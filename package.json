@@ -18,5 +18,9 @@
   "homepage": "https://github.com/uetsujitomoya/yogajs",
   "dependencies": {
     "d3": "~3.5.6"
+  },
+  "devDependencies": {
+    "browserify": "~11.1.0",
+    "babelify": "~6.3.0"
   }
 }
