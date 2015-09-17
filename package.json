@@ -1,0 +1,19 @@
+{
+  "name": "yogajs",
+  "version": "0.0.0",
+  "description": "first.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://uetsujitomoya@github.com/uetsujitomoya/yogajs.git"
+  },
+  "author": "Tomoya Uetsuji",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/uetsujitomoya/yogajs/issues"
+  },
+  "homepage": "https://github.com/uetsujitomoya/yogajs"
+}
