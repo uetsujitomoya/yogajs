@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/uetsujitomoya/yogajs/issues"
   },
-  "homepage": "https://github.com/uetsujitomoya/yogajs"
+  "homepage": "https://github.com/uetsujitomoya/yogajs",
+  "dependencies": {
+    "d3": "~3.5.6"
+  }
 }
