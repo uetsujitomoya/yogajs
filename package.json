@@ -4,6 +4,7 @@
   "description": "first.",
   "main": "index.js",
   "scripts": {
+    "build": "browserify src/index.js -o app/bundle.js -t babelify",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

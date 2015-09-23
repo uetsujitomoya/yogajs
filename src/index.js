@@ -32,7 +32,7 @@ d3.json("miserables.json", function(error, graph) {
       .data(graph.nodes)
     .enter().append("circle")
       .attr("class", "node")
-      .attr("r", 5)
+      .attr("r", 30)
       .style("fill", function(d) { return color(d.group); })
       .call(force.drag);
 
