@@ -22,6 +22,7 @@ d3.json("miserables.json", function(error, graph) {
       .links(graph.links)
       .start();
 
+
   var link = svg.selectAll(".link")
       .data(graph.links)
     .enter().append("line")
@@ -32,7 +33,7 @@ d3.json("miserables.json", function(error, graph) {
       .data(graph.nodes)
     .enter().append("circle")
       .attr("class", "node")
-      .attr("r", 30)
+      .attr("r", 5)
       .style("fill", function(d) { return color(d.group); })
       .call(force.drag);
 
