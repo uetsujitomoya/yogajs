@@ -3,7 +3,7 @@ import d3 from "d3"
 var width = 960,
     height = 500;
 
-var color = d3.scale.category20();
+var color = d3.scale.category20c();
 
 var force = d3.layout.force()
     .charge(-120)
