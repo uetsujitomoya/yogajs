@@ -31,15 +31,12 @@ d3.json("miserables.json", function(error, graph) {
 
   var node = svg.selectAll(".node")
       .data(graph.nodes)
-    .enter().append("circle")
+    .enter().append("text")
       .attr("class", "node")
-      .attr("r", 30)
       .style("fill", function(d) { return color(d.group); })
       .call(force.drag)
       .text(function(d) { return d.name.substring(0,4); });
 
-  node.append("title")
-      .text(function(d) { return d.name; });
 
 
 
@@ -49,7 +46,7 @@ d3.json("miserables.json", function(error, graph) {
         .attr("x2", function(d) { return d.target.x; })
         .attr("y2", function(d) { return d.target.y; });
 
-    node.attr("cx", function(d) { return d.x; })
-        .attr("cy", function(d) { return d.y; });
+    node.attr("x", function(d) { return d.x; })
+        .attr("y", function(d) { return d.y; });
   });
 });
