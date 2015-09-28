@@ -33,12 +33,15 @@ d3.json("miserables.json", function(error, graph) {
       .data(graph.nodes)
     .enter().append("circle")
       .attr("class", "node")
-      .attr("r", 5)
+      .attr("r", 30)
       .style("fill", function(d) { return color(d.group); })
-      .call(force.drag);
+      .call(force.drag)
+      .text(function(d) { return d.name.substring(0,4); });
 
   node.append("title")
       .text(function(d) { return d.name; });
+
+
 
   force.on("tick", function() {
     link.attr("x1", function(d) { return d.source.x; })
