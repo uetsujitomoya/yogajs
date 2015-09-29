@@ -52,8 +52,8 @@ var svg = d3.select("body").append("svg")
     var tangoset = new Set();
 
 
-
-    // tangoset.add(danraku.tango);
+//for
+//    tangoset.add(danraku.tango);
 
 
 
@@ -63,17 +63,7 @@ var svg = d3.select("body").append("svg")
     var keitaisokaiseki = [[1,0],[1,1],[1,0],[0,1]];
     var link = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
     var i,j,k,l;
-    for(i=0; i<tangoset.size; ++i){
-    for(j=i+1; j<tangoset.size; ++j){
-    for(k=0; k<k_danraku.size; ++k){
-      for(l=0; l<k_danraku.size; ++l){
-        if(keitaisokaiseki[i][k]==1&&keitaisokaiseki[j][l]==1){
-          link[i][j]=1;
-        }
-      }
-    }
-    }
-    }
+
 
 
 
@@ -118,33 +108,47 @@ var svg = d3.select("body").append("svg")
         {"name":"B","group":1}
       ],
       "links":[
-        {"source":11,"target":8,"value":1},
-        {"source":13,"target":11,"value":8},
-        {"source":13,"target":12,"value":10},
-        {"source":12,"target":9,"value":6},
-        {"source":10,"target":9,"value":1},
-        {"source":14,"target":10,"value":1},
-        {"source":15,"target":13,"value":1},
-        {"source":16,"target":14,"value":1},
-        {"source":17,"target":14,"value":2},
-        {"source":18,"target":15,"value":1},
-        {"source":19,"target":16,"value":1},
-        {"source":20,"target":17,"value":3},
-        {"source":21,"target":19,"value":3},
-        {"source":22,"target":20,"value":5},
-        {"source":25,"target":23,"value":1},
-        {"source":24,"target":23,"value":1},
-        {"source":26,"target":24,"value":1},
-        {"source":27,"target":22,"value":1},
-        {"source":25,"target":22,"value":4},
-        {"source":28,"target":27,"value":4},
-        {"source":29,"target":25,"value":4},
-        {"source":31,"target":28,"value":4},
-        {"source":30,"target":29,"value":4},
-        {"source":32,"target":31,"value":4},
-        {"source":33,"target":32,"value":3}
+        {"source":11,"target":8,"value":0},
+        {"source":13,"target":11,"value":0},
+        {"source":13,"target":12,"value":0},
+        {"source":12,"target":9,"value":0},
+        {"source":10,"target":9,"value":0},
+        {"source":14,"target":10,"value":0},
+        {"source":15,"target":13,"value":0},
+        {"source":16,"target":14,"value":0},
+        {"source":17,"target":14,"value":0},
+        {"source":18,"target":15,"value":0},
+        {"source":19,"target":16,"value":0},
+        {"source":20,"target":17,"value":0},
+        {"source":21,"target":19,"value":0},
+        {"source":22,"target":20,"value":0},
+        {"source":25,"target":23,"value":0},
+        {"source":24,"target":23,"value":0},
+        {"source":26,"target":24,"value":0},
+        {"source":27,"target":22,"value":0},
+        {"source":25,"target":22,"value":0},
+        {"source":28,"target":27,"value":0},
+        {"source":29,"target":25,"value":0},
+        {"source":31,"target":28,"value":0},
+        {"source":30,"target":29,"value":0},
+        {"source":32,"target":31,"value":0},
+        {"source":33,"target":32,"value":0}
       ]
     };
+
+
+/*    for(i=0; i<tangoset.size; ++i){
+    for(j=i+1; j<tangoset.size; ++j){
+    for(k=0; k<k_danraku.size; ++k){
+      for(l=0; l<k_danraku.size; ++l){
+        if(keitaisokaiseki[i][k]==1&&keitaisokaiseki[j][l]==1){
+          miserables.nodes[i].value=1;
+        }
+      }
+    }
+    }
+  }*/
+
 
 //以上計算中
 
