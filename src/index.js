@@ -53,7 +53,7 @@ var svg = d3.select("body").append("svg")
 
 
 
-    tangoset.add(danraku.tango);
+    // tangoset.add(danraku.tango);
 
 
 
@@ -65,8 +65,8 @@ var svg = d3.select("body").append("svg")
     var i,j,k,l;
     for(i=0; i<tangoset.size; ++i){
     for(j=i+1; j<tangoset.size; ++j){
-    for(k=0; k<danraku.size; ++k){
-      for(l=0; l<danraku.size; ++l){
+    for(k=0; k<k_danraku.size; ++k){
+      for(l=0; l<k_danraku.size; ++l){
         if(keitaisokaiseki[i][k]==1&&keitaisokaiseki[j][l]==1){
           link[i][j]=1;
         }
@@ -80,7 +80,7 @@ var svg = d3.select("body").append("svg")
     var jaccard
 
 
-    var miserable = {
+    var miserables = {
       "nodes":[
         {"name":"1","group":1},
         {"name":"2","group":2},
@@ -148,9 +148,11 @@ var svg = d3.select("body").append("svg")
 
 //以上計算中
 
+var graph = miserables;
+//d3.json("miserables.json", function(error, graph) {
 
-d3.json("miserables.json", function(error, graph) {
-  if (error) throw error;
+
+//  if (error) throw error;
 
   force
       .nodes(graph.nodes)
@@ -184,4 +186,4 @@ d3.json("miserables.json", function(error, graph) {
     node.attr("x", function(d) { return d.x; })
         .attr("y", function(d) { return d.y; });
   });
-});
+//});
