@@ -1,5 +1,7 @@
 import d3 from "d3"
 
+var i,j,k,l;
+
 var width = 960,
     height = 500;
 
@@ -16,12 +18,12 @@ var svg = d3.select("body").append("svg")
 
 
     //以下計算中
-
+/*
     var b = ["酒","借金"];
     var c = ["借りる","過食"];
      var a = [b,c];
 
-
+*/
 
      /*var k_danraku = {    //形態素解析段落
        "danraku1":[
@@ -62,7 +64,7 @@ var svg = d3.select("body").append("svg")
 
     var keitaisokaiseki = [[1,0],[1,1],[1,0],[0,1]];
     var link = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
-    var i,j,k,l;
+
 
 
 
@@ -140,6 +142,20 @@ var svg = d3.select("body").append("svg")
         {"source":33,"target":32,"value":0}
       ]
     };
+
+
+miserables.nodes = new Set();
+miserables.links = new Set();
+
+//node書き換え
+for(i=0;i<keitaisokaiseki.size;++i){
+  for(j=0;j<keitaisokaiseki[i].size;++j){
+    miserables.nodes.add();
+    miserables.nodes[].name =;
+    miserables.nodes[].group =1;//ゆくゆくはjaccard係数に
+  }
+}
+
 
 
 /*    for(i=0; i<tangoset.size; ++i){
