@@ -147,7 +147,9 @@ var svg = d3.select("body").append("svg")
 miserables.nodes = new Set();
 miserables.links = new Set();
 
-//node書き換え
+//nodes書き換え。nodesはオブジェクトmiserables内にある配列
+//keitaisokaiseki.size は段落数
+//keitaisokaiseki[i].sizeは段落[i]内の単語数
 for(i=0;i<keitaisokaiseki.size;++i){
   for(j=0;j<keitaisokaiseki[i].size;++j){
     miserables.nodes.add();
@@ -157,7 +159,31 @@ for(i=0;i<keitaisokaiseki.size;++i){
 }
 //node作成終了。miserables.nodes.sizeがtangosetになってるはず
 
+var tangoset = miserables.nodes.size
+var danrakusuu = keitaisokaiseki.size
+
+//あとはlinksの作成だけ
+//まずはlistをつくる
+var list
+//list初期化
+for(i=0;i<tangoset;++i){
+  for(j=0;j<danrakusuu;j++){
+    for(k=0;k<)
+    list[i][j]=0
+  }
+}
+//keitaisokaisekiとnodesを照らしあわせる
 for()
+
+
+
+for(i=0;i<keitaisokaiseki.size;++i){
+  for(j=0;j<keitaisokaiseki[i].size;++j){
+    miserables.nodes.add();
+    miserables.nodes[].name =;
+    miserables.nodes[].group =1;//ゆくゆくはjaccard係数に
+  }
+}
 
 /*    for(i=0; i<tangoset.size; ++i){
     for(j=i+1; j<tangoset.size; ++j){
