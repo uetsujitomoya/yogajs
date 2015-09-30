@@ -198,7 +198,7 @@ for(i=0;i<keitaisokaiseki.size;++i){
       }
     }
   }
-}
+
 //list3[段落][単語k][単語l]
 
 //value太さをつける
@@ -220,7 +220,6 @@ for(j=0;k<edges.size;++k){  //edgesをjで見ていく
 
 
 
-for()
 
 
 /*
