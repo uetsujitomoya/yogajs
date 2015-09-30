@@ -183,26 +183,45 @@ for(i=0;i<keitaisokaiseki.size;++i){//danrakusuuはkeitaisokaisekiとlistで共�
 }
 
 //listはi*k
-//listからlinksをつくる
+var list3//どの段落でどれとどれが共起されてるか
+//listからmiserables.linksとlist3をつくる
 for(i=0;i<keitaisokaiseki.size;++i){
-  for(j=i+1;j<keitaisokaiseki;++j){//別の段落を見る
-    for(k=0;k<tangoset.size;++k){
-      for()
-      if(list[i][k]==1 && list[j][k]==1){
-        miserables.nodes.add({"source":j,"target":i,"value":1});
-      }
 
+    for(k=0;k<tangoset.size;++k){
+      for(l=k+1;l<tangoset.size;++l){//別の単語を見る
+      if(list[i][k]==1 && list[i][l]==1){
+        miserables.links.add({"source":l,"target":k,"value":0});
+        list3[i][k][l]=1;
+      }else{
+        list3[i][k][l]=0;
+
+      }
+      }
     }
   }
+}
+//list3[段落][単語k][単語l]
+
+//value太さをつける
 
 
+for(i=0;i<keitaisokaiseki.size;++i){
+
+    for(k=0;k<tangoset.size;++k){
+      for(l=k+1;l<tangoset.size;++l){//別の単語を見る
+
+for(j=0;k<miserables.links.size;++k){
+  if(list[i][k]==1 && list[i][l]==1){
+  miserables.nodes[k].name =miserables.nodes[k];
+  miserables.nodes[k].group =1;//ゆくゆくはjaccard係数に
+}
 
 
 
 for()
 
 
-
+/*
 for(i=0;i<keitaisokaiseki.size;++i){
   for(j=0;j<keitaisokaiseki[i].size;++j){
     miserables.nodes.add();
@@ -210,7 +229,7 @@ for(i=0;i<keitaisokaiseki.size;++i){
     miserables.nodes[].group =1;//ゆくゆくはjaccard係数に
   }
 }
-
+*/
 /*    for(i=0; i<tangoset.size; ++i){
     for(j=i+1; j<tangoset.size; ++j){
     for(k=0; k<k_danraku.size; ++k){
