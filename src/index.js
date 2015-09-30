@@ -152,33 +152,50 @@ miserables.links = new Set();
 //keitaisokaiseki[i].sizeは段落[i]内の単語数
 for(i=0;i<keitaisokaiseki.size;++i){
   for(j=0;j<keitaisokaiseki[i].size;++j){
-    miserables.nodes.add();
-    miserables.nodes[].name =;
-    miserables.nodes[].group =1;//ゆくゆくはjaccard係数に
+    miserables.nodes.add(keitaisokaiseki[i][j]);
   }
+}
+var tangoset = miserables.nodes;
+for(k=0;k<tangoset.size;++k){
+  miserables.nodes[k].name =miserables.nodes[k];
+  miserables.nodes[k].group =1;//ゆくゆくはjaccard係数に
 }
 //node作成終了。miserables.nodes.sizeがtangosetになってるはず
 
-var tanogset = miserables.nodes
+
 var danrakusuu = keitaisokaiseki.size
 
 //あとはlinksの作成だけ
 //まずはlistをつくる
 var list
-//list初期化
+//list作成
 //keitaisokaisekiとnodesを照らしあわせる
 for(i=0;i<keitaisokaiseki.size;++i){//danrakusuuはkeitaisokaisekiとlistで共通
   for(j=0;j<keitaisokaiseki[i].size;++j){
     for(k=0;k<tangoset.size;++k){
-      if(keitaisokaiseki[i][j]==tangoset[k]){
+      if(keitaisokaiseki[i][j]==tangoset[k].name){
         list[i][k]=1;
       } else{
         list[i][k]=0;
       }
-
     }
   }
 }
+
+//listはi*k
+//listからlinksをつくる
+for(i=0;i<keitaisokaiseki.size;++i){
+  for(j=i+1;j<keitaisokaiseki;++j){//別の段落を見る
+    for(k=0;k<tangoset.size;++k){
+      for()
+      if(list[i][k]==1 && list[j][k]==1){
+        miserables.nodes.add({"source":j,"target":i,"value":1});
+      }
+
+    }
+  }
+
+
 
 
 
