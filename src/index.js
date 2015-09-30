@@ -159,20 +159,29 @@ for(i=0;i<keitaisokaiseki.size;++i){
 }
 //node作成終了。miserables.nodes.sizeがtangosetになってるはず
 
-var tangoset = miserables.nodes.size
+var tanogset = miserables.nodes
 var danrakusuu = keitaisokaiseki.size
 
 //あとはlinksの作成だけ
 //まずはlistをつくる
 var list
 //list初期化
-for(i=0;i<tangoset;++i){
-  for(j=0;j<danrakusuu;j++){
-    for(k=0;k<)
-    list[i][j]=0
+//keitaisokaisekiとnodesを照らしあわせる
+for(i=0;i<keitaisokaiseki.size;++i){//danrakusuuはkeitaisokaisekiとlistで共通
+  for(j=0;j<keitaisokaiseki[i].size;++j){
+    for(k=0;k<tangoset.size;++k){
+      if(keitaisokaiseki[i][j]==tangoset[k]){
+        list[i][k]=1;
+      } else{
+        list[i][k]=0;
+      }
+
+    }
   }
 }
-//keitaisokaisekiとnodesを照らしあわせる
+
+
+
 for()
 
 
