@@ -41,7 +41,7 @@ var svg = d3.select("body").append("svg")
 
     var danraku0 = ["A","B","C"];
     var danraku1 = ["B","D"];
-    var k_danraku = [danraku0,danraku1];
+    var keitaisokaiseki = [danraku0,danraku1];
 
 
 
@@ -51,7 +51,7 @@ var svg = d3.select("body").append("svg")
     var A =
     */
 
-    var tangoset = new Set();
+
 
 
 //for
@@ -60,10 +60,9 @@ var svg = d3.select("body").append("svg")
 
 
 
-    var tangoset = ["a","b","c","d"];
 
-    var keitaisokaiseki = [[1,0],[1,1],[1,0],[0,1]];
-    var link = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
+
+
 
 
 
@@ -163,11 +162,11 @@ for(k=0;k<tangoset.size;++k){
 //node作成終了。miserables.nodes.sizeがtangosetになってるはず
 
 
-var danrakusuu = keitaisokaiseki.size
+var danrakusuu = keitaisokaiseki.size;
 
 //あとはlinksの作成だけ
 //まずはlistをつくる
-var list
+var list;
 //list作成
 //keitaisokaisekiとnodesを照らしあわせる
 for(i=0;i<keitaisokaiseki.size;++i){//danrakusuuはkeitaisokaisekiとlistで共通
@@ -203,17 +202,20 @@ for(i=0;i<keitaisokaiseki.size;++i){
 //list3[段落][単語k][単語l]
 
 //value太さをつける
-
+var edges = miserables.links;
 
 for(i=0;i<keitaisokaiseki.size;++i){
 
     for(k=0;k<tangoset.size;++k){
       for(l=k+1;l<tangoset.size;++l){//別の単語を見る
 
-for(j=0;k<miserables.links.size;++k){
-  if(list[i][k]==1 && list[i][l]==1){
-  miserables.nodes[k].name =miserables.nodes[k];
-  miserables.nodes[k].group =1;//ゆくゆくはjaccard係数に
+for(j=0;k<edges.size;++k){  //edgesをjで見ていく
+  if(list3[i][k][l]==1 && edges[j].source==l && edges[j].target==k){
+  edges[j].value++;
+}
+}
+}
+}
 }
 
 
