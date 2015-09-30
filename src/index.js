@@ -41,9 +41,9 @@ var svg = d3.select("body").append("svg")
 
     var danraku0 = ["A","B","C"];
     var danraku1 = ["B","D"];
-    var keitaisokaiseki = [danraku0,danraku1];
+    var keitaisokaiseki = [["あ","い","う"],["い","え"]];
 
-
+console.log(keitaisokaiseki[0][0]);
 
     /*danraku1.add()
 
@@ -154,6 +154,7 @@ for(i=0;i<keitaisokaiseki.size;++i){
     miserables.nodes.add(keitaisokaiseki[i][j]);
   }
 }
+console.log(miserables.nodes);
 var tangoset = miserables.nodes;
 for(k=0;k<tangoset.size;++k){
   miserables.nodes[k].name =miserables.nodes[k];
