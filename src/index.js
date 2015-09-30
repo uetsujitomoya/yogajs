@@ -155,8 +155,9 @@ for(i=0;i<keitaisokaiseki.size;++i){
     miserables.nodes[].group =1;//ゆくゆくはjaccard係数に
   }
 }
+//node作成終了。miserables.nodes.sizeがtangosetになってるはず
 
-
+for()
 
 /*    for(i=0; i<tangoset.size; ++i){
     for(j=i+1; j<tangoset.size; ++j){
