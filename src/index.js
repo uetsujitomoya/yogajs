@@ -161,13 +161,15 @@ console.log(miserables.nodes);
 
 for(k=0;k<tangoset.length;++k){
   miserables.nodes[k].name =miserables.nodes[k];
+
   miserables.nodes[k].group =1;//ゆくゆくはjaccard係数に
 }
 //node作成終了。miserables.nodes.lengthがtangosetになってるはず
-
+  console.log(miserables.nodes);
 
 var danrakusuu = keitaisokaiseki.length;
 
+console.log(danrakusuu);
 //あとはlinksの作成だけ
 //まずはlistをつくる
 var list;
@@ -184,7 +186,7 @@ for(i=0;i<keitaisokaiseki.length;++i){//danrakusuuはkeitaisokaisekiとlistで�
     }
   }
 }
-
+console.log(list);
 //listはi*k
 var list3//どの段落でどれとどれが共起されてるか
 //listからmiserables.linksとlist3をつくる
