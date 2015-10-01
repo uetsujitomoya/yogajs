@@ -74,8 +74,7 @@ console.log(keitaisokaiseki[0][0]);
 
 
 
-
-
+/*
     var miserables = {
       "nodes":[
         {"id":0,"name":"1","group":1},
@@ -141,11 +140,12 @@ console.log(keitaisokaiseki[0][0]);
         {"source":33,"target":32,"value":0}
       ]
     };
+    */
+
+var tangoset = new Set();
 
 
-miserables.nodes = new Set();
-miserables.links = new Set();
-var tangoset = miserables.nodes;
+//var tangoset = miserables.nodes;
 
 //nodes書き換え。nodesはオブジェクトmiserables内にある配列
 //keitaisokaiseki.length は段落数
@@ -157,7 +157,16 @@ for(i=0;i<keitaisokaiseki.length;++i){
     tangoset.add(keitaisokaiseki[i][j]);
   }
 }
-console.log(miserables.nodes);
+var miserables={"nodes":new Array,"links":new Array};
+
+console.log(tangoset);
+
+miserables.nodes = Array.from(tangoset).map(function(t) {
+  return {nodes:t};
+  // body...
+});
+
+console.log(miserables.nodes[0]);
 
 for(k=0;k<tangoset.length;++k){
   miserables.nodes[k].name =miserables.nodes[k];
