@@ -174,7 +174,7 @@ for(k=0;k<miserables.nodes.length;++k){
   miserables.nodes[k].group =1;//ゆくゆくはjaccard係数に
 }
 //node作成終了。miserables.nodes.lengthがtangosetになってるはず
-  console.log(miserables.nodes);
+  console.log(miserables.nodes[0]);
   console.log(miserables.nodes.length);
 
 var danrakusuu = keitaisokaiseki.length;
@@ -190,9 +190,9 @@ for(i=0;i<keitaisokaiseki.length;++i){//danrakusuuはkeitaisokaisekiとlistで�
     for(k=0;k<miserables.nodes.length;++k){
       if(keitaisokaiseki[i][j]==miserables.nodes[k].name){
         list[i][k]=1;
-      } else{
-        list[i][k]=0;
-      }
+      } /*else{
+        list[i][k]=2;
+      }*/
     }
   }
 }
@@ -205,14 +205,14 @@ for(i=0;i<keitaisokaiseki.length;++i){
     for(k=0;k<miserables.nodes.length;++k){
       for(l=k+1;l<miserables.nodes.length;++l){//別の単語を見る
       if(list[i][k]==1 && list[i][l]==1){
-        miserables.links.add({"source":l,"target":k,"value":1});
+        miserables.links.push({"source":l,"target":k,"value":1});
 
       }
 
       }
       }
     }
-  }
+
 
 //list3[段落][単語k][単語l]
 
