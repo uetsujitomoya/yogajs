@@ -175,7 +175,7 @@ for(k=0;k<miserables.nodes.length;++k){
 }
 //node作成終了。miserables.nodes.lengthがtangosetになってるはず
   console.log(miserables.nodes);
-  console.log(miserables.nodes.size);
+  console.log(miserables.nodes.length);
 
 var danrakusuu = keitaisokaiseki.length;
 
@@ -187,7 +187,7 @@ var list;
 //keitaisokaisekiとnodesを照らしあわせる
 for(i=0;i<keitaisokaiseki.length;++i){//danrakusuuはkeitaisokaisekiとlistで共通
   for(j=0;j<keitaisokaiseki[i].length;++j){
-    for(k=0;k<miserables.nodes.size;++k){
+    for(k=0;k<miserables.nodes.length;++k){
       if(keitaisokaiseki[i][j]==miserables.nodes[k].name){
         list[i][k]=1;
       } else{
@@ -198,17 +198,16 @@ for(i=0;i<keitaisokaiseki.length;++i){//danrakusuuはkeitaisokaisekiとlistで�
 }
 console.log(list);
 //listはi*k
-var list3//どの段落でどれとどれが共起されてるか
+//var list3//どの段落でどれとどれが共起されてるか
 //listからmiserables.linksとlist3をつくる
 for(i=0;i<keitaisokaiseki.length;++i){
 
-    for(k=0;k<miserables.nodes.size;++k){
-      for(l=k+1;l<miserables.nodes.size;++l){//別の単語を見る
+    for(k=0;k<miserables.nodes.length;++k){
+      for(l=k+1;l<miserables.nodes.length;++l){//別の単語を見る
       if(list[i][k]==1 && list[i][l]==1){
-        miserables.links.add({"source":l,"target":k,"value":0});
-        list3[i][k][l]=1;
-      }else{
-        list3[i][k][l]=0;
+        miserables.links.add({"source":l,"target":k,"value":1});
+
+      }
 
       }
       }
@@ -218,14 +217,15 @@ for(i=0;i<keitaisokaiseki.length;++i){
 //list3[段落][単語k][単語l]
 
 //value太さをつける
+/*
 var edges = miserables.links;
 
 for(i=0;i<keitaisokaiseki.length;++i){
 
-    for(k=0;k<miserables.nodes.size;++k){
-      for(l=k+1;l<miserables.nodes.size;++l){//別の単語を見る
+    for(k=0;k<miserables.nodes.length;++k){
+      for(l=k+1;l<miserables.nodes.length;++l){//別の単語を見る
 
-for(j=0;k<edges.size;++k){  //edgesをjで見ていく
+for(j=0;k<edges.length;++k){  //edgesをjで見ていく
   if(list3[i][k][l]==1 && edges[j].source==l && edges[j].target==k){
   edges[j].value++;
 }
@@ -233,7 +233,7 @@ for(j=0;k<edges.size;++k){  //edgesをjで見ていく
 }
 }
 }
-
+*/
 
 
 
