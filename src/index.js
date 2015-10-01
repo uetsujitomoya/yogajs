@@ -205,7 +205,7 @@ for(i=0;i<keitaisokaiseki.length;++i){
     for(k=0;k<miserables.nodes.size;++k){
       for(l=k+1;l<miserables.nodes.size;++l){//別の単語を見る
       if(list[i][k]==1 && list[i][l]==1){
-        miserables.links.add({"source":l,"target":k,"value":0});
+        miserables.links.push({"source":l,"target":k,"value":0});
         list3[i][k][l]=1;
       }else{
         list3[i][k][l]=0;
