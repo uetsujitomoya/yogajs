@@ -162,13 +162,13 @@ var miserables={"nodes":new Array,"links":new Array};
 console.log(tangoset);
 
 miserables.nodes = Array.from(tangoset).map(function(t) {
-  return {nodes:t};
+  return {name:t};
   // body...
 });
 
 console.log(miserables.nodes[0]);
 
-for(k=0;k<tangoset.length;++k){
+for(k=0;k<miserables.nodes.length;++k){
   miserables.nodes[k].name =miserables.nodes[k];
 
   miserables.nodes[k].group =1;//ゆくゆくはjaccard係数に
@@ -187,8 +187,8 @@ var list;
 //keitaisokaisekiとnodesを照らしあわせる
 for(i=0;i<keitaisokaiseki.length;++i){//danrakusuuはkeitaisokaisekiとlistで共通
   for(j=0;j<keitaisokaiseki[i].length;++j){
-    for(k=0;k<tangoset.size;++k){
-      if(keitaisokaiseki[i][j]==tangoset[k].name){
+    for(k=0;k<miserables.nodes.size;++k){
+      if(keitaisokaiseki[i][j]==miserables.nodes[k].name){
         list[i][k]=1;
       } else{
         list[i][k]=0;
@@ -202,8 +202,8 @@ var list3//どの段落でどれとどれが共起されてるか
 //listからmiserables.linksとlist3をつくる
 for(i=0;i<keitaisokaiseki.length;++i){
 
-    for(k=0;k<tangoset.size;++k){
-      for(l=k+1;l<tangoset.size;++l){//別の単語を見る
+    for(k=0;k<miserables.nodes.size;++k){
+      for(l=k+1;l<miserables.nodes.size;++l){//別の単語を見る
       if(list[i][k]==1 && list[i][l]==1){
         miserables.links.add({"source":l,"target":k,"value":0});
         list3[i][k][l]=1;
@@ -222,8 +222,8 @@ var edges = miserables.links;
 
 for(i=0;i<keitaisokaiseki.length;++i){
 
-    for(k=0;k<tangoset.size;++k){
-      for(l=k+1;l<tangoset.size;++l){//別の単語を見る
+    for(k=0;k<miserables.nodes.size;++k){
+      for(l=k+1;l<miserables.nodes.size;++l){//別の単語を見る
 
 for(j=0;k<edges.size;++k){  //edgesをjで見ていく
   if(list3[i][k][l]==1 && edges[j].source==l && edges[j].target==k){
@@ -247,8 +247,8 @@ for(i=0;i<keitaisokaiseki.length;++i){
   }
 }
 */
-/*    for(i=0; i<tangoset.length; ++i){
-    for(j=i+1; j<tangoset.length; ++j){
+/*    for(i=0; i<miserables.nodes.length; ++i){
+    for(j=i+1; j<miserables.nodes.length; ++j){
     for(k=0; k<k_danraku.length; ++k){
       for(l=0; l<k_danraku.length; ++l){
         if(keitaisokaiseki[i][k]==1&&keitaisokaiseki[j][l]==1){
@@ -286,7 +286,7 @@ var graph = miserables;
       .attr("class", "node")
       .style("fill", function(d) { return color(d.group); })
       .call(force.drag)
-      .text(function(d) { return d.name.substring(0,4); });
+      .text(function(d) { return d.name; });
 
 
 
