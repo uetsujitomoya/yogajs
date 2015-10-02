@@ -120,17 +120,14 @@ for(i=0;i<keitaisokaiseki.length;++i){//danrakusuuはkeitaisokaisekiとlistで�
 }
 console.log(list);
 //listはi*k
-var list3//どの段落でどれとどれが共起されてるか
+
 //listからmiserables.linksとlist3をつくる
 for(i=0;i<keitaisokaiseki.length;++i){
 
-    for(k=0;k<miserables.nodes.size;++k){
-      for(l=k+1;l<miserables.nodes.size;++l){//別の単語を見る
+    for(k=0;k<miserables.nodes.length;++k){
+      for(l=k+1;l<miserables.nodes.length;++l){//別の単語を見る
       if(list[i][k]==1 && list[i][l]==1){
         miserables.links.push({"source":l,"target":k,"value":0});
-        list3[i][k][l]=1;
-      }else{
-        list3[i][k][l]=0;
 
       }
       }
@@ -141,13 +138,13 @@ for(i=0;i<keitaisokaiseki.length;++i){
 
 //value太さをつける
 var edges = miserables.links;
-
+/*
 for(i=0;i<keitaisokaiseki.length;++i){
 
-    for(k=0;k<miserables.nodes.size;++k){
-      for(l=k+1;l<miserables.nodes.size;++l){//別の単語を見る
-
-for(j=0;k<edges.size;++k){  //edgesをjで見ていく
+    for(k=0;k<miserables.nodes.length;++k){
+      for(l=k+1;l<miserables.nodes.length;++l){//別の単語を見る*/
+/*
+for(j=0;k<edges.length;++k){  //edgesをjで見ていく
   if(list3[i][k][l]==1 && edges[j].source==l && edges[j].target==k){
   edges[j].value++;
 }
@@ -156,7 +153,7 @@ for(j=0;k<edges.size;++k){  //edgesをjで見ていく
 }
 }
 
-
+*/
 
 
 
@@ -222,4 +219,3 @@ var graph = miserables;
     node.attr("x", function(d) { return d.x; })
         .attr("y", function(d) { return d.y; });
   });
-//});
