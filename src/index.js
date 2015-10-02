@@ -102,14 +102,16 @@ var danrakusuu = keitaisokaiseki.length;
 console.log(danrakusuu);
 //あとはlinksの作成だけ
 //まずはlistをつくる
-var list;
+var list = new Array(keitaisokaiseki.length);
 //list作成
 //keitaisokaisekiとnodesを照らしあわせる
-for(i=0;i<keitaisokaiseki.length;++i){//danrakusuuはkeitaisokaisekiとlistで共通
+for(i=0;i<keitaisokaiseki.length;++i){//danrakusuuはkeitaisokaisekiとlistで共
+  list[i] = new Array(miserables.nodes.length);
   for(j=0;j<keitaisokaiseki[i].length;++j){
-    for(k=0;k<miserables.nodes.size;++k){
+    for(k=0;k<miserables.nodes.length;++k){
       if(keitaisokaiseki[i][j]==miserables.nodes[k].name){
         list[i][k]=1;
+        console.log(list[i][k]);
       } else{
         list[i][k]=0;
       }
