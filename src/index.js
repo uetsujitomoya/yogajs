@@ -45,30 +45,7 @@ var svg = d3.select("body").append("svg")
 
 console.log(keitaisokaiseki[0][0]);
 
-    /*danraku1.add()
 
-    var danraku = ["段落あ","段落い"];
-    var A =
-    */
-
-
-
-
-//for
-//    tangoset.add(danraku.tango);
-
-
-
-
-
-
-
-
-
-
-
-
-    var jaccard
 
 
 
@@ -77,67 +54,10 @@ console.log(keitaisokaiseki[0][0]);
 /*
     var miserables = {
       "nodes":[
-        {"id":0,"name":"1","group":1},
-        {"id":1,"name":"2","group":2},
-        {"id":2,"name":"3","group":3},
-        {"id":3,"name":"4","group":4},
-        {"id":4,"name":"8","group":8},
-        {"id":5,"name":"7","group":7},
-        {"id":6,"name":"6","group":6},
-        {"id":7,"name":"5","group":5},
-        {"id":8,"name":"結局","group":1},
-        {"id":9,"name":"思う","group":6},
-        {"id":10,"name":"関係","group":6},
-        {"id":11,"name":"入る","group":2},
-        {"id":12,"name":"仕事","group":5},
-        {"id":13,"name":"人","group":4},
-        {"id":14,"name":"嘔吐","group":8},
-        {"id":15,"name":"見える","group":2},
-        {"id":16,"name":"分かる","group":3},
-        {"id":17,"name":"過食","group":7},
-        {"id":18,"name":"嫌い","group":1},
-        {"id":19,"name":"悪い","group":2},
-        {"id":20,"name":"2つ","group":7},
-        {"id":21,"name":"対人","group":1},
-        {"id":22,"name":"ストレス","group":8},
-        {"id":23,"name":"風","group":3},
-        {"id":24,"name":"信頼","group":2},
-        {"id":25,"name":"一つ","group":5},
-        {"id":26,"name":"行動","group":1},
-        {"id":27,"name":"調子","group":4},
-        {"id":28,"name":"考える","group":4},
-        {"id":29,"name":"気持ち","group":2},
-        {"id":30,"name":"言う","group":2},
-        {"id":31,"name":"ま","group":3},
-        {"id":32,"name":"自分","group":2},
-        {"id":33,"name":"B","group":1}
+        {"id":0,"name":"1","group":1}
       ],
       "links":[
-        {"source":11,"target":8,"value":0},
-        {"source":13,"target":11,"value":0},
-        {"source":13,"target":12,"value":0},
-        {"source":12,"target":9,"value":0},
-        {"source":10,"target":9,"value":0},
-        {"source":14,"target":10,"value":0},
-        {"source":15,"target":13,"value":0},
-        {"source":16,"target":14,"value":0},
-        {"source":17,"target":14,"value":0},
-        {"source":18,"target":15,"value":0},
-        {"source":19,"target":16,"value":0},
-        {"source":20,"target":17,"value":0},
-        {"source":21,"target":19,"value":0},
-        {"source":22,"target":20,"value":0},
-        {"source":25,"target":23,"value":0},
-        {"source":24,"target":23,"value":0},
-        {"source":26,"target":24,"value":0},
-        {"source":27,"target":22,"value":0},
-        {"source":25,"target":22,"value":0},
-        {"source":28,"target":27,"value":0},
-        {"source":29,"target":25,"value":0},
-        {"source":31,"target":28,"value":0},
-        {"source":30,"target":29,"value":0},
-        {"source":32,"target":31,"value":0},
-        {"source":33,"target":32,"value":0}
+        {"source":11,"target":8,"value":0}
       ]
     };
     */
@@ -175,7 +95,7 @@ for(k=0;k<miserables.nodes.length;++k){
 }
 //node作成終了。miserables.nodes.lengthがtangosetになってるはず
   console.log(miserables.nodes);
-  console.log(miserables.nodes.size);
+  console.log(miserables.nodes.length);
 
 var danrakusuu = keitaisokaiseki.length;
 
