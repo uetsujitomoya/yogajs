@@ -17,26 +17,6 @@ var svg = d3.select("body").append("svg")
     .attr("height", height);
 
 
-    //以下計算中
-/*
-    var b = ["酒","借金"];
-    var c = ["借りる","過食"];
-     var a = [b,c];
-
-*/
-
-     /*var k_danraku = {    //形態素解析段落
-       "danraku1":[
-         "私",
-         "生きる",
-         "いる"
-       ],
-       "danraku2":[
-         "ここ",
-         "生きる"
-       ]
-     }
-    */
 
 
     var danraku0 = ["A","B","C"];
@@ -50,17 +30,6 @@ console.log(keitaisokaiseki[0][0]);
 
 
 
-
-/*
-    var miserables = {
-      "nodes":[
-        {"id":0,"name":"1","group":1}
-      ],
-      "links":[
-        {"source":11,"target":8,"value":0}
-      ]
-    };
-    */
 
 var tangoset = new Set();
 
@@ -111,9 +80,7 @@ for(i=0;i<keitaisokaiseki.length;++i){//danrakusuuはkeitaisokaisekiとlistで�
     for(k=0;k<miserables.nodes.length;++k){
       if(keitaisokaiseki[i][j]==miserables.nodes[k].name){
         list[i][k]=1;
-        console.log(list[i][k]);
-      } else{
-        list[i][k]=0;
+        console.log(i,k,list[i][k]);
       }
     }
   }
@@ -125,12 +92,19 @@ console.log(list[0][0]);
 //listはi*k
 
 //listからmiserables.linksとlist3をつくる
+
+var x,y;
+
 for(i=0;i<keitaisokaiseki.length;++i){
 
     for(k=0;k<miserables.nodes.length;++k){
-      console.log(k);
+
       for(l=k+1;l<miserables.nodes.length;++l){//別の単語を見る
-      if(list[i][k]==1 && list[i][l]==1){
+        console.log(list[i][k]);
+        console.log(list[i][l]);
+        x=list[i][k];
+        y=list[i][l];
+      if(x==1 && y==1){
         console.log("hello");
         console.log(i);
         console.log(k);
@@ -141,7 +115,7 @@ for(i=0;i<keitaisokaiseki.length;++i){
       }
     }
   }
-console.log(miserables.links);
+console.log(miserables.links[0]);
 
 //list3[段落][単語k][単語l]
 
