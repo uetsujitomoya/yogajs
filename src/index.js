@@ -60,7 +60,7 @@ console.log(miserables.nodes[0]);
 for(k=0;k<miserables.nodes.length;++k){
 
 
-  miserables.nodes[k].group =1;//ゆくゆくはjaccard係数に
+  miserables.nodes[k].group =1;//ゆくゆくは媒介中心性に
 }
 //node作成終了。miserables.nodes.lengthがtangosetになってるはず
   console.log(miserables.nodes);
@@ -95,13 +95,14 @@ console.log(list[0][0]);
 
 var x,y;
 
-for(i=0;i<keitaisokaiseki.length;++i){
+
 
     for(k=0;k<miserables.nodes.length;++k){
 
       for(l=k+1;l<miserables.nodes.length;++l){//別の単語を見る
-        console.log(list[i][k]);
-        console.log(list[i][l]);
+
+
+        for(i=0;i<keitaisokaiseki.length;++i){
         x=list[i][k];
         y=list[i][l];
       if(x==1 && y==1){
