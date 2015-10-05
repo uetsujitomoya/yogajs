@@ -34,11 +34,7 @@ console.log(keitaisokaiseki[0][0]);
 var tangoset = new Set();
 
 
-//var tangoset = miserables.nodes;
 
-//nodes書き換え。nodesはオブジェクトmiserables内にある配列
-//keitaisokaiseki.length は段落数
-//keitaisokaiseki[i].lengthは段落[i]内の単語数
 console.log(keitaisokaiseki.length);
 for(i=0;i<keitaisokaiseki.length;++i){
   console.log(keitaisokaiseki[i].length);
@@ -117,51 +113,6 @@ var x,y;
     }
   }
 console.log(miserables.links[0]);
-
-//list3[段落][単語k][単語l]
-
-//value太さをつける
-var edges = miserables.links;
-/*
-for(i=0;i<keitaisokaiseki.length;++i){
-
-    for(k=0;k<miserables.nodes.length;++k){
-      for(l=k+1;l<miserables.nodes.length;++l){//別の単語を見る*/
-/*
-for(j=0;k<edges.length;++k){  //edgesをjで見ていく
-  if(list3[i][k][l]==1 && edges[j].source==l && edges[j].target==k){
-  edges[j].value++;
-}
-}
-}
-}
-}
-
-*/
-
-
-
-/*
-for(i=0;i<keitaisokaiseki.length;++i){
-  for(j=0;j<keitaisokaiseki[i].length;++j){
-    miserables.nodes.add();
-    miserables.nodes[].name =;
-    miserables.nodes[].group =1;//ゆくゆくはjaccard係数に
-  }
-}
-*/
-/*    for(i=0; i<miserables.nodes.length; ++i){
-    for(j=i+1; j<miserables.nodes.length; ++j){
-    for(k=0; k<k_danraku.length; ++k){
-      for(l=0; l<k_danraku.length; ++l){
-        if(keitaisokaiseki[i][k]==1&&keitaisokaiseki[j][l]==1){
-          miserables.nodes[i].value=1;
-        }
-      }
-    }
-    }
-  }*/
-
 
 //以上計算中
 
