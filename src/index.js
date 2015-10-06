@@ -21,7 +21,10 @@ var svg = d3.select("body").append("svg")
 
     var danraku0 = ["A","B","C"];
     var danraku1 = ["B","D"];
-    var keitaisokaiseki = [["あ","い","う"],["い","え"]];
+    var keitaisokaiseki = [["あ","い","う","え"],
+                            ["い","あ","え"],
+                            ["あ","お"],
+                          ["い","か"]];
 
 console.log(keitaisokaiseki[0][0]);
 
@@ -89,35 +92,51 @@ console.log(list[0][0]);
 
 //listからmiserables.linksとlist3をつくる
 
-var x,y;
+var x,y,z;
 
-
+var edge=-1;
 
     for(k=0;k<miserables.nodes.length;++k){
 
       for(l=k+1;l<miserables.nodes.length;++l){//別の単語を見る
+        //現在単語2個の組み合わせを選択中
+
+        //ここから段落を指定して縦になめる
 
 
         for(i=0;i<keitaisokaiseki.length;++i){
-        x=list[i][k];
-        y=list[i][l];
-      if(x==1 && y==1){
-        console.log("hello");
-        console.log(i);
-        console.log(k);
-        console.log(l);
-        miserables.links.push({"source":l,"target":k,"value":1});
+          x=list[i][k];
+          y=list[i][l];
 
-      }
+          if(x==1 && y==1){
+            console.log("hello");
+            console.log(i);
+            console.log(k);
+            console.log(l);
+            miserables.links.push({"source":l,"target":k,"value":0});
+            edge++;//最初のedgeが0
+            break;
+          }
+        }
+        //とりあえずエッジつくってbreak
+        //こっからvalueを与える
+        for(i=0;i<keitaisokaiseki.length;++i){
+          x=list[i][k];
+          y=list[i][l];
+          if(x==1 && y==1){
+            z = miserables.links[edge].value;
+            z++;
+            miserables.links[edge].value = z;
+          }
+        }
       }
     }
-  }
 console.log(miserables.links[0]);
 
 //以上計算中
 
 var graph = miserables;
-//d3.json("miserables.json", function(error, graph) {
+//d3.json("miserables.json", function(error, graph)
 
 
 //  if (error) throw error;
