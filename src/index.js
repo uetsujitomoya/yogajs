@@ -18,11 +18,11 @@ var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height);
 
-<<<<<<< HEAD
-kuromoji.builder({dicPath: 'dict/'}).build((err, tokenizer) => {
+
+kuromoji.builder({dicPath: 'dict/'}).build((err, tokenizer) => {  //?
   const path = tokenizer.tokenize("すもももももももものうち");
   console.log(path);
-=======
+
 
 
 
@@ -143,14 +143,8 @@ console.log(miserables.links[0]);
 //以上計算中
 
 var graph = miserables;
-//d3.json("miserables.json", function(error, graph)
 
 
-//  if (error) throw error;
->>>>>>> yattonankadeta
-
-  d3.json("miserables.json", function(error, graph) {
-    if (error) throw error;
 
     force
         .nodes(graph.nodes)
@@ -158,13 +152,13 @@ var graph = miserables;
         .start();
 
 
-<<<<<<< HEAD
+
     var link = svg.selectAll(".link")
         .data(graph.links)
       .enter().append("line")
         .attr("class", "link")
         .style("stroke-width", function(d) { return Math.sqrt(d.value); });
-=======
+
   var node = svg.selectAll(".node")
       .data(graph.nodes)
     .enter().append("text")
@@ -172,7 +166,7 @@ var graph = miserables;
       .style("fill", function(d) { return color(d.group); })
       .call(force.drag)
       .text(function(d) { return d.name; });
->>>>>>> yattonankadeta
+
 
     var node = svg.selectAll(".node")
         .data(graph.nodes)
@@ -194,4 +188,3 @@ var graph = miserables;
       node.attr("x", function(d) { return d.x; })
           .attr("y", function(d) { return d.y; });
     });
-  });
