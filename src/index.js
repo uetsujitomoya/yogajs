@@ -20,18 +20,28 @@ var svg = d3.select("body").append("svg")
 
 
 kuromoji.builder({dicPath: 'dict/'}).build((err, tokenizer) => {
-  const path = tokenizer.tokenize("すもももももももものうち");
+  const path = tokenizer.tokenize("すもももももももものうち"); //1集計単位ごとにこの関数を用いよう
   console.log(path);
 
+  var keitaisokaiseki = new Array; //ゆくゆくはArrayの大きさを段落数に指定
+  keitaisokaiseki[0] = new Array(path.length);
+
+  for(i=0;i<path.length;i++){
+    keitaisokaiseki[0][i] = path[i].basic_form;
+  }
 
 
+
+//以下、想定していた形態素解析後の結果から、共起ネットワークのノード・エッジ作成へ
 
     var danraku0 = ["A","B","C"];
     var danraku1 = ["B","D"];
+    /*
     var keitaisokaiseki = [["あ","い","う","え"],
                             ["い","あ","え"],
                             ["あ","お"],
                           ["い","か"]];
+                          */
 
 console.log(keitaisokaiseki[0][0]);
 
