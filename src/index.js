@@ -19,7 +19,7 @@ var svg = d3.select("body").append("svg")
     .attr("height", height);
 
 
-kuromoji.builder({dicPath: 'dict/'}).build((err, tokenizer) => {  //?
+kuromoji.builder({dicPath: 'dict/'}).build((err, tokenizer) => {
   const path = tokenizer.tokenize("すもももももももものうち");
   console.log(path);
 
@@ -187,4 +187,5 @@ var graph = miserables;
 
       node.attr("x", function(d) { return d.x; })
           .attr("y", function(d) { return d.y; });
+    });
     });
