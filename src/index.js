@@ -168,13 +168,6 @@ var graph = miserables;
       .text(function(d) { return d.name; });
 
 
-    var node = svg.selectAll(".node")
-        .data(graph.nodes)
-      .enter().append("text")
-        .attr("class", "node")
-        .style("fill", function(d) { return color(d.group); })
-        .call(force.drag)
-        .text(function(d) { return d.name.substring(0,4); });
 
 
 
