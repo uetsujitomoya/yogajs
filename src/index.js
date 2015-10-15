@@ -11,7 +11,7 @@ var color = d3.scale.category20c();
 
 var force = d3.layout.force()
     .charge(-120)
-    .linkDistance(30)
+    .linkDistance(60)
     .size([width, height]);
 
 var svg = d3.select("body").append("svg")
@@ -20,7 +20,7 @@ var svg = d3.select("body").append("svg")
 
 
 kuromoji.builder({dicPath: 'dict/'}).build((err, tokenizer) => {
-  const path = tokenizer.tokenize("俺は強い。俺は弱い。"); //1集計単位ごとにこの関数を用いよう
+  const path = tokenizer.tokenize("俺は強くて優しい。俺は弱くて素敵だ。"); //1集計単位ごとにこの関数を用いよう
   console.log(path);
 
   var keitaisokaiseki = new Array; //このlengthは段落数
