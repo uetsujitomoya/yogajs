@@ -20,7 +20,7 @@ var svg = d3.select("body").append("svg")
 
 
 kuromoji.builder({dicPath: 'dict/'}).build((err, tokenizer) => {
-  const path = tokenizer.tokenize("すもももももももものうち"); //1集計単位ごとにこの関数を用いよう
+  const path = tokenizer.tokenize("I have a pen."); //1集計単位ごとにこの関数を用いよう
   console.log(path);
 
   var keitaisokaiseki = new Array; //ゆくゆくはArrayの大きさを段落数に指定
