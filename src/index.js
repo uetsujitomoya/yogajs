@@ -20,14 +20,27 @@ var svg = d3.select("body").append("svg")
 
 
 kuromoji.builder({dicPath: 'dict/'}).build((err, tokenizer) => {
-  const path = tokenizer.tokenize("I have a pen."); //1集計単位ごとにこの関数を用いよう
+  const path = tokenizer.tokenize("俺は強い。俺は弱い。"); //1集計単位ごとにこの関数を用いよう
   console.log(path);
 
-  var keitaisokaiseki = new Array; //ゆくゆくはArrayの大きさを段落数に指定
-  keitaisokaiseki[0] = new Array(path.length);
+  var keitaisokaiseki = new Array; //このlengthは段落数
 
-  for(i=0;i<path.length;i++){
-    keitaisokaiseki[0][i] = path[i].basic_form;
+
+  i=0; //iは全データ内で何文字目か
+  j=0; //集計単位の何個目か。
+  while(i<path.length){
+    keitaisokaiseki[j] = new Array;
+    k=0; //集計単位内で何文字目か
+    while(i<path.length){
+      if(path[i].basic_form=="。"){
+        i++
+        break;
+      }
+      keitaisokaiseki[j][k] = path[i].basic_form;
+      i++;
+      k++;
+    }
+    j++;
   }
 
 
@@ -43,7 +56,7 @@ kuromoji.builder({dicPath: 'dict/'}).build((err, tokenizer) => {
                           ["い","か"]];
                           */
 
-console.log(keitaisokaiseki[0][0]);
+console.log(keitaisokaiseki);
 
 
 
@@ -57,7 +70,7 @@ var tangoset = new Set();
 
 console.log(keitaisokaiseki.length);
 for(i=0;i<keitaisokaiseki.length;++i){
-  console.log(keitaisokaiseki[i].length);
+  console.log(keitaisokaiseki[i]);
   for(j=0;j<keitaisokaiseki[i].length;++j){
     tangoset.add(keitaisokaiseki[i][j]);
   }
