@@ -35,6 +35,9 @@ kuromoji.builder({dicPath: 'dict/'}).build((err, tokenizer) => {
       if(path[i].basic_form=="。"){
         i++
         break;
+      } else if(path[i].pos=="助詞"||path[i].pos=="助動詞"){
+        i++
+        continue;
       }
       keitaisokaiseki[j][k] = path[i].basic_form;
       i++;
