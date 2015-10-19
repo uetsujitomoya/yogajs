@@ -2,6 +2,16 @@
 import d3 from "d3"
 import "kuromoji"
 
+
+
+document.getElementById('load-button').addEventListener('click', function () {
+        var file = document.getElementById('file-input').files[0];
+        var reader = new FileReader();
+        reader.onload = function(event) {
+            var data = JSON.parse(event.target.result);
+            console.log(data);
+        };
+        reader.readAsText(file);
 var i,j,k,l;
 
 var width = 960,
@@ -19,8 +29,12 @@ var svg = d3.select("body").append("svg")
     .attr("height", height);
 
 
+
+
+
+
 kuromoji.builder({dicPath: 'dict/'}).build((err, tokenizer) => {
-  const path = tokenizer.tokenize("俺は強くて優しい。俺は弱くて素敵だ。"); //1集計単位ごとにこの関数を用いよう
+  const path = tokenizer.tokenize(file); //1集計単位ごとにこの関数を用いよう
   console.log(path);
 
   var keitaisokaiseki = new Array; //このlengthは段落数
@@ -50,14 +64,7 @@ kuromoji.builder({dicPath: 'dict/'}).build((err, tokenizer) => {
 
 //以下、想定していた形態素解析後の結果から、共起ネットワークのノード・エッジ作成へ
 
-    var danraku0 = ["A","B","C"];
-    var danraku1 = ["B","D"];
-    /*
-    var keitaisokaiseki = [["あ","い","う","え"],
-                            ["い","あ","え"],
-                            ["あ","お"],
-                          ["い","か"]];
-                          */
+
 
 console.log(keitaisokaiseki);
 
@@ -208,3 +215,4 @@ var graph = miserables;
           .attr("y", function(d) { return d.y; });
     });
     });
+  });
