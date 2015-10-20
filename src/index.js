@@ -5,8 +5,8 @@ import "kuromoji"
 
 var i,j,k,l;
 
-var width = 960,
-    height = 500;
+var width = 848,
+    height = 480;
 
 var color = d3.scale.category20c();
 
@@ -46,10 +46,10 @@ document.getElementById('load-button').addEventListener('click', function () {
                 keitaisokaiseki[j] = new Array;
                 k=0; //集計単位内で何文字目か
                 while(i<path.length){
-                  if(path[i].basic_form=="。"){
+                  if(path[i].basic_form=="。"||path[i].basic_form=="？"||path[i].basic_form=="?"){
                     i++
                     break;
-                  } else if(path[i].pos=="助詞"||path[i].pos=="助動詞"){
+                  } else if(path[i].pos=="助詞"||path[i].pos=="助動詞"||path[i].pos_detail_1=="非自立"){
                     i++
                     continue;
                   }
