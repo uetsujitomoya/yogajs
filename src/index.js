@@ -39,18 +39,42 @@ document.getElementById('load-button').addEventListener('click', function () {
 
               var keitaisokaiseki = new Array; //このlengthは段落数
 
-
+              var buntou,bunmatsu;
+              var tegakari;
               i=0; //iは全データ内で何文字目か
               j=0; //集計単位の何個目か。
               while(i<path.length){
-                keitaisokaiseki[j] = new Array;
+                tegakari=0;//手がかりがあるか
+                keitaisokaiseki[j] = new Array; //一文
+                buntou=i; //現在の文の文頭が何単語目か
+
+                //まずは手がかり語があるか探す
+
+                while(i<path.length){
+                  if(path[i].basic_form=="から"){
+                    tegakari=1;
+                    break;
+                  }
+                  if(path[i].basic_form=="。"||path[i].basic_form=="？"||path[i].basic_form=="?"){
+                    bunmatsu=i;
+                    break;
+                  }
+                  i++;
+                }
+                //手がかりがなければbreak
+                i=buntou
                 k=0; //集計単位内で何文字目か
                 while(i<path.length){
+                  if(tegakari==0){
+                    i=bunmatsu;
+                    i++;
+                    break;
+                  }
                   if(path[i].basic_form=="。"||path[i].basic_form=="？"||path[i].basic_form=="?"){
-                    i++
+                    i++;
                     break;
                   } else if(path[i].pos=="助詞"||path[i].pos=="助動詞"||path[i].pos_detail_1=="非自立"){
-                    i++
+                    i++;
                     continue;
                   }
                   keitaisokaiseki[j][k] = path[i].basic_form;
@@ -78,23 +102,23 @@ document.getElementById('load-button').addEventListener('click', function () {
 
 
 
-            console.log(keitaisokaiseki.length);
+
             for(i=0;i<keitaisokaiseki.length;++i){
-              console.log(keitaisokaiseki[i]);
+
               for(j=0;j<keitaisokaiseki[i].length;++j){
                 tangoset.add(keitaisokaiseki[i][j]);
               }
             }
             var miserables={"nodes":new Array,"links":new Array};
 
-            console.log(tangoset);
+
 
             miserables.nodes = Array.from(tangoset).map(function(t) {
               return {name:t};
               // body...
             });
 
-            console.log(miserables.nodes[0]);
+
 
             for(k=0;k<miserables.nodes.length;++k){
 
@@ -102,12 +126,11 @@ document.getElementById('load-button').addEventListener('click', function () {
               miserables.nodes[k].group =1;//ゆくゆくは媒介中心性に
             }
             //node作成終了。miserables.nodes.lengthがtangosetになってるはず
-              console.log(miserables.nodes);
-              console.log(miserables.nodes.length);
+
 
             var danrakusuu = keitaisokaiseki.length;
 
-            console.log(danrakusuu);
+
             //あとはlinksの作成だけ
             //まずはlistをつくる
             var list = new Array(keitaisokaiseki.length);
@@ -119,15 +142,12 @@ document.getElementById('load-button').addEventListener('click', function () {
                 for(k=0;k<miserables.nodes.length;++k){
                   if(keitaisokaiseki[i][j]==miserables.nodes[k].name){
                     list[i][k]=1;
-                    console.log(i,k,list[i][k]);
+
                   }
                 }
               }
             }
-            console.log(keitaisokaiseki[0][0]);
-            console.log(miserables.nodes[0].name);
-            console.log(list);
-            console.log(list[0][0]);
+
             //listはi*k
 
             //listからmiserables.linksとlist3をつくる
@@ -149,10 +169,7 @@ document.getElementById('load-button').addEventListener('click', function () {
                       y=list[i][l];
 
                       if(x==1 && y==1){
-                        console.log("hello");
-                        console.log(i);
-                        console.log(k);
-                        console.log(l);
+
                         miserables.links.push({"source":l,"target":k,"value":0});
                         edge++;//最初のedgeが0
                         break;
