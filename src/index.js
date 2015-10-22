@@ -48,7 +48,7 @@ document.getElementById('load-button').addEventListener('click', function () {
               j=0; //何個目の集計単位か。
               var karabasho;
               var reason;
-              var kara="から"
+              var kara="て"
               while(i<path.length){
                 tegakari=0;//手がかりがあるか
                 keitaisokaiseki[j] = new Array; //一文
