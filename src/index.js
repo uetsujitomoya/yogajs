@@ -41,42 +41,73 @@ document.getElementById('load-button').addEventListener('click', function () {
 
               var buntou,bunmatsu;
               var tegakari;
+              var toutencount;
+              var toutenbasho=0;
               i=0; //iは全データ内で何文字目か
               j=0; //集計単位の何個目か。
+              var karabasho;
               while(i<path.length){
                 tegakari=0;//手がかりがあるか
                 keitaisokaiseki[j] = new Array; //一文
                 buntou=i; //現在の文の文頭が何単語目か
+                toutencount=0
 
                 //まずは手がかり語があるか探す
 
                 while(i<path.length){
                   if(path[i].basic_form=="から"){
+                    karabasho = i;
+                    while(i>0){
+                      i=i-1;
+                      if(path[i].basic_form=="。"||path[i].basic_form=="？"||path[i].basic_form=="?"||path[i].basic_form=="、"){
+                        if(toutencount==0){
+                          toutencount=1;
+                          continue;
+                        } else{
+                          buntou=i;
+                          toutencount=0;
+                          break;
+                        }
+                      }
+                    }
+                    i=karabasho;
+                    while(i<path.length){
+                      i=i+1;
+                      if(path[i].basic_form=="。"||path[i].basic_form=="？"||path[i].basic_form=="?"||path[i].basic_form=="、"){
+                        if(toutencount==0){
+                          toutencount=1;
+                          continue;
+                        } else{
+                          bunmatsu=i;
+                          toutencount=0;
+                          break;
+                        }
+                      }
+                    }
+                    i=karabasho;
                     tegakari=1;
-                    break;
-                  }
-                  if(path[i].basic_form=="。"||path[i].basic_form=="？"||path[i].basic_form=="?"){
-                    bunmatsu=i;
                     break;
                   }
                   i++;
                 }
                 //手がかりがなければbreak
                 i=buntou
+                toutencount=0;
                 k=0; //集計単位内で何文字目か
                 while(i<path.length){
-                  if(tegakari==0){
-                    i=bunmatsu;
-                    i++;
-                    break;
+
+                  if(path[i].basic_form=="。"||path[i].basic_form=="？"||path[i].basic_form=="?"||path[i].basic_form=="、"){
+                    if(toutencount<3){
+                      i++;
+                      toutencount++;
+                      continue;
+                    } else{
+                      i++;
+                      toutencount=0;
+                      break;
+                    }
                   }
-                  if(path[i].basic_form=="。"||path[i].basic_form=="？"||path[i].basic_form=="?"){
-                    i++;
-                    break;
-                  } else if(path[i].pos=="助詞"||path[i].pos=="助動詞"||path[i].pos_detail_1=="非自立"){
-                    i++;
-                    continue;
-                  }
+
                   keitaisokaiseki[j][k] = path[i].basic_form;
                   i++;
                   k++;
