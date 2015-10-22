@@ -38,6 +38,7 @@ document.getElementById('load-button').addEventListener('click', function () {
               console.log(path);
 
               var keitaisokaiseki = new Array; //このlengthは段落数
+              var reasonMargin = new Array;
 
               var buntou,bunmatsu;
               var tegakari;
@@ -46,12 +47,14 @@ document.getElementById('load-button').addEventListener('click', function () {
               i=0; //iは全データ内で何文字目か
               j=0; //集計単位の何個目か。
               var karabasho;
+              var reason;
               while(i<path.length){
                 tegakari=0;//手がかりがあるか
                 keitaisokaiseki[j] = new Array; //一文
+                reasonMargin[j] = new Array;
                 buntou=i; //現在の文の文頭が何単語目か
                 toutencount=0
-
+                reason=1;
                 //まずは手がかり語があるか探す
 
                 while(i<path.length){
@@ -95,7 +98,9 @@ document.getElementById('load-button').addEventListener('click', function () {
                 toutencount=0;
                 k=0; //集計単位内で何文字目か
                 while(i<path.length){
-
+                  if(i==karabasho+1){
+                    reason=0;
+                  }
                   if(path[i].basic_form=="。"||path[i].basic_form=="？"||path[i].basic_form=="?"||path[i].basic_form=="、"){
                     if(toutencount<3){
                       i++;
@@ -115,6 +120,7 @@ document.getElementById('load-button').addEventListener('click', function () {
                   }
 
                   keitaisokaiseki[j][k] = path[i].basic_form;
+                  reasonMargin[j][k] = reason;
                   i++;
                   k++;
                 }
@@ -130,6 +136,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 
 
             console.log(keitaisokaiseki);
+            console.log(reasonMargin);
 
 
 
