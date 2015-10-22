@@ -12,7 +12,7 @@ var color = d3.scale.category20c();
 
 var force = d3.layout.force()
     .charge(-120)
-    .linkDistance(60)
+    .linkDistance(100)
     .size([width, height]);
 
 var svg = d3.select("body").append("svg")
@@ -86,7 +86,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 
                 //手がかりがなければbreak
                 if(i==path.length){
-                  console.log("Kara is not found.");
+                  console.log("All kara was found.");
                   break;
                 }
 
