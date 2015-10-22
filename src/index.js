@@ -48,6 +48,7 @@ document.getElementById('load-button').addEventListener('click', function () {
               j=0; //集計単位の何個目か。
               var karabasho;
               var reason;
+              var kara="から"
               while(i<path.length){
                 tegakari=0;//手がかりがあるか
                 keitaisokaiseki[j] = new Array; //一文
@@ -58,7 +59,7 @@ document.getElementById('load-button').addEventListener('click', function () {
                 //まずは手がかり語があるか探す
 
                 while(i<path.length){
-                  if(path[i].basic_form=="から"){
+                  if(path[i].basic_form==kara){
                     karabasho = i;
                     while(i>0){
                       i=i-1;
@@ -112,7 +113,7 @@ document.getElementById('load-button').addEventListener('click', function () {
                       break;//3区間終了
                     }
                   }
-                  if(path[i].basic_form!="から"){
+                  if(path[i].basic_form!=kara){
                     if(path[i].pos=="助詞"||path[i].pos=="助動詞"||path[i].pos=="記号"||path[i].pos_detail_1=="非自立"){
                       i++;
                       continue;
