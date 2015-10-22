@@ -86,7 +86,7 @@ document.getElementById('load-button').addEventListener('click', function () {
                     }
                     i=karabasho;
                     tegakari=1;
-                    break;
+                    break;//「から」が見つかった
                   }
                   i++;
                 }
@@ -104,7 +104,13 @@ document.getElementById('load-button').addEventListener('click', function () {
                     } else{
                       i++;
                       toutencount=0;
-                      break;
+                      break;//3区間終了
+                    }
+                  }
+                  if(path[i].basic_form!="から"){
+                    if(path[i].pos=="助詞"||path[i].pos=="助動詞"||path[i].pos=="記号"||path[i].pos_detail_1=="非自立"){
+                      i++;
+                      continue;
                     }
                   }
 
@@ -112,6 +118,8 @@ document.getElementById('load-button').addEventListener('click', function () {
                   i++;
                   k++;
                 }
+                if(i==path.length){break;}//keitaisokaiseki作成完了
+                i=karabasho+1;
                 j++;
               }
 
