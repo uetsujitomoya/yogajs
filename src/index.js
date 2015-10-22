@@ -40,12 +40,12 @@ document.getElementById('load-button').addEventListener('click', function () {
               var keitaisokaiseki = new Array; //このlengthは段落数
               var reasonMargin = new Array;
 
-              var buntou,bunmatsu;
+              var buntou;
               var tegakari;
               var toutencount;
               var toutenbasho=0;
               i=0; //iは全データ内で何文字目か
-              j=0; //集計単位の何個目か。
+              j=0; //何個目の集計単位か。
               var karabasho;
               var reason;
               var kara="から"
@@ -58,8 +58,8 @@ document.getElementById('load-button').addEventListener('click', function () {
                 reason=1;
                 //まずは手がかり語があるか探す
 
-                while(i<path.length){
-                  if(path[i].basic_form==kara){
+                while(i<path.length){ //kara捜索
+                  if(path[i].basic_form==kara){ //手がかり語があったら3区間指定
                     karabasho = i;
                     while(i>0){
                       i=i-1;
@@ -74,27 +74,23 @@ document.getElementById('load-button').addEventListener('click', function () {
                         }
                       }
                     }
-                    i=karabasho;
-                    while(i<path.length){
-                      i=i+1;
-                      if(path[i].basic_form=="。"||path[i].basic_form=="？"||path[i].basic_form=="?"||path[i].basic_form=="、"){
-                        if(toutencount==0){
-                          toutencount=1;
-                          continue;
-                        } else{
-                          bunmatsu=i;
-                          toutencount=0;
-                          break;
-                        }
-                      }
+                    if(i==0){
+                      buntou=0;
                     }
-                    i=karabasho;
+                    console.log(buntou);
                     tegakari=1;
                     break;//「から」が見つかった
                   }
                   i++;
                 }
+
                 //手がかりがなければbreak
+                if(i==path.length){
+                  console.log("Kara is not found.");
+                  break;
+                }
+
+
                 i=buntou
                 toutencount=0;
                 k=0; //集計単位内で何文字目か
