@@ -228,7 +228,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 
                       if(x==1 && y==1){
 
-                        miserables.links.push({"source":l,"target":k,"value":0});
+                        miserables.links.push({source:l,target:k,value:0});
                         edge++;//最初のedgeが0
                         break;
                       }
@@ -246,7 +246,8 @@ document.getElementById('load-button').addEventListener('click', function () {
                     }
                   }
                 }
-            console.log(miserables.links);
+                console.log(miserables.links);
+
 
             //以上計算中
 
