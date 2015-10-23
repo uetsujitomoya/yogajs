@@ -48,7 +48,7 @@ document.getElementById('load-button').addEventListener('click', function () {
               j=0; //何個目の集計単位か。
               var karabasho;
               var reason;
-              var kara="て"
+              var kara="から"
               while(i<path.length){
                 tegakari=0;//手がかりがあるか
                 keitaisokaiseki[j] = new Array; //一文
@@ -106,13 +106,17 @@ document.getElementById('load-button').addEventListener('click', function () {
                       break;//3区間終了
                     }
                   }
-                  if(path[i].basic_form==kara||path[i].basic_form=="たぶん"||path[i].basic_form=="られる"){
+                  if(path[i].basic_form==kara||path[i].basic_form=="たぶん"||path[i].basic_form=="られる"||path[i].basic_form=="する"||path[i].basic_form=="なる"||path[i].basic_form=="れる"||path[i].basic_form=="思う"||path[i].basic_form=="自分"||path[i].basic_form=="ちょっと"){
                     i++;
                     continue;
                   }
-                  if(path[i].pos=="助詞"||path[i].pos=="助動詞"||path[i].pos=="記号"||path[i].pos_detail_1=="非自立"){
+                  if(path[i].pos=="助詞"||path[i].pos=="助動詞"||path[i].pos=="接続詞"||path[i].pos=="記号"||path[i].pos_detail_1=="非自立"||path[i].basic_form=="それで"||path[i].basic_form=="こう"||path[i].basic_form=="そう"||path[i].pos_detail_1=="代名詞"){
                       i++;
                       continue;
+                  }
+                  if(path[i].basic_form=="もう"||path[i].basic_form=="こんなに"||path[i].basic_form=="そんな"){
+                    i++;
+                    continue;
                   }
 
                   keitaisokaiseki[j][k] = path[i].basic_form;
