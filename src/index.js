@@ -199,8 +199,6 @@ document.getElementById('load-button').addEventListener('click', function () {
                   if(keitaisokaiseki[i][j]==miserables.nodes[k].name){
                     list[i][k]=1;
 
-                  } else{
-                    list[i][k]=0;
                   }
                 }
               }
@@ -272,7 +270,14 @@ document.getElementById('load-button').addEventListener('click', function () {
                   .data(graph.nodes)
                 .enter().append("text")
                   .attr("class", "node")
-                  .style("fill", function(d) { return color(d.group); })
+                  .style("fill", function(d) {
+                    if(d.group==1){
+                      return "red";
+                    } else{
+                      return "blue";
+                    }
+
+                  })
                   .call(force.drag)
                   .text(function(d) { return d.name; });
 
