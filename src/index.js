@@ -231,7 +231,7 @@ document.getElementById('load-button').addEventListener('click', function () {
                     }
                   }
                 }
-            console.log(miserables.links[0]);
+            console.log(miserables.links);
 
             //以上計算中
 
