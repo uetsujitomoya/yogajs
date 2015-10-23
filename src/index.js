@@ -38,7 +38,7 @@ document.getElementById('load-button').addEventListener('click', function () {
               console.log(path);
 
               var keitaisokaiseki = new Array; //このlengthは段落数
-              var reasonMargin = new Array;
+              var reasonMatrix = new Array;
 
               var buntou;
               var tegakari;
@@ -48,11 +48,11 @@ document.getElementById('load-button').addEventListener('click', function () {
               j=0; //何個目の集計単位か。
               var karabasho;
               var reason;
-              var kara="て"
+              var kara="から"
               while(i<path.length){
                 tegakari=0;//手がかりがあるか
                 keitaisokaiseki[j] = new Array; //一文
-                reasonMargin[j] = new Array;
+                reasonMatrix[j] = new Array;
                 buntou=i; //現在の文の文頭が何単語目か
                 toutencount=0
                 reason=1;
@@ -117,7 +117,7 @@ document.getElementById('load-button').addEventListener('click', function () {
                   }
 
                   keitaisokaiseki[j][k] = path[i].basic_form;
-                  reasonMargin[j][k] = reason;
+                  reasonMatrix[j][k] = reason;
                   i++;
                   k++;
                 }
@@ -133,7 +133,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 
 
             console.log(keitaisokaiseki);
-            console.log(reasonMargin);
+            console.log(reasonMatrix);
 
 
 
@@ -149,25 +149,38 @@ document.getElementById('load-button').addEventListener('click', function () {
             for(i=0;i<keitaisokaiseki.length;++i){
 
               for(j=0;j<keitaisokaiseki[i].length;++j){
-                tangoset.add(keitaisokaiseki[i][j]);
-              }
+                tangoset.add({name:keitaisokaiseki[i][j],
+                              group:reasonMatrix[i][j]
+
+                            });
+
             }
+          }
+
+          var tangosett = new Array;;
+
+          tangosett = Array.from(tangoset).map(function(t) {
+            return {t};
+            // body...
+          });
+
+
             var miserables={"nodes":new Array,"links":new Array};
 
 
-
-            miserables.nodes = Array.from(tangoset).map(function(t) {
-              return {name:t};
-              // body...
-            });
+            for(i=0;i<tangosett.length;i++){
+              miserables.nodes[i]=tangosett[i].t;
+            }
 
 
-
+            console.log(miserables.nodes);
+            console.log(miserables.nodes.length);
+/*
             for(k=0;k<miserables.nodes.length;++k){
 
 
               miserables.nodes[k].group =1;//ゆくゆくは媒介中心性に
-            }
+            }*/
             //node作成終了。miserables.nodes.lengthがtangosetになってるはず
 
 
@@ -186,11 +199,13 @@ document.getElementById('load-button').addEventListener('click', function () {
                   if(keitaisokaiseki[i][j]==miserables.nodes[k].name){
                     list[i][k]=1;
 
+                  } else{
+                    list[i][k]=0;
                   }
                 }
               }
             }
-
+            console.log(list);
             //listはi*k
 
             //listからmiserables.linksとlist3をつくる
@@ -231,7 +246,7 @@ document.getElementById('load-button').addEventListener('click', function () {
                     }
                   }
                 }
-            console.log(miserables.links[0]);
+            console.log(miserables.links);
 
             //以上計算中
 
