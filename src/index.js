@@ -306,47 +306,47 @@ document.getElementById('load-button').addEventListener('click', function () {
         /*clustering*/
 
 
-        var cluster = require('hierarchical-clustering');
-var colors = [
+
+  });
+
+
+  var cluster = require('hierarchical-clustering');
+  var colors = [
   [20, 20, 80],
   [22, 22, 90],
   [250, 255, 253],
   [100, 54, 255]
-];
+  ];
 
-// Euclidean distance
-function distance(a, b) {
+  // Euclidean distance
+  function distance(a, b) {
   var d = 0;
   for (var i = 0; i < a.length; i++) {
-    d += Math.pow(a[i] - b[i], 2);
+  d += Math.pow(a[i] - b[i], 2);
   }
   return Math.sqrt(d);
-}
+  }
 
-// Single-linkage clustering
-function linkage(distances) {
+  // Single-linkage clustering
+  function linkage(distances) {
   return Math.min.apply(null, distances);
-}
+  }
 
-var levels = cluster({
+  var levels = cluster({
   input: colors,
   distance: distance,
   linkage: linkage,
   minClusters: 2, // only want two clusters
-});
+  });
 
-var clusters = levels[levels.length - 1].clusters;
-console.log(clusters);
-// => [ [ 2 ], [ 3, 1, 0 ] ]
-clusters = clusters.map(function (cluster) {
+  var clusters = levels[levels.length - 1].clusters;
+  console.log(clusters);
+  // => [ [ 2 ], [ 3, 1, 0 ] ]
+  clusters = clusters.map(function (cluster) {
   return cluster.map(function (index) {
-    return colors[index];
+  return colors[index];
   });
-});
-console.log(clusters);
-// => [ [ [ 250, 255, 253 ] ],
-// => [ [ 100, 54, 255 ], [ 22, 22, 90 ], [ 20, 20, 80 ] ] ]
-
-
-
   });
+  console.log(clusters);
+  // => [ [ [ 250, 255, 253 ] ],
+  // => [ [ 100, 54, 255 ], [ 22, 22, 90 ], [ 20, 20, 80 ] ] ]
