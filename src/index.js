@@ -5,8 +5,8 @@ import "kuromoji"
 
 var i,j,k,l;
 
-var width = 848,
-    height = 480;
+var width = 1320,
+    height = 660;
 
 var color = d3.scale.category20c();
 
