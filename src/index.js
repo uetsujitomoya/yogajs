@@ -382,3 +382,35 @@ document.getElementById('load-button').addEventListener('click', function () {
               .append("path")
               .attr("d", area)
               .attr("fill",function(d,i){return colors[i]});
+
+
+
+
+//チェックボックス
+
+              function boxCheck(){
+
+                //チェックされた項目を記録する変数
+                var str="";
+
+                //for文でチェックボックスを１つずつ確認
+                for( i=0; i<6; i++ )
+                {
+                  //チェックされているか確認する
+                  if( document.chbox.elements[i].checked )
+                  {
+                    //変数strが空でない時、区切りのコンマを入れる
+                    if( str != "" ) str=str+",";
+
+                    //チェックボックスのvalue値を変数strに入れる
+                    str=str+document.chbox.elements[i].value;
+                  }
+                }
+
+                //strが空の時、警告を出す
+                if( str=="" ){
+                   alert( "どれか選択してください。" );
+                }else{
+                  alert( str + "が選択されました。" );
+                }
+              }
