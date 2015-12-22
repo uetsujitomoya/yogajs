@@ -389,10 +389,6 @@ document.getElementById('load-button').addEventListener('click', function () {
               //引数はstart,stop,stepの順
               //[190,170,150,130,110,90,70,50,30,10]と同等
             var range = d3.range(200,5,-40);
-            svg.selectAll("line.h")
-              .data(range).enter().append("line")
-              .attr("x1", 0).attr("y1", function(d,i){return d;})
-              .attr("x2", 200).attr("y2", function(d,i){return d;});
             svg.selectAll("line.v")
               .data(range).enter().append("line")
               .attr("x1", function(d,i){return d;}).attr("y1", 0)
