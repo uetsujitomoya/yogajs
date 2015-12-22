@@ -374,8 +374,19 @@ document.getElementById('load-button').addEventListener('click', function () {
           var colors = ["blue","purple","red","orange","yellow","#0f0","green"];
           var area = d3.svg.area()
               .x(function(d,i){return i * 200/5})
-              .y0(function(d){return 200})
+              .y0(function(d){return
+                 200})
               .y1(function(d){return 200 - scaleY(d.y+d.y0)});
+
+
+              //x軸+グリッド線
+              var xAxis = d3.svg.axis()
+                  .scale(scaleX)
+                  .orient("bottom")
+                  .innerTickSize(-height)  // 目盛線の長さ（内側）
+                  .outerTickSize(0) // 目盛線の長さ（外側）
+                  .tickPadding(10); // 目盛線とテキストの間の長さ
+
           svg.selectAll("path")
               .data(stackdata.reverse())
               .enter()
