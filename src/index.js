@@ -369,11 +369,11 @@ document.getElementById('load-button').addEventListener('click', function () {
               .values(function(d){return d;});
           var stackdata = stack(stackdataArr);
           var max = d3.max(stackdata[stackdata.length - 1], function(d){return d.y + d.y0;});
-          var scaleX = d3.scale.linear().domain([0,6]).range([0,200]);
+          var scaleX = d3.scale.linear().domain([0,6]).range([0,width/2]);
           var scaleY = d3.scale.linear().domain([0,max]).range([0,200]);
           var colors = ["blue","purple","red","orange","yellow","#0f0","green"];
           var area = d3.svg.area()
-              .x(function(d,i){return i * 200/5})
+              .x(function(d,i){return i * width/10})
               .y0(function(d){return 200})
               .y1(function(d){return 200 - scaleY(d.y+d.y0)});
           svg.selectAll("path")
@@ -388,7 +388,7 @@ document.getElementById('load-button').addEventListener('click', function () {
               //grid line
               //引数はstart,stop,stepの順
               //[190,170,150,130,110,90,70,50,30,10]と同等
-            var range = d3.range(200,5,-40);
+            var range = d3.range((width/2)-(width/20),4,-width/10);
             svg.selectAll("line.v")
               .data(range).enter().append("line")
               .attr("x1", function(d,i){return d;}).attr("y1", 0)
