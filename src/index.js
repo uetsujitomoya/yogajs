@@ -395,8 +395,6 @@ document.getElementById('load-button').addEventListener('click', function () {
               .attr("x2", function(d,i){return d;}).attr("y2", 200);
             svg.selectAll("line")
               .attr("stroke", "black")
-              .attr("stroke-dasharray", 2)
-              .attr("shape-rendering", "crispEdges");
 
 
 
