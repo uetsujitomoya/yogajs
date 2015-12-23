@@ -375,7 +375,7 @@ document.getElementById('load-button').addEventListener('click', function () {
           var max = d3.max(stackdata[stackdata.length - 1], function(d){return d.y + d.y0;});
           var scaleX = d3.scale.linear().domain([0,6]).range([0,width/2]);
           var scaleY = d3.scale.linear().domain([0,max]).range([0,200]);
-          var colors = ["blue","purple","red","orange","yellow","#0f0","green"];
+          var colors = ["silver","#77ff77","#ff7777","#7777ff","yellow","#0f0","green"];
           var area = d3.svg.area()
               .x(function(d,i){return i * width/10})
               .y0(function(d){return 200})
@@ -398,8 +398,8 @@ document.getElementById('load-button').addEventListener('click', function () {
               .attr("x1", function(d,i){return d;}).attr("y1", 0)
               .attr("x2", function(d,i){return d;}).attr("y2", 200);
             svg.selectAll("line")
-              .attr("stroke", "purple")
-              .attr("stroke-width", 20)
+              .attr("stroke", "#b3b")
+              .attr("stroke-width", 10)
 
 
 
