@@ -7,7 +7,7 @@ if(1){
 }
 
 
-var i,j,k,l;
+var i,j,k,l,m,bunsuu;  //mは段落
 
 var width = 1320,
     height = 660;
@@ -49,88 +49,93 @@ document.getElementById('load-button').addEventListener('click', function () {
               var toutencount;
               var toutenbasho=0;
               i=0; //iは全データ内で何文字目か
-              j=0; //何個目の集計単位か。
+              bunsuu=0; //全段落内で何分目か
+              m=0; //何個目の発言か
+              j=0; //段落内の何文目か。
               var karabasho;
               var reason;
               var kara="から"
               while(i<path.length){
-                tegakari=0;//手がかりがあるか
-                keitaisokaiseki[j] = new Array; //一文
-                reasonMatrix[j] = new Array;
-                buntou=i; //現在の文の文頭が何単語目か
-                toutencount=0
-                reason=1;
-                //まずは手がかり語があるか探す
 
-                while(i<path.length){ //kara捜索
-                  if(path[i].basic_form==kara){ //手がかり語があったら3区間指定
-                    karabasho = i;
-                    while(i>0){
-                      i=i-1;
-                      if(path[i].basic_form=="。"||path[i].basic_form=="？"||path[i].basic_form=="?"||path[i].basic_form=="、"){
-
-                          buntou=i;
-                          toutencount=0;
-                          break;
-
-                      }
-                    }
-                    if(i==0){
-                      buntou=0;
-                    }
-                    console.log(buntou);
-                    tegakari=1;
-                    break;//「から」が見つかった
-                  }
-                  i++;
-                }
-
-                //手がかりがなければbreak
-                if(i==path.length){
-                  console.log("All kara was found.");
-                  break;
-                }
-
-
-                i=buntou
-                toutencount=0;
-                k=0; //集計単位内で何文字目か
+                keitaisokaiseki[m] = new Array; //一発言
                 while(i<path.length){
-                  if(i==karabasho+1){
-                    reason=0;
-                  }
-                  if(path[i].basic_form=="。"||path[i].basic_form=="？"||path[i].basic_form=="?"||path[i].basic_form=="、"){
-                    if(toutencount<3){
-                      i++;
-                      toutencount++;
-                      continue;
-                    } else{
-                      i++;
-                      toutencount=0;
-                      break;//3区間終了
+                  tegakari=0;//手がかりがあるか
+                  keitaisokaiseki[m][j] = new Array; //文
+                  reasonMatrix[j] = new Array;
+                  buntou=i; //現在の文の文頭が何単語目か
+                  toutencount=0
+                  reason=1;
+                  //まずは手がかり語があるか探す
+
+                  while(i<path.length){ //kara捜索
+                    if(path[i].basic_form==kara){ //手がかり語があったら3区間指定
+                      karabasho = i;
+                      while(i>0){
+                        i=i-1;
+                        if(path[i].basic_form=="。"||path[i].basic_form=="？"||path[i].basic_form=="?"||path[i].basic_form=="、"){
+
+                            buntou=i;
+                            toutencount=0;
+                            break;
+
+                        }
+                      }
+                      if(i==0){
+                        buntou=0;
+                      }
+                      console.log(buntou);
+                      tegakari=1;
+                      break;//「から」が見つかった
                     }
-                  }
-                  if(path[i].basic_form==kara||path[i].basic_form=="たぶん"||path[i].basic_form=="られる"||path[i].basic_form=="する"||path[i].basic_form=="なる"||path[i].basic_form=="れる"||path[i].basic_form=="思う"||path[i].basic_form=="自分"||path[i].basic_form=="ちょっと"){
                     i++;
-                    continue;
-                  }
-                  if(path[i].pos=="助詞"||path[i].pos=="助動詞"||path[i].pos=="接続詞"||path[i].pos=="記号"||path[i].pos_detail_1=="非自立"||path[i].basic_form=="それで"||path[i].basic_form=="こう"||path[i].basic_form=="そう"||path[i].pos_detail_1=="代名詞"){
-                      i++;
-                      continue;
-                  }
-                  if(path[i].basic_form=="もう"||path[i].basic_form=="こんなに"||path[i].basic_form=="そんな"||path[i].basic_form=="さん"){
-                    i++;
-                    continue;
                   }
 
-                  keitaisokaiseki[j][k] = path[i].basic_form;
-                  reasonMatrix[j][k] = reason;
-                  i++;
-                  k++;
+                  //手がかりがなければbreak
+                  if(i==path.length){
+                    console.log("All kara was found.");
+                    break;
+                  }
+
+
+                  i=buntou
+                  toutencount=0;
+                  k=0; //集計単位内で何文字目か
+                  while(i<path.length){
+                    if(i==karabasho+1){
+                      reason=0;
+                    }
+                    if(path[i].basic_form=="。"){
+
+                        i++;
+                        bunsuu++;
+                        toutencount=0;
+                        break;//3区間終了
+
+                    }
+                    if(path[i].basic_form==kara||path[i].basic_form=="たぶん"||path[i].basic_form=="られる"||path[i].basic_form=="する"||path[i].basic_form=="なる"||path[i].basic_form=="れる"||path[i].basic_form=="思う"||path[i].basic_form=="自分"||path[i].basic_form=="ちょっと"){
+                      i++;
+                      continue;
+                    }
+                    if(path[i].pos=="助詞"||path[i].pos=="助動詞"||path[i].pos=="接続詞"||path[i].pos=="記号"||path[i].pos_detail_1=="非自立"||path[i].basic_form=="それで"||path[i].basic_form=="こう"||path[i].basic_form=="そう"||path[i].pos_detail_1=="代名詞"){
+                        i++;
+                        continue;
+                    }
+                    if(path[i].basic_form=="もう"||path[i].basic_form=="こんなに"||path[i].basic_form=="そんな"||path[i].basic_form=="さん"){
+                      i++;
+                      continue;
+                    }
+
+                    keitaisokaiseki[m][j][k] = path[i].basic_form;
+                    reasonMatrix[j][k] = reason;
+                    i++;
+                    k++;
+                  }
+                  if(path[i].basic_form=="："){break;}//1段落作成完了
+                  i=karabasho+1;
+                  j++;
                 }
                 if(i==path.length){break;}//keitaisokaiseki作成完了
-                i=karabasho+1;
-                j++;
+                m++
               }
 
 
@@ -152,17 +157,19 @@ document.getElementById('load-button').addEventListener('click', function () {
 
 
 
+            for(m=0;m<keitaisokaiseki.length;++m){
+              for(i=0;i<keitaisokaiseki[m].length;++i){
 
-            for(i=0;i<keitaisokaiseki.length;++i){
+                for(j=0;j<keitaisokaiseki[m][i].length;++j){
+                  tangoset.add({name:keitaisokaiseki[m][i][j],
+                                group:reasonMatrix[i][j]
 
-              for(j=0;j<keitaisokaiseki[i].length;++j){
-                tangoset.add({name:keitaisokaiseki[i][j],
-                              group:reasonMatrix[i][j]
+                              });
 
-                            });
-
+                  }
+                }
             }
-          }
+
 
           var tangosett = new Array;;
 
@@ -182,37 +189,39 @@ document.getElementById('load-button').addEventListener('click', function () {
 
             console.log(miserables.nodes);
             console.log(miserables.nodes.length);
-/*
-            for(k=0;k<miserables.nodes.length;++k){
 
 
-              miserables.nodes[k].group =1;//ゆくゆくは媒介中心性に
-            }*/
-            //node作成終了。miserables.nodes.lengthがtangosetになってるはず
 
 
-            var danrakusuu = keitaisokaiseki.length;
 
 
             //あとはlinksの作成だけ
             //まずはlistをつくる
             var list = new Array(keitaisokaiseki.length);
             //list作成
-            //keitaisokaisekiとnodesを照らしあわせる
-            for(i=0;i<keitaisokaiseki.length;++i){//danrakusuuはkeitaisokaisekiとlistで共
-              list[i] = new Array(miserables.nodes.length);
-              for(j=0;j<keitaisokaiseki[i].length;++j){
-                for(k=0;k<miserables.nodes.length;++k){
-                  if(keitaisokaiseki[i][j]==miserables.nodes[k].name){
-                    list[i][k]=1;
-                    if(keitaisokaiseki[i][j]=="母"){
-                      console.log("%d文目の%d語目に「母」が出ています",i,j);
-                    }
 
+            var RGBlist  = new Array(keitaisokaiseki.length);
+
+            //keitaisokaisekiとnodesを照らしあわせる
+            for(m=0;m<keitaisokaiseki.length;++m){
+              list[m] = new Array(keitaisokaiseki[m].length);
+              for(i=0;i<keitaisokaiseki[m].length;++i){
+                list[m][i] = new Array(miserables.nodes.length);
+                for(j=0;j<keitaisokaiseki[m][i].length;++j){
+                  for(k=0;k<miserables.nodes.length;++k){
+                    if(keitaisokaiseki[m][i][j]==miserables.nodes[k].name){
+                      list[m][i][k]=1;
+                      if(keitaisokaiseki[m][i][j]=="母"){
+                        console.log("%d発言目の%d文目の%d語目に「母」が出ています",m,i,j);
+                      }
+
+                    }
                   }
                 }
               }
             }
+
+
             console.log(list);
             //listはi*k
 
@@ -222,6 +231,8 @@ document.getElementById('load-button').addEventListener('click', function () {
 
             var edge=-1;
 
+
+
                 for(k=0;k<miserables.nodes.length;++k){
 
                   for(l=k+1;l<miserables.nodes.length;++l){//別の単語を見る
@@ -229,31 +240,39 @@ document.getElementById('load-button').addEventListener('click', function () {
 
                     //ここから段落を指定して縦になめる
 
+                    for(m=0;i<keitaisokaiseki.length;++m){
+                      for(i=0;i<keitaisokaiseki[m].length;++i){
+                        x=list[m][i][k];
+                        y=list[m][i][l];
 
-                    for(i=0;i<keitaisokaiseki.length;++i){
-                      x=list[i][k];
-                      y=list[i][l];
+                        if(x==1 && y==1){
 
-                      if(x==1 && y==1){
-
-                        miserables.links.push({source:l,target:k,value:0});
-                        edge++;//最初のedgeが0
-                        break;
+                          miserables.links.push({source:l,target:k,value:0});
+                          edge++;//最初のedgeが0
+                          break;
+                        }
                       }
                     }
-                    //とりあえずエッジつくってbreak
-                    //こっからvalueを与える
-                    for(i=0;i<keitaisokaiseki.length;++i){
-                      x=list[i][k];
-                      y=list[i][l];
-                      if(x==1 && y==1){
-                        z = miserables.links[edge].value;
-                        z++;
-                        miserables.links[edge].value = z;
+                      //とりあえずエッジつくってbreak
+                      //こっからvalueを与える
+                    for(m=0;i<keitaisokaiseki.length;++m){
+                      for(i=0;i<keitaisokaiseki[m].length;++i){
+                        x=list[m][i][k];
+                        y=list[m][i][l];
+                        if(x==1 && y==1){
+                          z = miserables.links[edge].value;
+                          z++;
+                          miserables.links[edge].value = z;
+                        }
                       }
                     }
+
+
+                    }
+
+
                   }
-                }
+
                 console.log(miserables.links);
 
 
