@@ -55,88 +55,36 @@ document.getElementById('load-button').addEventListener('click', function () {
               var karabasho;
               var reason;
               var kara="から"
-              while(i<path.length){
-
+              while(i<path.length){//発言ごとのループ
                 keitaisokaiseki[m] = new Array; //一発言
-                while(i<path.length){
-                  tegakari=0;//手がかりがあるか
+                while(i<path.length){//文ごとのループ
                   keitaisokaiseki[m][j] = new Array; //文
                   reasonMatrix[j] = new Array;
-                  buntou=i; //現在の文の文頭が何単語目か
-                  toutencount=0
-                  reason=1;
-                  //まずは手がかり語があるか探す
-
-                  while(i<path.length){ //kara捜索
-                    if(path[i].basic_form==kara){ //手がかり語があったら3区間指定
-                      karabasho = i;
-                      while(i>0){
-                        i=i-1;
-                        if(path[i].basic_form=="。"||path[i].basic_form=="？"||path[i].basic_form=="?"||path[i].basic_form=="、"){
-
-                            buntou=i;
-                            toutencount=0;
-                            break;
-
-                        }
-                      }
-                      if(i==0){
-                        buntou=0;
-                      }
-                      console.log(buntou);
-                      tegakari=1;
-                      break;//「から」が見つかった
-                    }
-                    i++;
-                  }
-
-                  //手がかりがなければbreak
-                  if(i==path.length){
-                    console.log("All kara was found.");
-                    break;
-                  }
-
-
-                  i=buntou
-                  toutencount=0;
-                  k=0; //集計単位内で何文字目か
-                  while(i<path.length){
-                    if(i==karabasho+1){
-                      reason=0;
-                    }
-                    if(path[i].basic_form=="。"){
-
-                        i++;
+                  k=0; //集計単位内で何単語目か
+                  while(i<path.length){//単語ごとのループ
+                      if(path[i].basic_form=="。"||path[i].basic_form=="？"||path[i].basic_form=="?"||path[i].basic_form=="："){
                         bunsuu++;
                         toutencount=0;
                         break;//3区間終了
-
-                    }
-                    if(path[i].basic_form==kara||path[i].basic_form=="たぶん"||path[i].basic_form=="られる"||path[i].basic_form=="する"||path[i].basic_form=="なる"||path[i].basic_form=="れる"||path[i].basic_form=="思う"||path[i].basic_form=="自分"||path[i].basic_form=="ちょっと"){
+                      }
+                      keitaisokaiseki[m][j][k] = path[i].basic_form;
+                      reasonMatrix[j][k] = reason;
                       i++;
-                      continue;
-                    }
-                    if(path[i].pos=="助詞"||path[i].pos=="助動詞"||path[i].pos=="接続詞"||path[i].pos=="記号"||path[i].pos_detail_1=="非自立"||path[i].basic_form=="それで"||path[i].basic_form=="こう"||path[i].basic_form=="そう"||path[i].pos_detail_1=="代名詞"){
-                        i++;
-                        continue;
-                    }
-                    if(path[i].basic_form=="もう"||path[i].basic_form=="こんなに"||path[i].basic_form=="そんな"||path[i].basic_form=="さん"){
-                      i++;
-                      continue;
-                    }
-
-                    keitaisokaiseki[m][j][k] = path[i].basic_form;
-                    reasonMatrix[j][k] = reason;
-                    i++;
-                    k++;
+                      k++;
                   }
-                  if(path[i].basic_form=="："){break;}//1段落作成完了
-                  i=karabasho+1;
-                  j++;
+                  if(i==path.length){//確認
+                    break;
+                  }
+                  if(path[i].basic_form=="："){
+                    i++;
+                    break;
+                  }//1段落作成完了
+                  i++;
+                  j++;//段落内の何文目か
                 }
-                if(i==path.length){break;}//keitaisokaiseki作成完了
-                m++
+                m++;
               }
+
 
 
 
