@@ -358,7 +358,9 @@ document.getElementById('load-button').addEventListener('click', function () {
   // => [ [ 100, 54, 255 ], [ 22, 22, 90 ], [ 20, 20, 80 ] ] ]
 
 
-
+//ドットで区切る
+//分布解析
+//stackdataArr完成
 
 
           var stackdataArr = [
@@ -400,6 +402,16 @@ document.getElementById('load-button').addEventListener('click', function () {
             svg.selectAll("line")
               .attr("stroke", "#b3b")
               .attr("stroke-width", 10)
+
+
+              var range2 = d3.range((width/2)-(width/40),5,-width/10);
+              svg.selectAll("line.v")
+                .data(range2).enter().append("line")
+                .attr("x1", function(d,i){return d;}).attr("y1", 0)
+                .attr("x2", function(d,i){return d;}).attr("y2", 200);
+              svg.selectAll("line")
+                .attr("stroke", function(d,i){return colors[i]})
+                .attr("stroke-width", 10)
 
 
 
