@@ -62,7 +62,7 @@ document.getElementById('load-button').addEventListener('click', function () {
                   reasonMatrix[j] = new Array;
                   k=0; //集計単位内で何単語目か
                   while(i<path.length){//単語ごとのループ
-                      if(path[i].basic_form=="。"||path[i].basic_form=="？"||path[i].basic_form=="?"||path[i].basic_form=="："){
+                      if(path[i].basic_form=="。"||path[i].basic_form=="？"||path[i].basic_form=="?"||path[i].word_id=="2613630"){
                         bunsuu++;
                         toutencount=0;
                         break;//3区間終了
@@ -75,7 +75,7 @@ document.getElementById('load-button').addEventListener('click', function () {
                   if(i==path.length){//確認
                     break;
                   }
-                  if(path[i].basic_form=="："){
+                  if(path[i].word_id=="2613630"){
                     i++;
                     break;
                   }//1段落作成完了
@@ -93,8 +93,6 @@ document.getElementById('load-button').addEventListener('click', function () {
 
 
             console.log(keitaisokaiseki);
-            console.log(reasonMatrix);
-
 
 
 
@@ -107,7 +105,9 @@ document.getElementById('load-button').addEventListener('click', function () {
 
             for(m=0;m<keitaisokaiseki.length;++m){
               for(i=0;i<keitaisokaiseki[m].length;++i){
-
+                if(keitaisokaiseki[m][i].length==0){//確認
+                  continue;
+                }
                 for(j=0;j<keitaisokaiseki[m][i].length;++j){
                   tangoset.add({name:keitaisokaiseki[m][i][j],
                                 group:reasonMatrix[i][j]
