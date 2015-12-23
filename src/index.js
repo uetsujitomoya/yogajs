@@ -3,6 +3,8 @@ import d3 from "d3"
 import "kuromoji"
 
 
+document.write("JavaScriptはONです。");
+
 var i,j,k,l;
 
 var width = 1320,
@@ -394,12 +396,16 @@ document.getElementById('load-button').addEventListener('click', function () {
               .attr("x1", function(d,i){return d;}).attr("y1", 0)
               .attr("x2", function(d,i){return d;}).attr("y2", 200);
             svg.selectAll("line")
-              .attr("stroke", "black")
+              .attr("stroke", "purple")
+              .attr("stroke-width", 20)
 
 
 
 
 //チェックボックス
+
+
+
 
               function boxCheck(){
 
