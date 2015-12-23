@@ -59,52 +59,15 @@ document.getElementById('load-button').addEventListener('click', function () {
 
                 keitaisokaiseki[m] = new Array; //一発言
                 while(i<path.length){
-                  tegakari=0;//手がかりがあるか
                   keitaisokaiseki[m][j] = new Array; //文
-                  reasonMatrix[j] = new Array;
-                  buntou=i; //現在の文の文頭が何単語目か
-                  toutencount=0
-                  reason=1;
-                  //まずは手がかり語があるか探す
-
-                  while(i<path.length){ //kara捜索
-                    if(path[i].basic_form==kara){ //手がかり語があったら3区間指定
-                      karabasho = i;
-                      while(i>0){
-                        i=i-1;
-                        if(path[i].basic_form=="。"||path[i].basic_form=="？"||path[i].basic_form=="?"||path[i].basic_form=="、"){
-
-                            buntou=i;
-                            toutencount=0;
-                            break;
-
-                        }
-                      }
-                      if(i==0){
-                        buntou=0;
-                      }
-                      console.log(buntou);
-                      tegakari=1;
-                      break;//「から」が見つかった
-                    }
-                    i++;
-                  }
-
-                  //手がかりがなければbreak
-                  if(i==path.length){
-                    console.log("All kara was found.");
-                    break;
-                  }
 
 
                   i=buntou
-                  toutencount=0;
+
                   k=0; //集計単位内で何文字目か
                   while(i<path.length){
-                    if(i==karabasho+1){
-                      reason=0;
-                    }
-                    if(path[i].basic_form=="。"){
+
+                    if(path[i].basic_form=="。"||path[i].basic_form=="？"||path[i].basic_form=="?"){
 
                         i++;
                         bunsuu++;
@@ -131,11 +94,10 @@ document.getElementById('load-button').addEventListener('click', function () {
                     k++;
                   }
                   if(path[i].basic_form=="："){break;}//1段落作成完了
-                  i=karabasho+1;
                   j++;
                 }
                 if(i==path.length){break;}//keitaisokaiseki作成完了
-                m++
+                m++;
               }
 
 
