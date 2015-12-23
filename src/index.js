@@ -205,6 +205,9 @@ document.getElementById('load-button').addEventListener('click', function () {
                 for(k=0;k<miserables.nodes.length;++k){
                   if(keitaisokaiseki[i][j]==miserables.nodes[k].name){
                     list[i][k]=1;
+                    if(keitaisokaiseki[i][j]=="母"){
+                      console.log("%d文目の%d語目に「母」が出ています",i,j);
+                    }
 
                   }
                 }
@@ -359,7 +362,9 @@ document.getElementById('load-button').addEventListener('click', function () {
 
 
 //ドットで区切る
-//分布解析
+//単語グループ分け -> 形態素解析時点で。
+
+//クライアントの各文の得点換算
 //stackdataArr完成
 
 
