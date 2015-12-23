@@ -2,8 +2,10 @@
 import d3 from "d3"
 import "kuromoji"
 
+if(1){
+  document.write("JavaScriptはONです。");
+}
 
-document.write("JavaScriptはONです。");
 
 var i,j,k,l;
 
