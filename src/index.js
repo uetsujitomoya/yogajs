@@ -383,6 +383,7 @@ document.getElementById('load-button').addEventListener('click', function () {
           var scaleX = d3.scale.linear().domain([0,6]).range([0,width/2]);
           var scaleY = d3.scale.linear().domain([0,max]).range([0,200]);
           var colors = ["silver","#77ff77","#ff7777","#7777ff","yellow","#0f0","green"];
+          var colors2 = ["gray","#b3b","#b3b","gray","#b3b","#b3b","gray"];
           var area = d3.svg.area()
               .x(function(d,i){return i * width/10})
               .y0(function(d){return 200})
@@ -405,18 +406,11 @@ document.getElementById('load-button').addEventListener('click', function () {
               .attr("x1", function(d,i){return d;}).attr("y1", 0)
               .attr("x2", function(d,i){return d;}).attr("y2", 200);
             svg.selectAll("line")
-              .attr("stroke", "#b3b")
+              .attr("stroke", function(d,i){return colors2[i]})
               .attr("stroke-width", 10)
 
 
-              var range2 = d3.range((width/2)-(width/40),5,-width/10);
-              svg.selectAll("line.v")
-                .data(range2).enter().append("line")
-                .attr("x1", function(d,i){return d;}).attr("y1", 0)
-                .attr("x2", function(d,i){return d;}).attr("y2", 200);
-              svg.selectAll("line")
-                .attr("stroke", function(d,i){return colors[i]})
-                .attr("stroke-width", 10)
+              
 
 
 
