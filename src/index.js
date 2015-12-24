@@ -59,6 +59,7 @@ document.getElementById('load-button').addEventListener('click', function () {
                 keitaisokaiseki[m] = new Array; //一発言
                 while(i<path.length){//文ごとのループ
                   keitaisokaiseki[m][j] = new Array; //文
+                  keitaisokaiseki[m][j].length = 0;
                   reasonMatrix[j] = new Array;
                   k=0; //集計単位内で何単語目か
                   while(i<path.length){//単語ごとのループ
@@ -105,9 +106,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 
             for(m=0;m<keitaisokaiseki.length;++m){
               for(i=0;i<keitaisokaiseki[m].length;++i){
-                if(keitaisokaiseki[m][i].length==0){//確認
-                  continue;
-                }
+                
                 for(j=0;j<keitaisokaiseki[m][i].length;++j){
                   tangoset.add({name:keitaisokaiseki[m][i][j],
                                 group:reasonMatrix[i][j]
