@@ -171,11 +171,11 @@ document.getElementById('load-button').addEventListener('click', function () {
                   for(k=0;k<miserables.nodes.length;++k){
                     if(keitaisokaiseki[m][i][j]==miserables.nodes[k].name){
                       list[m][i][k]=1;
-                      if(keitaisokaiseki[m][i][j]=="母"){
+                      if(keitaisokaiseki[m][i][j]=="母"||keitaisokaiseki[m][i][j]=="姉"||keitaisokaiseki[m][i][j]=="母親"||keitaisokaiseki[m][i][j]=="お姉さん"||keitaisokaiseki[m][i][j]=="父"||keitaisokaiseki[m][i][j]=="家族"){
 
                         RGBlist[m][i][0]=RGBlist[m][i][0]+1;
                       }
-                      if(keitaisokaiseki[m][i][j]=="仕事")
+                      if(keitaisokaiseki[m][i][j]=="仕事"||keitaisokaiseki[m][i][j]=="休み"||keitaisokaiseki[m][i][j]=="風邪")
                         RGBlist[m][i][2]=RGBlist[m][i][2]+1;
                       }
                       if(keitaisokaiseki[m][i][j]=="友人"){
