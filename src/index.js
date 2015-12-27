@@ -168,19 +168,22 @@ document.getElementById('load-button').addEventListener('click', function () {
                 RGBlist[m][i][1]=0;
                 RGBlist[m][i][2]=0;
                 for(j=0;j<keitaisokaiseki[m][i].length;++j){
+                  if(keitaisokaiseki[m][i][j]=="母"||keitaisokaiseki[m][i][j]=="姉"||keitaisokaiseki[m][i][j]=="母親"||keitaisokaiseki[m][i][j]=="お姉さん"||keitaisokaiseki[m][i][j]=="父"||keitaisokaiseki[m][i][j]=="家族"){
+
+                    RGBlist[m][i][0]=RGBlist[m][i][0]+1;
+                  }
+                  if(keitaisokaiseki[m][i][j]=="仕事"||keitaisokaiseki[m][i][j]=="休み"||keitaisokaiseki[m][i][j]=="風邪")
+                    RGBlist[m][i][2]=RGBlist[m][i][2]+1;
+                  }
+                  if(keitaisokaiseki[m][i][j]=="友人"){
+                    RGBlist[m][i][1]=RGBlist[m][i][1]+1;
+                  }
+
                   for(k=0;k<miserables.nodes.length;++k){
+
                     if(keitaisokaiseki[m][i][j]==miserables.nodes[k].name){
                       list[m][i][k]=1;
-                      if(keitaisokaiseki[m][i][j]=="母"||keitaisokaiseki[m][i][j]=="姉"||keitaisokaiseki[m][i][j]=="母親"||keitaisokaiseki[m][i][j]=="お姉さん"||keitaisokaiseki[m][i][j]=="父"||keitaisokaiseki[m][i][j]=="家族"){
 
-                        RGBlist[m][i][0]=RGBlist[m][i][0]+1;
-                      }
-                      if(keitaisokaiseki[m][i][j]=="仕事"||keitaisokaiseki[m][i][j]=="休み"||keitaisokaiseki[m][i][j]=="風邪")
-                        RGBlist[m][i][2]=RGBlist[m][i][2]+1;
-                      }
-                      if(keitaisokaiseki[m][i][j]=="友人"){
-                        RGBlist[m][i][1]=RGBlist[m][i][1]+1;
-                      }
 
                     }
                   }
