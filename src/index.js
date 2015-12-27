@@ -100,6 +100,7 @@ document.getElementById('load-button').addEventListener('click', function () {
                       n++;
                       j++;
                   }
+                  console.log(RGBlist[m][i]);
                   if(n==path.length){//確認
                     break;
                   }
