@@ -7,7 +7,7 @@ if(1){
 }
 
 
-var i,j,k,l,m,n,bunsuu;  //mは段落
+var h,i,j,k,l,m,n,bunsuu;  //mは段落
 
 var width = 1320,
     height = 660;
@@ -58,17 +58,17 @@ document.getElementById('load-button').addEventListener('click', function () {
               while(n<path.length){//発言ごとのループ
                 keitaisokaiseki[m] = new Array; //一発言
 
-                RGBlist[m] = new Array;
+                RGBlist[m] = new Array(5);
+                RGBlist[m][0]=0;
+                RGBlist[m][1]=0;
+                RGBlist[m][2]=0;
+                RGBlist[m][3]=0;
+                RGBlist[m][4]=0;
                 i=0; //段落内の何文目か。
                 while(n<path.length){//文ごとのループ
                   keitaisokaiseki[m][i] = new Array; //文
                   keitaisokaiseki[m][i].length = 0;
-                  RGBlist[m][i] = new Array(5);
-                  RGBlist[m][i][0]=0;
-                  RGBlist[m][i][1]=0;
-                  RGBlist[m][i][2]=0;
-                  RGBlist[m][i][3]=0;
-                  RGBlist[m][i][4]=0;
+
                   reasonMatrix[i] = new Array;
                   j=0; //集計単位内で何単語目か
                   while(n<path.length){//単語ごとのループ
@@ -200,12 +200,20 @@ document.getElementById('load-button').addEventListener('click', function () {
               //stackdataArr完成
 
 
-                        var stackdataArr = [
+                        /*var stackdataArr = [
                             [{x:1,y:2.5},{x:2,y:5},{x:3,y:7},{x:4,y:3},{x:5,y:5},{x:6,y:7}],
                             [{x:1,y:2},{x:2,y:4},{x:3,y:9},{x:4,y:7},{x:5,y:6},{x:6,y:4}],
                             [{x:1,y:1},{x:2,y:8},{x:3,y:5},{x:4,y:3},{x:5,y:5},{x:6,y:7}],
                             [{x:1,y:18},{x:2,y:7},{x:3,y:3},{x:4,y:11},{x:5,y:8},{x:6,y:6}]
-                        ];
+                        ];*/
+                        var stackdataArr = new Array(5);
+                        for(h=0;h<5;h++){
+                          stackdataArr[h] = new Array(keitaisokaiseki.length);
+                          for(m=0;m<keitaisokaiseki.length;m++){
+                            stackdataArr[h][m]=new Object();
+                            stackdataArr[h][m]= {x:m+1,y:28*[m][h]}
+                          }
+                        }
                         var stack = d3.layout.stack()
                             .x(function(d){return 1;})
                             .y(function(d){return d.y;})
