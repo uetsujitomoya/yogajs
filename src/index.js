@@ -81,26 +81,26 @@ document.getElementById('load-button').addEventListener('click', function () {
                       reasonMatrix[i][j] = reason;
                       if(keitaisokaiseki[m][i][j]=="母"||keitaisokaiseki[m][i][j]=="姉"||keitaisokaiseki[m][i][j]=="母親"||keitaisokaiseki[m][i][j]=="お姉さん"||keitaisokaiseki[m][i][j]=="父"||keitaisokaiseki[m][i][j]=="家族"){
 
-                        RGBlist[m][i][0]=RGBlist[m][i][0]+1;
+                        RGBlist[m][0]=RGBlist[m][0]+1;
                       }
                       if(keitaisokaiseki[m][i][j]=="仕事"||keitaisokaiseki[m][i][j]=="休み"||keitaisokaiseki[m][i][j]=="風邪"){
-                        RGBlist[m][i][2]=RGBlist[m][i][2]+1;
+                        RGBlist[m][2]=RGBlist[m][2]+1;
                       }
                       if(keitaisokaiseki[m][i][j]=="友人"){
-                        RGBlist[m][i][1]=RGBlist[m][i][1]+1;
+                        RGBlist[m][1]=RGBlist[m][1]+1;
                       }
                       if(keitaisokaiseki[m][i][j]=="いかが"||keitaisokaiseki[m][i][j]=="どの"||keitaisokaiseki[m][i][j]=="どのように"||keitaisokaiseki[m][i][j]=="いつ"||keitaisokaiseki[m][i][j]=="どういう"){
                         console.log("%d発言めの%d文目は開かれた質問です",m,i);
-                        RGBlist[m][i][3]=RGBlist[m][i][3]+1;
+                        RGBlist[m][3]=RGBlist[m][3]+1;
                       }
                       if(keitaisokaiseki[m][i][j]=="ね"||keitaisokaiseki[m][i][j]=="そうですね"){
                         console.log("%d発言めの%d文目は閉じられた質問かもしれません",m,i);
-                        RGBlist[m][i][4]=RGBlist[m][i][4]+1;
+                        RGBlist[m][4]=RGBlist[m][4]+1;
                       }
                       n++;
                       j++;
                   }
-                  console.log(RGBlist[m][i]);
+
                   if(n==path.length){//確認
                     break;
                   }
@@ -111,6 +111,7 @@ document.getElementById('load-button').addEventListener('click', function () {
                   n++;
                   i++;//段落内の何文目か
                 }
+                console.log(RGBlist[m]);
                 m++;
               }
 
