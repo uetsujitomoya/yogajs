@@ -70,6 +70,12 @@ document.getElementById('load-button').addEventListener('click', function () {
                       }
                       keitaisokaiseki[m][i][k] = path[n].basic_form;
                       reasonMatrix[i][k] = reason;
+                      if(keitaisokaiseki[m][i][k]=="いかが"||keitaisokaiseki[m][i][k]=="どの"||keitaisokaiseki[m][i][k]=="どのように"||keitaisokaiseki[m][i][k]=="いつ"||keitaisokaiseki[m][i][k]=="どういう"){
+                        console.log("%d発言めの%d文目は開かれた質問です",m,i);
+                      }
+                      if(keitaisokaiseki[m][i][k]=="ね"||keitaisokaiseki[m][i][k]=="そうですね"){
+                        console.log("%d発言めの%d文目は閉じられた質問かもしれません",m,i);
+                      }
                       n++;
                       k++;
                   }
@@ -163,10 +169,12 @@ document.getElementById('load-button').addEventListener('click', function () {
               RGBlist[m] = new Array(keitaisokaiseki[m].length);
               for(i=0;i<keitaisokaiseki[m].length;++i){
                 list[m][i] = new Array(miserables.nodes.length);
-                RGBlist[m][i] = new Array(3);
+                RGBlist[m][i] = new Array(5);
                 RGBlist[m][i][0]=0;
                 RGBlist[m][i][1]=0;
                 RGBlist[m][i][2]=0;
+                RGBlist[m][i][3]=0;
+                RGBlist[m][i][4]=0;
                 for(j=0;j<keitaisokaiseki[m][i].length;++j){
                   if(keitaisokaiseki[m][i][j]=="母"||keitaisokaiseki[m][i][j]=="姉"||keitaisokaiseki[m][i][j]=="母親"||keitaisokaiseki[m][i][j]=="お姉さん"||keitaisokaiseki[m][i][j]=="父"||keitaisokaiseki[m][i][j]=="家族"){
 
@@ -177,6 +185,14 @@ document.getElementById('load-button').addEventListener('click', function () {
                   }
                   if(keitaisokaiseki[m][i][j]=="友人"){
                     RGBlist[m][i][1]=RGBlist[m][i][1]+1;
+                  }
+                  if(keitaisokaiseki[m][i][j]=="いかが"||keitaisokaiseki[m][i][j]=="どの"||keitaisokaiseki[m][i][j]=="どのように"||keitaisokaiseki[m][i][j]=="いつ"||keitaisokaiseki[m][i][j]=="どういう"){
+                    console.log("%d発言めの%d文目は開かれた質問です",m,i);
+                    RGBlist[m][i][3]=RGBlist[m][i][3]+1;
+                  }
+                  if(keitaisokaiseki[m][i][j]=="ね"||keitaisokaiseki[m][i][j]=="そうですね"){
+                    console.log("%d発言めの%d文目は閉じられた質問かもしれません",m,i);
+                    RGBlist[m][i][4]=RGBlist[m][i][4]+1;
                   }
 
                   for(k=0;k<miserables.nodes.length;++k){
@@ -200,7 +216,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 
 
                         var stackdataArr = [
-                            [{x:1,y:3},{x:2,y:5},{x:3,y:7},{x:4,y:3},{x:5,y:5},{x:6,y:7}],
+                            [{x:1,y:2.5},{x:2,y:5},{x:3,y:7},{x:4,y:3},{x:5,y:5},{x:6,y:7}],
                             [{x:1,y:2},{x:2,y:4},{x:3,y:9},{x:4,y:7},{x:5,y:6},{x:6,y:4}],
                             [{x:1,y:1},{x:2,y:8},{x:3,y:5},{x:4,y:3},{x:5,y:5},{x:6,y:7}],
                             [{x:1,y:18},{x:2,y:7},{x:3,y:3},{x:4,y:11},{x:5,y:8},{x:6,y:6}]
