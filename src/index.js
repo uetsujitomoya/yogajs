@@ -106,7 +106,7 @@ document.getElementById('load-button').addEventListener('click', function () {
             var tmp=new Array;
 
             for(m=0;m<keitaisokaiseki.length;++m){
-              for(i=0;i<keitaisokaiseki[m].length;++i){
+              for(i=1;i<keitaisokaiseki[m].length;++i){//なぜか1から
                 tmp = keitaisokaiseki[m][i];
                 console.log("m=%d,i=%d",m,i);
                 console.log(tmp);
