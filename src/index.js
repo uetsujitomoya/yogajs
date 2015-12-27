@@ -372,7 +372,7 @@ document.getElementById('load-button').addEventListener('click', function () {
               [{x:1,y:3},{x:2,y:5},{x:3,y:7},{x:4,y:3},{x:5,y:5},{x:6,y:7}],
               [{x:1,y:2},{x:2,y:4},{x:3,y:9},{x:4,y:7},{x:5,y:6},{x:6,y:4}],
               [{x:1,y:1},{x:2,y:8},{x:3,y:5},{x:4,y:3},{x:5,y:5},{x:6,y:7}],
-              [{x:1,y:8},{x:2,y:6},{x:3,y:3},{x:4,y:2},{x:5,y:7},{x:6,y:4}]
+              [{x:1,y:18},{x:2,y:7},{x:3,y:3},{x:4,y:11},{x:5,y:8},{x:6,y:6}]
           ];
           var stack = d3.layout.stack()
               .x(function(d){return 1;})
@@ -382,8 +382,8 @@ document.getElementById('load-button').addEventListener('click', function () {
           var max = d3.max(stackdata[stackdata.length - 1], function(d){return d.y + d.y0;});
           var scaleX = d3.scale.linear().domain([0,6]).range([0,width/2]);
           var scaleY = d3.scale.linear().domain([0,max]).range([0,200]);
-          var colors = ["silver","#77ff77","#ff7777","#7777ff","yellow","#0f0","green"];
-          var colors2 = ["gray","#b3b","#b3b","gray","#b3b","#b3b","gray"];
+          var colors = ["lightgray","#77ff77","#ff7777","#7777ff","yellow","#0f0","green"];
+          var colors2 = ["gray","#d4d","#d4d","gray","#d4d","#d4d","gray"];
           var area = d3.svg.area()
               .x(function(d,i){return i * width/10})
               .y0(function(d){return 200})
@@ -410,7 +410,7 @@ document.getElementById('load-button').addEventListener('click', function () {
               .attr("stroke-width", 10)
 
 
-              
+
 
 
 
