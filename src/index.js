@@ -160,21 +160,35 @@ document.getElementById('load-button').addEventListener('click', function () {
             //keitaisokaisekiとnodesを照らしあわせる
             for(m=0;m<keitaisokaiseki.length;++m){
               list[m] = new Array(keitaisokaiseki[m].length);
+              RGBlist[m] = new Array(keitaisokaiseki[m].length);
               for(i=0;i<keitaisokaiseki[m].length;++i){
                 list[m][i] = new Array(miserables.nodes.length);
+                RGBlist[m][i] = new Array(3);
+                RGBlist[m][i][0]=0;
+                RGBlist[m][i][1]=0;
+                RGBlist[m][i][2]=0;
                 for(j=0;j<keitaisokaiseki[m][i].length;++j){
                   for(k=0;k<miserables.nodes.length;++k){
                     if(keitaisokaiseki[m][i][j]==miserables.nodes[k].name){
                       list[m][i][k]=1;
                       if(keitaisokaiseki[m][i][j]=="母"){
-                        console.log("%d発言目の%d文目の%d語目に「母」が出ています",m,i,j);
+
+                        RGBlist[m][i][0]=RGBlist[m][i][0]+1;
+                      }
+                      if(keitaisokaiseki[m][i][j]=="仕事")
+                        RGBlist[m][i][2]=RGBlist[m][i][2]+1;
+                      }
+                      if(keitaisokaiseki[m][i][j]=="友人"){
+                        RGBlist[m][i][1]=RGBlist[m][i][1]+1;
                       }
 
                     }
                   }
+
+                  console.log(RGBlist[m][i]);
                 }
               }
-            }
+
 
 
             console.log(list);
@@ -195,7 +209,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 
                     //ここから段落を指定して縦になめる
 
-                    for(m=0;i<keitaisokaiseki.length;++m){
+                    for(m=0;m<keitaisokaiseki.length;++m){
                       for(i=0;i<keitaisokaiseki[m].length;++i){
                         x=list[m][i][k];
                         y=list[m][i][l];
@@ -210,7 +224,7 @@ document.getElementById('load-button').addEventListener('click', function () {
                     }
                       //とりあえずエッジつくってbreak
                       //こっからvalueを与える
-                    for(m=0;i<keitaisokaiseki.length;++m){
+                    for(m=0;m<keitaisokaiseki.length;++m){
                       for(i=0;i<keitaisokaiseki[m].length;++i){
                         x=list[m][i][k];
                         y=list[m][i][l];
