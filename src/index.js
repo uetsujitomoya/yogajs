@@ -51,12 +51,12 @@ document.getElementById('load-button').addEventListener('click', function () {
               n=0; //nは全データ内で何文字目か
               bunsuu=0; //全段落内で何分目か
               m=0; //何個目の発言か
-              i=0; //段落内の何文目か。
               var karabasho;
               var reason;
               var kara="から"
               while(n<path.length){//発言ごとのループ
                 keitaisokaiseki[m] = new Array; //一発言
+                i=0; //段落内の何文目か。
                 while(n<path.length){//文ごとのループ
                   keitaisokaiseki[m][i] = new Array; //文
                   keitaisokaiseki[m][i].length = 0;
@@ -106,7 +106,7 @@ document.getElementById('load-button').addEventListener('click', function () {
             var tmp=new Array;
 
             for(m=0;m<keitaisokaiseki.length;++m){
-              for(i=1;i<keitaisokaiseki[m].length;++i){//なぜか1から
+              for(i=0;i<keitaisokaiseki[m].length;++i){
                 tmp = keitaisokaiseki[m][i];
                 console.log("m=%d,i=%d",m,i);
                 console.log(tmp);
