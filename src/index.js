@@ -189,9 +189,55 @@ document.getElementById('load-button').addEventListener('click', function () {
                 }
               }
 
+              //ドットで区切る
+              //単語グループ分け -> 形態素解析時点で。
+
+              //クライアントの各文の得点換算
+              //stackdataArr完成
 
 
-            console.log(list);
+                        var stackdataArr = [
+                            [{x:1,y:3},{x:2,y:5},{x:3,y:7},{x:4,y:3},{x:5,y:5},{x:6,y:7}],
+                            [{x:1,y:2},{x:2,y:4},{x:3,y:9},{x:4,y:7},{x:5,y:6},{x:6,y:4}],
+                            [{x:1,y:1},{x:2,y:8},{x:3,y:5},{x:4,y:3},{x:5,y:5},{x:6,y:7}],
+                            [{x:1,y:18},{x:2,y:7},{x:3,y:3},{x:4,y:11},{x:5,y:8},{x:6,y:6}]
+                        ];
+                        var stack = d3.layout.stack()
+                            .x(function(d){return 1;})
+                            .y(function(d){return d.y;})
+                            .values(function(d){return d;});
+                        var stackdata = stack(stackdataArr);
+                        var max = d3.max(stackdata[stackdata.length - 1], function(d){return d.y + d.y0;});
+                        var scaleX = d3.scale.linear().domain([0,6]).range([0,width/2]);
+                        var scaleY = d3.scale.linear().domain([0,max]).range([0,200]);
+                        var colors = ["lightgray","#77ff77","#ff7777","#7777ff","yellow","#0f0","green"];
+                        var colors2 = ["gray","#d4d","#d4d","gray","#d4d","#d4d","gray"];
+                        var area = d3.svg.area()
+                            .x(function(d,i){return i * width/10})
+                            .y0(function(d){return 200})
+                            .y1(function(d){return 200 - scaleY(d.y+d.y0)});
+                        svg.selectAll("path")
+                            .data(stackdata.reverse())
+                            .enter()
+                            .append("path")
+                            .attr("d", area)
+                            .attr("fill",function(d,i){return colors[i]});
+
+
+
+                            //grid line
+                            //引数はstart,stop,stepの順
+                            //[190,170,150,130,110,90,70,50,30,10]と同等
+                          var range = d3.range((width/2)-(width/20),4,-width/10);
+                          svg.selectAll("line.v")
+                            .data(range).enter().append("line")
+                            .attr("x1", function(d,i){return d;}).attr("y1", 0)
+                            .attr("x2", function(d,i){return d;}).attr("y2", 200);
+                          svg.selectAll("line")
+                            .attr("stroke", function(d,i){return colors2[i]})
+                            .attr("stroke-width", 10)
+
+            //console.log(list);
             //listはi*k
 
             //listからmiserables.linksとlist3をつくる
@@ -242,7 +288,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 
                   }
 
-                console.log(miserables.links);
+                //console.log(miserables.links);
 
 
             //以上計算中
@@ -353,53 +399,7 @@ document.getElementById('load-button').addEventListener('click', function () {
   // => [ [ 100, 54, 255 ], [ 22, 22, 90 ], [ 20, 20, 80 ] ] ]
 
 
-//ドットで区切る
-//単語グループ分け -> 形態素解析時点で。
 
-//クライアントの各文の得点換算
-//stackdataArr完成
-
-
-          var stackdataArr = [
-              [{x:1,y:3},{x:2,y:5},{x:3,y:7},{x:4,y:3},{x:5,y:5},{x:6,y:7}],
-              [{x:1,y:2},{x:2,y:4},{x:3,y:9},{x:4,y:7},{x:5,y:6},{x:6,y:4}],
-              [{x:1,y:1},{x:2,y:8},{x:3,y:5},{x:4,y:3},{x:5,y:5},{x:6,y:7}],
-              [{x:1,y:18},{x:2,y:7},{x:3,y:3},{x:4,y:11},{x:5,y:8},{x:6,y:6}]
-          ];
-          var stack = d3.layout.stack()
-              .x(function(d){return 1;})
-              .y(function(d){return d.y;})
-              .values(function(d){return d;});
-          var stackdata = stack(stackdataArr);
-          var max = d3.max(stackdata[stackdata.length - 1], function(d){return d.y + d.y0;});
-          var scaleX = d3.scale.linear().domain([0,6]).range([0,width/2]);
-          var scaleY = d3.scale.linear().domain([0,max]).range([0,200]);
-          var colors = ["lightgray","#77ff77","#ff7777","#7777ff","yellow","#0f0","green"];
-          var colors2 = ["gray","#d4d","#d4d","gray","#d4d","#d4d","gray"];
-          var area = d3.svg.area()
-              .x(function(d,i){return i * width/10})
-              .y0(function(d){return 200})
-              .y1(function(d){return 200 - scaleY(d.y+d.y0)});
-          svg.selectAll("path")
-              .data(stackdata.reverse())
-              .enter()
-              .append("path")
-              .attr("d", area)
-              .attr("fill",function(d,i){return colors[i]});
-
-
-
-              //grid line
-              //引数はstart,stop,stepの順
-              //[190,170,150,130,110,90,70,50,30,10]と同等
-            var range = d3.range((width/2)-(width/20),4,-width/10);
-            svg.selectAll("line.v")
-              .data(range).enter().append("line")
-              .attr("x1", function(d,i){return d;}).attr("y1", 0)
-              .attr("x2", function(d,i){return d;}).attr("y2", 200);
-            svg.selectAll("line")
-              .attr("stroke", function(d,i){return colors2[i]})
-              .attr("stroke-width", 10)
 
 
 
