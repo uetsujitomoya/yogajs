@@ -105,7 +105,8 @@ document.getElementById('load-button').addEventListener('click', function () {
 
             var tmp=new Array;
 
-            for(m=0;m<keitaisokaiseki.length;++m){
+            for(m=0;m
+              <keitaisokaiseki.length;++m){
               for(i=0;i<keitaisokaiseki[m].length;++i){
                 tmp = keitaisokaiseki[m][i];
                 console.log("m=%d,i=%d",m,i);
@@ -235,21 +236,22 @@ document.getElementById('load-button').addEventListener('click', function () {
             var graph = miserables;
 
 
-
+//共起マップ
+/*
                 force
                     .nodes(graph.nodes)
                     .links(graph.links)
                     .start();
 
-
-
+*/
+/*
                 var link = svg.selectAll(".link")
                     .data(graph.links)
                   .enter().append("line")
                     .attr("class", "link")
                     .style("stroke-width", function(d) { return Math.sqrt(d.value); });
-
-              var node = svg.selectAll(".node")
+*/
+/*              var node = svg.selectAll(".node")
                   .data(graph.nodes)
                 .enter().append("text")
                   .attr("class", "node")
@@ -263,12 +265,12 @@ document.getElementById('load-button').addEventListener('click', function () {
                   })
                   .call(force.drag)
                   .text(function(d) { return d.name; });
+*/
 
 
 
 
-
-
+/*
                 force.on("tick", function() {
                   link.attr("x1", function(d) { return d.source.x; })
                       .attr("y1", function(d) { return d.source.y; })
@@ -278,6 +280,9 @@ document.getElementById('load-button').addEventListener('click', function () {
                   node.attr("x", function(d) { return d.x; })
                       .attr("y", function(d) { return d.y; });
                 });
+
+*/
+
                 });
         };
         reader.readAsText(file);
