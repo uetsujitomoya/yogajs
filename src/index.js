@@ -7,7 +7,7 @@ if(1){
 }
 
 
-var i,j,k,l,m,bunsuu;  //mは段落
+var i,j,k,l,m,n,bunsuu;  //mは段落
 
 var width = 1320,
     height = 660;
@@ -48,40 +48,40 @@ document.getElementById('load-button').addEventListener('click', function () {
               var tegakari;
               var toutencount;
               var toutenbasho=0;
-              i=0; //iは全データ内で何文字目か
+              n=0; //nは全データ内で何文字目か
               bunsuu=0; //全段落内で何分目か
               m=0; //何個目の発言か
-              j=0; //段落内の何文目か。
+              i=0; //段落内の何文目か。
               var karabasho;
               var reason;
               var kara="から"
-              while(i<path.length){//発言ごとのループ
+              while(n<path.length){//発言ごとのループ
                 keitaisokaiseki[m] = new Array; //一発言
-                while(i<path.length){//文ごとのループ
-                  keitaisokaiseki[m][j] = new Array; //文
-                  keitaisokaiseki[m][j].length = 0;
-                  reasonMatrix[j] = new Array;
+                while(n<path.length){//文ごとのループ
+                  keitaisokaiseki[m][i] = new Array; //文
+                  keitaisokaiseki[m][i].length = 0;
+                  reasonMatrix[i] = new Array;
                   k=0; //集計単位内で何単語目か
-                  while(i<path.length){//単語ごとのループ
-                      if(path[i].basic_form=="。"||path[i].basic_form=="？"||path[i].basic_form=="?"||path[i].word_id=="2613630"){
+                  while(n<path.length){//単語ごとのループ
+                      if(path[n].basic_form=="。"||path[n].basic_form=="？"||path[n].basic_form=="?"||path[n].word_id=="2613630"){
                         bunsuu++;
                         toutencount=0;
                         break;//3区間終了
                       }
-                      keitaisokaiseki[m][j][k] = path[i].basic_form;
-                      reasonMatrix[j][k] = reason;
-                      i++;
+                      keitaisokaiseki[m][i][k] = path[n].basic_form;
+                      reasonMatrix[i][k] = reason;
+                      n++;
                       k++;
                   }
-                  if(i==path.length){//確認
+                  if(n==path.length){//確認
                     break;
                   }
-                  if(path[i].word_id=="2613630"){
-                    i++;
+                  if(path[n].word_id=="2613630"){
+                    n++;
                     break;
                   }//1段落作成完了
-                  i++;
-                  j++;//段落内の何文目か
+                  n++;
+                  i++;//段落内の何文目か
                 }
                 m++;
               }
@@ -103,11 +103,18 @@ document.getElementById('load-button').addEventListener('click', function () {
             var tangoset = new Set();
 
 
+            var tmp=new Array;
 
             for(m=0;m<keitaisokaiseki.length;++m){
               for(i=0;i<keitaisokaiseki[m].length;++i){
-                
-                for(j=0;j<keitaisokaiseki[m][i].length;++j){
+                tmp = keitaisokaiseki[m][i];
+                console.log("m=%d,i=%d",m,i);
+                console.log(tmp);
+                if(keitaisokaiseki[m][i] ==false||keitaisokaiseki[m][i]==new Array){
+                  keitaisokaiseki[m][i].length=0;
+                  continue;
+                }
+                for(j=0;j<tmp.length;++j){
                   tangoset.add({name:keitaisokaiseki[m][i][j],
                                 group:reasonMatrix[i][j]
 
@@ -142,8 +149,8 @@ document.getElementById('load-button').addEventListener('click', function () {
 
 
 
-            //あとはlinksの作成だけ
-            //まずはlistをつくる
+            /*あとはlinksの作成だけ
+            まずはlistをつくる*/
             var list = new Array(keitaisokaiseki.length);
             //list作成
 
