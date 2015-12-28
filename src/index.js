@@ -226,7 +226,7 @@ document.getElementById('load-button').addEventListener('click', function () {
                         var colors = ["gray","#d4d","#77ff77","#ff7777","#7777ff","lightgray","#0f0","green"];
                         var colors2 = ["gray","#d4d","#d4d","gray","#d4d","#d4d","gray"];
                         var area = d3.svg.area()
-                            .x(function(d,i){return i * width/10})
+                            .x(function(d,i){return i * width/keitaisokaiseki.length})
                             .y0(function(d){return 200})
                             .y1(function(d){return 200 - scaleY(d.y+d.y0)});
                         svg.selectAll("path")
