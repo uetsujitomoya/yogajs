@@ -237,7 +237,7 @@ document.getElementById('load-button').addEventListener('click', function () {
                             .attr("fill",function(d,i){return colors[i]});
 
 
-
+/*
                             //grid line
                             //引数はstart,stop,stepの順
                             //[190,170,150,130,110,90,70,50,30,10]と同等
@@ -248,7 +248,7 @@ document.getElementById('load-button').addEventListener('click', function () {
                             .attr("x2", function(d,i){return d;}).attr("y2", 200);
                           svg.selectAll("line")
                             .attr("stroke", function(d,i){return colors2[i]})
-                            .attr("stroke-width", 10)
+                            .attr("stroke-width", 10)*/
 
             //console.log(list);
             //listはi*k
