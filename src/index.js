@@ -212,7 +212,7 @@ document.getElementById('load-button').addEventListener('click', function () {
                           stackdataArr[h] = new Array(keitaisokaiseki.length);
                           for(m=0;m<keitaisokaiseki.length;m++){
                             stackdataArr[h][m]=new Object();
-                            stackdataArr[h][m]= {x:m+1,y:28*[m][h]}
+                            stackdataArr[h][m]= {x:m+1,y:28*RGBlist[m][h]/keitaisokaiseki[m].length};
                           }
                         }
                         var stack = d3.layout.stack()
@@ -221,9 +221,9 @@ document.getElementById('load-button').addEventListener('click', function () {
                             .values(function(d){return d;});
                         var stackdata = stack(stackdataArr);
                         var max = d3.max(stackdata[stackdata.length - 1], function(d){return d.y + d.y0;});
-                        var scaleX = d3.scale.linear().domain([0,6]).range([0,width/2]);
+                        var scaleX = d3.scale.linear().domain([0,keitaisokaiseki.length]).range([0,width]);
                         var scaleY = d3.scale.linear().domain([0,max]).range([0,200]);
-                        var colors = ["lightgray","#77ff77","#ff7777","#7777ff","yellow","#0f0","green"];
+                        var colors = ["gray","#d4d","#77ff77","#ff7777","#7777ff","lightgray","#0f0","green"];
                         var colors2 = ["gray","#d4d","#d4d","gray","#d4d","#d4d","gray"];
                         var area = d3.svg.area()
                             .x(function(d,i){return i * width/10})
