@@ -83,6 +83,10 @@ document.getElementById('load-button').addEventListener('click', function () {
 
                         RGBlist[m][0]=RGBlist[m][0]+1;
                       }
+                      if(keitaisokaiseki[m][i][j]=="借金"||keitaisokaiseki[m][i][j]=="兄"||keitaisokaiseki[m][i][j]=="子"||keitaisokaiseki[m][i][j]=="子ども"||keitaisokaiseki[m][i][j]=="妹"||keitaisokaiseki[m][i][j]=="弟"){
+
+                        RGBlist[m][0]=RGBlist[m][0]+1;
+                      }
                       if(keitaisokaiseki[m][i][j]=="仕事"||keitaisokaiseki[m][i][j]=="休み"||keitaisokaiseki[m][i][j]=="風邪"){
                         RGBlist[m][2]=RGBlist[m][2]+1;
                       }
@@ -223,7 +227,7 @@ document.getElementById('load-button').addEventListener('click', function () {
                         var max = d3.max(stackdata[stackdata.length - 1], function(d){return d.y + d.y0;});
                         var scaleX = d3.scale.linear().domain([0,keitaisokaiseki.length]).range([0,width]);
                         var scaleY = d3.scale.linear().domain([0,max]).range([0,200]);
-                        var colors = ["gray","#d4d","#77ff77","#ff7777","#7777ff","lightgray","#0f0","green"];
+                        var colors = ["gray","red","#aaaaff","#aaffaa","#ffaaaa","lightgray","#0f0","green"];
                         var colors2 = ["gray","#d4d","#d4d","gray","#d4d","#d4d","gray"];
                         var area = d3.svg.area()
                             .x(function(d,i){return i * width/keitaisokaiseki.length})
