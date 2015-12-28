@@ -9,8 +9,8 @@ if(1){
 
 var h,i,j,k,l,m,n,bunsuu;  //mは段落
 
-var width = 1320,
-    height = 660;
+var width = 960,
+    height = 540;
 
 var color = d3.scale.category20c();
 
@@ -87,7 +87,18 @@ document.getElementById('load-button').addEventListener('click', function () {
 
                         RGBlist[m][0]=RGBlist[m][0]+1;
                       }
-                      if(keitaisokaiseki[m][i][j]=="仕事"||keitaisokaiseki[m][i][j]=="休み"||keitaisokaiseki[m][i][j]=="風邪"){
+                      if(keitaisokaiseki[m][i][j]=="病気"||keitaisokaiseki[m][i][j]=="お金"||keitaisokaiseki[m][i][j]=="両親"||keitaisokaiseki[m][i][j]=="言う"||keitaisokaiseki[m][i][j]=="お母様"||keitaisokaiseki[m][i][j]=="お父様"){
+
+                        RGBlist[m][0]=RGBlist[m][0]+1;
+                      }
+                      if(keitaisokaiseki[m][i][j]=="借金"||keitaisokaiseki[m][i][j]=="兄"||keitaisokaiseki[m][i][j]=="子"||keitaisokaiseki[m][i][j]=="子ども"||keitaisokaiseki[m][i][j]=="妹"||keitaisokaiseki[m][i][j]=="弟"){
+
+                        RGBlist[m][0]=RGBlist[m][0]+1;
+                      }
+                      if(keitaisokaiseki[m][i][j]=="仕事"||keitaisokaiseki[m][i][j]=="休み"||keitaisokaiseki[m][i][j]=="風邪"||keitaisokaiseki[m][i][j]=="いや"||keitaisokaiseki[m][i][j]=="風"){
+                        RGBlist[m][2]=RGBlist[m][2]+1;
+                      }
+                      if(keitaisokaiseki[m][i][j]=="分かる"||keitaisokaiseki[m][i][j]=="焼ける"){
                         RGBlist[m][2]=RGBlist[m][2]+1;
                       }
                       if(keitaisokaiseki[m][i][j]=="友人"){
@@ -227,7 +238,7 @@ document.getElementById('load-button').addEventListener('click', function () {
                         var max = d3.max(stackdata[stackdata.length - 1], function(d){return d.y + d.y0;});
                         var scaleX = d3.scale.linear().domain([0,keitaisokaiseki.length]).range([0,width]);
                         var scaleY = d3.scale.linear().domain([0,max]).range([0,200]);
-                        var colors = ["gray","red","#aaaaff","#aaffaa","#ffaaaa","lightgray","#0f0","green"];
+                        var colors = ["#dddddd","#ff00ff","#aaaaff","#bbffbb","#ffbbbb","lightgray","#0f0","green"];
                         var colors2 = ["gray","#d4d","#d4d","gray","#d4d","#d4d","gray"];
                         var area = d3.svg.area()
                             .x(function(d,i){return i * width/keitaisokaiseki.length})
