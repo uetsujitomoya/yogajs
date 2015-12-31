@@ -2,9 +2,7 @@
 import d3 from "d3"
 import "kuromoji"
 
-if(1){
-  document.write("JavaScriptはONです。");
-}
+
 
 
 var h,i,j,k,l,m,n,bunsuu;  //mは段落
@@ -51,7 +49,7 @@ document.getElementById('load-button').addEventListener('click', function () {
               var toutenbasho=0;
               n=0; //nは全データ内で何文字目か
               bunsuu=0; //全段落内で何分目か
-              m=0; //何個目の発言か
+              m=0; //何個目の発言か。これの偶奇わけで判断。カウンセラーが奇数。患者が偶数。
               var karabasho;
               var reason;
               var kara="から"
