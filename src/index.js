@@ -287,12 +287,7 @@ document.getElementById('load-button').addEventListener('click', function () {
               //stackdataArr完成
 
 
-                        /*var stackdataArr = [
-                            [{x:1,y:2.5},{x:2,y:5},{x:3,y:7},{x:4,y:3},{x:5,y:5},{x:6,y:7}],
-                            [{x:1,y:2},{x:2,y:4},{x:3,y:9},{x:4,y:7},{x:5,y:6},{x:6,y:4}],
-                            [{x:1,y:1},{x:2,y:8},{x:3,y:5},{x:4,y:3},{x:5,y:5},{x:6,y:7}],
-                            [{x:1,y:18},{x:2,y:7},{x:3,y:3},{x:4,y:11},{x:5,y:8},{x:6,y:6}]
-                        ];*/
+                        
                         var stackdataArr = new Array(5);
                         for(h=0;h<5;h++){
                           stackdataArr[h] = new Array(keitaisokaiseki.length);
@@ -323,7 +318,7 @@ document.getElementById('load-button').addEventListener('click', function () {
                             .attr("fill",function(d,i){return colors[i]});
 
 
-/*
+
                             //grid line
                             //引数はstart,stop,stepの順
                             //[190,170,150,130,110,90,70,50,30,10]と同等
@@ -334,7 +329,7 @@ document.getElementById('load-button').addEventListener('click', function () {
                             .attr("x2", function(d,i){return d;}).attr("y2", 200);
                           svg.selectAll("line")
                             .attr("stroke", function(d,i){return colors2[i]})
-                            .attr("stroke-width", 10)*/
+                            .attr("stroke-width", 10)
 
             //console.log(list);
             //listはi*k
