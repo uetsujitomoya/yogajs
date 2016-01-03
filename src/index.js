@@ -50,6 +50,7 @@ document.getElementById('load-button').addEventListener('click', function () {
               n=0; //nは全データ内で何文字目か
               bunsuu=0; //全段落内で何分目か
               m=0; //何個目の発言か。これの偶奇わけで判断。カウンセラーが奇数。患者が偶数。
+//1文は1文で格納
               var karabasho;
               var reason;
               var kara="から"
