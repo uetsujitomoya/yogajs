@@ -200,39 +200,14 @@ document.getElementById('load-button').addEventListener('click', function () {
             var list = new Array(keitaisokaiseki.length);
             //list作成
 
-            var RGBlist  = new Array(keitaisokaiseki.length);
-
             //keitaisokaisekiとnodesを照らしあわせる
             for(m=0;m<keitaisokaiseki.length;++m){
               list[m] = new Array(keitaisokaiseki[m].length);
-              RGBlist[m] = new Array(keitaisokaiseki[m].length);
               for(i=0;i<keitaisokaiseki[m].length;++i){
                 list[m][i] = new Array(miserables.nodes.length);
-                RGBlist[m][i] = new Array(5);
-                RGBlist[m][i][0]=0;
-                RGBlist[m][i][1]=0;
-                RGBlist[m][i][2]=0;
-                RGBlist[m][i][3]=0;
-                RGBlist[m][i][4]=0;
+                
                 for(j=0;j<keitaisokaiseki[m][i].length;++j){
-                  if(keitaisokaiseki[m][i][j]=="母"||keitaisokaiseki[m][i][j]=="姉"||keitaisokaiseki[m][i][j]=="母親"||keitaisokaiseki[m][i][j]=="お姉さん"||keitaisokaiseki[m][i][j]=="父"||keitaisokaiseki[m][i][j]=="家族"){
-
-                    RGBlist[m][i][0]=RGBlist[m][i][0]+1;
-                  }
-                  if(keitaisokaiseki[m][i][j]=="仕事"||keitaisokaiseki[m][i][j]=="休み"||keitaisokaiseki[m][i][j]=="風邪")
-                    RGBlist[m][i][2]=RGBlist[m][i][2]+1;
-                  }
-                  if(keitaisokaiseki[m][i][j]=="友人"){
-                    RGBlist[m][i][1]=RGBlist[m][i][1]+1;
-                  }
-                  if(keitaisokaiseki[m][i][j]=="いかが"||keitaisokaiseki[m][i][j]=="どの"||keitaisokaiseki[m][i][j]=="どのように"||keitaisokaiseki[m][i][j]=="いつ"||keitaisokaiseki[m][i][j]=="どういう"){
-                    console.log("%d発言めの%d文目は開かれた質問です",m,i);
-                    RGBlist[m][i][3]=RGBlist[m][i][3]+1;
-                  }
-                  if(keitaisokaiseki[m][i][j]=="ね"||keitaisokaiseki[m][i][j]=="そうですね"){
-                    console.log("%d発言めの%d文目は閉じられた質問かもしれません",m,i);
-                    RGBlist[m][i][4]=RGBlist[m][i][4]+1;
-                  }
+                  
 
                   for(k=0;k<miserables.nodes.length;++k){
 
@@ -248,7 +223,37 @@ document.getElementById('load-button').addEventListener('click', function () {
               }
             //var list = new Array(keitaisokaiseki.length);
 
-            //list作成
+            	//list作成終了
+
+
+//listからcheckboxをつくる
+            	/*<div id="disp">この文章を表示したり消したりします。</div>
+					
+					<form>
+					<input type="button" value="表示" onclick="hyoji1(0)">
+					<input type="button" value="非表示" onclick="hyoji1(1)">
+					</form>*/
+            	//listからif文をつくる→checkboxをつくって表示
+            function hyoji1(num)
+            {
+            	if (num == 0)
+            	{
+            		document.getElementById("disp").style.display="block";
+            	}
+            	else
+            	{
+            		document.getElementById("disp").style.display="none";
+            	}
+            }
+
+            	//ドットで区切る
+            	//単語グループ分け -> 形態素解析時点で。
+
+            	//クライアントの各文の得点換算
+            	//stackdataArr完成
+            	//偶数発言目
+
+            	//checkboxからRGBlistつくる
 
 
             while(n<path.length){//発言ごとのループ
@@ -327,22 +332,28 @@ document.getElementById('load-button').addEventListener('click', function () {
             }ｖ
             //keitaisokaisekiとnodesを照らしあわせる
 
-//チェックボックス出す
-
-              //ドットで区切る
-              //単語グループ分け -> 形態素解析時点で。
-
-              //クライアントの各文の得点換算
-              //stackdataArr完成
 
 
+  
+//color2のlistをつくる。奇数RGBlistから。
+            	//var colors2 = ["gray","#d4d","#d4d","gray","#d4d","#d4d","gray"];//奇数用
+            var color2=new Array();
+		//for loop
+            for(m=0;m<eitaisokaiseki.length;m=m+2){
+            	if(fukumu){
+
+            		color2[m]="#d4d";
+            	}else{
+            		color2[m]="gray";
+            	}
+            }
                         
                         var stackdataArr = new Array(5);
                         for(h=0;h<5;h++){
-                          stackdataArr[h] = new Array(keitaisokaiseki.length);
-                          for(m=0;m<keitaisokaiseki.length;m++){
+                          stackdataArr[h] = new Array();
+                          for(m=0;m<keitaisokaiseki.length/2;m++){//2個飛ばしにしたら後が面倒くさい
                             stackdataArr[h][m]=new Object();
-                            stackdataArr[h][m]= {x:m+1,y:28*RGBlist[m][h]/keitaisokaiseki[m].length};
+                            stackdataArr[h][m]= {x:m+1,y:28*RGBlist[2m][h]/keitaisokaiseki[m].length};
                           }
                         }
                         var stack = d3.layout.stack()
@@ -353,8 +364,8 @@ document.getElementById('load-button').addEventListener('click', function () {
                         var max = d3.max(stackdata[stackdata.length - 1], function(d){return d.y + d.y0;});
                         var scaleX = d3.scale.linear().domain([0,keitaisokaiseki.length]).range([0,width]);
                         var scaleY = d3.scale.linear().domain([0,max]).range([0,200]);
-                        var colors = ["#dddddd","#ff00ff","#aaaaff","#bbffbb","#ffbbbb","lightgray","#0f0","green"];
-                        var colors2 = ["gray","#d4d","#d4d","gray","#d4d","#d4d","gray"];
+                        var colors = ["white","white","#aaaaff","#bbffbb","#ffbbbb","lightgray","#0f0","green"];
+                        
                         var area = d3.svg.area()
                             .x(function(d,i){return i * width/keitaisokaiseki.length})
                             .y0(function(d){return 200})
@@ -367,7 +378,7 @@ document.getElementById('load-button').addEventListener('click', function () {
                             .attr("fill",function(d,i){return colors[i]});
 
 
-
+//奇数発言目
                             //grid line
                             //引数はstart,stop,stepの順
                             //[190,170,150,130,110,90,70,50,30,10]と同等
