@@ -327,9 +327,7 @@ document.getElementById('load-button').addEventListener('click', function () {
             }ｖ
             //keitaisokaisekiとnodesを照らしあわせる
 
-/*
-
-            */
+//チェックボックス出す
 
               //ドットで区切る
               //単語グループ分け -> 形態素解析時点で。
