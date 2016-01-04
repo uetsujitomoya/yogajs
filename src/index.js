@@ -374,6 +374,149 @@ document.getElementById('load-button').addEventListener('click', function () {
 			
 
 			}
+
+
+
+
+			//これか。
+
+			document.getElementById('check-button').addEventListener('click', function () {
+				console.log("手順2に進んだよ")
+				var checked = new Array(chboxlist.length);
+					
+				for(c=0;i<chboxlist.length;c++){
+					checked[i] = document.form1.i.checked;//リストつくる作業完了、こっから舐める
+				}
+				console.log(checked);
+						
+				//check2 = document.form1.Checkbox2.checked;
+ 
+					
+
+				//check配列でonの単語について、文を舐めてRGBlistをつくる。
+
+				//偶奇1setでカウント（同じm内に収める）
+
+				m=0;//発言数
+				n=0;//偶奇1setのセット数
+				while(m<keitaisokaiseki.length){//発言ごとのループ
+
+						
+					RGBlist[n][0]=0;
+					RGBlist[n][1]=0;
+					RGBlist[n][2]=0;
+						
+					//まずは偶数から（カウンセラー）
+					//iは発言内の何文目か。
+					for(i=0;i<keitaisokaiseki[m].length;i++){
+						j=0; //集計単位内で何単語目か
+						for(j=0;j<keitaisokaiseki[m][i].length;j++){//単語ごとのループ
+							for(c=0;c<checkboxlist.length;c++){
+								
+								if (checked[c] == true) {
+									if(keitaisokaiseki[m][i][j]==chboxlist[c][0]){
+										if(chboxlist[c][1]=0){
+											RGBlist[n][0]=RGBlist[n][0]+1;
+										}else if(chboxlist[c][1]=1){
+											RGBlist[n][1]=RGBlist[n][1]+1;
+										}else if(chboxlist[c][1]=2){
+											RGBlist[n][2]=RGBlist[n][2]+1;
+										}
+									}
+									
+										
+								}
+							}
+            			
+								
+            			
+						}
+
+					}
+
+					m++;
+
+					//奇数（患者）
+						
+					console.log(RGBlist[m]);
+					m++;	
+					n++;
+				}
+
+
+
+				//checkboxのステータスからポイント加算
+            			
+   
+
+
+
+  
+				//color2のlistをつくる。奇数RGBlistから。
+				//var colors2 = ["gray","#d4d","#d4d","gray","#d4d","#d4d","gray"];//奇数用
+				var color2=new Array();
+				for(m=0;m<keitaisokaiseki.length;m=m+2){
+					if(RGBlist[m][3]>=1){
+
+						color2[m]="#d4d";
+
+					}else{
+						color2[m]="gray";
+					}
+				}
+                        
+				var stackdataArr = new Array(5);
+				for(h=0;h<5;h++){
+					stackdataArr[h] = new Array();
+					for(m=0;m<keitaisokaiseki.length/2;m++){//2個飛ばしにしたら後が面倒くさい
+						stackdataArr[h][m]=new Object();
+						stackdataArr[h][m]= {x:m+1,y:28*RGBlist[2*m][h]/keitaisokaiseki[m].length};
+					}
+				}
+				var stack = d3.layout.stack()
+					.x(function(d){return 1;})
+					.y(function(d){return d.y;})
+					.values(function(d){return d;});
+				var stackdata = stack(stackdataArr);
+				var max = d3.max(stackdata[stackdata.length - 1], function(d){return d.y + d.y0;});
+				var scaleX = d3.scale.linear().domain([0,keitaisokaiseki.length]).range([0,width]);
+				var scaleY = d3.scale.linear().domain([0,max]).range([0,200]);
+				var colors = ["white","white","#aaaaff","#bbffbb","#ffbbbb","lightgray","#0f0","green"];
+                        
+				var area = d3.svg.area()
+					.x(function(d,i){return i * width/keitaisokaiseki.length})
+					.y0(function(d){return 200})
+					.y1(function(d){return 200 - scaleY(d.y+d.y0)});
+				svg.selectAll("path")
+					.data(stackdata.reverse())
+					.enter()
+					.append("path")
+					.attr("d", area)
+					.attr("fill",function(d,i){return colors[i]});
+
+
+				//奇数発言目
+				//grid line
+				//引数はstart,stop,stepの順
+				//[190,170,150,130,110,90,70,50,30,10]と同等
+				var range = d3.range((width/2)-(width/20),4,-width/10);
+				svg.selectAll("line.v")
+				  .data(range).enter().append("line")
+				  .attr("x1", function(d,i){return d;}).attr("y1", 0)
+				  .attr("x2", function(d,i){return d;}).attr("y2", 200);
+				svg.selectAll("line")
+				  .attr("stroke", function(d,i){return colors2[i]})
+				  .attr("stroke-width", 10)
+
+
+					
+			});
+
+
+			//checkbox依存部分終わり
+
+
+
 		})//kuromoji.builder終了
 		};//reader.onload終了。これとなんちゃら(file)が並列してないといけない
 	reader.readAsText(file);
@@ -386,142 +529,6 @@ document.getElementById('load-button').addEventListener('click', function () {
 
 
 
-			//これか。
-
-document.getElementById('check-button').addEventListener('click', function () {
-	console.log("手順2に進んだよ")
-	var checked = new Array(chboxlist.length);
-					
-	for(c=0;i<chboxlist.length;c++){
-		checked[i] = document.form1.i.checked;//リストつくる作業完了、こっから舐める
-	}
-	console.log(checked);
-						
-	//check2 = document.form1.Checkbox2.checked;
- 
-					
-
-	//check配列でonの単語について、文を舐めてRGBlistをつくる。
-
-	//偶奇1setでカウント（同じm内に収める）
-
-	m=0;//発言数
-	n=0;//偶奇1setのセット数
-	while(m<keitaisokaiseki.length){//発言ごとのループ
-
-						
-		RGBlist[n][0]=0;
-		RGBlist[n][1]=0;
-		RGBlist[n][2]=0;
-						
-		//まずは偶数から（カウンセラー）
-		//iは発言内の何文目か。
-		for(i=0;i<keitaisokaiseki[m].length;i++){
-			j=0; //集計単位内で何単語目か
-			for(j=0;j<keitaisokaiseki[m][i].length;j++){//単語ごとのループ
-				for(c=0;c<checkboxlist.length;c++){
-								
-					if (checked[c] == true) {
-						if(keitaisokaiseki[m][i][j]==chboxlist[c][0]){
-							if(chboxlist[c][1]=0){
-								RGBlist[n][0]=RGBlist[n][0]+1;
-							}else if(chboxlist[c][1]=1){
-								RGBlist[n][1]=RGBlist[n][1]+1;
-							}else if(chboxlist[c][1]=2){
-								RGBlist[n][2]=RGBlist[n][2]+1;
-							}
-						}
-									
-										
-					}
-				}
-            			
-								
-            			
-			}
-
-		}
-
-		m++;
-
-		//奇数（患者）
-						
-		console.log(RGBlist[m]);
-		m++;	
-		n++;
-	}
-
-
-
-	//checkboxのステータスからポイント加算
-            			
-   
-
-
-
-  
-	//color2のlistをつくる。奇数RGBlistから。
-	//var colors2 = ["gray","#d4d","#d4d","gray","#d4d","#d4d","gray"];//奇数用
-	var color2=new Array();
-	for(m=0;m<keitaisokaiseki.length;m=m+2){
-		if(RGBlist[m][3]>=1){
-
-			color2[m]="#d4d";
-
-		}else{
-			color2[m]="gray";
-		}
-	}
-                        
-	var stackdataArr = new Array(5);
-	for(h=0;h<5;h++){
-		stackdataArr[h] = new Array();
-		for(m=0;m<keitaisokaiseki.length/2;m++){//2個飛ばしにしたら後が面倒くさい
-			stackdataArr[h][m]=new Object();
-			stackdataArr[h][m]= {x:m+1,y:28*RGBlist[2*m][h]/keitaisokaiseki[m].length};
-		}
-	}
-	var stack = d3.layout.stack()
-		.x(function(d){return 1;})
-		.y(function(d){return d.y;})
-		.values(function(d){return d;});
-	var stackdata = stack(stackdataArr);
-	var max = d3.max(stackdata[stackdata.length - 1], function(d){return d.y + d.y0;});
-	var scaleX = d3.scale.linear().domain([0,keitaisokaiseki.length]).range([0,width]);
-	var scaleY = d3.scale.linear().domain([0,max]).range([0,200]);
-	var colors = ["white","white","#aaaaff","#bbffbb","#ffbbbb","lightgray","#0f0","green"];
-                        
-	var area = d3.svg.area()
-		.x(function(d,i){return i * width/keitaisokaiseki.length})
-		.y0(function(d){return 200})
-		.y1(function(d){return 200 - scaleY(d.y+d.y0)});
-	svg.selectAll("path")
-		.data(stackdata.reverse())
-		.enter()
-		.append("path")
-		.attr("d", area)
-		.attr("fill",function(d,i){return colors[i]});
-
-
-	//奇数発言目
-	//grid line
-	//引数はstart,stop,stepの順
-	//[190,170,150,130,110,90,70,50,30,10]と同等
-	var range = d3.range((width/2)-(width/20),4,-width/10);
-	svg.selectAll("line.v")
-	  .data(range).enter().append("line")
-	  .attr("x1", function(d,i){return d;}).attr("y1", 0)
-	  .attr("x2", function(d,i){return d;}).attr("y2", 200);
-	svg.selectAll("line")
-	  .attr("stroke", function(d,i){return colors2[i]})
-	  .attr("stroke-width", 10)
-
-
-					
-});
-
-
-	//checkbox依存部分終わり
 
 
 	//console.log(list);
