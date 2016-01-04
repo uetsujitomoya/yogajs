@@ -56,12 +56,6 @@ document.getElementById('load-button').addEventListener('click', function () {
               while(n<path.length){//発言ごとのループ
                 keitaisokaiseki[m] = new Array; //一発言
 
-                RGBlist[m] = new Array(5);
-                RGBlist[m][0]=0;
-                RGBlist[m][1]=0;
-                RGBlist[m][2]=0;
-                RGBlist[m][3]=0;
-                RGBlist[m][4]=0;
                 i=0; //段落内の何文目か。
                 while(n<path.length){//文ごとのループ
                   keitaisokaiseki[m][i] = new Array; //文
@@ -360,7 +354,7 @@ document.getElementById('load-button').addEventListener('click', function () {
             	//stackdataArr完成
             	//偶数発言目
 //checkbox情報取得
-            	//checkboxからRGBlistつくる
+            	//checkboxからcheckリストをつくり、RGBlistつくる
 
 
             	/*<form name="form1" action="">
@@ -370,13 +364,16 @@ document.getElementById('load-button').addEventListener('click', function () {
 				  </form>
 				 
 				  <div id="output"></div>*/
+
+            var check = new Array;
+
             function onButtonClick() {
-            	check1 = document.form1.Checkbox1.checked;
+            	check[i] = document.form1.i.checked;//リストつくる作業完了、こっから舐める
             	check2 = document.form1.Checkbox2.checked;
  
             	target = document.getElementById("output");
-            	if (check1 == true) {
-            		target.innerHTML = "チェック項目1がチェックされています。<br/>";
+            	if (check[i] == true) {
+            		RGBlist[m][0]=RGBlist[m][0]+1;
             	} else {
             		target.innerHTML = "チェック項目1がチェックされていません。<br/>";
             	}
@@ -386,12 +383,44 @@ document.getElementById('load-button').addEventListener('click', function () {
             		target.innerHTML += "チェック項目2がチェックされていません。<br/>";
             	}
             }
-		//checkboxのステータスからポイント加算
+
+
+            	//check配列でonの単語について、文を舐めてRGBlistをつくる。
+
+            	//偶奇1setでカウント（同じm内に収める）
+
+            m=0;//発言数
+            n=0;//偶奇1setのセット数
+            while(m<keitaisokaiseki.length){//発言ごとのループ
+
+            	RGBlist[n] = new Array(5);
+            	RGBlist[n][0]=0;
+            	RGBlist[n][1]=0;
+            	RGBlist[n][2]=0;
+            	RGBlist[n][3]=0;
+            	RGBlist[n][4]=0;
+//まずは偶数から（カウンセラー）
+            	 //iは発言内の何文目か。
+            	for(i=0;i<keitaisokaiseki[m].length;i++){
+            		j=0; //集計単位内で何単語目か
+            		for(j=0;j<keitaisokaiseki[m][i].length;j++){//単語ごとのループ
+            			
             			if(keitaisokaiseki[m][i][j]=="母"||keitaisokaiseki[m][i][j]=="姉"||keitaisokaiseki[m][i][j]=="母親"||keitaisokaiseki[m][i][j]=="お姉さん"||keitaisokaiseki[m][i][j]=="父"||keitaisokaiseki[m][i][j]=="家族"){
+
+            				RGBlist[n][0]=RGBlist[n][0]+1;
+            			}
+            			if(keitaisokaiseki[m][i][j]=="借金"||keitaisokaiseki[m][i][j]=="兄"||keitaisokaiseki[m][i][j]=="子"||keitaisokaiseki[m][i][j]=="子ども"||keitaisokaiseki[m][i][j]=="妹"||keitaisokaiseki[m][i][j]=="弟"){
 
             				RGBlist[m][0]=RGBlist[m][0]+1;
             			}
-            			
+            			if(keitaisokaiseki[m][i][j]=="病気"||keitaisokaiseki[m][i][j]=="お金"||keitaisokaiseki[m][i][j]=="両親"||keitaisokaiseki[m][i][j]=="言う"||keitaisokaiseki[m][i][j]=="お母様"||keitaisokaiseki[m][i][j]=="お父様"){
+
+            				RGBlist[m][0]=RGBlist[m][0]+1;
+            			}
+            			if(keitaisokaiseki[m][i][j]=="借金"||keitaisokaiseki[m][i][j]=="兄"||keitaisokaiseki[m][i][j]=="子"||keitaisokaiseki[m][i][j]=="子ども"||keitaisokaiseki[m][i][j]=="妹"||keitaisokaiseki[m][i][j]=="弟"){
+
+            				RGBlist[m][0]=RGBlist[m][0]+1;
+            			}
             			if(keitaisokaiseki[m][i][j]=="仕事"||keitaisokaiseki[m][i][j]=="休み"||keitaisokaiseki[m][i][j]=="風邪"||keitaisokaiseki[m][i][j]=="いや"||keitaisokaiseki[m][i][j]=="風"){
             				RGBlist[m][2]=RGBlist[m][2]+1;
             			}
@@ -409,6 +438,64 @@ document.getElementById('load-button').addEventListener('click', function () {
             				console.log("%d発言めの%d文目は閉じられた質問かもしれません",m,i);
             				RGBlist[m][4]=RGBlist[m][4]+1;
             			}
+            			
+            		}
+
+            	}
+
+            	m++;
+
+//奇数（患者）
+            	for(i=0;i<keitaisokaiseki[m].length;i++){
+            		j=0; //集計単位内で何単語目か
+            		for(j=0;j<keitaisokaiseki[m][i].length;j++){//単語ごとのループ
+            			
+            			if(keitaisokaiseki[m][i][j]=="母"||keitaisokaiseki[m][i][j]=="姉"||keitaisokaiseki[m][i][j]=="母親"||keitaisokaiseki[m][i][j]=="お姉さん"||keitaisokaiseki[m][i][j]=="父"||keitaisokaiseki[m][i][j]=="家族"){
+
+            				RGBlist[n][0]=RGBlist[n][0]+1;
+            			}
+            			if(keitaisokaiseki[m][i][j]=="借金"||keitaisokaiseki[m][i][j]=="兄"||keitaisokaiseki[m][i][j]=="子"||keitaisokaiseki[m][i][j]=="子ども"||keitaisokaiseki[m][i][j]=="妹"||keitaisokaiseki[m][i][j]=="弟"){
+
+            				RGBlist[m][0]=RGBlist[m][0]+1;
+            			}
+            			if(keitaisokaiseki[m][i][j]=="病気"||keitaisokaiseki[m][i][j]=="お金"||keitaisokaiseki[m][i][j]=="両親"||keitaisokaiseki[m][i][j]=="言う"||keitaisokaiseki[m][i][j]=="お母様"||keitaisokaiseki[m][i][j]=="お父様"){
+
+            				RGBlist[m][0]=RGBlist[m][0]+1;
+            			}
+            			if(keitaisokaiseki[m][i][j]=="借金"||keitaisokaiseki[m][i][j]=="兄"||keitaisokaiseki[m][i][j]=="子"||keitaisokaiseki[m][i][j]=="子ども"||keitaisokaiseki[m][i][j]=="妹"||keitaisokaiseki[m][i][j]=="弟"){
+
+            				RGBlist[m][0]=RGBlist[m][0]+1;
+            			}
+            			if(keitaisokaiseki[m][i][j]=="仕事"||keitaisokaiseki[m][i][j]=="休み"||keitaisokaiseki[m][i][j]=="風邪"||keitaisokaiseki[m][i][j]=="いや"||keitaisokaiseki[m][i][j]=="風"){
+            				RGBlist[m][2]=RGBlist[m][2]+1;
+            			}
+            			if(keitaisokaiseki[m][i][j]=="分かる"||keitaisokaiseki[m][i][j]=="焼ける"){
+            				RGBlist[m][2]=RGBlist[m][2]+1;
+            			}
+            			if(keitaisokaiseki[m][i][j]=="友人"){
+            				RGBlist[m][1]=RGBlist[m][1]+1;
+            			}
+            			if(keitaisokaiseki[m][i][j]=="いかが"||keitaisokaiseki[m][i][j]=="どの"||keitaisokaiseki[m][i][j]=="どのように"||keitaisokaiseki[m][i][j]=="いつ"||keitaisokaiseki[m][i][j]=="どういう"){
+            				console.log("%d発言めの%d文目は開かれた質問です",m,i);
+            				RGBlist[m][3]=RGBlist[m][3]+1;
+            			}
+            			if(keitaisokaiseki[m][i][j]=="ね"||keitaisokaiseki[m][i][j]=="そうですね"){
+            				console.log("%d発言めの%d文目は閉じられた質問かもしれません",m,i);
+            				RGBlist[m][4]=RGBlist[m][4]+1;
+            			}
+            			
+            		}
+
+            	}
+            	console.log(RGBlist[m]);
+            	m++;	
+				n++;
+            }
+
+
+
+		//checkboxのステータスからポイント加算
+            			
    
 
 
