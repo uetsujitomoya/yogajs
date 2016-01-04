@@ -234,6 +234,10 @@ document.getElementById('load-button').addEventListener('click', function () {
 					<input type="button" value="非表示" onclick="hyoji1(1)">
 					</form>*/
             	//listからif文をつくる→checkboxをつくって表示
+
+            	//単語0の番号取得→単語1の番号取得→単語2の番号取得
+//単語リストmiserables.nodesとlist番号を照らしあわせる→checkbox表示
+
             function hyoji1(num)
             {
             	if (num == 0)
@@ -252,7 +256,7 @@ document.getElementById('load-button').addEventListener('click', function () {
             	//クライアントの各文の得点換算
             	//stackdataArr完成
             	//偶数発言目
-
+//checkbox情報取得
             	//checkboxからRGBlistつくる
 
 
@@ -335,14 +339,14 @@ document.getElementById('load-button').addEventListener('click', function () {
 
 
   
-//color2のlistをつくる。奇数RGBlistから。
+			//color2のlistをつくる。奇数RGBlistから。
             	//var colors2 = ["gray","#d4d","#d4d","gray","#d4d","#d4d","gray"];//奇数用
             var color2=new Array();
-		//for loop
             for(m=0;m<eitaisokaiseki.length;m=m+2){
-            	if(fukumu){
+            	if(RGBlist[m][3]>=1){
 
             		color2[m]="#d4d";
+
             	}else{
             		color2[m]="gray";
             	}
