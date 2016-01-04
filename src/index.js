@@ -49,8 +49,7 @@ document.getElementById('load-button').addEventListener('click', function () {
               var toutenbasho=0;
               n=0; //nは全データ内で何文字目か
               bunsuu=0; //全段落内で何分目か
-              m=0; //何個目の発言か。これの偶奇わけで判断。カウンセラーが奇数。患者が偶数。
-//1文は1文で格納
+              m=0; //何個目の発言か。これの偶奇わけで判断。カウンセラーが奇数。患者が偶数。1文は1文で格納
               var karabasho;
               var reason;
               var kara="から"
@@ -148,8 +147,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 
             var tmp=new Array;
 
-            for(m=0;m
-              <keitaisokaiseki.length;++m){
+            for(m=0;m<keitaisokaiseki.length;++m){
               for(i=0;i<keitaisokaiseki[m].length;++i){
                 tmp = keitaisokaiseki[m][i];
                 console.log("m=%d,i=%d",m,i);
@@ -216,6 +214,107 @@ document.getElementById('load-button').addEventListener('click', function () {
 
 
                     }
+
+                  	//checkbox用
+
+                    if(keitaisokaiseki[m][i][j]=="母"){
+
+                    	RGBlist[m][0]=RGBlist[m][0]+1;
+                    }
+                    if(keitaisokaiseki[m][i][j]=="姉"){
+
+                    	RGBlist[m][0]=RGBlist[m][0]+1;
+                    }
+                    if(keitaisokaiseki[m][i][j]=="母親"){
+
+                    	RGBlist[m][0]=RGBlist[m][0]+1;
+                    }
+                    if(keitaisokaiseki[m][i][j]=="お姉さん"){
+
+                    	RGBlist[m][0]=RGBlist[m][0]+1;
+                    }
+                    if(keitaisokaiseki[m][i][j]=="父"){
+
+                    	RGBlist[m][0]=RGBlist[m][0]+1;
+                    }
+                    if(keitaisokaiseki[m][i][j]=="家族"){
+
+                    	RGBlist[m][0]=RGBlist[m][0]+1;
+                    }
+                    if(keitaisokaiseki[m][i][j]=="借金"){
+
+                    	RGBlist[m][0]=RGBlist[m][0]+1;
+                    }
+                    if(keitaisokaiseki[m][i][j]=="兄"){
+
+                    	RGBlist[m][0]=RGBlist[m][0]+1;
+                    }
+                    if(keitaisokaiseki[m][i][j]=="子"){
+
+                    	RGBlist[m][0]=RGBlist[m][0]+1;
+                    }
+                    if(keitaisokaiseki[m][i][j]=="子ども"){
+
+                    	RGBlist[m][0]=RGBlist[m][0]+1;
+                    }
+                    if(keitaisokaiseki[m][i][j]=="妹"){
+
+                    	RGBlist[m][0]=RGBlist[m][0]+1;
+                    }
+                    if(keitaisokaiseki[m][i][j]=="弟"){
+
+                    	RGBlist[m][0]=RGBlist[m][0]+1;
+                    }
+                    if(keitaisokaiseki[m][i][j]=="病気"){
+
+                    	RGBlist[m][0]=RGBlist[m][0]+1;
+                    }
+                    if(keitaisokaiseki[m][i][j]=="お金"){
+
+                    	RGBlist[m][0]=RGBlist[m][0]+1;
+                    }
+                    if(keitaisokaiseki[m][i][j]=="両親"){
+
+                    	RGBlist[m][0]=RGBlist[m][0]+1;
+                    }
+                    if(keitaisokaiseki[m][i][j]=="言う"){
+
+                    	RGBlist[m][0]=RGBlist[m][0]+1;
+                    }
+                    if(keitaisokaiseki[m][i][j]=="お母様"){
+
+                    	RGBlist[m][0]=RGBlist[m][0]+1;
+                    }
+                    if(keitaisokaiseki[m][i][j]=="お父様"){
+
+                    	RGBlist[m][0]=RGBlist[m][0]+1;
+                    }
+                    if(keitaisokaiseki[m][i][j]=="仕事"){
+                    	RGBlist[m][2]=RGBlist[m][2]+1;
+                    }
+                    if(keitaisokaiseki[m][i][j]=="休み"){
+                    	RGBlist[m][2]=RGBlist[m][2]+1;
+                    }
+                    if(keitaisokaiseki[m][i][j]=="風邪"){
+                    	RGBlist[m][2]=RGBlist[m][2]+1;
+                    }
+                    if(keitaisokaiseki[m][i][j]=="いや"){
+                    	RGBlist[m][2]=RGBlist[m][2]+1;
+                    }
+                    if(keitaisokaiseki[m][i][j]=="風"){
+                    	RGBlist[m][2]=RGBlist[m][2]+1;
+                    }
+                    if(keitaisokaiseki[m][i][j]=="分かる"){
+                    	RGBlist[m][2]=RGBlist[m][2]+1;
+                    }
+                    if(keitaisokaiseki[m][i][j]=="焼ける"){
+                    	RGBlist[m][2]=RGBlist[m][2]+1;
+                    }
+                    if(keitaisokaiseki[m][i][j]=="友人"){
+                    	RGBlist[m][1]=RGBlist[m][1]+1;
+                    }
+                    
+
                   }
 
                   console.log(RGBlist[m][i]);
@@ -236,11 +335,15 @@ document.getElementById('load-button').addEventListener('click', function () {
             	//listからif文をつくる→checkboxをつくって表示
 
             	//単語0の番号取得→単語1の番号取得→単語2の番号取得
-//単語リストmiserables.nodesとlist番号を照らしあわせる→checkbox表示
+            	//単語リストmiserables.nodesとlist番号を照らしあわせる→checkbox表示
+            	//miserablesnodesから単語名を表示、idとする
+
+
 
             function hyoji1(num)
             {
             	if (num == 0)
+
             	{
             		document.getElementById("disp").style.display="block";
             	}
@@ -260,46 +363,35 @@ document.getElementById('load-button').addEventListener('click', function () {
             	//checkboxからRGBlistつくる
 
 
-            while(n<path.length){//発言ごとのループ
-            	keitaisokaiseki[m] = new Array; //一発言
-
-            	RGBlist[m] = new Array(5);
-            	RGBlist[m][0]=0;
-            	RGBlist[m][1]=0;
-            	RGBlist[m][2]=0;
-            	RGBlist[m][3]=0;
-            	RGBlist[m][4]=0;
-            	i=0; //段落内の何文目か。
-            	while(n<path.length){//文ごとのループ
-            		keitaisokaiseki[m][i] = new Array; //文
-            		keitaisokaiseki[m][i].length = 0;
-
-            		reasonMatrix[i] = new Array;
-            		j=0; //集計単位内で何単語目か
-            		while(n<path.length){//単語ごとのループ
-            			if(path[n].basic_form=="。"||path[n].basic_form=="？"||path[n].basic_form=="?"||path[n].word_id=="2613630"){
-            				bunsuu++;
-            				toutencount=0;
-            				break;//3区間終了
-            			}
-            			keitaisokaiseki[m][i][j] = path[n].basic_form;
-            			reasonMatrix[i][j] = reason;
+            	/*<form name="form1" action="">
+					<input id="Checkbox1" type="checkbox" /><label for="Checkbox1">チェック項目1</label><br />
+					<input id="Checkbox2" type="checkbox" /><label for="Checkbox2">チェック項目2</label><br />
+					<input type="button" value="Exec" onclick="onButtonClick();" />
+				  </form>
+				 
+				  <div id="output"></div>*/
+            function onButtonClick() {
+            	check1 = document.form1.Checkbox1.checked;
+            	check2 = document.form1.Checkbox2.checked;
+ 
+            	target = document.getElementById("output");
+            	if (check1 == true) {
+            		target.innerHTML = "チェック項目1がチェックされています。<br/>";
+            	} else {
+            		target.innerHTML = "チェック項目1がチェックされていません。<br/>";
+            	}
+            	if (check2 == true) {
+            		target.innerHTML += "チェック項目2がチェックされています。<br/>";
+            	} else {
+            		target.innerHTML += "チェック項目2がチェックされていません。<br/>";
+            	}
+            }
+		//checkboxのステータスからポイント加算
             			if(keitaisokaiseki[m][i][j]=="母"||keitaisokaiseki[m][i][j]=="姉"||keitaisokaiseki[m][i][j]=="母親"||keitaisokaiseki[m][i][j]=="お姉さん"||keitaisokaiseki[m][i][j]=="父"||keitaisokaiseki[m][i][j]=="家族"){
 
             				RGBlist[m][0]=RGBlist[m][0]+1;
             			}
-            			if(keitaisokaiseki[m][i][j]=="借金"||keitaisokaiseki[m][i][j]=="兄"||keitaisokaiseki[m][i][j]=="子"||keitaisokaiseki[m][i][j]=="子ども"||keitaisokaiseki[m][i][j]=="妹"||keitaisokaiseki[m][i][j]=="弟"){
-
-            				RGBlist[m][0]=RGBlist[m][0]+1;
-            			}
-            			if(keitaisokaiseki[m][i][j]=="病気"||keitaisokaiseki[m][i][j]=="お金"||keitaisokaiseki[m][i][j]=="両親"||keitaisokaiseki[m][i][j]=="言う"||keitaisokaiseki[m][i][j]=="お母様"||keitaisokaiseki[m][i][j]=="お父様"){
-
-            				RGBlist[m][0]=RGBlist[m][0]+1;
-            			}
-            			if(keitaisokaiseki[m][i][j]=="借金"||keitaisokaiseki[m][i][j]=="兄"||keitaisokaiseki[m][i][j]=="子"||keitaisokaiseki[m][i][j]=="子ども"||keitaisokaiseki[m][i][j]=="妹"||keitaisokaiseki[m][i][j]=="弟"){
-
-            				RGBlist[m][0]=RGBlist[m][0]+1;
-            			}
+            			
             			if(keitaisokaiseki[m][i][j]=="仕事"||keitaisokaiseki[m][i][j]=="休み"||keitaisokaiseki[m][i][j]=="風邪"||keitaisokaiseki[m][i][j]=="いや"||keitaisokaiseki[m][i][j]=="風"){
             				RGBlist[m][2]=RGBlist[m][2]+1;
             			}
@@ -317,24 +409,7 @@ document.getElementById('load-button').addEventListener('click', function () {
             				console.log("%d発言めの%d文目は閉じられた質問かもしれません",m,i);
             				RGBlist[m][4]=RGBlist[m][4]+1;
             			}
-            			n++;
-            			j++;
-            		}
-
-            		if(n==path.length){//確認
-            			break;
-            		}
-            		if(path[n].word_id=="2613630"){
-            			n++;
-            			break;
-            		}//1段落作成完了
-            		n++;
-            		i++;//段落内の何文目か
-            	}
-            	console.log(RGBlist[m]);
-            	m++;
-            }ｖ
-            //keitaisokaisekiとnodesを照らしあわせる
+   
 
 
 
@@ -342,7 +417,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 			//color2のlistをつくる。奇数RGBlistから。
             	//var colors2 = ["gray","#d4d","#d4d","gray","#d4d","#d4d","gray"];//奇数用
             var color2=new Array();
-            for(m=0;m<eitaisokaiseki.length;m=m+2){
+            for(m=0;m<keitaisokaiseki.length;m=m+2){
             	if(RGBlist[m][3]>=1){
 
             		color2[m]="#d4d";
@@ -418,7 +493,8 @@ document.getElementById('load-button').addEventListener('click', function () {
                         x=list[m][i][k];
                         y=list[m][i][l];
 
-                        if(x==1 && y==1){
+                        if(x==
+1 && y==1){
 
                           miserables.links.push({source:l,target:k,value:0});
                           edge++;//最初のedgeが0
