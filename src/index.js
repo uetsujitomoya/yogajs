@@ -277,39 +277,42 @@ document.getElementById('load-button').addEventListener('click', function () {
 
 								if(RGB[m][i][0]==1){
 									if(checkboxlist[k][1]==0){//単語とグループの組み合わせの重複を防ぐ
-										target.innerHTML += "<input id=\"" + c + "\" type=checkbox checked /><label for="+c+">「" + miserables.nodes[k].name + "」を「愛(恋愛･家族関係)」に。</label><br />";
+										target.innerHTML += "<input id=\"ken" + c + "\" type=checkbox checked /><label for="+c+">「" + miserables.nodes[k].name + "」を「愛(恋愛･家族関係)」に。</label><br />";
 										console.log("%d,%d,%d,%sを愛に",m,i,j,miserables.nodes[k].name);
-										console.log(hinshi[m][i][k]);
+										console.log(hinshi[m][i][j]);
 										checkboxlist[k][0]=1;
 										checkboxlist[k][1]=1;
 										chboxlist[c]=new Array(2);
 										chboxlist[c][0]=miserables.nodes[k].name;
+										console.log("%d",c);
 										chboxlist[c][1]=0;
 										c++;
 									}
 								}
 								if(RGB[m][i][1]==1){
 									if(checkboxlist[k][2]==0){
-										target.innerHTML += "<input id=\"" + c + "\" type=checkbox checked /><label for="+c+">「" + miserables.nodes[k].name + "」を「交友関係」に。</label><br />";
+										target.innerHTML += "<input id=\"ken" + c + "\" type=checkbox checked /><label for="+c+">「" + miserables.nodes[k].name + "」を「交友関係」に。</label><br />";
 										console.log("%sを交友に",miserables.nodes[k].name);
-										console.log(hinshi[m][i][k]);
+										console.log(hinshi[m][i][j]);
 										checkboxlist[k][0]=1;
 										checkboxlist[k][2]=1;
 										chboxlist[c]=new Array(2);
 										chboxlist[c][0]=miserables.nodes[k].name;
+										console.log("%d",c);
 										chboxlist[c][1]=1;
 										c++;
 									}
 								}
 								if(RGB[m][i][2]==1){
 									if(checkboxlist[k][3]==0){
-										target.innerHTML += "<input id=\"" + c + "\" type=checkbox checked /><label for="+c+">「" + miserables.nodes[k].name + "」を「仕事関係」に。</label><br />";
+										target.innerHTML += "<input id=\"ken" + c + "\" type=checkbox checked /><label for="+c+">「" + miserables.nodes[k].name + "」を「仕事関係」に。</label><br />";
 										console.log("%sを仕事に",miserables.nodes[k].name);
-										console.log(hinshi[m][i][k]);
+										console.log(hinshi[m][i][j]);
 										checkboxlist[k][0]=1;
 										checkboxlist[k][3]=1;
 										chboxlist[c]=new Array(2);
 										chboxlist[c][0]=miserables.nodes[k].name;
+										console.log("%d",c);
 										chboxlist[c][1]=2;
 										c++;
 									}
@@ -384,8 +387,12 @@ document.getElementById('load-button').addEventListener('click', function () {
 				console.log("手順2に進んだよ")
 				var checked = new Array(chboxlist.length);
 					
-				for(c=0;i<chboxlist.length;c++){
-					checked[i] = document.form1.i.checked;//リストつくる作業完了、こっから舐める
+				for(c=0 ; c<chboxlist.length ; c++){    //"ken"に1～5の連番付き
+					var obj = eval("document.form1.ken" + c);  //checkboxｵﾌﾞｼﾞｪｸﾄを生成する
+					if(obj.checked)	{
+						checked[c] += "\n\t" + obj.value;
+						
+					}
 				}
 				console.log(checked);
 						
@@ -455,7 +462,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 				//color2のlistをつくる。奇数RGBlistから。
 				//var colors2 = ["gray","#d4d","#d4d","gray","#d4d","#d4d","gray"];//奇数用
 				var color2=new Array();
-				for(m=0;m<keitaisokaiseki.length;m=m+2){
+				for(m=0;m<keitaisokaiseki.length/2;m++){
 					if(RGBlist[m][3]>=1){
 
 						color2[m]="#d4d";
