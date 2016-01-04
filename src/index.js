@@ -180,8 +180,8 @@ document.getElementById('load-button').addEventListener('click', function () {
 
 			tangosett = Array.from(tangoset).map(function(t) {
 				return {t};
-				// body...
-			});
+				// body
+				});
 
 
 
@@ -294,6 +294,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 
 					}
 				}
+
 				//var list = new Array(keitaisokaiseki.length);
 
 				//list作成終了
@@ -335,249 +336,249 @@ document.getElementById('load-button').addEventListener('click', function () {
 				 
 				  <div id="output"></div>*/
 
-            
+			
 
-            
+			}
 
-				//これか。
-				function onButtonClick() {
-					var checked = new Array(checkboxlist.length);
+			//これか。
+			function onButtonClick() {
+				var checked = new Array(checkboxlist.length);
 					
-					for(c=0;i<checkboxlist.length;c++){
-						checked[i] = document.form1.i.checked;//リストつくる作業完了、こっから舐める
-					}
+				for(c=0;i<checkboxlist.length;c++){
+					checked[i] = document.form1.i.checked;//リストつくる作業完了、こっから舐める
+				}
 						
-					//check2 = document.form1.Checkbox2.checked;
+				//check2 = document.form1.Checkbox2.checked;
  
 					
 
-					//check配列でonの単語について、文を舐めてRGBlistをつくる。
+				//check配列でonの単語について、文を舐めてRGBlistをつくる。
 
-					//偶奇1setでカウント（同じm内に収める）
+				//偶奇1setでカウント（同じm内に収める）
 
-					m=0;//発言数
-					n=0;//偶奇1setのセット数
-					while(m<keitaisokaiseki.length){//発言ごとのループ
+				m=0;//発言数
+				n=0;//偶奇1setのセット数
+				while(m<keitaisokaiseki.length){//発言ごとのループ
 
 						
-						RGBlist[n][0]=0;
-						RGBlist[n][1]=0;
-						RGBlist[n][2]=0;
+					RGBlist[n][0]=0;
+					RGBlist[n][1]=0;
+					RGBlist[n][2]=0;
 						
-						//まずは偶数から（カウンセラー）
-						//iは発言内の何文目か。
-						for(i=0;i<keitaisokaiseki[m].length;i++){
-							j=0; //集計単位内で何単語目か
-							for(j=0;j<keitaisokaiseki[m][i].length;j++){//単語ごとのループ
-								for(c=0;c<checkboxlist.length;c++){
-									if (checked[i] == true) {
-										if(checkboxlist[c][1]=1){
-											RGBlist[n][1]=RGBlist[n][1]+1;
-										}else if(checkboxlist[c][1]=2){
-											RGBlist[n][2]=RGBlist[n][2]+1;
-										}else{
-											RGBlist[n][0]=RGBlist[n][0]+1;
-										}
-										
+					//まずは偶数から（カウンセラー）
+					//iは発言内の何文目か。
+					for(i=0;i<keitaisokaiseki[m].length;i++){
+						j=0; //集計単位内で何単語目か
+						for(j=0;j<keitaisokaiseki[m][i].length;j++){//単語ごとのループ
+							for(c=0;c<checkboxlist.length;c++){
+								if (checked[i] == true) {
+									if(checkboxlist[c][1]=1){
+										RGBlist[n][1]=RGBlist[n][1]+1;
+									}else if(checkboxlist[c][1]=2){
+										RGBlist[n][2]=RGBlist[n][2]+1;
+									}else{
+										RGBlist[n][0]=RGBlist[n][0]+1;
 									}
+										
 								}
+							}
             			
 								
             			
-							}
-
 						}
 
-						m++;
-
-						//奇数（患者）
-						
-						console.log(RGBlist[m]);
-						m++;	
-						n++;
 					}
 
+					m++;
+
+					//奇数（患者）
+						
+					console.log(RGBlist[m]);
+					m++;	
+					n++;
+				}
 
 
-					//checkboxのステータスからポイント加算
+
+				//checkboxのステータスからポイント加算
             			
    
 
 
 
   
-					//color2のlistをつくる。奇数RGBlistから。
-					//var colors2 = ["gray","#d4d","#d4d","gray","#d4d","#d4d","gray"];//奇数用
-					var color2=new Array();
-					for(m=0;m<keitaisokaiseki.length;m=m+2){
-						if(RGBlist[m][3]>=1){
+				//color2のlistをつくる。奇数RGBlistから。
+				//var colors2 = ["gray","#d4d","#d4d","gray","#d4d","#d4d","gray"];//奇数用
+				var color2=new Array();
+				for(m=0;m<keitaisokaiseki.length;m=m+2){
+					if(RGBlist[m][3]>=1){
 
-							color2[m]="#d4d";
+						color2[m]="#d4d";
 
-						}else{
-							color2[m]="gray";
-						}
+					}else{
+						color2[m]="gray";
 					}
+				}
                         
-					var stackdataArr = new Array(5);
-					for(h=0;h<5;h++){
-						stackdataArr[h] = new Array();
-						for(m=0;m<keitaisokaiseki.length/2;m++){//2個飛ばしにしたら後が面倒くさい
-							stackdataArr[h][m]=new Object();
-							stackdataArr[h][m]= {x:m+1,y:28*RGBlist[2*m][h]/keitaisokaiseki[m].length};
-						}
+				var stackdataArr = new Array(5);
+				for(h=0;h<5;h++){
+					stackdataArr[h] = new Array();
+					for(m=0;m<keitaisokaiseki.length/2;m++){//2個飛ばしにしたら後が面倒くさい
+						stackdataArr[h][m]=new Object();
+						stackdataArr[h][m]= {x:m+1,y:28*RGBlist[2*m][h]/keitaisokaiseki[m].length};
 					}
-					var stack = d3.layout.stack()
-						.x(function(d){return 1;})
-						.y(function(d){return d.y;})
-						.values(function(d){return d;});
-					var stackdata = stack(stackdataArr);
-					var max = d3.max(stackdata[stackdata.length - 1], function(d){return d.y + d.y0;});
-					var scaleX = d3.scale.linear().domain([0,keitaisokaiseki.length]).range([0,width]);
-					var scaleY = d3.scale.linear().domain([0,max]).range([0,200]);
-					var colors = ["white","white","#aaaaff","#bbffbb","#ffbbbb","lightgray","#0f0","green"];
+				}
+				var stack = d3.layout.stack()
+					.x(function(d){return 1;})
+					.y(function(d){return d.y;})
+					.values(function(d){return d;});
+				var stackdata = stack(stackdataArr);
+				var max = d3.max(stackdata[stackdata.length - 1], function(d){return d.y + d.y0;});
+				var scaleX = d3.scale.linear().domain([0,keitaisokaiseki.length]).range([0,width]);
+				var scaleY = d3.scale.linear().domain([0,max]).range([0,200]);
+				var colors = ["white","white","#aaaaff","#bbffbb","#ffbbbb","lightgray","#0f0","green"];
                         
-					var area = d3.svg.area()
-						.x(function(d,i){return i * width/keitaisokaiseki.length})
-						.y0(function(d){return 200})
-						.y1(function(d){return 200 - scaleY(d.y+d.y0)});
-					svg.selectAll("path")
-						.data(stackdata.reverse())
-						.enter()
-						.append("path")
-						.attr("d", area)
-						.attr("fill",function(d,i){return colors[i]});
+				var area = d3.svg.area()
+					.x(function(d,i){return i * width/keitaisokaiseki.length})
+					.y0(function(d){return 200})
+					.y1(function(d){return 200 - scaleY(d.y+d.y0)});
+				svg.selectAll("path")
+					.data(stackdata.reverse())
+					.enter()
+					.append("path")
+					.attr("d", area)
+					.attr("fill",function(d,i){return colors[i]});
 
 
-					//奇数発言目
-					//grid line
-					//引数はstart,stop,stepの順
-					//[190,170,150,130,110,90,70,50,30,10]と同等
-					var range = d3.range((width/2)-(width/20),4,-width/10);
-					svg.selectAll("line.v")
-					  .data(range).enter().append("line")
-					  .attr("x1", function(d,i){return d;}).attr("y1", 0)
-					  .attr("x2", function(d,i){return d;}).attr("y2", 200);
-					svg.selectAll("line")
-					  .attr("stroke", function(d,i){return colors2[i]})
-					  .attr("stroke-width", 10)
+				//奇数発言目
+				//grid line
+				//引数はstart,stop,stepの順
+				//[190,170,150,130,110,90,70,50,30,10]と同等
+				var range = d3.range((width/2)-(width/20),4,-width/10);
+				svg.selectAll("line.v")
+				  .data(range).enter().append("line")
+				  .attr("x1", function(d,i){return d;}).attr("y1", 0)
+				  .attr("x2", function(d,i){return d;}).attr("y2", 200);
+				svg.selectAll("line")
+				  .attr("stroke", function(d,i){return colors2[i]})
+				  .attr("stroke-width", 10)
 
 
 					
-				}
+			}
 
 
-				//checkbox依存部分終わり
+			//checkbox依存部分終わり
 
 
-				//console.log(list);
-				//listはi*k
+			//console.log(list);
+			//listはi*k
 
-				//listからmiserables.linksとlist3をつくる
+			//listからmiserables.linksとlist3をつくる
 
-				var x,y,z;
+			var x,y,z;
 
-				var edge=-1;
+			var edge=-1;
 
 
 
-				for(k=0;k<miserables.nodes.length;++k){
+			for(k=0;k<miserables.nodes.length;++k){
 
-					for(l=k+1;l<miserables.nodes.length;++l){//別の単語を見る
-						//現在単語2個の組み合わせを選択中
+				for(l=k+1;l<miserables.nodes.length;++l){//別の単語を見る
+					//現在単語2個の組み合わせを選択中
 
-						//ここから段落を指定して縦になめる
+					//ここから段落を指定して縦になめる
 
-						for(m=0;m<keitaisokaiseki.length;++m){
-							for(i=0;i<keitaisokaiseki[m].length;++i){
-								x=list[m][i][k];
-								y=list[m][i][l];
+					for(m=0;m<keitaisokaiseki.length;++m){
+						for(i=0;i<keitaisokaiseki[m].length;++i){
+							x=list[m][i][k];
+							y=list[m][i][l];
 
-								if(x==1 && y==1){
+							if(x==1 && y==1){
 
-									miserables.links.push({source:l,target:k,value:0});
-									edge++;//最初のedgeが0
-									break;
-								}
+								miserables.links.push({source:l,target:k,value:0});
+								edge++;//最初のedgeが0
+								break;
 							}
 						}
-						//とりあえずエッジつくってbreak
-						//こっからvalueを与える
-						for(m=0;m<keitaisokaiseki.length;++m){
-							for(i=0;i<keitaisokaiseki[m].length;++i){
-								x=list[m][i][k];
-								y=list[m][i][l];
-								if(x==1 && y==1){
-									z = miserables.links[edge].value;
-									z++;
-									miserables.links[edge].value = z;
-								}
+					}
+					//とりあえずエッジつくってbreak
+					//こっからvalueを与える
+					for(m=0;m<keitaisokaiseki.length;++m){
+						for(i=0;i<keitaisokaiseki[m].length;++i){
+							x=list[m][i][k];
+							y=list[m][i][l];
+							if(x==1 && y==1){
+								z = miserables.links[edge].value;
+								z++;
+								miserables.links[edge].value = z;
 							}
 						}
-
-
 					}
 
 
 				}
 
-				//console.log(miserables.links);
+
+			}
+
+			//console.log(miserables.links);
 
 
-				//以上計算中
+			//以上計算中
 
-				var graph = miserables;
-
-
-				//共起マップ
-				/*
-								force
-									.nodes(graph.nodes)
-									.links(graph.links)
-									.start();
-				
-				*/
-				/*
-								var link = svg.selectAll(".link")
-									.data(graph.links)
-								  .enter().append("line")
-									.attr("class", "link")
-									.style("stroke-width", function(d) { return Math.sqrt(d.value); });
-				*/
-				/*              var node = svg.selectAll(".node")
-								  .data(graph.nodes)
-								.enter().append("text")
-								  .attr("class", "node")
-								  .style("fill", function(d) {
-									if(d.group==1){
-									  return "red";
-									} else{
-									  return "blue";
-									}
-				
-								  })
-								  .call(force.drag)
-								  .text(function(d) { return d.name; });
-				*/
+			var graph = miserables;
 
 
+			//共起マップ
+			/*
+							force
+								.nodes(graph.nodes)
+								.links(graph.links)
+								.start();
+			
+			*/
+			/*
+							var link = svg.selectAll(".link")
+								.data(graph.links)
+							  .enter().append("line")
+								.attr("class", "link")
+								.style("stroke-width", function(d) { return Math.sqrt(d.value); });
+			*/
+			/*              var node = svg.selectAll(".node")
+							  .data(graph.nodes)
+							.enter().append("text")
+							  .attr("class", "node")
+							  .style("fill", function(d) {
+								if(d.group==1){
+								  return "red";
+								} else{
+								  return "blue";
+								}
+			
+							  })
+							  .call(force.drag)
+							  .text(function(d) { return d.name; });
+			*/
 
 
-				/*
-								force.on("tick", function() {
-								  link.attr("x1", function(d) { return d.source.x; })
-									  .attr("y1", function(d) { return d.source.y; })
-									  .attr("x2", function(d) { return d.target.x; })
-									  .attr("y2", function(d) { return d.target.y; });
-				
-								  node.attr("x", function(d) { return d.x; })
-									  .attr("y", function(d) { return d.y; });
-								});
-				
-				*/
 
-			};
-		});
+
+			/*
+							force.on("tick", function() {
+							  link.attr("x1", function(d) { return d.source.x; })
+								  .attr("y1", function(d) { return d.source.y; })
+								  .attr("x2", function(d) { return d.target.x; })
+								  .attr("y2", function(d) { return d.target.y; });
+			
+							  node.attr("x", function(d) { return d.x; })
+								  .attr("y", function(d) { return d.y; });
+							});
+			
+			*/
+
+		}
+		)//kuromoji.builder終了
 		reader.readAsText(file);
 
 
@@ -585,51 +586,51 @@ document.getElementById('load-button').addEventListener('click', function () {
 
 
 
-	};
+	
 
 
-	var cluster = require('hierarchical-clustering');
-	var colors = [
-	[20, 20, 80],
-	[22, 22, 90],
-	[250, 255, 253],
-	[100, 54, 255]
-	];
+		var cluster = require('hierarchical-clustering');
+		var colors = [
+		[20, 20, 80],
+		[22, 22, 90],
+		[250, 255, 253],
+		[100, 54, 255]
+		];
 
 
 
-	// Euclidean distance
-	function distance(a, b) {
-		var d = 0;
-		for (var i = 0; i < a.length; i++) {
-			d += Math.pow(a[i] - b[i], 2);
+		// Euclidean distance
+		function distance(a, b) {
+			var d = 0;
+			for (var i = 0; i < a.length; i++) {
+				d += Math.pow(a[i] - b[i], 2);
+			}
+			return Math.sqrt(d);
 		}
-		return Math.sqrt(d);
-	}
 
-	// Single-linkage clustering
-	function linkage(distances) {
-		return Math.min.apply(null, distances);
-	}
+		// Single-linkage clustering
+		function linkage(distances) {
+			return Math.min.apply(null, distances);
+		}
 
-	var levels = cluster({
-		input: colors,
-		distance: distance,
-		linkage: linkage,
-		minClusters: 2, // only want two clusters
-	});
-
-	var clusters = levels[levels.length - 1].clusters;
-	//console.log(clusters);
-	// => [ [ 2 ], [ 3, 1, 0 ] ]
-	clusters = clusters.map(function (cluster) {
-		return cluster.map(function (index) {
-			return colors[index];
+		var levels = cluster({
+			input: colors,
+			distance: distance,
+			linkage: linkage,
+			minClusters: 2, // only want two clusters
 		});
-	});
-	//console.log(clusters);
-	// => [ [ [ 250, 255, 253 ] ],
-	// => [ [ 100, 54, 255 ], [ 22, 22, 90 ], [ 20, 20, 80 ] ] ]
+
+		var clusters = levels[levels.length - 1].clusters;
+		//console.log(clusters);
+		// => [ [ 2 ], [ 3, 1, 0 ] ]
+		clusters = clusters.map(function (cluster) {
+			return cluster.map(function (index) {
+				return colors[index];
+			});
+		});
+		//console.log(clusters);
+		// => [ [ [ 250, 255, 253 ] ],
+		// => [ [ 100, 54, 255 ], [ 22, 22, 90 ], [ 20, 20, 80 ] ] ]
 
 
 
@@ -640,35 +641,37 @@ document.getElementById('load-button').addEventListener('click', function () {
 
 
 
-	//チェックボックス
+		//チェックボックス
 
 
 
 
-	function boxCheck(){
+		function boxCheck(){
 
-		//チェックされた項目を記録する変数
-		var str="";
+			//チェックされた項目を記録する変数
+			var str="";
 
-		//for文でチェックボックスを１つずつ確認
-		for( i=0; i<6; i++ )
-		{
-			//チェックされているか確認する
-			if( document.chbox.elements[i].checked )
+			//for文でチェックボックスを１つずつ確認
+			for( i=0; i<6; i++ )
 			{
-				//変数strが空でない時、区切りのコンマを入れる
-				if( str != "" ) str=str+",";
+				//チェックされているか確認する
+				if( document.chbox.elements[i].checked )
+				{
+					//変数strが空でない時、区切りのコンマを入れる
+					if( str != "" ) str=str+",";
 
-				//チェックボックスのvalue値を変数strに入れる
-				str=str+document.chbox.elements[i].value;
+					//チェックボックスのvalue値を変数strに入れる
+					str=str+document.chbox.elements[i].value;
+				}
+			}
+
+			//strが空の時、警告を出す
+			if( str=="" ){
+				alert( "どれか選択してください。" );
+			}else{
+				alert( str + "が選択されました。" );
 			}
 		}
-
-		//strが空の時、警告を出す
-		if( str=="" ){
-			alert( "どれか選択してください。" );
-		}else{
-			alert( str + "が選択されました。" );
-		}
 	}
-})
+
+})//document.getElementById終了
