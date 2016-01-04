@@ -5,7 +5,7 @@ import "kuromoji"
 
 
 
-var h,i,j,k,l,m,n,bunsuu;  //mは段落
+var h,i,j,k,l,m,n,c,bunsuu;  //mは段落
 
 var width = 960,
     height = 540;
@@ -190,7 +190,10 @@ document.getElementById('load-button').addEventListener('click', function () {
             /*あとはlinksの作成だけ
             まずはlistをつくる*/
             var list = new Array(keitaisokaiseki.length);
-            //list作成
+            	//list作成
+
+            var checkboxlist=new Array;//checkboxに入る一覧
+            c=0;
 
             //keitaisokaisekiとnodesを照らしあわせる
             for(m=0;m<keitaisokaiseki.length;++m){
@@ -214,6 +217,11 @@ document.getElementById('load-button').addEventListener('click', function () {
                     if(keitaisokaiseki[m][i][j]=="母"){
 
                     	RGBlist[m][0]=RGBlist[m][0]+1;
+                    	checkboxlist[c]=keitaisokaiseki[m][i][j];
+                    	c++;
+
+
+
                     }
                     if(keitaisokaiseki[m][i][j]=="姉"){
 
@@ -365,9 +373,14 @@ document.getElementById('load-button').addEventListener('click', function () {
 				 
 				  <div id="output"></div>*/
 
-            var check = new Array;
+            var check = new Array(3);//rgbに対応
+            check[0]=new Array;
+            check[1]=new Array;
+            check[2]=new Array;
+
 
             function onButtonClick() {
+				while(i<)
             	check[i] = document.form1.i.checked;//リストつくる作業完了、こっから舐める
             	check2 = document.form1.Checkbox2.checked;
  
