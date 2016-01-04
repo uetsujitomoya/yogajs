@@ -27,7 +27,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 	var reader = new FileReader();
 	reader.onload = function(event) {
 		var data = JSON.parse(event.target.result);
-		console.log(data);
+		//console.log(data);
 
 
 
