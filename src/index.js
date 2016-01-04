@@ -5,7 +5,7 @@ import "kuromoji"
 
 
 
-var h,i,j,k,l,m,n,c,r,g,b,bunsuu;  //mは段落
+var h,i,j,k,l,m,n,c,r,g,b,x,y,z,bunsuu;  //mは段落
 
 var width = 960,
     height = 540;
@@ -339,6 +339,12 @@ document.getElementById('load-button').addEventListener('click', function () {
 			
 
 			}
+		})//kuromoji.builder終了
+		};//reader.onload終了。これとなんちゃら(file)が並列してないといけない
+	reader.readAsText(file);
+
+
+	});//document.getElementById終了
 
 			//これか。
 			function onButtonClick() {
@@ -476,11 +482,11 @@ document.getElementById('load-button').addEventListener('click', function () {
 
 			//listからmiserables.linksとlist3をつくる
 
-			var x,y,z;
+			
 
 			var edge=-1;
 
-
+/*
 
 			for(k=0;k<miserables.nodes.length;++k){
 
@@ -521,6 +527,8 @@ document.getElementById('load-button').addEventListener('click', function () {
 
 
 			}
+
+*/
 
 			//console.log(miserables.links);
 
@@ -577,9 +585,9 @@ document.getElementById('load-button').addEventListener('click', function () {
 			
 			*/
 
-		}
-		)//kuromoji.builder終了
-		reader.readAsText(file);
+		
+		
+		
 
 
 		/*clustering*/
@@ -590,17 +598,17 @@ document.getElementById('load-button').addEventListener('click', function () {
 
 
 		var cluster = require('hierarchical-clustering');
-		var colors = [
+		/*var colors = [
 		[20, 20, 80],
 		[22, 22, 90],
 		[250, 255, 253],
 		[100, 54, 255]
-		];
+		];*/
 
 
 
 		// Euclidean distance
-		function distance(a, b) {
+		/*function distance(a, b) {
 			var d = 0;
 			for (var i = 0; i < a.length; i++) {
 				d += Math.pow(a[i] - b[i], 2);
@@ -671,7 +679,5 @@ document.getElementById('load-button').addEventListener('click', function () {
 			}else{
 				alert( str + "が選択されました。" );
 			}
-		}
-	}
-
-})//document.getElementById終了
+		}*/
+	
