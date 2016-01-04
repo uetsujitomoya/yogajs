@@ -77,12 +77,11 @@ document.getElementById('load-button').addEventListener('click', function () {
 							toutencount=0;
 							break;
 						}
-						if(path[n].pos_detail_1=="接尾"||path[n].basic_form=="*"||path[n].pos=="助詞"||path[n].basic_form=="、"||path[n].pos=="記号"||path[n].pos=="助動詞"||path[n].pos=="感動詞"||path[n].pos=="接続詞"||path[n].pos=="接頭詞"||path[n].pos_detail_1=="非自立"){
+						if(path[n].pos_detail_1=="接尾"||path[n].basic_form=="*"||path[n].pos=="助詞"||path[n].basic_form=="、"||path[n].pos=="記号"||path[n].pos=="助動詞"||path[n].pos=="感動詞"||path[n].pos=="接続詞"||path[n].pos=="接頭詞"||path[n].pos_detail_1=="非自立"||path[n].pos_detail_1=="代名詞"){
 							n++;//これないと延々ループする
 							continue;
 						}
 						keitaisokaiseki[m][i][j] = path[n].basic_form;
-						hinshi[m][i][j]=new Object();
 						hinshi[m][i][j]=path[n];
 
 						//ぐう期分け
@@ -278,7 +277,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 								if(RGB[m][i][0]==1){
 									if(checkboxlist[k][1]==0){//単語とグループの組み合わせの重複を防ぐ
 										target.innerHTML += "<input id=\"ken" + c + "\" type=checkbox checked /><label for="+c+">「" + miserables.nodes[k].name + "」を「愛(恋愛･家族関係)」に。</label><br />";
-										console.log("%d,%d,%d,%sを愛に",m,i,j,miserables.nodes[k].name);
+										console.log("%d,%d,%d,「%s」を「愛」に",m,i,j,miserables.nodes[k].name);
 										console.log(hinshi[m][i][j]);
 										checkboxlist[k][0]=1;
 										checkboxlist[k][1]=1;
@@ -292,7 +291,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 								if(RGB[m][i][1]==1){
 									if(checkboxlist[k][2]==0){
 										target.innerHTML += "<input id=\"ken" + c + "\" type=checkbox checked /><label for="+c+">「" + miserables.nodes[k].name + "」を「交友関係」に。</label><br />";
-										console.log("%sを交友に",miserables.nodes[k].name);
+										console.log("「%s」を「交友」に",miserables.nodes[k].name);
 										console.log(hinshi[m][i][j]);
 										checkboxlist[k][0]=1;
 										checkboxlist[k][2]=1;
@@ -306,7 +305,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 								if(RGB[m][i][2]==1){
 									if(checkboxlist[k][3]==0){
 										target.innerHTML += "<input id=\"ken" + c + "\" type=checkbox checked /><label for="+c+">「" + miserables.nodes[k].name + "」を「仕事関係」に。</label><br />";
-										console.log("%sを仕事に",miserables.nodes[k].name);
+										console.log("「%s」を「仕事」に",miserables.nodes[k].name);
 										console.log(hinshi[m][i][j]);
 										checkboxlist[k][0]=1;
 										checkboxlist[k][3]=1;
@@ -420,7 +419,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 						for(j=0;j<keitaisokaiseki[m][i].length;j++){//単語ごとのループ
 							for(c=0;c<checkboxlist.length;c++){
 								
-								if (checked[c] == true) {
+								if (checked[c]=="undifined on") {
 									if(keitaisokaiseki[m][i][j]==chboxlist[c][0]){
 										if(chboxlist[c][1]=0){
 											RGBlist[n][0]=RGBlist[n][0]+1;
@@ -445,7 +444,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 
 					//奇数（患者）
 						
-					console.log(RGBlist[m]);
+					console.log(RGBlist[n]);
 					m++;	
 					n++;
 				}
@@ -471,13 +470,14 @@ document.getElementById('load-button').addEventListener('click', function () {
 						color2[m]="gray";
 					}
 				}
+				console.log(color2);
                         
 				var stackdataArr = new Array(5);
 				for(h=0;h<5;h++){
 					stackdataArr[h] = new Array();
 					for(m=0;m<keitaisokaiseki.length/2;m++){//2個飛ばしにしたら後が面倒くさい
 						stackdataArr[h][m]=new Object();
-						stackdataArr[h][m]= {x:m+1,y:28*RGBlist[2*m][h]/keitaisokaiseki[m].length};
+						stackdataArr[h][m]= {x:m+1,y:(28*(RGBlist[m][h])/(keitaisokaiseki[2*m+1].length))};
 					}
 				}
 				var stack = d3.layout.stack()
@@ -512,7 +512,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 				  .attr("x1", function(d,i){return d;}).attr("y1", 0)
 				  .attr("x2", function(d,i){return d;}).attr("y2", 200);
 				svg.selectAll("line")
-				  .attr("stroke", function(d,i){return colors2[i]})
+				  .attr("stroke", function(d,i){return color2[i]})
 				  .attr("stroke-width", 10)
 
 
