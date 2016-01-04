@@ -52,7 +52,10 @@ document.getElementById('load-button').addEventListener('click', function () {
 			m=0; //何個目の発言か。これの偶奇わけで判断。カウンセラーが奇数。患者が偶数。1文は1文で格納
 			while(n<path.length){//発言ごとのループ
 				keitaisokaiseki[m] = new Array; //一発言
-				RGB[m] = new Array;
+				RGB[m] = new Array(3);
+				RGB[m][0]=0;
+				RGB[m][1]=0;
+				RGB[m][2]=0;
 				if(m%2==1){
 					RGBlist[(m-1)/2] = new Array(5);
 				}
@@ -61,7 +64,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 				while(n<path.length){//文ごとのループ
 					keitaisokaiseki[m][i] = new Array; //文
 					keitaisokaiseki[m][i].length = 0;
-					RGM[m][i]=new Array;
+					
 					j=0; //集計単位内で何単語目か
 					while(n<path.length){//単語ごとのループ
 						if(path[n].basic_form=="。"||path[n].basic_form=="？"||path[n].basic_form=="?"||path[n].word_id=="2613630"){
@@ -77,26 +80,26 @@ document.getElementById('load-button').addEventListener('click', function () {
 
 							if(keitaisokaiseki[m][i][j]=="母"||keitaisokaiseki[m][i][j]=="姉"||keitaisokaiseki[m][i][j]=="母親"||keitaisokaiseki[m][i][j]=="お姉さん"||keitaisokaiseki[m][i][j]=="父"||keitaisokaiseki[m][i][j]=="家族"){
 
-								RGB[m][0]==1;
+								RGB[m][0]=1;
 							}
 							if(keitaisokaiseki[m][i][j]=="借金"||keitaisokaiseki[m][i][j]=="兄"||keitaisokaiseki[m][i][j]=="子"||keitaisokaiseki[m][i][j]=="子ども"||keitaisokaiseki[m][i][j]=="妹"||keitaisokaiseki[m][i][j]=="弟"){
 
-								RGB[m][0]==1;
+								RGB[m][0]=1;
 							}
 							if(keitaisokaiseki[m][i][j]=="両親"||keitaisokaiseki[m][i][j]=="お母様"||keitaisokaiseki[m][i][j]=="お父様"){
 
-								RGB[m][0]==1;
+								RGB[m][0]=1;
 							}
 							if(keitaisokaiseki[m][i][j]=="兄"||keitaisokaiseki[m][i][j]=="子"||keitaisokaiseki[m][i][j]=="子ども"||keitaisokaiseki[m][i][j]=="妹"||keitaisokaiseki[m][i][j]=="弟"){
 
-								RGB[m][0]==1;
+								RGB[m][0]=1;
 							}
 							if(keitaisokaiseki[m][i][j]=="仕事"||keitaisokaiseki[m][i][j]=="休み"){
-								RGB[m][2]==1;
+								RGB[m][2]=1;
 							}
 							
 							if(keitaisokaiseki[m][i][j]=="友人"||keitaisokaiseki[m][i][j]=="親友"||keitaisokaiseki[m][i][j]=="友達"||keitaisokaiseki[m][i][j]=="友"||keitaisokaiseki[m][i][j]=="交友"||keitaisokaiseki[m][i][j]=="友好"){
-								RGB[m][1]==1;
+								RGB[m][1]=1;
 							}
                       	
 						}else if(m%2==1){
@@ -209,7 +212,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 					//list作成
 
 				var checkboxlist=new Array;//checkboxに入る一覧+RGBのどれかの情報をもつ
-				checkboxRGB=new Array(3);
+				var checkboxRGB=new Array(3);
 				checkboxRGB[0]=new Array;
 				checkboxRGB[1]=new Array;
 				checkboxRGB[2]=new Array;
@@ -219,7 +222,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 				b=0;
 				g=0;
 
-				target = document.getElementById("checkbox");//checkboxを出す場所
+				var target = document.getElementById("checkbox");//checkboxを出す場所
 
 
 			//keitaisokaisekiとnodesを照らしあわせる
@@ -251,7 +254,8 @@ document.getElementById('load-button').addEventListener('click', function () {
 								
 								
 
-								if(RGB[m][0]=1){
+								if(RGB[m][0]==1){
+									console.log("%d,%d,%d,%s",m,i,j,miserables.nodes[k].name);
 									checkboxlist[c]=new Array(2);
 									checkboxlist[c][0]=miserables.nodes[k].name;
 									checkboxlist[c][1]=0
@@ -259,8 +263,10 @@ document.getElementById('load-button').addEventListener('click', function () {
 									target.innerHTML += "<input id=\"" + c + "\" type=checkbox /><label for="+c+">" + miserables.nodes[k].name + "を「愛(恋愛･家族関係)」に。</label><br />";
 									r++;
 									c++;
+
 								}
-								if(RGB[m][1]=1){
+								if(RGB[m][1]==1){
+									console.log("%d,%d,%d,%s",m,i,j,miserables.nodes[k].name);
 									checkboxlist[c]=new Array(2);
 									checkboxlist[c][0]=miserables.nodes[k].name;
 									checkboxlist[c][1]=1
@@ -270,7 +276,8 @@ document.getElementById('load-button').addEventListener('click', function () {
 									c++;
 
 								}
-								if(RGB[m][2]=1){
+								if(RGB[m][2]==1){
+									console.log("%d,%d,%d,%s",m,i,j,miserables.nodes[k].name);
 									checkboxlist[c]=new Array(2);
 									checkboxlist[c][0]=miserables.nodes[k].name;
 									checkboxlist[c][1]=2
@@ -535,7 +542,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 
 			//以上計算中
 
-			var graph = miserables;
+			//var graph = miserables;
 
 
 			//共起マップ
