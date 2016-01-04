@@ -20,19 +20,14 @@ stroke-width: 3px;
 </head>
 <body>
   <input type="file" id="file-input"/>
-  <button id="load-button">Load</button>
+  <button id="load-button">手順1：左でjsonファイルを指定してから、ここをクリック</button>
+<br>
+<br>
 
+  <form name="form1" id="checkbox" action="">
+					<input type="button" value="手順2：下記項目にチェックしてから、ここをクリック" onclick="onButtonClick();" />
 
-  <form name="chbox">
-  <p></p>
-  <input type="checkbox" value="母">母<br>
-  <input type="checkbox" value="姉">姉<br>
-  <input type="checkbox" value="父">父<br>
-  <input type="checkbox" value="借金">借金<br>
-  <input type="checkbox" value="仕事">仕事<br>
-  <input type="checkbox" value="休み">休み<br>
-  <input type="button" value="確認" onclick="boxCheck()">
-  </form>
+				  </form>
 <script src="bundle.js"></script>
 
 </body>

@@ -133,7 +133,6 @@ document.getElementById('load-button').addEventListener('click', function () {
 					n++;
 					i++;//段落内の何文目か
 				}
-				console.log(RGBlist[m]);
 				m++;
 			}
 
@@ -621,14 +620,14 @@ document.getElementById('load-button').addEventListener('click', function () {
 	});
 
 	var clusters = levels[levels.length - 1].clusters;
-	console.log(clusters);
+	//console.log(clusters);
 	// => [ [ 2 ], [ 3, 1, 0 ] ]
 	clusters = clusters.map(function (cluster) {
 		return cluster.map(function (index) {
 			return colors[index];
 		});
 	});
-	console.log(clusters);
+	//console.log(clusters);
 	// => [ [ [ 250, 255, 253 ] ],
 	// => [ [ 100, 54, 255 ], [ 22, 22, 90 ], [ 20, 20, 80 ] ] ]
 
