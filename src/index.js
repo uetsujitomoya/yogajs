@@ -82,7 +82,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 
 								RGB[m][0]=1;
 							}
-							if(keitaisokaiseki[m][i][j]=="借金"||keitaisokaiseki[m][i][j]=="兄"||keitaisokaiseki[m][i][j]=="子"||keitaisokaiseki[m][i][j]=="子ども"||keitaisokaiseki[m][i][j]=="妹"||keitaisokaiseki[m][i][j]=="弟"){
+							if(keitaisokaiseki[m][i][j]=="兄"||keitaisokaiseki[m][i][j]=="子"||keitaisokaiseki[m][i][j]=="子ども"||keitaisokaiseki[m][i][j]=="妹"||keitaisokaiseki[m][i][j]=="弟"){
 
 								RGB[m][0]=1;
 							}
@@ -211,18 +211,28 @@ document.getElementById('load-button').addEventListener('click', function () {
 				var list = new Array(keitaisokaiseki.length);
 					//list作成
 
-				var checkboxlist=new Array;//checkboxに入る一覧+RGBのどれかの情報をもつ
+				var checkboxlist=new Array(miserables.nodes.length);//checkboxに入る単語に1+RGBどれかの情報が3次元
+				for(k=0;k<miserables.nodes.length;k++){
+					checkboxlist[k]=new Array;
+					checkboxlist[k][0]=0;
+					checkboxlist[k][1]=0;
+					checkboxlist[k][2]=0;
+					checkboxlist[k][3]=0;
+				}
 				var checkboxRGB=new Array(3);
 				checkboxRGB[0]=new Array;
 				checkboxRGB[1]=new Array;
 				checkboxRGB[2]=new Array;
+
+				var chboxlist=new Array;//通し番号
+
 
 				c=0;
 				r=0;
 				b=0;
 				g=0;
 
-				var target = document.getElementById("checkbox");//checkboxを出す場所
+				var target = document.getElementById("chbox");//checkboxを出す場所
 
 
 			//keitaisokaisekiとnodesを照らしあわせる
@@ -255,36 +265,40 @@ document.getElementById('load-button').addEventListener('click', function () {
 								
 
 								if(RGB[m][0]==1){
-									console.log("%d,%d,%d,%s",m,i,j,miserables.nodes[k].name);
-									checkboxlist[c]=new Array(2);
-									checkboxlist[c][0]=miserables.nodes[k].name;
-									checkboxlist[c][1]=0
-									checkboxRGB[0][r]=miserables.nodes[k].name;
-									target.innerHTML += "<input id=\"" + c + "\" type=checkbox /><label for="+c+">" + miserables.nodes[k].name + "を「愛(恋愛･家族関係)」に。</label><br />";
-									r++;
-									c++;
-
+									if(checkboxlist[k][1]==0){//単語とグループの組み合わせの重複を防ぐ
+										target.innerHTML += "<input id=\"" + c + "\" type=checkbox /><label for="+c+">" + miserables.nodes[k].name + "を「愛(恋愛･家族関係)」に。</label><br />";
+										console.log("%sを愛に",miserables.nodes[k].name);
+										checkboxlist[k][0]=1;
+										checkboxlist[k][1]=1;
+										chboxlist[c]=new Array(2);
+										chboxlist[c][0]=miserables.nodes[k].name;
+										chboxlist[c][1]=0;
+										c++;
+									}
 								}
 								if(RGB[m][1]==1){
-									console.log("%d,%d,%d,%s",m,i,j,miserables.nodes[k].name);
-									checkboxlist[c]=new Array(2);
-									checkboxlist[c][0]=miserables.nodes[k].name;
-									checkboxlist[c][1]=1
-									checkboxRGB[1][g]=miserables.nodes[k].name;
-									target.innerHTML += "<input id=\"" + c + "\" type=checkbox /><label for="+c+">" + miserables.nodes[k].name + "を「交友関係」に。</label><br />";
-									g++;
-									c++;
-
+									if(checkboxlist[k][2]==0){
+										target.innerHTML += "<input id=\"" + c + "\" type=checkbox /><label for="+c+">" + miserables.nodes[k].name + "を「交友関係」に。</label><br />";
+										console.log("%sを交友に",miserables.nodes[k].name);
+										checkboxlist[k][0]=1;
+										checkboxlist[k][2]=1;
+										chboxlist[c]=new Array(2);
+										chboxlist[c][0]=miserables.nodes[k].name;
+										chboxlist[c][1]=1;
+										c++;
+									}
 								}
 								if(RGB[m][2]==1){
-									console.log("%d,%d,%d,%s",m,i,j,miserables.nodes[k].name);
-									checkboxlist[c]=new Array(2);
-									checkboxlist[c][0]=miserables.nodes[k].name;
-									checkboxlist[c][1]=2
-									checkboxRGB[2][b]=miserables.nodes[k].name;
-									target.innerHTML += "<input id=\"" + c + "\" type=checkbox /><label for="+c+">" + miserables.nodes[k].name + "を「仕事関係」に。</label><br />";
-									b++;
-									c++;
+									if(checkboxlist[k][3]==0){
+										target.innerHTML += "<input id=\"" + c + "\" type=checkbox /><label for="+c+">" + miserables.nodes[k].name + "を「仕事関係」に。</label><br />";
+										console.log("%sを仕事に",miserables.nodes[k].name);
+										checkboxlist[k][0]=1;
+										checkboxlist[k][3]=1;
+										chboxlist[c]=new Array(2);
+										chboxlist[c][0]=miserables.nodes[k].name;
+										chboxlist[c][1]=2;
+										c++;
+									}
 								}
 
 								
@@ -355,9 +369,9 @@ document.getElementById('load-button').addEventListener('click', function () {
 
 			//これか。
 			function onButtonClick() {
-				var checked = new Array(checkboxlist.length);
+				var checked = new Array(chboxlist.length);
 					
-				for(c=0;i<checkboxlist.length;c++){
+				for(c=0;i<chboxlist.length;c++){
 					checked[i] = document.form1.i.checked;//リストつくる作業完了、こっから舐める
 				}
 						
@@ -384,14 +398,18 @@ document.getElementById('load-button').addEventListener('click', function () {
 						j=0; //集計単位内で何単語目か
 						for(j=0;j<keitaisokaiseki[m][i].length;j++){//単語ごとのループ
 							for(c=0;c<checkboxlist.length;c++){
-								if (checked[i] == true) {
-									if(checkboxlist[c][1]=1){
-										RGBlist[n][1]=RGBlist[n][1]+1;
-									}else if(checkboxlist[c][1]=2){
-										RGBlist[n][2]=RGBlist[n][2]+1;
-									}else{
-										RGBlist[n][0]=RGBlist[n][0]+1;
+								
+								if (checked[c] == true) {
+									if(keitaisokaiseki[m][i][j]==chboxlist[c][0]){
+										if(chboxlist[c][1]=0){
+											RGBlist[n][0]=RGBlist[n][0]+1;
+										}else if(chboxlist[c][1]=1){
+											RGBlist[n][1]=RGBlist[n][1]+1;
+										}else if(chboxlist[c][1]=2){
+											RGBlist[n][2]=RGBlist[n][2]+1;
+										}
 									}
+									
 										
 								}
 							}
