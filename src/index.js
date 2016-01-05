@@ -106,7 +106,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 
 								RGB[m][i][0]=1;
 							}
-							if(keitaisokaiseki[m][i][j]=="仕事"||keitaisokaiseki[m][i][j]=="休み"||keitaisokaiseki[m][i][j]=="アルバイト"){
+							if(keitaisokaiseki[m][i][j]=="仕事"||keitaisokaiseki[m][i][j]=="休み"||keitaisokaiseki[m][i][j]=="アルバイト"||keitaisokaiseki[m][i][j]=="働く"){
 								RGB[m][i][2]=1;
 							}
 							
