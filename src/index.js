@@ -94,7 +94,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 						if(m%2==1){
 							//患者（この発言rgbにがあることを示す）
 
-							if(keitaisokaiseki[m][i][j]=="母"||keitaisokaiseki[m][i][j]=="姉"||keitaisokaiseki[m][i][j]=="姉さん"||keitaisokaiseki[m][i][j]=="母親"||keitaisokaiseki[m][i][j]=="お姉さん"||keitaisokaiseki[m][i][j]=="父"||keitaisokaiseki[m][i][j]=="家族"){
+							if(keitaisokaiseki[m][i][j]=="母"||keitaisokaiseki[m][i][j]=="主人"||keitaisokaiseki[m][i][j]=="父さん"||keitaisokaiseki[m][i][j]=="ご主人"||keitaisokaiseki[m][i][j]=="お父さん"||keitaisokaiseki[m][i][j]=="姉"||keitaisokaiseki[m][i][j]=="姉さん"||keitaisokaiseki[m][i][j]=="母親"||keitaisokaiseki[m][i][j]=="お姉さん"||keitaisokaiseki[m][i][j]=="父"||keitaisokaiseki[m][i][j]=="家族"){
 
 								RGB[m][i][0]=1;
 							}
@@ -106,7 +106,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 
 								RGB[m][i][0]=1;
 							}
-							if(keitaisokaiseki[m][i][j]=="仕事"||keitaisokaiseki[m][i][j]=="休み"){
+							if(keitaisokaiseki[m][i][j]=="仕事"||keitaisokaiseki[m][i][j]=="休み"||keitaisokaiseki[m][i][j]=="アルバイト"){
 								RGB[m][i][2]=1;
 							}
 							
@@ -117,7 +117,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 						}else if(m%2==0){
 							//カウンセラー
 
-							if(keitaisokaiseki[m][i][j]=="いかが"||keitaisokaiseki[m][i][j]=="どの"||keitaisokaiseki[m][i][j]=="どのように"||keitaisokaiseki[m][i][j]=="いつ"||keitaisokaiseki[m][i][j]=="どういう"||keitaisokaiseki[m][i][j]=="どなた"||keitaisokaiseki[m][i][j]=="どう"){
+							if(keitaisokaiseki[m][i][j]=="いかが"||keitaisokaiseki[m][i][j]=="なんで"||keitaisokaiseki[m][i][j]=="どうして"||keitaisokaiseki[m][i][j]=="どの"||keitaisokaiseki[m][i][j]=="どのように"||keitaisokaiseki[m][i][j]=="いつ"||keitaisokaiseki[m][i][j]=="どういう"||keitaisokaiseki[m][i][j]=="どなた"||keitaisokaiseki[m][i][j]=="どう"||keitaisokaiseki[m][i][j]=="何"||keitaisokaiseki[m][i][j]=="何か"||keitaisokaiseki[m][i][j]=="どんな"||keitaisokaiseki[m][i][j]=="どのような"){
 								console.log("%d発言めの%d文目は開かれた質問です",m,i);
 								RGBlist[m/2][3]=1;
 								RGBlist[m/2][4]=0;
@@ -550,7 +550,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 				  .attr("x2", function(d,i){return d;}).attr("y2", height);
 				svg.selectAll("line")
 				  .attr("stroke", function(d,i){return color2[color2.length-1-i]})
-				  .attr("stroke-width", 5)
+				  .attr("stroke-width", 3)
 
 
 					
