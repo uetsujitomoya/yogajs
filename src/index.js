@@ -277,7 +277,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 											checkboxlist[k][1]=1;
 											chboxlist[c]=new Array(2);
 											chboxlist[c][0]=miserables.nodes[k].name;
-											console.log("%d",c);
+											console.log("c=%d,k=%d",c,k);
 											chboxlist[c][1]=0;
 											c++;
 										}
@@ -293,7 +293,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 											checkboxlist[k][2]=1;
 											chboxlist[c]=new Array(2);
 											chboxlist[c][0]=miserables.nodes[k].name;
-											console.log("%d",c);
+											console.log("c=%d,k=%d",c,k);
 											chboxlist[c][1]=1;
 											c++;
 										}
@@ -308,7 +308,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 											checkboxlist[k][3]=1;
 											chboxlist[c]=new Array(2);
 											chboxlist[c][0]=miserables.nodes[k].name;
-											console.log("%d",c);
+											console.log("c=%d,k=%d",c,k);
 											chboxlist[c][1]=2;
 											c++;
 										
