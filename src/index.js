@@ -83,7 +83,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 							toutencount=0;
 							break;//１文終了
 						}
-						if(path[n].pos_detail_1=="接尾"||path[n].basic_form=="*"||path[n].pos=="助詞"||path[n].basic_form=="、"||path[n].pos=="記号"||path[n].pos=="助動詞"||path[n].pos=="感動詞"||path[n].pos=="接頭詞"||path[n].pos_detail_1=="非自立"||path[n].pos_detail_1=="代名詞"||path[n].basic_form=="する"||path[n].basic_form=="いる"||path[n].basic_form=="こういう"||path[n].basic_form=="そういう"||path[n].basic_form=="こう"||path[n].basic_form=="する"||path[n].basic_form=="こうした"||path[n].basic_form=="いう"||path[n].basic_form=="する"||path[n].basic_form=="なる"||path[n].basic_form=="その"||path[n].basic_form=="あの"||path[n].pos_detail_1=="数"||path[n].basic_form=="そう"||path[n].basic_form=="気持ち"||path[n].basic_form=="思い"||path[n].basic_form=="思う"||path[n].pos_detail_1=="動詞非自立的"||path[n].pos_detail_1=="副詞可能"||path[n].basic_form=="ある"){
+						if(path[n].pos_detail_1=="接尾"||path[n].basic_form=="*"||path[n].pos=="助詞"||path[n].basic_form=="、"||path[n].pos=="記号"||path[n].pos=="助動詞"||path[n].pos=="感動詞"||path[n].pos=="接頭詞"||path[n].pos_detail_1=="非自立"||path[n].pos_detail_1=="代名詞"||path[n].basic_form=="する"||path[n].basic_form=="いる"||path[n].basic_form=="こういう"||path[n].basic_form=="そういう"||path[n].basic_form=="こう"||path[n].basic_form=="する"||path[n].basic_form=="こうした"||path[n].basic_form=="いう"||path[n].basic_form=="する"||path[n].basic_form=="なる"||path[n].basic_form=="その"||path[n].basic_form=="あの"||path[n].pos_detail_1=="数"||path[n].basic_form=="そう"||path[n].basic_form=="気持ち"||path[n].basic_form=="思い"||path[n].basic_form=="思う"||path[n].basic_form=="ある"){
 							n++;//これないと延々ループする
 							continue;
 						}
@@ -512,7 +512,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 					stackdataArr[h] = new Array();
 					for(m=0;m<((keitaisokaiseki.length-1)/2);m++){//2個飛ばしにしたら後が面倒くさい。患者 1→0　3→1 長さ9なら番号は8まで
 						stackdataArr[h][m]=new Object();
-						stackdataArr[h][m]= {x:m+1,y:(28*(RGBlist[m][h])/(keitaisokaiseki[2*m+1].length))};
+						stackdataArr[h][m]= {x:m+1,y:(1*(RGBlist[m][h])/(keitaisokaiseki[2*m+1].length))};
 						console.log(stackdataArr[h][m]);
 					}
 				}
@@ -528,7 +528,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 				var colors = ["#7777ff","#77ff77","#ff7777"];
                         
 				var area = d3.svg.area()
-					.x(function(d,i){return (i+1) * width/stackdataArr[0].length})
+					.x(function(d,i){return (i+1) * width/stackdata.length})
 					.y0(function(d){return height})
 					.y1(function(d){return height - scaleY(d.y+d.y0)});
 				svg.selectAll("path")
