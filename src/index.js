@@ -94,7 +94,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 						if(m%2==1){
 							//患者（この発言rgbにがあることを示す）
 
-							if(keitaisokaiseki[m][i][j]=="母"||keitaisokaiseki[m][i][j]=="姉"||keitaisokaiseki[m][i][j]=="母親"||keitaisokaiseki[m][i][j]=="お姉さん"||keitaisokaiseki[m][i][j]=="父"||keitaisokaiseki[m][i][j]=="家族"){
+							if(keitaisokaiseki[m][i][j]=="母"||keitaisokaiseki[m][i][j]=="姉"||keitaisokaiseki[m][i][j]=="姉さん"||keitaisokaiseki[m][i][j]=="母親"||keitaisokaiseki[m][i][j]=="お姉さん"||keitaisokaiseki[m][i][j]=="父"||keitaisokaiseki[m][i][j]=="家族"){
 
 								RGB[m][i][0]=1;
 							}
@@ -269,7 +269,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 									
 									if(RGB[m][i][0]==1){
 										if(checkboxlist[k][1]==0){//単語とグループの組み合わせの重複を防ぐ
-											if(keitaisokaiseki[m][i][j]=="母"||keitaisokaiseki[m][i][j]=="姉"||keitaisokaiseki[m][i][j]=="母親"||keitaisokaiseki[m][i][j]=="お姉さん"||keitaisokaiseki[m][i][j]=="父"||keitaisokaiseki[m][i][j]=="家族"||keitaisokaiseki[m][i][j]=="兄"||keitaisokaiseki[m][i][j]=="子"||keitaisokaiseki[m][i][j]=="子ども"||keitaisokaiseki[m][i][j]=="妹"||keitaisokaiseki[m][i][j]=="弟"||keitaisokaiseki[m][i][j]=="両親"||keitaisokaiseki[m][i][j]=="お母様"||keitaisokaiseki[m][i][j]=="お父様"){
+											if(keitaisokaiseki[m][i][j]=="母"||keitaisokaiseki[m][i][j]=="姉さん"||keitaisokaiseki[m][i][j]=="姉"||keitaisokaiseki[m][i][j]=="母親"||keitaisokaiseki[m][i][j]=="お姉さん"||keitaisokaiseki[m][i][j]=="父"||keitaisokaiseki[m][i][j]=="家族"||keitaisokaiseki[m][i][j]=="兄"||keitaisokaiseki[m][i][j]=="子"||keitaisokaiseki[m][i][j]=="子ども"||keitaisokaiseki[m][i][j]=="妹"||keitaisokaiseki[m][i][j]=="弟"||keitaisokaiseki[m][i][j]=="両親"||keitaisokaiseki[m][i][j]=="お母様"||keitaisokaiseki[m][i][j]=="お父様"){
 												target.innerHTML += "<input id=\"ken" + c + "\" type=checkbox checked /><label for="+c+">「" + miserables.nodes[k].name + "」を「愛」に。</label><br />";
 												
 											}else{
@@ -456,11 +456,11 @@ document.getElementById('load-button').addEventListener('click', function () {
 								
 								if (checked[c]==1) {
 									if(keitaisokaiseki[m][i][j]==chboxlist[c][0]){
-										if(chboxlist[c][1]=0){
+										if(chboxlist[c][1]==0){
 											RGBlist[n][0]=RGBlist[n][0]+1;
-										}else if(chboxlist[c][1]=1){
+										}else if(chboxlist[c][1]==1){
 											RGBlist[n][1]=RGBlist[n][1]+1;
-										}else if(chboxlist[c][1]=2){
+										}else if(chboxlist[c][1]==2){
 											RGBlist[n][2]=RGBlist[n][2]+1;
 										}
 									}
@@ -525,10 +525,10 @@ document.getElementById('load-button').addEventListener('click', function () {
 				var max = d3.max(stackdata[stackdata.length - 1], function(d){return d.y + d.y0;});
 				var scaleX = d3.scale.linear().domain([0,keitaisokaiseki.length]).range([0,width]);
 				var scaleY = d3.scale.linear().domain([0,max]).range([0,height]);
-				var colors = ["white","white","#aaaaff","#bbffbb","#ffbbbb","lightgray","#0f0","green"];
+				var colors = ["#7777ff","#77ff77","#ff7777"];
                         
 				var area = d3.svg.area()
-					.x(function(d,i){return i * width/keitaisokaiseki.length})
+					.x(function(d,i){return (i+1) * width/stackdataArr[0].length})
 					.y0(function(d){return height})
 					.y1(function(d){return height - scaleY(d.y+d.y0)});
 				svg.selectAll("path")
