@@ -263,18 +263,12 @@ document.getElementById('load-button').addEventListener('click', function () {
 
 							if(keitaisokaiseki[m][i][j]==miserables.nodes[k].name){
 								list[m][i][k]=1;
-
-
-							}
-
-							//checkbox用
-
-							if(RGB[m][i][0]+RGB[m][i][1]+RGB[m][i][2]>=1){
+								if(RGB[m][i][0]+RGB[m][i][1]+RGB[m][i][2]>=1){
 								
 									
 								
 									
-								if(RGB[m][i][0]==1){
+									if(RGB[m][i][0]==1){
 										if(checkboxlist[k][1]==0){//単語とグループの組み合わせの重複を防ぐ
 											target.innerHTML += "<input id=\"ken" + c + "\" type=checkbox /><label for="+c+">「" + miserables.nodes[k].name + "」を「愛(恋愛･家族関係)」に。</label><br />";
 											console.log("%d,%d,%d,「%s」を「愛」に",m,i,j,miserables.nodes[k].name);
@@ -290,10 +284,10 @@ document.getElementById('load-button').addEventListener('click', function () {
 									}
 
 									
-								if(RGB[m][i][1]==1){
+									if(RGB[m][i][1]==1){
 										if(checkboxlist[k][2]==0){
 											target.innerHTML += "<input id=\"ken" + c + "\" type=checkbox /><label for="+c+">「" + miserables.nodes[k].name + "」を「交友関係」に。</label><br />";
-											console.log("「%s」を「交友」に",miserables.nodes[k].name);
+											console.log("%d,%d,%d,「%s」を「交友」に",m,i,j,miserables.nodes[k].name);
 										
 											checkboxlist[k][0]=1;
 											checkboxlist[k][2]=1;
@@ -305,10 +299,10 @@ document.getElementById('load-button').addEventListener('click', function () {
 										}
 									}
 									
-								if(RGB[m][i][2]==1){
+									if(RGB[m][i][2]==1){
 										if(checkboxlist[k][3]==0){
 											target.innerHTML += "<input id=\"ken" + c + "\" type=checkbox /><label for="+c+">「" + miserables.nodes[k].name + "」を「仕事関係」に。</label><br />";
-											console.log("「%s」を「仕事」に",miserables.nodes[k].name);
+											console.log("%d,%d,%d,「%s」を「仕事」に",m,i,j,miserables.nodes[k].name);
 										
 											checkboxlist[k][0]=1;
 											checkboxlist[k][3]=1;
@@ -317,14 +311,16 @@ document.getElementById('load-button').addEventListener('click', function () {
 											console.log("%d",c);
 											chboxlist[c][1]=2;
 											c++;
+										
 										}
+									
 									}
 
 								
 								
 
-								//checkboxを出す
-								//<input id=Checkbox1 type=checkbox /><label for=Checkbox1>チェック項目1</label><br />
+									//checkboxを出す
+									//<input id=Checkbox1 type=checkbox /><label for=Checkbox1>チェック項目1</label><br />
 								
 								
 								
@@ -336,13 +332,19 @@ document.getElementById('load-button').addEventListener('click', function () {
 								
 
 								
-								//関連発言内の全単語を出力する
+									//関連発言内の全単語を出力する
 
+
+
+								}
+                    
 
 
 							}
-                    
 
+							//checkbox用
+
+							
 						}
 
 					}
