@@ -7,8 +7,8 @@ import "kuromoji"
 
 var h,i,j,k,l,m,n,c,r,g,b,x,y,z,bunsuu;  //mは段落
 
-var width = 800,
-    height = 270;
+var width = 1200,
+    height = 250;
 
 var color = d3.scale.category20c();
 
@@ -524,13 +524,13 @@ document.getElementById('load-button').addEventListener('click', function () {
 				var stackdata = stack(stackdataArr);
 				var max = d3.max(stackdata[stackdata.length - 1], function(d){return d.y + d.y0;});
 				var scaleX = d3.scale.linear().domain([0,keitaisokaiseki.length]).range([0,width]);
-				var scaleY = d3.scale.linear().domain([0,max]).range([0,200]);
+				var scaleY = d3.scale.linear().domain([0,max]).range([0,height]);
 				var colors = ["white","white","#aaaaff","#bbffbb","#ffbbbb","lightgray","#0f0","green"];
                         
 				var area = d3.svg.area()
 					.x(function(d,i){return i * width/keitaisokaiseki.length})
-					.y0(function(d){return 200})
-					.y1(function(d){return 200 - scaleY(d.y+d.y0)});
+					.y0(function(d){return height})
+					.y1(function(d){return height - scaleY(d.y+d.y0)});
 				svg.selectAll("path")
 					.data(stackdata.reverse())
 					.enter()
@@ -547,10 +547,10 @@ document.getElementById('load-button').addEventListener('click', function () {
 				svg.selectAll("line.v")
 				  .data(range).enter().append("line")
 				  .attr("x1", function(d,i){return d;}).attr("y1", 0)
-				  .attr("x2", function(d,i){return d;}).attr("y2", 200);
+				  .attr("x2", function(d,i){return d;}).attr("y2", height);
 				svg.selectAll("line")
 				  .attr("stroke", function(d,i){return color2[color2.length-1-i]})
-				  .attr("stroke-width", 10)
+				  .attr("stroke-width", 5)
 
 
 					
