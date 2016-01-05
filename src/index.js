@@ -56,11 +56,14 @@ document.getElementById('load-button').addEventListener('click', function () {
 				hinshi[m] = new Array;
 				RGB[m] = new Array;
 				
-				if(m%2==1){
-					RGBlist[(m-1)/2] = new Array(5);
-					RGBlist[(m-1)/2][0]=0;
-					RGBlist[(m-1)/2][1]=0;
-					RGBlist[(m-1)/2][2]=0;
+				if(m%2==0){//カウンセラー
+					RGBlist[m/2] = new Array(5);
+					RGBlist[m/2][0]=0;
+					RGBlist[m/2][1]=0;
+					RGBlist[m/2][2]=0;
+					RGBlist[m/2][3]=0;
+					RGBlist[m/2][4]=0;
+					
 				}
 				
 				i=0; //段落内の何文目か。
@@ -78,9 +81,9 @@ document.getElementById('load-button').addEventListener('click', function () {
 						if(path[n].basic_form=="。"||path[n].basic_form=="？"||path[n].basic_form=="?"||path[n].word_id=="2613630"){
 							bunsuu++;
 							toutencount=0;
-							break;
+							break;//１文終了
 						}
-						if(path[n].pos_detail_1=="接尾"||path[n].basic_form=="*"||path[n].pos=="助詞"||path[n].basic_form=="、"||path[n].pos=="記号"||path[n].pos=="助動詞"||path[n].pos=="感動詞"||path[n].pos=="接続詞"||path[n].pos=="接頭詞"||path[n].pos_detail_1=="非自立"||path[n].pos_detail_1=="代名詞"||path[n].basic_form=="する"||path[n].basic_form=="いる"||path[n].basic_form=="こういう"||path[n].basic_form=="そういう"||path[n].basic_form=="こう"||path[n].basic_form=="する"||path[n].basic_form=="こうした"||path[n].basic_form=="いう"||path[n].basic_form=="する"||path[n].basic_form=="なる"||path[n].basic_form=="その"||path[n].basic_form=="あの"){
+						if(path[n].pos_detail_1=="接尾"||path[n].basic_form=="*"||path[n].pos=="助詞"||path[n].basic_form=="、"||path[n].pos=="記号"||path[n].pos=="助動詞"||path[n].pos=="感動詞"||path[n].pos=="接頭詞"||path[n].pos_detail_1=="非自立"||path[n].pos_detail_1=="代名詞"||path[n].basic_form=="する"||path[n].basic_form=="いる"||path[n].basic_form=="こういう"||path[n].basic_form=="そういう"||path[n].basic_form=="こう"||path[n].basic_form=="する"||path[n].basic_form=="こうした"||path[n].basic_form=="いう"||path[n].basic_form=="する"||path[n].basic_form=="なる"||path[n].basic_form=="その"||path[n].basic_form=="あの"||path[n].pos_detail_1=="数"||path[n].basic_form=="そう"||path[n].basic_form=="気持ち"||path[n].basic_form=="思い"||path[n].basic_form=="思う"||path[n].pos_detail_1=="動詞非自立的"||path[n].pos_detail_1=="副詞可能"||path[n].basic_form=="ある"){
 							n++;//これないと延々ループする
 							continue;
 						}
@@ -88,8 +91,8 @@ document.getElementById('load-button').addEventListener('click', function () {
 						hinshi[m][i][j] = path[n];
 
 						//ぐう期分け
-						if(m%2==0){
-							//カウンセラー（この発言rgbにがあることを示す）
+						if(m%2==1){
+							//患者（この発言rgbにがあることを示す）
 
 							if(keitaisokaiseki[m][i][j]=="母"||keitaisokaiseki[m][i][j]=="姉"||keitaisokaiseki[m][i][j]=="母親"||keitaisokaiseki[m][i][j]=="お姉さん"||keitaisokaiseki[m][i][j]=="父"||keitaisokaiseki[m][i][j]=="家族"){
 
@@ -103,10 +106,6 @@ document.getElementById('load-button').addEventListener('click', function () {
 
 								RGB[m][i][0]=1;
 							}
-							if(keitaisokaiseki[m][i][j]=="兄"||keitaisokaiseki[m][i][j]=="子"||keitaisokaiseki[m][i][j]=="子ども"||keitaisokaiseki[m][i][j]=="妹"||keitaisokaiseki[m][i][j]=="弟"){
-
-								RGB[m][i][0]=1;
-							}
 							if(keitaisokaiseki[m][i][j]=="仕事"||keitaisokaiseki[m][i][j]=="休み"){
 								RGB[m][i][2]=1;
 							}
@@ -115,16 +114,16 @@ document.getElementById('load-button').addEventListener('click', function () {
 								RGB[m][i][1]=1;
 							}
                       	
-						}else if(m%2==1){
-							//患者
+						}else if(m%2==0){
+							//カウンセラー
 
-							if(keitaisokaiseki[m][i][j]=="いかが"||keitaisokaiseki[m][i][j]=="どの"||keitaisokaiseki[m][i][j]=="どのように"||keitaisokaiseki[m][i][j]=="いつ"||keitaisokaiseki[m][i][j]=="どういう"){
+							if(keitaisokaiseki[m][i][j]=="いかが"||keitaisokaiseki[m][i][j]=="どの"||keitaisokaiseki[m][i][j]=="どのように"||keitaisokaiseki[m][i][j]=="いつ"||keitaisokaiseki[m][i][j]=="どういう"||keitaisokaiseki[m][i][j]=="どなた"||keitaisokaiseki[m][i][j]=="どう"){
 								console.log("%d発言めの%d文目は開かれた質問です",m,i);
-								RGBlist[(m-1)/2][3]=1;
-								RGBlist[(m-1)/2][4]=0;
+								RGBlist[m/2][3]=1;
+								RGBlist[m/2][4]=0;
 							} else {
-								RGBlist[(m-1)/2][3]=0;
-								RGBlist[(m-1)/2][4]=1;
+								console.log("%d発言めの%d文目はとじられた質問です",m,i);
+								//書き換えない
 							}
 
 						}
@@ -149,7 +148,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 				m++;
 			}
 
-
+			console.log(RGBlist);
 			//keitaisokaiseki完成
 
 
@@ -270,7 +269,13 @@ document.getElementById('load-button').addEventListener('click', function () {
 									
 									if(RGB[m][i][0]==1){
 										if(checkboxlist[k][1]==0){//単語とグループの組み合わせの重複を防ぐ
-											target.innerHTML += "<input id=\"ken" + c + "\" type=checkbox /><label for="+c+">「" + miserables.nodes[k].name + "」を「愛(恋愛･家族関係)」に。</label><br />";
+											if(keitaisokaiseki[m][i][j]=="母"||keitaisokaiseki[m][i][j]=="姉"||keitaisokaiseki[m][i][j]=="母親"||keitaisokaiseki[m][i][j]=="お姉さん"||keitaisokaiseki[m][i][j]=="父"||keitaisokaiseki[m][i][j]=="家族"||keitaisokaiseki[m][i][j]=="兄"||keitaisokaiseki[m][i][j]=="子"||keitaisokaiseki[m][i][j]=="子ども"||keitaisokaiseki[m][i][j]=="妹"||keitaisokaiseki[m][i][j]=="弟"||keitaisokaiseki[m][i][j]=="両親"||keitaisokaiseki[m][i][j]=="お母様"||keitaisokaiseki[m][i][j]=="お父様"){
+												target.innerHTML += "<input id=\"ken" + c + "\" type=checkbox checked /><label for="+c+">「" + miserables.nodes[k].name + "」を「愛」に。</label><br />";
+												
+											}else{
+												target.innerHTML += "<input id=\"ken" + c + "\" type=checkbox /><label for="+c+">「" + miserables.nodes[k].name + "」を「愛」に。</label><br />";
+											}
+											
 											console.log("%d,%d,%d,「%s」を「愛」に",m,i,j,miserables.nodes[k].name);
 										
 											checkboxlist[k][0]=1;
@@ -286,7 +291,12 @@ document.getElementById('load-button').addEventListener('click', function () {
 									
 									if(RGB[m][i][1]==1){
 										if(checkboxlist[k][2]==0){
-											target.innerHTML += "<input id=\"ken" + c + "\" type=checkbox /><label for="+c+">「" + miserables.nodes[k].name + "」を「交友関係」に。</label><br />";
+											
+											if(keitaisokaiseki[m][i][j]=="友人"||keitaisokaiseki[m][i][j]=="親友"||keitaisokaiseki[m][i][j]=="友達"||keitaisokaiseki[m][i][j]=="友"||keitaisokaiseki[m][i][j]=="交友"||keitaisokaiseki[m][i][j]=="友好"){
+												target.innerHTML += "<input id=\"ken" + c + "\" type=checkbox checked /><label for="+c+">「" + miserables.nodes[k].name + "」を「交友」に。</label><br />";
+											}else{
+												target.innerHTML += "<input id=\"ken" + c + "\" type=checkbox /><label for="+c+">「" + miserables.nodes[k].name + "」を「交友」に。</label><br />";
+											}
 											console.log("%d,%d,%d,「%s」を「交友」に",m,i,j,miserables.nodes[k].name);
 										
 											checkboxlist[k][0]=1;
@@ -301,7 +311,12 @@ document.getElementById('load-button').addEventListener('click', function () {
 									
 									if(RGB[m][i][2]==1){
 										if(checkboxlist[k][3]==0){
-											target.innerHTML += "<input id=\"ken" + c + "\" type=checkbox /><label for="+c+">「" + miserables.nodes[k].name + "」を「仕事関係」に。</label><br />";
+											if(keitaisokaiseki[m][i][j]=="仕事"||keitaisokaiseki[m][i][j]=="休み"){
+												target.innerHTML += "<input id=\"ken" + c + "\" type=checkbox checked /><label for="+c+">「" + miserables.nodes[k].name + "」を「仕事」に。</label><br />";
+											}else{
+												target.innerHTML += "<input id=\"ken" + c + "\" type=checkbox /><label for="+c+">「" + miserables.nodes[k].name + "」を「仕事」に。</label><br />";
+											}
+											
 											console.log("%d,%d,%d,「%s」を「仕事」に",m,i,j,miserables.nodes[k].name);
 										
 											checkboxlist[k][0]=1;
@@ -495,7 +510,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 				var stackdataArr = new Array(3);
 				for(h=0;h<3;h++){
 					stackdataArr[h] = new Array();
-					for(m=0;m<keitaisokaiseki.length/2;m++){//2個飛ばしにしたら後が面倒くさい
+					for(m=0;m<((keitaisokaiseki.length-1)/2);m++){//2個飛ばしにしたら後が面倒くさい。患者 1→0　3→1 長さ9なら番号は8まで
 						stackdataArr[h][m]=new Object();
 						stackdataArr[h][m]= {x:m+1,y:(28*(RGBlist[m][h])/(keitaisokaiseki[2*m+1].length))};
 						console.log(stackdataArr[h][m]);
@@ -528,7 +543,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 				//grid line
 				//引数はstart,stop,stepの順
 				//[190,170,150,130,110,90,70,50,30,10]と同等
-				var range = d3.range((width/2)-(width/20),4,-width/10);
+				var range = d3.range((width)-(width/(color2.length*2)), color2.length-1, -width/(color2.length));
 				svg.selectAll("line.v")
 				  .data(range).enter().append("line")
 				  .attr("x1", function(d,i){return d;}).attr("y1", 0)
