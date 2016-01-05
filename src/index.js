@@ -407,8 +407,10 @@ document.getElementById('load-button').addEventListener('click', function () {
 				for(c=0 ; c<chboxlist.length ; c++){    //"ken"に1～5の連番付き
 					var obj = eval("document.form1.ken" + c);  //checkboxｵﾌﾞｼﾞｪｸﾄを生成する
 					if(obj.checked)	{
-						checked[c] += "\n\t" + obj.value;
+						checked[c] =1;
 						
+					}else{
+						checked[c]=0;
 					}
 				}
 				console.log(checked);
@@ -435,7 +437,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 						for(j=0;j<keitaisokaiseki[m][i].length;j++){//単語ごとのループ
 							for(c=0;c<checkboxlist.length;c++){
 								
-								if (checked[c]=="undifined on") {
+								if (checked[c]==1) {
 									if(keitaisokaiseki[m][i][j]==chboxlist[c][0]){
 										if(chboxlist[c][1]=0){
 											RGBlist[n][0]=RGBlist[n][0]+1;
