@@ -7,8 +7,8 @@ import "kuromoji"
 
 var h,i,j,k,l,m,n,c,r,g,b,x,y,z,bunsuu;  //mは段落
 
-var width = 960,
-    height = 540;
+var width = 800,
+    height = 270;
 
 var color = d3.scale.category20c();
 
@@ -316,7 +316,9 @@ document.getElementById('load-button').addEventListener('click', function () {
 									
 									}
 
-								
+									if(checkboxlist[k][1]+checkboxlist[k][2]+checkboxlist[k][3]>=0){
+										break;//miserables実は重複してる
+									}
 								
 
 									//checkboxを出す
