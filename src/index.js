@@ -273,7 +273,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 												target.innerHTML += "<input id=\"ken" + c + "\" type=checkbox checked /><label for="+c+">「" + miserables.nodes[k].name + "」を「愛」に。</label><br />";
 												
 											}else{
-												target.innerHTML += "<input id=\"ken" + c + "\" type=checkbox /><label for="+c+">「" + miserables.nodes[k].name + "」を「愛」に。</label><br />";
+												target.innerHTML += "<input id=\"ken" + c + "\" type=checkbox checked /><label for="+c+">「" + miserables.nodes[k].name + "」を「愛」に。</label><br />";
 											}
 											
 											console.log("%d,%d,%d,「%s」を「愛」に",m,i,j,miserables.nodes[k].name);
@@ -295,7 +295,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 											if(keitaisokaiseki[m][i][j]=="友人"||keitaisokaiseki[m][i][j]=="親友"||keitaisokaiseki[m][i][j]=="友達"||keitaisokaiseki[m][i][j]=="友"||keitaisokaiseki[m][i][j]=="交友"||keitaisokaiseki[m][i][j]=="友好"){
 												target.innerHTML += "<input id=\"ken" + c + "\" type=checkbox checked /><label for="+c+">「" + miserables.nodes[k].name + "」を「交友」に。</label><br />";
 											}else{
-												target.innerHTML += "<input id=\"ken" + c + "\" type=checkbox /><label for="+c+">「" + miserables.nodes[k].name + "」を「交友」に。</label><br />";
+												target.innerHTML += "<input id=\"ken" + c + "\" type=checkbox checked /><label for="+c+">「" + miserables.nodes[k].name + "」を「交友」に。</label><br />";
 											}
 											console.log("%d,%d,%d,「%s」を「交友」に",m,i,j,miserables.nodes[k].name);
 										
@@ -314,7 +314,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 											if(keitaisokaiseki[m][i][j]=="仕事"||keitaisokaiseki[m][i][j]=="休み"){
 												target.innerHTML += "<input id=\"ken" + c + "\" type=checkbox checked /><label for="+c+">「" + miserables.nodes[k].name + "」を「仕事」に。</label><br />";
 											}else{
-												target.innerHTML += "<input id=\"ken" + c + "\" type=checkbox /><label for="+c+">「" + miserables.nodes[k].name + "」を「仕事」に。</label><br />";
+												target.innerHTML += "<input id=\"ken" + c + "\" type=checkbox checked /><label for="+c+">「" + miserables.nodes[k].name + "」を「仕事」に。</label><br />";
 											}
 											
 											console.log("%d,%d,%d,「%s」を「仕事」に",m,i,j,miserables.nodes[k].name);
