@@ -522,13 +522,13 @@ document.getElementById('load-button').addEventListener('click', function () {
 					.y(function(d){return d.y;})
 					.values(function(d){return d;});
 				var stackdata = stack(stackdataArr);
-				var max = d3.max(stackdata[stackdata.length - 1], function(d){return d.y + d.y0;});
-				var scaleX = d3.scale.linear().domain([0,keitaisokaiseki.length]).range([0,width]);
+				var max = d3.max(stackdata[stackdata.length-1], function(d){return d.y + d.y0;});
+				var scaleX = d3.scale.linear().domain([0,color2.length]).range([width/(color2.length),width]);
 				var scaleY = d3.scale.linear().domain([0,max]).range([0,height]);
 				var colors = ["#7777ff","#77ff77","#ff7777"];
                         
 				var area = d3.svg.area()
-					.x(function(d,i){return (i+1) * width/stackdataArr[0].length})
+					.x(function(d,i){return (i+1) * width/color2.length})
 					.y0(function(d){return height})
 					.y1(function(d){return height - scaleY(d.y+d.y0)});
 				svg.selectAll("path")
@@ -537,7 +537,6 @@ document.getElementById('load-button').addEventListener('click', function () {
 					.append("path")
 					.attr("d", area)
 					.attr("fill",function(d,i){return colors[i]});
-
 
 				//奇数発言目
 				//grid line
