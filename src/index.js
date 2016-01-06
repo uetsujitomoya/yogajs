@@ -412,7 +412,11 @@ document.getElementById('load-button').addEventListener('click', function () {
 
 			}
 
-
+			if(c==0){
+				var greet = document.createElement('p'),
+				            text = document.createTextNode('「愛」「交友」「仕事」のいずれかに該当しそうな単語が一つも見つかりませんでした。');
+				        document.body.appendChild(greet).appendChild(text);
+			}//「愛」「交友」「仕事」のいずれかに該当しそうな単語が一つも見つかりませんでした。
 
 
 			//これか。
