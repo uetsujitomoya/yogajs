@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <script language="javascript" src="bundle.js"></script>
 <title>
   Force-Directed Graph
 </title>
@@ -8,17 +9,29 @@
 <style>
 
 .node {
-
+stroke-width: 3px;
 }
 
 .link {
   stroke: #999;
-  stroke-opacity: .6;
+  stroke-opacity: .9;
 }
 
 </style>
 </head>
 <body>
-<script src="bundle.js"></script>
+  <input type="file" id="file-input"/>
+  <button id="load-button">手順1：左でjsonファイルを指定してから、ここをクリックして10秒ほど待つ</button>
+<br>
+<br><p></p>
+<br>
+  <form name="form1" id="chbox" action=""></form>
+					<input type="button" value="手順2：このボタンと手順1ボタンとの間に現れる項目にチェックしてから、ここをクリック" id="check-button" /><br><br>
+
+
+
+          <script language="javascript" src="bundle.js"></script>
+
+
 </body>
 </html>
