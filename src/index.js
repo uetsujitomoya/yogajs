@@ -31,22 +31,14 @@ document.getElementById('load-button').addEventListener('click', function () {
         RGB[m] = new Array;
 
         if(m%2==0){//カウンセラー
-          RGBlist[m/2] = new Array(5);
-          RGBlist[m/2][0]=0;
-          RGBlist[m/2][1]=0;
-          RGBlist[m/2][2]=0;
-          RGBlist[m/2][3]=0;
-          RGBlist[m/2][4]=0;
+          RGBlist[m/2] = [0,0,0,0,0];
         }
         i=0; //段落内の何文目か。
         while(n<path.length){//文ごとのループ
           keitaisokaiseki[m][i] = new Array; //文
           hinshi[m][i]=new Array;
           keitaisokaiseki[m][i].length = 0;
-          RGB[m][i] = new Array(3);
-          RGB[m][i][0]=0;
-          RGB[m][i][1]=0;
-          RGB[m][i][2]=0;
+          RGB[m][i] = [0,0,0];
 
           j=0; //集計単位内で何単語目か
           while(n<path.length){//単語ごとのループ
@@ -133,7 +125,7 @@ document.getElementById('load-button').addEventListener('click', function () {
         }
       }
 
-      var tangosett = new Array;;
+      var tangosett = [];
 
       tangosett = Array.from(tangoset).map(function(t) {
         return {t};
@@ -154,18 +146,14 @@ document.getElementById('load-button').addEventListener('click', function () {
 
       var checkboxlist=new Array(miserables.nodes.length);//checkboxに入る単語に1+RGBどれかの情報が3次元
       for(k=0;k<miserables.nodes.length;k++){
-        checkboxlist[k]=new Array;
-        checkboxlist[k][0]=0;
-        checkboxlist[k][1]=0;
-        checkboxlist[k][2]=0;
-        checkboxlist[k][3]=0;
+        checkboxlist[k]=[0,0,0,0];
       }
       var checkboxRGB=new Array(3);
-      checkboxRGB[0]=new Array;
-      checkboxRGB[1]=new Array;
-      checkboxRGB[2]=new Array;
+      checkboxRGB[0]=[];
+      checkboxRGB[1]=[];
+      checkboxRGB[2]=[];
 
-      var chboxlist=new Array;//通し番号
+      var chboxlist=[];//通し番号
 
       c=0;
       r=0;
@@ -304,9 +292,7 @@ document.getElementById('load-button').addEventListener('click', function () {
       var color2=new Array();
       for(m=0;m<keitaisokaiseki.length/2;m++){
         if(RGBlist[m][3]>=1){
-
           color2[m]="#d4d";
-
         }else{
           color2[m]="gray";
         }
