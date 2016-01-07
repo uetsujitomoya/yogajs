@@ -52,6 +52,17 @@ var viz=(stackdataArr,color2) => {
   .attr("stroke-width", 3)
 };
 
+var funcChecked = (chboxlist,checked) => {
+  var c;
+  console.log("手順2に進んだよ")
+  for(c=0 ; c<chboxlist.length ; c++){
+    var obj = eval("document.form1.ken" + c);  //checkboxｵﾌﾞｼﾞｪｸﾄを生成する
+    if(obj.checked)	{
+      checked[c] =1;
+    }else{
+      checked[c]=0;
+    }
+  }    //"ken"に1～5の連番付き
+};
 
-
-export {force, svg, color, width, height, viz};
+export {force, svg, color, width, height, viz, funcChecked};
