@@ -337,7 +337,6 @@ document.getElementById('load-button').addEventListener('click', function () {
 
 
                   //checkboxを出す
-                  //<input id=Checkbox1 type=checkbox /><label for=Checkbox1>チェック項目1</label><br />
 
 
 
@@ -373,12 +372,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 
 
         //listからcheckboxをつくる
-        /*<div id="disp">この文章を表示したり消したりします。</div>
 
-        <form>
-        <input type="button" value="表示" onclick="hyoji1(0)">
-        <input type="button" value="非表示" onclick="hyoji1(1)">
-        </form>*/
         //listからif文をつくる→checkboxをつくって表示
 
         //単語0の番号取得→単語1の番号取得→単語2の番号取得
@@ -399,14 +393,7 @@ document.getElementById('load-button').addEventListener('click', function () {
         //checkboxからcheckリストをつくり、RGBlistつくる
 
 
-        /*<form name="form1" id="checkbox" action="">
-        <input type="button" value="Exec" onclick="onButtonClick();" />
-        <input id="Checkbox1" type="checkbox" /><label for="Checkbox1">チェック項目1</label><br />
-        <input id="Checkbox2" type="checkbox" /><label for="Checkbox2">チェック項目2</label><br />
 
-        </form>
-
-        <div id="output"></div>*/
 
 
 
@@ -436,7 +423,7 @@ document.getElementById('load-button').addEventListener('click', function () {
       }
       console.log(checked);
 
-      //check2 = document.form1.Checkbox2.checked;
+
 
 
 
@@ -498,7 +485,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 
 
       //color2のlistをつくる。奇数RGBlistから。
-      //var colors2 = ["gray","#d4d","#d4d","gray","#d4d","#d4d","gray"];//奇数用
+
       var color2=new Array();
       for(m=0;m<keitaisokaiseki.length/2;m++){
         if(RGBlist[m][3]>=1){
@@ -586,198 +573,3 @@ reader.readAsText(file);
 
 
 var edge=-1;
-
-/*
-
-for(k=0;k<miserables.nodes.length;++k){
-
-for(l=k+1;l<miserables.nodes.length;++l){//別の単語を見る
-//現在単語2個の組み合わせを選択中
-
-//ここから段落を指定して縦になめる
-
-for(m=0;m<keitaisokaiseki.length;++m){
-for(i=0;i<keitaisokaiseki[m].length;++i){
-x=list[m][i][k];
-y=list[m][i][l];
-
-if(x==1 && y==1){
-
-miserables.links.push({source:l,target:k,value:0});
-edge++;//最初のedgeが0
-break;
-}
-}
-}
-//とりあえずエッジつくってbreak
-//こっからvalueを与える
-for(m=0;m<keitaisokaiseki.length;++m){
-for(i=0;i<keitaisokaiseki[m].length;++i){
-x=list[m][i][k];
-y=list[m][i][l];
-if(x==1 && y==1){
-z = miserables.links[edge].value;
-z++;
-miserables.links[edge].value = z;
-}
-}
-}
-
-
-}
-
-
-}
-
-*/
-
-//console.log(miserables.links);
-
-
-//以上計算中
-
-//var graph = miserables;
-
-
-//共起マップ
-/*
-force
-.nodes(graph.nodes)
-.links(graph.links)
-.start();
-
-*/
-/*
-var link = svg.selectAll(".link")
-.data(graph.links)
-.enter().append("line")
-.attr("class", "link")
-.style("stroke-width", function(d) { return Math.sqrt(d.value); });
-*/
-/*              var node = svg.selectAll(".node")
-.data(graph.nodes)
-.enter().append("text")
-.attr("class", "node")
-.style("fill", function(d) {
-if(d.group==1){
-return "red";
-} else{
-return "blue";
-}
-
-})
-.call(force.drag)
-.text(function(d) { return d.name; });
-*/
-
-
-
-
-/*
-force.on("tick", function() {
-link.attr("x1", function(d) { return d.source.x; })
-.attr("y1", function(d) { return d.source.y; })
-.attr("x2", function(d) { return d.target.x; })
-.attr("y2", function(d) { return d.target.y; });
-
-node.attr("x", function(d) { return d.x; })
-.attr("y", function(d) { return d.y; });
-});
-
-*/
-
-
-
-
-
-
-/*clustering*/
-
-
-
-
-
-
-var cluster = require('hierarchical-clustering');
-/*var colors = [
-[20, 20, 80],
-[22, 22, 90],
-[250, 255, 253],
-[100, 54, 255]
-];*/
-
-
-
-// Euclidean distance
-/*function distance(a, b) {
-var d = 0;
-for (var i = 0; i < a.length; i++) {
-d += Math.pow(a[i] - b[i], 2);
-}
-return Math.sqrt(d);
-}
-
-// Single-linkage clustering
-function linkage(distances) {
-return Math.min.apply(null, distances);
-}
-
-var levels = cluster({
-input: colors,
-distance: distance,
-linkage: linkage,
-minClusters: 2, // only want two clusters
-});
-
-var clusters = levels[levels.length - 1].clusters;
-//console.log(clusters);
-// => [ [ 2 ], [ 3, 1, 0 ] ]
-clusters = clusters.map(function (cluster) {
-return cluster.map(function (index) {
-return colors[index];
-});
-});
-//console.log(clusters);
-// => [ [ [ 250, 255, 253 ] ],
-// => [ [ 100, 54, 255 ], [ 22, 22, 90 ], [ 20, 20, 80 ] ] ]
-
-
-
-
-
-
-
-
-
-
-//チェックボックス
-
-
-
-
-function boxCheck(){
-
-//チェックされた項目を記録する変数
-var str="";
-
-//for文でチェックボックスを１つずつ確認
-for( i=0; i<6; i++ )
-{
-//チェックされているか確認する
-if( document.chbox.elements[i].checked )
-{
-//変数strが空でない時、区切りのコンマを入れる
-if( str != "" ) str=str+",";
-
-//チェックボックスのvalue値を変数strに入れる
-str=str+document.chbox.elements[i].value;
-}
-}
-
-//strが空の時、警告を出す
-if( str=="" ){
-alert( "どれか選択してください。" );
-}else{
-alert( str + "が選択されました。" );
-}
-}*/
