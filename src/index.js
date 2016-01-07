@@ -13,10 +13,10 @@ document.getElementById('load-button').addEventListener('click', function () {
       const path = tokenizer.tokenize(data[0].a); //1集計単位ごとにこの関数を用いよう
       console.log(path);
 
-      var keitaisokaiseki = new Array; //このlengthは段落数
-      var hinshi = new Array;
-      var RGB = new Array;//どの発言にRGBが入っているか大まかに色分け
-      var RGBlist  = new Array;//checkboxのセレクト結果
+      var keitaisokaiseki = []; //このlengthは段落数
+      var hinshi = [];
+      var RGB = [];//どの発言にRGBが入っているか大まかに色分け
+      var RGBlist  = [];//checkboxのセレクト結果
 
       var buntou;
       var tegakari;
@@ -26,17 +26,17 @@ document.getElementById('load-button').addEventListener('click', function () {
       bunsuu=0; //全段落内で何分目か
       m=0; //何個目の発言か。これの偶奇わけで判断。カウンセラーが奇数。患者が偶数。1文は1文で格納
       while(n<path.length){//発言ごとのループ
-        keitaisokaiseki[m] = new Array; //一発言
-        hinshi[m] = new Array;
-        RGB[m] = new Array;
+        keitaisokaiseki[m] = []; //一発言
+        hinshi[m] = [];
+        RGB[m] = [];
 
         if(m%2==0){//カウンセラー
           RGBlist[m/2] = [0,0,0,0,0];
         }
         i=0; //段落内の何文目か。
         while(n<path.length){//文ごとのループ
-          keitaisokaiseki[m][i] = new Array; //文
-          hinshi[m][i]=new Array;
+          keitaisokaiseki[m][i] = []; //文
+          hinshi[m][i]=[];
           keitaisokaiseki[m][i].length = 0;
           RGB[m][i] = [0,0,0];
 
@@ -108,12 +108,12 @@ document.getElementById('load-button').addEventListener('click', function () {
 
       var tangoset = new Set();
 
-      var tmp=new Array;
+      var tmp=[];
 
       for(m=0;m<keitaisokaiseki.length;++m){
         for(i=0;i<keitaisokaiseki[m].length;++i){
           tmp = keitaisokaiseki[m][i];
-          if(keitaisokaiseki[m][i] ==false||keitaisokaiseki[m][i]==new Array){
+          if(keitaisokaiseki[m][i] ==false||keitaisokaiseki[m][i]==[]){
             keitaisokaiseki[m][i].length=0;
             continue;
           }
@@ -131,7 +131,7 @@ document.getElementById('load-button').addEventListener('click', function () {
         return {t};
       });
 
-      var miserables={"nodes":new Array,"links":new Array};
+      var miserables={"nodes":[],"links":[]};
 
       for(i=0;i<tangosett.length;i++){
         miserables.nodes[i]=tangosett[i].t;
@@ -289,7 +289,7 @@ document.getElementById('load-button').addEventListener('click', function () {
         n++;
       }
 
-      var color2=new Array();
+      var color2=[];
       for(m=0;m<keitaisokaiseki.length/2;m++){
         if(RGBlist[m][3]>=1){
           color2[m]="#d4d";
@@ -301,7 +301,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 
       var stackdataArr = new Array(3);
       for(h=0;h<3;h++){
-        stackdataArr[h] = new Array();
+        stackdataArr[h] = [];
         for(m=0;m<((keitaisokaiseki.length-1)/2);m++){//2個飛ばしにしたら後が面倒くさい。患者 1→0　3→1 長さ9なら番号は8まで
           stackdataArr[h][m]=new Object();
           stackdataArr[h][m]= {x:m+1,y:(28*(RGBlist[m][h])/(keitaisokaiseki[2*m+1].length))};
