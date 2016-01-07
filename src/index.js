@@ -141,14 +141,14 @@ document.getElementById('load-button').addEventListener('click', function () {
 
       /*あとはlinksの作成だけ
       まずはlistをつくる*/
-      var list = new Array(keitaisokaiseki.length);
+      var list = [];
       //list作成
 
-      var checkboxlist=new Array(miserables.nodes.length);//checkboxに入る単語に1+RGBどれかの情報が3次元
+      var checkboxlist=[];//checkboxに入る単語に1+RGBどれかの情報が3次元
       for(k=0;k<miserables.nodes.length;k++){
         checkboxlist[k]=[0,0,0,0];
       }
-      var checkboxRGB=new Array(3);
+      var checkboxRGB=[];
       checkboxRGB[0]=[];
       checkboxRGB[1]=[];
       checkboxRGB[2]=[];
@@ -164,9 +164,9 @@ document.getElementById('load-button').addEventListener('click', function () {
 
       //keitaisokaisekiとnodesを照らしあわせる
       for(m=0;m<keitaisokaiseki.length;++m){
-        list[m] = new Array(keitaisokaiseki[m].length);
+        list[m] = [];
         for(i=0;i<keitaisokaiseki[m].length;++i){
-          list[m][i] = new Array(miserables.nodes.length);
+          list[m][i] = [];
           for(j=0;j<keitaisokaiseki[m][i].length;++j){
             for(k=0;k<miserables.nodes.length;++k){
               if(keitaisokaiseki[m][i][j]==miserables.nodes[k].name){
@@ -181,7 +181,7 @@ document.getElementById('load-button').addEventListener('click', function () {
                       }
                       checkboxlist[k][0]=1;
                       checkboxlist[k][1]=1;
-                      chboxlist[c]=new Array(2);
+                      chboxlist[c]=[];
                       chboxlist[c][0]=miserables.nodes[k].name;
                       chboxlist[c][1]=0;
                       c++;
@@ -197,7 +197,7 @@ document.getElementById('load-button').addEventListener('click', function () {
                       }
                       checkboxlist[k][0]=1;
                       checkboxlist[k][2]=1;
-                      chboxlist[c]=new Array(2);
+                      chboxlist[c]=[];
                       chboxlist[c][0]=miserables.nodes[k].name;
                       chboxlist[c][1]=1;
                       c++;
@@ -212,7 +212,7 @@ document.getElementById('load-button').addEventListener('click', function () {
                       }
                       checkboxlist[k][0]=1;
                       checkboxlist[k][3]=1;
-                      chboxlist[c]=new Array(2);
+                      chboxlist[c]=[];
                       chboxlist[c][0]=miserables.nodes[k].name;
                       chboxlist[c][1]=2;
                       c++;
@@ -239,7 +239,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 
       document.getElementById('check-button').addEventListener('click', function () {
         console.log("手順2に進んだよ")
-        var checked = new Array(chboxlist.length);
+        var checked = [];
 
         for(c=0 ; c<chboxlist.length ; c++){    //"ken"に1～5の連番付き
         var obj = eval("document.form1.ken" + c);  //checkboxｵﾌﾞｼﾞｪｸﾄを生成する
@@ -299,7 +299,7 @@ document.getElementById('load-button').addEventListener('click', function () {
       }
       console.log(color2);
 
-      var stackdataArr = new Array(3);
+      var stackdataArr = [];
       for(h=0;h<3;h++){
         stackdataArr[h] = [];
         for(m=0;m<((keitaisokaiseki.length-1)/2);m++){//2個飛ばしにしたら後が面倒くさい。患者 1→0　3→1 長さ9なら番号は8まで
