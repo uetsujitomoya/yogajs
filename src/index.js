@@ -1,5 +1,5 @@
 /* global kuromoji */
-import d3 from "d3"
+import {color, svg, force, width, height} from "./svg.js"
 import "kuromoji"
 
 
@@ -7,19 +7,7 @@ import "kuromoji"
 
 var h,i,j,k,l,m,n,c,r,g,b,x,y,z,bunsuu;  //mは段落
 
-var width = 1200,
-height = 250;
 
-var color = d3.scale.category20c();
-
-var force = d3.layout.force()
-.charge(-120)
-.linkDistance(120)
-.size([width, height]);
-
-var svg = d3.select("body").append("svg")
-.attr("width", width)
-.attr("height", height);
 
 
 document.getElementById('load-button').addEventListener('click', function () {
