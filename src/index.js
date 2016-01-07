@@ -1,5 +1,5 @@
 /* global kuromoji */
-import {color, svg, force, width, height, viz, funcChecked} from "./svg.js"
+import {color, svg, force, width, height, viz, funcChecked, setForViz} from "./svg.js"
 import "kuromoji"
 
 var h,i,j,k,l,m,n,c,r,g,b,x,y,z,bunsuu;  //mは段落
@@ -19,9 +19,7 @@ var checkboxlist=[];//checkboxに入る単語に1+RGBどれかの情報が3次�
 var checkboxRGB=[];
 var chboxlist=[];//通し番号
 var target = document.getElementById("chbox");//checkboxを出す場所
-var checked = [];
-var color2=[];
-var stackdataArr = [];
+
 
 document.getElementById('load-button').addEventListener('click', function () {
   var file = document.getElementById('file-input').files[0];
@@ -31,7 +29,7 @@ document.getElementById('load-button').addEventListener('click', function () {
 
     kuromoji.builder({dicPath: 'dict/'}).build((err, tokenizer) => {
       const path = tokenizer.tokenize(data[0].a); //1集計単位ごとにこの関数を用いよう
-      console.log(path);
+      //console.log(path);
       n=0; //nは全データ内で何文字目か
       bunsuu=0; //全段落内で何分目か
       m=0; //何個目の発言か。これの偶奇わけで判断。カウンセラーが奇数。患者が偶数。1文は1文で格納
@@ -114,7 +112,7 @@ document.getElementById('load-button').addEventListener('click', function () {
         m++;
       }
 
-      console.log(keitaisokaiseki);
+      //console.log(keitaisokaiseki);
 
 
 
@@ -145,7 +143,7 @@ document.getElementById('load-button').addEventListener('click', function () {
         miserables.nodes[i]=tangosett[i].t;
       }
 
-      console.log(miserables.nodes);
+      //console.log(miserables.nodes);
 
       /*あとはlinksの作成だけ
       まずはlistをつくる*/
@@ -246,67 +244,9 @@ document.getElementById('load-button').addEventListener('click', function () {
       //これか。
 
       document.getElementById('check-button').addEventListener('click', function () {
-        funcChecked(chboxlist,checked);
-        console.log(checked);
-
         //check配列でonの単語について、文を舐めてRGBlistをつくる。
-
         //偶奇1setでカウント（同じm内に収める）
-
-        m=0;//発言数
-        n=0;//偶奇1setのセット数
-        while(m<keitaisokaiseki.length){//発言ごとのループ
-
-          //まずは偶数から（カウンセラー）
-          //iは発言内の何文目か。
-          for(i=0;i<keitaisokaiseki[m].length;i++){
-            j=0; //集計単位内で何単語目か
-            for(j=0;j<keitaisokaiseki[m][i].length;j++){//単語ごとのループ
-              for(c=0;c<checkboxlist.length;c++){
-                if (checked[c]==1) {
-                  if(keitaisokaiseki[m][i][j]==chboxlist[c][0]){
-                    if(chboxlist[c][1]==0){
-                      RGBlist[n][0]=RGBlist[n][0]+1;
-                    }else if(chboxlist[c][1]==1){
-                      RGBlist[n][1]=RGBlist[n][1]+1;
-                    }else if(chboxlist[c][1]==2){
-                      RGBlist[n][2]=RGBlist[n][2]+1;
-                    }
-                  }
-                }
-              }
-            }
-          }
-
-          m++;
-
-          //奇数（患者）
-
-          console.log(RGBlist[n]);
-          m++;
-          n++;
-        }
-
-
-        for(m=0;m<keitaisokaiseki.length/2;m++){
-          if(RGBlist[m][3]>=1){
-            color2[m]="#d4d";
-          }else{
-            color2[m]="gray";
-          }
-        }
-        console.log(color2);
-
-        for(h=0;h<3;h++){
-          stackdataArr[h] = [];
-          for(m=0;m<((keitaisokaiseki.length-1)/2);m++){//2個飛ばしにしたら後が面倒くさい。患者 1→0　3→1 長さ9なら番号は8まで
-            stackdataArr[h][m]=new Object();
-            stackdataArr[h][m]= {x:m+1,y:(28*(RGBlist[m][h])/(keitaisokaiseki[2*m+1].length))};
-            console.log(stackdataArr[h][m]);
-          }
-        }
-
-        viz(stackdataArr,color2);
+        setForViz(keitaisokaiseki,checkboxlist,chboxlist,RGBlist);
       });
       //checkbox依存部分終わり
     })//kuromoji.builder終了

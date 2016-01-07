@@ -54,7 +54,7 @@ var viz=(stackdataArr,color2) => {
 
 var funcChecked = (chboxlist,checked) => {
   var c;
-  console.log("手順2に進んだよ")
+  //console.log("手順2に進んだよ")
   for(c=0 ; c<chboxlist.length ; c++){
     var obj = eval("document.form1.ken" + c);  //checkboxｵﾌﾞｼﾞｪｸﾄを生成する
     if(obj.checked)	{
@@ -65,4 +65,59 @@ var funcChecked = (chboxlist,checked) => {
   }    //"ken"に1～5の連番付き
 };
 
-export {force, svg, color, width, height, viz, funcChecked};
+var setForViz = (keitaisokaiseki,checkboxlist,chboxlist,RGBlist) => {
+  var checked = [];
+  var color2=[];
+  var stackdataArr = [];
+  funcChecked(chboxlist,checked);
+  var h,i,j,c
+  var m=0;//発言数
+  var n=0;//偶奇1setのセット数
+  while(m<keitaisokaiseki.length){//発言ごとのループ
+    //まずは偶数から（カウンセラー）
+    //iは発言内の何文目か。
+    for(i=0;i<keitaisokaiseki[m].length;i++){
+      j=0; //集計単位内で何単語目か
+      for(j=0;j<keitaisokaiseki[m][i].length;j++){//単語ごとのループ
+        for(c=0;c<checkboxlist.length;c++){
+          if (checked[c]==1) {
+            if(keitaisokaiseki[m][i][j]==chboxlist[c][0]){
+              if(chboxlist[c][1]==0){
+                RGBlist[n][0]=RGBlist[n][0]+1;
+              }else if(chboxlist[c][1]==1){
+                RGBlist[n][1]=RGBlist[n][1]+1;
+              }else if(chboxlist[c][1]==2){
+                RGBlist[n][2]=RGBlist[n][2]+1;
+              }
+            }
+          }
+        }
+      }
+    }
+    m=m+2;
+    n++;
+  }
+
+
+  for(m=0;m<keitaisokaiseki.length/2;m++){
+    if(RGBlist[m][3]>=1){
+      color2[m]="#d4d";
+    }else{
+      color2[m]="gray";
+    }
+  }
+  //console.log(color2);
+
+  for(h=0;h<3;h++){
+    stackdataArr[h] = [];
+    for(m=0;m<((keitaisokaiseki.length-1)/2);m++){//2個飛ばしにしたら後が面倒くさい。患者 1→0　3→1 長さ9なら番号は8まで
+      stackdataArr[h][m]=new Object();
+      stackdataArr[h][m]= {x:m+1,y:(28*(RGBlist[m][h])/(keitaisokaiseki[2*m+1].length))};
+      //console.log(stackdataArr[h][m]);
+    }
+  }
+
+  viz(stackdataArr,color2);
+}
+
+export {force, svg, color, width, height, viz, funcChecked, setForViz};
