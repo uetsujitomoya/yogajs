@@ -1,27 +1,13 @@
 /* global kuromoji */
 import {color, svg, force, width, height} from "./svg.js"
 import "kuromoji"
-
-
-
-
 var h,i,j,k,l,m,n,c,r,g,b,x,y,z,bunsuu;  //mは段落
-
-
-
 
 document.getElementById('load-button').addEventListener('click', function () {
   var file = document.getElementById('file-input').files[0];
   var reader = new FileReader();
   reader.onload = function(event) {
     var data = JSON.parse(event.target.result);
-    //console.log(data);
-
-
-
-
-
-
 
     kuromoji.builder({dicPath: 'dict/'}).build((err, tokenizer) => {
       const path = tokenizer.tokenize(data[0].a); //1集計単位ごとにこの関数を用いよう
@@ -51,9 +37,7 @@ document.getElementById('load-button').addEventListener('click', function () {
           RGBlist[m/2][2]=0;
           RGBlist[m/2][3]=0;
           RGBlist[m/2][4]=0;
-
         }
-
         i=0; //段落内の何文目か。
         while(n<path.length){//文ごとのループ
           keitaisokaiseki[m][i] = new Array; //文
@@ -106,19 +90,11 @@ document.getElementById('load-button').addEventListener('click', function () {
               //カウンセラー
 
               if(keitaisokaiseki[m][i][j]=="いかが"||keitaisokaiseki[m][i][j]=="なんで"||keitaisokaiseki[m][i][j]=="どうして"||keitaisokaiseki[m][i][j]=="どの"||keitaisokaiseki[m][i][j]=="どのように"||keitaisokaiseki[m][i][j]=="いつ"||keitaisokaiseki[m][i][j]=="どういう"||keitaisokaiseki[m][i][j]=="どなた"||keitaisokaiseki[m][i][j]=="どう"||keitaisokaiseki[m][i][j]=="何"||keitaisokaiseki[m][i][j]=="何か"||keitaisokaiseki[m][i][j]=="どんな"||keitaisokaiseki[m][i][j]=="どのような"){
-                console.log("%d発言めの%d文目は開かれた質問です",m,i);
+
                 RGBlist[m/2][3]=1;
                 RGBlist[m/2][4]=0;
-              } else {
-                console.log("%d発言めの%d文目はとじられた質問です",m,i);
-                //書き換えない
               }
-
             }
-
-
-
-
             n++;
             j++;
           }
@@ -136,31 +112,15 @@ document.getElementById('load-button').addEventListener('click', function () {
         m++;
       }
 
-      console.log(RGBlist);
-      //keitaisokaiseki完成
-
-
-      //以下、想定していた形態素解析後の結果から、共起ネットワークのノード・エッジ作成へ
-
-
-
       console.log(keitaisokaiseki);
 
-
-
-
-
-
       var tangoset = new Set();
-
 
       var tmp=new Array;
 
       for(m=0;m<keitaisokaiseki.length;++m){
         for(i=0;i<keitaisokaiseki[m].length;++i){
           tmp = keitaisokaiseki[m][i];
-          console.log("m=%d,i=%d",m,i);
-          console.log(tmp);
           if(keitaisokaiseki[m][i] ==false||keitaisokaiseki[m][i]==new Array){
             keitaisokaiseki[m][i].length=0;
             continue;
@@ -169,40 +129,24 @@ document.getElementById('load-button').addEventListener('click', function () {
             tangoset.add({name:keitaisokaiseki[m][i][j],
               group:0
             });//tangoset終了
-
-
           }
         }
       }
-
 
       var tangosett = new Array;;
 
       tangosett = Array.from(tangoset).map(function(t) {
         return {t};
-        // body
       });
 
-
-
       var miserables={"nodes":new Array,"links":new Array};
-
 
       for(i=0;i<tangosett.length;i++){
         miserables.nodes[i]=tangosett[i].t;
       }
 
-
       console.log(miserables.nodes);
-      console.log(miserables.nodes.length);
 
-
-
-
-
-
-      /*あとはlinksの作成だけ
-      まずはlistをつくる*/
       /*あとはlinksの作成だけ
       まずはlistをつくる*/
       var list = new Array(keitaisokaiseki.length);
@@ -223,7 +167,6 @@ document.getElementById('load-button').addEventListener('click', function () {
 
       var chboxlist=new Array;//通し番号
 
-
       c=0;
       r=0;
       b=0;
@@ -231,72 +174,47 @@ document.getElementById('load-button').addEventListener('click', function () {
 
       var target = document.getElementById("chbox");//checkboxを出す場所
 
-
       //keitaisokaisekiとnodesを照らしあわせる
       for(m=0;m<keitaisokaiseki.length;++m){
         list[m] = new Array(keitaisokaiseki[m].length);
         for(i=0;i<keitaisokaiseki[m].length;++i){
           list[m][i] = new Array(miserables.nodes.length);
-
           for(j=0;j<keitaisokaiseki[m][i].length;++j){
-
-            if(RGB[m][i][0]+RGB[m][i][1]+RGB[m][i][2]>=1){
-
-              console.log(hinshi[m][i][j]);
-            }
-
-
             for(k=0;k<miserables.nodes.length;++k){
-
               if(keitaisokaiseki[m][i][j]==miserables.nodes[k].name){
                 list[m][i][k]=1;
                 if(RGB[m][i][0]+RGB[m][i][1]+RGB[m][i][2]>=1){
-
-
-
-
                   if(RGB[m][i][0]==1){
                     if(checkboxlist[k][1]==0){//単語とグループの組み合わせの重複を防ぐ
                       if(keitaisokaiseki[m][i][j]=="母"||keitaisokaiseki[m][i][j]=="姉さん"||keitaisokaiseki[m][i][j]=="姉"||keitaisokaiseki[m][i][j]=="母親"||keitaisokaiseki[m][i][j]=="お姉さん"||keitaisokaiseki[m][i][j]=="父"||keitaisokaiseki[m][i][j]=="家族"||keitaisokaiseki[m][i][j]=="兄"||keitaisokaiseki[m][i][j]=="子"||keitaisokaiseki[m][i][j]=="子ども"||keitaisokaiseki[m][i][j]=="妹"||keitaisokaiseki[m][i][j]=="弟"||keitaisokaiseki[m][i][j]=="両親"||keitaisokaiseki[m][i][j]=="お母様"||keitaisokaiseki[m][i][j]=="お父様"){
                         target.innerHTML += "<input id=\"ken" + c + "\" type=checkbox checked /><label for="+c+">「" + miserables.nodes[k].name + "」を「愛」に。</label><br />";
-
                       }else{
                         target.innerHTML += "<input id=\"ken" + c + "\" type=checkbox checked /><label for="+c+">「" + miserables.nodes[k].name + "」を「愛」に。</label><br />";
                       }
-
-                      console.log("%d,%d,%d,「%s」を「愛」に",m,i,j,miserables.nodes[k].name);
-
                       checkboxlist[k][0]=1;
                       checkboxlist[k][1]=1;
                       chboxlist[c]=new Array(2);
                       chboxlist[c][0]=miserables.nodes[k].name;
-                      console.log("%d",c);
                       chboxlist[c][1]=0;
                       c++;
                     }
                   }
 
-
                   if(RGB[m][i][1]==1){
                     if(checkboxlist[k][2]==0){
-
                       if(keitaisokaiseki[m][i][j]=="友人"||keitaisokaiseki[m][i][j]=="親友"||keitaisokaiseki[m][i][j]=="友達"||keitaisokaiseki[m][i][j]=="友"||keitaisokaiseki[m][i][j]=="交友"||keitaisokaiseki[m][i][j]=="友好"){
                         target.innerHTML += "<input id=\"ken" + c + "\" type=checkbox checked /><label for="+c+">「" + miserables.nodes[k].name + "」を「交友」に。</label><br />";
                       }else{
                         target.innerHTML += "<input id=\"ken" + c + "\" type=checkbox checked /><label for="+c+">「" + miserables.nodes[k].name + "」を「交友」に。</label><br />";
                       }
-                      console.log("%d,%d,%d,「%s」を「交友」に",m,i,j,miserables.nodes[k].name);
-
                       checkboxlist[k][0]=1;
                       checkboxlist[k][2]=1;
                       chboxlist[c]=new Array(2);
                       chboxlist[c][0]=miserables.nodes[k].name;
-                      console.log("%d",c);
                       chboxlist[c][1]=1;
                       c++;
                     }
                   }
-
                   if(RGB[m][i][2]==1){
                     if(checkboxlist[k][3]==0){
                       if(keitaisokaiseki[m][i][j]=="仕事"||keitaisokaiseki[m][i][j]=="休み"){
@@ -304,87 +222,22 @@ document.getElementById('load-button').addEventListener('click', function () {
                       }else{
                         target.innerHTML += "<input id=\"ken" + c + "\" type=checkbox checked /><label for="+c+">「" + miserables.nodes[k].name + "」を「仕事」に。</label><br />";
                       }
-
-                      console.log("%d,%d,%d,「%s」を「仕事」に",m,i,j,miserables.nodes[k].name);
-
                       checkboxlist[k][0]=1;
                       checkboxlist[k][3]=1;
                       chboxlist[c]=new Array(2);
                       chboxlist[c][0]=miserables.nodes[k].name;
-                      console.log("%d",c);
                       chboxlist[c][1]=2;
                       c++;
-
                     }
-
                   }
-
                   if(checkboxlist[k][1]+checkboxlist[k][2]+checkboxlist[k][3]>=0){
                     break;//miserables実は重複してる
                   }
-
-
-                  //checkboxを出す
-
-
-
-
-
-
-
-
-
-
-
-                  //関連発言内の全単語を出力する
-
-
-
                 }
-
-
-
               }
-
-              //checkbox用
-
-
             }
-
           }
         }
-
-        //var list = new Array(keitaisokaiseki.length);
-
-        //list作成終了
-
-
-        //listからcheckboxをつくる
-
-        //listからif文をつくる→checkboxをつくって表示
-
-        //単語0の番号取得→単語1の番号取得→単語2の番号取得
-        //単語リストmiserables.nodesとlist番号を照らしあわせる→checkbox表示
-        //miserablesnodesから単語名を表示、idとする
-
-
-
-
-
-        //ドットで区切る
-        //単語グループ分け -> 形態素解析時点で。
-
-        //クライアントの各文の得点換算
-        //stackdataArr完成
-        //偶数発言目
-        //checkbox情報取得
-        //checkboxからcheckリストをつくり、RGBlistつくる
-
-
-
-
-
-
       }
 
       if(c==0){
@@ -404,16 +257,11 @@ document.getElementById('load-button').addEventListener('click', function () {
         var obj = eval("document.form1.ken" + c);  //checkboxｵﾌﾞｼﾞｪｸﾄを生成する
         if(obj.checked)	{
           checked[c] =1;
-
         }else{
           checked[c]=0;
         }
       }
       console.log(checked);
-
-
-
-
 
       //check配列でonの単語について、文を舐めてRGBlistをつくる。
 
@@ -423,16 +271,12 @@ document.getElementById('load-button').addEventListener('click', function () {
       n=0;//偶奇1setのセット数
       while(m<keitaisokaiseki.length){//発言ごとのループ
 
-
-
-
         //まずは偶数から（カウンセラー）
         //iは発言内の何文目か。
         for(i=0;i<keitaisokaiseki[m].length;i++){
           j=0; //集計単位内で何単語目か
           for(j=0;j<keitaisokaiseki[m][i].length;j++){//単語ごとのループ
             for(c=0;c<checkboxlist.length;c++){
-
               if (checked[c]==1) {
                 if(keitaisokaiseki[m][i][j]==chboxlist[c][0]){
                   if(chboxlist[c][1]==0){
@@ -443,15 +287,9 @@ document.getElementById('load-button').addEventListener('click', function () {
                     RGBlist[n][2]=RGBlist[n][2]+1;
                   }
                 }
-
-
               }
             }
-
-
-
           }
-
         }
 
         m++;
@@ -462,17 +300,6 @@ document.getElementById('load-button').addEventListener('click', function () {
         m++;
         n++;
       }
-
-
-
-      //checkboxのステータスからポイント加算
-
-
-
-
-
-
-      //color2のlistをつくる。奇数RGBlistから。
 
       var color2=new Array();
       for(m=0;m<keitaisokaiseki.length/2;m++){
@@ -529,35 +356,9 @@ document.getElementById('load-button').addEventListener('click', function () {
       svg.selectAll("line")
       .attr("stroke", function(d,i){return color2[color2.length-1-i]})
       .attr("stroke-width", 3)
-
-
-
     });
-
-
     //checkbox依存部分終わり
-
-
-
   })//kuromoji.builder終了
 };//reader.onload終了。これとなんちゃら(file)が並列してないといけない
 reader.readAsText(file);
-
-
 });//document.getElementById終了
-
-
-
-
-
-
-
-
-//console.log(list);
-//listはi*k
-
-//listからmiserables.linksとlist3をつくる
-
-
-
-var edge=-1;
