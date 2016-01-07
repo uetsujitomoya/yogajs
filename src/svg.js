@@ -337,4 +337,6 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,RGBlist) =>
   })//kuromoji.builder終了
 };
 
+
+
 export {force, svg, color, width, height, setForViz, funcReaderOnload};
