@@ -76,6 +76,7 @@ var setForViz = (keitaisokaiseki,checkboxlist,chboxlist,RGBlist) => {
   funcChecked(chboxlist,checked);
   var h,i,j,c,m;
   var n=0;//偶奇1setのセット数
+  console.log(RGBlist);
   for(c=0;c<(chboxlist.length-1);c++){
     if (checked[c]>=1) {
       for(m=0;m<keitaisokaiseki.length;m=m+2){//発言ごとのループ

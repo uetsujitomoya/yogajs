@@ -31,7 +31,7 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,list,RGB) => {
                 //target.innerHTML += "<input id=\"ken" + c + "\" type=checkbox checked /><label for="+c+">「" + miserables.nodes[k] + "」を「愛」に。</label><br />";
 
                 c++;
-                target.innerHTML += "<div id=\"" + c + "\">" + miserables.nodes[k] + "<br><input type=radio name=\"" + c + "\" value=0>どれにも含まない</div><br>";
+                target.innerHTML += "<div id=\"" + c + "\">" + miserables.nodes[k] + "<br><label><input type=radio name=\"" + c + "\" value=0>どれにも含まない</div></label><br>";
                 //その他の選択肢
 
                 if(RGB[m][i][0]==1){
@@ -41,9 +41,9 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,list,RGB) => {
 
                     if(keitaisokaiseki[m][i][j]=="母"||keitaisokaiseki[m][i][j]=="姉さん"||keitaisokaiseki[m][i][j]=="姉"||keitaisokaiseki[m][i][j]=="母親"||keitaisokaiseki[m][i][j]=="お姉さん"||keitaisokaiseki[m][i][j]=="父"||keitaisokaiseki[m][i][j]=="家族"||keitaisokaiseki[m][i][j]=="兄"||keitaisokaiseki[m][i][j]=="子"||keitaisokaiseki[m][i][j]=="子ども"||keitaisokaiseki[m][i][j]=="妹"||keitaisokaiseki[m][i][j]=="弟"||keitaisokaiseki[m][i][j]=="両親"||keitaisokaiseki[m][i][j]=="お母様"||keitaisokaiseki[m][i][j]=="お父様"){
                       checkboxlist[k][1]=2;
-                      document.getElementById(c).innerHTML += "<input type=radio name=\"" + c + "\" value=1 checked>「愛」に含む";
+                      document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=1 checked>「愛」に含む</label>";
                     }else{
-                      document.getElementById(c).innerHTML += "<input type=radio name=\"" + c + "\" value=1 checked>「愛」に含む";
+                      document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=1 checked>「愛」に含む</label>";
                     }
                     checkboxlist[k][0]=1;
                     chboxlist[c]=[];
@@ -55,9 +55,9 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,list,RGB) => {
                 if(RGB[m][i][1]==1){
                   if(checkboxlist[k][2]==0){
                     if(keitaisokaiseki[m][i][j]=="友人"||keitaisokaiseki[m][i][j]=="親友"||keitaisokaiseki[m][i][j]=="友達"||keitaisokaiseki[m][i][j]=="友"||keitaisokaiseki[m][i][j]=="交友"||keitaisokaiseki[m][i][j]=="友好"){
-                      document.getElementById(c).innerHTML += "<input type=radio name=\"" + c + "\" value=2 checked>「交友」に含む";
+                      document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=2 checked>「交友」に含む</label>";
                     }else{
-                      document.getElementById(c).innerHTML += "<input type=radio name=\"" + c + "\" value=2 checked>「交友」に含む";
+                      document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=2 checked>「交友」に含む</label>";
                     }
                     checkboxlist[k][0]=1;
 
@@ -69,9 +69,9 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,list,RGB) => {
                 if(RGB[m][i][2]==1){
                   if(checkboxlist[k][3]==0){
                     if(keitaisokaiseki[m][i][j]=="仕事"||keitaisokaiseki[m][i][j]=="休み"){
-                      document.getElementById(c).innerHTML += "<input type=radio name=\"" + c + "\" value=3 checked>「仕事」に含む";
+                      document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=3 checked>「仕事」に含む</label>";
                     }else{
-                      document.getElementById(c).innerHTML += "<input type=radio name=\"" + c + "\" value=3 checked>「仕事」に含む";
+                      document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=3 checked>「仕事」に含む</label>";
                     }
                     checkboxlist[k][0]=1;
                     chboxlist[c]=[];
