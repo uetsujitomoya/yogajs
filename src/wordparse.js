@@ -109,7 +109,7 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,RGBlist) =>
       }
       m++;
     }
-    //console.log(keitaisokaiseki);
+    console.log(RGBlist);
 
     var tango=[];//全単語（重複あり）
     x=0;
@@ -160,7 +160,7 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,RGBlist) =>
     console.log(miserables.nodes);
 
     select(checkboxlist,keitaisokaiseki,miserables,chboxlist,list,RGB);
-    
+
   })//kuromoji.builder終了
 };
 

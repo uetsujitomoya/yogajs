@@ -56,14 +56,14 @@ var funcChecked = (chboxlist,checked) => {
   console.log("funcChecked");
   var c;
   for(c=1;c<chboxlist.length;c++){
-    console.log(c);
+    //console.log(c);
     const radio = document.getElementById(c).children;
-    console.log(radio);
+    //console.log(radio);
     for(let i = 0, l = radio.length; i < l; i++){
-      console.log("c=%d,i=%d,value=%d",c,i,radio[i].value);
+      //console.log("c=%d,i=%d,value=%d",c,i,radio[i].value);
       if(radio[i].checked){
-        console.log("c=%d,i=%d,value=%d",c,i,radio[i].value);
-        checked[i] = radio[i].value;
+        //console.log("c=%d,i=%d,value=%d",c,i,radio[i].value);
+        checked[c-1] = radio[i].value;
       }
     }
   }
@@ -76,7 +76,7 @@ var setForViz = (keitaisokaiseki,checkboxlist,chboxlist,RGBlist) => {
   funcChecked(chboxlist,checked);
   var h,i,j,c,m;
   var n=0;//偶奇1setのセット数
-  for(c=0;c<checkboxlist.length;c++){
+  for(c=0;c<(chboxlist.length-1);c++){
     if (checked[c]>=1) {
       for(m=0;m<keitaisokaiseki.length;m=m+2){//発言ごとのループ
         //まずは偶数から（カウンセラー）
@@ -84,8 +84,8 @@ var setForViz = (keitaisokaiseki,checkboxlist,chboxlist,RGBlist) => {
         for(i=0;i<keitaisokaiseki[m].length;i++){
           j=0; //集計単位内で何単語目か
           for(j=0;j<keitaisokaiseki[m][i].length;j++){//単語ごとのループ
-            if(checked[c]==1){
-              if(chboxlist[c][1]==0){
+            if(keitaisokaiseki[m][i][j]==chboxlist[c+1][0]){
+              if(checked[c]==1){
                 RGBlist[n][0]=RGBlist[n][0]+1;
               }else if(checked[c]==2){
                 RGBlist[n][1]=RGBlist[n][1]+1;
@@ -97,7 +97,7 @@ var setForViz = (keitaisokaiseki,checkboxlist,chboxlist,RGBlist) => {
         }
       }
     }
-    n++;
+    n++
   }
   console.log(RGBlist);
 
