@@ -63,6 +63,19 @@ var funcChecked = (chboxlist,checked) => {
       checked[c]=0;
     }
   }    //"ken"に1～5の連番付き
+
+  /*
+
+  const radio_buttons = document.getElementById("hoge").children;
+  for(let i = 0, l = radio_buttons.length; i < l; i++){
+  	radio_buttons[i].onchange = () => {
+    	console.log("changed", i);
+    };
+  }
+
+  */
+
+
 };
 
 var setForViz = (keitaisokaiseki,checkboxlist,chboxlist,RGBlist) => {

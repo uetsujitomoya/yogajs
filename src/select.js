@@ -90,6 +90,16 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,list,RGB) => {
     }
   }
 
+/*
+
+<div id="hoge">
+  <input type="radio" name="q1" value="hoge">
+  <input type="radio" name="q1" value="foo">
+</div>
+
+*/
+
+
   if(c==0){
     var greet = document.createElement('p'),
     text = document.createTextNode('「愛」「交友」「仕事」のいずれかに該当しそうな単語が一つも見つかりませんでした。');
