@@ -97,6 +97,9 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,list,RGB) => {
   <input type="radio" name="q1" value="foo">
 </div>
 
+候補単語自体について<div>とnameを追加
+候補グループについてvalueを追加
+
 */
 
 
