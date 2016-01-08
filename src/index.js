@@ -1,6 +1,7 @@
 /* global kuromoji */
-import {color, svg, force, width, height, setForViz, funcReaderOnload} from "./svg.js"
-import "kuromoji"
+import {color, svg, force, width, height, setForViz} from "./svg.js"
+import {funcReaderOnload} from "./wordparse.js"
+
 //import "jquery"
 
 //var $ = require('jquery');
