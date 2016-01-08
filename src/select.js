@@ -28,7 +28,7 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,list,RGB) => {
 
               //target.innerHTML += "<input id=\"ken" + c + "\" type=checkbox checked /><label for="+c+">「" + miserables.nodes[k].name + "」を「愛」に。</label><br />";
 
-              target.innerHTML += "<div id=\"" + k + "\">" + miserables.nodes[k].name + "<br><input type=radio name=\"" + k + "\" value=0>どれにも含まない</div>";
+              target.innerHTML += "<br><div id=\"" + k + "\">" + miserables.nodes[k].name + "<br><input type=radio name=\"" + k + "\" value=0>どれにも含まない</div><br>";
               //その他の選択肢
 
               if(RGB[m][i][0]==1){
@@ -101,12 +101,12 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,list,RGB) => {
 
   */
 
-
   if(c==0){
     var greet = document.createElement('p'),
     text = document.createTextNode('「愛」「交友」「仕事」のいずれかに該当しそうな単語が一つも見つかりませんでした。');
     document.body.appendChild(greet).appendChild(text);
   }//DOMを操作してみよう「愛」「交友」「仕事」のいずれかに該当しそうな単語が一つも見つかりませんでした。
+
 };
 
 

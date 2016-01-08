@@ -118,9 +118,7 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,RGBlist) =>
           continue;
         }
         for(j=0;j<tmp.length;++j){
-          tangoset.add({name:keitaisokaiseki[m][i][j],
-            group:0
-          });//tangoset終了
+          tangoset.add(keitaisokaiseki[m][i][j]);//tangoset終了
         }
       }
     }
@@ -132,7 +130,7 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,RGBlist) =>
       miserables.nodes[i]=tangosett[i].t;
     }
 
-    //console.log(miserables.nodes);
+    console.log(miserables.nodes);
 
     select(checkboxlist,keitaisokaiseki,miserables,chboxlist,list,RGB);
     setForViz(keitaisokaiseki,checkboxlist,chboxlist,RGBlist);
