@@ -53,29 +53,20 @@ var viz=(stackdataArr,color2) => {
 };
 
 var funcChecked = (chboxlist,checked) => {
+  console.log("funcChecked");
   var c;
-  //console.log("手順2に進んだよ")
-  for(c=0 ; c<chboxlist.length ; c++){
-    var obj = eval("document.form1.ken" + c);  //checkboxｵﾌﾞｼﾞｪｸﾄを生成する
-    if(obj.checked)	{
-      checked[c] =1;
-    }else{
-      checked[c]=0;
+  for(c=1;c<chboxlist.length;c++){
+    console.log(c);
+    const radio = document.getElementById(c).children;
+    console.log(radio);
+    for(let i = 0, l = radio.length; i < l; i++){
+      console.log("c=%d,i=%d,value=%d",c,i,radio[i].value);
+      if(radio[i].checked){
+        console.log("c=%d,i=%d,value=%d",c,i,radio[i].value);
+        checked[i] = radio[i].value;
+      }
     }
-  }    //"ken"に1～5の連番付き
-
-  /*
-
-  const radio_buttons = document.getElementById("hoge").children;
-  for(let i = 0, l = radio_buttons.length; i < l; i++){
-  	radio_buttons[i].onchange = () => {
-    	console.log("changed", i);
-    };
   }
-
-  */
-
-
 };
 
 var setForViz = (keitaisokaiseki,checkboxlist,chboxlist,RGBlist) => {
@@ -83,23 +74,22 @@ var setForViz = (keitaisokaiseki,checkboxlist,chboxlist,RGBlist) => {
   var color2=[];
   var stackdataArr = [];
   funcChecked(chboxlist,checked);
-  var h,i,j,c
-  var m=0;//発言数
+  var h,i,j,c,m;
   var n=0;//偶奇1setのセット数
-  while(m<keitaisokaiseki.length){//発言ごとのループ
-    //まずは偶数から（カウンセラー）
-    //iは発言内の何文目か。
-    for(i=0;i<keitaisokaiseki[m].length;i++){
-      j=0; //集計単位内で何単語目か
-      for(j=0;j<keitaisokaiseki[m][i].length;j++){//単語ごとのループ
-        for(c=0;c<checkboxlist.length;c++){
-          if (checked[c]==1) {
-            if(keitaisokaiseki[m][i][j]==chboxlist[c][0]){
+  for(c=0;c<checkboxlist.length;c++){
+    if (checked[c]>=1) {
+      for(m=0;m<keitaisokaiseki.length;m=m+2){//発言ごとのループ
+        //まずは偶数から（カウンセラー）
+        //iは発言内の何文目か。
+        for(i=0;i<keitaisokaiseki[m].length;i++){
+          j=0; //集計単位内で何単語目か
+          for(j=0;j<keitaisokaiseki[m][i].length;j++){//単語ごとのループ
+            if(checked[c]==1){
               if(chboxlist[c][1]==0){
                 RGBlist[n][0]=RGBlist[n][0]+1;
-              }else if(chboxlist[c][1]==1){
+              }else if(checked[c]==2){
                 RGBlist[n][1]=RGBlist[n][1]+1;
-              }else if(chboxlist[c][1]==2){
+              }else if(checked[c]==3){
                 RGBlist[n][2]=RGBlist[n][2]+1;
               }
             }
@@ -107,9 +97,9 @@ var setForViz = (keitaisokaiseki,checkboxlist,chboxlist,RGBlist) => {
         }
       }
     }
-    m=m+2;
     n++;
   }
+  console.log(RGBlist);
 
 
   for(m=0;m<keitaisokaiseki.length/2;m++){
@@ -119,21 +109,21 @@ var setForViz = (keitaisokaiseki,checkboxlist,chboxlist,RGBlist) => {
       color2[m]="gray";
     }
   }
-  //console.log(color2);
+  console.log(color2);
 
   for(h=0;h<3;h++){
     stackdataArr[h] = [];
     for(m=0;m<((keitaisokaiseki.length-1)/2);m++){//2個飛ばしにしたら後が面倒くさい。患者 1→0　3→1 長さ9なら番号は8まで
       stackdataArr[h][m]=new Object();
       stackdataArr[h][m]= {x:m+1,y:(28*(RGBlist[m][h])/(keitaisokaiseki[2*m+1].length))};
-      //console.log(stackdataArr[h][m]);
+      console.log(stackdataArr[h][m]);
     }
   }
 
   viz(stackdataArr,color2);
 }
 
-
+//      radio[i].onchange = () => {};
 
 
 export {force, svg, color, width, height, setForViz};
