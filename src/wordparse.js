@@ -110,15 +110,42 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,RGBlist) =>
       m++;
     }
     //console.log(keitaisokaiseki);
+
+    var tango=[];//全単語（重複あり）
+    x=0;
+
     for(m=0;m<keitaisokaiseki.length;++m){
       for(i=0;i<keitaisokaiseki[m].length;++i){
-        tmp = keitaisokaiseki[m][i];
-        if(keitaisokaiseki[m][i] ==false||keitaisokaiseki[m][i]==[]){
-          keitaisokaiseki[m][i].length=0;
-          continue;
+        for(j=0;j<keitaisokaiseki[m][i].length;++j){
+          tango[x]=keitaisokaiseki[m][i][j];
+          x++;
         }
-        for(j=0;j<tmp.length;++j){
+      }
+    }
+
+    console.log(tango);
+
+    x=0;//tangoについてまわす
+
+    for(m=0;m<keitaisokaiseki.length;++m){
+      for(i=0;i<keitaisokaiseki[m].length;++i){
+        for(j=0;j<keitaisokaiseki[m][i].length;++j){
+          y=0;//重複があれば1
+          if(x>0){
+            for(z=0;z<x;z++){
+              if(tango[z]==keitaisokaiseki[m][i][j]){
+                y=1;
+                break;//y=1になったので用済み
+              }
+            }
+          }
+          x++;
+          if(y==1){
+            continue;//次のjへ
+          }
+
           tangoset.add(keitaisokaiseki[m][i][j]);//tangoset終了
+
         }
       }
     }
