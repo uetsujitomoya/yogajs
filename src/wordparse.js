@@ -1,24 +1,16 @@
+
 import "kuromoji"
-import {select} from "./select.js"
 
-var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,RGBlist) => {
-  var data = JSON.parse(event.target.result);
-  var h,i,j,k,l,m,n,c,r,g,b,x,y,z,bunsuu;  //mは段落
-  var hinshi = [];
-  var RGB = [];//どの発言にRGBが入っているか大まかに色分け
-  var buntou;
-  var toutencount;
-  var toutenbasho=0;
-  var tangoset = new Set();
-  var tmp=[];
-  var tangosett = [];
-  var miserables={"nodes":[],"links":[]};
-  var list = [];
-  var target = document.getElementById("chbox");//checkboxを出す場所
 
+var wordparse = (event,keitaisokaiseki,checkboxlist,chboxlist,RGBlist) => {
   kuromoji.builder({dicPath: 'dict/'}).build((err, tokenizer) => {
     const path = tokenizer.tokenize(data[0].a); //1集計単位ごとにこの関数を用いよう
     //console.log(path);
+    var h,i,j,k,l,m,n,c,bunsuu;  //mは段落
+    var hinshi = [];
+
+    var target = document.getElementById("chbox");//checkboxを出す場所
+
     n=0; //nは全データ内で何文字目か
     bunsuu=0; //全段落内で何分目か
     m=0; //何個目の発言か。これの偶奇わけで判断。カウンセラーが奇数。患者が偶数。1文は1文で格納
@@ -41,7 +33,6 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,RGBlist) =>
         while(n<path.length){//単語ごとのループ
           if(path[n].basic_form=="。"||path[n].basic_form=="？"||path[n].basic_form=="?"||path[n].word_id=="2613630"){
             bunsuu++;
-            toutencount=0;
             break;//１文終了
           }
           if(path[n].pos_detail_1=="接尾"||path[n].basic_form=="*"||path[n].pos=="助詞"||path[n].basic_form=="、"||path[n].pos=="記号"||path[n].pos=="助動詞"||path[n].pos=="感動詞"||path[n].pos=="接頭詞"||path[n].pos_detail_1=="非自立"||path[n].basic_form=="する"||path[n].basic_form=="いる"||path[n].basic_form=="こういう"||path[n].basic_form=="そういう"||path[n].basic_form=="こう"||path[n].basic_form=="する"||path[n].basic_form=="こうした"||path[n].basic_form=="いう"||path[n].basic_form=="する"||path[n].basic_form=="なる"||path[n].basic_form=="その"||path[n].basic_form=="あの"||path[n].pos_detail_1=="数"||path[n].basic_form=="そう"||path[n].basic_form=="気持ち"||path[n].basic_form=="思い"||path[n].basic_form=="思う"||path[n].basic_form=="ある"){
@@ -100,34 +91,9 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,RGBlist) =>
       }
       m++;
     }
-    //console.log(keitaisokaiseki);
-    for(m=0;m<keitaisokaiseki.length;++m){
-      for(i=0;i<keitaisokaiseki[m].length;++i){
-        tmp = keitaisokaiseki[m][i];
-        if(keitaisokaiseki[m][i] ==false||keitaisokaiseki[m][i]==[]){
-          keitaisokaiseki[m][i].length=0;
-          continue;
-        }
-        for(j=0;j<tmp.length;++j){
-          tangoset.add({name:keitaisokaiseki[m][i][j],
-            group:0
-          });//tangoset終了
-        }
-      }
-    }
-    tangosett = Array.from(tangoset).map(function(t) {
-      return {t};
-    });
-
-    for(i=0;i<tangosett.length;i++){
-      miserables.nodes[i]=tangosett[i].t;
-    }
-
-    //console.log(miserables.nodes);
-
-    select(checkboxlist,keitaisokaiseki,miserables,chboxlist,list,RGB);
-
-  })//kuromoji.builder終了
+  });//kuromoji.builder終了
 };
 
-export {funcReaderOnload};
+
+
+export {wordparse};
