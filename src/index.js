@@ -26,8 +26,6 @@ document.getElementById('load-button').addEventListener('click', function () {
     console.log(event);
     funcReaderOnload(event,keitaisokaiseki,checkboxlist,chboxlist,RGBlist);
     document.getElementById('check-button').addEventListener('click', function () {
-      //check配列でonの単語について、文を舐めてRGBlistをつくる。
-      //偶奇1setでカウント（同じm内に収める）
       setForViz(keitaisokaiseki,checkboxlist,chboxlist,RGBlist);
     });
     //checkbox依存部分終わり
