@@ -23,6 +23,7 @@ document.getElementById('load-button').addEventListener('click', function () {
   var file = document.getElementById('file-input').files[0];
   var reader = new FileReader();
   reader.onload = function(event) {
+    console.log(event);
     funcReaderOnload(event,keitaisokaiseki,checkboxlist,chboxlist,RGBlist);
     //これか。
     document.getElementById('check-button').addEventListener('click', function () {

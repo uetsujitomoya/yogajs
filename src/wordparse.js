@@ -2,7 +2,7 @@ import "kuromoji"
 import {select} from "./select.js"
 
 var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,RGBlist) => {
-  var data = JSON.parse(event.target.result);
+
   var h,i,j,k,l,m,n,c,r,g,b,x,y,z,bunsuu;  //mは段落
   var hinshi = [];
   var RGB = [];//どの発言にRGBが入っているか大まかに色分け
@@ -16,8 +16,16 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,RGBlist) =>
   var list = [];
   var target = document.getElementById("chbox");//checkboxを出す場所
 
+
+
+
+  var data = JSON.parse(event.target.result);
   kuromoji.builder({dicPath: 'dict/'}).build((err, tokenizer) => {
-    const path = tokenizer.tokenize(data[0].a); //1集計単位ごとにこの関数を用いよう
+    const path = tokenizer.tokenize(data[0].a);
+
+
+
+    //1集計単位ごとにこの関数を用いよう
     //console.log(path);
     n=0; //nは全データ内で何文字目か
     bunsuu=0; //全段落内で何分目か
