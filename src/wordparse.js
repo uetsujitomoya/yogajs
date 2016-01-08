@@ -14,7 +14,6 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,RGBlist) =>
   var miserables={"nodes":[],"links":[]};
   var list = [];
   var target = document.getElementById("chbox");//checkboxを出す場所
-  var checkboxRGB=[];
 
   kuromoji.builder({dicPath: 'dict/'}).build((err, tokenizer) => {
     const path = tokenizer.tokenize(data[0].a); //1集計単位ごとにこの関数を用いよう
@@ -132,10 +131,6 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,RGBlist) =>
     for(k=0;k<miserables.nodes.length;k++){
       checkboxlist[k]=[0,0,0,0];
     }
-
-    checkboxRGB[0]=[];
-    checkboxRGB[1]=[];
-    checkboxRGB[2]=[];
 
     c=0;
     r=0;
