@@ -35,7 +35,7 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,list,RGB) => {
                 //その他の選択肢
 
                 if(RGB[m][i][0]==1){
-                  if(checkboxlist[k][1]==0){//単語とグループの組み合わせの重複を防ぐ
+                  
 
                     //checkboxに出す単語とグループの組み合わせ、さらにcheckedか否かの保存
 
@@ -49,11 +49,11 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,list,RGB) => {
                     chboxlist[c]=[];
                     chboxlist[c][0]=miserables.nodes[k];
                     chboxlist[c][1]=0;
-                  }
+                  
                 }
 
                 if(RGB[m][i][1]==1){
-                  if(checkboxlist[k][2]==0){
+                  
                     if(keitaisokaiseki[m][i][j]=="友人"||keitaisokaiseki[m][i][j]=="親友"||keitaisokaiseki[m][i][j]=="友達"||keitaisokaiseki[m][i][j]=="友"||keitaisokaiseki[m][i][j]=="交友"||keitaisokaiseki[m][i][j]=="友好"){
                       document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=2 checked>「交友」に含む</label>";
                     }else{
@@ -64,10 +64,10 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,list,RGB) => {
                     chboxlist[c]=[];
                     chboxlist[c][0]=miserables.nodes[k];
                     chboxlist[c][1]=1;
-                  }
+                  
                 }
                 if(RGB[m][i][2]==1){
-                  if(checkboxlist[k][3]==0){
+                  
                     if(keitaisokaiseki[m][i][j]=="仕事"||keitaisokaiseki[m][i][j]=="休み"){
                       document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=3 checked>「仕事」に含む</label>";
                     }else{
@@ -77,7 +77,7 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,list,RGB) => {
                     chboxlist[c]=[];
                     chboxlist[c][0]=miserables.nodes[k];
                     chboxlist[c][1]=2;
-                  }
+                  
                 }
                 if(checkboxlist[k][1]+checkboxlist[k][2]+checkboxlist[k][3]>=0){
                   break;//miserables実は重複してる

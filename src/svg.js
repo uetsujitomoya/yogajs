@@ -75,7 +75,7 @@ var setForViz = (keitaisokaiseki,checkboxlist,chboxlist,RGBlist) => {
   var stackdataArr = [];
   funcChecked(chboxlist,checked);
   var h,i,j,c,m;
-  var n=0;//偶奇1setのセット数
+  var n=0;
   console.log(RGBlist);
   for(c=0;c<(chboxlist.length-1);c++){
     if (checked[c]>=1) {
