@@ -79,24 +79,26 @@ var setForViz = (keitaisokaiseki,checkboxlist,chboxlist,RGBlist) => {
 	var h,i,j,c,m,n;
 
 	console.log(checked);
-	console.log(RGBlist);
+	//console.log(RGBlist);
 	console.log(chboxlist);
 	for(c=1;c<chboxlist.length;c++){
 		if (checked[c]>=1) {
-
+			n=0;
 			for(m=0;m<keitaisokaiseki.length;m=m+2){//発言ごとのループ
 				//まずは偶数から（カウンセラー）
 				//iは発言内の何文目か。
-				n=0;
 				for(i=0;i<keitaisokaiseki[m].length;i++){
 					j=0; //集計単位内で何単語目か
 					for(j=0;j<keitaisokaiseki[m][i].length;j++){//単語ごとのループ
 						if(keitaisokaiseki[m][i][j]==chboxlist[c][0]){
 							if(checked[c]==1){
+								console.log("c=%d,n=%d",c,n);
 								RGBlist[n][0]=RGBlist[n][0]+1;
 							}else if(checked[c]==2){
+								console.log("c=%d,n=%d",c,n);
 								RGBlist[n][1]=RGBlist[n][1]+1;
 							}else if(checked[c]==3){
+								console.log("c=%d,n=%d",c,n);
 								RGBlist[n][2]=RGBlist[n][2]+1;
 							}
 						}

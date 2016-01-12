@@ -37,6 +37,7 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,RGBlist) =>
       RGB[m] = [];
 
       if(m%2==0){//カウンセラー
+      	console.log(m/2);
         RGBlist[m/2] = [0,0,0,0,0];
       }
       i=0; //段落内の何文目か。
@@ -157,7 +158,7 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,RGBlist) =>
       miserables.nodes[i]=tangosett[i].t;
     }
 
-    console.log(miserables.nodes);
+    //console.log(miserables.nodes);
 
     select(checkboxlist,keitaisokaiseki,miserables,chboxlist,list,RGB);
 
