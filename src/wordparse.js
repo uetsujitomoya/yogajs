@@ -2,7 +2,7 @@ import "kuromoji"
 import {select} from "./select.js"
 import {setForViz} from "./svg.js"
 
-var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,RGBlist) => {
+var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,RGBlist,hatsugen,bun) => {
 
 	var h,i,j,k,l,m,n,c,r,g,b,x,y,z,bunsuu;  //mは段落
 	var hinshi = [];
@@ -17,8 +17,7 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,RGBlist) =>
 	var list = [];
 	var target = document.getElementById("chbox");//checkboxを出す場所
 
-	var hatsugen =[];
-	var bun = [];
+
 
 	var data = JSON.parse(event.target.result);
 	kuromoji.builder({dicPath: 'dict/'}).build((err, tokenizer) => {
