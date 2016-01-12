@@ -15,7 +15,7 @@ var svg = d3.select("body").append("svg")
 .attr("height", height);
 
 
-var viz=(stackdataArr,color2) => {
+var viz=(stackdataArr,color2,bun) => {
 	console.log("func viz start");
 
 	var stack = d3.layout.stack()
@@ -51,7 +51,14 @@ var viz=(stackdataArr,color2) => {
 	svg.selectAll("line")
 	.attr("stroke", function(d,i){return color2[color2.length-1-i]})
 	.attr("stroke-width", 3)
-	.on("mouseover",  function(d,i){ mouseover(i); })
+	.on('mouseover', function(d,i){
+		console.log(bun[2*(color2.length-i-1)]);
+		var element = document.createElement("div");
+		element.innerHTML = bun[2*i];
+		this.appendChild(element);
+	})
+
+
 };
 
 var funcChecked = (chboxlist,checked) => {
@@ -143,7 +150,7 @@ var setForViz = (keitaisokaiseki,checkboxlist,chboxlist,RGBlist,hatsugen,bun) =>
 		}
 	}
 
-	viz(stackdataArr,color2);
+	viz(stackdataArr,color2,bun);
 }
 
 //      radio[i].onchange = () => {};
