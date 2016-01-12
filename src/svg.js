@@ -10,12 +10,7 @@ var force = d3.layout.force()
 .linkDistance(120)
 .size([width, height]);
 
-var svg = d3.select("body").append("svg")
-.attr("width", width)
-.attr("height", height);
-
-
-var viz=(stackdataArr,color2,bun) => {
+var viz=(stackdataArr,color2,bun,svg) => {
 	console.log("func viz start");
 
 	var stack = d3.layout.stack()
@@ -57,8 +52,6 @@ var viz=(stackdataArr,color2,bun) => {
 		element.innerHTML = bun[2*i];
 		this.appendChild(element);
 	})
-
-
 };
 
 var funcChecked = (chboxlist,checked) => {
@@ -88,6 +81,11 @@ var funcChecked = (chboxlist,checked) => {
 };
 
 var setForViz = (keitaisokaiseki,checkboxlist,chboxlist,RGBlist,hatsugen,bun) => {
+
+	var svg = d3.select("body").append("svg")
+	.attr("width", width)
+	.attr("height", height);
+
 	console.log("setForViz");
 	var checked = [];
 	var color2=[];
@@ -98,6 +96,13 @@ var setForViz = (keitaisokaiseki,checkboxlist,chboxlist,RGBlist,hatsugen,bun) =>
 	console.log(checked);
 	//console.log(RGBlist);
 	console.log(chboxlist);
+
+	for(n=0;n<RGBlist.length;n++){
+		RGBlist[n][0]=0;
+		RGBlist[n][1]=0;
+		RGBlist[n][2]=0;//更新の時に値を引き継ぐのを防ぐ
+	}
+
 	for(c=1;c<chboxlist.length;c++){
 		if (checked[c]>=1) {
 			console.log("checked[%d]=%d",c,checked[c]);
@@ -150,10 +155,10 @@ var setForViz = (keitaisokaiseki,checkboxlist,chboxlist,RGBlist,hatsugen,bun) =>
 		}
 	}
 
-	viz(stackdataArr,color2,bun);
+	viz(stackdataArr,color2,bun,svg);
 }
 
 //      radio[i].onchange = () => {};
 
 
-export {force, svg, color, width, height, setForViz};
+export {setForViz};
