@@ -1,14 +1,6 @@
 import d3 from "d3"
 
-var width = 1200,
-height = 250;
-
-var color = d3.scale.category20c();
-
-var force = d3.layout.force()
-.charge(-120)
-.linkDistance(120)
-.size([width, height]);
+var height=250,width=1200;
 
 var viz=(stackdataArr,color2,bun,svg) => {
 	console.log("func viz start");
@@ -82,9 +74,11 @@ var funcChecked = (chboxlist,checked) => {
 
 var setForViz = (keitaisokaiseki,checkboxlist,chboxlist,RGBlist,hatsugen,bun) => {
 
-	var svg = d3.select("body").append("svg")
-	.attr("width", width)
-	.attr("height", height);
+	d3.select("#svgdiv").select("svg").remove();
+
+	var svg = d3.select("#svgdiv").append("svg")
+	.attr("height",height)
+	.attr("width",width);
 
 	console.log("setForViz");
 	var checked = [];
