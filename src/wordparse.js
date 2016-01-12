@@ -156,21 +156,19 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,RGBlist,hat
 				}
 			}
 		}
-		tangosett = Array.from(tangoset).map(function(t) {
-			return {t};
-			});
+		tangosett = Array.from(tangoset).map(function(t) {return {t};});
 
-		  for(i=0;i<tangosett.length;i++){
+		for(i=0;i<tangosett.length;i++){
 			miserables.nodes[i]=tangosett[i].t;
-			}
+		}
 
-		  //console.log(miserables.nodes);
+		//console.log(miserables.nodes);
 
-		  select(checkboxlist,keitaisokaiseki,miserables,chboxlist,list,RGB);
+		select(checkboxlist,keitaisokaiseki,miserables,chboxlist,list,RGB);
 
-		  setForViz(keitaisokaiseki,checkboxlist,chboxlist,RGBlist,hatsugen,bun);
+		setForViz(keitaisokaiseki,checkboxlist,chboxlist,RGBlist,hatsugen,bun);//形態素解析後に1度目の描画
 
-			})//kuromoji.builder終了
-			};
+	});//kuromoji.builder終了
+};
 
-	  export {funcReaderOnload};
+export {funcReaderOnload};
