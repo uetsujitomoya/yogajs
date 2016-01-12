@@ -27,6 +27,7 @@ document.getElementById('load-button').addEventListener('click', function () {
   reader.onload = function(event) {
     console.log(event);
     funcReaderOnload(event,keitaisokaiseki,checkboxlist,chboxlist,RGBlist,hatsugen,bun);
+    
     document.getElementById('radio_buttons').onchange = () => {
     	setForViz(keitaisokaiseki,checkboxlist,chboxlist,RGBlist,hatsugen,bun);
     };

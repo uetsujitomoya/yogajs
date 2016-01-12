@@ -2,6 +2,7 @@ import "kuromoji"
 import {select} from "./select.js"
 import {setForViz} from "./svg.js"
 
+
 var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,RGBlist,hatsugen,bun) => {
 
 	var h,i,j,k,l,m,n,c,r,g,b,x,y,z,bunsuu;  //mは段落
@@ -166,6 +167,8 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,RGBlist,hat
 		  //console.log(miserables.nodes);
 
 		  select(checkboxlist,keitaisokaiseki,miserables,chboxlist,list,RGB);
+
+		  setForViz(keitaisokaiseki,checkboxlist,chboxlist,RGBlist,hatsugen,bun);
 
 			})//kuromoji.builder終了
 			};
