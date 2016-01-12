@@ -39,7 +39,7 @@ var viz=(stackdataArr,color2) => {
 	.attr("d", area)
 	.attr("fill",function(d,i){return colors[i]});
 
-	//奇数発言目
+	//偶数発言目
 	//grid line
 	//引数はstart,stop,stepの順
 	//[190,170,150,130,110,90,70,50,30,10]と同等
@@ -51,6 +51,7 @@ var viz=(stackdataArr,color2) => {
 	svg.selectAll("line")
 	.attr("stroke", function(d,i){return color2[color2.length-1-i]})
 	.attr("stroke-width", 3)
+	.on("mouseover",  function(d,i){ mouseover(i); })
 };
 
 var funcChecked = (chboxlist,checked) => {
