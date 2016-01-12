@@ -65,6 +65,15 @@ var funcChecked = (chboxlist,checked) => {
 				//console.log("c=%d,i=%d",c,i);
 				//console.log(radio[i].control.value);
 				checked[c-1] = radio[i].control.value;
+				if(radio[i].control.value=="1"){
+					checked[c-1] =1;
+				}else if(radio[i].control.value=="2"){
+					checked[c-1] =2;
+				}else if(radio[i].control.value=="3"){
+					checked[c-1] =3;
+				}else{
+					checked[c-1] =0;
+				}
 			}
 		}
 	}
@@ -83,6 +92,7 @@ var setForViz = (keitaisokaiseki,checkboxlist,chboxlist,RGBlist) => {
 	console.log(chboxlist);
 	for(c=1;c<chboxlist.length;c++){
 		if (checked[c]>=1) {
+			console.log("checked[%d]=%d",c,checked[c]);
 			n=0;
 			for(m=0;m<keitaisokaiseki.length;m=m+2){//発言ごとのループ
 				//まずは偶数から（カウンセラー）
@@ -91,14 +101,15 @@ var setForViz = (keitaisokaiseki,checkboxlist,chboxlist,RGBlist) => {
 					j=0; //集計単位内で何単語目か
 					for(j=0;j<keitaisokaiseki[m][i].length;j++){//単語ごとのループ
 						if(keitaisokaiseki[m][i][j]==chboxlist[c][0]){
+							console.log(chboxlist[c][0]);
 							if(checked[c]==1){
-								console.log("c=%d,n=%d",c,n);
+								console.log("c=%d,n=%d,%s",c,n,chboxlist[c][0]);
 								RGBlist[n][0]=RGBlist[n][0]+1;
 							}else if(checked[c]==2){
-								console.log("c=%d,n=%d",c,n);
+								console.log("c=%d,n=%d,%s",c,n,chboxlist[c][0]);
 								RGBlist[n][1]=RGBlist[n][1]+1;
 							}else if(checked[c]==3){
-								console.log("c=%d,n=%d",c,n);
+								console.log("c=%d,n=%d,%s",c,n,chboxlist[c][0]);
 								RGBlist[n][2]=RGBlist[n][2]+1;
 							}
 						}
