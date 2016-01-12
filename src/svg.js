@@ -61,10 +61,10 @@ var funcChecked = (chboxlist,checked) => {
 		const radio = document.getElementById(c).children;
 		console.log(radio);
 		for(let i = 1, l = radio.length; i < l; i++){
-			console.log("c=%d,i=%d",c,i);
-			console.log(radio[i].control.checked);
-			if(radio[i].control.checked){
-				checked[c-1] = radio[i].value;
+			if(radio[i].control.checked==true){
+				console.log("c=%d,i=%d",c,i);
+				console.log(radio[i].control.value);
+				checked[c-1] = radio[i].control.value;
 			}
 		}
 	}
@@ -78,7 +78,6 @@ var setForViz = (keitaisokaiseki,checkboxlist,chboxlist,RGBlist) => {
 	funcChecked(chboxlist,checked);
 	var h,i,j,c,m;
 	var n=0;
-	console.log(RGBlist);
 	for(c=0;c<(chboxlist.length-1);c++){
 		if (checked[c]>=1) {
 			for(m=0;m<keitaisokaiseki.length;m=m+2){//発言ごとのループ
