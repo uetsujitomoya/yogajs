@@ -32,6 +32,7 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,RGBlist) =>
 		while(n<path.length){//発言ごとのループ
 			keitaisokaiseki[m] = []; //一発言
 			bun[m] = [];
+			hatsugen[m] = "";
 			hinshi[m] = [];
 			RGB[m] = [];
 
@@ -42,6 +43,7 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,RGBlist) =>
 			i=0; //段落内の何文目か。
 			while(n<path.length){//文ごとのループ
 				keitaisokaiseki[m][i] = []; //文
+				bun[m][i]="";
 				hinshi[m][i]=[];
 				keitaisokaiseki[m][i].length = 0;
 				RGB[m][i] = [0,0,0];
