@@ -108,8 +108,6 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,list,RGB) => {
     text = document.createTextNode('「愛」「交友」「仕事」のいずれかに該当しそうな単語が一つも見つかりませんでした。');
     document.body.appendChild(greet).appendChild(text);
   }//DOMを操作してみよう「愛」「交友」「仕事」のいずれかに該当しそうな単語が一つも見つかりませんでした。
-
-  console.log(chboxlist);
 };
 
 
