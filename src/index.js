@@ -25,9 +25,9 @@ document.getElementById('load-button').addEventListener('click', function () {
   reader.onload = function(event) {
     console.log(event);
     funcReaderOnload(event,keitaisokaiseki,checkboxlist,chboxlist,RGBlist);
-    document.getElementById('check-button').addEventListener('click', function () {
+    document.getElementById('radio_buttons').onchange = () => {
       setForViz(keitaisokaiseki,checkboxlist,chboxlist,RGBlist);
-    });
+    };
     //checkbox依存部分終わり
   };//reader.onload終了。これとなんちゃら(file)が並列してないといけない
   reader.readAsText(file);
