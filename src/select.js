@@ -31,7 +31,7 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,R
                 //target.innerHTML += "<input id=\"ken" + c + "\" type=checkbox checked /><label for="+c+">「" + miserables.nodes[k] + "」を「愛」に。</label><br />";
 
                 c++;
-                target.innerHTML += "<div id=\"" + c + "\">" + miserables.nodes[k] + "<br><label><input type=radio name=\"" + c + "\" value=0>どれにも含まない</div></label><br>";
+                target.innerHTML += "<div id=\"" + c + "\">" + miserables.nodes[k] + "<br><label><input type=radio name=\"" + c + "\" value=0>どれにも含まない</label></div><br>";
                 //その他の選択肢
 
                 if(RGB[m][i][0]==1){
@@ -99,7 +99,7 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,R
   n=0;
   for(m=0;m<keitaisokaiseki.length;m=m+2){
   	c++;
-  	target.innerHTML += "<div id=\"" + c + "\">" + hatsugen[m] + "<br><label><input type=radio name=\"" + c + "\" value=4>閉じられた質問</div></label><br>";
+  	target.innerHTML += "<div id=\"" + c + "\">" + hatsugen[m] + "<br><label><input type=radio name=\"" + c + "\" value=4 checked>閉じられた質問</label></div><br>";
 
 
   	if(RGBlist[m/2][3]=1){
@@ -113,6 +113,7 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,R
   		document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=5>その他（無駄話・相づち等）</label>";
   	}
 
+  	document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=4 checked>閉じられた質問</label>";
   		
   	chboxlist2[n]=c;
   	

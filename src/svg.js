@@ -41,7 +41,7 @@ var viz=(stackdataArr,color2,hatsugen,svg) => {
 	.on('mouseover', function(d,i){
 		console.log("%d,%s",2*(color2.length-i-1),hatsugen[2*(color2.length-i-1)]);
 		var e = document.getElementById('msg');
-		e.innerHTML = hatsugen[-2+2*(color2.length-i-1)]+"<br>"+hatsugen[-1+2*(color2.length-i-1)]+"<br><b><u>"+hatsugen[2*(color2.length-i-1)]+"</u></b><br>"+hatsugen[1+2*(color2.length-i-1)]+"<br>"+hatsugen[2+2*(color2.length-i-1)];
+		e.innerHTML = hatsugen[-3+2*(color2.length-i-1)]+"<br>"+hatsugen[-2+2*(color2.length-i-1)]+"<br>"+hatsugen[-1+2*(color2.length-i-1)]+"<br><b><u>"+hatsugen[2*(color2.length-i-1)]+"</u></b><br>"+hatsugen[1+2*(color2.length-i-1)]+"<br>"+hatsugen[2+2*(color2.length-i-1)]+"<br>"+hatsugen[3+2*(color2.length-i-1)];
 		e.style.color = color2[color2.length-1-i];
 		
 		//var element = document.createElement("div");
@@ -152,7 +152,7 @@ var setForViz = (keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,RGBlist,hatsu
 			}
 		}
 	}
-	console.log(RGBlist);
+	//console.log(RGBlist);
 
 
 	for(m=0;m<checked2.length;m++){
@@ -174,11 +174,7 @@ var setForViz = (keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,RGBlist,hatsu
 			console.log(stackdataArr[h][m]);
 		}
 	}
-
 	viz(stackdataArr,color2,hatsugen,svg);
 }
-
-//      radio[i].onchange = () => {};
-
 
 export {setForViz};
