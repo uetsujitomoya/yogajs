@@ -26,10 +26,6 @@ var viz=(stackdataArr,color2,bun,svg) => {
 	.attr("d", area)
 	.attr("fill",function(d,i){return colors[i]});
 
-	//偶数発言目
-	//grid line
-	//引数はstart,stop,stepの順
-	//[190,170,150,130,110,90,70,50,30,10]と同等
 	var range = d3.range((width)-(width/(color2.length*2)), color2.length-1, -width/(color2.length));
 	svg.selectAll("line.v")
 	.data(range).enter().append("line")
@@ -41,12 +37,8 @@ var viz=(stackdataArr,color2,bun,svg) => {
 	.on('mouseover', function(d,i){
 		console.log("%d,%s",2*(color2.length-i-1),bun[2*(color2.length-i-1)]);
 		var e = document.getElementById('msg');
-		e.innerHTML = bun[-2+2*(color2.length-i-1)]+"<br>"+bun[-1+2*(color2.length-i-1)]+"<br><b><u>"+bun[2*(color2.length-i-1)]+"</u></b><br>"+bun[1+2*(color2.length-i-1)]+"<br>"+bun[2+2*(color2.length-i-1)];
+		e.innerHTML = bun[-3+2*(color2.length-i-1)]+"<br>"+bun[-2+2*(color2.length-i-1)]+"<br>"+bun[-1+2*(color2.length-i-1)]+"<br><b><u>"+bun[2*(color2.length-i-1)]+"</u></b><br>"+bun[1+2*(color2.length-i-1)]+"<br>"+bun[2+2*(color2.length-i-1)]+"<br>"+bun[3+2*(color2.length-i-1)];
 		e.style.color = color2[color2.length-1-i];
-		
-		//var element = document.createElement("div");
-		//element.innerHTML = bun[2*i];
-		//this.appendChild(element);
 	})
 };
 
@@ -54,13 +46,9 @@ var funcChecked = (chboxlist,checked) => {
 	console.log("funcChecked");
 	var c;
 	for(c=1;c<chboxlist.length;c++){
-		//console.log(c);
 		const radio = document.getElementById(c).children;
-		//console.log(radio);
 		for(let i = 1, l = radio.length; i < l; i++){
 			if(radio[i].control.checked==true){
-				//console.log("c=%d,i=%d",c,i);
-				//console.log(radio[i].control.value);
 				checked[c-1] = radio[i].control.value;
 				if(radio[i].control.value=="1"){
 					checked[c-1] =1;
@@ -91,27 +79,20 @@ var setForViz = (keitaisokaiseki,checkboxlist,chboxlist,RGBlist,hatsugen,bun) =>
 	funcChecked(chboxlist,checked);
 	var h,i,j,c,m,n;
 
-	console.log(checked);
-	//console.log(RGBlist);
-	console.log(chboxlist);
-
 	for(n=0;n<RGBlist.length;n++){
 		RGBlist[n][0]=0;
 		RGBlist[n][1]=0;
-		RGBlist[n][2]=0;//更新の時に値を引き継ぐのを防ぐ
+		RGBlist[n][2]=0;
 	}
 
 	for(c=1;c<chboxlist.length;c++){
 		if (checked[c]>=1) {
 			console.log("checked[%d]=%d",c,checked[c]);
 			n=0;
-			for(m=1;m<keitaisokaiseki.length;m=m+2){//発言ごとのループ
-				//（患者のみ）
-				//console.log(hatsugen[m]);
-				//iは発言内の何文目か。
+			for(m=1;m<keitaisokaiseki.length;m=m+2){
 				for(i=0;i<keitaisokaiseki[m].length;i++){
-					j=0; //集計単位内で何単語目か
-					for(j=0;j<keitaisokaiseki[m][i].length;j++){//単語ごとのループ
+					j=0; 
+					for(j=0;j<keitaisokaiseki[m][i].length;j++){
 						if(keitaisokaiseki[m][i][j]==chboxlist[c][0]){
 							console.log(chboxlist[c][0]);
 							if(checked[c]==1){
@@ -127,7 +108,7 @@ var setForViz = (keitaisokaiseki,checkboxlist,chboxlist,RGBlist,hatsugen,bun) =>
 						}
 					}
 				}
-				n++ //発言ごとにnを回す
+				n++
 			}
 
 		}
