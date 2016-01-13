@@ -1,35 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>
-  Force-Directed Graph
-</title>
-<meta charset="utf-8">
-<style>
+  <title>
+    Force-Directed Graph
+  </title>
+  <meta charset="utf-8">
+  <style>
 
-.node {
-stroke-width: 3px;
-}
+  .node {
+    stroke-width: 3px;
+  }
 
-.link {
-  stroke: #999;
-  stroke-opacity: .9;
-}
+  .link {
+    stroke: #999;
+    stroke-opacity: .9;
+  }
 
-</style>
+  </style>
 </head>
 <body>
   <input type="file" id="file-input"/>
-  <button id="load-button">手順1：左でjsonファイルを指定してから、ここをクリックして4秒ほど待つ</button>
-<br><p></p>
-<br>
-  <form name="form1" id="chbox" action=""></form>
-					<input type="button" value="手順2：このボタンと手順1ボタンとの間に現れる項目にチェックしてから、ここをクリック" id="check-button" /><br><br>
+  <button id="load-button">左でjsonファイルを指定してから、ここをクリックして4秒ほど待つ</button>
+  <br>
+  <br>
 
+  <div style="height:250px; overflow-y:scroll">
+    <form name="form1" id="chbox" action="">
+      <div id="radio_buttons"></div>
+    </form>
+  </div>
+  <br><br>
+  <div id="msg"></div>
+  <div id="svgdiv">
+  </div>
 
-
-          <script language="javascript" src="bundle.js"></script>
-
+  <script language="javascript" src="bundle.js"></script>
 
 </body>
 </html>
