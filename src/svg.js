@@ -5,26 +5,7 @@ var height=250,width=1200;
 var viz=(stackdataArr,color2,bun,svg) => {
 	console.log("func viz start");
 
-	var stack = d3.layout.stack()
-	.x(function(d){return 1;})
-	.y(function(d){return d.y;})
-	.values(function(d){return d;});
-	var stackdata = stack(stackdataArr);
-	var max = d3.max(stackdata[stackdata.length-1], function(d){return d.y + d.y0;});
-	var scaleX = d3.scale.linear().domain([0,color2.length]).range([width/(color2.length),width]);
-	var scaleY = d3.scale.linear().domain([0,max]).range([0,height]);
-	var colors = ["#7777ff","#77ff77","#ff7777"];
-
-	var area = d3.svg.area()
-	.x(function(d,i){return (i+1) * width/color2.length})
-	.y0(function(d){return height})
-	.y1(function(d){return height - scaleY(d.y+d.y0)});
-	svg.selectAll("path")
-	.data(stackdata.reverse())
-	.enter()
-	.append("path")
-	.attr("d", area)
-	.attr("fill",function(d,i){return colors[i]});
+	
 
 	//偶数発言目
 	//grid line
@@ -48,6 +29,30 @@ var viz=(stackdataArr,color2,bun,svg) => {
 		//element.innerHTML = bun[2*i];
 		//this.appendChild(element);
 	})
+
+
+	var stack = d3.layout.stack()
+		.x(function(d){return 1;})
+		.y(function(d){return d.y;})
+		.values(function(d){return d;});
+	var stackdata = stack(stackdataArr);
+	var max = d3.max(stackdata[stackdata.length-1], function(d){return d.y + d.y0;});
+	var scaleX = d3.scale.linear().domain([0,color2.length]).range([width/(color2.length),width]);
+	var scaleY = d3.scale.linear().domain([0,max]).range([0,height]);
+	var colors = ["#7777ff","#77ff77","#ff7777"];
+
+	var area = d3.svg.area()
+	.x(function(d,i){return (i+1) * width/color2.length})
+	.y0(function(d){return height})
+	.y1(function(d){return height - scaleY(d.y+d.y0)});
+	svg.selectAll("path")
+	.data(stackdata.reverse())
+	.enter()
+	.append("path")
+	.attr("d", area)
+	.attr("fill",function(d,i){return colors[i]});
+
+
 };
 
 var funcChecked = (chboxlist,checked) => {
