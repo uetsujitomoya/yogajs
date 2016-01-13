@@ -39,9 +39,9 @@ var viz=(stackdataArr,color2,bun,svg) => {
 	.attr("stroke", function(d,i){return color2[color2.length-1-i]})
 	.attr("stroke-width", 3)
 	.on('mouseover', function(d,i){
-		console.log(bun[2*(color2.length-i-1)]);
+		console.log("%d,%s",2*(color2.length-i-1),bun[2*(color2.length-i-1)]);
 		var e = document.getElementById('msg');
-		e.textContent = bun[2*(color2.length-i-1)];
+		e.innerHTML = bun[-2+2*(color2.length-i-1)]+"<br>"+bun[-1+2*(color2.length-i-1)]+"<br><b><u>"+bun[2*(color2.length-i-1)]+"</u></b><br>"+bun[1+2*(color2.length-i-1)]+"<br>"+bun[2+2*(color2.length-i-1)];
 		e.style.color = color2[color2.length-1-i];
 		
 		//var element = document.createElement("div");
@@ -142,7 +142,7 @@ var setForViz = (keitaisokaiseki,checkboxlist,chboxlist,RGBlist,hatsugen,bun) =>
 			color2[m]="gray";
 		}
 	}
-	console.log(color2);
+	//console.log("color2.length"color2);
 
 	for(h=0;h<3;h++){
 		stackdataArr[h] = [];
