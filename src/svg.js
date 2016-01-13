@@ -52,10 +52,13 @@ var funcChecked = (chboxlist,checked) => {
 				checked[c-1] = radio[i].control.value;
 				if(radio[i].control.value=="1"){
 					checked[c-1] =1;
+					break;
 				}else if(radio[i].control.value=="2"){
 					checked[c-1] =2;
+					break;
 				}else if(radio[i].control.value=="3"){
 					checked[c-1] =3;
+					break;
 				}else{
 					checked[c-1] =0;
 				}
@@ -64,7 +67,7 @@ var funcChecked = (chboxlist,checked) => {
 	}
 };
 
-var setForViz = (keitaisokaiseki,checkboxlist,chboxlist,RGBlist,hatsugen,bun) => {
+var setForViz = (keitaisokaiseki,chboxlist,RGBlist,hatsugen,bun) => {
 
 	d3.select("#svgdiv").select("svg").remove();
 
@@ -78,6 +81,8 @@ var setForViz = (keitaisokaiseki,checkboxlist,chboxlist,RGBlist,hatsugen,bun) =>
 	var stackdataArr = [];
 	funcChecked(chboxlist,checked);
 	var h,i,j,c,m,n;
+
+	console.log(RGBlist);
 
 	for(n=0;n<RGBlist.length;n++){
 		RGBlist[n][0]=0;
@@ -142,6 +147,7 @@ var setForViz = (keitaisokaiseki,checkboxlist,chboxlist,RGBlist,hatsugen,bun) =>
 	}
 
 	viz(stackdataArr,color2,bun,svg);
+	console.log(RGBlist);
 }
 
 //      radio[i].onchange = () => {};

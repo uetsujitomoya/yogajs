@@ -1,9 +1,9 @@
-import "kuromoji"
+import "kuromoji";
 import {select} from "./select.js"
 import {setForViz} from "./svg.js"
 
 
-var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,RGBlist,hatsugen,bun) => {
+var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,RGBlist=[],hatsugen,bun) => {
 
 	var h,i,j,k,l,m,n,c,r,g,b,x,y,z,bunsuu;  //mは段落
 	var hinshi = [];
@@ -18,7 +18,9 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,RGBlist,hat
 	var list = [];
 	var target = document.getElementById("chbox");//checkboxを出す場所
 
+	var checkboxlist=[];//checkboxに入る単語に1+RGBどれかの情報が3次元
 
+	bun=[];
 
 	var data = JSON.parse(event.target.result);
 	kuromoji.builder({dicPath: 'dict/'}).build((err, tokenizer) => {
@@ -63,11 +65,8 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,RGBlist,hat
 						continue;
 					}
 					keitaisokaiseki[m][i][j] = path[n].basic_form;
-					hinshi[m][i][j] = path[n];
-
-					//ぐう期分け
+					//hinshi[m][i][j] = path[n];
 					if(m%2==1){
-						//患者（この発言rgbにがあることを示す）
 
 						if(keitaisokaiseki[m][i][j]=="母"||keitaisokaiseki[m][i][j]=="主人"||keitaisokaiseki[m][i][j]=="父さん"||keitaisokaiseki[m][i][j]=="ご主人"||keitaisokaiseki[m][i][j]=="お父さん"||keitaisokaiseki[m][i][j]=="姉"||keitaisokaiseki[m][i][j]=="姉さん"||keitaisokaiseki[m][i][j]=="母親"||keitaisokaiseki[m][i][j]=="お姉さん"||keitaisokaiseki[m][i][j]=="父"||keitaisokaiseki[m][i][j]=="家族"){
 
@@ -90,7 +89,6 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,RGBlist,hat
 						}
 
 					}else if(m%2==0){
-						//カウンセラー
 
 						if(keitaisokaiseki[m][i][j]=="いかが"||keitaisokaiseki[m][i][j]=="なんで"||keitaisokaiseki[m][i][j]=="どうして"||keitaisokaiseki[m][i][j]=="どの"||keitaisokaiseki[m][i][j]=="どのように"||keitaisokaiseki[m][i][j]=="いつ"||keitaisokaiseki[m][i][j]=="どういう"||keitaisokaiseki[m][i][j]=="どなた"||keitaisokaiseki[m][i][j]=="どう"||keitaisokaiseki[m][i][j]=="何"||keitaisokaiseki[m][i][j]=="何か"||keitaisokaiseki[m][i][j]=="どんな"||keitaisokaiseki[m][i][j]=="どのような"){
 
@@ -166,9 +164,17 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,RGBlist,hat
 
 		select(checkboxlist,keitaisokaiseki,miserables,chboxlist,list,RGB);
 
-		setForViz(keitaisokaiseki,checkboxlist,chboxlist,RGBlist,hatsugen,bun);//形態素解析後に1度目の描画
+		setForViz(keitaisokaiseki,chboxlist,RGBlist,hatsugen,bun);//形態素解析後に1度目の描画
+		console.log(RGBlist);
 
-	});//kuromoji.builder終了
+		console.log("kuromoji.builderの中");
+
+	});
+	console.log("kuromoji.builderの外");
+	console.log(RGBlist);
+	return{
+		RGBlist:RGBlist,keitaisokaiseki:keitaisokaiseki,hatsugen:hatsugen,bun:bun,chboxlist:chboxlist
+	}
 };
 
 export {funcReaderOnload};

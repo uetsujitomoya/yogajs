@@ -7,7 +7,6 @@ import {funcReaderOnload} from "./wordparse.js"
 //var $ = require('jquery');
 var keitaisokaiseki = []; //このlengthは段落数
 var RGBlist  = [];//checkboxのセレクト結果
-var checkboxlist=[];//checkboxに入る単語に1+RGBどれかの情報が3次元
 var chboxlist=[];//通し番号
 
 var hatsugen =[];
@@ -26,12 +25,22 @@ document.getElementById('load-button').addEventListener('click', function () {
   var reader = new FileReader();
   reader.onload = function(event) {
     console.log(event);
-    funcReaderOnload(event,keitaisokaiseki,checkboxlist,chboxlist,RGBlist,hatsugen,bun);
     
+    var result = funcReaderOnload(event,keitaisokaiseki,chboxlist,RGBlist,hatsugen,bun);
+    keitaisokaiseki = result.keitaisokaiseki;
+    chboxlist = result.chboxlist;
+    hatsugen =  result.hatsugen;
+    bun = result.bun;
+    RGBlist = result.RGBlist;
+    console.log("onchangeの外");
     document.getElementById('radio_buttons').onchange = () => {
-    	setForViz(keitaisokaiseki,checkboxlist,chboxlist,RGBlist,hatsugen,bun);
-    };
-    //checkbox依存部分終わり
-  };//reader.onload終了。これとなんちゃら(file)が並列してないといけない
+    	console.log(RGBlist);
+    	console.log("onchangeの中");
+    	setForViz(keitaisokaiseki,chboxlist,RGBlist,hatsugen,bun);
+    	console.log("checkbox依存部分終わり");
+    };   
+  };
+  console.log("reader.onload終了。これとなんちゃら(file)が並列してないといけない");
   reader.readAsText(file);
-});//document.getElementById終了
+});
+console.log("document.getElementById終了");
