@@ -72,7 +72,7 @@ var funcChecked2 = (chboxlist,chboxlist2) => {
 	console.log("funcChecked2");
 	var c;
 	console.log(chboxlist2.length);
-	for(c=1;c<chboxlist2.length;c++){
+	for(c=1;c<=chboxlist2.length;c++){
 		console.log("c=%d",c);
 		console.log(document.getElementById(c-1+chboxlist.length));
 		const radio = document.getElementById(c-1+chboxlist.length).children;
