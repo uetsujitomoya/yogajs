@@ -2,8 +2,7 @@ import "kuromoji";
 import {select} from "./select.js"
 import {setForViz} from "./svg.js"
 
-
-var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,RGBlist=[],hatsugen,bun) => {
+var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,RGBlist,hatsugen,bun) => {
 
 	var h,i,j,k,l,m,n,c,r,g,b,x,y,z,bunsuu;  //mは段落
 	var hinshi = [];
@@ -40,7 +39,7 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,RGBlist=[],
 
 			if(m%2==0){//カウンセラー
 				console.log(m/2);
-				RGBlist[m/2] = [0,0,0,0,0];
+				RGBlist[m/2] = [0,0,0,0,0,0];
 			}
 			i=0; //段落内の何文目か。
 			while(n<path.length){//文ごとのループ
@@ -60,42 +59,56 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,RGBlist=[],
 						toutencount=0;
 						break;//１文終了
 					}
+					
+					if(m%2==1){
+
+						if(path[n].basic_form=="母"||path[n].basic_form=="主人"||path[n].basic_form=="父さん"||path[n].basic_form=="ご主人"||path[n].basic_form=="お父さん"||path[n].basic_form=="姉"||path[n].basic_form=="姉さん"||path[n].basic_form=="母親"||path[n].basic_form=="お姉さん"||path[n].basic_form=="父"||path[n].basic_form=="家族"){
+
+							RGB[m][i][0]=1;
+						}
+						if(path[n].basic_form=="兄"||path[n].basic_form=="子"||path[n].basic_form=="子ども"||path[n].basic_form=="妹"||path[n].basic_form=="弟"){
+
+							RGB[m][i][0]=1;
+						}
+						if(path[n].basic_form=="両親"||path[n].basic_form=="お母様"||path[n].basic_form=="お父様"){
+
+							RGB[m][i][0]=1;
+						}
+						if(path[n].basic_form=="仕事"||path[n].basic_form=="休み"||path[n].basic_form=="アルバイト"||path[n].basic_form=="働く"){
+							RGB[m][i][2]=1;
+						}
+
+						if(path[n].basic_form=="友人"||path[n].basic_form=="親友"||path[n].basic_form=="友達"||path[n].basic_form=="友"||path[n].basic_form=="交友"||path[n].basic_form=="友好"){
+							RGB[m][i][1]=1;
+						}
+
+					}else if(m%2==0){
+
+						if(path[n].basic_form=="いかが"||path[n].basic_form=="なんで"||path[n].basic_form=="どうして"||path[n].basic_form=="どの"||path[n].basic_form=="どのように"||path[n].basic_form=="いつ"||path[n].basic_form=="どういう"||path[n].basic_form=="どなた"||path[n].basic_form=="どう"||path[n].basic_form=="何"||path[n].basic_form=="何か"||path[n].basic_form=="どんな"||path[n].basic_form=="どのような"){
+
+							RGBlist[m/2][3]=1;
+							RGBlist[m/2][4]=0;
+							RGBlist[m/2][5]=0;
+						}else if(path[n].basic_form=="ええ"||path[n].basic_form=="そうですね"||path[n].basic_form=="そうですか"){
+
+							RGBlist[m/2][3]=0;
+							RGBlist[m/2][4]=0;
+							RGBlist[m/2][5]=1;
+						}else{
+							RGBlist[m/2][3]=0;
+							RGBlist[m/2][4]=1;
+							RGBlist[m/2][5]=0;
+						}
+					}
+
+
 					if(path[n].pos_detail_1=="接尾"||path[n].basic_form=="*"||path[n].pos=="助詞"||path[n].basic_form=="、"||path[n].pos=="記号"||path[n].pos=="助動詞"||path[n].pos=="感動詞"||path[n].pos=="接頭詞"||path[n].pos_detail_1=="非自立"||path[n].basic_form=="する"||path[n].basic_form=="いる"||path[n].basic_form=="こういう"||path[n].basic_form=="そういう"||path[n].basic_form=="こう"||path[n].basic_form=="する"||path[n].basic_form=="こうした"||path[n].basic_form=="いう"||path[n].basic_form=="する"||path[n].basic_form=="なる"||path[n].basic_form=="その"||path[n].basic_form=="あの"||path[n].pos_detail_1=="数"||path[n].basic_form=="そう"||path[n].basic_form=="気持ち"||path[n].basic_form=="思い"||path[n].basic_form=="思う"||path[n].basic_form=="ある"){
 						n++;//これないと延々ループする
 						continue;
 					}
 					keitaisokaiseki[m][i][j] = path[n].basic_form;
 					//hinshi[m][i][j] = path[n];
-					if(m%2==1){
 
-						if(keitaisokaiseki[m][i][j]=="母"||keitaisokaiseki[m][i][j]=="主人"||keitaisokaiseki[m][i][j]=="父さん"||keitaisokaiseki[m][i][j]=="ご主人"||keitaisokaiseki[m][i][j]=="お父さん"||keitaisokaiseki[m][i][j]=="姉"||keitaisokaiseki[m][i][j]=="姉さん"||keitaisokaiseki[m][i][j]=="母親"||keitaisokaiseki[m][i][j]=="お姉さん"||keitaisokaiseki[m][i][j]=="父"||keitaisokaiseki[m][i][j]=="家族"){
-
-							RGB[m][i][0]=1;
-						}
-						if(keitaisokaiseki[m][i][j]=="兄"||keitaisokaiseki[m][i][j]=="子"||keitaisokaiseki[m][i][j]=="子ども"||keitaisokaiseki[m][i][j]=="妹"||keitaisokaiseki[m][i][j]=="弟"){
-
-							RGB[m][i][0]=1;
-						}
-						if(keitaisokaiseki[m][i][j]=="両親"||keitaisokaiseki[m][i][j]=="お母様"||keitaisokaiseki[m][i][j]=="お父様"){
-
-							RGB[m][i][0]=1;
-						}
-						if(keitaisokaiseki[m][i][j]=="仕事"||keitaisokaiseki[m][i][j]=="休み"||keitaisokaiseki[m][i][j]=="アルバイト"||keitaisokaiseki[m][i][j]=="働く"){
-							RGB[m][i][2]=1;
-						}
-
-						if(keitaisokaiseki[m][i][j]=="友人"||keitaisokaiseki[m][i][j]=="親友"||keitaisokaiseki[m][i][j]=="友達"||keitaisokaiseki[m][i][j]=="友"||keitaisokaiseki[m][i][j]=="交友"||keitaisokaiseki[m][i][j]=="友好"){
-							RGB[m][i][1]=1;
-						}
-
-					}else if(m%2==0){
-
-						if(keitaisokaiseki[m][i][j]=="いかが"||keitaisokaiseki[m][i][j]=="なんで"||keitaisokaiseki[m][i][j]=="どうして"||keitaisokaiseki[m][i][j]=="どの"||keitaisokaiseki[m][i][j]=="どのように"||keitaisokaiseki[m][i][j]=="いつ"||keitaisokaiseki[m][i][j]=="どういう"||keitaisokaiseki[m][i][j]=="どなた"||keitaisokaiseki[m][i][j]=="どう"||keitaisokaiseki[m][i][j]=="何"||keitaisokaiseki[m][i][j]=="何か"||keitaisokaiseki[m][i][j]=="どんな"||keitaisokaiseki[m][i][j]=="どのような"){
-
-							RGBlist[m/2][3]=1;
-							RGBlist[m/2][4]=0;
-						}
-					}
 					n++;
 					j++;
 				}
@@ -162,9 +175,9 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,RGBlist=[],
 
 		//console.log(miserables.nodes);
 
-		select(checkboxlist,keitaisokaiseki,miserables,chboxlist,list,RGB);
+		select(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,RGB,RGBlist,hatsugen);
 
-		setForViz(keitaisokaiseki,chboxlist,RGBlist,hatsugen,bun);//形態素解析後に1度目の描画
+		setForViz(keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun);//形態素解析後に1度目の描画
 		console.log(RGBlist);
 
 		console.log("kuromoji.builderの中");
@@ -173,7 +186,7 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,RGBlist=[],
 	console.log("kuromoji.builderの外");
 	console.log(RGBlist);
 	return{
-		RGBlist:RGBlist,keitaisokaiseki:keitaisokaiseki,hatsugen:hatsugen,bun:bun,chboxlist:chboxlist
+		RGBlist:RGBlist,keitaisokaiseki:keitaisokaiseki,hatsugen:hatsugen,bun:bun,chboxlist:chboxlist,chboxlist2:chboxlist2
 	}
 };
 

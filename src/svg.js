@@ -49,7 +49,7 @@ var funcChecked = (chboxlist,checked) => {
 		const radio = document.getElementById(c).children;
 		for(let i = 1, l = radio.length; i < l; i++){
 			if(radio[i].control.checked==true){
-				checked[c-1] = radio[i].control.value;
+				//checked[c-1] = radio[i].control.value;
 				if(radio[i].control.value=="1"){
 					checked[c-1] =1;
 					break;
@@ -59,15 +59,41 @@ var funcChecked = (chboxlist,checked) => {
 				}else if(radio[i].control.value=="3"){
 					checked[c-1] =3;
 					break;
-				}else{
-					checked[c-1] =0;
 				}
+			}else{
+				checked[c-1] =0;
 			}
 		}
 	}
 };
 
-var setForViz = (keitaisokaiseki,chboxlist,RGBlist,hatsugen,bun) => {
+var funcChecked2 = (chboxlist,chboxlist2) => {
+	var checked2=[];
+	console.log("funcChecked2");
+	var c;
+	console.log(chboxlist2.length);
+	for(c=1;c<chboxlist2.length;c++){
+		console.log("c=%d",c);
+		console.log(document.getElementById(c-1+chboxlist.length));
+		const radio = document.getElementById(c-1+chboxlist.length).children;
+		for(let i = 1, l = radio.length; i < l; i++){
+			if(radio[i].control.checked==true){
+				if(radio[i].control.value=="3"){
+					checked2[c-1] =3;
+					break;
+				}else if(radio[i].control.value=="5"){
+					checked2[c-1] =5;
+					break;
+				}
+			}else{
+				checked2[c-1] =4;
+			}
+		}
+	}
+	return{checked2:checked2};
+};
+
+var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun) => {
 
 	d3.select("#svgdiv").select("svg").remove();
 
@@ -80,9 +106,13 @@ var setForViz = (keitaisokaiseki,chboxlist,RGBlist,hatsugen,bun) => {
 	var color2=[];
 	var stackdataArr = [];
 	funcChecked(chboxlist,checked);
+	var result2 = funcChecked2(chboxlist,chboxlist2);
+	console.log(result2);
+	var checked2 = result2.checked2;
+	console.log(checked2);
 	var h,i,j,c,m,n;
 
-	console.log(RGBlist);
+	//console.log(RGBlist);
 
 	for(n=0;n<RGBlist.length;n++){
 		RGBlist[n][0]=0;
@@ -128,14 +158,17 @@ var setForViz = (keitaisokaiseki,chboxlist,RGBlist,hatsugen,bun) => {
 	console.log(RGBlist);//←グラフにすなお
 
 
-	for(m=0;m<keitaisokaiseki.length/2;m++){
-		if(RGBlist[m][3]>=1){
-			color2[m]="#d4d";
+	for(c=0;c<checked2.length;c++){
+		if(checked2[c]==3){
+			color2[c]="#d4d";
+		}else if(checked2[c]==5){
+			color2[c]="white";
 		}else{
-			color2[m]="gray";
+			color2[c]="gray";
 		}
 	}
-	//console.log("color2.length"color2);
+	console.log("color2");
+	console.log(color2);
 
 	for(h=0;h<3;h++){
 		stackdataArr[h] = [];
@@ -147,7 +180,8 @@ var setForViz = (keitaisokaiseki,chboxlist,RGBlist,hatsugen,bun) => {
 	}
 
 	viz(stackdataArr,color2,bun,svg);
-	console.log(RGBlist);
+	console.log("chboxlist2");
+	console.log(chboxlist2);
 }
 
 //      radio[i].onchange = () => {};
