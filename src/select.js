@@ -73,6 +73,9 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,R
 		document.body.appendChild(greet).appendChild(text);
 	}//DOMを操作してみよう「愛」「交友」「仕事」のいずれかに該当しそうな単語が一つも見つかりませんでした。
 
+	console.log("RGBlist");
+	console.log(RGBlist);
+
 	for(m=0;m<keitaisokaiseki.length;m=m+2){
 	
 		c++;
@@ -83,14 +86,16 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,R
 		chboxlist2[n][0]=hatsugen[m];
 		chboxlist2[n][1]=4;
 
-		if(RGBlist[m/2][3]==1){
+		if(RGBlist[m/2][5]==1){
 			chboxlist2[n][1]=3;
+			console.log("「%s」は開かれた質問だと思います",hatsugen[m]);
 			document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=5 checked>無駄話・相づち等</label>";
 		}else{
 			document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=5>無駄話・相づち等</label>";
 		}
 
-		if(RGBlist[m/2][5]==1){
+		if(RGBlist[m/2][3]==1){
+			console.log("「%s」はその他だと思います",hatsugen[m]);
 			document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=3 checked>開かれた質問</label>";
 			chboxlist2[n][1]=5;
 		}else{

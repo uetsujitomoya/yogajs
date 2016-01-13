@@ -162,9 +162,9 @@ var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun) => {
 		if(checked2[c]==3){
 			color2[c]="#d4d";
 		}else if(checked2[c]==5){
-			color2[c]="white";
+			color2[c]="silver";
 		}else{
-			color2[c]="gray";
+			color2[c]="dimgray";
 		}
 	}
 	console.log("color2");

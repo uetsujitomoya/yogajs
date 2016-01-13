@@ -87,18 +87,17 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 						if(path[n].basic_form=="いかが"||path[n].basic_form=="なんで"||path[n].basic_form=="どうして"||path[n].basic_form=="どの"||path[n].basic_form=="どのように"||path[n].basic_form=="いつ"||path[n].basic_form=="どういう"||path[n].basic_form=="どなた"||path[n].basic_form=="どう"||path[n].basic_form=="何"||path[n].basic_form=="何か"||path[n].basic_form=="どんな"||path[n].basic_form=="どのような"){
 
 							RGBlist[m/2][3]=1;
-							RGBlist[m/2][4]=0;
-							RGBlist[m/2][5]=0;
+
+							console.log(path[n].basic_form);
 						}else if(path[n].basic_form=="ええ"||path[n].basic_form=="そうですね"||path[n].basic_form=="そうですか"){
 
-							RGBlist[m/2][3]=0;
-							RGBlist[m/2][4]=0;
 							RGBlist[m/2][5]=1;
-						}else{
+							console.log(path[n].basic_form);
+						}/*else{
 							RGBlist[m/2][3]=0;
 							RGBlist[m/2][4]=1;
 							RGBlist[m/2][5]=0;
-						}
+						}←これいれると次のループでリセットしてまう*/
 					}
 
 
@@ -126,7 +125,9 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 			}
 			m++;
 		}
-		console.log(hatsugen);
+		//console.log(hatsugen);
+
+		console.log("RGBlist");
 		console.log(RGBlist);
 
 		var tango=[];//全単語（重複あり）
