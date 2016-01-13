@@ -61,7 +61,7 @@ var funcChecked = (chboxlist,checked) => {
 			if(radio[i].control.checked==true){
 				//console.log("c=%d,i=%d",c,i);
 				//console.log(radio[i].control.value);
-				checked[c-1] = radio[i].control.value;
+				//checked[c-1] = radio[i].control.value;
 				if(radio[i].control.value=="1"){
 					checked[c-1] =1;
 				}else if(radio[i].control.value=="2"){
@@ -76,7 +76,26 @@ var funcChecked = (chboxlist,checked) => {
 	}
 };
 
-var setForViz = (keitaisokaiseki,checkboxlist,chboxlist,RGBlist,hatsugen,bun) => {
+var funcChecked2 = (chboxlist,chboxlist2,checked) => {
+	console.log("funcChecked");
+	var c;
+	for( c=1+chboxlist.length; c < chboxlist.length + chboxlist2.length ; c++ ) {
+		const radio = document.getElementById(c).children;
+		for(let i = 1, l = radio.length; i < l; i++){
+			if(radio[i].control.checked==true){
+				if(radio[i].control.value=="3"){
+					checked[c-1-chboxlist.length] =3;
+				}else if(radio[i].control.value=="5"){
+					checked[c-1-chboxlist.length] =5;
+				}else{
+					checked[c-1-chboxlist.length] =4;
+				}
+			}
+		}
+	}
+};
+
+var setForViz = (keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,RGBlist,hatsugen,bun) => {
 
 	d3.select("#svgdiv").select("svg").remove();
 
@@ -84,16 +103,18 @@ var setForViz = (keitaisokaiseki,checkboxlist,chboxlist,RGBlist,hatsugen,bun) =>
 	.attr("height",height)
 	.attr("width",width);
 
-	console.log("setForViz");
+	//console.log("setForViz");
 	var checked = [];
+	var checked2 = [];
 	var color2=[];
 	var stackdataArr = [];
 	funcChecked(chboxlist,checked);
+	funcChecked2(chboxlist,chboxlist2,checked2);//ここでchecked2の値がかえってくる
 	var h,i,j,c,m,n;
 
-	console.log(checked);
+	//console.log(checked);
 	//console.log(RGBlist);
-	console.log(chboxlist);
+	//console.log(chboxlist);
 
 	for(n=0;n<RGBlist.length;n++){
 		RGBlist[n][0]=0;
@@ -134,9 +155,11 @@ var setForViz = (keitaisokaiseki,checkboxlist,chboxlist,RGBlist,hatsugen,bun) =>
 	console.log(RGBlist);
 
 
-	for(m=0;m<keitaisokaiseki.length/2;m++){
-		if(RGBlist[m][3]>=1){
+	for(m=0;m<checked2.length;m++){
+		if(checked[m]==3){
 			color2[m]="#d4d";
+		}else if(checked[m]==5){
+			color2[m]="white";
 		}else{
 			color2[m]="gray";
 		}

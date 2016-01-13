@@ -3,7 +3,7 @@ import {select} from "./select.js"
 import {setForViz} from "./svg.js"
 
 
-var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,RGBlist,hatsugen,bun) => {
+var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,RGBlist,hatsugen,bun) => {
 
 	var h,i,j,k,l,m,n,c,r,g,b,x,y,z,bunsuu;  //mは段落
 	var hinshi = [];
@@ -170,9 +170,9 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,RGBlist,hat
 
 		//console.log(miserables.nodes);
 
-		select(checkboxlist,keitaisokaiseki,miserables,chboxlist,list,RGB,RGBlist);
+		select(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,RGB,RGBlist,hatsugen);
 
-		setForViz(keitaisokaiseki,checkboxlist,chboxlist,RGBlist,hatsugen,bun);//形態素解析後に1度目の描画
+		setForViz(keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,RGBlist,hatsugen,bun);//形態素解析後に1度目の描画
 
 	});//kuromoji.builder終了
 };
