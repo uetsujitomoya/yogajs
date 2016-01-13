@@ -6,7 +6,6 @@
 
 var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,list,RGB) => {
   var h,i,j,k,l,m,n;
-  var list = [];
 
   for(k=0;k<miserables.nodes.length;k++){
     checkboxlist[k]=[0,0,0,0,0];
