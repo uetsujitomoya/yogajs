@@ -40,9 +40,13 @@ var viz=(stackdataArr,color2,bun,svg) => {
 	.attr("stroke-width", 3)
 	.on('mouseover', function(d,i){
 		console.log(bun[2*(color2.length-i-1)]);
-		var element = document.createElement("div");
-		element.innerHTML = bun[2*i];
-		this.appendChild(element);
+		var e = document.getElementById('msg');
+		e.textContent = bun[2*(color2.length-i-1)];
+		e.style.color = color2[color2.length-1-i];
+		
+		//var element = document.createElement("div");
+		//element.innerHTML = bun[2*i];
+		//this.appendChild(element);
 	})
 };
 
