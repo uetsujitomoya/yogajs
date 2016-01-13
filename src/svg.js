@@ -129,7 +129,6 @@ var setForViz = (keitaisokaiseki,checkboxlist,chboxlist,RGBlist,hatsugen,bun) =>
 				}
 				n++ //発言ごとにnを回す
 			}
-
 		}
 	}
 	console.log(RGBlist);

@@ -4,7 +4,7 @@
 //list作成
 
 
-var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,list,RGB) => {
+var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,list,RGB,RGBlist) => {
   var h,i,j,k,l,m,n;
 
   for(k=0;k<miserables.nodes.length;k++){
@@ -90,24 +90,32 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,list,RGB) => {
     }
   }
 
-  /*
-
-  <div id="hoge">
-  <input type="radio" name="q1" value="hoge">
-  <input type="radio" name="q1" value="foo">
-  </div>
-
-  候補単語自体について<div>とnameを追加
-  候補グループについてvalueを追加
-
-  */
-
-
   if(c==0){
-    var greet = document.createElement('p'),
+  	var greet = document.createElement('p'),
     text = document.createTextNode('「愛」「交友」「仕事」のいずれかに該当しそうな単語が一つも見つかりませんでした。');
-    document.body.appendChild(greet).appendChild(text);
+  	document.body.appendChild(greet).appendChild(text);
   }//DOMを操作してみよう「愛」「交友」「仕事」のいずれかに該当しそうな単語が一つも見つかりませんでした。
+
+
+  for(m=0;m<keitaisokaiseki.length;m=m+2){
+  	c++;
+  	target.innerHTML += "<div id=\"" + c + "\">" + miserables.nodes[k] + "<br><label><input type=radio name=\"" + c + "\" value=4>閉じられた質問</div></label><br>";
+
+  	if(RGB[m][i][0]==1){
+        if(keitaisokaiseki[m][i][j]=="母"||keitaisokaiseki[m][i][j]=="姉さん"||keitaisokaiseki[m][i][j]=="姉"||keitaisokaiseki[m][i][j]=="母親"||keitaisokaiseki[m][i][j]=="お姉さん"||keitaisokaiseki[m][i][j]=="父"||keitaisokaiseki[m][i][j]=="家族"||keitaisokaiseki[m][i][j]=="兄"||keitaisokaiseki[m][i][j]=="子"||keitaisokaiseki[m][i][j]=="子ども"||keitaisokaiseki[m][i][j]=="妹"||keitaisokaiseki[m][i][j]=="弟"||keitaisokaiseki[m][i][j]=="両親"||keitaisokaiseki[m][i][j]=="お母様"||keitaisokaiseki[m][i][j]=="お父様"){
+  			checkboxlist[k][1]=2;
+  			document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=1 checked>「愛」に含む</label>";
+  		}else{
+  			document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=1 checked>「愛」に含む</label>";
+  		}
+  		checkboxlist[k][0]=1;
+  		chboxlist[c]=[];
+  		chboxlist[c][0]=miserables.nodes[k];
+  		chboxlist[c][1]=0; 
+  	}
+
+  }
+
 };
 
 
