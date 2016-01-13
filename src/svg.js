@@ -10,9 +10,9 @@ var viz=(stackdataArr,color2,bun,svg) => {
 	.y(function(d){return d.y;})
 	.values(function(d){return d;});
 	var stackdata = stack(stackdataArr);
-	var max = d3.max(stackdata[stackdata.length-1], function(d){return d.y + d.y0;});
+	//var max = d3.max(stackdata[stackdata.length-1], function(d){return d.y + d.y0;});
 	var scaleX = d3.scale.linear().domain([0,color2.length]).range([width/(color2.length),width]);
-	var scaleY = d3.scale.linear().domain([0,max]).range([0,height]);
+	var scaleY = d3.scale.linear().domain([0,6]).range([0,height]);
 	var colors = ["#7777ff","#77ff77","#ff7777"];
 
 	var area = d3.svg.area()
@@ -129,7 +129,7 @@ var setForViz = (keitaisokaiseki,checkboxlist,chboxlist,RGBlist,hatsugen,bun) =>
 		stackdataArr[h] = [];
 		for(m=0;m<((keitaisokaiseki.length-1)/2);m++){//2個飛ばしにしたら後が面倒くさい。患者 1→0　3→1 長さ9なら番号は8まで
 			stackdataArr[h][m]=new Object();
-			stackdataArr[h][m]= {x:m+1,y:(28*(RGBlist[m][h])/(keitaisokaiseki[2*m+1].length))};
+			stackdataArr[h][m]= {x:m+1,y:(1*(RGBlist[m][h])/(keitaisokaiseki[2*m+1].length))};
 			console.log(stackdataArr[h][m]);
 		}
 	}
