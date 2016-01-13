@@ -1,6 +1,6 @@
 import d3 from "d3"
 
-var height=250,width=1200;
+var height=200,width=1200;
 
 var viz=(stackdataArr,color2,bun,svg) => {
 	console.log("func viz start");
