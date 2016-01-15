@@ -168,14 +168,25 @@ var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun) => {
 		}
 	}
 	
+	var RGBmax=[];
+
 	console.log("color2");
 	console.log(color2.length);
+	
+	for(m=0;m<((keitaisokaiseki.length-1)/2);m++){//2個飛ばしにしたら後が面倒くさい。患者 1→0　3→1 長さ9なら番号は8まで
+		RGBmax[m]=1;
+		for(h=0;h<3;h++){
+			RGBmax[m]=RGBmax[m]+RGBlist[m][h];
+		}
+	}
+	console.log("RGBmax");
+	console.log(RGBmax);
 
 	for(h=0;h<3;h++){
 		stackdataArr[h] = [];
 		for(m=0;m<((keitaisokaiseki.length-1)/2);m++){//2個飛ばしにしたら後が面倒くさい。患者 1→0　3→1 長さ9なら番号は8まで
 			stackdataArr[h][m]=new Object();
-			stackdataArr[h][m]= {x:m+1,y:(1*(RGBlist[m][h])/(keitaisokaiseki[2*m+1].length))};
+			stackdataArr[h][m]= {x:m+1,y:(5*(RGBlist[m][h])/RGBmax[m])};
 			//console.log(stackdataArr[h][m]);
 		}
 	}
