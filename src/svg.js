@@ -37,7 +37,7 @@ var viz=(stackdataArr,color2,bun,svg) => {
 	.on('mouseover', function(d,i){
 		//console.log("%d,%s",2*(color2.length-i-1),bun[2*(color2.length-i-1)]);
 		var e = document.getElementById('msg');
-		e.innerHTML = bun[-3+2*(color2.length-i-1)]+"<br>"+bun[-2+2*(color2.length-i-1)]+"<br>"+bun[-1+2*(color2.length-i-1)]+"<br><b><u>"+(1+2*(color2.length-i-1))+" "+bun[2*(color2.length-i-1)]+"</u></b><br>"+bun[1+2*(color2.length-i-1)]+"<br>"+bun[2+2*(color2.length-i-1)]+"<br>"+bun[3+2*(color2.length-i-1)];
+		e.innerHTML = (-2+2*(color2.length-i-1))+" "+bun[-3+2*(color2.length-i-1)]+"<br>"+(-1+2*(color2.length-i-1))+" "+bun[-2+2*(color2.length-i-1)]+"<br>"+(2*(color2.length-i-1))+" "+bun[-1+2*(color2.length-i-1)]+"<br><b><u>"+(1+2*(color2.length-i-1))+" "+bun[2*(color2.length-i-1)]+"</u></b><br>"+(2+2*(color2.length-i-1))+" "+bun[1+2*(color2.length-i-1)]+"<br>"+(3+2*(color2.length-i-1))+" "+bun[2+2*(color2.length-i-1)]+"<br>"+(4+2*(color2.length-i-1))+" "+bun[3+2*(color2.length-i-1)];
 		e.style.color = color2[color2.length-1-i];
 	})
 };
