@@ -37,7 +37,17 @@ var viz=(stackdataArr,color2,bun,svg) => {
 	.on('mouseover', function(d,i){
 		//console.log("%d,%s",2*(color2.length-i-1),bun[2*(color2.length-i-1)]);
 		var e = document.getElementById('msg');
-		e.innerHTML = (-2+2*(color2.length-i-1))+" "+bun[-3+2*(color2.length-i-1)]+"<br>"+(-1+2*(color2.length-i-1))+" "+bun[-2+2*(color2.length-i-1)]+"<br>"+(2*(color2.length-i-1))+" "+bun[-1+2*(color2.length-i-1)]+"<br><b><u>"+(1+2*(color2.length-i-1))+" "+bun[2*(color2.length-i-1)]+"</u></b><br>"+(2+2*(color2.length-i-1))+" "+bun[1+2*(color2.length-i-1)]+"<br>"+(3+2*(color2.length-i-1))+" "+bun[2+2*(color2.length-i-1)]+"<br>"+(4+2*(color2.length-i-1))+" "+bun[3+2*(color2.length-i-1)];
+		if(i==color2.length-1){
+			e.innerHTML = "<b><u>"+(1+2*(color2.length-i-1))+" "+bun[2*(color2.length-i-1)]+"</u></b><br>"+(2+2*(color2.length-i-1))+" "+bun[1+2*(color2.length-i-1)]+"<br>"+(3+2*(color2.length-i-1))+" "+bun[2+2*(color2.length-i-1)]+"<br>"+(4+2*(color2.length-i-1))+" "+bun[3+2*(color2.length-i-1)];
+		}else if(i==color2.length-2){
+			e.innerHTML = (-1+2*(color2.length-i-1))+" "+bun[-2+2*(color2.length-i-1)]+"<br>"+(2*(color2.length-i-1))+" "+bun[-1+2*(color2.length-i-1)]+"<br><b><u>"+(1+2*(color2.length-i-1))+" "+bun[2*(color2.length-i-1)]+"</u></b><br>"+(2+2*(color2.length-i-1))+" "+bun[1+2*(color2.length-i-1)]+"<br>"+(3+2*(color2.length-i-1))+" "+bun[2+2*(color2.length-i-1)]+"<br>"+(4+2*(color2.length-i-1))+" "+bun[3+2*(color2.length-i-1)];
+		}else if(i==1){
+			e.innerHTML = (-2+2*(color2.length-i-1))+" "+bun[-3+2*(color2.length-i-1)]+"<br>"+(-1+2*(color2.length-i-1))+" "+bun[-2+2*(color2.length-i-1)]+"<br>"+(2*(color2.length-i-1))+" "+bun[-1+2*(color2.length-i-1)]+"<br><b><u>"+(1+2*(color2.length-i-1))+" "+bun[2*(color2.length-i-1)]+"</u></b><br>"+(2+2*(color2.length-i-1))+" "+bun[1+2*(color2.length-i-1)]+"<br>"+(3+2*(color2.length-i-1))+" "+bun[2+2*(color2.length-i-1)];
+		}else if(i==0){
+			e.innerHTML = (-2+2*(color2.length-i-1))+" "+bun[-3+2*(color2.length-i-1)]+"<br>"+(-1+2*(color2.length-i-1))+" "+bun[-2+2*(color2.length-i-1)]+"<br>"+(2*(color2.length-i-1))+" "+bun[-1+2*(color2.length-i-1)]+"<br><b><u>"+(1+2*(color2.length-i-1))+" "+bun[2*(color2.length-i-1)]+"</u></b>";
+		}else{
+			e.innerHTML = (-2+2*(color2.length-i-1))+" "+bun[-3+2*(color2.length-i-1)]+"<br>"+(-1+2*(color2.length-i-1))+" "+bun[-2+2*(color2.length-i-1)]+"<br>"+(2*(color2.length-i-1))+" "+bun[-1+2*(color2.length-i-1)]+"<br><b><u>"+(1+2*(color2.length-i-1))+" "+bun[2*(color2.length-i-1)]+"</u></b><br>"+(2+2*(color2.length-i-1))+" "+bun[1+2*(color2.length-i-1)]+"<br>"+(3+2*(color2.length-i-1))+" "+bun[2+2*(color2.length-i-1)]+"<br>"+(4+2*(color2.length-i-1))+" "+bun[3+2*(color2.length-i-1)];
+		}
 		e.style.color = color2[color2.length-1-i];
 	})
 };
@@ -126,7 +136,7 @@ var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun) => {
 			n=0;
 			for(m=1;m<keitaisokaiseki.length;m=m+2){
 				for(i=0;i<keitaisokaiseki[m].length;i++){
-					j=0; 
+					j=0;
 					for(j=0;j<keitaisokaiseki[m][i].length;j++){
 						if(keitaisokaiseki[m][i][j]==chboxlist[c][0]){
 							//console.log(chboxlist[c][0]);
@@ -152,7 +162,6 @@ var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun) => {
 				}
 				n++
 			}
-
 		}
 	}
 	console.log(RGBlist);//←グラフにすなお
@@ -167,12 +176,12 @@ var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun) => {
 			color2[c]="dimgray";
 		}
 	}
-	
+
 	var RGBmax=[];
 
 	console.log("color2");
 	console.log(color2.length);
-	
+
 	for(m=0;m<((keitaisokaiseki.length-1)/2);m++){//2個飛ばしにしたら後が面倒くさい。患者 1→0　3→1 長さ9なら番号は8まで
 		RGBmax[m]=1;
 		for(h=0;h<3;h++){
