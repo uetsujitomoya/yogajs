@@ -92,7 +92,7 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,R
 		if(RGBlist[m/2][5]==1){
 			chboxlist2[n][1]=3;
 			console.log("「%s」は開かれた質問だと思います",hatsugen[m]);
-			document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=5 checked><font color=\"silver\">無駄話・相づち等</font></label>";
+			document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=5 checked><font color=\"silver\"><u>無駄話・相づち等</u></font></label>";
 		}else{
 			document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=5>無駄話・相づち等</label>";
 		}
