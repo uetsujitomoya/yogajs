@@ -73,8 +73,11 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,R
 		document.body.appendChild(greet).appendChild(text);
 	}//DOMを操作してみよう「愛」「交友」「仕事」のいずれかに該当しそうな単語が一つも見つかりませんでした。
 
-	console.log("RGBlist");
-	console.log(RGBlist);
+	console.log("keitaisokaiseki");
+	console.log(keitaisokaiseki.length);
+
+	//console.log("RGBlist");
+	//console.log(RGBlist);
 
 	for(m=0;m<keitaisokaiseki.length;m=m+2){
 	

@@ -37,7 +37,7 @@ var viz=(stackdataArr,color2,bun,svg) => {
 	.on('mouseover', function(d,i){
 		//console.log("%d,%s",2*(color2.length-i-1),bun[2*(color2.length-i-1)]);
 		var e = document.getElementById('msg');
-		e.innerHTML = bun[-3+2*(color2.length-i-1)]+"<br>"+bun[-2+2*(color2.length-i-1)]+"<br>"+bun[-1+2*(color2.length-i-1)]+"<br><b><u>"+bun[2*(color2.length-i-1)]+"</u></b><br>"+bun[1+2*(color2.length-i-1)]+"<br>"+bun[2+2*(color2.length-i-1)]+"<br>"+bun[3+2*(color2.length-i-1)];
+		e.innerHTML = bun[-3+2*(color2.length-i-1)]+"<br>"+bun[-2+2*(color2.length-i-1)]+"<br>"+bun[-1+2*(color2.length-i-1)]+"<br><b><u>"+(1+2*(color2.length-i-1))+" "+bun[2*(color2.length-i-1)]+"</u></b><br>"+bun[1+2*(color2.length-i-1)]+"<br>"+bun[2+2*(color2.length-i-1)]+"<br>"+bun[3+2*(color2.length-i-1)];
 		e.style.color = color2[color2.length-1-i];
 	})
 };
@@ -167,8 +167,9 @@ var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun) => {
 			color2[c]="dimgray";
 		}
 	}
+	
 	console.log("color2");
-	console.log(color2);
+	console.log(color2.length);
 
 	for(h=0;h<3;h++){
 		stackdataArr[h] = [];
