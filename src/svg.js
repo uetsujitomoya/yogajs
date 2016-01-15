@@ -1,9 +1,9 @@
 import d3 from "d3"
 
-var height=200,width=1200;
+var height=200,width=2000;
 
 var viz=(stackdataArr,color2,bun,svg) => {
-	console.log("func viz start");
+	//console.log("func viz start");
 
 	var stack = d3.layout.stack()
 	.x(function(d){return 1;})
@@ -16,7 +16,7 @@ var viz=(stackdataArr,color2,bun,svg) => {
 	var colors = ["#7777ff","#77ff77","#ff7777"];
 
 	var area = d3.svg.area()
-	.x(function(d,i){return (i+1) * width/color2.length})
+	.x(function(d,i){return (i+1) * (-1+width/color2.length)})
 	.y0(function(d){return height})
 	.y1(function(d){return height - scaleY(d.y+d.y0)});
 	svg.selectAll("path")
@@ -26,7 +26,9 @@ var viz=(stackdataArr,color2,bun,svg) => {
 	.attr("d", area)
 	.attr("fill",function(d,i){return colors[i]});
 
-	var range = d3.range((width)-(width/(color2.length*2)), color2.length-1, -width/(color2.length));
+
+	console.log("range,%d,%d,%d",width-(width/(color2.length*2)), color2.length-1,3-width/(color2.length));
+	var range = d3.range(width-(width/(color2.length*2)), color2.length-1, 1-width/(color2.length));
 	svg.selectAll("line.v")
 	.data(range).enter().append("line")
 	.attr("x1", function(d,i){return d;}).attr("y1", 0)
@@ -36,8 +38,9 @@ var viz=(stackdataArr,color2,bun,svg) => {
 	.attr("stroke-width", 3)
 	.on('mouseover', function(d,i){
 		//console.log("%d,%s",2*(color2.length-i-1),bun[2*(color2.length-i-1)]);
+		console.log("%d,%d",d,i);
 		var e = document.getElementById('msg');
-		e.innerHTML = bun[-3+2*(color2.length-i-1)]+"<br>"+bun[-2+2*(color2.length-i-1)]+"<br>"+bun[-1+2*(color2.length-i-1)]+"<br><b><u>"+(1+2*(color2.length-i-1))+" "+bun[2*(color2.length-i-1)]+"</u></b><br>"+bun[1+2*(color2.length-i-1)]+"<br>"+bun[2+2*(color2.length-i-1)]+"<br>"+bun[3+2*(color2.length-i-1)];
+		e.innerHTML = (-2+2*(color2.length-i-1))+" "+bun[-3+2*(color2.length-i-1)]+"<br>"+(-1+2*(color2.length-i-1))+" "+bun[-2+2*(color2.length-i-1)]+"<br>"+(2*(color2.length-i-1))+" "+bun[-1+2*(color2.length-i-1)]+"<br><b><u>"+(1+2*(color2.length-i-1))+" "+bun[2*(color2.length-i-1)]+"</u></b><br>"+(2+2*(color2.length-i-1))+" "+bun[1+2*(color2.length-i-1)]+"<br>"+(3+2*(color2.length-i-1))+" "+bun[2+2*(color2.length-i-1)]+"<br>"+(4+2*(color2.length-i-1))+" "+bun[3+2*(color2.length-i-1)];
 		e.style.color = color2[color2.length-1-i];
 	})
 };
@@ -73,8 +76,8 @@ var funcChecked2 = (chboxlist,chboxlist2) => {
 	var c;
 	console.log(chboxlist2.length);
 	for(c=1;c<=chboxlist2.length;c++){
-		console.log("c=%d",c);
-		console.log(document.getElementById(c-1+chboxlist.length));
+		//console.log("c=%d",c);
+		//console.log(document.getElementById(c-1+chboxlist.length));
 		const radio = document.getElementById(c-1+chboxlist.length).children;
 		for(let i = 1, l = radio.length; i < l; i++){
 			if(radio[i].control.checked==true){
@@ -134,17 +137,17 @@ var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun) => {
 							if(checked[c-1]==1){
 
 								RGBlist[n][0]=RGBlist[n][0]+1;
-								console.log("c=%d,m=%d,n=%d,%s,RGBlist[%d][%d]=%d",c,m,n,chboxlist[c][0],n,checked[c]-1,RGBlist[n][0]);
+								//console.log("c=%d,m=%d,n=%d,%s,RGBlist[%d][%d]=%d",c,m,n,chboxlist[c][0],n,checked[c]-1,RGBlist[n][0]);
 
 							}else if(checked[c-1]==2){
 
 								RGBlist[n][1]=RGBlist[n][1]+1;
-								console.log("c=%d,m=%d,n=%d,%s,RGBlist[%d][%d]=%d",c,m,n,chboxlist[c][0],n,checked[c]-1,RGBlist[n][1]);
+								//console.log("c=%d,m=%d,n=%d,%s,RGBlist[%d][%d]=%d",c,m,n,chboxlist[c][0],n,checked[c]-1,RGBlist[n][1]);
 
 							}else if(checked[c-1]==3){
 
 								RGBlist[n][2]=RGBlist[n][2]+1;
-								console.log("c=%d,m=%d,n=%d,%s,RGBlist[%d][%d]=%d",c,m,n,chboxlist[c][0],n,checked[c]-1,RGBlist[n][2]);
+								//console.log("c=%d,m=%d,n=%d,%s,RGBlist[%d][%d]=%d",c,m,n,chboxlist[c][0],n,checked[c]-1,RGBlist[n][2]);
 
 							}
 						}
