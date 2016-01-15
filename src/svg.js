@@ -16,7 +16,7 @@ var viz=(stackdataArr,color2,bun,svg) => {
 	var colors = ["#7777ff","#77ff77","#ff7777"];
 
 	var area = d3.svg.area()
-	.x(function(d,i){return (i+1) * (-1+width/color2.length)})
+	.x(function(d,i){return (width/(color2.length*2)-(color2.length-1)*(-1+width/(color2.length))+(i+1)*(-1+width/color2.length))})
 	.y0(function(d){return height})
 	.y1(function(d){return height - scaleY(d.y+d.y0)});
 	svg.selectAll("path")
@@ -27,7 +27,7 @@ var viz=(stackdataArr,color2,bun,svg) => {
 	.attr("fill",function(d,i){return colors[i]});
 
 
-	console.log("range,%d,%d,%d",width-(width/(color2.length*2)), color2.length-1,3-width/(color2.length));
+	console.log("range,%d,%d,%d",width-(width/(color2.length*2)), color2.length-1,1-width/(color2.length));
 	var range = d3.range(width-(width/(color2.length*2)), color2.length-1, 1-width/(color2.length));
 	svg.selectAll("line.v")
 	.data(range).enter().append("line")
