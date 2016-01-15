@@ -24,13 +24,10 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 	var data = JSON.parse(event.target.result);
 	kuromoji.builder({dicPath: 'dict/'}).build((err, tokenizer) => {
 		const path = tokenizer.tokenize(data[0].a);
-
-		//1集計単位ごとにこの関数を用いよう
-		console.log(path);
 		n=0; //nは全データ内で何文字目か
 		bunsuu=0; //全段落内で何分目か
 		m=0; //何個目の発言か。これの偶奇わけで判断。カウンセラーが奇数。患者が偶数。1文は1文で格納
-		while(n<path.length){//発言ごとのループ
+		while(n<path.length){
 			keitaisokaiseki[m] = []; //一発言
 			bun[m] = [];
 			hatsugen[m] = "";
@@ -38,7 +35,6 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 			RGB[m] = [];
 
 			if(m%2==0){//カウンセラー
-				console.log(m/2);
 				RGBlist[m/2] = [0,0,0,0,0,0];
 			}
 			i=0; //段落内の何文目か。
@@ -54,8 +50,8 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 
 					bun[m][i] += path[n].surface_form;
 
-					if(path[n].basic_form=="。"||path[n].basic_form=="？"||path[n].basic_form=="?"||path[n].basic_form=="："||path[n].basic_form==":"||path[n].word_id=="2613630"||path[n].surface_form=="･･･？："){
-						console.log(path[n]);
+					if(path[n].basic_form=="。"||path[n].basic_form=="？"||path[n].basic_form=="?"||path[n].basic_form=="："||path[n].basic_form==":"||path[n].word_id=="2613630"||path[n].surface_form=="･･･？："||path[n].surface_form=="･･？："){
+
 						bunsuu++;
 						toutencount=0;
 						break;//１文終了
@@ -88,17 +84,10 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 						if(path[n].basic_form=="いかが"||path[n].basic_form=="なんで"||path[n].basic_form=="どうして"||path[n].basic_form=="どの"||path[n].basic_form=="どのように"||path[n].basic_form=="いつ"||path[n].basic_form=="どういう"||path[n].basic_form=="どなた"||path[n].basic_form=="どう"||path[n].basic_form=="何"||path[n].basic_form=="何か"||path[n].basic_form=="どんな"||path[n].basic_form=="どのような"){
 
 							RGBlist[m/2][3]=1;
-
-							//console.log(path[n].basic_form);
 						}else if(path[n].basic_form=="ええ"||path[n].basic_form=="そうですね"||path[n].basic_form=="そうですか"){
 
 							RGBlist[m/2][5]=1;
-							//console.log(path[n].basic_form);
-						}/*else{
-							RGBlist[m/2][3]=0;
-							RGBlist[m/2][4]=1;
-							RGBlist[m/2][5]=0;
-						}←これいれると次のループでリセットしてまう*/
+						}
 					}
 
 
@@ -117,7 +106,7 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 				if(n==path.length){//確認
 					break;
 				}
-				if(path[n].word_id=="2613630"||path[n].basic_form=="："||path[n].basic_form==":"||path[n].surface_form=="･･･？："){
+				if(path[n].word_id=="2613630"||path[n].basic_form=="："||path[n].basic_form==":"||path[n].surface_form=="･･･？："||path[n].surface_form=="･･？："){
 					n++;
 					break;
 				}//1段落作成完了
@@ -126,11 +115,6 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 			}
 			m++;
 		}
-		//console.log(hatsugen);
-
-		//console.log("RGBlist");
-		//console.log(RGBlist);
-
 		var tango=[];//全単語（重複あり）
 		x=0;
 
@@ -142,30 +126,25 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 				}
 			}
 		}
-
-		//console.log(tango);
-
-		x=0;//tangoについてまわす
+		x=0;
 
 		for(m=0;m<keitaisokaiseki.length;++m){
 			for(i=0;i<keitaisokaiseki[m].length;++i){
 				for(j=0;j<keitaisokaiseki[m][i].length;++j){
-					y=0;//重複があれば1
+					y=0;
 					if(x>0){
 						for(z=0;z<x;z++){
 							if(tango[z]==keitaisokaiseki[m][i][j]){
 								y=1;
-								break;//y=1になったので用済み
+								break;
 							}
 						}
 					}
 					x++;
 					if(y==1){
-						continue;//次のjへ
+						continue;
 					}
-
-					tangoset.add(keitaisokaiseki[m][i][j]);//tangoset終了
-
+					tangoset.add(keitaisokaiseki[m][i][j]);
 				}
 			}
 		}
@@ -174,19 +153,9 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 		for(i=0;i<tangosett.length;i++){
 			miserables.nodes[i]=tangosett[i].t;
 		}
-
-		//console.log(miserables.nodes);
-
 		select(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,RGB,RGBlist,hatsugen);
-
-		setForViz(keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun);//形態素解析後に1度目の描画
-		//console.log(RGBlist);
-
-		console.log("kuromoji.builderの中");
-
+		setForViz(keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun);
 	});
-	console.log("kuromoji.builderの外");
-	//console.log(RGBlist);
 	return{
 		RGBlist:RGBlist,keitaisokaiseki:keitaisokaiseki,hatsugen:hatsugen,bun:bun,chboxlist:chboxlist,chboxlist2:chboxlist2
 	}
