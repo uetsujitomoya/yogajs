@@ -12,11 +12,8 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 	var miserables={"nodes":[],"links":[]};
 	var list = [];
 	var target = document.getElementById("chbox");//checkboxを出す場所
-
 	var checkboxlist=[];//checkboxに入る単語に1+RGBどれかの情報が3次元
-
 	bun=[];
-
 	var data = JSON.parse(event.target.result);
 	kuromoji.builder({dicPath: 'dict/'}).build((err, tokenizer) => {
 		const path = tokenizer.tokenize(data[0].a);
