@@ -54,12 +54,13 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 
 					bun[m][i] += path[n].surface_form;
 
-					if(path[n].basic_form=="。"||path[n].basic_form=="？"||path[n].basic_form=="?"||path[n].word_id=="2613630"){
+					if(path[n].basic_form=="。"||path[n].basic_form=="？"||path[n].basic_form=="?"||path[n].basic_form=="："||path[n].basic_form==":"||path[n].word_id=="2613630"||path[n].surface_form=="･･･？："){
+						console.log(path[n]);
 						bunsuu++;
 						toutencount=0;
 						break;//１文終了
 					}
-					
+
 					if(m%2==1){
 
 						if(path[n].basic_form=="母"||path[n].basic_form=="主人"||path[n].basic_form=="父さん"||path[n].basic_form=="ご主人"||path[n].basic_form=="お父さん"||path[n].basic_form=="姉"||path[n].basic_form=="姉さん"||path[n].basic_form=="母親"||path[n].basic_form=="お姉さん"||path[n].basic_form=="父"||path[n].basic_form=="家族"){
@@ -88,11 +89,11 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 
 							RGBlist[m/2][3]=1;
 
-							console.log(path[n].basic_form);
+							//console.log(path[n].basic_form);
 						}else if(path[n].basic_form=="ええ"||path[n].basic_form=="そうですね"||path[n].basic_form=="そうですか"){
 
 							RGBlist[m/2][5]=1;
-							console.log(path[n].basic_form);
+							//console.log(path[n].basic_form);
 						}/*else{
 							RGBlist[m/2][3]=0;
 							RGBlist[m/2][4]=1;
@@ -116,7 +117,7 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 				if(n==path.length){//確認
 					break;
 				}
-				if(path[n].word_id=="2613630"){
+				if(path[n].word_id=="2613630"||path[n].basic_form=="："||path[n].basic_form==":"||path[n].surface_form=="･･･？："){
 					n++;
 					break;
 				}//1段落作成完了
@@ -127,8 +128,8 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 		}
 		//console.log(hatsugen);
 
-		console.log("RGBlist");
-		console.log(RGBlist);
+		//console.log("RGBlist");
+		//console.log(RGBlist);
 
 		var tango=[];//全単語（重複あり）
 		x=0;
@@ -142,7 +143,7 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 			}
 		}
 
-		console.log(tango);
+		//console.log(tango);
 
 		x=0;//tangoについてまわす
 
@@ -179,13 +180,13 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 		select(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,RGB,RGBlist,hatsugen);
 
 		setForViz(keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun);//形態素解析後に1度目の描画
-		console.log(RGBlist);
+		//console.log(RGBlist);
 
 		console.log("kuromoji.builderの中");
 
 	});
 	console.log("kuromoji.builderの外");
-	console.log(RGBlist);
+	//console.log(RGBlist);
 	return{
 		RGBlist:RGBlist,keitaisokaiseki:keitaisokaiseki,hatsugen:hatsugen,bun:bun,chboxlist:chboxlist,chboxlist2:chboxlist2
 	}
