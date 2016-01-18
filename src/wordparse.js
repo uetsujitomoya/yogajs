@@ -94,11 +94,11 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 
 							RGBlist[m/2][5]=1;
 							//console.log(path[n].basic_form);
-						}/*else{
-							RGBlist[m/2][3]=0;
+						}else if(path[n].surface_form=="か"&&path[n].pos=="助詞"){
+							//RGBlist[m/2][3]=0;←これいれると次のループでリセットしてまう
 							RGBlist[m/2][4]=1;
-							RGBlist[m/2][5]=0;
-						}←これいれると次のループでリセットしてまう*/
+							//RGBlist[m/2][5]=0;
+						}
 					}
 
 
