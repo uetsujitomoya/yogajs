@@ -7,11 +7,7 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 	var h,i,j,k,l,m,n,c,r,g,b,x,y,z,bunsuu;  //mは段落
 	var hinshi = [];
 	var RGB = [];//どの発言にRGBが入っているか大まかに色分け
-	var buntou;
-	var toutencount;
-	var toutenbasho=0;
 	var tangoset = new Set();
-	var tmp=[];
 	var tangosett = [];
 	var miserables={"nodes":[],"links":[]};
 	var list = [];
@@ -28,7 +24,7 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 		//1集計単位ごとにこの関数を用いよう
 		console.log(path);
 		n=0; //nは全データ内で何文字目か
-		bunsuu=0; //全段落内で何分目か
+		//bunsuu=0; //全段落内で何分目か
 		m=0; //何個目の発言か。これの偶奇わけで判断。カウンセラーが奇数。患者が偶数。1文は1文で格納
 		while(n<path.length){//発言ごとのループ
 			keitaisokaiseki[m] = []; //一発言
@@ -55,9 +51,8 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 					bun[m][i] += path[n].surface_form;
 
 					if(path[n].basic_form=="。"||path[n].basic_form=="？"||path[n].basic_form=="?"||path[n].basic_form=="："||path[n].basic_form==":"||path[n].word_id=="2613630"||path[n].surface_form=="･･･？："){
-						console.log(path[n]);
-						bunsuu++;
-						toutencount=0;
+						//console.log(path[n]);
+						//bunsuu++;
 						break;//１文終了
 					}
 
@@ -86,23 +81,16 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 					}else if(m%2==0){
 
 						if(path[n].basic_form=="いかが"||path[n].basic_form=="なんで"||path[n].basic_form=="どうして"||path[n].basic_form=="どの"||path[n].basic_form=="どのように"||path[n].basic_form=="いつ"||path[n].basic_form=="どういう"||path[n].basic_form=="どなた"||path[n].basic_form=="どう"||path[n].basic_form=="何"||path[n].basic_form=="何か"||path[n].basic_form=="どんな"||path[n].basic_form=="どのような"){
-
 							RGBlist[m/2][3]=1;
-
-							//console.log(path[n].basic_form);
-						}else if(path[n].basic_form=="ええ"||path[n].basic_form=="そうですね"||path[n].basic_form=="そうですか"){
-
-							RGBlist[m/2][5]=1;
-							//console.log(path[n].basic_form);
 						}else if(path[n].surface_form=="か"&&path[n].pos=="助詞"){
-							//RGBlist[m/2][3]=0;←これいれると次のループでリセットしてまう
 							RGBlist[m/2][4]=1;
-							//RGBlist[m/2][5]=0;
 						}
 					}
 
 
-					if(path[n].pos_detail_1=="接尾"||path[n].basic_form=="*"||path[n].pos=="助詞"||path[n].basic_form=="、"||path[n].pos=="記号"||path[n].pos=="助動詞"||path[n].pos=="感動詞"||path[n].pos=="接頭詞"||path[n].pos_detail_1=="非自立"||path[n].basic_form=="する"||path[n].basic_form=="いる"||path[n].basic_form=="こういう"||path[n].basic_form=="そういう"||path[n].basic_form=="こう"||path[n].basic_form=="する"||path[n].basic_form=="こうした"||path[n].basic_form=="いう"||path[n].basic_form=="する"||path[n].basic_form=="なる"||path[n].basic_form=="その"||path[n].basic_form=="あの"||path[n].pos_detail_1=="数"||path[n].basic_form=="そう"||path[n].basic_form=="気持ち"||path[n].basic_form=="思い"||path[n].basic_form=="思う"||path[n].basic_form=="ある"){
+					if(path[n].pos_detail_1=="接尾"||path[n].basic_form=="*"||path[n].pos=="助詞"||path[n].basic_form=="、"||path[n].pos=="記号"||path[n].pos=="助動詞"||path[n].pos=="感動詞"||path[n].pos=="接頭詞"||path[n].pos_detail_1=="非自立"
+					||path[n].basic_form=="する"||path[n].basic_form=="いる"||path[n].basic_form=="こういう"||path[n].basic_form=="そういう"||path[n].basic_form=="こう"||path[n].basic_form=="する"||path[n].basic_form=="こうした"||path[n].basic_form=="いう"||path[n].basic_form=="する"
+					||path[n].basic_form=="なる"||path[n].basic_form=="その"||path[n].basic_form=="あの"||path[n].pos_detail_1=="数"||path[n].basic_form=="そう"||path[n].basic_form=="気持ち"||path[n].basic_form=="思い"||path[n].basic_form=="思う"||path[n].basic_form=="ある"){
 						n++;//これないと延々ループする
 						continue;
 					}
@@ -111,13 +99,20 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 
 					n++;
 					j++;
-				}
+				}//１文作成完了
+
 				hatsugen[m] += bun[m][i];
 
 				if(n==path.length){//確認
+					if(i<=4){
+						RGBlist[m/2][5]=1;
+					}
 					break;
 				}
 				if(path[n].word_id=="2613630"||path[n].basic_form=="："||path[n].basic_form==":"||path[n].surface_form=="･･･？："){
+					if(i<=4){
+						RGBlist[m/2][5]=1;
+					}
 					n++;
 					break;
 				}//1段落作成完了
