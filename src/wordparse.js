@@ -23,6 +23,7 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 		n=0; //nは全データ内で何文字目か
 		//bunsuu=0; //全段落内で何分目か
 		m=0; //何個目の発言か。これの偶奇わけで判断。カウンセラーが奇数。患者が偶数。1文は1文で格納
+
 		while(n<path.length){//発言ごとのループ
 			keitaisokaiseki[m] = []; //一発言
 			bun[m] = [];
@@ -31,12 +32,13 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 			RGB[m] = [];
 
 			if(m%2==0){//カウンセラー
-				console.log(m/2);
+				//console.log(m/2);
 				RGBlist[m/2] = [0,0,0,0,0,0];
-				console.log(m);
-				console.log(RGBlist[m/2]);
+				//console.log(m);
+				//console.log(RGBlist[m/2]);
 			}
 			i=0; //段落内の何文目か。
+
 			while(n<path.length){//文ごとのループ
 				keitaisokaiseki[m][i] = []; //文
 				bun[m][i]="";
@@ -50,7 +52,6 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 					bun[m][i] += path[n].surface_form;
 
 					if(path[n].basic_form=="。"||path[n].basic_form=="？"||path[n].basic_form=="?"||path[n].basic_form=="："||path[n].basic_form==":"||path[n].word_id=="2613630"||path[n].surface_form=="･･･？："||path[n].surface_form==")："){
-
 						break;//１文終了
 					}
 
@@ -98,14 +99,14 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 				}//１文作成完了
 				hatsugen[m] += bun[m][i];
 				if(n==path.length){//確認
-					if( i<=4 && m%2==0 ){
+					if( i==0 && j<=4 && m%2==0 ){
 						console.log("m=%dでi<=4",m);
 						RGBlist[m/2][5]=1;
 					}
 					break;
 				}
 				if(path[n].word_id=="2613630"||path[n].basic_form=="："||path[n].basic_form==":"||path[n].surface_form=="･･･？："||path[n].surface_form==")："){
-					if(i<=4 && m%2==0 ){
+					if(i==0 && j<=4 && m%2==0 ){
 						RGBlist[m/2][5]=1;
 					}
 					n++;
@@ -116,6 +117,10 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 			}
 			m++;
 		}
+
+		console.log("RGBlist");
+		console.log(RGBlist);
+
 		var tango=[];//全単語（重複あり）
 		x=0;
 		for(m=0;m<keitaisokaiseki.length;++m){

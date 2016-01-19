@@ -85,6 +85,7 @@ var funcChecked = (chboxlist,checked,taiou,chboxlength) => {
 		//console.log(document.getElementById(c));
 		const radio = document.getElementById(c).children;
 		console.log(radio);
+		console.log("radio.length=%d",radio.length);
 		for(let i = 2, l = radio.length; i < l; i++){
 			if(radio[i].control.checked==true){
 				//checked[c-1] = radio[i].control.value;
@@ -113,7 +114,9 @@ var funcChecked2 = (chboxlist,chboxlist2,checked2,taiou,chboxlength,chboxlength2
 		console.log("c=%d",c);
 		console.log(document.getElementById(c-1+chboxlength));
 		const radio = document.getElementById(c-1+chboxlength).children;
-		for(let i = 1, l = radio.length; i < l; i++){
+		console.log(radio);
+		console.log("radio.length=%d",radio.length);
+		for(let i = 2, l = radio.length; i < l; i++){
 			if(radio[i].control.checked==true){
 				if(radio[i].control.value=="6"){
 					checked2[taiou[c]] =6;
