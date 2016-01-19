@@ -80,9 +80,8 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,R
 
 	for(m=0;m<keitaisokaiseki.length;m=m+2){
 
-		c++;
+
 		n++:
-		target.innerHTML += "<div id=\"" + c + "\">" + hatsugen[m] + "<br></div><br>";
 
 		chboxlist2[n]=[];
 		chboxlist2[n][0]=hatsugen[m];
@@ -99,11 +98,9 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,R
 			//chboxlist2[n][1]=5;
 			checked2[n]==5;
 		}else{
-			document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=3>開かれた質問</label><label><input type=radio name=\"" + c + "\" value=6>解釈</label><label><input type=radio name=\"" + c + "\" value=7>無駄話</label>";
+			c++;
+			target.innerHTML += "<div id=\"" + c + "\">" + hatsugen[m] + "<br><label><input type=radio name=\"" + c + "\" value=3>開かれた質問</label><label><input type=radio name=\"" + c + "\" value=6>解釈</label><label><input type=radio name=\"" + c + "\" value=7>無駄話</label></div><br>";
 		}
-
-		document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=4>閉じられた質問</label>";
-
 	}
 	console.log("chboxlist2");
 	console.log(chboxlist2);
