@@ -103,7 +103,7 @@ var funcChecked2 = (chboxlist,chboxlist2) => {
 	return{checked2:checked2};
 };
 
-var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun) => {
+var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked) => {
 
 	d3.select("#svgdiv").select("svg").remove();
 
@@ -112,7 +112,6 @@ var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun) => {
 	.attr("width",width);
 
 	console.log("setForViz");
-	var checked = [];
 	var color2=[];
 	var stackdataArr = [];
 	funcChecked(chboxlist,checked);

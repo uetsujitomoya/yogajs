@@ -1,4 +1,4 @@
-var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,RGB,RGBlist,hatsugen) => {
+var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,RGB,RGBlist,hatsugen,checked) => {
 	var h,i,j,k,l,m,n;
 
 	for(k=0;k<miserables.nodes.length;k++){
@@ -8,6 +8,7 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,R
 	var target = document.getElementById("radio_buttons");//checkboxを出す場所
 
 	var c=0;
+	n=0;
 
 	//keitaisokaisekiとnodesを照らしあわせる
 	for(m=0;m<keitaisokaiseki.length;++m){
@@ -18,13 +19,12 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,R
 				for(k=0;k<miserables.nodes.length;++k){
 					if(keitaisokaiseki[m][i][j]==miserables.nodes[k]){
 						list[m][i][k]=1;
-						if(RGB[m][i][0]+RGB[m][i][1]+RGB[m][i][2]>=1){
+
+						if(RGB[m][i][0]+RGB[m][i][1]+RGB[m][i][2]>=2){
 
 							if(checkboxlist[k][0]==0){
-
-								//target.innerHTML += "<input id=\"ken" + c + "\" type=checkbox checked /><label for="+c+">「" + miserables.nodes[k] + "」を「愛」に。</label><br />";
-
 								c++;
+								n++;
 								target.innerHTML += "<div id=\"" + c + "\">" + miserables.nodes[k] + "<br><label><input type=radio name=\"" + c + "\" value=0>どれにも含まない</div></label><br>";
 								//その他の選択肢
 
@@ -60,14 +60,27 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,R
 									break;//miserables実は重複してる
 								}
 							}
-						}
+						}else if(RGB[m][i][0]+RGB[m][i][1]+RGB[m][i][2]==1){
+							n++;
+							if(RGB[m][i][0]==1){
+								checked[n]==1;
+							}
+
+							if(RGB[m][i][1]==1){
+								checked[n]==2;
+							}
+
+							if(RGB[m][i][2]==1){
+								checked[n]==3;
+							}
+						}//RGB[m][i][0]+RGB[m][i][1]+RGB[m][i][2]==1終了
 					}
 				}
 			}
 		}
 	}
 
-	if(c==0){
+	if(n==0){
 		var greet = document.createElement('p'),
 		text = document.createTextNode('「愛」「交友」「仕事」のいずれかに該当しそうな単語が一つも見つかりませんでした。');
 		document.body.appendChild(greet).appendChild(text);
@@ -80,7 +93,7 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,R
 	//console.log(RGBlist);
 
 	for(m=0;m<keitaisokaiseki.length;m=m+2){
-	
+
 		c++;
 		n=c-chboxlist.length;
 		target.innerHTML += "<div id=\"" + c + "\">" + hatsugen[m] + "<br></div><br>";

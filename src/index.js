@@ -13,6 +13,8 @@ var hatsugen =[];
 var bun = [];
 var chboxlist2=[];
 
+var checked = [];
+
 /*
 $('file-input').on('change',function(){
 
@@ -26,22 +28,23 @@ document.getElementById('load-button').addEventListener('click', function () {
   var reader = new FileReader();
   reader.onload = function(event) {
     console.log(event);
-    
-    var result = funcReaderOnload(event,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun);
+
+    var result = funcReaderOnload(event,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked);
     keitaisokaiseki = result.keitaisokaiseki;
     chboxlist = result.chboxlist;
     chboxlist2 = result.chboxlist2;
     hatsugen =  result.hatsugen;
     bun = result.bun;
     RGBlist = result.RGBlist;
+    checked = result.checked;
     console.log("onchangeの外");
     document.getElementById('radio_buttons').onchange = () => {
     	console.log("chboxlist2");
     	console.log(chboxlist2);
     	console.log("onchangeの中");
-    	setForViz(keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun);
+    	setForViz(keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked);
     	console.log("checkbox依存部分終わり");
-    };   
+    };
   };
   console.log("reader.onload終了。これとなんちゃら(file)が並列してないといけない");
   reader.readAsText(file);
