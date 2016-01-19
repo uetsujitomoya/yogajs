@@ -1,4 +1,4 @@
-var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,RGB,RGBlist,hatsugen,bun,checked,checked2) => {
+var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,RGB,RGBlist,hatsugen,bun,checked,checked2,taiou) => {
 	var h,i,j,k,l,m,n;
 
 	//for(k=0;k<miserables.nodes.length;k++){
@@ -24,6 +24,7 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,R
 			if(RGB[m][i][0]+RGB[m][i][1]+RGB[m][i][2]>=2){
 				c++;
 				n++;
+				taiou[c]=n;
 				target.innerHTML += "<div id=\"" + c + "\">" + bun[m][i] + "<br>（" + hatsugen[m] + "）<br><label><input type=radio name=\"" + c + "\" value=0>どれにも含まない</div></label><br>";
 				//その他の選択肢
 				chboxlist[c]=[];
@@ -99,6 +100,7 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,R
 			checked2[n]==5;
 		}else{
 			c++;
+			taiou[c]=n;
 			target.innerHTML += "<div id=\"" + c + "\">" + hatsugen[m] + "<br><label><input type=radio name=\"" + c + "\" value=3>開かれた質問</label><label><input type=radio name=\"" + c + "\" value=6>解釈</label><label><input type=radio name=\"" + c + "\" value=7>無駄話</label></div><br>";
 		}
 	}

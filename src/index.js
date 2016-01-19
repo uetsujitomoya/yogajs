@@ -13,6 +13,7 @@ var bun = [];
 var chboxlist2=[];
 var checked = [];
 var checked2 = [];
+var taiou=[];
 
 /*
 $('file-input').on('change',function(){
@@ -27,7 +28,7 @@ document.getElementById('load-button').addEventListener('click', function () {
   var reader = new FileReader();
   reader.onload = function(event) {
     console.log(event);
-    var result = funcReaderOnload(event,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2);
+    var result = funcReaderOnload(event,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou);
     keitaisokaiseki = result.keitaisokaiseki;
     chboxlist = result.chboxlist;
     chboxlist2 = result.chboxlist2;
@@ -36,12 +37,13 @@ document.getElementById('load-button').addEventListener('click', function () {
     RGBlist = result.RGBlist;
     checked = result.checked;
     checked2 = result.checked2;
+    taiou = result.taiou;
     console.log("onchangeの外");
     document.getElementById('radio_buttons').onchange = () => {
     	console.log("chboxlist2");
     	console.log(chboxlist2);
     	console.log("onchangeの中");
-    	setForViz(keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2);
+    	setForViz(keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou);
     	console.log("checkbox依存部分終わり");
     };
   };

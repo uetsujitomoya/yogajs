@@ -103,7 +103,7 @@ var funcChecked2 = (chboxlist,chboxlist2) => {
 	return{checked2:checked2};
 };
 
-var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked) => {
+var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,taiou) => {
 
 	d3.select("#svgdiv").select("svg").remove();
 
@@ -209,6 +209,5 @@ var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,check
 }
 
 //      radio[i].onchange = () => {};
-
 
 export {setForViz};
