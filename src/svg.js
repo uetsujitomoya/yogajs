@@ -52,10 +52,11 @@ var viz=(stackdataArr,color2,bun,svg) => {
 	})
 };
 
-var funcChecked = (chboxlist,checked,taiou) => {
+var funcChecked = (chboxlist,checked,taiou,chboxlength) => {
 	console.log("funcChecked");
 	var c;
-	for(c=1;c<chboxlist.length;c++){
+	for(c=1;c<chboxlength;c++){
+		//console.log(document.getElementById(c));
 		const radio = document.getElementById(c).children;
 		console.log(radio);
 		for(let i = 2, l = radio.length; i < l; i++){
@@ -78,15 +79,15 @@ var funcChecked = (chboxlist,checked,taiou) => {
 	}
 };
 
-var funcChecked2 = (chboxlist,chboxlist2,taiou) => {
+var funcChecked2 = (chboxlist,chboxlist2,taiou,chboxlength,chboxlength2) => {
 	var checked2=[];
 	console.log("funcChecked2");
 	var c;
-	console.log(chboxlist2.length);
-	for(c=1;c<=chboxlist2.length;c++){
+	console.log(chboxlength2);
+	for(c=1;c<=chboxlength2;c++){
 		console.log("c=%d",c);
-		console.log(document.getElementById(c-1+chboxlist.length));
-		const radio = document.getElementById(c-1+chboxlist.length).children;
+		console.log(document.getElementById(c-1+chboxlength));
+		const radio = document.getElementById(c-1+chboxlength).children;
 		for(let i = 1, l = radio.length; i < l; i++){
 			if(radio[i].control.checked==true){
 				if(radio[i].control.value=="6"){
@@ -104,7 +105,7 @@ var funcChecked2 = (chboxlist,chboxlist2,taiou) => {
 	return{checked2:checked2};
 };
 
-var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,taiou,bunCheckedTaiou) => {
+var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,taiou,bunCheckedTaiou,chboxlength,chboxlength2) => {
 
 	d3.select("#svgdiv").select("svg").remove();
 
@@ -115,11 +116,16 @@ var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,check
 	console.log("setForViz");
 	var color2=[];
 	var stackdataArr = [];
-	funcChecked(chboxlist,checked,taiou);
-	var result2 = funcChecked2(chboxlist,chboxlist2,taiou);
-	console.log(result2);
-	checked2 = result2.checked2;
-	console.log(checked2);
+	if(chboxlength>=1){
+		funcChecked(chboxlist,checked,taiou,chboxlength);
+	}
+	if(chboxlength>=1){
+		var result2 = funcChecked2(chboxlist,chboxlist2,taiou,chboxlength,chboxlength2);
+		console.log(result2);
+		checked2 = result2.checked2;
+		console.log(checked2);
+	}
+
 	var h,i,j,c,m,n;
 
 	//console.log(RGBlist);

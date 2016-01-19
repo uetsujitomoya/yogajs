@@ -1,4 +1,4 @@
-var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,RGB,RGBlist,hatsugen,bun,checked,checked2,taiou,bunCheckedTaiou) => {
+var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,RGB,RGBlist,hatsugen,bun,checked,checked2,taiou,bunCheckedTaiou,chboxlength,chboxlength2) => {
 	console.log(taiou)
 	taiou = [];
 	bunCheckedTaiou = [];
@@ -81,6 +81,8 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,R
 		document.body.appendChild(greet).appendChild(text);
 	}//DOMを操作してみよう「愛」「交友」「仕事」のいずれかに該当しそうな単語が一つも見つかりませんでした。
 
+	chboxlength=c;
+
 	console.log("keitaisokaiseki");
 	console.log(keitaisokaiseki.length);
 
@@ -116,9 +118,9 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,R
 			taiou[c-1]=n-1;
 			target.innerHTML += "<div id=\"" + c + "\">" + hatsugen[m] + "<br><label><input type=radio name=\"" + c + "\" value=4>閉じられた質問</label><label><input type=radio name=\"" + c + "\" value=6>解釈</label><label><input type=radio name=\"" + c + "\" value=7 checked>無駄話</label></div><br>";
 		}
-	}
-	//console.log("chboxlist2");
-	//console.log(chboxlist2);
+	}//m=0;m<keitaisokaiseki.length;m=m+2
+	chboxlength2 = c -chboxlength;
+	console.log("chboxlength2=%d",chboxlength2);
 }
 
 export {select};
