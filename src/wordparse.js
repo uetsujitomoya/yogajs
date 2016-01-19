@@ -193,12 +193,16 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 		RGBlist = vResult.RGBlist;
 		checked = vResult.checked;
 		checked2 = vResult.checked2;
-
+		console.log("chboxlist2");
+		return{
+			RGBlist:RGBlist,keitaisokaiseki:keitaisokaiseki,hatsugen:hatsugen,bun:bun,chboxlist:chboxlist,chboxlist2:chboxlist2,checked:checked,checked2:checked2,taiou:taiou,bunCheckedTaiou:bunCheckedTaiou,chboxlength:chboxlength,chboxlength2:chboxlength2
+		}
 	});
 	console.log("kuromoji.builderの外");
-	return{
-		RGBlist:RGBlist,keitaisokaiseki:keitaisokaiseki,hatsugen:hatsugen,bun:bun,chboxlist:chboxlist,chboxlist2:chboxlist2,checked:checked,checked2:checked2,taiou:taiou,bunCheckedTaiou:bunCheckedTaiou,chboxlength:chboxlength,chboxlength2:chboxlength2
-	}
+	console.log("chboxlist2");
+	console.log("chboxlength=%d",chboxlength);
+	console.log("chboxlength2=%d",chboxlength2);
+
 };
 
 export {funcReaderOnload};
