@@ -52,7 +52,7 @@ var viz=(stackdataArr,color2,bun,svg) => {
 	})
 };
 
-var funcChecked = (chboxlist,checked) => {
+var funcChecked = (chboxlist,checked,taiou) => {
 	console.log("funcChecked");
 	var c;
 	for(c=1;c<chboxlist.length;c++){
@@ -61,23 +61,23 @@ var funcChecked = (chboxlist,checked) => {
 			if(radio[i].control.checked==true){
 				//checked[c-1] = radio[i].control.value;
 				if(radio[i].control.value=="1"){
-					checked[c-1] =1;
+					checked[taiou[c]-1] =1;
 					break;
 				}else if(radio[i].control.value=="2"){
-					checked[c-1] =2;
+					checked[taiou[c]-1] =2;
 					break;
 				}else if(radio[i].control.value=="3"){
-					checked[c-1] =3;
+					checked[taiou[c]-1] =3;
 					break;
 				}
 			}else{
-				checked[c-1] =0;
+				checked[taiou[c]-1] =0;
 			}
 		}
 	}
 };
 
-var funcChecked2 = (chboxlist,chboxlist2) => {
+var funcChecked2 = (chboxlist,chboxlist2,taiou) => {
 	var checked2=[];
 	console.log("funcChecked2");
 	var c;
@@ -88,15 +88,15 @@ var funcChecked2 = (chboxlist,chboxlist2) => {
 		const radio = document.getElementById(c-1+chboxlist.length).children;
 		for(let i = 1, l = radio.length; i < l; i++){
 			if(radio[i].control.checked==true){
-				if(radio[i].control.value=="3"){
-					checked2[c-1] =3;
+				if(radio[i].control.value=="6"){
+					checked2[taiou[c]-1] =6;
 					break;
-				}else if(radio[i].control.value=="5"){
-					checked2[c-1] =5;
+				}else if(radio[i].control.value=="7"){
+					checked2[taiou[c]-1] =7;
 					break;
 				}
 			}else{
-				checked2[c-1] =4;
+				checked2[taiou[c]-1] =4;
 			}
 		}
 	}
@@ -114,10 +114,10 @@ var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,check
 	console.log("setForViz");
 	var color2=[];
 	var stackdataArr = [];
-	funcChecked(chboxlist,checked);
-	var result2 = funcChecked2(chboxlist,chboxlist2);
+	funcChecked(chboxlist,checked,taiou);
+	var result2 = funcChecked2(chboxlist,chboxlist2,taiou);
 	console.log(result2);
-	var checked2 = result2.checked2;
+	checked2 = result2.checked2;
 	console.log(checked2);
 	var h,i,j,c,m,n;
 
@@ -192,8 +192,6 @@ var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,check
 		}
 	}
 
-
-
 	for(h=0;h<3;h++){
 		stackdataArr[h] = [];
 		for(m=0;m<((keitaisokaiseki.length-1)/2);m++){//2個飛ばしにしたら後が面倒くさい。患者 1→0　3→1 長さ9なら番号は8まで
@@ -207,7 +205,5 @@ var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,check
 	console.log("chboxlist2");
 	console.log(chboxlist2);
 }
-
-//      radio[i].onchange = () => {};
 
 export {setForViz};

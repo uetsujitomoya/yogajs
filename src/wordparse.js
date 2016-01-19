@@ -161,7 +161,6 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 
 		setForViz(keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou);//形態素解析後に1度目の描画
 		//console.log(RGBlist);
-
 		console.log("kuromoji.builderの中");
 
 	});
