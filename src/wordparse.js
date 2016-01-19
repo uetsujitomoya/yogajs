@@ -21,7 +21,7 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 		//1集計単位ごとにこの関数を用いよう
 		console.log(path);
 		n=0; //nは全データ内で何文字目か
-		//bunsuu=0; //全段落内で何分目か
+		var tangosuu=0; //hatugenn内で何たんご目か
 		m=0; //何個目の発言か。これの偶奇わけで判断。カウンセラーが奇数。患者が偶数。1文は1文で格納
 
 		while(n<path.length){//発言ごとのループ
@@ -38,6 +38,7 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 				//console.log(RGBlist[m/2]);
 			}
 			i=0; //段落内の何文目か。
+			tangosuu=0; //hatugenn内で何たんご目か
 
 			while(n<path.length){//文ごとのループ
 				keitaisokaiseki[m][i] = []; //文
@@ -49,6 +50,8 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 				j=0; //集計単位内で何単語目か
 				while(n<path.length){//単語ごとのループ
 
+					tangosuu++;
+					console.log("tangosuu=%d,%s",tangosuu,path[n].surface_form);
 					bun[m][i] += path[n].surface_form;
 
 					if(path[n].basic_form=="。"||path[n].basic_form=="？"||path[n].basic_form=="?"||path[n].basic_form=="："||path[n].basic_form==":"||path[n].word_id=="2613630"||path[n].surface_form=="･･･？："||path[n].surface_form==")："){
@@ -99,19 +102,27 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 				}//１文作成完了
 				hatsugen[m] += bun[m][i];
 				if(n==path.length){//確認
-					if( i==0 && j<=4 && m%2==0 ){
-						console.log("m=%dでi<=4",m);
-						RGBlist[m/2][5]=1;
+					if(m%2==0 ){
+						console.log("m=%d i=%d tangosuu=%d %s",m,i,tangosuu,hatsugen[m]);
+						if( i<=2 && tangosuu<=7){
+							console.log("m=%dでtangosuu<=7",m);
+							RGBlist[m/2][5]=1;
+						}
 					}
 					break;
 				}
 				if(path[n].word_id=="2613630"||path[n].basic_form=="："||path[n].basic_form==":"||path[n].surface_form=="･･･？："||path[n].surface_form==")："){
-					if(i==0 && j<=4 && m%2==0 ){
-						RGBlist[m/2][5]=1;
+					if(m%2==0 ){
+						console.log("m=%d i=%d tangosuu=%d %s",m,i,tangosuu,hatsugen[m]);
+						if( i<=2 && tangosuu<=7){
+							console.log("m=%dでtangosuu<=7",m);
+							RGBlist[m/2][5]=1;
+						}
 					}
 					n++;
 					break;
 				}//1段落作成完了
+				bunsuu=0;
 				n++;
 				i++;//段落内の何文目か
 			}
