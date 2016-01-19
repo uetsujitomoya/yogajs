@@ -29,11 +29,12 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,R
 			if(RGB[m][i][0]+RGB[m][i][1]+RGB[m][i][2]>=2){
 				c++;
 				n++;
+				chboxlist[n]=[];//こいつの長さは、チェックボックスの有無にかかわらず全文数
+				chboxlist[n][0]=bun[m][i];
 				taiou[c-1]=n-1;
 				target.innerHTML += "<div id=\"" + c + "\">" + bun[m][i] + "<br>（" + hatsugen[m] + "）<br><label><input type=radio name=\"" + c + "\" value=0>どれにも含まない</div></label><br>";
 				//その他の選択肢
-				chboxlist[n]=[];//こいつの長さは、チェックボックスの有無にかかわらず全文数
-				chboxlist[n][0]=bun[m][i];
+
 				//checkboxに出す単語とグループの組み合わせ、さらにcheckedか否かの保存
 				if(RGB[m][i][0]==1){
 					chboxlist[n][1]=0;
@@ -53,6 +54,8 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,R
 
 			}else if(RGB[m][i][0]+RGB[m][i][1]+RGB[m][i][2]==1){
 				n++;
+				chboxlist[n]=[];//こいつの長さは、チェックボックスの有無にかかわらず全文数
+				chboxlist[n][0]=bun[m][i];
 				if(RGB[m][i][0]==1){
 					checked[n-1]==1;
 				}
