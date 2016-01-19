@@ -103,8 +103,7 @@ var funcChecked = (chboxlist,checked,taiou,chboxlength) => {
 	}
 };
 
-var funcChecked2 = (chboxlist,chboxlist2,taiou,chboxlength,chboxlength2) => {
-	var checked2=[];
+var funcChecked2 = (chboxlist,chboxlist2,checked2,taiou,chboxlength,chboxlength2) => {
 	console.log("funcChecked2");
 	var c;
 	console.log(chboxlength2);
@@ -126,10 +125,9 @@ var funcChecked2 = (chboxlist,chboxlist2,taiou,chboxlength,chboxlength2) => {
 			}
 		}
 	}
-	return{checked2:checked2};
 };
 
-var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,taiou,bunCheckedTaiou,chboxlength,chboxlength2) => {
+var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,bunCheckedTaiou,chboxlength,chboxlength2) => {
 
 	d3.select("#svgdiv").select("svg").remove();
 
@@ -143,12 +141,13 @@ var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,check
 	if(chboxlength>=1){
 		funcChecked(chboxlist,checked,taiou,chboxlength);
 	}
-	if(chboxlength>=1){
-		var result2 = funcChecked2(chboxlist,chboxlist2,taiou,chboxlength,chboxlength2);
-		console.log(result2);
-		checked2 = result2.checked2;
-		console.log(checked2);
+	console.log("checked");
+	console.log(checked);
+	if(chboxlength2>=1){
+		funcChecked2(chboxlist,chboxlist2,checked2,taiou,chboxlength,chboxlength2);
 	}
+	console.log("checked2");
+	console.log(checked2);
 
 	var h,i,j,c,m,n;
 
@@ -163,7 +162,7 @@ var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,check
 var checkedBun=[];
 
 	for(c=1;c<chboxlist.length;c++){
-		if (checked[c]>=1) {
+
 			n=0;
 			for(m=1;m<keitaisokaiseki.length;m=m+2){
 				checkedBun[m]=[];//svgでの描画ではm→i
@@ -186,7 +185,7 @@ var checkedBun=[];
 				}
 				n++
 			}
-		}
+
 	}
 	console.log(RGBlist);//←グラフにすなお
 
@@ -230,9 +229,23 @@ var checkedBun=[];
 		}
 	}
 
-	viz(stackdataArr,color2,bun,svg,checkedBun);
+	console.log("stackdataArr");
+	console.log(stackdataArr);
+	console.log("color2");
+	console.log(color2);
+	console.log("checkedBun");
+	console.log(checkedBun);
+	viz(stackdataArr,color2,bun,hatsugen,svg,checkedBun);
 	console.log("chboxlist2");
 	console.log(chboxlist2);
+
+	return{
+		chboxlist:chboxlist,
+		chboxlist2:chboxlist2,
+		RGBlist:RGBlist,
+		checked:checked,
+		checked2:checked2
+	}
 }
 
 export {setForViz};

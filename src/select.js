@@ -1,9 +1,11 @@
-var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,RGB,RGBlist,hatsugen,bun,checked,checked2,taiou,bunCheckedTaiou,chboxlength,chboxlength2) => {
+var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RGBlist,hatsugen,bun,checked,checked2,taiou,bunCheckedTaiou,chboxlength,chboxlength2) => {
+/*
 	console.log(taiou)
 	taiou = [];
 	bunCheckedTaiou = [];
 	checked=[];
 	checked2=[];
+	*/
 	var h,i,j,k,l,m,n;
 
 	//for(k=0;k<miserables.nodes.length;k++){
@@ -57,15 +59,15 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,R
 				chboxlist[n]=[];//こいつの長さは、チェックボックスの有無にかかわらず全文数
 				chboxlist[n][0]=bun[m][i];
 				if(RGB[m][i][0]==1){
-					checked[n-1]==1;
+					checked[n-1]=1;
 				}
 
 				if(RGB[m][i][1]==1){
-					checked[n-1]==2;
+					checked[n-1]=2;
 				}
 
 				if(RGB[m][i][2]==1){
-					checked[n-1]==3;
+					checked[n-1]=3;
 				}
 			}//RGB[m][i][0]+RGB[m][i][1]+RGB[m][i][2]==1終了
 			//}//checkboxlist[k][0]==0
@@ -84,6 +86,8 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,R
 		document.body.appendChild(greet).appendChild(text);
 	}//DOMを操作してみよう「愛」「交友」「仕事」のいずれかに該当しそうな単語が一つも見つかりませんでした。
 
+	console.log("checked");
+	console.log(checked);
 	chboxlength=c;
 
 	console.log("keitaisokaiseki");
@@ -102,28 +106,42 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,R
 		chboxlist2[n][0]=hatsugen[m];
 		chboxlist2[n][1]=4;
 
-		if(RGBlist[m/2][5]==1){
-			//chboxlist2[n][1]=3;
-			//console.log("「%s」は開かれた質問だと思います",hatsugen[m]);
-			//document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=5 checked><font color=\"silver\"><u>無駄話・相づち等</u></font></label>";
-			checked2[n-1]==3;
-		}else	if(RGBlist[m/2][3]==1){
-			//console.log("「%s」はその他だと思います",hatsugen[m]);
-			//document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=3 checked><font color=\"#d4d\">開かれた質問</font></label>";
-			//chboxlist2[n][1]=5;
-			checked2[n-1]==5;
+		if(RGBlist[m/2][3]==1){
+			console.log("「%s」は開かれた質問だと思います",hatsugen[m]);
+			checked2[n-1]=3;
+		}else	if(RGBlist[m/2][5]==1){
+			console.log("「%s」は相づちだと思います",hatsugen[m]);
+			checked2[n-1]=5;
 		}else	if(RGBlist[m/2][4]==1){
+			console.log("「%s」は閉じられた質問だと思います",hatsugen[m]);
 			c++;
 			taiou[c-1]=n-1;
 			target.innerHTML += "<div id=\"" + c + "\">" + hatsugen[m] + "<br><label><input type=radio name=\"" + c + "\" value=4 checked>閉じられた質問</label><label><input type=radio name=\"" + c + "\" value=6>解釈</label><label><input type=radio name=\"" + c + "\" value=7>無駄話</label></div><br>";
 		}else{
+			console.log("「%s」は何？",hatsugen[m]);
 			c++;
 			taiou[c-1]=n-1;
 			target.innerHTML += "<div id=\"" + c + "\">" + hatsugen[m] + "<br><label><input type=radio name=\"" + c + "\" value=4>閉じられた質問</label><label><input type=radio name=\"" + c + "\" value=6>解釈</label><label><input type=radio name=\"" + c + "\" value=7 checked>無駄話</label></div><br>";
 		}
 	}//m=0;m<keitaisokaiseki.length;m=m+2
+	console.log("checked2");
+	console.log(checked2);
 	chboxlength2 = c -chboxlength;
 	console.log("chboxlength2=%d",chboxlength2);
+
+	return{
+		checkboxlist:checkboxlist,
+		chboxlist:chboxlist,
+		chboxlist2:chboxlist2,
+		RGB:RGB,
+		RGBlist:RGBlist,
+		checked:checked,
+		checked2:checked2,
+		taiou:taiou,
+		chboxlength:chboxlength,
+		chboxlength2:chboxlength2,
+		bunCheckedTaiou:bunCheckedTaiou
+	}
 }
 
 export {select};
