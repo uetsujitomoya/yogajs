@@ -1,4 +1,9 @@
-var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,RGB,RGBlist,hatsugen,bun,checked,checked2,taiou) => {
+var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,RGB,RGBlist,hatsugen,bun,checked,checked2,taiou,bunCheckedTaiou) => {
+	console.log(taiou)
+	taiou = [];
+	bunCheckedTaiou = [];
+	checked=[];
+	checked2=[];
 	var h,i,j,k,l,m,n;
 
 	//for(k=0;k<miserables.nodes.length;k++){
@@ -24,23 +29,23 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,R
 			if(RGB[m][i][0]+RGB[m][i][1]+RGB[m][i][2]>=2){
 				c++;
 				n++;
-				taiou[c]=n;
+				taiou[c-1]=n-1;
 				target.innerHTML += "<div id=\"" + c + "\">" + bun[m][i] + "<br>（" + hatsugen[m] + "）<br><label><input type=radio name=\"" + c + "\" value=0>どれにも含まない</div></label><br>";
 				//その他の選択肢
-				chboxlist[c]=[];
-				chboxlist[c][0]=miserables.nodes[k];
+				chboxlist[n]=[];//こいつの長さは、チェックボックスの有無にかかわらず全文数
+				chboxlist[n][0]=bun[m][i];
 				//checkboxに出す単語とグループの組み合わせ、さらにcheckedか否かの保存
 				if(RGB[m][i][0]==1){
-					chboxlist[c][1]=0;
+					chboxlist[n][1]=0;
 					document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=1 checked><font color=\"#ff7777\">「愛」に含む</font></label>";
 				}
 				if(RGB[m][i][1]==1){
 					document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=2 checked><font color=\"#77ff77\">「交友」に含む</font></label>";
-					chboxlist[c][1]=1;
+					chboxlist[n][1]=1;
 				}
 				if(RGB[m][i][2]==1){
 					document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=3 checked><font color=\"#7777ff\">「仕事」に含む</font></label>";
-					chboxlist[c][1]=2;
+					chboxlist[n][1]=2;
 				}
 				//if(checkboxlist[k][1]+checkboxlist[k][2]+checkboxlist[k][3]>=0){
 				//break;//miserables実は重複してる
@@ -68,7 +73,11 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,R
 
 	if(n==0){
 		var greet = document.createElement('p'),
-		text = document.createTextNode('「愛」「交友」「仕事」のいずれかに該当しそうな単語が一つも見つかりませんでした。');
+		text = document.createTextNode('「愛」「交友」「仕事」のいずれかに該当しそうな文が一つも見つかりませんでした。');
+		document.body.appendChild(greet).appendChild(text);
+	}else if(c==0){
+		var greet = document.createElement('p'),
+		text = document.createTextNode('「愛」「交友」「仕事」のいずれか複数に該当しそうな文が一つも見つかりませんでした。');
 		document.body.appendChild(greet).appendChild(text);
 	}//DOMを操作してみよう「愛」「交友」「仕事」のいずれかに該当しそうな単語が一つも見つかりませんでした。
 
@@ -82,7 +91,7 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,R
 	for(m=0;m<keitaisokaiseki.length;m=m+2){
 
 
-		n++:
+		n++;
 
 		chboxlist2[n]=[];
 		chboxlist2[n][0]=hatsugen[m];
@@ -100,11 +109,11 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,R
 			checked2[n-1]==5;
 		}else	if(RGBlist[m/2][4]==1){
 			c++;
-			taiou[c]=n;
+			taiou[c-1]=n-1;
 			target.innerHTML += "<div id=\"" + c + "\">" + hatsugen[m] + "<br><label><input type=radio name=\"" + c + "\" value=4 checked>閉じられた質問</label><label><input type=radio name=\"" + c + "\" value=6>解釈</label><label><input type=radio name=\"" + c + "\" value=7>無駄話</label></div><br>";
 		}else{
 			c++;
-			taiou[c]=n;
+			taiou[c-1]=n-1;
 			target.innerHTML += "<div id=\"" + c + "\">" + hatsugen[m] + "<br><label><input type=radio name=\"" + c + "\" value=4>閉じられた質問</label><label><input type=radio name=\"" + c + "\" value=6>解釈</label><label><input type=radio name=\"" + c + "\" value=7 checked>無駄話</label></div><br>";
 		}
 	}

@@ -2,7 +2,7 @@ import "kuromoji";
 import {select} from "./select.js"
 import {setForViz} from "./svg.js"
 
-var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou) => {
+var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,bunCheckedTaiou) => {
 
 	var h,i,j,k,l,m,n,c,r,g,b,x,y,z,bunsuu;  //mは段落
 	var hinshi = [];
@@ -33,6 +33,8 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 			if(m%2==0){//カウンセラー
 				console.log(m/2);
 				RGBlist[m/2] = [0,0,0,0,0,0];
+				console.log(m);
+				console.log(RGBlist[m/2]);
 			}
 			i=0; //段落内の何文目か。
 			while(n<path.length){//文ごとのループ
@@ -97,13 +99,14 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 				}//１文作成完了
 				hatsugen[m] += bun[m][i];
 				if(n==path.length){//確認
-					if(i<=4){
+					if( i<=4 && m%2==0 ){
+						console.log("m=%dでi<=4",m);
 						RGBlist[m/2][5]=1;
 					}
 					break;
 				}
 				if(path[n].word_id=="2613630"||path[n].basic_form=="："||path[n].basic_form==":"||path[n].surface_form=="･･･？："){
-					if(i<=4){
+					if(i<=4 && m%2==0 ){
 						RGBlist[m/2][5]=1;
 					}
 					n++;
@@ -157,9 +160,9 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 
 		//console.log(miserables.nodes);
 
-		select(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,RGB,RGBlist,hatsugen,bun,checked,checked2,taiou);
+		select(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,RGB,RGBlist,hatsugen,bun,checked,checked2,taiou,bunCheckedTaiou);
 
-		setForViz(keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou);//形態素解析後に1度目の描画
+		setForViz(keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,bunCheckedTaiou);//形態素解析後に1度目の描画
 		//console.log(RGBlist);
 		console.log("kuromoji.builderの中");
 
@@ -167,7 +170,7 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 	console.log("kuromoji.builderの外");
 	//console.log(RGBlist);
 	return{
-		RGBlist:RGBlist,keitaisokaiseki:keitaisokaiseki,hatsugen:hatsugen,bun:bun,chboxlist:chboxlist,chboxlist2:chboxlist2,checked:checked,checked2:checked2,taiou:taiou
+		RGBlist:RGBlist,keitaisokaiseki:keitaisokaiseki,hatsugen:hatsugen,bun:bun,chboxlist:chboxlist,chboxlist2:chboxlist2,checked:checked,checked2:checked2,taiou:taiou,bunCheckedTaiou:bunCheckedTaiou
 	}
 };
 

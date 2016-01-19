@@ -57,21 +57,22 @@ var funcChecked = (chboxlist,checked,taiou) => {
 	var c;
 	for(c=1;c<chboxlist.length;c++){
 		const radio = document.getElementById(c).children;
-		for(let i = 1, l = radio.length; i < l; i++){
+		console.log(radio);
+		for(let i = 2, l = radio.length; i < l; i++){
 			if(radio[i].control.checked==true){
 				//checked[c-1] = radio[i].control.value;
 				if(radio[i].control.value=="1"){
-					checked[taiou[c]-1] =1;
+					checked[taiou[c]] =1;
 					break;
 				}else if(radio[i].control.value=="2"){
-					checked[taiou[c]-1] =2;
+					checked[taiou[c]] =2;
 					break;
 				}else if(radio[i].control.value=="3"){
-					checked[taiou[c]-1] =3;
+					checked[taiou[c]] =3;
 					break;
 				}
 			}else{
-				checked[taiou[c]-1] =0;
+				checked[taiou[c]] =0;
 			}
 		}
 	}
@@ -89,21 +90,21 @@ var funcChecked2 = (chboxlist,chboxlist2,taiou) => {
 		for(let i = 1, l = radio.length; i < l; i++){
 			if(radio[i].control.checked==true){
 				if(radio[i].control.value=="6"){
-					checked2[taiou[c]-1] =6;
+					checked2[taiou[c]] =6;
 					break;
 				}else if(radio[i].control.value=="7"){
-					checked2[taiou[c]-1] =7;
+					checked2[taiou[c]] =7;
 					break;
 				}
 			}else{
-				checked2[taiou[c]-1] =4;
+				checked2[taiou[c]] =4;
 			}
 		}
 	}
 	return{checked2:checked2};
 };
 
-var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,taiou) => {
+var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,taiou,bunCheckedTaiou) => {
 
 	d3.select("#svgdiv").select("svg").remove();
 
@@ -136,7 +137,7 @@ var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,check
 			for(m=1;m<keitaisokaiseki.length;m=m+2){
 				for(i=0;i<keitaisokaiseki[m].length;i++){
 					j=0;
-					for(j=0;j<keitaisokaiseki[m][i].length;j++){
+					//for(j=0;j<keitaisokaiseki[m][i].length;j++){
 						if(keitaisokaiseki[m][i][j]==chboxlist[c][0]){
 							//console.log(chboxlist[c][0]);
 
@@ -157,7 +158,7 @@ var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,check
 
 							}
 						}
-					}
+					//}//j=0;j<keitaisokaiseki[m][i].length;j++
 				}
 				n++
 			}
