@@ -67,7 +67,7 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 
 							RGB[m][i][0]=1;
 						}
-						if(path[n].basic_form=="仕事"||path[n].basic_form=="休み"||path[n].basic_form=="アルバイト"||path[n].basic_form=="働く"){
+						if(path[n].basic_form=="仕事"||path[n].basic_form=="休み"||path[n].basic_form=="アルバイト"||path[n].basic_form=="働く"||path[n].basic_form=="同僚"||path[n].basic_form=="職場"||path[n].basic_form=="上司"||path[n].basic_form=="部下"){
 							RGB[m][i][2]=1;
 						}
 
@@ -92,14 +92,10 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 						continue;
 					}
 					keitaisokaiseki[m][i][j] = path[n].basic_form;
-					//hinshi[m][i][j] = path[n];
-
 					n++;
 					j++;
 				}//１文作成完了
-
 				hatsugen[m] += bun[m][i];
-
 				if(n==path.length){//確認
 					if(i<=4){
 						RGBlist[m/2][5]=1;
@@ -118,14 +114,8 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 			}
 			m++;
 		}
-		//console.log(hatsugen);
-
-		//console.log("RGBlist");
-		//console.log(RGBlist);
-
 		var tango=[];//全単語（重複あり）
 		x=0;
-
 		for(m=0;m<keitaisokaiseki.length;++m){
 			for(i=0;i<keitaisokaiseki[m].length;++i){
 				for(j=0;j<keitaisokaiseki[m][i].length;++j){
@@ -155,9 +145,7 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 					if(y==1){
 						continue;//次のjへ
 					}
-
 					tangoset.add(keitaisokaiseki[m][i][j]);//tangoset終了
-
 				}
 			}
 		}
@@ -169,7 +157,7 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 
 		//console.log(miserables.nodes);
 
-		select(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,RGB,RGBlist,hatsugen,checked);
+		select(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,RGB,RGBlist,hatsugen,bun,checked);
 
 		setForViz(keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked);//形態素解析後に1度目の描画
 		//console.log(RGBlist);

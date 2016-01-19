@@ -8,11 +8,9 @@ import {funcReaderOnload} from "./wordparse.js"
 var keitaisokaiseki = []; //このlengthは段落数
 var RGBlist  = [];//checkboxのセレクト結果
 var chboxlist=[];//通し番号
-
 var hatsugen =[];
 var bun = [];
 var chboxlist2=[];
-
 var checked = [];
 
 /*
