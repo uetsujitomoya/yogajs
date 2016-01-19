@@ -1,4 +1,4 @@
-var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,RGB,RGBlist,hatsugen,bun,checked) => {
+var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,RGB,RGBlist,hatsugen,bun,checked,checked2) => {
 	var h,i,j,k,l,m,n;
 
 	//for(k=0;k<miserables.nodes.length;k++){
@@ -24,7 +24,7 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,R
 			if(RGB[m][i][0]+RGB[m][i][1]+RGB[m][i][2]>=2){
 				c++;
 				n++;
-				target.innerHTML += "<div id=\"" + c + "\">" + miserables.nodes[k] + "<br><label><input type=radio name=\"" + c + "\" value=0>どれにも含まない</div></label><br>";
+				target.innerHTML += "<div id=\"" + c + "\">" + bun[m][i] + "<br>（" + hatsugen[m] + "）<br><label><input type=radio name=\"" + c + "\" value=0>どれにも含まない</div></label><br>";
 				//その他の選択肢
 				chboxlist[c]=[];
 				chboxlist[c][0]=miserables.nodes[k];
@@ -76,11 +76,12 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,R
 
 	//console.log("RGBlist");
 	//console.log(RGBlist);
+	n=0;
 
 	for(m=0;m<keitaisokaiseki.length;m=m+2){
 
 		c++;
-		n=c-chboxlist.length;
+		n++:
 		target.innerHTML += "<div id=\"" + c + "\">" + hatsugen[m] + "<br></div><br>";
 
 		chboxlist2[n]=[];
@@ -88,15 +89,17 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,R
 		chboxlist2[n][1]=4;
 
 		if(RGBlist[m/2][5]==1){
-			chboxlist2[n][1]=3;
-			console.log("「%s」は開かれた質問だと思います",hatsugen[m]);
-			document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=5 checked><font color=\"silver\"><u>無駄話・相づち等</u></font></label>";
+			//chboxlist2[n][1]=3;
+			//console.log("「%s」は開かれた質問だと思います",hatsugen[m]);
+			//document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=5 checked><font color=\"silver\"><u>無駄話・相づち等</u></font></label>";
+			checked2[n]==3;
 		}else	if(RGBlist[m/2][3]==1){
-			console.log("「%s」はその他だと思います",hatsugen[m]);
-			document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=3 checked><font color=\"#d4d\">開かれた質問</font></label>";
-			chboxlist2[n][1]=5;
+			//console.log("「%s」はその他だと思います",hatsugen[m]);
+			//document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=3 checked><font color=\"#d4d\">開かれた質問</font></label>";
+			//chboxlist2[n][1]=5;
+			checked2[n]==5;
 		}else{
-			document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=3>開かれた質問</label>";
+			document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=3>開かれた質問</label><label><input type=radio name=\"" + c + "\" value=6>解釈</label><label><input type=radio name=\"" + c + "\" value=7>無駄話</label>";
 		}
 
 		document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=4>閉じられた質問</label>";
