@@ -38,21 +38,23 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun) => {
 	.on('mouseover', function(d,i){
 		var e = document.getElementById('msg');
 		var k,l;
+		e.innerHTML = "";
 		for(k=-3;k<=3;k++){
-			if(2*(color2.length-i-1)+k<0||2*(color2.length-i-1)+k>=color2.length){
+			if(2*(color2.length-i-1)+k<0||2*(color2.length-i-1)+k>=hatsugen.length){
+				console.log("%d,continue",2*(color2.length-i-1)+k);
 				continue;
 			}
 			//ｸﾞｳ期分け
 			if(k==0){
-					e.innerHTML = "<b><u><font color="+color2[color2.length-1-i]+">"+(1+2*(color2.length-i-1))+" "+hatsugen[2*(color2.length-i-1)]+"</font></u></b><br>";
+					e.innerHTML += "<b><u><font color="+color2[color2.length-1-i]+">"+(1+2*(color2.length-i-1))+" "+hatsugen[2*(color2.length-i-1)]+"</font></u></b><br>";
 
 			}else if(k%2==0){
-					e.innerHTML = "<font color="+color2[k/2+color2.length-1-i]+">"+(1+k+2*(color2.length-i-1))+" "+hatsugen[k+2*(color2.length-i-1)]+"</u></b><br>";
+					e.innerHTML += "<font color="+color2[k/2+color2.length-1-i]+">"+(1+k+2*(color2.length-i-1))+" "+hatsugen[k+2*(color2.length-i-1)]+"</u></b><br>";
 
 
 			}else{
 				for(l=0;l<bun[k+2*(color2.length-i-1)].length;l++){
-					e.innerHTML = "<font color="+colorBun[checkedBun[k+2*(color2.length-i-1)][l]]+">"+(1+k+2*(color2.length-i-1))+" "+bun[k+2*(color2.length-i-1)][l]+"</font>";
+					e.innerHTML += "<font color="+colorBun[checkedBun[k+2*(color2.length-i-1)][l]]+">"+(1+k+2*(color2.length-i-1))+" "+bun[k+2*(color2.length-i-1)][l]+"</font>";
 				}
 				e.innerHTML += "<br>";
 			}
