@@ -31,7 +31,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki) => {
 	var scaleX = d3.scale.linear().domain([0,color2.length]).range([width/(color2.length),width]);
 	var scaleY = d3.scale.linear().domain([0,6]).range([0,height]);
 	var colors = ["#7777ff","#77ff77","#ff7777"];
-	var colorBun=["dimgray","#ff7777","#77ff77","#7777ff"];
+	var colorBun=["dimgray","deeppink","green","dodgerblue"];
 
 	var area = d3.svg.area()
 	.x(function(d,i){return (nagasa[i]+nagasa[i+1])/2})
