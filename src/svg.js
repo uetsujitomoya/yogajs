@@ -92,7 +92,7 @@ var funcChecked = (chboxlist,checked,taiou,chboxlength) => {
 		console.log("radio");
 		console.log(radio);
 		console.log("radio.length=%d",radio.length);
-		for(let i = 2, l = radio.length; i < l; i++){
+		for(let i = 3, l = radio.length; i < l; i++){
 			if(radio[i].control.checked==true){
 				console.log("radio[%d].control.checked==true",i);
 				if(radio[i].control.value=="1"){

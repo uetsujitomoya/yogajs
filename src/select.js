@@ -29,7 +29,7 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RG
 				c++;
 
 				taiou[c-1]=n-1;
-				target.innerHTML += "<div id=\"" + c + "\">"+ bun[m][i] + "<br>（" + (m+1) + " " + hatsugen[m] + "）<br><label><input type=radio name=\"" + c + "\" value=0>どれにも含まない</div></label><br>";
+				target.innerHTML += "--<br><div id=\"" + c + "\">"+ bun[m][i] + "<br><font size=1 color=silver>（" + (m+1) + " " + hatsugen[m] + "）</font><br><label><input type=radio name=\"" + c + "\" value=0>どれにも含まない</div></label><br>";
 				//その他の選択肢
 
 				//checkboxに出す単語とグループの組み合わせ、さらにcheckedか否かの保存
@@ -108,12 +108,12 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RG
 			console.log("「%s」は解釈だと思います",hatsugen[m]);
 			c++;
 			taiou[c-1]=n-1;
-			target.innerHTML += "<div id=\"" + c + "\">" + (m+1) + " "  + hatsugen[m] + "<br><label><input type=radio name=\"" + c + "\" value=6 checked>解釈</label><label><input type=radio name=\"" + c + "\" value=7>無駄話</label></div><br>";
+			target.innerHTML += "--<br><div id=\"" + c + "\">" + (m+1) + " "  + hatsugen[m] + "<br><label><input type=radio name=\"" + c + "\" value=6 checked>解釈</label><label><input type=radio name=\"" + c + "\" value=7>無駄話</label></div><br>";
 		}else{
 			console.log("「%s」は無駄話だと思います",hatsugen[m]);
 			c++;
 			taiou[c-1]=n-1;
-			target.innerHTML += "<div id=\"" + c + "\">" + (m+1) + " "   + hatsugen[m] + "<br><label><input type=radio name=\"" + c + "\" value=6>解釈</label><label><input type=radio name=\"" + c + "\" value=7 checked>無駄話</label></div><br>";
+			target.innerHTML += "--<br><div id=\"" + c + "\">" + (m+1) + " "   + hatsugen[m] + "<br><label><input type=radio name=\"" + c + "\" value=6>解釈</label><label><input type=radio name=\"" + c + "\" value=7 checked>無駄話</label></div><br>";
 		}
 	}//m=0;m<keitaisokaiseki.length;m=m+2
 
