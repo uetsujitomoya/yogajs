@@ -116,7 +116,8 @@ var funcChecked2 = (chboxlist,chboxlist2,checked2,taiou,chboxlength,chboxlength2
 	var c;
 	//console.log(chboxlength2);
 	for(c=chboxlength+1;c<=chboxlength+chboxlength2;c++){
-		const radio = document.getElementById(c-1+chboxlength).children;
+		console.log(document.getElementById(c))
+		const radio = document.getElementById(c).children;
 		for(let i = radio.length-3, l = radio.length; i < l; i++){
 			if(radio[i].control.checked==true){
 				if(radio[i].control.value=="6"){

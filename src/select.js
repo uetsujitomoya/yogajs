@@ -74,13 +74,9 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RG
 	}
 
 	if(n==0){
-		var greet = document.createElement('p'),
-		text = document.createTextNode('「愛」「交友」「仕事」のいずれかに該当しそうな文が一つも見つかりませんでした。');
-		document.body.appendChild(greet).appendChild(text);
+		target.innerHTML +="「愛」「交友」「仕事」のいずれかに該当しそうな文が一つも見つかりませんでした。";
 	}else if(c==0){
-		var greet = document.createElement('p'),
-		text = document.createTextNode('「愛」「交友」「仕事」のいずれか複数に該当しそうな文が一つも見つかりませんでした。');
-		document.body.appendChild(greet).appendChild(text);
+		target.innerHTML +="「愛」「交友」「仕事」のいずれか複数に該当しそうな文が一つも見つかりませんでした。";
 	}//DOMを操作してみよう「愛」「交友」「仕事」のいずれかに該当しそうな単語が一つも見つかりませんでした。
 
 	console.log("checked");
