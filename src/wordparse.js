@@ -175,6 +175,54 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 		}
 
 
+		var RGBk=[];
+		for(h=0;h<=2;h++){
+			RGBk[h]=[];
+			for(k=0;k<miserables.nodes.length;k++){
+				RGBk[h][k]=0;
+				for(m=1;m<keitaisokaiseki.length;m=m+2){
+					for(i=0;i<keitaisokaiseki[m].length;i++){
+						if(RGB[m][i][h]==1){
+							for(j=0;j<keitaisokaiseki[m][i].length;j++){
+								if(miserables.nodes[k]==keitaisokaiseki[m][i][j]){
+									console.log("%s,%d",miserables.nodes[k],h);
+									RGBk[h][k]=1;
+									break;
+								}
+							}
+						}
+						if(RGBk[h][k]==1){
+							break;
+						}
+					}
+					if(RGBk[h][k]==1){
+						break;
+					}
+				}
+			}
+		}
+
+		for(h=0;h<=2;h++){
+			for(k=0;k<miserables.nodes.length;k++){
+				if(RGBk[h][k]==1){
+					for(m=1;m<keitaisokaiseki.length;m=m+2){
+						for(i=0;i<keitaisokaiseki[m].length;i++){
+							if(RGB[m][i][h]==0){
+								for(j=0;j<keitaisokaiseki[m][i].length;j++){
+									if(miserables.nodes[k]==keitaisokaiseki[m][i][j]){
+										console.log("%s,%d,m=%d,i=%d",bun[m][i],h,m,i);
+										RGB[m][i][h]=1;
+										break;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+
 		var sResult = select(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RGBlist,hatsugen,bun,checked,checked2,taiou,chboxlength,chboxlength2);
 
 		checkboxlist = sResult.checkboxlist;
