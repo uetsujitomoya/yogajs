@@ -1,8 +1,8 @@
 import d3 from "d3"
 
-var height=200,width=1200;
+var height=200,width=1320;
 
-var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun) => {
+var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki) => {
 	console.log("func viz start");
 	var m;
 	var bunsuu=2;//前後の余白
@@ -16,7 +16,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun) => {
 	console.log("bunsuu=%d",bunsuu);
 	var nagasa=[];//縦棒の位置
 	nagasa[0]=1*width/(bunsuu+1);
-	for(m=1;m<=hatsugen.length;m=m+2){
+	for(m=1;m<hatsugen.length;m=m+2){
 		nagasa[(m+1)/2]=nagasa[-1 + (m+1)/2]+hatsugen[m].length*width/bunsuu;
 	}
 	console.log("nagasa");
@@ -54,7 +54,11 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun) => {
 	.attr("x2", function(d,i){return nagasa[i];}).attr("y2", height);
 	svg.selectAll("line")
 	.attr("stroke", function(d,i){return color2[i]})
-	.attr("stroke-width", 3)
+	.attr("stroke-width", function(d,i){
+		//console.log("hatsugen[%d].length==%d",2*i,hatsugen[2*i].length);
+		console.log("keitaisokaiseki[%d].length==%d",2*i,keitaisokaiseki[2*i].length);
+		return(keitaisokaiseki[2*i].length);
+	})
 	.on('mouseover', function(d,i){
 		var e = document.getElementById('msg');
 		var k,l;
@@ -171,10 +175,6 @@ var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,check
 
 	var checkedBun=[];
 
-
-
-
-
 	n=0;//m=1;m<keitaisokaiseki.length;m=m+2の外
 	for(m=1;m<keitaisokaiseki.length;m=m+2){
 		checkedBun[m]=[];//svgでの描画ではm→i
@@ -251,7 +251,7 @@ var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,check
 	//console.log(color2);
 	console.log("checkedBun");
 	console.log(checkedBun);
-	viz(stackdataArr,color2,bun,hatsugen,svg,checkedBun);
+	viz(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki);
 	//console.log("chboxlist2");
 	//console.log(chboxlist2);
 
