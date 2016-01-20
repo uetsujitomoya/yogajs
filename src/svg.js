@@ -15,7 +15,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun) => {
 	}
 	console.log("bunsuu=%d",bunsuu);
 	var nagasa=[];//縦棒の位置
-	nagasa[0]=1*width/(bunsuu+1)+hatsugen[0].length*width/bunsuu;
+	nagasa[0]=1*width/(bunsuu+1);
 	for(m=1;m<=hatsugen.length;m=m+2){
 		nagasa[(m+1)/2]=nagasa[-1 + (m+1)/2]+hatsugen[m].length*width/bunsuu;
 	}
@@ -47,8 +47,8 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun) => {
 	var range = d3.range((width)-(width/(color2.length*2)), color2.length-1, -width/(color2.length));
 	svg.selectAll("line.v")
 	.data(range).enter().append("line")
-	.attr("x1", function(d,i){return nagasa[i];}).attr("y1", 0)
-	.attr("x2", function(d,i){return nagasa[i];}).attr("y2", height);
+	.attr("x1", function(d,i){return nagasa[i-1];}).attr("y1", 0)//i=1から始まってる？
+	.attr("x2", function(d,i){return nagasa[i-1];}).attr("y2", height);
 	svg.selectAll("line")
 	.attr("stroke", function(d,i){return color2[color2.length-1-(color2.length-i)]})
 	.attr("stroke-width", 3)
@@ -71,8 +71,9 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun) => {
 
 
 			}else{
+				e.innerHTML += (1+k+2*(color2.length-i-1))+" ";
 				for(l=0;l<bun[k+2*(color2.length-i-1)].length;l++){
-					e.innerHTML += "<font color="+colorBun[checkedBun[k+2*(color2.length-i-1)][l]]+">"+(1+k+2*(color2.length-i-1))+" "+bun[k+2*(color2.length-i-1)][l]+"</font>";
+					e.innerHTML += "<font color="+colorBun[checkedBun[k+2*(color2.length-i-1)][l]]+">"+bun[k+2*(color2.length-i-1)][l]+"</font>";
 				}
 				e.innerHTML += "<br>";
 			}
