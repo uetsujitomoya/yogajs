@@ -65,7 +65,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun) => {
 var funcChecked = (chboxlist,checked,taiou,chboxlength) => {
 	console.log("funcChecked");
 	var c;
-	for(c=1;c<chboxlength;c++){
+	for(c=1;c<=chboxlength;c++){
 		//console.log(document.getElementById(c));
 		const radio = document.getElementById(c).children;
 		console.log("radio");
@@ -76,15 +76,15 @@ var funcChecked = (chboxlist,checked,taiou,chboxlength) => {
 				console.log("radio[%d].control.checked==true",i);
 				if(radio[i].control.value=="1"){
 					console.log("radio[%d].control.value==1",i);
-					checked[taiou[c]] =1;
+					checked[taiou[c-1]] =1;
 					break;
 				}else if(radio[i].control.value=="2"){
 					console.log("radio[%d].control.value==2",i);
-					checked[taiou[c]] =2;
+					checked[taiou[c-1]] =2;
 					break;
 				}else if(radio[i].control.value=="3"){
 					console.log("radio[%d].control.value==3",i);
-					checked[taiou[c]] =3;
+					checked[taiou[c-1]] =3;
 					break;
 				}
 			}else{
@@ -95,23 +95,23 @@ var funcChecked = (chboxlist,checked,taiou,chboxlength) => {
 };
 
 var funcChecked2 = (chboxlist,chboxlist2,checked2,taiou,chboxlength,chboxlength2) => {
-	console.log("funcChecked2");
+	//console.log("funcChecked2");
 	var c;
-	console.log(chboxlength2);
+	//console.log(chboxlength2);
 	for(c=chboxlength+1;c<=chboxlength+chboxlength2;c++){
-		console.log("c=%d",c);
-		console.log(document.getElementById(c-1+chboxlength));
+		//console.log("c=%d",c);
+		//console.log(document.getElementById(c-1+chboxlength));
 		const radio = document.getElementById(c-1+chboxlength).children;
-		console.log(radio);
-		console.log("radio.length=%d",radio.length);
+		//console.log(radio);
+		//console.log("radio.length=%d",radio.length);
 		for(let i = radio.length-3, l = radio.length; i < l; i++){
 			if(radio[i].control.checked==true){
 				if(radio[i].control.value=="6"){
-					console.log("radio[%d].control.value==6",i);
+					//console.log("radio[%d].control.value==6",i);
 					checked2[taiou[c-1]] =6;
 					break;
 				}else if(radio[i].control.value=="7"){
-					console.log("radio[%d].control.value==7",i);
+					//console.log("radio[%d].control.value==7",i);
 					checked2[taiou[c-1]] =7;
 					break;
 				}
