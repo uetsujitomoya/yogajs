@@ -56,8 +56,8 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki) => {
 	.attr("stroke", function(d,i){return color2[i]})
 	.attr("stroke-width", function(d,i){
 		//console.log("hatsugen[%d].length==%d",2*i,hatsugen[2*i].length);
-		console.log("keitaisokaiseki[%d].length==%d",2*i,keitaisokaiseki[2*i].length);
-		return(keitaisokaiseki[2*i].length);
+		console.log("√keitaisokaiseki[%d].length==%d",2*i,Math.sqrt(keitaisokaiseki[2*i].length));
+		return(Math.sqrt(keitaisokaiseki[2*i].length));
 	})
 	.on('mouseover', function(d,i){
 		var e = document.getElementById('msg');
