@@ -116,11 +116,7 @@ var funcChecked2 = (chboxlist,chboxlist2,checked2,taiou,chboxlength,chboxlength2
 	var c;
 	//console.log(chboxlength2);
 	for(c=chboxlength+1;c<=chboxlength+chboxlength2;c++){
-		//console.log("c=%d",c);
-		//console.log(document.getElementById(c-1+chboxlength));
 		const radio = document.getElementById(c-1+chboxlength).children;
-		//console.log(radio);
-		//console.log("radio.length=%d",radio.length);
 		for(let i = radio.length-3, l = radio.length; i < l; i++){
 			if(radio[i].control.checked==true){
 				if(radio[i].control.value=="6"){
@@ -161,12 +157,10 @@ var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,check
 	if(chboxlength2>=1){
 		funcChecked2(chboxlist,chboxlist2,checked2,taiou,chboxlength,chboxlength2);
 	}
-	console.log("checked2");
-	console.log(checked2);
+	//console.log("checked2");
+	//console.log(checked2);
 
 	var h,i,j,c,m,n;
-
-	//console.log(RGBlist);
 
 	for(n=0;n<RGBlist.length;n++){
 		RGBlist[n][0]=0;
@@ -176,35 +170,40 @@ var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,check
 
 	var checkedBun=[];
 
-	for(c=1;c<chboxlist.length;c++){
 
-		n=0;
-		for(m=1;m<keitaisokaiseki.length;m=m+2){
-			checkedBun[m]=[];//svgでの描画ではm→i
-			for(i=0;i<keitaisokaiseki[m].length;i++){
-				//for(j=0;j<keitaisokaiseki[m][i].length;j++){
-				checkedBun[m][i]=0;
+
+
+
+	n=0;//m=1;m<keitaisokaiseki.length;m=m+2の外
+	for(m=1;m<keitaisokaiseki.length;m=m+2){
+		checkedBun[m]=[];//svgでの描画ではm→i
+		for(i=0;i<keitaisokaiseki[m].length;i++){
+			checkedBun[m][i]=0;
+			for(c=1;c<chboxlist.length;c++){
 				if(bun[m][i]==chboxlist[c][0]){
 					if(checked[c-1]==1){
 						RGBlist[n][0]=RGBlist[n][0]+1;
 						checkedBun[m][i]=1;
+						console.log("%d,%d,「%s」は「愛」",m,i,bun[m][i]);
 					}else if(checked[c-1]==2){
 						RGBlist[n][1]=RGBlist[n][1]+1;
 						checkedBun[m][i]=2;
+						console.log("%d,%d,「%s」は「交友」",m,i,bun[m][i]);
 					}else if(checked[c-1]==3){
 						RGBlist[n][2]=RGBlist[n][2]+1;
 						checkedBun[m][i]=3;
+						console.log("%d,%d,「%s」は「仕事」",m,i,bun[m][i]);
 					}
 				}
-				//}//j=0;j<keitaisokaiseki[m][i].length;j++
-			}
-			n++
-		}
-	}
+			}//c=1;c<chboxlist.length;c++
+		}//i=0;i<keitaisokaiseki[m].length;i++
+		n++
+	}//m=1;m<keitaisokaiseki.length;m=m+2
+
 	console.log("checkedBun");
 	console.log(checkedBun);
-	console.log("RGBlist");
-	console.log(RGBlist);//←グラフにすなお
+	//console.log("RGBlist");
+	//console.log(RGBlist);//←グラフにすなお
 
 
 	for(c=0;c<checked2.length;c++){
@@ -224,8 +223,8 @@ var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,check
 	var RGBmax=[];
 	var RGBmaxmax=1;
 
-	console.log("color2");
-	console.log(color2.length);
+	//console.log("color2");
+	//console.log(color2.length);
 
 	for(m=0;m<((keitaisokaiseki.length-1)/2);m++){//2個飛ばしにしたら後が面倒くさい。患者 1→0　3→1 長さ9なら番号は8まで
 		RGBmax[m]=1;
@@ -242,19 +241,18 @@ var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,check
 		for(m=0;m<((keitaisokaiseki.length-1)/2);m++){//2個飛ばしにしたら後が面倒くさい。患者 1→0　3→1 長さ9なら番号は8まで
 			stackdataArr[h][m]=new Object();
 			stackdataArr[h][m]= {x:m+1,y:(5*(RGBlist[m][h])/RGBmaxmax)};
-			//console.log(stackdataArr[h][m]);
 		}
 	}
 
-	console.log("stackdataArr");
-	console.log(stackdataArr);
-	console.log("color2");
-	console.log(color2);
+	//	console.log("stackdataArr");
+	//console.log(stackdataArr);
+	//console.log("color2");
+	//console.log(color2);
 	console.log("checkedBun");
 	console.log(checkedBun);
 	viz(stackdataArr,color2,bun,hatsugen,svg,checkedBun);
-	console.log("chboxlist2");
-	console.log(chboxlist2);
+	//console.log("chboxlist2");
+	//console.log(chboxlist2);
 
 	return{
 		chboxlist:chboxlist,
