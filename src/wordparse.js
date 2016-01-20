@@ -2,7 +2,7 @@ import "kuromoji";
 import {select} from "./select.js"
 import {setForViz} from "./svg.js"
 
-var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,bunCheckedTaiou,chboxlength,chboxlength2) => {
+var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,chboxlength,chboxlength2) => {
 
 	var h,i,j,k,l,m,n,c,r,g,b,x,y,z,bunsuu;  //mは段落
 	var hinshi = [];
@@ -15,7 +15,7 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 	var checkboxlist=[];//checkboxに入る単語に1+RGBどれかの情報が3次元
 	bun=[];
 	var data = JSON.parse(event.target.result);
-	kuromoji.builder({dicPath: 'dict/'}).build((err, tokenizer) => {
+	return kuromoji.builder({dicPath: 'dict/'}).build((err, tokenizer) => {
 		const path = tokenizer.tokenize(data[0].a);
 
 		//1集計単位ごとにこの関数を用いよう
@@ -51,7 +51,7 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 				while(n<path.length){//単語ごとのループ
 
 					tangosuu++;
-					console.log("tangosuu=%d,%s",tangosuu,path[n].surface_form);
+					//console.log("tangosuu=%d,%s",tangosuu,path[n].surface_form);
 					bun[m][i] += path[n].surface_form;
 
 					if(path[n].basic_form=="。"||path[n].basic_form=="？"||path[n].basic_form=="?"||path[n].basic_form=="："||path[n].basic_form==":"||path[n].word_id=="2613630"||path[n].surface_form=="･･･？："||path[n].surface_form==")："){
@@ -173,7 +173,7 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 		}
 
 
-		var sResult = select(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RGBlist,hatsugen,bun,checked,checked2,taiou,bunCheckedTaiou,chboxlength,chboxlength2);
+		var sResult = select(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RGBlist,hatsugen,bun,checked,checked2,taiou,chboxlength,chboxlength2);
 
 		checkboxlist = sResult.checkboxlist;
 		chboxlist = sResult.chboxlist;
@@ -185,20 +185,45 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 		taiou = sResult.taiou;
 		chboxlength = sResult.chboxlength;
 		chboxlength2 = sResult.chboxlength2;
-		bunCheckedTaiou = sResult.bunCheckedTaiou;
+		console.log("sResult");
+		console.log(sResult);
 
-		var vResult = setForViz(keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,bunCheckedTaiou,chboxlength,chboxlength2);//形態素解析後に1度目の描画
+		var vResult = setForViz(keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,chboxlength,chboxlength2);//形態素解析後に1度目の描画
 		chboxlist = vResult.chboxlist;
 		chboxlist2 = vResult.chboxlist2;
 		RGBlist = vResult.RGBlist;
 		checked = vResult.checked;
 		checked2 = vResult.checked2;
+		chboxlength = vResult.chboxlength;
+		chboxlength2 = vResult.chboxlength2;
+		console.log("vResult");
+		console.log(vResult);
 
-	});
-	console.log("kuromoji.builderの外");
-	return{
-		RGBlist:RGBlist,keitaisokaiseki:keitaisokaiseki,hatsugen:hatsugen,bun:bun,chboxlist:chboxlist,chboxlist2:chboxlist2,checked:checked,checked2:checked2,taiou:taiou,bunCheckedTaiou:bunCheckedTaiou,chboxlength:chboxlength,chboxlength2:chboxlength2
-	}
+		document.getElementById('radio_buttons').onchange = () => {
+			/*
+			console.log("result");
+    	console.log(result);
+      keitaisokaiseki = result.keitaisokaiseki;
+      chboxlist = result.chboxlist;
+      chboxlist2 = result.chboxlist2;
+      hatsugen =  result.hatsugen;
+      bun = result.bun;
+      RGBlist = result.RGBlist;
+      checked = result.checked;
+      checked2 = result.checked2;
+      taiou = result.taiou;
+      chboxlength = result.chboxlength;
+      chboxlength2 = result.chboxlength2;
+			*/
+    	console.log("onchangeの中");
+    	setForViz(keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,chboxlength,chboxlength2);
+    	console.log("checkbox依存部分終わり");
+    };
+
+		return{
+			RGBlist:RGBlist,keitaisokaiseki:keitaisokaiseki,hatsugen:hatsugen,bun:bun,chboxlist:chboxlist,chboxlist2:chboxlist2,checked:checked,checked2:checked2,taiou:taiou,chboxlength:chboxlength,chboxlength2:chboxlength2
+		}
+	})
 };
 
 export {funcReaderOnload};

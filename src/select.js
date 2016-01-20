@@ -1,12 +1,7 @@
-var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RGBlist,hatsugen,bun,checked,checked2,taiou,bunCheckedTaiou,chboxlength,chboxlength2) => {
-/*
-	console.log(taiou)
-	taiou = [];
-	bunCheckedTaiou = [];
-	checked=[];
-	checked2=[];
-	*/
+var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RGBlist,hatsugen,bun,checked,checked2,taiou,chboxlength,chboxlength2) => {
+
 	var h,i,j,k,l,m,n;
+	taiou = [];
 
 	//for(k=0;k<miserables.nodes.length;k++){
 	//checkboxlist[k]=[0,0,0,0,0];
@@ -141,8 +136,7 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RG
 		checked2:checked2,
 		taiou:taiou,
 		chboxlength:chboxlength,
-		chboxlength2:chboxlength2,
-		bunCheckedTaiou:bunCheckedTaiou
+		chboxlength2:chboxlength2
 	}
 }
 

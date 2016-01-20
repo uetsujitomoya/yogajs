@@ -46,10 +46,10 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun) => {
 			}
 			//ｸﾞｳ期分け
 			if(k==0){
-					e.innerHTML += "<b><u><font color="+color2[color2.length-1-i]+">"+(1+2*(color2.length-i-1))+" "+hatsugen[2*(color2.length-i-1)]+"</font></u></b><br>";
+				e.innerHTML += "<b><u><font color="+color2[color2.length-1-i]+">"+(1+2*(color2.length-i-1))+" "+hatsugen[2*(color2.length-i-1)]+"</font></u></b><br>";
 
 			}else if(k%2==0){
-					e.innerHTML += "<font color="+color2[k/2+color2.length-1-i]+">"+(1+k+2*(color2.length-i-1))+" "+hatsugen[k+2*(color2.length-i-1)]+"</u></b><br>";
+				e.innerHTML += "<font color="+color2[k/2+color2.length-1-i]+">"+(1+k+2*(color2.length-i-1))+" "+hatsugen[k+2*(color2.length-i-1)]+"</u></b><br>";
 
 
 			}else{
@@ -63,19 +63,19 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun) => {
 
 		/*
 		if(i==color2.length-1){
-			e.innerHTML = "<b><u>"+(1+2*(color2.length-i-1))+" "+bun[2*(color2.length-i-1)]+"</u></b><br>"+(2+2*(color2.length-i-1))+" "+bun[1+2*(color2.length-i-1)]+"<br>"+(3+2*(color2.length-i-1))+" "+bun[2+2*(color2.length-i-1)]+"<br>"+(4+2*(color2.length-i-1))+" "+bun[3+2*(color2.length-i-1)];
-		}else if(i==color2.length-2){
-			e.innerHTML = (-1+2*(color2.length-i-1))+" "+bun[-2+2*(color2.length-i-1)]+"<br>"+(2*(color2.length-i-1))+" "+bun[-1+2*(color2.length-i-1)]+"<br><b><u>"+(1+2*(color2.length-i-1))+" "+bun[2*(color2.length-i-1)]+"</u></b><br>"+(2+2*(color2.length-i-1))+" "+bun[1+2*(color2.length-i-1)]+"<br>"+(3+2*(color2.length-i-1))+" "+bun[2+2*(color2.length-i-1)]+"<br>"+(4+2*(color2.length-i-1))+" "+bun[3+2*(color2.length-i-1)];
-		}else if(i==1){
-			e.innerHTML = (-2+2*(color2.length-i-1))+" "+bun[-3+2*(color2.length-i-1)]+"<br>"+(-1+2*(color2.length-i-1))+" "+bun[-2+2*(color2.length-i-1)]+"<br>"+(2*(color2.length-i-1))+" "+bun[-1+2*(color2.length-i-1)]+"<br><b><u>"+(1+2*(color2.length-i-1))+" "+bun[2*(color2.length-i-1)]+"</u></b><br>"+(2+2*(color2.length-i-1))+" "+bun[1+2*(color2.length-i-1)]+"<br>"+(3+2*(color2.length-i-1))+" "+bun[2+2*(color2.length-i-1)];
-		}else if(i==0){
-			e.innerHTML = (-2+2*(color2.length-i-1))+" "+bun[-3+2*(color2.length-i-1)]+"<br>"+(-1+2*(color2.length-i-1))+" "+bun[-2+2*(color2.length-i-1)]+"<br>"+(2*(color2.length-i-1))+" "+bun[-1+2*(color2.length-i-1)]+"<br><b><u>"+(1+2*(color2.length-i-1))+" "+bun[2*(color2.length-i-1)]+"</u></b>";
-		}else{
-			e.innerHTML = (-2+2*(color2.length-i-1))+" "+bun[-3+2*(color2.length-i-1)]+"<br>"+(-1+2*(color2.length-i-1))+" "+bun[-2+2*(color2.length-i-1)]+"<br>"+(2*(color2.length-i-1))+" "+bun[-1+2*(color2.length-i-1)]+"<br><b><u>"+(1+2*(color2.length-i-1))+" "+bun[2*(color2.length-i-1)]+"</u></b><br>"+(2+2*(color2.length-i-1))+" "+bun[1+2*(color2.length-i-1)]+"<br>"+(3+2*(color2.length-i-1))+" "+bun[2+2*(color2.length-i-1)]+"<br>"+(4+2*(color2.length-i-1))+" "+bun[3+2*(color2.length-i-1)];
-		}
-		e.style.color = color2[color2.length-1-i];
-		*/
-	})
+		e.innerHTML = "<b><u>"+(1+2*(color2.length-i-1))+" "+bun[2*(color2.length-i-1)]+"</u></b><br>"+(2+2*(color2.length-i-1))+" "+bun[1+2*(color2.length-i-1)]+"<br>"+(3+2*(color2.length-i-1))+" "+bun[2+2*(color2.length-i-1)]+"<br>"+(4+2*(color2.length-i-1))+" "+bun[3+2*(color2.length-i-1)];
+	}else if(i==color2.length-2){
+	e.innerHTML = (-1+2*(color2.length-i-1))+" "+bun[-2+2*(color2.length-i-1)]+"<br>"+(2*(color2.length-i-1))+" "+bun[-1+2*(color2.length-i-1)]+"<br><b><u>"+(1+2*(color2.length-i-1))+" "+bun[2*(color2.length-i-1)]+"</u></b><br>"+(2+2*(color2.length-i-1))+" "+bun[1+2*(color2.length-i-1)]+"<br>"+(3+2*(color2.length-i-1))+" "+bun[2+2*(color2.length-i-1)]+"<br>"+(4+2*(color2.length-i-1))+" "+bun[3+2*(color2.length-i-1)];
+}else if(i==1){
+e.innerHTML = (-2+2*(color2.length-i-1))+" "+bun[-3+2*(color2.length-i-1)]+"<br>"+(-1+2*(color2.length-i-1))+" "+bun[-2+2*(color2.length-i-1)]+"<br>"+(2*(color2.length-i-1))+" "+bun[-1+2*(color2.length-i-1)]+"<br><b><u>"+(1+2*(color2.length-i-1))+" "+bun[2*(color2.length-i-1)]+"</u></b><br>"+(2+2*(color2.length-i-1))+" "+bun[1+2*(color2.length-i-1)]+"<br>"+(3+2*(color2.length-i-1))+" "+bun[2+2*(color2.length-i-1)];
+}else if(i==0){
+e.innerHTML = (-2+2*(color2.length-i-1))+" "+bun[-3+2*(color2.length-i-1)]+"<br>"+(-1+2*(color2.length-i-1))+" "+bun[-2+2*(color2.length-i-1)]+"<br>"+(2*(color2.length-i-1))+" "+bun[-1+2*(color2.length-i-1)]+"<br><b><u>"+(1+2*(color2.length-i-1))+" "+bun[2*(color2.length-i-1)]+"</u></b>";
+}else{
+e.innerHTML = (-2+2*(color2.length-i-1))+" "+bun[-3+2*(color2.length-i-1)]+"<br>"+(-1+2*(color2.length-i-1))+" "+bun[-2+2*(color2.length-i-1)]+"<br>"+(2*(color2.length-i-1))+" "+bun[-1+2*(color2.length-i-1)]+"<br><b><u>"+(1+2*(color2.length-i-1))+" "+bun[2*(color2.length-i-1)]+"</u></b><br>"+(2+2*(color2.length-i-1))+" "+bun[1+2*(color2.length-i-1)]+"<br>"+(3+2*(color2.length-i-1))+" "+bun[2+2*(color2.length-i-1)]+"<br>"+(4+2*(color2.length-i-1))+" "+bun[3+2*(color2.length-i-1)];
+}
+e.style.color = color2[color2.length-1-i];
+*/
+})
 };
 
 var funcChecked = (chboxlist,checked,taiou,chboxlength) => {
@@ -84,18 +84,22 @@ var funcChecked = (chboxlist,checked,taiou,chboxlength) => {
 	for(c=1;c<chboxlength;c++){
 		//console.log(document.getElementById(c));
 		const radio = document.getElementById(c).children;
+		console.log("radio");
 		console.log(radio);
 		console.log("radio.length=%d",radio.length);
 		for(let i = 2, l = radio.length; i < l; i++){
 			if(radio[i].control.checked==true){
-				//checked[c-1] = radio[i].control.value;
+				console.log("radio[%d].control.checked==true",i);
 				if(radio[i].control.value=="1"){
+					console.log("radio[%d].control.value==1",i);
 					checked[taiou[c]] =1;
 					break;
 				}else if(radio[i].control.value=="2"){
+					console.log("radio[%d].control.value==2",i);
 					checked[taiou[c]] =2;
 					break;
 				}else if(radio[i].control.value=="3"){
+					console.log("radio[%d].control.value==3",i);
 					checked[taiou[c]] =3;
 					break;
 				}
@@ -132,7 +136,7 @@ var funcChecked2 = (chboxlist,chboxlist2,checked2,taiou,chboxlength,chboxlength2
 	}
 };
 
-var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,bunCheckedTaiou,chboxlength,chboxlength2) => {
+var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,chboxlength,chboxlength2) => {
 
 	d3.select("#svgdiv").select("svg").remove();
 
@@ -143,6 +147,7 @@ var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,check
 	console.log("setForViz");
 	var color2=[];
 	var stackdataArr = [];
+	console.log("chboxlength=%d",chboxlength);
 	if(chboxlength>=1){
 		funcChecked(chboxlist,checked,taiou,chboxlength);
 	}
@@ -166,34 +171,36 @@ var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,check
 		RGBlist[n][2]=0;
 	}
 
-var checkedBun=[];
+	var checkedBun=[];
 
 	for(c=1;c<chboxlist.length;c++){
 
-			n=0;
-			for(m=1;m<keitaisokaiseki.length;m=m+2){
-				checkedBun[m]=[];//svgでの描画ではm→i
-				for(i=0;i<keitaisokaiseki[m].length;i++){
-					//for(j=0;j<keitaisokaiseki[m][i].length;j++){
-					checkedBun[m][i]=0;
-					if(bun[m][i]==chboxlist[c][0]){
-						if(checked[c-1]==1){
-							RGBlist[n][0]=RGBlist[n][0]+1;
-							checkedBun[m][i]=1;
-						}else if(checked[c-1]==2){
-							RGBlist[n][1]=RGBlist[n][1]+1;
-							checkedBun[m][i]=2;
-						}else if(checked[c-1]==3){
-							RGBlist[n][2]=RGBlist[n][2]+1;
-							checkedBun[m][i]=3;
-						}
+		n=0;
+		for(m=1;m<keitaisokaiseki.length;m=m+2){
+			checkedBun[m]=[];//svgでの描画ではm→i
+			for(i=0;i<keitaisokaiseki[m].length;i++){
+				//for(j=0;j<keitaisokaiseki[m][i].length;j++){
+				checkedBun[m][i]=0;
+				if(bun[m][i]==chboxlist[c][0]){
+					if(checked[c-1]==1){
+						RGBlist[n][0]=RGBlist[n][0]+1;
+						checkedBun[m][i]=1;
+					}else if(checked[c-1]==2){
+						RGBlist[n][1]=RGBlist[n][1]+1;
+						checkedBun[m][i]=2;
+					}else if(checked[c-1]==3){
+						RGBlist[n][2]=RGBlist[n][2]+1;
+						checkedBun[m][i]=3;
 					}
-					//}//j=0;j<keitaisokaiseki[m][i].length;j++
 				}
-				n++
+				//}//j=0;j<keitaisokaiseki[m][i].length;j++
 			}
-
+			n++
+		}
 	}
+	console.log("checkedBun");
+	console.log(checkedBun);
+	console.log("RGBlist");
 	console.log(RGBlist);//←グラフにすなお
 
 
@@ -251,7 +258,9 @@ var checkedBun=[];
 		chboxlist2:chboxlist2,
 		RGBlist:RGBlist,
 		checked:checked,
-		checked2:checked2
+		checked2:checked2,
+		chboxlength:chboxlength,
+		chboxlength2:chboxlength2
 	}
 }
 

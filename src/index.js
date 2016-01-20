@@ -14,7 +14,6 @@ var chboxlist2=[];
 var checked = [];
 var checked2 = [];
 var taiou=[];
-var bunCheckedTaiou=[];
 var chboxlength,chboxlength2;
 
 /*
@@ -30,27 +29,31 @@ document.getElementById('load-button').addEventListener('click', function () {
   var reader = new FileReader();
   reader.onload = function(event) {
     console.log(event);
-    var result = funcReaderOnload(event,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,bunCheckedTaiou,chboxlength,chboxlength2);
-    keitaisokaiseki = result.keitaisokaiseki;
-    chboxlist = result.chboxlist;
-    chboxlist2 = result.chboxlist2;
-    hatsugen =  result.hatsugen;
-    bun = result.bun;
-    RGBlist = result.RGBlist;
-    checked = result.checked;
-    checked2 = result.checked2;
-    taiou = result.taiou;
-    chboxlength = result.chboxlength;
-    chboxlength2 = result.chboxlength2;
-    bunCheckedTaiou = result.bunCheckedTaiou;
+    var result = funcReaderOnload(event,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,chboxlength,chboxlength2);
+    console.log("result");
+    console.log(result);
     console.log("onchangeの外");
+    /*
     document.getElementById('radio_buttons').onchange = () => {
-    	console.log("chboxlist2");
-    	console.log(chboxlist2);
+    	console.log("result");
+    	console.log(result);
+      keitaisokaiseki = result.keitaisokaiseki;
+      chboxlist = result.chboxlist;
+      chboxlist2 = result.chboxlist2;
+      hatsugen =  result.hatsugen;
+      bun = result.bun;
+      RGBlist = result.RGBlist;
+      checked = result.checked;
+      checked2 = result.checked2;
+      taiou = result.taiou;
+      chboxlength = result.chboxlength;
+      chboxlength2 = result.chboxlength2;
     	console.log("onchangeの中");
-    	setForViz(keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,bunCheckedTaiou,chboxlength,chboxlength2);
+
+    	setForViz(keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,chboxlength,chboxlength2);
     	console.log("checkbox依存部分終わり");
     };
+    */
   };
   console.log("reader.onload終了。これとなんちゃら(file)が並列してないといけない");
   reader.readAsText(file);
