@@ -50,9 +50,10 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun) => {
 	.attr("x1", function(d,i){return nagasa[i];}).attr("y1", 0)
 	.attr("x2", function(d,i){return nagasa[i];}).attr("y2", height);
 	svg.selectAll("line")
-	.attr("stroke", function(d,i){return color2[color2.length-1-i]})
+	.attr("stroke", function(d,i){return color2[color2.length-1-(color2.length-i)]})
 	.attr("stroke-width", 3)
 	.on('mouseover', function(d,i){
+		i=color2.length-i;
 		var e = document.getElementById('msg');
 		var k,l;
 		e.innerHTML = "";
