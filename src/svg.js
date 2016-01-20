@@ -122,19 +122,15 @@ var funcChecked2 = (chboxlist,chboxlist2,checked2,taiou,chboxlength,chboxlength2
 	for(c=chboxlength+1;c<=chboxlength+chboxlength2;c++){
 		console.log(document.getElementById(c))
 		const radio = document.getElementById(c).children;
-		for(let i = radio.length-3, l = radio.length; i < l; i++){
+		for(let i = radio.length-2, l = radio.length; i < l; i++){
 			if(radio[i].control.checked==true){
 				if(radio[i].control.value=="6"){
 					//console.log("radio[%d].control.value==6",i);
 					checked2[taiou[c-1]] =6;
 					break;
-				}else if(radio[i].control.value=="7"){
-					//console.log("radio[%d].control.value==7",i);
-					checked2[taiou[c-1]] =7;
-					break;
 				}
 			}else{
-				checked2[taiou[c-1]] =4;
+				checked2[taiou[c-1]] =7;
 			}
 		}
 	}

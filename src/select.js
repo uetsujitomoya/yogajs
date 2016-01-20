@@ -3,10 +3,6 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RG
 	var h,i,j,k,l,m,n;
 	taiou = [];
 
-	//for(k=0;k<miserables.nodes.length;k++){
-	//checkboxlist[k]=[0,0,0,0,0];
-	//}
-
 	var target = document.getElementById("radio_buttons");//checkboxを出す場所
 
 	var c=0;
@@ -107,16 +103,24 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RG
 			checked2[n-1]=5;
 		}else	if(RGBlist[m/2][4]==1){
 			console.log("「%s」は閉じられた質問だと思います",hatsugen[m]);
+			checked2[n-1]=4;
+		}else	if(RGBlist[m/2][6]==1){
+			console.log("「%s」は解釈だと思います",hatsugen[m]);
 			c++;
 			taiou[c-1]=n-1;
-			target.innerHTML += "<div id=\"" + c + "\">" + (m+1) + " "  + hatsugen[m] + "<br><label><input type=radio name=\"" + c + "\" value=4 checked>閉じられた質問</label><label><input type=radio name=\"" + c + "\" value=6>解釈</label><label><input type=radio name=\"" + c + "\" value=7>無駄話</label></div><br>";
+			target.innerHTML += "<div id=\"" + c + "\">" + (m+1) + " "  + hatsugen[m] + "<br><label><input type=radio name=\"" + c + "\" value=6 checked>解釈</label><label><input type=radio name=\"" + c + "\" value=7>無駄話</label></div><br>";
 		}else{
-			console.log("「%s」は何？",hatsugen[m]);
+			console.log("「%s」は無駄話だと思います",hatsugen[m]);
 			c++;
 			taiou[c-1]=n-1;
-			target.innerHTML += "<div id=\"" + c + "\">" + (m+1) + " "   + hatsugen[m] + "<br><label><input type=radio name=\"" + c + "\" value=4>閉じられた質問</label><label><input type=radio name=\"" + c + "\" value=6>解釈</label><label><input type=radio name=\"" + c + "\" value=7 checked>無駄話</label></div><br>";
+			target.innerHTML += "<div id=\"" + c + "\">" + (m+1) + " "   + hatsugen[m] + "<br><label><input type=radio name=\"" + c + "\" value=6>解釈</label><label><input type=radio name=\"" + c + "\" value=7 checked>無駄話</label></div><br>";
 		}
 	}//m=0;m<keitaisokaiseki.length;m=m+2
+
+	if(c==0){
+		target.innerHTML +="「解釈」「無駄話」のいずれかに該当しそうなカウンセラーの発言が一つも見つかりませんでした。";
+	}
+
 	console.log("checked2");
 	console.log(checked2);
 	chboxlength2 = c -chboxlength;

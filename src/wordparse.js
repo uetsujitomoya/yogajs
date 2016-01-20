@@ -33,7 +33,7 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 
 			if(m%2==0){//カウンセラー
 				//console.log(m/2);
-				RGBlist[m/2] = [0,0,0,0,0,0];
+				RGBlist[m/2] = [0,0,0,0,0,0,0];
 				//console.log(m);
 				//console.log(RGBlist[m/2]);
 			}
@@ -86,6 +86,8 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 							RGBlist[m/2][3]=1;
 						}else if(path[n].surface_form=="か"&&path[n].pos=="助詞"){
 							RGBlist[m/2][4]=1;
+						}else if(path[n].surface_form=="ね"&&path[n].pos=="助詞"){
+							RGBlist[m/2][6]=1;
 						}
 					}
 
