@@ -105,7 +105,7 @@ var funcChecked = (chboxlist,checked,taiou,chboxlength) => {
 					break;
 				}
 			}else{
-				checked[taiou[c]] =0;
+				checked[taiou[c-1]] =0;
 			}
 		}
 	}
