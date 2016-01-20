@@ -47,33 +47,31 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun) => {
 	var range = d3.range((width)-(width/(color2.length*2)), color2.length-1, -width/(color2.length));
 	svg.selectAll("line.v")
 	.data(range).enter().append("line")
-	.attr("x1", function(d,i){return nagasa[i-1];}).attr("y1", 0)//i=1から始まってる？
-	.attr("x2", function(d,i){return nagasa[i-1];}).attr("y2", height);
+	.attr("x1", function(d,i){
+		console.log("i=%d",i);
+		return nagasa[i];
+	}).attr("y1", 0)//i=1から始まってる？←そんなことはなかった
+	.attr("x2", function(d,i){return nagasa[i];}).attr("y2", height);
 	svg.selectAll("line")
-	.attr("stroke", function(d,i){return color2[color2.length-1-(color2.length-i)]})
+	.attr("stroke", function(d,i){return color2[i]})
 	.attr("stroke-width", 3)
 	.on('mouseover', function(d,i){
-		i=color2.length-i;
 		var e = document.getElementById('msg');
 		var k,l;
 		e.innerHTML = "";
 		for(k=-3;k<=3;k++){
-			if(2*(color2.length-i-1)+k<0||2*(color2.length-i-1)+k>=hatsugen.length){
-				console.log("%d,continue",2*(color2.length-i-1)+k);
+			if(2*(i)+k<0||2*(i)+k>=hatsugen.length){
+				console.log("%d,continue",2*i+k);
 				continue;
 			}
-			//ｸﾞｳ期分け
 			if(k==0){
-				e.innerHTML += "<b><u><font color="+color2[color2.length-1-i]+">"+(1+2*(color2.length-i-1))+" "+hatsugen[2*(color2.length-i-1)]+"</font></u></b><br>";
-
+				e.innerHTML += "<b><u><font color="+color2[i]+">"+(1+2*i)+" "+hatsugen[2*i]+"</font></u></b><br>";
 			}else if(k%2==0){
-				e.innerHTML += "<font color="+color2[k/2+color2.length-1-i]+">"+(1+k+2*(color2.length-i-1))+" "+hatsugen[k+2*(color2.length-i-1)]+"</u></b><br>";
-
-
+				e.innerHTML += "<font color="+color2[k/2+i]+">"+(1+k+2*i)+" "+hatsugen[k+2*i]+"</u></b><br>";
 			}else{
-				e.innerHTML += (1+k+2*(color2.length-i-1))+" ";
-				for(l=0;l<bun[k+2*(color2.length-i-1)].length;l++){
-					e.innerHTML += "<font color="+colorBun[checkedBun[k+2*(color2.length-i-1)][l]]+">"+bun[k+2*(color2.length-i-1)][l]+"</font>";
+				e.innerHTML += (1+k+2*i)+" ";
+				for(l=0;l<bun[k+2*i].length;l++){
+					e.innerHTML += "<font color="+colorBun[checkedBun[k+2*i][l]]+">"+bun[k+2*i][l]+"</font>";
 				}
 				e.innerHTML += "<br>";
 			}
