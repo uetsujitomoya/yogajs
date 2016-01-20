@@ -4,6 +4,20 @@ var height=200,width=1200;
 
 var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun) => {
 	console.log("func viz start");
+	var m;
+	var bunsuu=2;//前後の余白
+	for(m=1;m<hatsugen.length;m=m+2){//患者の発言で間隔を作る
+		if(m==hatsugen.length-1){
+			bunsuu = bunsuu + hatsugen[m].length/2;
+			break;
+		}
+		bunsuu = bunsuu + hatsugen[m].length;
+	}
+	var nagasa=[];//縦棒の位置
+	nagasa[0]=1*width/(bunsuu+1)+hatsugen[k].length*width/bunsuu;
+	for(m=1;m<=hatsugen.length;m=m+2){
+		nagasa[(m+1)/2]=nagasa[m-1]+hatsugen[m].length*width/bunsuu;
+	}
 
 	var stack = d3.layout.stack()
 	.x(function(d){return 1;})
@@ -17,7 +31,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun) => {
 	var colorBun=["dimgray","#ff7777","#77ff77","#7777ff"];
 
 	var area = d3.svg.area()
-	.x(function(d,i){return (i+1) * width/color2.length})
+	.x(funxtion(d,i){return (nagasa[i]+nagasa[i+1])/2})
 	.y0(function(d){return height})
 	.y1(function(d){return height - scaleY(d.y+d.y0)});
 	svg.selectAll("path")
@@ -30,8 +44,8 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun) => {
 	var range = d3.range((width)-(width/(color2.length*2)), color2.length-1, -width/(color2.length));
 	svg.selectAll("line.v")
 	.data(range).enter().append("line")
-	.attr("x1", function(d,i){return d;}).attr("y1", 0)
-	.attr("x2", function(d,i){return d;}).attr("y2", height);
+	.attr("x1", function(d,i){return nagasa[i];}).attr("y1", 0)
+	.attr("x2", function(d,i){return nagasa[i];}).attr("y2", height);
 	svg.selectAll("line")
 	.attr("stroke", function(d,i){return color2[color2.length-1-i]})
 	.attr("stroke-width", 3)

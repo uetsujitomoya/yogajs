@@ -21,7 +21,7 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 		//1集計単位ごとにこの関数を用いよう
 		console.log(path);
 		n=0; //nは全データ内で何文字目か
-		var tangosuu=0; //hatugenn内で何たんご目か
+		var tangosuu=0; //hatsugen内で何たんご目か
 		m=0; //何個目の発言か。これの偶奇わけで判断。カウンセラーが奇数。患者が偶数。1文は1文で格納
 
 		while(n<path.length){//発言ごとのループ
@@ -38,7 +38,7 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 				//console.log(RGBlist[m/2]);
 			}
 			i=0; //段落内の何文目か。
-			tangosuu=0; //hatugenn内で何たんご目か
+			tangosuu=0; //hatsugen内で何たんご目か
 
 			while(n<path.length){//文ごとのループ
 				keitaisokaiseki[m][i] = []; //文
