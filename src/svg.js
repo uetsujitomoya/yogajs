@@ -108,15 +108,15 @@ var funcChecked2 = (chboxlist,chboxlist2,checked2,taiou,chboxlength,chboxlength2
 			if(radio[i].control.checked==true){
 				if(radio[i].control.value=="6"){
 					console.log("radio[%d].control.value==6",i);
-					checked2[taiou[c]] =6;
+					checked2[taiou[c-1]] =6;
 					break;
 				}else if(radio[i].control.value=="7"){
 					console.log("radio[%d].control.value==7",i);
-					checked2[taiou[c]] =7;
+					checked2[taiou[c-1]] =7;
 					break;
 				}
 			}else{
-				checked2[taiou[c]] =4;
+				checked2[taiou[c-1]] =4;
 			}
 		}
 	}
