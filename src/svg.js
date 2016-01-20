@@ -148,6 +148,8 @@ var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,check
 	}
 	console.log("checked");
 	console.log(checked);
+	console.log("chboxlist");
+	console.log(chboxlist);
 	if(chboxlength2>=1){
 		funcChecked2(chboxlist,chboxlist2,checked2,taiou,chboxlength,chboxlength2);
 	}
