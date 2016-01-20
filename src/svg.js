@@ -13,11 +13,14 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun) => {
 		}
 		bunsuu = bunsuu + hatsugen[m].length;
 	}
+	console.log("bunsuu=%d",bunsuu);
 	var nagasa=[];//縦棒の位置
-	nagasa[0]=1*width/(bunsuu+1)+hatsugen[k].length*width/bunsuu;
+	nagasa[0]=1*width/(bunsuu+1)+hatsugen[0].length*width/bunsuu;
 	for(m=1;m<=hatsugen.length;m=m+2){
-		nagasa[(m+1)/2]=nagasa[m-1]+hatsugen[m].length*width/bunsuu;
+		nagasa[(m+1)/2]=nagasa[-1 + (m+1)/2]+hatsugen[m].length*width/bunsuu;
 	}
+	console.log("nagasa");
+	console.log(nagasa);
 
 	var stack = d3.layout.stack()
 	.x(function(d){return 1;})
@@ -31,7 +34,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun) => {
 	var colorBun=["dimgray","#ff7777","#77ff77","#7777ff"];
 
 	var area = d3.svg.area()
-	.x(funxtion(d,i){return (nagasa[i]+nagasa[i+1])/2})
+	.x(function(d,i){return (nagasa[i]+nagasa[i+1])/2})
 	.y0(function(d){return height})
 	.y1(function(d){return height - scaleY(d.y+d.y0)});
 	svg.selectAll("path")
