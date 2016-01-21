@@ -30,8 +30,8 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki) => {
 	//var max = d3.max(stackdata[stackdata.length-1], function(d){return d.y + d.y0;});
 	var scaleX = d3.scale.linear().domain([0,color2.length]).range([width/(color2.length),width]);
 	var scaleY = d3.scale.linear().domain([0,6]).range([0,height]);
-	var colors = ["#7777ff","#77ff77","#ff7777"];
-	var colorBun=["dimgray","deeppink","green","dodgerblue"];
+	var colors = ["#9edae5","#dbdb8d","#f7b6d2"];
+	var colorBun=["#c7c7c7","#e377c2","#bcbd22","#17becf"];
 
 	var area = d3.svg.area()
 	.x(function(d,i){return (nagasa[i]+nagasa[i+1])/2})
@@ -205,15 +205,15 @@ var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,check
 
 	for(c=0;c<checked2.length;c++){
 		if(checked2[c]==3){
-			color2[c]="#ff3333";
+			color2[c]="#d62728";
 		}else if(checked2[c]==5){
-			color2[c]="yellow";
+			color2[c]="#9467bd";
 		}else if(checked2[c]==4){
 			color2[c]="#3333ff";
 		}else if(checked2[c]==6){
-			color2[c]="orange";
+			color2[c]="#ff7f0e";
 		}else{
-			color2[c]="silver";
+			color2[c]="#7f7f7f";
 		}
 	}
 
