@@ -55,65 +55,37 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RG
 		target.innerHTML +="「愛」「交友」「仕事」のいずれかに該当しそうな文が一つも見つかりませんでした。<br>";
 	}else if(c==0){
 		target.innerHTML +="「愛」「交友」「仕事」のいずれか複数に該当しそうな文が一つも見つかりませんでした。<br>";
-	}//DOMを操作してみよう「愛」「交友」「仕事」のいずれかに該当しそうな単語が一つも見つかりませんでした。
-
-	//console.log("checked");
-	//console.log(checked);
+	}
 	chboxlength=c;
-
-	//console.log("keitaisokaiseki");
-	//console.log(keitaisokaiseki.length);
 	n=0;
-
 	for(m=0;m<keitaisokaiseki.length;m=m+2){
-
-
 		n++;
-
 		chboxlist2[n]=[];
 		chboxlist2[n][0]=hatsugen[m];
 		chboxlist2[n][1]=4;
-
 		c++;
 		taiou[c-1]=n-1;
-
 		if(RGBlist[m/2][3]==1){
-			//console.log("「%s」は開かれた質問だと思います",hatsugen[m]);
-			//checked2[n-1]=3;
 			target.innerHTML += "<div id=\"b" + c + "\"><font size=1 color=gray>"+ (m+1) + " "  + hatsugen[m] + "</font></div><div id=\"r" + c + "\" class=\"hide\"><label><input type=radio name=\"r" + c + "\" value=3 checked><font color=red>開かれた質問</font></label><label><input type=radio name=\"r" + c + "\" value=4><font color=blue>閉じられた質問</font></label><label><input type=radio name=\"r" + c + "\" value=5><font color=dimgray>相づち</font></label><label><input type=radio name=\"r"
 			 + c + "\" value=6><font color=orange>解釈</font></label><label><input type=radio name=\"r" + c + "\" value=7><font color=silver>世間話</font></label></div><br>";
 		}else	if(RGBlist[m/2][5]==1){
-			//console.log("「%s」は相づちだと思います",hatsugen[m]);
-			//checked2[n-1]=5;
 			target.innerHTML += "<div id=\"b" + c + "\"><font size=1 color=gray>"+ (m+1) + " "  + hatsugen[m] + "</font></div><div id=\"r" + c + "\" class=\"hide\"><label><input type=radio name=\"r" + c + "\" value=3><font color=red>開かれた質問</font></label><label><input type=radio name=\"r" + c + "\" value=4><font color=blue>閉じられた質問</font></label><label><input type=radio name=\"r" + c + "\" value=5 checked><font color=dimgray>相づち</font></label><label><input type=radio name=\"r"
 			 + c + "\" value=6><font color=orange>解釈</font></label><label><input type=radio name=\"r" + c + "\" value=7><font color=silver>世間話</font></label></div><br>";
 		}else	if(RGBlist[m/2][4]==1){
-			//console.log("「%s」は閉じられた質問だと思います",hatsugen[m]);
-			//checked2[n-1]=4;
 			target.innerHTML += "<div id=\"b" + c + "\"><font size=1 color=gray>"+ (m+1) + " "  + hatsugen[m] + "</font></div><div id=\"r" + c + "\" class=\"hide\"><label><input type=radio name=\"r" + c + "\" value=3><font color=red>開かれた質問</font></label><label><input type=radio name=\"r" + c + "\" value=4 checked><font color=blue>閉じられた質問</font></label><label><input type=radio name=\"r" + c + "\" value=5><font color=dimgray>相づち</font></label><label><input type=radio name=\"r"
 			 + c + "\" value=6><font color=orange>解釈</font></label><label><input type=radio name=\"r" + c + "\" value=7><font color=silver>世間話</font></label></div><br>";
 		}else	if(RGBlist[m/2][6]==1){
-			//console.log("「%s」は解釈だと思います",hatsugen[m]);
 			target.innerHTML += "<div id=\"b" + c + "\">"+ (m+1) + " "  + hatsugen[m] + "</div><div id=\"r" + c + "\"><label><input type=radio name=\"r" + c + "\" value=3><font color=red>開かれた質問</font></label><label><input type=radio name=\"r" + c + "\" value=4><font color=blue>閉じられた質問</font></label><label><input type=radio name=\"r" + c + "\" value=5><font color=dimgray>相づち</font></label><label><input type=radio name=\"r" + c
 			+ "\" value=6 checked><font color=orange>解釈</font></label><label><input type=radio name=\"r" + c + "\" value=7><font color=silver>世間話</font></label></div><br>";
-
 		}else{
-			//console.log("「%s」は無駄話だと思います",hatsugen[m]);
 			target.innerHTML += "<div id=\"b" + c + "\">"+ (m+1) + " "  + hatsugen[m] + "</div><div id=\"r" + c + "\"><label><input type=radio name=\"r" + c + "\" value=3><font color=red>開かれた質問</font></label><label><input type=radio name=\"r" + c + "\" value=4><font color=blue>閉じられた質問</font></label><label><input type=radio name=\"r" + c + "\" value=5><font color=dimgray>相づち</font></label><label><input type=radio name=\"r" + c
 			+ "\" value=6><font color=orange>解釈</font></label><label><input type=radio name=\"r" + c + "\" value=7 checked><font color=silver>世間話</font></label></div><br>";
-
 		}
-	}//m=0;m<keitaisokaiseki.length;m=m+2
-
+	}
 	if(c==chboxlength){
 		target.innerHTML +="「解釈」「無駄話」のいずれかに該当しそうなカウンセラーの発言が一つも見つかりませんでした。";
 	}
-
-	//console.log("checked2");
-	//console.log(checked2);
 	chboxlength2 = c -chboxlength;
-	//console.log("chboxlength2=%d",chboxlength2);
-
 	return{
 		checkboxlist:checkboxlist,
 		chboxlist:chboxlist,
@@ -127,21 +99,4 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RG
 		chboxlength2:chboxlength2
 	}
 }
-
-/*<div id="items">
-<div id='item1' class="hide">
-radio
-<ul>
-<li>check1</li>
-<li>check2</li>
-</ul>
-</div>
-</div>
-
-<div>
-<button id="btn">
-show hide
-</button>
-</div>ji*/
-
 export {select};
