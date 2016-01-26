@@ -111,6 +111,10 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 					n++;
 					j++;
 				}//１文作成完了
+				if(bun[m][i]=="Ａ"||bun[m][i]=="Ｂ"||bun[m][i]=="Ｔ"||bun[m][i]=="A"||bun[m][i]=="B"||bun[m][i]=="T"){
+					bun[m][i]="";
+					continue;
+				}
 				if(bun[m][i]!="Ａ"&&bun[m][i]!="Ｂ"&&bun[m][i]!="Ｔ"&&bun[m][i]!="A"&&bun[m][i]!="B"&&bun[m][i]!="T"){
 					hatsugen[m] += bun[m][i];
 					hatsugen[m] += "。";
