@@ -24,10 +24,10 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RG
 
 			taiou[c-1]=n-1;
 			if(RGB[m][i][0]+RGB[m][i][1]+RGB[m][i][2]>=2){
-				target.innerHTML += "<div id=\"b" + c + "\">"+ bun[m][i] + "</div><div id=\"r" + c + "\"><font size=1 color=yellow>（" + (m+1) + " " + hatsugen[m] + "）</font><label><input type=radio name=\"r" + c + "\" value=0>どれにも含まない</label></div><br>";
+				target.innerHTML += "<div id=\"b" + c + "\">"+ bun[m][i] + "</div><div id=\"r" + c + "\"><font size=1 color=purple>（" + (m+1) + " " + hatsugen[m] + "）</font><label><input type=radio name=\"r" + c + "\" value=0>どれにも含まない</label></div><br>";
 
 			}else{
-				target.innerHTML += "<div id=\"b" + c + "\"><font size=1 color=gray>"+ bun[m][i] + "</div><div id=\"r" + c + "\" class=\"hide\"><font size=1 color=yellow>（" + (m+1) + " " + hatsugen[m] + "）</font><label><input type=radio name=\"r" + c + "\" value=0>どれにも含まない</label></div></font><br>";
+				target.innerHTML += "<div id=\"b" + c + "\"><font size=1 color=gray>"+ bun[m][i] + "</div><div id=\"r" + c + "\" class=\"hide\"><font size=1 color=purple>（" + (m+1) + " " + hatsugen[m] + "）</font><label><input type=radio name=\"r" + c + "\" value=0>どれにも含まない</label></div></font><br>";
 			}
 
 			if(RGB[m][i][0]==1){
