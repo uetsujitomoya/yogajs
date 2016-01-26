@@ -213,7 +213,7 @@ var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,check
 		if(checked2[c]==3){
 			color2[c]="#ff3333";
 		}else if(checked2[c]==5){
-			color2[c]="yellow";
+			color2[c]="dimgray";
 		}else if(checked2[c]==4){
 			color2[c]="#3333ff";
 		}else if(checked2[c]==6){

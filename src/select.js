@@ -80,26 +80,26 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RG
 		if(RGBlist[m/2][3]==1){
 			//console.log("「%s」は開かれた質問だと思います",hatsugen[m]);
 			//checked2[n-1]=3;
-			target.innerHTML += "<div id=\"b" + c + "\"><font size=1 color=gray>"+ (m+1) + " "  + hatsugen[m] + "</font></div><div id=\"r" + c + "\" class=\"hide\"><label><input type=radio name=\"r" + c + "\" value=3 checked><font color=red>開かれた質問</font></label><label><input type=radio name=\"r" + c + "\" value=4><font color=blue>閉じられた質問</font></label><label><input type=radio name=\"r" + c + "\" value=5><font color=yellow>相づち</font></label><label><input type=radio name=\"r"
+			target.innerHTML += "<div id=\"b" + c + "\"><font size=1 color=gray>"+ (m+1) + " "  + hatsugen[m] + "</font></div><div id=\"r" + c + "\" class=\"hide\"><label><input type=radio name=\"r" + c + "\" value=3 checked><font color=red>開かれた質問</font></label><label><input type=radio name=\"r" + c + "\" value=4><font color=blue>閉じられた質問</font></label><label><input type=radio name=\"r" + c + "\" value=5><font color=dimgray>相づち</font></label><label><input type=radio name=\"r"
 			 + c + "\" value=6><font color=orange>解釈</font></label><label><input type=radio name=\"r" + c + "\" value=7><font color=silver>世間話</font></label></div><br>";
 		}else	if(RGBlist[m/2][5]==1){
 			//console.log("「%s」は相づちだと思います",hatsugen[m]);
 			//checked2[n-1]=5;
-			target.innerHTML += "<div id=\"b" + c + "\"><font size=1 color=gray>"+ (m+1) + " "  + hatsugen[m] + "</font></div><div id=\"r" + c + "\" class=\"hide\"><label><input type=radio name=\"r" + c + "\" value=3><font color=red>開かれた質問</font></label><label><input type=radio name=\"r" + c + "\" value=4><font color=blue>閉じられた質問</font></label><label><input type=radio name=\"r" + c + "\" value=5 checked><font color=yellow>相づち</font></label><label><input type=radio name=\"r"
+			target.innerHTML += "<div id=\"b" + c + "\"><font size=1 color=gray>"+ (m+1) + " "  + hatsugen[m] + "</font></div><div id=\"r" + c + "\" class=\"hide\"><label><input type=radio name=\"r" + c + "\" value=3><font color=red>開かれた質問</font></label><label><input type=radio name=\"r" + c + "\" value=4><font color=blue>閉じられた質問</font></label><label><input type=radio name=\"r" + c + "\" value=5 checked><font color=dimgray>相づち</font></label><label><input type=radio name=\"r"
 			 + c + "\" value=6><font color=orange>解釈</font></label><label><input type=radio name=\"r" + c + "\" value=7><font color=silver>世間話</font></label></div><br>";
 		}else	if(RGBlist[m/2][4]==1){
 			//console.log("「%s」は閉じられた質問だと思います",hatsugen[m]);
 			//checked2[n-1]=4;
-			target.innerHTML += "<div id=\"b" + c + "\"><font size=1 color=gray>"+ (m+1) + " "  + hatsugen[m] + "</font></div><div id=\"r" + c + "\" class=\"hide\"><label><input type=radio name=\"r" + c + "\" value=3><font color=red>開かれた質問</font></label><label><input type=radio name=\"r" + c + "\" value=4 checked><font color=blue>閉じられた質問</font></label><label><input type=radio name=\"r" + c + "\" value=5><font color=yellow>相づち</font></label><label><input type=radio name=\"r"
+			target.innerHTML += "<div id=\"b" + c + "\"><font size=1 color=gray>"+ (m+1) + " "  + hatsugen[m] + "</font></div><div id=\"r" + c + "\" class=\"hide\"><label><input type=radio name=\"r" + c + "\" value=3><font color=red>開かれた質問</font></label><label><input type=radio name=\"r" + c + "\" value=4 checked><font color=blue>閉じられた質問</font></label><label><input type=radio name=\"r" + c + "\" value=5><font color=dimgray>相づち</font></label><label><input type=radio name=\"r"
 			 + c + "\" value=6><font color=orange>解釈</font></label><label><input type=radio name=\"r" + c + "\" value=7><font color=silver>世間話</font></label></div><br>";
 		}else	if(RGBlist[m/2][6]==1){
 			//console.log("「%s」は解釈だと思います",hatsugen[m]);
-			target.innerHTML += "<div id=\"b" + c + "\">"+ (m+1) + " "  + hatsugen[m] + "</div><div id=\"r" + c + "\"><label><input type=radio name=\"r" + c + "\" value=3><font color=red>開かれた質問</font></label><label><input type=radio name=\"r" + c + "\" value=4><font color=blue>閉じられた質問</font></label><label><input type=radio name=\"r" + c + "\" value=5><font color=yellow>相づち</font></label><label><input type=radio name=\"r" + c
+			target.innerHTML += "<div id=\"b" + c + "\">"+ (m+1) + " "  + hatsugen[m] + "</div><div id=\"r" + c + "\"><label><input type=radio name=\"r" + c + "\" value=3><font color=red>開かれた質問</font></label><label><input type=radio name=\"r" + c + "\" value=4><font color=blue>閉じられた質問</font></label><label><input type=radio name=\"r" + c + "\" value=5><font color=dimgray>相づち</font></label><label><input type=radio name=\"r" + c
 			+ "\" value=6 checked><font color=orange>解釈</font></label><label><input type=radio name=\"r" + c + "\" value=7><font color=silver>世間話</font></label></div><br>";
 
 		}else{
 			//console.log("「%s」は無駄話だと思います",hatsugen[m]);
-			target.innerHTML += "<div id=\"b" + c + "\">"+ (m+1) + " "  + hatsugen[m] + "</div><div id=\"r" + c + "\"><label><input type=radio name=\"r" + c + "\" value=3><font color=red>開かれた質問</font></label><label><input type=radio name=\"r" + c + "\" value=4><font color=blue>閉じられた質問</font></label><label><input type=radio name=\"r" + c + "\" value=5><font color=yellow>相づち</font></label><label><input type=radio name=\"r" + c
+			target.innerHTML += "<div id=\"b" + c + "\">"+ (m+1) + " "  + hatsugen[m] + "</div><div id=\"r" + c + "\"><label><input type=radio name=\"r" + c + "\" value=3><font color=red>開かれた質問</font></label><label><input type=radio name=\"r" + c + "\" value=4><font color=blue>閉じられた質問</font></label><label><input type=radio name=\"r" + c + "\" value=5><font color=dimgray>相づち</font></label><label><input type=radio name=\"r" + c
 			+ "\" value=6><font color=orange>解釈</font></label><label><input type=radio name=\"r" + c + "\" value=7 checked><font color=silver>世間話</font></label></div><br>";
 
 		}
