@@ -87,8 +87,8 @@ var funcChecked = (chboxlist,checked,taiou,chboxlength) => {
 	console.log("funcChecked");
 	var c;
 	for(c=1;c<=chboxlength;c++){
-		//console.log(document.getElementById(c));
-		const radio = document.getElementById(c).children;
+		//console.log(document.getElementById("r"+c));
+		const radio = document.getElementById("r"+c).children;
 		console.log("radio");
 		console.log(radio);
 		console.log("radio.length=%d",radio.length);
@@ -120,8 +120,8 @@ var funcChecked2 = (chboxlist,chboxlist2,checked2,taiou,chboxlength,chboxlength2
 	var c;
 	//console.log(chboxlength2);
 	for(c=chboxlength+1;c<=chboxlength+chboxlength2;c++){
-		console.log(document.getElementById(c))
-		const radio = document.getElementById(c).children;
+		console.log(document.getElementById("r"+c))
+		const radio = document.getElementById("r"+c).children;
 		for(let i = radio.length-2, l = radio.length; i < l; i++){
 			if(radio[i].control.checked==true){
 				if(radio[i].control.value=="6"){

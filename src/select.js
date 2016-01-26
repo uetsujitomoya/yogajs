@@ -24,34 +24,34 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RG
 
 			taiou[c-1]=n-1;
 			if(RGB[m][i][0]+RGB[m][i][1]+RGB[m][i][2]>=2){
-				target.innerHTML += "<div id=\"b" + c + "\">"+ bun[m][i] + "</div><div id=\"" + c + "\"><br><font size=1 color=silver>（" + (m+1) + " " + hatsugen[m] + "）</font><br><label><input type=radio name=\"" + c + "\" value=0>どれにも含まない</label></div>";
+				target.innerHTML += "<div id=\"b" + c + "\">"+ bun[m][i] + "</div><div id=\"r" + c + "\"><br><font size=1 color=silver>（" + (m+1) + " " + hatsugen[m] + "）</font><br><label><input type=radio name=\"" + c + "\" value=0>どれにも含まない</label></div>";
 
 			}else{
-				target.innerHTML += "<div id=\"b" + c + "\"><font size=1>"+ bun[m][i] + "</div><div id=\"" + c + "\" class=\"hide\"><br><font size=1 color=silver>（" + (m+1) + " " + hatsugen[m] + "）</font><br><label><input type=radio name=\"" + c + "\" value=0>どれにも含まない</label></div></font>";
+				target.innerHTML += "<div id=\"b" + c + "\"><font size=1>"+ bun[m][i] + "</div><div id=\"r" + c + "\" class=\"hide\"><br><font size=1 color=silver>（" + (m+1) + " " + hatsugen[m] + "）</font><br><label><input type=radio name=\"" + c + "\" value=0>どれにも含まない</label></div></font>";
 			}
 
 
 			if(RGB[m][i][0]==1){
 				chboxlist[n][1]=0;
-				document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=1 checked><font color=\"#ff7777\">「愛」に含む</font></label>";
+				document.getElementById("r"+c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=1 checked><font color=\"#ff7777\">「愛」に含む</font></label>";
 			}else{
-				document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=1><font color=\"#ff7777\">「愛」に含む</font></label>";
+				document.getElementById("r"+c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=1><font color=\"#ff7777\">「愛」に含む</font></label>";
 			}
 			if(RGB[m][i][1]==1){
-				document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=2 checked><font color=\"#77ff77\">「交友」に含む</font></label>";
+				document.getElementById("r"+c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=2 checked><font color=\"#77ff77\">「交友」に含む</font></label>";
 				chboxlist[n][1]=1;
 			}else{
-				document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=2><font color=\"#77ff77\">「交友」に含む</font></label>";
+				document.getElementById("r"+c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=2><font color=\"#77ff77\">「交友」に含む</font></label>";
 			}
 			if(RGB[m][i][2]==1){
-				document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=3 checked><font color=\"#7777ff\">「仕事」に含む</font></label>";
+				document.getElementById("r"+c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=3 checked><font color=\"#7777ff\">「仕事」に含む</font></label>";
 				chboxlist[n][1]=2;
 			}else{
-				document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=3><font color=\"#7777ff\">「仕事」に含む</font></label>";
+				document.getElementById("r"+c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=3><font color=\"#7777ff\">「仕事」に含む</font></label>";
 			}
-			console.log(document.getElementById(c).classList);
+			console.log(document.getElementById("r"+c).classList);
 			console.log(document.getElementById("b"+c));
-			
+
 
 		}
 	}
@@ -95,12 +95,12 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RG
 			console.log("「%s」は解釈だと思います",hatsugen[m]);
 			c++;
 			taiou[c-1]=n-1;
-			target.innerHTML += "--<br><div id=\"" + c + "\">" + (m+1) + " "  + hatsugen[m] + "<br><label><input type=radio name=\"" + c + "\" value=6 checked>解釈</label><label><input type=radio name=\"" + c + "\" value=7>無駄話</label></div><br>";
+			target.innerHTML += "--<br><div id=\"r" + c + "\">" + (m+1) + " "  + hatsugen[m] + "<br><label><input type=radio name=\"r" + c + "\" value=6 checked>解釈</label><label><input type=radio name=\"r" + c + "\" value=7>無駄話</label></div><br>";
 		}else{
 			console.log("「%s」は無駄話だと思います",hatsugen[m]);
 			c++;
 			taiou[c-1]=n-1;
-			target.innerHTML += "--<br><div id=\"" + c + "\">" + (m+1) + " "   + hatsugen[m] + "<br><label><input type=radio name=\"" + c + "\" value=6>解釈</label><label><input type=radio name=\"" + c + "\" value=7 checked>無駄話</label></div><br>";
+			target.innerHTML += "--<br><div id=\"r" + c + "\">" + (m+1) + " "   + hatsugen[m] + "<br><label><input type=radio name=\"r" + c + "\" value=6>解釈</label><label><input type=radio name=\"r" + c + "\" value=7 checked>無駄話</label></div><br>";
 		}
 	}//m=0;m<keitaisokaiseki.length;m=m+2
 

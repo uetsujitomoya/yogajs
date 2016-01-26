@@ -2,6 +2,18 @@ import "kuromoji";
 import {select} from "./select.js"
 import {setForViz} from "./svg.js"
 
+
+var makeOnClick = (c) =>{
+	document.getElementById("b"+c).onclick = (e) => {
+		console.log(e);
+
+		const id = "r"+c;
+
+		console.log("b%sをクリック",id);
+		document.getElementById(id).classList.toggle("hide");
+	};
+}
+
 var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,chboxlength,chboxlength2) => {
 
 	var h,i,j,k,l,m,n,c,r,g,b,x,y,z,bunsuu;  //mは段落
@@ -51,8 +63,6 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 				while(n<path.length){//単語ごとのループ
 
 					tangosuu++;
-					//console.log("tangosuu=%d,%s",tangosuu,path[n].surface_form);
-					bun[m][i] += path[n].surface_form;
 
 					if(path[n].basic_form=="。"||path[n].basic_form=="？"||path[n].basic_form=="?"||path[n].basic_form=="："||path[n].basic_form==":"||path[n].word_id=="2613630"||path[n].surface_form=="･･･？："||path[n].surface_form==")："){
 						break;//１文終了
@@ -91,7 +101,7 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 						}
 					}
 
-
+					bun[m][i] += path[n].surface_form;
 					if(path[n].pos_detail_1=="接尾"||path[n].basic_form=="*"||path[n].pos=="助詞"||path[n].basic_form=="、"||path[n].pos=="記号"||path[n].pos=="助動詞"||path[n].pos=="感動詞"||path[n].pos=="接頭詞"||path[n].pos_detail_1=="非自立"
 					||path[n].basic_form=="する"||path[n].basic_form=="いる"||path[n].basic_form=="こういう"||path[n].basic_form=="そういう"||path[n].basic_form=="こう"||path[n].basic_form=="する"||path[n].basic_form=="こうした"||path[n].basic_form=="いう"||path[n].basic_form=="する"
 					||path[n].basic_form=="なる"||path[n].basic_form=="その"||path[n].basic_form=="あの"||path[n].pos_detail_1=="数"||path[n].basic_form=="そう"||path[n].basic_form=="気持ち"||path[n].basic_form=="思い"||path[n].basic_form=="思う"||path[n].basic_form=="ある"){
@@ -99,10 +109,13 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 						continue;
 					}
 					keitaisokaiseki[m][i][j] = path[n].basic_form;
+
+
 					n++;
 					j++;
 				}//１文作成完了
 				hatsugen[m] += bun[m][i];
+				hatsugen[m] += "。";
 				if(n==path.length){//確認
 					if(m%2==0 ){
 						console.log("m=%d i=%d tangosuu=%d %s",m,i,tangosuu,hatsugen[m]);
@@ -250,15 +263,13 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 		console.log(vResult);
 
 
+
+
 		for(c=1;c<=chboxlength;c++){
 			console.log("for %d",c);
-			document.getElementById("b"+c).onclick = () => {
-				document.getElementById(c).classList.toggle("hide");
-				console.log("%dをクリック",c);
-			};
-			document.getElementById("b"+c).mouseover = () => {
-				console.log("%dを通過",c);
-			};
+			console.log(document.getElementById("r"+c));
+			console.log(document.getElementById("r"+c).classList);
+			makeOnClick(c);
 		}
 
 
