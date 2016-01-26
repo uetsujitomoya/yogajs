@@ -250,41 +250,21 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 		console.log(vResult);
 
 
+		for(c=1;c<=chboxlength;c++){
+			console.log("for %d",c);
+			document.getElementById("b"+c).onclick = () => {
+				document.getElementById(c).classList.toggle("hide");
+				console.log("%dをクリック",c);
+			};
+			document.getElementById("b"+c).mouseover = () => {
+				console.log("%dを通過",c);
+			};
+		}
 
 
-
-		/*
-		var item1 = document.getElementById("item1");
-
-		var btn = document.getElementById("btn");
-		btn.onclick = () => {
-			console.log(item1.classList);
-			item1.classList.toggle("hide");
-		};
-		*/
-
-
-		document.getElementById("b"+c).onclick = () => {
-			console.log(c.classList);
-			c.classList.toggle("hide");
-		};
 
 		document.getElementById('radio_buttons').onchange = () => {
-			/*
-			console.log("result");
-			console.log(result);
-			keitaisokaiseki = result.keitaisokaiseki;
-			chboxlist = result.chboxlist;
-			chboxlist2 = result.chboxlist2;
-			hatsugen =  result.hatsugen;
-			bun = result.bun;
-			RGBlist = result.RGBlist;
-			checked = result.checked;
-			checked2 = result.checked2;
-			taiou = result.taiou;
-			chboxlength = result.chboxlength;
-			chboxlength2 = result.chboxlength2;
-			*/
+
 			console.log("onchangeの中");
 			setForViz(keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,chboxlength,chboxlength2);
 			console.log("checkbox依存部分終わり");

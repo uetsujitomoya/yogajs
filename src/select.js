@@ -24,10 +24,10 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RG
 
 			taiou[c-1]=n-1;
 			if(RGB[m][i][0]+RGB[m][i][1]+RGB[m][i][2]>=2){
-				target.innerHTML += "<div id=\"b" + c + "\">"+ bun[m][i] + "</div><div id=\"" + c + "\"><br><font size=1 color=silver>（" + (m+1) + " " + hatsugen[m] + "）</font><br><label><input type=radio name=\"" + c + "\" value=0>どれにも含まない</label></div><br>";
+				target.innerHTML += "<div id=\"b" + c + "\">"+ bun[m][i] + "</div><div id=\"" + c + "\"><br><font size=1 color=silver>（" + (m+1) + " " + hatsugen[m] + "）</font><br><label><input type=radio name=\"" + c + "\" value=0>どれにも含まない</label></div>";
 
 			}else{
-				target.innerHTML += "<div id=\"b" + c + "\">"+ bun[m][i] + "</div><div id=\"" + c + "\" class=\"hide\"><br><font size=1 color=silver>（" + (m+1) + " " + hatsugen[m] + "）</font><br><label><input type=radio name=\"" + c + "\" value=0>どれにも含まない</label></div><br>";
+				target.innerHTML += "<div id=\"b" + c + "\"><font size=1>"+ bun[m][i] + "</div><div id=\"" + c + "\" class=\"hide\"><br><font size=1 color=silver>（" + (m+1) + " " + hatsugen[m] + "）</font><br><label><input type=radio name=\"" + c + "\" value=0>どれにも含まない</label></div></font>";
 			}
 
 
@@ -49,10 +49,9 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RG
 			}else{
 				document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=3><font color=\"#7777ff\">「仕事」に含む</font></label>";
 			}
-			//if(checkboxlist[k][1]+checkboxlist[k][2]+checkboxlist[k][3]>=0){
-			//break;//miserables実は重複してる
-			//}
-
+			console.log(document.getElementById(c).classList);
+			console.log(document.getElementById("b"+c));
+			
 
 		}
 	}
