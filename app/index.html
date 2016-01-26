@@ -27,19 +27,24 @@
   <button id="load-button">左でjsonファイルを指定してから、ここをクリックして5～15秒ほど待つ</button>
   <br>
   <br>
-
-  <div style="height:300px; width:650px; overflow-y:scroll">
+  <br>
+<div id="svgdiv"></div>
+折れ線グラフ：クライエントの発言について<font color="deeppink">「愛」</font><font color="green">「交友」</font><font color="dodgerblue">「仕事」</font><br>
+縦棒：カウンセラーからの<font color="#ff3333">「開かれた質問」</font><font color="#3333ff">「閉じられた質問」</font><font color="dimgray">「相づち」</font><font color="orange">「解釈」</font><font color="silver">「無駄話」</font><br><br><br>
+<br><br>
+クライエントが発した文/カウンセラーが発した質問について分類してください<br>
+  <div style="height:300px; width:650px; overflow-y:scroll; float:left">
     <form name="form1" id="chbox" action="">
       <div id="radio_buttons"></div>
     </form>
-  </div>
-  <br><br>
+  </div>　　
+  <div id="msg" style="height:300px; width:600px; overflow-y:scroll"></div>
 
-  <div id="svgdiv"></div>
 
-  折れ線グラフ：患者の発言について<font color="deeppink">「愛」</font><font color="green">「交友」</font><font color="dodgerblue">「仕事」</font><br>
-  縦棒：セラピストからの<font color="#ff3333">「開かれた質問」</font><font color="#3333ff">「閉じられた質問」</font><font color="dimgray">「相づち」</font><font color="orange">「解釈」</font><font color="silver">「無駄話」</font><br><br><br>
-  <div id="msg"></div>
+
+
+
+
 
   <script language="javascript" src="bundle.js"></script>
 
