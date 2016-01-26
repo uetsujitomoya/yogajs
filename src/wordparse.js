@@ -115,7 +115,7 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 					bun[m][i]="";
 					continue;
 				}
-				if(bun[m][i]!="Ａ"&&bun[m][i]!="Ｂ"&&bun[m][i]!="Ｔ"&&bun[m][i]!="A"&&bun[m][i]!="B"&&bun[m][i]!="T"){
+				if(bun[m][i]!="Ａ"&&bun[m][i]!="Ｂ"&&bun[m][i]!="Ｔ"&&bun[m][i]!="A"&&bun[m][i]!="B"&&bun[m][i]!="T"&&bun[m][i]!=""){
 					hatsugen[m] += bun[m][i];
 					hatsugen[m] += "。";
 				}
@@ -262,7 +262,7 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 		//console.log("vResult");
 		//console.log(vResult);
 
-		for(c=1;c<=chboxlength;c++){
+		for(c=1;c<=chboxlength+chboxlength2;c++){
 			console.log("for %d",c);
 			console.log(document.getElementById("r"+c));
 			console.log(document.getElementById("r"+c).classList);
