@@ -44,10 +44,7 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 			RGB[m] = [];
 
 			if(m%2==0){//カウンセラー
-				//console.log(m/2);
 				RGBlist[m/2] = [0,0,0,0,0,0,0];
-				//console.log(m);
-				//console.log(RGBlist[m/2]);
 			}
 			i=0; //段落内の何文目か。
 			tangosuu=0; //hatsugen内で何たんご目か
@@ -118,9 +115,9 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 				hatsugen[m] += "。";
 				if(n==path.length){//確認
 					if(m%2==0 ){
-						console.log("m=%d i=%d tangosuu=%d %s",m,i,tangosuu,hatsugen[m]);
+						//console.log("m=%d i=%d tangosuu=%d %s",m,i,tangosuu,hatsugen[m]);
 						if( i<=2 && tangosuu<=7){
-							console.log("m=%dでtangosuu<=7",m);
+							//console.log("m=%dでtangosuu<=7",m);
 							RGBlist[m/2][5]=1;
 						}
 					}
@@ -128,9 +125,9 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 				}
 				if(path[n].word_id=="2613630"||path[n].basic_form=="："||path[n].basic_form==":"||path[n].surface_form=="･･･？："||path[n].surface_form==")："){
 					if(m%2==0 ){
-						console.log("m=%d i=%d tangosuu=%d %s",m,i,tangosuu,hatsugen[m]);
+						//console.log("m=%d i=%d tangosuu=%d %s",m,i,tangosuu,hatsugen[m]);
 						if( i<=2 && tangosuu<=7){
-							console.log("m=%dでtangosuu<=7",m);
+							//console.log("m=%dでtangosuu<=7",m);
 							RGBlist[m/2][5]=1;
 						}
 					}
@@ -143,9 +140,6 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 			}
 			m++;
 		}
-
-		console.log("RGBlist");
-		console.log(RGBlist);
 
 		var tango=[];//全単語（重複あり）
 		x=0;
@@ -198,7 +192,7 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 						if(RGB[m][i][h]==1){
 							for(j=0;j<keitaisokaiseki[m][i].length;j++){
 								if(miserables.nodes[k]==keitaisokaiseki[m][i][j]){
-									console.log("%s,%d",miserables.nodes[k],h);
+									//console.log("%s,%d",miserables.nodes[k],h);
 									RGBk[h][k]=1;
 									break;
 								}
@@ -223,7 +217,7 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 							if(RGB[m][i][h]==0){
 								for(j=0;j<keitaisokaiseki[m][i].length;j++){
 									if(miserables.nodes[k]==keitaisokaiseki[m][i][j]){
-										console.log("%s,%d,m=%d,i=%d",bun[m][i],h,m,i);
+										//console.log("%s,%d,m=%d,i=%d",bun[m][i],h,m,i);
 										RGB[m][i][h]=1;
 										break;
 									}
@@ -248,8 +242,8 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 		taiou = sResult.taiou;
 		chboxlength = sResult.chboxlength;
 		chboxlength2 = sResult.chboxlength2;
-		console.log("sResult");
-		console.log(sResult);
+		//console.log("sResult");
+		//console.log(sResult);
 
 		var vResult = setForViz(keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,chboxlength,chboxlength2);//形態素解析後に1度目の描画
 		chboxlist = vResult.chboxlist;
@@ -259,11 +253,8 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 		checked2 = vResult.checked2;
 		chboxlength = vResult.chboxlength;
 		chboxlength2 = vResult.chboxlength2;
-		console.log("vResult");
-		console.log(vResult);
-
-
-
+		//console.log("vResult");
+		//console.log(vResult);
 
 		for(c=1;c<=chboxlength;c++){
 			console.log("for %d",c);
@@ -276,9 +267,9 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 
 		document.getElementById('radio_buttons').onchange = () => {
 
-			console.log("onchangeの中");
+			//console.log("onchangeの中");
 			setForViz(keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,chboxlength,chboxlength2);
-			console.log("checkbox依存部分終わり");
+			//console.log("checkbox依存部分終わり");
 		};
 
 		return{

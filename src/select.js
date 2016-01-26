@@ -24,10 +24,10 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RG
 
 			taiou[c-1]=n-1;
 			if(RGB[m][i][0]+RGB[m][i][1]+RGB[m][i][2]>=2){
-				target.innerHTML += "<div id=\"b" + c + "\">"+ bun[m][i] + "</div><div id=\"r" + c + "\"><br><font size=1 color=silver>（" + (m+1) + " " + hatsugen[m] + "）</font><br><label><input type=radio name=\"" + c + "\" value=0>どれにも含まない</label></div>";
+				target.innerHTML += "<div id=\"b" + c + "\">"+ bun[m][i] + "</div><div id=\"r" + c + "\"><font size=1 color=silver>（" + (m+1) + " " + hatsugen[m] + "）</font><label><input type=radio name=\"" + c + "\" value=0>どれにも含まない</label></div><br>--";
 
 			}else{
-				target.innerHTML += "<div id=\"b" + c + "\"><font size=1>"+ bun[m][i] + "</div><div id=\"r" + c + "\" class=\"hide\"><br><font size=1 color=silver>（" + (m+1) + " " + hatsugen[m] + "）</font><br><label><input type=radio name=\"" + c + "\" value=0>どれにも含まない</label></div></font>";
+				target.innerHTML += "<div id=\"b" + c + "\"><font size=1>"+ bun[m][i] + "</div><div id=\"r" + c + "\" class=\"hide\"><font size=1 color=silver>（" + (m+1) + " " + hatsugen[m] + "）</font><br><label><input type=radio name=\"" + c + "\" value=0>どれにも含まない</label></div></font><br>--";
 			}
 
 
@@ -49,8 +49,8 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RG
 			}else{
 				document.getElementById("r"+c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=3><font color=\"#7777ff\">「仕事」に含む</font></label>";
 			}
-			console.log(document.getElementById("r"+c).classList);
-			console.log(document.getElementById("b"+c));
+			//console.log(document.getElementById("r"+c).classList);
+			//console.log(document.getElementById("b"+c));
 
 
 		}
@@ -62,15 +62,12 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RG
 		target.innerHTML +="「愛」「交友」「仕事」のいずれか複数に該当しそうな文が一つも見つかりませんでした。<br>";
 	}//DOMを操作してみよう「愛」「交友」「仕事」のいずれかに該当しそうな単語が一つも見つかりませんでした。
 
-	console.log("checked");
-	console.log(checked);
+	//console.log("checked");
+	//console.log(checked);
 	chboxlength=c;
 
-	console.log("keitaisokaiseki");
-	console.log(keitaisokaiseki.length);
-
-	//console.log("RGBlist");
-	//console.log(RGBlist);
+	//console.log("keitaisokaiseki");
+	//console.log(keitaisokaiseki.length);
 	n=0;
 
 	for(m=0;m<keitaisokaiseki.length;m=m+2){
@@ -83,21 +80,21 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RG
 		chboxlist2[n][1]=4;
 
 		if(RGBlist[m/2][3]==1){
-			console.log("「%s」は開かれた質問だと思います",hatsugen[m]);
+			//console.log("「%s」は開かれた質問だと思います",hatsugen[m]);
 			checked2[n-1]=3;
 		}else	if(RGBlist[m/2][5]==1){
-			console.log("「%s」は相づちだと思います",hatsugen[m]);
+			//console.log("「%s」は相づちだと思います",hatsugen[m]);
 			checked2[n-1]=5;
 		}else	if(RGBlist[m/2][4]==1){
-			console.log("「%s」は閉じられた質問だと思います",hatsugen[m]);
+			//console.log("「%s」は閉じられた質問だと思います",hatsugen[m]);
 			checked2[n-1]=4;
 		}else	if(RGBlist[m/2][6]==1){
-			console.log("「%s」は解釈だと思います",hatsugen[m]);
+			//console.log("「%s」は解釈だと思います",hatsugen[m]);
 			c++;
 			taiou[c-1]=n-1;
 			target.innerHTML += "--<br><div id=\"r" + c + "\">" + (m+1) + " "  + hatsugen[m] + "<br><label><input type=radio name=\"r" + c + "\" value=6 checked>解釈</label><label><input type=radio name=\"r" + c + "\" value=7>無駄話</label></div><br>";
 		}else{
-			console.log("「%s」は無駄話だと思います",hatsugen[m]);
+			//console.log("「%s」は無駄話だと思います",hatsugen[m]);
 			c++;
 			taiou[c-1]=n-1;
 			target.innerHTML += "--<br><div id=\"r" + c + "\">" + (m+1) + " "   + hatsugen[m] + "<br><label><input type=radio name=\"r" + c + "\" value=6>解釈</label><label><input type=radio name=\"r" + c + "\" value=7 checked>無駄話</label></div><br>";
@@ -108,10 +105,10 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RG
 		target.innerHTML +="「解釈」「無駄話」のいずれかに該当しそうなカウンセラーの発言が一つも見つかりませんでした。";
 	}
 
-	console.log("checked2");
-	console.log(checked2);
+	//console.log("checked2");
+	//console.log(checked2);
 	chboxlength2 = c -chboxlength;
-	console.log("chboxlength2=%d",chboxlength2);
+	//console.log("chboxlength2=%d",chboxlength2);
 
 	return{
 		checkboxlist:checkboxlist,

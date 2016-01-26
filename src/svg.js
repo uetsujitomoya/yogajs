@@ -13,14 +13,14 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki) => {
 		}
 		bunsuu = bunsuu + hatsugen[m].length;
 	}
-	console.log("bunsuu=%d",bunsuu);
+	//console.log("bunsuu=%d",bunsuu);
 	var nagasa=[];//縦棒の位置
 	nagasa[0]=1*width/(bunsuu+1);
 	for(m=1;m<hatsugen.length;m=m+2){
 		nagasa[(m+1)/2]=nagasa[-1 + (m+1)/2]+hatsugen[m].length*width/bunsuu;
 	}
-	console.log("nagasa");
-	console.log(nagasa);
+	//console.log("nagasa");
+	//console.log(nagasa);
 
 	var stack = d3.layout.stack()
 	.x(function(d){return 1;})
@@ -48,15 +48,14 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki) => {
 	svg.selectAll("line.v")
 	.data(range).enter().append("line")
 	.attr("x1", function(d,i){
-		console.log("i=%d",i);
+		//console.log("i=%d",i);
 		return nagasa[i];
 	}).attr("y1", 0)//i=1から始まってる？←そんなことはなかった
 	.attr("x2", function(d,i){return nagasa[i];}).attr("y2", height);
 	svg.selectAll("line")
 	.attr("stroke", function(d,i){return color2[i]})
 	.attr("stroke-width", function(d,i){
-		//console.log("hatsugen[%d].length==%d",2*i,hatsugen[2*i].length);
-		console.log("√keitaisokaiseki[%d].length==%d",2*i,Math.sqrt(keitaisokaiseki[2*i].length));
+		//console.log("√keitaisokaiseki[%d].length==%d",2*i,Math.sqrt(keitaisokaiseki[2*i].length));
 		return(Math.sqrt(keitaisokaiseki[2*i].length));
 	})
 	.on('mouseover', function(d,i){
@@ -65,7 +64,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki) => {
 		e.innerHTML = "";
 		for(k=-3;k<=3;k++){
 			if(2*(i)+k<0||2*(i)+k>=hatsugen.length){
-				console.log("%d,continue",2*i+k);
+				//console.log("%d,continue",2*i+k);
 				continue;
 			}
 			if(k==0){
@@ -87,24 +86,23 @@ var funcChecked = (chboxlist,checked,taiou,chboxlength) => {
 	console.log("funcChecked");
 	var c;
 	for(c=1;c<=chboxlength;c++){
-		//console.log(document.getElementById("r"+c));
 		const radio = document.getElementById("r"+c).children;
-		console.log("radio");
-		console.log(radio);
-		console.log("radio.length=%d",radio.length);
+		//console.log("radio");
+		//console.log(radio);
+		//console.log("radio.length=%d",radio.length);
 		for(let i = 3, l = radio.length; i < l; i++){
 			if(radio[i].control.checked==true){
-				console.log("radio[%d].control.checked==true",i);
+				//console.log("radio[%d].control.checked==true",i);
 				if(radio[i].control.value=="1"){
-					console.log("radio[%d].control.value==1",i);
+					//console.log("radio[%d].control.value==1",i);
 					checked[taiou[c-1]] =1;
 					break;
 				}else if(radio[i].control.value=="2"){
-					console.log("radio[%d].control.value==2",i);
+					//console.log("radio[%d].control.value==2",i);
 					checked[taiou[c-1]] =2;
 					break;
 				}else if(radio[i].control.value=="3"){
-					console.log("radio[%d].control.value==3",i);
+					//console.log("radio[%d].control.value==3",i);
 					checked[taiou[c-1]] =3;
 					break;
 				}
@@ -116,16 +114,13 @@ var funcChecked = (chboxlist,checked,taiou,chboxlength) => {
 };
 
 var funcChecked2 = (chboxlist,chboxlist2,checked2,taiou,chboxlength,chboxlength2) => {
-	//console.log("funcChecked2");
 	var c;
-	//console.log(chboxlength2);
 	for(c=chboxlength+1;c<=chboxlength+chboxlength2;c++){
-		console.log(document.getElementById("r"+c))
+		//console.log(document.getElementById("r"+c))
 		const radio = document.getElementById("r"+c).children;
 		for(let i = radio.length-2, l = radio.length; i < l; i++){
 			if(radio[i].control.checked==true){
 				if(radio[i].control.value=="6"){
-					//console.log("radio[%d].control.value==6",i);
 					checked2[taiou[c-1]] =6;
 					break;
 				}
@@ -147,19 +142,17 @@ var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,check
 	console.log("setForViz");
 	var color2=[];
 	var stackdataArr = [];
-	console.log("chboxlength=%d",chboxlength);
+	//console.log("chboxlength=%d",chboxlength);
 	if(chboxlength>=1){
 		funcChecked(chboxlist,checked,taiou,chboxlength);
 	}
-	console.log("checked");
-	console.log(checked);
-	console.log("chboxlist");
-	console.log(chboxlist);
+	//console.log("checked");
+	//console.log(checked);
+	//console.log("chboxlist");
+	//console.log(chboxlist);
 	if(chboxlength2>=1){
 		funcChecked2(chboxlist,chboxlist2,checked2,taiou,chboxlength,chboxlength2);
 	}
-	//console.log("checked2");
-	//console.log(checked2);
 
 	var h,i,j,c,m,n;
 
@@ -199,8 +192,6 @@ var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,check
 
 	console.log("checkedBun");
 	console.log(checkedBun);
-	//console.log("RGBlist");
-	//console.log(RGBlist);//←グラフにすなお
 
 
 	for(c=0;c<checked2.length;c++){
@@ -220,9 +211,6 @@ var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,check
 	var RGBmax=[];
 	var RGBmaxmax=1;
 
-	//console.log("color2");
-	//console.log(color2.length);
-
 	for(m=0;m<((keitaisokaiseki.length-1)/2);m++){//2個飛ばしにしたら後が面倒くさい。患者 1→0　3→1 長さ9なら番号は8まで
 		RGBmax[m]=1;
 		for(h=0;h<3;h++){
@@ -240,17 +228,9 @@ var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,check
 			stackdataArr[h][m]= {x:m+1,y:(5*(RGBlist[m][h])/RGBmaxmax)};
 		}
 	}
-
-	//	console.log("stackdataArr");
-	//console.log(stackdataArr);
-	//console.log("color2");
-	//console.log(color2);
 	console.log("checkedBun");
 	console.log(checkedBun);
 	viz(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki);
-	//console.log("chboxlist2");
-	//console.log(chboxlist2);
-
 	return{
 		chboxlist:chboxlist,
 		chboxlist2:chboxlist2,
