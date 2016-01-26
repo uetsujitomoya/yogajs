@@ -7,14 +7,14 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RG
 
 	var c=0;
 	n=0;
-
-	//keitaisokaisekiとnodesを照らしあわせる
 	var btn=[];
-	//患者ごと
 	for(m=1;m<keitaisokaiseki.length;m=m+2){
 		//list[m] = [];
 		var RGBtensuu=[0,0,0];
 		for(i=0;i<keitaisokaiseki[m].length;++i){
+			if(bun[m][i]=="Ａ"||bun[m][i]=="Ｂ"||bun[m][i]=="Ｔ"||bun[m][i]=="A"||bun[m][i]=="B"||bun[m][i]=="T"){
+				continue;
+			}
 			n++;
 			chboxlist[n]=[];//こいつの長さは、チェックボックスの有無にかかわらず全文数なので、ifの外
 			chboxlist[n][0]=bun[m][i];
@@ -24,12 +24,11 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RG
 
 			taiou[c-1]=n-1;
 			if(RGB[m][i][0]+RGB[m][i][1]+RGB[m][i][2]>=2){
-				target.innerHTML += "<div id=\"b" + c + "\">"+ bun[m][i] + "</div><div id=\"r" + c + "\"><font size=1 color=silver>（" + (m+1) + " " + hatsugen[m] + "）</font><label><input type=radio name=\"" + c + "\" value=0>どれにも含まない</label></div><br>--";
+				target.innerHTML += "<div id=\"b" + c + "\">"+ bun[m][i] + "</div><div id=\"r" + c + "\"><font size=1 color=silver>（" + (m+1) + " " + hatsugen[m] + "）</font><label><input type=radio name=\"" + c + "\" value=0>どれにも含まない</label></div><br>";
 
 			}else{
-				target.innerHTML += "<div id=\"b" + c + "\"><font size=1>"+ bun[m][i] + "</div><div id=\"r" + c + "\" class=\"hide\"><font size=1 color=silver>（" + (m+1) + " " + hatsugen[m] + "）</font><br><label><input type=radio name=\"" + c + "\" value=0>どれにも含まない</label></div></font><br>--";
+				target.innerHTML += "<div id=\"b" + c + "\"><font size=1>"+ bun[m][i] + "</div><div id=\"r" + c + "\" class=\"hide\"><font size=1 color=silver>（" + (m+1) + " " + hatsugen[m] + "）</font><label><input type=radio name=\"" + c + "\" value=0>どれにも含まない</label></div></font><br>";
 			}
-
 
 			if(RGB[m][i][0]==1){
 				chboxlist[n][1]=0;
@@ -49,10 +48,6 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RG
 			}else{
 				document.getElementById("r"+c).innerHTML += "<label><input type=radio name=\"r" + c + "\" value=3><font color=\"#7777ff\">「仕事」に含む</font></label>";
 			}
-			//console.log(document.getElementById("r"+c).classList);
-			//console.log(document.getElementById("b"+c));
-
-
 		}
 	}
 
