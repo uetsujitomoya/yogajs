@@ -9,7 +9,7 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RG
 	n=0;
 
 	//keitaisokaisekiとnodesを照らしあわせる
-
+	var btn=[];
 	//患者ごと
 	for(m=1;m<keitaisokaiseki.length;m=m+2){
 		//list[m] = [];
@@ -19,53 +19,41 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RG
 			chboxlist[n]=[];//こいつの長さは、チェックボックスの有無にかかわらず全文数なので、ifの外
 			chboxlist[n][0]=bun[m][i];
 			chboxlist[n][1]=0;
-			//list[m][i] = [];
-			//for(k=0;k<miserables.nodes.length;++k){
-			//if(keitaisokaiseki[m][i][j]==miserables.nodes[k]){
-			//list[m][i][k]=1;
-			//if(checkboxlist[k][0]==0){
-			//checkboxlist[k][0]=1;
+
+			c++;
+
+			taiou[c-1]=n-1;
 			if(RGB[m][i][0]+RGB[m][i][1]+RGB[m][i][2]>=2){
-				c++;
+				target.innerHTML += "<div id=\"b" + c + "\">"+ bun[m][i] + "</div><div id=\"" + c + "\"><br><font size=1 color=silver>（" + (m+1) + " " + hatsugen[m] + "）</font><br><label><input type=radio name=\"" + c + "\" value=0>どれにも含まない</label></div><br>";
 
-				taiou[c-1]=n-1;
-				target.innerHTML += "--<br><div id=\"" + c + "\">"+ bun[m][i] + "<br><font size=1 color=silver>（" + (m+1) + " " + hatsugen[m] + "）</font><br><label><input type=radio name=\"" + c + "\" value=0>どれにも含まない</div></label><br>";
-				//その他の選択肢
+			}else{
+				target.innerHTML += "<div id=\"b" + c + "\">"+ bun[m][i] + "</div><div id=\"" + c + "\" class=\"hide\"><br><font size=1 color=silver>（" + (m+1) + " " + hatsugen[m] + "）</font><br><label><input type=radio name=\"" + c + "\" value=0>どれにも含まない</label></div><br>";
+			}
 
-				//checkboxに出す単語とグループの組み合わせ、さらにcheckedか否かの保存
-				if(RGB[m][i][0]==1){
-					chboxlist[n][1]=0;
-					document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=1 checked><font color=\"#ff7777\">「愛」に含む</font></label>";
-				}
-				if(RGB[m][i][1]==1){
-					document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=2 checked><font color=\"#77ff77\">「交友」に含む</font></label>";
-					chboxlist[n][1]=1;
-				}
-				if(RGB[m][i][2]==1){
-					document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=3 checked><font color=\"#7777ff\">「仕事」に含む</font></label>";
-					chboxlist[n][1]=2;
-				}
-				//if(checkboxlist[k][1]+checkboxlist[k][2]+checkboxlist[k][3]>=0){
-				//break;//miserables実は重複してる
-				//}
 
-			}else if(RGB[m][i][0]+RGB[m][i][1]+RGB[m][i][2]==1){
-
-				if(RGB[m][i][0]==1){
-					checked[n-1]=1;
-				}
-
-				if(RGB[m][i][1]==1){
-					checked[n-1]=2;
-				}
-
-				if(RGB[m][i][2]==1){
-					checked[n-1]=3;
-				}
-			}//RGB[m][i][0]+RGB[m][i][1]+RGB[m][i][2]==1終了
-			//}//checkboxlist[k][0]==0
-			//}//keitaisokaiseki[m][i][j]==miserables.nodes[k]
+			if(RGB[m][i][0]==1){
+				chboxlist[n][1]=0;
+				document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=1 checked><font color=\"#ff7777\">「愛」に含む</font></label>";
+			}else{
+				document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=1><font color=\"#ff7777\">「愛」に含む</font></label>";
+			}
+			if(RGB[m][i][1]==1){
+				document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=2 checked><font color=\"#77ff77\">「交友」に含む</font></label>";
+				chboxlist[n][1]=1;
+			}else{
+				document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=2><font color=\"#77ff77\">「交友」に含む</font></label>";
+			}
+			if(RGB[m][i][2]==1){
+				document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=3 checked><font color=\"#7777ff\">「仕事」に含む</font></label>";
+				chboxlist[n][1]=2;
+			}else{
+				document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=3><font color=\"#7777ff\">「仕事」に含む</font></label>";
+			}
+			//if(checkboxlist[k][1]+checkboxlist[k][2]+checkboxlist[k][3]>=0){
+			//break;//miserables実は重複してる
 			//}
+
+
 		}
 	}
 
@@ -139,5 +127,21 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RG
 		chboxlength2:chboxlength2
 	}
 }
+
+/*<div id="items">
+<div id='item1' class="hide">
+radio
+<ul>
+<li>check1</li>
+<li>check2</li>
+</ul>
+</div>
+</div>
+
+<div>
+<button id="btn">
+show hide
+</button>
+</div>ji*/
 
 export {select};
