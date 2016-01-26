@@ -33,21 +33,21 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RG
 
 			if(RGB[m][i][0]==1){
 				chboxlist[n][1]=0;
-				document.getElementById("r"+c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=1 checked><font color=\"#ff7777\">「愛」に含む</font></label>";
+				document.getElementById("r"+c).innerHTML += "<label><input type=radio name=\"r" + c + "\" value=1 checked><font color=\"#ff7777\">「愛」に含む</font></label>";
 			}else{
-				document.getElementById("r"+c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=1><font color=\"#ff7777\">「愛」に含む</font></label>";
+				document.getElementById("r"+c).innerHTML += "<label><input type=radio name=\"r" + c + "\" value=1><font color=\"#ff7777\">「愛」に含む</font></label>";
 			}
 			if(RGB[m][i][1]==1){
-				document.getElementById("r"+c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=2 checked><font color=\"#77ff77\">「交友」に含む</font></label>";
+				document.getElementById("r"+c).innerHTML += "<label><input type=radio name=\"r" + c + "\" value=2 checked><font color=\"#77ff77\">「交友」に含む</font></label>";
 				chboxlist[n][1]=1;
 			}else{
-				document.getElementById("r"+c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=2><font color=\"#77ff77\">「交友」に含む</font></label>";
+				document.getElementById("r"+c).innerHTML += "<label><input type=radio name=\"r" + c + "\" value=2><font color=\"#77ff77\">「交友」に含む</font></label>";
 			}
 			if(RGB[m][i][2]==1){
-				document.getElementById("r"+c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=3 checked><font color=\"#7777ff\">「仕事」に含む</font></label>";
+				document.getElementById("r"+c).innerHTML += "<label><input type=radio name=\"r" + c + "\" value=3 checked><font color=\"#7777ff\">「仕事」に含む</font></label>";
 				chboxlist[n][1]=2;
 			}else{
-				document.getElementById("r"+c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=3><font color=\"#7777ff\">「仕事」に含む</font></label>";
+				document.getElementById("r"+c).innerHTML += "<label><input type=radio name=\"r" + c + "\" value=3><font color=\"#7777ff\">「仕事」に含む</font></label>";
 			}
 			//console.log(document.getElementById("r"+c).classList);
 			//console.log(document.getElementById("b"+c));

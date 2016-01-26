@@ -87,22 +87,22 @@ var funcChecked = (chboxlist,checked,taiou,chboxlength) => {
 	var c;
 	for(c=1;c<=chboxlength;c++){
 		const radio = document.getElementById("r"+c).children;
-		//console.log("radio");
-		//console.log(radio);
-		//console.log("radio.length=%d",radio.length);
-		for(let i = 3, l = radio.length; i < l; i++){
+		console.log("radio");
+		console.log(radio);
+		console.log("radio.length=%d",radio.length);
+		for(let i = radio.length-3, l = radio.length; i < l; i++){
 			if(radio[i].control.checked==true){
 				//console.log("radio[%d].control.checked==true",i);
 				if(radio[i].control.value=="1"){
-					//console.log("radio[%d].control.value==1",i);
+					console.log("radio[%d].control.value==1",i);
 					checked[taiou[c-1]] =1;
 					break;
 				}else if(radio[i].control.value=="2"){
-					//console.log("radio[%d].control.value==2",i);
+					console.log("radio[%d].control.value==2",i);
 					checked[taiou[c-1]] =2;
 					break;
 				}else if(radio[i].control.value=="3"){
-					//console.log("radio[%d].control.value==3",i);
+					console.log("radio[%d].control.value==3",i);
 					checked[taiou[c-1]] =3;
 					break;
 				}
