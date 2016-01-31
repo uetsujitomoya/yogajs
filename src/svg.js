@@ -31,15 +31,15 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki) => {
 	.y0(function(d){return height0})
 	.y1(function(d){return height0 - scaleY(d.y+d.y0)});
 
-	var margin = {top: 430, right: 10, bottom: 20, left: 40};
+	var margin = {top: 430, right: 0, bottom: 20, left: 0};
 
-	var margin2 = {top: 10, right: 10, bottom: 100, left: 40};
+	var margin2 = {top: 10, right: 0, bottom: 100, left: 0};
 
 	var focus = svg.append("g") //ズームグラフグループ作成
-	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+	.attr("transform", "translate(" + 0 + "," + margin.top + ")");
 
 	var context = svg.append("g") //全体グラフグループ作成
-	.attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
+	.attr("transform", "translate(" + 0 + "," + margin2.top + ")");
 
 	context.selectAll("path")
 	.data(stackdata.reverse())
@@ -224,7 +224,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki) => {
 	.x(scaleX) //下側全体グラフx軸を選択可能範囲に指定
 	.on("brush", brushed);
 
-	context.append("g") //brushグループを全体グラフに作成
+	focus.append("g") //brushグループを全体グラフに作成
 	.attr("class", "x brush")
 	.call(brush)
 	.selectAll("rect")
