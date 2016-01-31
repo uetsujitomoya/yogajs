@@ -109,7 +109,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 	.domain(scaleY2.domain())
 	.range([height0, 0]);
 	*/
-	var xAxis2 = d3.svg.axis().scale(scaleX).orient("bottom");
+	var xAxis2 = d3.svg.axis().scale(scaleX2).orient("bottom");//舌で呼んでる
 
 
 	//ズームグラフareaオブジェクト
