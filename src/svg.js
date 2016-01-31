@@ -2,7 +2,7 @@ import d3 from "d3"
 
 var height0=200,width=1320;
 
-var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki) => {
+var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxmax) => {
 	var m;
 	var bunsuu=2;//前後の余白
 	for(m=1;m<hatsugen.length;m=m+2){//患者の発言で間隔を作る
@@ -95,10 +95,8 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki) => {
 
 	//var scaleX = d3.scale.linear().domain([0,color2.length]).range([width/(color2.length),width]);
 	//var scaleY = d3.scale.linear().domain([0,6]).range([0,height0]);
-	var scaleX2 = d3.scale.linear().domain([0,color2.length]).range([width/(color2.length),width]);
-	var scaleY2 = d3.scale.linear()
-	.domain(scaleY.domain())
-	.range([height, 0]);
+	var scaleX2 = d3.scale.linear().domain([0,bunsuu]).range([0,width]);
+	var scaleY2 = d3.scale.linear().domain([0,RGBmaxmax]).range([height,0]);
 	var xAxis = d3.svg.axis().scale(scaleX2).orient("bottom");
 	var yAxis = d3.svg.axis().scale(scaleY2).orient("left");
 
@@ -377,7 +375,7 @@ var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,check
 			stackdataArr[h][m]= {x:m+1,y:(5*(RGBlist[m][h])/RGBmaxmax)};
 		}
 	}
-	viz(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki);
+	viz(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxmax);
 	return{
 		chboxlist:chboxlist,
 		chboxlist2:chboxlist2,
