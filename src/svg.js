@@ -93,23 +93,14 @@ e.innerHTML += "<font size=1><br><br></font>";
 //var width = 960 - margin.left - margin.right;
 var height = 500 - margin.top - margin.bottom;
 
-//var scaleX = d3.scale.linear().domain([0,color2.length]).range([width/(color2.length),width]);
-//var scaleY = d3.scale.linear().domain([0,6]).range([0,height0]);
+
 var scaleX2 = d3.scale.linear().domain([0,bunsuu]).range([0,width]);
 var scaleX2copy = d3.scale.linear().domain([0,bunsuu]).range([0,width]);
 var scaleY2 = d3.scale.linear().domain([0,RGBmaxmax]).range([height,0]);
 var xAxis = d3.svg.axis().scale(scaleX2).orient("bottom");
 var yAxis = d3.svg.axis().scale(scaleY2).orient("left");
 
-//全体グラフ用（全体グラフ）、margin, scale, axis設定
-//var height0 = 500 - margin2.top - margin2.bottom;
-/*var scaleX = d3.time.scale()
-.domain(scaleX2.domain())
-.range([0, width]);
-var scaleY = d3.scale.linear()
-.domain(scaleY2.domain())
-.range([height0, 0]);
-*/
+
 var xAxis2 = d3.svg.axis().scale(scaleX2).orient("bottom");//下で呼んでる
 
 
@@ -119,28 +110,7 @@ var area = d3.svg.area()
 .y0(height)
 .y1(function(d){return height - scaleY(d.y+d.y0)});
 
-/*
-var area0 = d3.svg.area()
-.x(function(d,i){return (nagasa[i]+nagasa[i+1])/2})
-.y0(function(d){return height0})
-.y1(function(d){return height0 - scaleY(d.y+d.y0)});
 
-*/
-
-//全体グラフareaオブジェクト
-/*
-var area2 = d3.svg.area()
-.interpolate("monotone")
-.x(F('date', scaleX))
-.y0(height0)
-.y1(F('access', scaleY));
-
-/*
-//ステージ作成
-var svg = d3.select("body").append("svg")
-.attr("width", width + margin.left + margin.right)
-.attr("height", height + margin.top + margin.bottom);
-*/
 //フォーカス時のズームグラフズーム前グラフの表示位置調整のためにクリップパスを作成
 svg.append("defs").append("clipPath")
 .attr("id", "clip")
@@ -154,7 +124,8 @@ svg.append("defs").append("clipPath")
 
 //focusの描画
 
-focus.data(stackdata.reverse())
+focus.selectAll("path")
+.data(stackdata.reverse())
 .enter()
 .append("path")
 .attr("clip-path", "url(#clip)") //クリップパスを適用
