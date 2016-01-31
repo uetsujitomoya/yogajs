@@ -105,6 +105,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 	//focusの描画
 
 	focus.selectAll("path")
+	.attr("class", "area")
 	.data(stackdata.reverse())
 	.enter()
 	.append("path")
@@ -121,6 +122,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 	}).attr("y1", 0)
 	.attr("x2", function(d,i){return nagasa[i];}).attr("y2", height0);
 	focus.selectAll("line")
+	.attr("class", "area")
 	.attr("stroke", function(d,i){return color2[i]})
 	.attr("stroke-width", function(d,i){
 		return(Math.sqrt(keitaisokaiseki[2*i].length));
@@ -189,7 +191,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 
 	function brushed() {
 		console.log( brush.extent());
-		scaleX2.domain(brush.empty() ? scaleX2.domain() : brush.extent()); //選択されたデータセットの範囲をscaleX2のdomainに反映
+		scaleX2.domain(brush.empty() ? scaleX.domain() : brush.extent()); //選択されたデータセットの範囲をscaleX2のdomainに反映
 		focus.select(".area").attr("d", area); //ズームグラフアップデート（focus描画）
 		focus.select(".x.axis").call(xAxis); //ズームx軸アップデート
 	}
