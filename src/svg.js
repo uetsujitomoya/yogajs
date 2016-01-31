@@ -1,6 +1,6 @@
 import d3 from "d3"
 
-var height=200,width=1320;
+var height0=200,width0=1320;
 
 var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki) => {
 	var m;
@@ -13,36 +13,155 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki) => {
 		bunsuu = bunsuu + hatsugen[m].length;
 	}
 	var nagasa=[];//縦棒の位置
-	nagasa[0]=1*width/(bunsuu+1);
+	nagasa[0]=1*width0/(bunsuu+1);
 	for(m=1;m<hatsugen.length;m=m+2){
-		nagasa[(m+1)/2]=nagasa[-1 + (m+1)/2]+hatsugen[m].length*width/bunsuu;
+		nagasa[(m+1)/2]=nagasa[-1 + (m+1)/2]+hatsugen[m].length*width0/bunsuu;
 	}
 	var stack = d3.layout.stack()
 	.x(function(d){return 1;})
 	.y(function(d){return d.y;})
 	.values(function(d){return d;});
 	var stackdata = stack(stackdataArr);
-	var scaleX = d3.scale.linear().domain([0,color2.length]).range([width/(color2.length),width]);
-	var scaleY = d3.scale.linear().domain([0,6]).range([0,height]);
+	var scaleX = d3.scale.linear().domain([0,color2.length]).range([width0/(color2.length),width0]);
+	var scaleY = d3.scale.linear().domain([0,6]).range([0,height0]);
 	var colors = ["#7777ff","#77ff77","#ff7777"];
 	var colorBun=["dimgray","deeppink","green","dodgerblue"];
-	var area = d3.svg.area()
+	var area0 = d3.svg.area()
 	.x(function(d,i){return (nagasa[i]+nagasa[i+1])/2})
-	.y0(function(d){return height})
-	.y1(function(d){return height - scaleY(d.y+d.y0)});
+	.y0(function(d){return height0})
+	.y1(function(d){return height0 - scaleY(d.y+d.y0)});
 	svg.selectAll("path")
 	.data(stackdata.reverse())
 	.enter()
 	.append("path")
-	.attr("d", area)
+	.attr("d", area0)
 	.attr("fill",function(d,i){return colors[i]});
-	var range = d3.range((width)-(width/(color2.length*2)), color2.length-1, -width/(color2.length));
+
+
+
+	//以下追加分
+
+	//ズームグラフ用（ズーム後グラフ）、margin, scale, axis設定
+  var margin = {top: 430, right: 10, bottom: 20, left: 40};
+  var width = 960 - margin.left - margin.right;
+  var height = 500 - margin.top - margin.bottom;
+  var xScale = d3.time.scale()
+  .domain(dateExtent)
+  .range([0, width]);
+  var yScale = d3.scale.linear()
+  .domain([0, accessMax])
+  .range([height, 0]);
+  var xAxis = d3.svg.axis().scale(xScale).orient("bottom");
+  var yAxis = d3.svg.axis().scale(yScale).orient("left");
+
+  //全体グラフ用（全体グラフ）、margin, scale, axis設定
+  var margin2 = {top: 10, right: 10, bottom: 100, left: 40};
+  var height2 = 500 - margin2.top - margin2.bottom;
+  var x2Scale = d3.time.scale()
+  .domain(xScale.domain())
+  .range([0, width]);
+  var y2Scale = d3.scale.linear()
+  .domain(yScale.domain())
+  .range([height2, 0]);
+  var xAxis2 = d3.svg.axis().scale(x2Scale).orient("bottom");
+
+
+  //ズームグラフareaオブジェクト
+  var area = d3.svg.area()
+  .interpolate("monotone")
+  .x(F('date', xScale))
+  .y0(height)
+  .y1(F('access', yScale));
+
+  //全体グラフareaオブジェクト
+  var area2 = d3.svg.area()
+  .interpolate("monotone")
+  .x(F('date', x2Scale))
+  .y0(height2)
+  .y1(F('access', y2Scale));
+
+  //ステージ作成
+  var svg = d3.select("body").append("svg")
+  .attr("width", width + margin.left + margin.right)
+  .attr("height", height + margin.top + margin.bottom);
+
+  //フォーカス時のズームグラフズーム前グラフの表示位置調整のためにクリップパスを作成
+  svg.append("defs").append("clipPath")
+  .attr("id", "clip")
+  .append("rect")
+  .attr("width", width)
+  .attr("height", height);
+
+
+
+  var focus = svg.append("g") //ズームグラフグループ作成
+  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+  var context = svg.append("g") //全体グラフグループ作成
+  .attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
+
+
+  focus.append("path")
+  .datum(data)
+  .attr("clip-path", "url(#clip)") //クリップパスを適用
+  .attr("d", area);
+
+  focus.append("g")  //x目盛軸
+  .attr("class", "x axis")
+  .attr("transform", "translate(0," + height + ")")
+  .call(xAxis);
+
+  focus.append("g") //y目盛軸
+  .attr("class", "y axis")
+  .call(yAxis);
+
+
+  context.append("path") //全体グラフ描画
+
+  .datum(data)
+  .attr("d", area2);
+
+  context.append("g") //全体x目盛軸
+  .attr("class", "x axis")
+  .attr("transform", "translate(0," + height2 + ")")
+  .call(xAxis2);
+
+
+  /*
+  *brushは透明なrectをグループ上設置しマウスイベントを取得する。
+  *設置したrect上ではドラッグで範囲選択が可能
+  *範囲が選択されている状態でbrush.extent()メソッドを実行するとその範囲のデータ値を返す
+  */
+
+  var brush = d3.svg.brush() //brushオブジェクト作成
+  .x(x2Scale) //下側全体グラフx軸を選択可能範囲に指定
+  .on("brush", brushed);
+
+  context.append("g") //brushグループを作成
+  .attr("class", "x brush")
+  .call(brush)
+  .selectAll("rect")
+  .attr("y", -6)
+  .attr("height", height2 + 7);
+
+
+  function brushed() {
+    console.log( brush.extent());
+    xScale.domain(brush.empty() ? x2Scale.domain() : brush.extent()); //選択されたデータセットの範囲をxScaleのdomainに反映
+    focus.select("path").attr("d", area); //ズームグラフアップデート
+    focus.select(".x.axis").call(xAxis); //ズームx軸アップデート
+  }
+
+	//以上追加分
+
+
+	var range = d3.range((width0)-(width0/(color2.length*2)), color2.length-1, -width0/(color2.length));
 	svg.selectAll("line.v")
 	.data(range).enter().append("line")
 	.attr("x1", function(d,i){
 		return nagasa[i];
 	}).attr("y1", 0)
-	.attr("x2", function(d,i){return nagasa[i];}).attr("y2", height);
+	.attr("x2", function(d,i){return nagasa[i];}).attr("y2", height0);
 	svg.selectAll("line")
 	.attr("stroke", function(d,i){return color2[i]})
 	.attr("stroke-width", function(d,i){
@@ -57,7 +176,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki) => {
 				continue;
 			}
 			if(k==0){
-				e.innerHTML += "<b><u><font color="+color2[i]+">"+(1+2*i)+" "+hatsugen[2*i]+"</font></u></b><font size=1><br><br></font>";
+				e.innerHTML += "<b><u><font size=3 color="+color2[i]+">"+(1+2*i)+" "+hatsugen[2*i]+"</font></u></b><font size=1><br><br></font>";
 			}else if(k%2==0){
 				e.innerHTML += "<font size=1 color="+color2[k/2+i]+">"+(1+k+2*i)+" "+hatsugen[k+2*i]+"<br><br></font>";
 			}else{
@@ -126,8 +245,9 @@ var funcChecked2 = (chboxlist,chboxlist2,checked2,taiou,chboxlength,chboxlength2
 var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,chboxlength,chboxlength2) => {
 	d3.select("#svgdiv").select("svg").remove();
 	var svg = d3.select("#svgdiv").append("svg")
-	.attr("height",height)
-	.attr("width",width);
+	.attr("height",height0)
+
+	.attr("width",width0);
 	var color2=[];
 	var stackdataArr = [];
 	if(chboxlength>=1){
