@@ -113,10 +113,17 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki) => {
 
 	//ズームグラフareaオブジェクト
 	var area = d3.svg.area()
-	.interpolate("monotone")
-	.x(F('date', scaleX2))
+	.x(function(d,i){return (nagasa[i]+nagasa[i+1])/2})
 	.y0(height)
-	.y1(F('access', scaleY2));
+	.y1(function(d){return height - scaleY(d.y+d.y0)});
+
+	/*
+	var area0 = d3.svg.area()
+	.x(function(d,i){return (nagasa[i]+nagasa[i+1])/2})
+	.y0(function(d){return height0})
+	.y1(function(d){return height0 - scaleY(d.y+d.y0)});
+
+	*/
 
 	//全体グラフareaオブジェクト
 	/*
@@ -145,10 +152,45 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki) => {
 
 	//focusの描画
 
-	focus.append("path")
-	.datum(data)
+	focus.data(stackdata.reverse())
+	.enter()
+	.append("path")
 	.attr("clip-path", "url(#clip)") //クリップパスを適用
-	.attr("d", area);
+	.attr("d", area0)
+	.attr("fill",function(d,i){return colors[i]});
+
+	focus.selectAll("line.v")
+	.data(range).enter().append("line")
+	.attr("x1", function(d,i){
+		return nagasa[i];
+	}).attr("y1", 0)
+	.attr("x2", function(d,i){return nagasa[i];}).attr("y2", height0);
+	context.selectAll("line")
+	.attr("stroke", function(d,i){return color2[i]})
+	.attr("stroke-width", function(d,i){
+		return(Math.sqrt(keitaisokaiseki[2*i].length));
+	})
+	.on('mouseover', function(d,i){
+		var e = document.getElementById('msg');
+		var k,l;
+		e.innerHTML = "";
+		for(k=-3;k<=3;k++){
+			if(2*(i)+k<0||2*(i)+k>=hatsugen.length){
+				continue;
+			}
+			if(k==0){
+				e.innerHTML += "<b><u><font size=3 color="+color2[i]+">"+(1+2*i)+" "+hatsugen[2*i]+"</font></u></b><font size=1><br><br></font>";
+			}else if(k%2==0){
+				e.innerHTML += "<font size=1 color="+color2[k/2+i]+">"+(1+k+2*i)+" "+hatsugen[k+2*i]+"<br><br></font>";
+			}else{
+				e.innerHTML += (1+k+2*i)+" ";
+				for(l=0;l<bun[k+2*i].length;l++){
+					e.innerHTML += "<font size=1 color="+colorBun[checkedBun[k+2*i][l]]+">"+bun[k+2*i][l]+"</font>";
+				}
+				e.innerHTML += "<font size=1><br><br></font>";
+			}
+		}
+	})
 
 	focus.append("g")  //focusのx目盛軸
 	.attr("class", "x axis")
@@ -256,7 +298,7 @@ var funcChecked2 = (chboxlist,chboxlist2,checked2,taiou,chboxlength,chboxlength2
 var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,chboxlength,chboxlength2) => {
 	d3.select("#svgdiv").select("svg").remove();
 	var svg = d3.select("#svgdiv").append("svg")
-	.attr("height",height0)
+	.attr("height",500)
 
 	.attr("width",width);
 	var color2=[];
