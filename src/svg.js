@@ -63,184 +63,185 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 	})
 	/*
 	.on('mouseover', function(d,i){
-		var e = document.getElementById('msg');
-		var k,l;
-		e.innerHTML = "";
-		for(k=-3;k<=3;k++){
-			if(2*(i)+k<0||2*(i)+k>=hatsugen.length){
-				continue;
-			}
-			if(k==0){
-				e.innerHTML += "<b><u><font size=3 color="+color2[i]+">"+(1+2*i)+" "+hatsugen[2*i]+"</font></u></b><font size=1><br><br></font>";
-			}else if(k%2==0){
-				e.innerHTML += "<font size=1 color="+color2[k/2+i]+">"+(1+k+2*i)+" "+hatsugen[k+2*i]+"<br><br></font>";
-			}else{
-				e.innerHTML += (1+k+2*i)+" ";
-				for(l=0;l<bun[k+2*i].length;l++){
-					e.innerHTML += "<font size=1 color="+colorBun[checkedBun[k+2*i][l]]+">"+bun[k+2*i][l]+"</font>";
-				}
-				e.innerHTML += "<font size=1><br><br></font>";
-			}
+	var e = document.getElementById('msg');
+	var k,l;
+	e.innerHTML = "";
+	for(k=-3;k<=3;k++){
+	if(2*(i)+k<0||2*(i)+k>=hatsugen.length){
+	continue;
+}
+if(k==0){
+e.innerHTML += "<b><u><font size=3 color="+color2[i]+">"+(1+2*i)+" "+hatsugen[2*i]+"</font></u></b><font size=1><br><br></font>";
+}else if(k%2==0){
+e.innerHTML += "<font size=1 color="+color2[k/2+i]+">"+(1+k+2*i)+" "+hatsugen[k+2*i]+"<br><br></font>";
+}else{
+e.innerHTML += (1+k+2*i)+" ";
+for(l=0;l<bun[k+2*i].length;l++){
+e.innerHTML += "<font size=1 color="+colorBun[checkedBun[k+2*i][l]]+">"+bun[k+2*i][l]+"</font>";
+}
+e.innerHTML += "<font size=1><br><br></font>";
+}
+}
+})
+*/
+
+
+//以下追加分
+
+//ズームグラフ用（ズーム後グラフ）、margin, scale, axis設定
+
+//var width = 960 - margin.left - margin.right;
+var height = 500 - margin.top - margin.bottom;
+
+//var scaleX = d3.scale.linear().domain([0,color2.length]).range([width/(color2.length),width]);
+//var scaleY = d3.scale.linear().domain([0,6]).range([0,height0]);
+var scaleX2 = d3.scale.linear().domain([0,bunsuu]).range([0,width]);
+var scaleX2copy = d3.scale.linear().domain([0,bunsuu]).range([0,width]);
+var scaleY2 = d3.scale.linear().domain([0,RGBmaxmax]).range([height,0]);
+var xAxis = d3.svg.axis().scale(scaleX2).orient("bottom");
+var yAxis = d3.svg.axis().scale(scaleY2).orient("left");
+
+//全体グラフ用（全体グラフ）、margin, scale, axis設定
+//var height0 = 500 - margin2.top - margin2.bottom;
+/*var scaleX = d3.time.scale()
+.domain(scaleX2.domain())
+.range([0, width]);
+var scaleY = d3.scale.linear()
+.domain(scaleY2.domain())
+.range([height0, 0]);
+*/
+var xAxis2 = d3.svg.axis().scale(scaleX2).orient("bottom");//下で呼んでる
+
+
+//ズームグラフareaオブジェクト
+var area = d3.svg.area()
+.x(function(d,i){return (nagasa[i]+nagasa[i+1])/2})
+.y0(height)
+.y1(function(d){return height - scaleY(d.y+d.y0)});
+
+/*
+var area0 = d3.svg.area()
+.x(function(d,i){return (nagasa[i]+nagasa[i+1])/2})
+.y0(function(d){return height0})
+.y1(function(d){return height0 - scaleY(d.y+d.y0)});
+
+*/
+
+//全体グラフareaオブジェクト
+/*
+var area2 = d3.svg.area()
+.interpolate("monotone")
+.x(F('date', scaleX))
+.y0(height0)
+.y1(F('access', scaleY));
+
+/*
+//ステージ作成
+var svg = d3.select("body").append("svg")
+.attr("width", width + margin.left + margin.right)
+.attr("height", height + margin.top + margin.bottom);
+*/
+//フォーカス時のズームグラフズーム前グラフの表示位置調整のためにクリップパスを作成
+svg.append("defs").append("clipPath")
+.attr("id", "clip")
+.append("rect")
+.attr("width", width)
+.attr("height", height);
+
+
+
+
+
+//focusの描画
+
+focus.data(stackdata.reverse())
+.enter()
+.append("path")
+.attr("clip-path", "url(#clip)") //クリップパスを適用
+.attr("d", area)
+.attr("fill",function(d,i){return colors[i]});
+
+focus.selectAll("line.v")
+.data(range).enter().append("line")
+.attr("x1", function(d,i){
+	return nagasa[i];
+}).attr("y1", 0)
+.attr("x2", function(d,i){return nagasa[i];}).attr("y2", height0);
+context.selectAll("line")
+.attr("stroke", function(d,i){return color2[i]})
+.attr("stroke-width", function(d,i){
+	return(Math.sqrt(keitaisokaiseki[2*i].length));
+})
+.on('mouseover', function(d,i){
+	var e = document.getElementById('msg');
+	var k,l;
+	e.innerHTML = "";
+	for(k=-3;k<=3;k++){
+		if(2*(i)+k<0||2*(i)+k>=hatsugen.length){
+			continue;
 		}
-	})
-	*/
-
-
-	//以下追加分
-
-	//ズームグラフ用（ズーム後グラフ）、margin, scale, axis設定
-
-	//var width = 960 - margin.left - margin.right;
-	var height = 500 - margin.top - margin.bottom;
-
-	//var scaleX = d3.scale.linear().domain([0,color2.length]).range([width/(color2.length),width]);
-	//var scaleY = d3.scale.linear().domain([0,6]).range([0,height0]);
-	var scaleX2 = d3.scale.linear().domain([0,bunsuu]).range([0,width]);
-	var scaleY2 = d3.scale.linear().domain([0,RGBmaxmax]).range([height,0]);
-	var xAxis = d3.svg.axis().scale(scaleX2).orient("bottom");
-	var yAxis = d3.svg.axis().scale(scaleY2).orient("left");
-
-	//全体グラフ用（全体グラフ）、margin, scale, axis設定
-	//var height0 = 500 - margin2.top - margin2.bottom;
-	/*var scaleX = d3.time.scale()
-	.domain(scaleX2.domain())
-	.range([0, width]);
-	var scaleY = d3.scale.linear()
-	.domain(scaleY2.domain())
-	.range([height0, 0]);
-	*/
-	var xAxis2 = d3.svg.axis().scale(scaleX2).orient("bottom");//舌で呼んでる
-
-
-	//ズームグラフareaオブジェクト
-	var area = d3.svg.area()
-	.x(function(d,i){return (nagasa[i]+nagasa[i+1])/2})
-	.y0(height)
-	.y1(function(d){return height - scaleY(d.y+d.y0)});
-
-	/*
-	var area0 = d3.svg.area()
-	.x(function(d,i){return (nagasa[i]+nagasa[i+1])/2})
-	.y0(function(d){return height0})
-	.y1(function(d){return height0 - scaleY(d.y+d.y0)});
-
-	*/
-
-	//全体グラフareaオブジェクト
-	/*
-	var area2 = d3.svg.area()
-	.interpolate("monotone")
-	.x(F('date', scaleX))
-	.y0(height0)
-	.y1(F('access', scaleY));
-
-	/*
-	//ステージ作成
-	var svg = d3.select("body").append("svg")
-	.attr("width", width + margin.left + margin.right)
-	.attr("height", height + margin.top + margin.bottom);
-	*/
-	//フォーカス時のズームグラフズーム前グラフの表示位置調整のためにクリップパスを作成
-	svg.append("defs").append("clipPath")
-	.attr("id", "clip")
-	.append("rect")
-	.attr("width", width)
-	.attr("height", height);
-
-
-
-
-
-	//focusの描画
-
-	focus.data(stackdata.reverse())
-	.enter()
-	.append("path")
-	.attr("clip-path", "url(#clip)") //クリップパスを適用
-	.attr("d", area)
-	.attr("fill",function(d,i){return colors[i]});
-
-	focus.selectAll("line.v")
-	.data(range).enter().append("line")
-	.attr("x1", function(d,i){
-		return nagasa[i];
-	}).attr("y1", 0)
-	.attr("x2", function(d,i){return nagasa[i];}).attr("y2", height0);
-	context.selectAll("line")
-	.attr("stroke", function(d,i){return color2[i]})
-	.attr("stroke-width", function(d,i){
-		return(Math.sqrt(keitaisokaiseki[2*i].length));
-	})
-	.on('mouseover', function(d,i){
-		var e = document.getElementById('msg');
-		var k,l;
-		e.innerHTML = "";
-		for(k=-3;k<=3;k++){
-			if(2*(i)+k<0||2*(i)+k>=hatsugen.length){
-				continue;
+		if(k==0){
+			e.innerHTML += "<b><u><font size=3 color="+color2[i]+">"+(1+2*i)+" "+hatsugen[2*i]+"</font></u></b><font size=1><br><br></font>";
+		}else if(k%2==0){
+			e.innerHTML += "<font size=1 color="+color2[k/2+i]+">"+(1+k+2*i)+" "+hatsugen[k+2*i]+"<br><br></font>";
+		}else{
+			e.innerHTML += (1+k+2*i)+" ";
+			for(l=0;l<bun[k+2*i].length;l++){
+				e.innerHTML += "<font size=1 color="+colorBun[checkedBun[k+2*i][l]]+">"+bun[k+2*i][l]+"</font>";
 			}
-			if(k==0){
-				e.innerHTML += "<b><u><font size=3 color="+color2[i]+">"+(1+2*i)+" "+hatsugen[2*i]+"</font></u></b><font size=1><br><br></font>";
-			}else if(k%2==0){
-				e.innerHTML += "<font size=1 color="+color2[k/2+i]+">"+(1+k+2*i)+" "+hatsugen[k+2*i]+"<br><br></font>";
-			}else{
-				e.innerHTML += (1+k+2*i)+" ";
-				for(l=0;l<bun[k+2*i].length;l++){
-					e.innerHTML += "<font size=1 color="+colorBun[checkedBun[k+2*i][l]]+">"+bun[k+2*i][l]+"</font>";
-				}
-				e.innerHTML += "<font size=1><br><br></font>";
-			}
+			e.innerHTML += "<font size=1><br><br></font>";
 		}
-	})
-
-	focus.append("g")  //focusのx目盛軸
-	.attr("class", "x axis")
-	.attr("transform", "translate(0," + height + ")")
-	.call(xAxis);
-
-	focus.append("g") //focusのy目盛軸
-	.attr("class", "y axis")
-	.call(yAxis);
-
-	/*
-	context.append("path") //全体グラフ描画
-
-	.datum(data)
-	.attr("d", area2);
-	*/
-
-	context.append("g") //全体x目盛軸
-	.attr("class", "x axis")
-	.attr("transform", "translate(0," + height0 + ")")
-	.call(xAxis2);
-
-
-	/*
-	*brushは透明なrectをグループ上設置しマウスイベントを取得する。
-	*設置したrect上ではドラッグで範囲選択が可能
-	*範囲が選択されている状態でbrush.extent()メソッドを実行するとその範囲のデータ値を返す
-	*/
-
-	var brush = d3.svg.brush() //brushオブジェクト作成
-	.x(scaleX) //下側全体グラフx軸を選択可能範囲に指定
-	.on("brush", brushed);
-
-	context.append("g") //brushグループを全体グラフに作成
-	.attr("class", "x brush")
-	.call(brush)
-	.selectAll("rect")
-	.attr("y", -6)
-	.attr("height", height0 + 7);
-
-
-	function brushed() {
-		console.log( brush.extent());
-		scaleX2.domain(brush.empty() ? scaleX.domain() : brush.extent()); //選択されたデータセットの範囲をscaleX2のdomainに反映
-		focus.select("path").attr("d", area); //ズームグラフアップデート（focus描画）
-		focus.select(".x.axis").call(xAxis); //ズームx軸アップデート
 	}
+})
 
-	//以上追加分
+focus.append("g")  //focusのx目盛軸
+.attr("class", "x axis")
+.attr("transform", "translate(0," + height + ")")
+.call(xAxis);
+
+focus.append("g") //focusのy目盛軸
+.attr("class", "y axis")
+.call(yAxis);
+
+/*
+context.append("path") //全体グラフ描画
+
+.datum(data)
+.attr("d", area2);
+*/
+
+context.append("g") //全体x目盛軸
+.attr("class", "x axis")
+.attr("transform", "translate(0," + height0 + ")")
+.call(xAxis2);
+
+
+/*
+*brushは透明なrectをグループ上設置しマウスイベントを取得する。
+*設置したrect上ではドラッグで範囲選択が可能
+*範囲が選択されている状態でbrush.extent()メソッドを実行するとその範囲のデータ値を返す
+*/
+
+var brush = d3.svg.brush() //brushオブジェクト作成
+.x(scaleX2copy) //全体グラフx軸を選択可能範囲に指定
+.on("brush", brushed);
+
+context.append("g") //brushグループを全体グラフに作成
+.attr("class", "x brush")
+.call(brush)
+.selectAll("rect")
+.attr("y", -6)
+.attr("height", height0 + 7);
+
+
+function brushed() {
+	console.log( brush.extent());
+	scaleX2.domain(brush.empty() ? scaleX2.domain() : brush.extent()); //選択されたデータセットの範囲をscaleX2のdomainに反映
+	focus.select("path").attr("d", area); //ズームグラフアップデート（focus描画）
+	focus.select(".x.axis").call(xAxis); //ズームx軸アップデート
+}
+
+//以上追加分
 
 };
 
