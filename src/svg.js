@@ -31,7 +31,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki) => {
 	.y0(function(d){return height0})
 	.y1(function(d){return height0 - scaleY(d.y+d.y0)});
 
-	var margin = {top: 430, right: 10, bottom: 20, left: 40};
+	var margin = {top: 300, right: 10, bottom: 20, left: 40};
 
 	var margin2 = {top: 10, right: 10, bottom: 100, left: 40};
 
@@ -61,6 +61,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki) => {
 	.attr("stroke-width", function(d,i){
 		return(Math.sqrt(keitaisokaiseki[2*i].length));
 	})
+	/*
 	.on('mouseover', function(d,i){
 		var e = document.getElementById('msg');
 		var k,l;
@@ -82,6 +83,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki) => {
 			}
 		}
 	})
+	*/
 
 
 	//以下追加分
@@ -90,9 +92,10 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki) => {
 
 	//var width = 960 - margin.left - margin.right;
 	var height = 500 - margin.top - margin.bottom;
-	var scaleX2 = d3.time.scale()
-	.domain(scaleX.domain())
-	.range([0, width]);
+
+	//var scaleX = d3.scale.linear().domain([0,color2.length]).range([width/(color2.length),width]);
+	//var scaleY = d3.scale.linear().domain([0,6]).range([0,height0]);
+	var scaleX2 = d3.scale.linear().domain([0,color2.length]).range([width/(color2.length),width]);
 	var scaleY2 = d3.scale.linear()
 	.domain(scaleY.domain())
 	.range([height, 0]);
@@ -156,7 +159,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki) => {
 	.enter()
 	.append("path")
 	.attr("clip-path", "url(#clip)") //クリップパスを適用
-	.attr("d", area0)
+	.attr("d", area)
 	.attr("fill",function(d,i){return colors[i]});
 
 	focus.selectAll("line.v")
