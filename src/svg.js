@@ -77,11 +77,11 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 	var scaleX2 = d3.scale.linear().domain([0,bunsuu]).range([0,width]);
 	var scaleX2copy = d3.scale.linear().domain([0,bunsuu]).range([0,width]);
 	var scaleY2 = d3.scale.linear().domain([0,RGBmaxmax]).range([height,0]);
-	var xAxis = d3.svg.axis().scale(scaleX2).orient("bottom");
-	var yAxis = d3.svg.axis().scale(scaleY2).orient("left");
+	var xAxisF = d3.svg.axis().scale(scaleX2).orient("bottom");//focus
+	var yAxis = d3.svg.axis().scale(scaleY2).orient("left");//focus
 
 
-	var xAxis2 = d3.svg.axis().scale(scaleX2).orient("bottom");//下で呼んでる
+	var xAxisC = d3.svg.axis().scale(scaleX2).orient("bottom");//context
 
 
 	//ズームグラフareaオブジェクト
@@ -152,7 +152,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 	focus.append("g")  //focusのx目盛軸
 	.attr("class", "x axis")
 	.attr("transform", "translate(0," + height + ")")
-	.call(xAxis);
+	.call(xAxisF);
 
 	focus.append("g") //focusのy目盛軸
 	.attr("class", "y axis")
@@ -168,7 +168,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 	context.append("g") //全体x目盛軸
 	.attr("class", "x axis")
 	.attr("transform", "translate(0," + height0 + ")")
-	.call(xAxis2);
+	.call(xAxisC);
 
 
 	/*
@@ -193,7 +193,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		console.log( brush.extent());
 		scaleX2.domain(brush.empty() ? scaleX.domain() : brush.extent()); //選択されたデータセットの範囲をscaleX2のdomainに反映
 		focus.select(".area").attr("d", area); //ズームグラフアップデート（focus描画）
-		focus.select(".x.axis").call(xAxis); //ズームx軸アップデート
+		focus.select(".x.axis").call(xAxisF); //ズームx軸アップデート
 	}
 
 	//以上追加分
