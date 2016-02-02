@@ -1,6 +1,6 @@
 import d3 from "d3"
 
-var height0=50,width=1320
+var height0=200,width=1320
 var height =200;
 
 var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxmax) => {
@@ -36,9 +36,9 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 
 	var margin2 = {top: 10, right: 10, bottom: 50, left: 40};
 
-	var focus = svg.append("g") //ズームグラフグループ作成
+	/*var focus = svg.append("g") //ズームグラフグループ作成
 	.attr("class", "focus")
-	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");*/
 
 	var context = svg.append("g") //全体グラフグループ作成
 	.attr("class", "context")
@@ -63,6 +63,28 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 	.attr("stroke", function(d,i){return color2[i]})
 	.attr("stroke-width", function(d,i){
 		return(Math.sqrt(keitaisokaiseki[2*i].length));
+	})
+	.on('mouseover', function(d,i){
+		var e = document.getElementById('msg');
+		var k,l;
+		e.innerHTML = "";
+		for(k=-3;k<=3;k++){
+			if(2*(i)+k<0||2*(i)+k>=hatsugen.length){
+				continue;
+			}
+			if(k==0){
+				e.innerHTML += "<b><u><font size=3>"+(1+2*i)+" <font color="+color2[i]+">【</font>"+hatsugen[2*i]+"<font color="+color2[i]+">】</font></font></u></b><font size=1><br><br></font>";
+			}else if(k%2==0){
+				e.innerHTML += "<font size=1>"+(1+k+2*i)+" <font color="+color2[k/2+i]+"><b>【</b></font>"+hatsugen[k+2*i]+"<font color="+color2[k/2+i]+"><b>】</b></font><br><br></font>";
+			}else{
+				e.innerHTML += (1+k+2*i)+" ";
+				for(l=0;l<bun[k+2*i].length;l++){
+					if(bun[k+2*i][l]==""){continue;}
+					e.innerHTML += "<font size=1><font color="+colorBun[checkedBun[k+2*i][l]]+"><b>【</b></font>"+bun[k+2*i][l]+"<font color="+colorBun[checkedBun[k+2*i][l]]+"><b>】</b></font></font>";
+				}
+				e.innerHTML += "<font size=1><br><br></font>";
+			}
+		}
 	})
 
 
@@ -103,7 +125,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 
 
 	//focusの描画
-
+/*
 	focus.selectAll("path")
 	.attr("class", "area")
 	.data(stackdata.reverse())
@@ -158,6 +180,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 	focus.append("g") //focusのy目盛軸
 	.attr("class", "y axis")
 	.call(yAxis);
+	*/
 
 	/*
 	context.append("path") //全体グラフ描画
@@ -177,7 +200,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 	*設置したrect上ではドラッグで範囲選択が可能
 	*範囲が選択されている状態でbrush.extent()メソッドを実行するとその範囲のデータ値を返す
 	*/
-
+/*
 	var brush = d3.svg.brush() //brushオブジェクト作成
 	.x(scaleX2copy) //全体グラフx軸を選択可能範囲に指定
 	.on("brush", brushed);
@@ -196,6 +219,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		focus.select(".area").attr("d", area); //ズームグラフアップデート（focus描画）
 		focus.select(".x.axis").call(xAxisF); //ズームx軸アップデート
 	}
+	*/
 
 	//以上追加分
 
@@ -264,7 +288,7 @@ var funcChecked2 = (chboxlist,chboxlist2,checked2,taiou,chboxlength,chboxlength2
 var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,chboxlength,chboxlength2) => {
 	d3.select("#svgdiv").select("svg").remove();
 	var svg = d3.select("#svgdiv").append("svg")
-	.attr("height",350)
+	.attr("height",250)
 
 	.attr("width",width);
 	var color2=[];
