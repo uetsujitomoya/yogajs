@@ -7,7 +7,13 @@ var makeOnClick = (c) =>{
 		document.getElementById(id).classList.toggle("hide");
 	};
 }
-var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,chboxlength,chboxlength2) => {
+var makeOnClickS = (c) =>{
+	document.getElementById("b"+c).onclick = (e) => {
+		const id = "rs"+c;
+		document.getElementById(id).classList.toggle("hide");
+	};
+}
+var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2) => {
 	var h,i,j,k,l,m,n,c,r,g,b,x,y,z,bunsuu;
 	var hinshi = [];
 	var RGB = [];
@@ -198,7 +204,7 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 		}
 
 
-		var sResult = select(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RGBlist,hatsugen,bun,checked,checked2,taiou,chboxlength,chboxlength2);
+		var sResult = select(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
 
 		checkboxlist = sResult.checkboxlist;
 		chboxlist = sResult.chboxlist;
@@ -208,6 +214,8 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 		checked = sResult.checked;
 		checked2 = sResult.checked2;
 		taiou = sResult.taiou;
+		taiou2 = sResult.taiou2;
+
 		chboxlength = sResult.chboxlength;
 		chboxlength2 = sResult.chboxlength2;
 		var vResult = setForViz(keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,chboxlength,chboxlength2);//形態素解析後に1度目の描画
@@ -219,16 +227,19 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 		chboxlength = vResult.chboxlength;
 		chboxlength2 = vResult.chboxlength2;
 
-		for(c=1;c<=chboxlength+chboxlength2;c++){
+		for(c=1;c<=chboxlength;c++){
 			makeOnClick(c);
+		}
+		for(c=1;c<=chboxlength2;c++){
+			makeOnClickS(c);
 		}
 
 		document.getElementById('radio_buttons').onchange = () => {
-			setForViz(keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,chboxlength,chboxlength2);
+			setForViz(keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
 		};
 
 		return{
-			RGBlist:RGBlist,keitaisokaiseki:keitaisokaiseki,hatsugen:hatsugen,bun:bun,chboxlist:chboxlist,chboxlist2:chboxlist2,checked:checked,checked2:checked2,taiou:taiou,chboxlength:chboxlength,chboxlength2:chboxlength2
+			RGBlist:RGBlist,keitaisokaiseki:keitaisokaiseki,hatsugen:hatsugen,bun:bun,chboxlist:chboxlist,chboxlist2:chboxlist2,checked:checked,checked2:checked2,taiou:taiou,taiou2:taiou2,chboxlength:chboxlength,chboxlength2:chboxlength2
 		}
 	})
 };

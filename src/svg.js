@@ -257,7 +257,7 @@ var funcChecked = (chboxlist,checked,taiou,chboxlength) => {
 	}
 };
 
-var funcChecked2 = (chboxlist,chboxlist2,checked2,taiou,chboxlength,chboxlength2) => {
+var funcChecked2 = (chboxlist,chboxlist2,checked2,taiou,taiou2,chboxlength,chboxlength2) => {
 	var c;
 	for(c=chboxlength+1;c<=chboxlength+chboxlength2;c++){
 		const radio = document.getElementById("r"+c).children;
@@ -286,7 +286,7 @@ var funcChecked2 = (chboxlist,chboxlist2,checked2,taiou,chboxlength,chboxlength2
 	}
 };
 
-var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,chboxlength,chboxlength2) => {
+var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2) => {
 	d3.select("#svgdiv").select("svg").remove();
 	var svg = d3.select("#svgdiv").append("svg")
 	.attr("height",270)
@@ -298,7 +298,7 @@ var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,check
 		funcChecked(chboxlist,checked,taiou,chboxlength);
 	}
 	if(chboxlength2>=1){
-		funcChecked2(chboxlist,chboxlist2,checked2,taiou,chboxlength,chboxlength2);
+		funcChecked2(chboxlist,chboxlist2,checked2,taiou,taiou2,chboxlength,chboxlength2);
 	}
 
 	var h,i,j,c,m,n;
