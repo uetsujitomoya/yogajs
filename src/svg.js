@@ -1,7 +1,7 @@
 import d3 from "d3"
 
 var height0=200,width=1320
-var height =200;
+var height =0;
 
 var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxmax) => {
 	var m;
@@ -26,7 +26,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 	var scaleX = d3.scale.linear().domain([0,color2.length]).range([width/(color2.length),width]);
 	var scaleY = d3.scale.linear().domain([0,6]).range([0,height0]);
 	var colors = ["#7777ff","#77ff77","#ff7777"];
-	var colorBun=["dimgray","deeppink","green","dodgerblue"];
+	var colorBun=["dimgray","#ff7777","#77ff77","#7777ff"];
 	var area0 = d3.svg.area()
 	.x(function(d,i){return (nagasa[i]+nagasa[i+1])/2})
 	.y0(function(d){return height0})
@@ -289,7 +289,7 @@ var funcChecked2 = (chboxlist,chboxlist2,checked2,taiou,chboxlength,chboxlength2
 var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,chboxlength,chboxlength2) => {
 	d3.select("#svgdiv").select("svg").remove();
 	var svg = d3.select("#svgdiv").append("svg")
-	.attr("height",300)
+	.attr("height",height0+height+70)
 
 	.attr("width",width);
 	var color2=[];
@@ -333,15 +333,15 @@ var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,check
 	}
 	for(c=0;c<checked2.length;c++){
 		if(checked2[c]==3){
-			color2[c]="#ff3333";
+			color2[c]="deeppink";
 		}else if(checked2[c]==5){
-			color2[c]="dimgray";
+			color2[c]="purple";
 		}else if(checked2[c]==4){
-			color2[c]="#3333ff";
+			color2[c]="blue";
 		}else if(checked2[c]==6){
-			color2[c]="orange";
+			color2[c]="orangered";
 		}else{
-			color2[c]="silver";
+			color2[c]="black";
 		}
 	}
 
