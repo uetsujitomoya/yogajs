@@ -80,30 +80,19 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RG
 		}
 	}
 
-	/*if(n==0){
-	target.innerHTML +="「愛」「交友」「仕事」のいずれかに該当しそうな文が一つも見つかりませんでした。<br>";
-}else if(c==0){
-target.innerHTML +="「愛」「交友」「仕事」のいずれか複数に該当しそうな文が一つも見つかりませんでした。<br>";
-}*/
-//chboxlength=c;
-
-//for(m=0;m<keitaisokaiseki.length;m=m+2){	}
-/*if(c==chboxlength){
-target.innerHTML +="「解釈」「無駄話」のいずれかに該当しそうなカウンセラーの発言が一つも見つかりませんでした。";
-}*/
-chboxlength2 = c -chboxlength;
-return{
-	checkboxlist:checkboxlist,
-	chboxlist:chboxlist,
-	chboxlist2:chboxlist2,
-	RGB:RGB,
-	RGBlist:RGBlist,
-	checked:checked,
-	checked2:checked2,
-	taiou:taiou,
-	taiou2:taiou2,
-	chboxlength:chboxlength,
-	chboxlength2:chboxlength2
-}
+	
+	return{
+		checkboxlist:checkboxlist,
+		chboxlist:chboxlist,
+		chboxlist2:chboxlist2,
+		RGB:RGB,
+		RGBlist:RGBlist,
+		checked:checked,
+		checked2:checked2,
+		taiou:taiou,
+		taiou2:taiou2,
+		chboxlength:chboxlength,
+		chboxlength2:chboxlength2
+	}
 }
 export {select};

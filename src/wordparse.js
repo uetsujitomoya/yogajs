@@ -8,7 +8,7 @@ var makeOnClick = (c) =>{
 	};
 }
 var makeOnClickS = (c) =>{
-	document.getElementById("b"+c).onclick = (e) => {
+	document.getElementById("bs"+c).onclick = (e) => {
 		const id = "rs"+c;
 		document.getElementById(id).classList.toggle("hide");
 	};
@@ -227,9 +227,11 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 		chboxlength = vResult.chboxlength;
 		chboxlength2 = vResult.chboxlength2;
 
+		console.log("chboxlength=%d",chboxlength);
 		for(c=1;c<=chboxlength;c++){
 			makeOnClick(c);
 		}
+		console.log("chboxlength2=%d",chboxlength2);
 		for(c=1;c<=chboxlength2;c++){
 			makeOnClickS(c);
 		}
