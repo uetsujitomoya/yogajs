@@ -107,6 +107,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 
 
 	//ズームグラフareaオブジェクト
+	/*
 	var area = d3.svg.area()
 	.x(function(d,i){return (nagasa[i]+nagasa[i+1])/2})
 	.y0(height)
@@ -119,7 +120,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 	.append("rect")
 	.attr("width", width)
 	.attr("height", height);
-
+*/
 
 
 
@@ -176,11 +177,11 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 	.attr("class", "x axis")
 	.attr("transform", "translate(0," + height + ")")
 	.call(xAxisF);
-
-	focus.append("g") //focusのy目盛軸
+	*/
+	context.append("g") //focusのy目盛軸
 	.attr("class", "y axis")
 	.call(yAxis);
-	*/
+
 
 	/*
 	context.append("path") //全体グラフ描画
@@ -288,7 +289,7 @@ var funcChecked2 = (chboxlist,chboxlist2,checked2,taiou,chboxlength,chboxlength2
 var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,chboxlength,chboxlength2) => {
 	d3.select("#svgdiv").select("svg").remove();
 	var svg = d3.select("#svgdiv").append("svg")
-	.attr("height",250)
+	.attr("height",300)
 
 	.attr("width",width);
 	var color2=[];
