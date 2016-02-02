@@ -80,7 +80,7 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RG
 		}
 	}
 
-	
+	console.log("chboxlength2 in select.js=%d",chboxlength2);
 	return{
 		checkboxlist:checkboxlist,
 		chboxlist:chboxlist,
@@ -92,7 +92,7 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RG
 		taiou:taiou,
 		taiou2:taiou2,
 		chboxlength:chboxlength,
-		chboxlength2:chboxlength2
-	}
+		chboxlength2:chboxlength2,
+	};
 }
 export {select};

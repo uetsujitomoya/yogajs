@@ -218,6 +218,14 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 
 		chboxlength = sResult.chboxlength;
 		chboxlength2 = sResult.chboxlength2;
+		console.log("chboxlength=%d",chboxlength);
+		for(c=1;c<=chboxlength;c++){
+			makeOnClick(c);
+		}
+		console.log("chboxlength2=%d",chboxlength2);
+		for(c=1;c<=chboxlength2;c++){
+			makeOnClickS(c);
+		}
 		var vResult = setForViz(keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,chboxlength,chboxlength2);//形態素解析後に1度目の描画
 		chboxlist = vResult.chboxlist;
 		chboxlist2 = vResult.chboxlist2;
@@ -227,14 +235,7 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 		chboxlength = vResult.chboxlength;
 		chboxlength2 = vResult.chboxlength2;
 
-		console.log("chboxlength=%d",chboxlength);
-		for(c=1;c<=chboxlength;c++){
-			makeOnClick(c);
-		}
-		console.log("chboxlength2=%d",chboxlength2);
-		for(c=1;c<=chboxlength2;c++){
-			makeOnClickS(c);
-		}
+
 
 		document.getElementById('radio_buttons').onchange = () => {
 			setForViz(keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
