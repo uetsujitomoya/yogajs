@@ -1,6 +1,7 @@
 import d3 from "d3"
 
-var height0=200,width=1320;
+var height0=50,width=1320
+var height =200;
 
 var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxmax) => {
 	var m;
@@ -31,9 +32,9 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 	.y0(function(d){return height0})
 	.y1(function(d){return height0 - scaleY(d.y+d.y0)});
 
-	var margin = {top: 300, right: 10, bottom: 20, left: 40};
+	var margin = {top: 50+height0, right: 10, bottom: 20, left: 40};
 
-	var margin2 = {top: 10, right: 10, bottom: 100, left: 40};
+	var margin2 = {top: 10, right: 10, bottom: 50, left: 40};
 
 	var focus = svg.append("g") //ズームグラフグループ作成
 	.attr("class", "focus")
@@ -71,7 +72,6 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 	//ズームグラフ用（ズーム後グラフ）、margin, scale, axis設定
 
 	//var width = 960 - margin.left - margin.right;
-	var height = 500 - margin.top - margin.bottom;
 
 
 	var scaleX2 = d3.scale.linear().domain([0,bunsuu]).range([0,width]);
@@ -120,7 +120,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 	.attr("x1", function(d,i){
 		return nagasa[i];
 	}).attr("y1", 0)
-	.attr("x2", function(d,i){return nagasa[i];}).attr("y2", height0);
+	.attr("x2", function(d,i){return nagasa[i];}).attr("y2", height);
 	focus.selectAll("line")
 	.attr("class", "area")
 	.attr("stroke", function(d,i){return color2[i]})
@@ -263,7 +263,7 @@ var funcChecked2 = (chboxlist,chboxlist2,checked2,taiou,chboxlength,chboxlength2
 var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,chboxlength,chboxlength2) => {
 	d3.select("#svgdiv").select("svg").remove();
 	var svg = d3.select("#svgdiv").append("svg")
-	.attr("height",500)
+	.attr("height",350)
 
 	.attr("width",width);
 	var color2=[];
