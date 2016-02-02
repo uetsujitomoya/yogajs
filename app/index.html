@@ -6,42 +6,34 @@
   </title>
   <meta charset="utf-8">
   <style>
-
   .node {
     stroke-width: 3px;
   }
-
   .link {
     stroke: #999;
     stroke-opacity: .9;
   }
-
   .hide {
-  display: none;
-}
-
-svg {
-  font: 10px sans-serif;
-}
-
-.area {
-  fill: steelblue;
-  clip-path: url(#clip);
-}
-
-.axis path,
-.axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
-}
-
-.brush .extent {
-  stroke: #fff;
-  fill-opacity: .125;
-  shape-rendering: crispEdges;
-}
-
+    display: none;
+  }
+  svg {
+    font: 10px sans-serif;
+  }
+  .area {
+    fill: steelblue;
+    clip-path: url(#clip);
+  }
+  .axis path,
+  .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+  }
+  .brush .extent {
+    stroke: #fff;
+    fill-opacity: .125;
+    shape-rendering: crispEdges;
+  }
   </style>
 </head>
 <body><font size="2">
@@ -49,11 +41,11 @@ svg {
   <button id="load-button">まず最初に、左でjsonファイルを指定してから、ここをクリックして5～15秒ほど待つ</button>
   <br>
   <br>
-<div id="svgdiv"></div>
-折れ線グラフ：クライエントの発言について<font color="#ff7777">「愛」</font><font color="#77ff77">「交友」</font><font color="#7777ff">「仕事」</font><br>
-縦棒：カウンセラーからの<font color="deeppink">「開かれた質問」</font><font color="blue">「閉じられた質問」</font><font color="purple">「相づち」</font><font color="orangered">「解釈」</font><font color="black">「無駄話」</font><br><br><br>
-<br>
-<font size=3><b><u>左下のエリア</u></b>で、クライエントが発した文/カウンセラーが発した質問について分類してください。<b><u>グラフの縦棒</u></b>をマウスオーバーすると<b><u>右下のエリア</u></b>に縦棒周辺の内容が表示されます</font><br>
+  <div id="svgdiv"></div>
+  折れ線グラフ：クライエントの発言について<font color="#ff7777">「愛」</font><font color="#77ff77">「交友」</font><font color="#7777ff">「仕事」</font><br>
+  縦棒：カウンセラーからの<font color="deeppink">「開かれた質問」</font><font color="blue">「閉じられた質問」</font><font color="purple">「相づち」</font><font color="orangered">「解釈」</font><font color="black">「無駄話」</font><br><br>
+
+  <font size=3 color=dimgray><b><u><font color=black size=4>左下のエリア</font></u></b>で、クライエントが発した文/カウンセラーが発した質問について分類してください。<b><u><font color=black size=4>グラフの縦棒</font></u></b>をマウスオーバーすると<b><u><font color=black size=4>右下のエリア</font></u></b>に縦棒周辺の内容が表示されます</font><br><br>
   <div style="height:300px; width:650px; overflow-y:scroll; float:left">
     <form name="form1" id="chbox" action="">
       <div id="radio_buttons"></div>
