@@ -73,11 +73,11 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 				continue;
 			}
 			if(k==0){
-				e.innerHTML += "<b><u><font size=3>"+(1+2*i)+" <font color="+color2[i]+">【</font>"+hatsugen[2*i]+"<font color="+color2[i]+">】</font></font></u></b><font size=2><br><br></font>";
+				e.innerHTML += "<b><u><font size=3>"+(1+2*i)+"(S) <font color="+color2[i]+">【</font>"+hatsugen[2*i]+"<font color="+color2[i]+">】</font></font></u></b><font size=2><br><br></font>";
 			}else if(k%2==0){
-				e.innerHTML += "<font size=2>"+(1+k+2*i)+" <font color="+color2[k/2+i]+"><b>【</b></font>"+hatsugen[k+2*i]+"<font color="+color2[k/2+i]+"><b>】</b></font><br><br></font>";
+				e.innerHTML += "<font size=2>"+(1+k+2*i)+"(S) <font color="+color2[k/2+i]+"><b>【</b></font>"+hatsugen[k+2*i]+"<font color="+color2[k/2+i]+"><b>】</b></font><br><br></font>";
 			}else{
-				e.innerHTML += (1+k+2*i)+" ";
+				e.innerHTML += (1+k+2*i)+"(C) ";
 				for(l=0;l<bun[k+2*i].length;l++){
 					if(bun[k+2*i][l]==""){continue;}
 					e.innerHTML += "<font size=2><font color="+colorBun[checkedBun[k+2*i][l]]+"><b>【</b></font>"+bun[k+2*i][l]+"<font color="+colorBun[checkedBun[k+2*i][l]]+"><b>】</b></font></font>";
