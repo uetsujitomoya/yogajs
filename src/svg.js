@@ -258,6 +258,7 @@ var funcChecked = (chboxlist,checked,taiou,chboxlength) => {
 };
 
 var funcChecked2 = (chboxlist,chboxlist2,checked2,taiou,taiou2,chboxlength,chboxlength2) => {
+
 	var c;
 	for(c=1;c<=chboxlength2;c++){
 		const radio = document.getElementById("rs"+c).children;
@@ -287,6 +288,7 @@ var funcChecked2 = (chboxlist,chboxlist2,checked2,taiou,taiou2,chboxlength,chbox
 };
 
 var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2) => {
+  console.log("chboxlength2 in svg.js=%d",chboxlength2);
 	d3.select("#svgdiv").select("svg").remove();
 	var svg = d3.select("#svgdiv").append("svg")
 	.attr("height",270)
@@ -297,9 +299,11 @@ var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,check
 	if(chboxlength>=1){
 		funcChecked(chboxlist,checked,taiou,chboxlength);
 	}
+	console.log("chboxlength2 in svg.js=%d",chboxlength2);
 	if(chboxlength2>=1){
 		funcChecked2(chboxlist,chboxlist2,checked2,taiou,taiou2,chboxlength,chboxlength2);
 	}
+	console.log("chboxlength2 in svg.js=%d",chboxlength2);
 
 	var h,i,j,c,m,n;
 
@@ -366,6 +370,7 @@ var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,check
 		}
 	}
 	viz(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxmax);
+	console.log("chboxlength2 in svg.js=%d",chboxlength2);
 	return{
 		chboxlist:chboxlist,
 		chboxlist2:chboxlist2,
@@ -373,7 +378,7 @@ var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,check
 		checked:checked,
 		checked2:checked2,
 		chboxlength:chboxlength,
-		chboxlength2:chboxlength2
+		chboxlength2:chboxlength2,
 	}
 }
 
