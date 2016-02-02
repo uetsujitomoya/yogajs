@@ -1,7 +1,7 @@
 import d3 from "d3"
 
 var height0=200,width=1320
-var height =0;
+var height =200;
 
 var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxmax) => {
 	var m;
@@ -100,7 +100,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 	var scaleX2copy = d3.scale.linear().domain([0,bunsuu]).range([0,width]);
 	var scaleY2 = d3.scale.linear().domain([0,RGBmaxmax]).range([height,0]);
 	var xAxisF = d3.svg.axis().scale(scaleX2).orient("bottom");//focus
-	var yAxis = d3.svg.axis().scale(scaleY2).orient("left");//focus
+	var yAxisC = d3.svg.axis().scale(scaleY2).orient("left");//focus
 
 
 	var xAxisC = d3.svg.axis().scale(scaleX2).orient("bottom");//context
@@ -180,7 +180,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 	*/
 	context.append("g") //focusのy目盛軸
 	.attr("class", "y axis")
-	.call(yAxis);
+	.call(yAxisC);
 
 
 	/*
@@ -289,7 +289,7 @@ var funcChecked2 = (chboxlist,chboxlist2,checked2,taiou,chboxlength,chboxlength2
 var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,chboxlength,chboxlength2) => {
 	d3.select("#svgdiv").select("svg").remove();
 	var svg = d3.select("#svgdiv").append("svg")
-	.attr("height",height0+height+70)
+	.attr("height",270)
 
 	.attr("width",width);
 	var color2=[];
