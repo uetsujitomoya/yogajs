@@ -10,7 +10,8 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RG
 	n=0;
 	var btn=[];
 	chboxlength=0;
-	chboxlength2=0:
+	chboxlength2=0;
+	var s=0;
 	for(m=0;m<keitaisokaiseki.length;m++){
 		if(m%2==1){
 			var RGBtensuu=[0,0,0];
@@ -54,57 +55,55 @@ var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RG
 				}
 			}
 		}else{//セラピストの質問
-
+			s++;
+			chboxlength2++;
+			chboxlist2[s]=[];
+			chboxlist2[s][0]=hatsugen[m];
+			chboxlist2[s][1]=4;
+			taiou2[s-1]=s-1;
+			if(RGBlist[m/2][3]==1){
+				target.innerHTML += "<div id=\"bs" + s + "\" style=\"cursor: pointer\"><font size=1 color=dimgray>"+ (m+1) + " "  + hatsugen[m] + "</font></div><div id=\"rs" + s + "\" class=\"hide\"><label><input type=radio name=\"rs" + s + "\" value=3 checked><font color=deeppink>開かれた質問</font></label><label><input type=radio name=\"rs" + s + "\" value=4><font color=blue>閉じられた質問</font></label><label><input type=radio name=\"rs" + s + "\" value=5><font color=purple>相づち</font></label><label><input type=radio name=\"r"
+				+ s + "\" value=6><font color=orangered>解釈</font></label><label><input type=radio name=\"rs" + s + "\" value=7><font color=black>世間話</font></label></div><br>";
+			}else	if(RGBlist[m/2][5]==1){
+				target.innerHTML += "<div id=\"bs" + s + "\" style=\"cursor: pointer\"><font size=1 color=dimgray>"+ (m+1) + " "  + hatsugen[m] + "</font></div><div id=\"rs" + s + "\" class=\"hide\"><label><input type=radio name=\"rs" + s + "\" value=3><font color=deeppink>開かれた質問</font></label><label><input type=radio name=\"rs" + s + "\" value=4><font color=blue>閉じられた質問</font></label><label><input type=radio name=\"rs" + s + "\" value=5 checked><font color=purple>相づち</font></label><label><input type=radio name=\"r"
+				+ s + "\" value=6><font color=orangered>解釈</font></label><label><input type=radio name=\"rs" + s + "\" value=7><font color=black>世間話</font></label></div><br>";
+			}else	if(RGBlist[m/2][4]==1){
+				target.innerHTML += "<div id=\"bs" + s + "\" style=\"cursor: pointer\"><font size=1 color=dimgray>"+ (m+1) + " "  + hatsugen[m] + "</font></div><div id=\"rs" + s + "\" class=\"hide\"><label><input type=radio name=\"rs" + s + "\" value=3><font color=deeppink>開かれた質問</font></label><label><input type=radio name=\"rs" + s + "\" value=4 checked><font color=blue>閉じられた質問</font></label><label><input type=radio name=\"rs" + s + "\" value=5><font color=purple>相づち</font></label><label><input type=radio name=\"r"
+				+ s + "\" value=6><font color=orangered>解釈</font></label><label><input type=radio name=\"rs" + s + "\" value=7><font color=black>世間話</font></label></div><br>";
+			}else	if(RGBlist[m/2][6]==1){
+				target.innerHTML += "<div id=\"bs" + s + "\" style=\"cursor: pointer\">"+ (m+1) + " "  + hatsugen[m] + "</div><div id=\"rs" + s + "\"><label><input type=radio name=\"rs" + s + "\" value=3><font color=deeppink>開かれた質問</font></label><label><input type=radio name=\"rs" + s + "\" value=4><font color=blue>閉じられた質問</font></label><label><input type=radio name=\"rs" + s + "\" value=5><font color=purple>相づち</font></label><label><input type=radio name=\"r" + c
+				+ "\" value=6 checked><font color=orangered>解釈</font></label><label><input type=radio name=\"rs" + s + "\" value=7><font color=black>世間話</font></label></div><br>";
+			}else{
+				target.innerHTML += "<div id=\"bs" + s + "\" style=\"cursor: pointer\">"+ (m+1) + " "  + hatsugen[m] + "</div><div id=\"rs" + s + "\"><label><input type=radio name=\"rs" + s + "\" value=3><font color=deeppink>開かれた質問</font></label><label><input type=radio name=\"rs" + s + "\" value=4><font color=blue>閉じられた質問</font></label><label><input type=radio name=\"rs" + s + "\" value=5><font color=purple>相づち</font></label><label><input type=radio name=\"r" + c
+				+ "\" value=6><font color=orangered>解釈</font></label><label><input type=radio name=\"rs" + s + "\" value=7 checked><font color=black>世間話</font></label></div><br>";
+			}
 		}
 	}
 
 	/*if(n==0){
-		target.innerHTML +="「愛」「交友」「仕事」のいずれかに該当しそうな文が一つも見つかりませんでした。<br>";
-	}else if(c==0){
-		target.innerHTML +="「愛」「交友」「仕事」のいずれか複数に該当しそうな文が一つも見つかりませんでした。<br>";
-	}*/
-	chboxlength=c;
-	var s=0;
-	for(m=0;m<keitaisokaiseki.length;m=m+2){
-		s++;
-		chboxlength2++;
-		chboxlist2[n]=[];
-		chboxlist2[n][0]=hatsugen[m];
-		chboxlist2[n][1]=4;
-		taiou2[s-1]=s-1;
-		if(RGBlist[m/2][3]==1){
-			target.innerHTML += "<div id=\"bs" + s + "\" style=\"cursor: pointer\"><font size=1 color=dimgray>"+ (m+1) + " "  + hatsugen[m] + "</font></div><div id=\"rs" + s + "\" class=\"hide\"><label><input type=radio name=\"rs" + s + "\" value=3 checked><font color=deeppink>開かれた質問</font></label><label><input type=radio name=\"rs" + s + "\" value=4><font color=blue>閉じられた質問</font></label><label><input type=radio name=\"rs" + s + "\" value=5><font color=purple>相づち</font></label><label><input type=radio name=\"r"
-			 + s + "\" value=6><font color=orangered>解釈</font></label><label><input type=radio name=\"rs" + s + "\" value=7><font color=black>世間話</font></label></div><br>";
-		}else	if(RGBlist[m/2][5]==1){
-			target.innerHTML += "<div id=\"bs" + s + "\" style=\"cursor: pointer\"><font size=1 color=dimgray>"+ (m+1) + " "  + hatsugen[m] + "</font></div><div id=\"rs" + s + "\" class=\"hide\"><label><input type=radio name=\"rs" + s + "\" value=3><font color=deeppink>開かれた質問</font></label><label><input type=radio name=\"rs" + s + "\" value=4><font color=blue>閉じられた質問</font></label><label><input type=radio name=\"rs" + s + "\" value=5 checked><font color=purple>相づち</font></label><label><input type=radio name=\"r"
-			 + s + "\" value=6><font color=orangered>解釈</font></label><label><input type=radio name=\"rs" + s + "\" value=7><font color=black>世間話</font></label></div><br>";
-		}else	if(RGBlist[m/2][4]==1){
-			target.innerHTML += "<div id=\"bs" + s + "\" style=\"cursor: pointer\"><font size=1 color=dimgray>"+ (m+1) + " "  + hatsugen[m] + "</font></div><div id=\"rs" + s + "\" class=\"hide\"><label><input type=radio name=\"rs" + s + "\" value=3><font color=deeppink>開かれた質問</font></label><label><input type=radio name=\"rs" + s + "\" value=4 checked><font color=blue>閉じられた質問</font></label><label><input type=radio name=\"rs" + s + "\" value=5><font color=purple>相づち</font></label><label><input type=radio name=\"r"
-			 + s + "\" value=6><font color=orangered>解釈</font></label><label><input type=radio name=\"rs" + s + "\" value=7><font color=black>世間話</font></label></div><br>";
-		}else	if(RGBlist[m/2][6]==1){
-			target.innerHTML += "<div id=\"bs" + s + "\" style=\"cursor: pointer\">"+ (m+1) + " "  + hatsugen[m] + "</div><div id=\"rs" + s + "\"><label><input type=radio name=\"rs" + s + "\" value=3><font color=deeppink>開かれた質問</font></label><label><input type=radio name=\"rs" + s + "\" value=4><font color=blue>閉じられた質問</font></label><label><input type=radio name=\"rs" + s + "\" value=5><font color=purple>相づち</font></label><label><input type=radio name=\"r" + c
-			+ "\" value=6 checked><font color=orangered>解釈</font></label><label><input type=radio name=\"rs" + s + "\" value=7><font color=black>世間話</font></label></div><br>";
-		}else{
-			target.innerHTML += "<div id=\"bs" + s + "\" style=\"cursor: pointer\">"+ (m+1) + " "  + hatsugen[m] + "</div><div id=\"rs" + s + "\"><label><input type=radio name=\"rs" + s + "\" value=3><font color=deeppink>開かれた質問</font></label><label><input type=radio name=\"rs" + s + "\" value=4><font color=blue>閉じられた質問</font></label><label><input type=radio name=\"rs" + s + "\" value=5><font color=purple>相づち</font></label><label><input type=radio name=\"r" + c
-			+ "\" value=6><font color=orangered>解釈</font></label><label><input type=radio name=\"rs" + s + "\" value=7 checked><font color=black>世間話</font></label></div><br>";
-		}
-	}
-	/*if(c==chboxlength){
-		target.innerHTML +="「解釈」「無駄話」のいずれかに該当しそうなカウンセラーの発言が一つも見つかりませんでした。";
-	}*/
-	chboxlength2 = c -chboxlength;
-	return{
-		checkboxlist:checkboxlist,
-		chboxlist:chboxlist,
-		chboxlist2:chboxlist2,
-		RGB:RGB,
-		RGBlist:RGBlist,
-		checked:checked,
-		checked2:checked2,
-		taiou:taiou,
-		taiou2:taiou2,
-		chboxlength:chboxlength,
-		chboxlength2:chboxlength2
-	}
+	target.innerHTML +="「愛」「交友」「仕事」のいずれかに該当しそうな文が一つも見つかりませんでした。<br>";
+}else if(c==0){
+target.innerHTML +="「愛」「交友」「仕事」のいずれか複数に該当しそうな文が一つも見つかりませんでした。<br>";
+}*/
+//chboxlength=c;
+
+//for(m=0;m<keitaisokaiseki.length;m=m+2){	}
+/*if(c==chboxlength){
+target.innerHTML +="「解釈」「無駄話」のいずれかに該当しそうなカウンセラーの発言が一つも見つかりませんでした。";
+}*/
+chboxlength2 = c -chboxlength;
+return{
+	checkboxlist:checkboxlist,
+	chboxlist:chboxlist,
+	chboxlist2:chboxlist2,
+	RGB:RGB,
+	RGBlist:RGBlist,
+	checked:checked,
+	checked2:checked2,
+	taiou:taiou,
+	taiou2:taiou2,
+	chboxlength:chboxlength,
+	chboxlength2:chboxlength2
+}
 }
 export {select};
