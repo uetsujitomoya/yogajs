@@ -28,7 +28,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 	var colors = ["#7777ff","#77ff77","#ff7777"];
 	var colorBun=["dimgray","#ff7777","#77ff77","#7777ff"];
 	var area0 = d3.svg.area()
-	.x(function(d,i){return (nagasa[i]+nagasa[i+1])/2})
+	.x(function(d,i){return nagasa[i+1]})//nagasa[i]+nagasa[i+1])/2
 	.y0(function(d){return height0})
 	.y1(function(d){return height0 - scaleY(d.y+d.y0)});
 
