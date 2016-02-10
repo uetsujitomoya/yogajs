@@ -29,7 +29,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 	var colorBun=["dimgray","#ff7777","#77ff77","#7777ff"];
 	var area0 = d3.svg.area()
 	.x(function(d,i){
-		if(i%2==0){return nagasa[i/2+1]-3;}else{return nagasa[(i-1)/2+1];}
+		if(i%3==0){return nagasa[i/3+1]-3;}else if(i%3==1){return nagasa[(i-1)/3+1]-2;}else{return nagasa[(i-2)/3+1];}
 
 	})//nagasa[i]+nagasa[i+1])/2
 	.y0(function(d){return height0})
@@ -375,10 +375,12 @@ var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,check
 	for(h=0;h<3;h++){
 		stackdataArr[h] = [];
 		for(m=0;m<((keitaisokaiseki.length-1)/2);m++){
-			stackdataArr[h][2*m]=new Object();
-			stackdataArr[h][2*m]= {x:2*m+2,y:(5*(RGBlist[m][h])/RGBmaxmax)};
-			stackdataArr[h][2*m+1]=new Object();
-			stackdataArr[h][2*m+1]= {x:2*m+1,y:0};
+			stackdataArr[h][3*m]=new Object();
+			stackdataArr[h][3*m]= {x:3*m+3,y:(5*(RGBlist[m][h])/RGBmaxmax)};
+			stackdataArr[h][3*m+1]=new Object();
+			stackdataArr[h][3*m+1]= {x:3*m+2,y:0};
+			stackdataArr[h][3*m+2]=new Object();
+			stackdataArr[h][3*m+2]= {x:3*m+1,y:0};
 		}
 	}
 	viz(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxmax);
