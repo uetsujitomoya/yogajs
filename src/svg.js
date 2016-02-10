@@ -7,10 +7,10 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 	var m;
 	var bunsuu=2;//前後の余白
 	for(m=1;m<hatsugen.length;m=m+2){//患者の発言で間隔を作る
-		if(m==hatsugen.length-1){
+		/*if(m==hatsugen.length-1){
 			bunsuu = bunsuu + hatsugen[m].length/2;
 			break;
-		}
+		}*/
 		bunsuu = bunsuu + hatsugen[m].length;
 	}
 	var nagasa=[];//縦棒の位置
