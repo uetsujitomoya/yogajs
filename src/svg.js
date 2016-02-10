@@ -28,9 +28,19 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 	var colors = ["#7777ff","#77ff77","#ff7777"];
 	var colorBun=["dimgray","#ff7777","#77ff77","#7777ff"];
 	var area0 = d3.svg.area()
-	.x(function(d,i){return nagasa[i+1]})//nagasa[i]+nagasa[i+1])/2
+	.x(function(d,i){
+		if(i%2==0){return nagasa[i/2+1]-3;}else{return nagasa[(i-1)/2+1];}
+
+	})//nagasa[i]+nagasa[i+1])/2
 	.y0(function(d){return height0})
 	.y1(function(d){return height0 - scaleY(d.y+d.y0)});
+
+	/*
+	.x(function(d,i){return nagasa[i+1]})//nagasa[i]+nagasa[i+1])/2
+	.y0(function(d){return height0})
+	.y1(function(d){return height0 - scaleY(d.d.y0)});
+
+	*/
 
 	var margin = {top: 50+height0, right: 10, bottom: 20, left: 40};
 
@@ -364,9 +374,11 @@ var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,check
 
 	for(h=0;h<3;h++){
 		stackdataArr[h] = [];
-		for(m=0;m<((keitaisokaiseki.length-1)/2);m++){//2個飛ばしにしたら後が面倒くさい。患者 1→0　3→1 長さ9なら番号は8まで
-			stackdataArr[h][m]=new Object();
-			stackdataArr[h][m]= {x:m+1,y:(5*(RGBlist[m][h])/RGBmaxmax)};
+		for(m=0;m<((keitaisokaiseki.length-1)/2);m++){
+			stackdataArr[h][2*m]=new Object();
+			stackdataArr[h][2*m]= {x:2*m+2,y:(5*(RGBlist[m][h])/RGBmaxmax)};
+			stackdataArr[h][2*m+1]=new Object();
+			stackdataArr[h][2*m+1]= {x:2*m+1,y:0};
 		}
 	}
 	viz(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxmax);
