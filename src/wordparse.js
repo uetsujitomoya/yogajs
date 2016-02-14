@@ -31,8 +31,10 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 		var tangosuu=0;
 		m=0;
 		var tangosuu2=0;
+		var kanjamoji=0;
 		var kanjatango=0;
 		var kanjabun=0;
+		var serapimoji=0;
 		var serapitango=0;
 		var serapibun=0;
 		while(n<path.length){
@@ -62,6 +64,7 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 					}
 					if(m%2==1){
 						kanjatango++;
+						kanjamoji=kanjamoji+path[n].surface_form.length;
 						if(path[n].basic_form=="母"||path[n].basic_form=="主人"||path[n].basic_form=="父さん"||path[n].basic_form=="ご主人"||path[n].basic_form=="お父さん"||path[n].basic_form=="姉"||path[n].basic_form=="姉さん"||path[n].basic_form=="母親"
 						||path[n].basic_form=="お姉さん"||path[n].basic_form=="父"||path[n].basic_form=="家族"){
 							RGB[m][i][0]=1;
@@ -80,6 +83,7 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 						}
 					}else if(m%2==0){
 						serapitango++;
+						serapimoji=serapimoji+path[n].surface_form.length;
 						if(path[n].basic_form=="いかが"||path[n].basic_form=="なんで"||path[n].basic_form=="どうして"||path[n].basic_form=="どの"||path[n].basic_form=="どのように"||path[n].basic_form=="いつ"||path[n].basic_form=="どういう"||path[n].basic_form=="どなた"||path[n].basic_form=="どう"||path[n].basic_form=="何"||path[n].basic_form=="何か"||path[n].basic_form=="どんな"||path[n].basic_form=="どのような"){
 							RGBlist[m/2][3]=1;
 						}else if(path[n].surface_form=="か"&&path[n].pos=="助詞"){
@@ -135,7 +139,7 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 			}
 			m++;
 		}
-		console.log("来談者文 %d 単語 %d 治療者文 %d 単語 %d",kanjabun,kanjatango,serapibun,serapitango);
+		console.log("来談者文 %d 単語 %d 文字 %d 治療者文 %d 単語 %d 文字 %d",kanjabun,kanjatango,kanjamoji,serapibun,serapitango,serapimoji);
 		var uetsuji="うえつじともや";
 		console.log(uetsuji.length);
 
