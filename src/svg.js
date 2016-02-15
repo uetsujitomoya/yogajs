@@ -270,6 +270,7 @@ var funcChecked = (chboxlist,checked,taiou,chboxlength) => {
 var funcChecked2 = (chboxlist,chboxlist2,checked2,taiou,taiou2,chboxlength,chboxlength2) => {
 
 	var c;
+	var black=0;
 	for(c=1;c<=chboxlength2;c++){
 		const radio = document.getElementById("rs"+c).children;
 		for(let i = radio.length-5, l = radio.length; i < l; i++){
@@ -294,7 +295,11 @@ var funcChecked2 = (chboxlist,chboxlist2,checked2,taiou,taiou2,chboxlength,chbox
 				checked2[c-1] =7;
 			}
 		}
+		if(checked2[c-1]==7){
+			black++;
+		}
 	}
+	console.log("black=%d",black);
 };
 
 var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2) => {

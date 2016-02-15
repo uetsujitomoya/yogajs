@@ -141,7 +141,7 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 			}
 			m++;
 		}
-		console.log("来談者文 %d 単語 %d 文字 %d 治療者文 %d 単語 %d 文字 %d",kanjabun,kanjatango,kanjamoji,serapibun,serapitango,serapimoji);
+		console.log("%d 来談者文 %d 単語 %d 文字 %d 治療者文 %d 単語 %d 文字 %d",m,kanjabun,kanjatango,kanjamoji,serapibun,serapitango,serapimoji);
 		var uetsuji="うえつじともや";
 		console.log(uetsuji.length);
 
