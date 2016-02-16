@@ -37,6 +37,7 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 		var serapimoji=0;
 		var serapitango=0;
 		var serapibun=0;
+		var soudesuka=0;
 		while(n<path.length){
 			keitaisokaiseki[m] = [];
 			bun[m] = [];
@@ -84,6 +85,9 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 					}else if(m%2==0){
 						serapitango++;
 						serapimoji=serapimoji+path[n].surface_form.length;
+						if(path[n].surface_form=="そう"&&path[n+1].surface_form=="です"&&path[n+2].surface_form=="か"){
+							soudesuka++;
+						}
 						if(path[n].surface_form=="何"&&path[n+1].surface_form=="か"){
 
 						}else if(path[n].basic_form=="いかが"||path[n].basic_form=="なんで"||path[n].basic_form=="どうして"||path[n].basic_form=="どの"||path[n].basic_form=="どのように"||path[n].basic_form=="いつ"||path[n].basic_form=="どういう"||path[n].basic_form=="どなた"||path[n].basic_form=="どう"||path[n].surface_form=="何"||path[n].basic_form=="誰"||path[n].basic_form=="どんな"||path[n].basic_form=="どのような"||path[n].basic_form=="どこ"){
@@ -142,6 +146,7 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 			m++;
 		}
 		console.log("%d 来談者文 %d 単語 %d 文字 %d 治療者文 %d 単語 %d 文字 %d",m,kanjabun,kanjatango,kanjamoji,serapibun,serapitango,serapimoji);
+		console.log("そうですか %d",soudesuka);
 		var uetsuji="うえつじともや";
 		console.log(uetsuji.length);
 
