@@ -25,8 +25,8 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 	var stackdata = stack(stackdataArr);
 	var scaleX = d3.scale.linear().domain([0,color2.length]).range([width/(color2.length),width]);
 	var scaleY = d3.scale.linear().domain([0,6]).range([0,height0]);
-	var colors = ["#7777ff","#77ff77","#ff7777"];
-	var colorBun=["dimgray","#ff7777","#77ff77","#7777ff"];
+	var colors = ["#eeeeff","#ccffcc","#ffcccc"];
+	var colorBun=["dimgray","#ffcccc","#ccffcc","#eeeeff"];
 	var area0 = d3.svg.area()
 	.x(function(d,i){
 		if(i%3==0){return nagasa[i/3];}else if(i%3==1){return nagasa[(i-1)/3+1]-3;}else{return nagasa[(i-2)/3+1]-2;}
@@ -83,9 +83,9 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 				continue;
 			}
 			if(k==0){
-				e.innerHTML += "<b><u><font size=3>"+(1+2*i)+"(S) <font color="+color2[i]+">【</font>"+hatsugen[2*i]+"<font color="+color2[i]+">】</font></font></u></b><font size=2><br><br></font>";
+				e.innerHTML += "<b><u><font size=3>"+(1+2*i)+"(T) <font color="+color2[i]+">【</font>"+hatsugen[2*i]+"<font color="+color2[i]+">】</font></font></u></b><font size=2><br><br></font>";
 			}else if(k%2==0){
-				e.innerHTML += "<font size=2>"+(1+k+2*i)+"(S) <font color="+color2[k/2+i]+"><b>【</b></font>"+hatsugen[k+2*i]+"<font color="+color2[k/2+i]+"><b>】</b></font><br><br></font>";
+				e.innerHTML += "<font size=2>"+(1+k+2*i)+"(T) <font color="+color2[k/2+i]+"><b>【</b></font>"+hatsugen[k+2*i]+"<font color="+color2[k/2+i]+"><b>】</b></font><br><br></font>";
 			}else{
 				e.innerHTML += (1+k+2*i)+"(C) ";
 				for(l=0;l<bun[k+2*i].length;l++){
@@ -352,13 +352,13 @@ var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,check
 	}
 	for(c=0;c<checked2.length;c++){
 		if(checked2[c]==3){
-			color2[c]="deeppink";
+			color2[c]="red";
 		}else if(checked2[c]==5){
 			color2[c]="purple";
 		}else if(checked2[c]==4){
 			color2[c]="blue";
 		}else if(checked2[c]==6){
-			color2[c]="orangered";
+			color2[c]="orange";
 		}else{
 			color2[c]="black";
 		}
