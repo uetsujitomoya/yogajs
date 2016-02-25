@@ -25,7 +25,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 	var stackdata = stack(stackdataArr);
 	var scaleX = d3.scale.linear().domain([0,color2.length]).range([width/(color2.length),width]);
 	var scaleY = d3.scale.linear().domain([0,6]).range([0,height0]);
-	var colors = ["#ddddff","#ddffdd","#ffdddd"];
+	var colors = ["#d7d7ff","#d7ffd7","#ffd7d7"];
 	var colorBun=["white","#ffdddd","#ddffdd","#ddddff"];
 	var area0 = d3.svg.area()
 	.x(function(d,i){
