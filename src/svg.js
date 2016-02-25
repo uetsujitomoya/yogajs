@@ -25,8 +25,8 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 	var stackdata = stack(stackdataArr);
 	var scaleX = d3.scale.linear().domain([0,color2.length]).range([width/(color2.length),width]);
 	var scaleY = d3.scale.linear().domain([0,6]).range([0,height0]);
-	var colors = ["#eeeeff","#ccffcc","#ffcccc"];
-	var colorBun=["dimgray","#ffcccc","#ccffcc","#eeeeff"];
+	var colors = ["#ddddff","#ddffdd","#ffdddd"];
+	var colorBun=["white","#ffdddd","#ddffdd","#ddddff"];
 	var area0 = d3.svg.area()
 	.x(function(d,i){
 		if(i%3==0){return nagasa[i/3];}else if(i%3==1){return nagasa[(i-1)/3+1]-3;}else{return nagasa[(i-2)/3+1]-2;}
@@ -352,11 +352,11 @@ var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,check
 	}
 	for(c=0;c<checked2.length;c++){
 		if(checked2[c]==3){
-			color2[c]="red";
+			color2[c]="#b52f25";
 		}else if(checked2[c]==5){
 			color2[c]="purple";
 		}else if(checked2[c]==4){
-			color2[c]="blue";
+			color2[c]="#2b4e91";
 		}else if(checked2[c]==6){
 			color2[c]="orange";
 		}else{

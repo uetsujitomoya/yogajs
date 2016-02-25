@@ -88,10 +88,9 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 						if(path[n].surface_form=="そう"&&path[n+1].surface_form=="です"&&path[n+2].surface_form=="か"){
 							soudesuka++;
 						}
-						/*if(path[n].surface_form=="何"&&path[n+1].surface_form=="か"){
+						if(path[n].surface_form=="何"&&path[n+1].surface_form=="か"){
 
-						}else */
-						if(path[n].basic_form=="いかが"||path[n].basic_form=="なんで"||path[n].basic_form=="どうして"||path[n].basic_form=="どの"||path[n].basic_form=="どのように"||path[n].basic_form=="いつ"||path[n].basic_form=="どういう"||path[n].basic_form=="どなた"||path[n].basic_form=="どう"||path[n].surface_form=="何"||path[n].basic_form=="誰"||path[n].basic_form=="どんな"||path[n].basic_form=="どのような"||path[n].basic_form=="どこ"){
+						}else if(path[n].basic_form=="いかが"||path[n].basic_form=="なんで"||path[n].basic_form=="どうして"||path[n].basic_form=="どの"||path[n].basic_form=="どのように"||path[n].basic_form=="いつ"||path[n].basic_form=="どういう"||path[n].basic_form=="どなた"||path[n].basic_form=="どう"||path[n].surface_form=="何"||path[n].basic_form=="誰"||path[n].basic_form=="どんな"||path[n].basic_form=="どのような"||path[n].basic_form=="どこ"){
 							RGBlist[m/2][3]=1;
 						}else if(path[n].surface_form=="か"&&path[n].pos=="助詞"){
 							RGBlist[m/2][4]=1;
