@@ -1,10 +1,12 @@
-var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,bunrui) => {
+var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,bunruiData) => {
 
 	var h,i,j,k,l,m,n;
 	taiou = [];
 	taiou2=[];
 
 	var target = document.getElementById("radio_buttons");//checkboxを出す場所
+	console.log("bunruiData");
+	console.log(bunruiData);
 
 	var c=0;
 	n=0;

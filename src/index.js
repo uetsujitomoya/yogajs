@@ -16,15 +16,19 @@ document.getElementById('load-button').addEventListener('click', function () {
   console.log("file");
   console.log(file);
   var bunrui = document.getElementById('bunrui-input').files[0];
+  console.log("bunrui");
+  console.log(bunrui);
   var reader = new FileReader();
   var bunruireader = new FileReader();
-  reader.readAsText(bunrui);
+  bunruireader.readAsText(bunrui);
+  console.log("bunruireader");
+  console.log(bunruireader);
   reader.onload = function(event) {
     console.log("reader");
   	console.log(reader);
     console.log("event");
   	console.log(event);
-    var result = funcReaderOnload(event,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,bunrui);
+    var result = funcReaderOnload(event,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,bunruireader);
   };
   reader.readAsText(file);
 });

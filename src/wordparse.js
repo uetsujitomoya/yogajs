@@ -13,7 +13,7 @@ var makeOnClickS = (c) =>{
 		document.getElementById(id).classList.toggle("hide");
 	};
 }
-var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,bunrui) => {
+var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,bunruireader) => {
 	var h,i,j,k,l,m,n,c,r,g,b,x,y,z,bunsuu;
 	var hinshi = [];
 	var RGB = [];
@@ -27,7 +27,7 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 	console.log("event.target.result");
 	console.log(event.target.result);
 	var data = JSON.parse(event.target.result);
-	var bunruiData = JSON.parse(bunrui.result);
+	var bunruiData = JSON.parse(bunruireader.result);
 
 	return kuromoji.builder({dicPath: 'dict/'}).build((err, tokenizer) => {
 		const path = tokenizer.tokenize(data[0].a);
@@ -236,7 +236,7 @@ var funcReaderOnload = (event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,
 		}
 
 
-		var sResult = select(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,bunrui);
+		var sResult = select(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,bunruiData);
 
 		checkboxlist = sResult.checkboxlist;
 		chboxlist = sResult.chboxlist;
