@@ -302,7 +302,7 @@ var funcChecked2 = (chboxlist,chboxlist2,checked2,taiou,taiou2,chboxlength,chbox
 	console.log("black=%d",black);
 };
 
-var setForViz = (keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2) => {
+var setForViz = (name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2) => {
   console.log("chboxlength2 in svg.js=%d",chboxlength2);
 	d3.select("#svgdiv").select("svg").remove();
 	var svg = d3.select("#svgdiv").append("svg")
