@@ -267,7 +267,7 @@ var funcChecked = (chboxlist,checked,taiou,chboxlength) => {
 	}
 };
 
-var funcChecked2 = (chboxlist,chboxlist2,checked2,taiou,taiou2,chboxlength,chboxlength2) => {
+var funcChecked2 = (name,storage,chboxlist,chboxlist2,checked2,taiou,taiou2,chboxlength,chboxlength2) => {
 
 	var c;
 	var black=0;
@@ -275,6 +275,7 @@ var funcChecked2 = (chboxlist,chboxlist2,checked2,taiou,taiou2,chboxlength,chbox
 		const radio = document.getElementById("rs"+c).children;
 		for(let i = radio.length-5, l = radio.length; i < l; i++){
 			if(radio[i].control.checked==true){
+				//storage.getItem(name+"RGBlist"+m)=
 				if(radio[i].control.value=="3"){
 					checked2[taiou[c-1]] =3;
 					break;
@@ -316,7 +317,7 @@ var setForViz = (name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsu
 	}
 	console.log("chboxlength2 in svg.js=%d",chboxlength2);
 	if(chboxlength2>=1){
-		funcChecked2(chboxlist,chboxlist2,checked2,taiou,taiou2,chboxlength,chboxlength2);
+		funcChecked2(name,storage,chboxlist,chboxlist2,checked2,taiou,taiou2,chboxlength,chboxlength2);
 	}
 	console.log("chboxlength2 in svg.js=%d",chboxlength2);
 
