@@ -252,15 +252,15 @@ var funcChecked = (name,storage,chboxlist,checked,taiou,chboxlength) => {
 			if(radio[i].control.checked==true){
 				if(radio[i].control.value=="1"){
 					checked[taiou[c-1]] =1;
-					storage.setItem(name+"RGBlist"+c, 0);
+					storage.setItem(name+"RGB"+c, 0);
 					break;
 				}else if(radio[i].control.value=="2"){
 					checked[taiou[c-1]] =2;
-					storage.setItem(name+"RGBlist"+c, 1);
+					storage.setItem(name+"RGB"+c, 1);
 					break;
 				}else if(radio[i].control.value=="3"){
 					checked[taiou[c-1]] =3;
-					storage.setItem(name+"RGBlist"+c, 2);
+					storage.setItem(name+"RGB"+c, 2);
 					break;
 				}
 			}else{
