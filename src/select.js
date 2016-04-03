@@ -27,7 +27,7 @@ var select =(name,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,chbo
 				c++;
 				chboxlength++;
 
-				var sf =storage.getItem(name+"RGB"+m+i);
+				var sf =storage.getItem(name+"RGB"+c);
 
 				if(sf!=null){
 					RGB[m][i][sf]=1;
@@ -73,7 +73,7 @@ var select =(name,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,chbo
 			chboxlist2[s][1]=4;
 			taiou2[s-1]=s-1;
 
-			var tf =storage.getItem(name+"RGBlist"+m);
+			var tf =storage.getItem(name+"RGBlist"+s);
 
 			if(tf!=null){
 				RGBlist[m/2][tf]=1;

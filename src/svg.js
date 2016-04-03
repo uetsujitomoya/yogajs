@@ -252,12 +252,15 @@ var funcChecked = (chboxlist,checked,taiou,chboxlength) => {
 			if(radio[i].control.checked==true){
 				if(radio[i].control.value=="1"){
 					checked[taiou[c-1]] =1;
+					storage.setItem(name+"RGBlist"+s, 0);
 					break;
 				}else if(radio[i].control.value=="2"){
 					checked[taiou[c-1]] =2;
+					storage.setItem(name+"RGBlist"+s, 1);
 					break;
 				}else if(radio[i].control.value=="3"){
 					checked[taiou[c-1]] =3;
+					storage.setItem(name+"RGBlist"+s, 2);
 					break;
 				}
 			}else{
@@ -278,22 +281,27 @@ var funcChecked2 = (name,storage,chboxlist,chboxlist2,checked2,taiou,taiou2,chbo
 				//storage.getItem(name+"RGBlist"+m)=
 				if(radio[i].control.value=="3"){
 					checked2[taiou[c-1]] =3;
+					storage.setItem(name+"RGBlist"+c, 3);
 					break;
 				}
 				if(radio[i].control.value=="4"){
 					checked2[c-1] =4;
+					storage.setItem(name+"RGBlist"+c, 4);
 					break;
 				}
 				if(radio[i].control.value=="5"){
 					checked2[c-1] =5;
+					storage.setItem(name+"RGBlist"+c, 5);
 					break;
 				}
 				if(radio[i].control.value=="6"){
 					checked2[c-1] =6;
+					storage.setItem(name+"RGBlist"+c, 6);
 					break;
 				}
 			}else{
 				checked2[c-1] =7;
+				storage.setItem(name+"RGBlist"+c, 7);
 			}
 		}
 		if(checked2[c-1]==7){
