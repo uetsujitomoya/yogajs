@@ -244,7 +244,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 
 
 
-var funcChecked = (chboxlist,checked,taiou,chboxlength) => {
+var funcChecked = (name,storage,chboxlist,checked,taiou,chboxlength) => {
 	var c;
 	for(c=1;c<=chboxlength;c++){
 		const radio = document.getElementById("r"+c).children;
@@ -252,15 +252,15 @@ var funcChecked = (chboxlist,checked,taiou,chboxlength) => {
 			if(radio[i].control.checked==true){
 				if(radio[i].control.value=="1"){
 					checked[taiou[c-1]] =1;
-					storage.setItem(name+"RGBlist"+s, 0);
+					storage.setItem(name+"RGBlist"+c, 0);
 					break;
 				}else if(radio[i].control.value=="2"){
 					checked[taiou[c-1]] =2;
-					storage.setItem(name+"RGBlist"+s, 1);
+					storage.setItem(name+"RGBlist"+c, 1);
 					break;
 				}else if(radio[i].control.value=="3"){
 					checked[taiou[c-1]] =3;
-					storage.setItem(name+"RGBlist"+s, 2);
+					storage.setItem(name+"RGBlist"+c, 2);
 					break;
 				}
 			}else{
@@ -321,7 +321,7 @@ var setForViz = (name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsu
 	var color2=[];
 	var stackdataArr = [];
 	if(chboxlength>=1){
-		funcChecked(chboxlist,checked,taiou,chboxlength);
+		funcChecked(name,storage,chboxlist,checked,taiou,chboxlength);
 	}
 	console.log("chboxlength2 in svg.js=%d",chboxlength2);
 	if(chboxlength2>=1){
