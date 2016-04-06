@@ -282,26 +282,31 @@ var funcChecked2 = (name,storage,chboxlist,chboxlist2,checked2,taiou,taiou2,chbo
 				if(radio[i].control.value=="3"){
 					checked2[taiou[c-1]] =3;
 					storage.setItem(name+"RGBlist"+c, 3);
+					console.log("c=%d,tf=3",c);
 					break;
 				}
 				if(radio[i].control.value=="4"){
 					checked2[c-1] =4;
 					storage.setItem(name+"RGBlist"+c, 4);
+					console.log("c=%d,tf=4",c);
 					break;
 				}
 				if(radio[i].control.value=="5"){
 					checked2[c-1] =5;
 					storage.setItem(name+"RGBlist"+c, 5);
+					console.log("c=%d,tf=5",c);
 					break;
 				}
 				if(radio[i].control.value=="6"){
 					checked2[c-1] =6;
 					storage.setItem(name+"RGBlist"+c, 6);
+					console.log("c=%d,tf=6",c);
 					break;
 				}
 			}else{
 				checked2[c-1] =7;
 				storage.setItem(name+"RGBlist"+c, 7);
+				console.log("c=%d,tf=7",c);
 			}
 		}
 		if(checked2[c-1]==7){

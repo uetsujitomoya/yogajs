@@ -1,5 +1,6 @@
 var select =(name,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2) => {
 	console.log(name+1+2+3);
+	console.log(storage);
 	var h,i,j,k,l,m,n,f;
 	taiou = [];
 	taiou2=[];
@@ -38,6 +39,9 @@ var select =(name,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,chbo
 					}
 				}
 
+				console.log("RGB[%d][%d]",m,i);
+				console.log(RGB[m][i]);
+
 				taiou[c-1]=n-1;
 				if(RGB[m][i][0]+RGB[m][i][1]+RGB[m][i][2]>=2){
 					target.innerHTML += "<div id=\"b" + c + "\" style=\"cursor: pointer\"><u>" + (m+1) + "(C) " + bun[m][i] + "</u></div><div id=\"r" + c + "\"><label><input type=radio name=\"r" + c + "\" value=0>どれにも含まない</label></div><br>";
@@ -74,6 +78,7 @@ var select =(name,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,chbo
 			taiou2[s-1]=s-1;
 
 			var tf =storage.getItem(name+"RGBlist"+s);
+			console.log("s=%d,tf=%s",s,tf);
 
 			if(tf!=null){
 				RGBlist[m/2][tf]=1;
@@ -83,6 +88,9 @@ var select =(name,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,chbo
 					}
 				}
 			}
+
+			console.log("RGBlist[%d]",m/2);
+			console.log(RGBlist[m/2]);
 
 			if(RGBlist[m/2][3]==1){
 				target.innerHTML += "<div id=\"bs" + s + "\" style=\"cursor: pointer\"><font size=2 color=dimgray><u>"+ (m+1) + "(T) "  + hatsugen[m] + "</u></font></div><div id=\"rs" + s + "\" class=\"hide\"><label><input type=radio name=\"rs" + s + "\" value=3 checked><font color=deeppink>開かれた質問</font></label><label><input type=radio name=\"rs" + s + "\" value=4><font color=blue>閉じられた質問</font></label><label><input type=radio name=\"rs" + s + "\" value=5><font color=purple>相づち</font></label><label><input type=radio name=\"r"
