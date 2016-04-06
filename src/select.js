@@ -81,10 +81,12 @@ var select =(name,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,chbo
 			console.log("s=%d,tf=%s",s,tf);
 
 			if(tf!=null){
-				RGBlist[m/2][tf]=1;
-				for(f=3;f<=6;f++){
-					if(f!=tf){
-						RGBlist[m/2][tf]=0;
+
+				for(f=3;f<=7;f++){
+					if(f==tf){
+						RGBlist[m/2][f]=1;
+					}else{
+						RGBlist[m/2][f]=0;
 					}
 				}
 			}

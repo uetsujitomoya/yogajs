@@ -49,7 +49,7 @@ var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxl
 			hinshi[m] = [];
 			RGB[m] = [];
 			if(m%2==0){
-				RGBlist[m/2] = [0,0,0,0,0,0,0];
+				RGBlist[m/2] = [0,0,0,0,0,0,0,0];
 			}
 			i=0;
 			tangosuu=0;
