@@ -103,8 +103,12 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 	.attr("transform", "translate(0," + height0 + ")")
 	.call(xAxisC);
 
+
 	var endTime = new Date();
 	console.log((endTime - startTime) / 1000 + '秒経過');
+	var timeKeeping=(endTime - startTime) / 1000 + '秒経過'
+	var timeKeepingArea = document.getElementById('timeKeeping');
+	timeKeepingArea.innerHTML = "<br>"+timeKeeping+"<br>";
 };
 
 
