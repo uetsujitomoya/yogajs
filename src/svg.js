@@ -3,14 +3,10 @@ import d3 from "d3"
 var height0=200,width=1320
 var height =200;
 
-var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxmax) => {
+var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxmax,startTime) => {
 	var m;
 	var bunsuu=2;//前後の余白
 	for(m=1;m<hatsugen.length;m=m+2){//患者の発言で間隔を作る
-		/*if(m==hatsugen.length-1){
-			bunsuu = bunsuu + hatsugen[m].length/2;
-			break;
-		}*/
 		bunsuu = bunsuu + hatsugen[m].length;
 	}
 	var nagasa=[];//縦棒の位置
@@ -35,20 +31,13 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 	.y0(function(d){return height0})
 	.y1(function(d){return height0 - scaleY(d.y+d.y0)});
 
-	/*
-	.x(function(d,i){return nagasa[i+1]})//nagasa[i]+nagasa[i+1])/2
-	.y0(function(d){return height0})
-	.y1(function(d){return height0 - scaleY(d.d.y0)});
 
-	*/
 
 	var margin = {top: 50+height0, right: 10, bottom: 20, left: 40};
 
 	var margin2 = {top: 10, right: 10, bottom: 50, left: 40};
 
-	/*var focus = svg.append("g") //ズームグラフグループ作成
-	.attr("class", "focus")
-	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");*/
+
 
 	var context = svg.append("g") //全体グラフグループ作成
 	.attr("class", "context")
@@ -97,143 +86,25 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		}
 	})
 
-
-
-	//以下追加分
-
-	//ズームグラフ用（ズーム後グラフ）、margin, scale, axis設定
-
-	//var width = 960 - margin.left - margin.right;
-
-
 	var scaleX2 = d3.scale.linear().domain([0,bunsuu]).range([0,width]);
 	var scaleX2copy = d3.scale.linear().domain([0,bunsuu]).range([0,width]);
 	var scaleY2 = d3.scale.linear().domain([0,RGBmaxmax]).range([height,0]);
 	var xAxisF = d3.svg.axis().scale(scaleX2).orient("bottom");//focus
 	var yAxisC = d3.svg.axis().scale(scaleY2).orient("left");//focus
 
-
 	var xAxisC = d3.svg.axis().scale(scaleX2).orient("bottom");//context
 
-
-	//ズームグラフareaオブジェクト
-	/*
-	var area = d3.svg.area()
-	.x(function(d,i){return (nagasa[i]+nagasa[i+1])/2})
-	.y0(height)
-	.y1(function(d){return height - scaleY(d.y+d.y0)});
-
-
-	//フォーカス時のズームグラフズーム前グラフの表示位置調整のためにクリップパスを作成
-	svg.append("defs").append("clipPath")
-	.attr("id", "clip")
-	.append("rect")
-	.attr("width", width)
-	.attr("height", height);
-*/
-
-
-
-
-	//focusの描画
-/*
-	focus.selectAll("path")
-	.attr("class", "area")
-	.data(stackdata.reverse())
-	.enter()
-	.append("path")
-	.attr("class", "area")
-	//.attr("clip-path", "url(#clip)") //クリップパスを適用
-	.attr("d", area)
-	.attr("fill",function(d,i){return colors[i]});
-
-	focus.selectAll("line.v")
-	.data(range).enter().append("line")
-	.attr("class", "area")
-	.attr("x1", function(d,i){
-		return nagasa[i];
-	}).attr("y1", 0)
-	.attr("x2", function(d,i){return nagasa[i];}).attr("y2", height);
-	focus.selectAll("line")
-	.attr("class", "area")
-	.attr("stroke", function(d,i){return color2[i]})
-	.attr("stroke-width", function(d,i){
-		return(Math.sqrt(keitaisokaiseki[2*i].length));
-	})
-	.on('mouseover', function(d,i){
-		var e = document.getElementById('msg');
-		var k,l;
-		e.innerHTML = "";
-		for(k=-3;k<=3;k++){
-			if(2*(i)+k<0||2*(i)+k>=hatsugen.length){
-				continue;
-			}
-			if(k==0){
-				e.innerHTML += "<b><u><font size=3>"+(1+2*i)+" <font color="+color2[i]+">【</font>"+hatsugen[2*i]+"<font color="+color2[i]+">】</font></font></u></b><font size=2><br><br></font>";
-			}else if(k%2==0){
-				e.innerHTML += "<font size=2>"+(1+k+2*i)+" <font color="+color2[k/2+i]+"><b>【</b></font>"+hatsugen[k+2*i]+"<font color="+color2[k/2+i]+"><b>】</b></font><br><br></font>";
-			}else{
-				e.innerHTML += (1+k+2*i)+" ";
-				for(l=0;l<bun[k+2*i].length;l++){
-					if(bun[k+2*i][l]==""){continue;}
-					e.innerHTML += "<font size=2><font color="+colorBun[checkedBun[k+2*i][l]]+"><b>【</b></font>"+bun[k+2*i][l]+"<font color="+colorBun[checkedBun[k+2*i][l]]+"><b>】</b></font></font>";
-				}
-				e.innerHTML += "<font size=2><br><br></font>";
-			}
-		}
-	})
-
-	focus.append("g")  //focusのx目盛軸
-	.attr("class", "x axis")
-	.attr("transform", "translate(0," + height + ")")
-	.call(xAxisF);
-	*/
 	context.append("g") //focusのy目盛軸
 	.attr("class", "y axis")
 	.call(yAxisC);
-
-
-	/*
-	context.append("path") //全体グラフ描画
-
-	.datum(data)
-	.attr("d", area2);
-	*/
 
 	context.append("g") //全体x目盛軸
 	.attr("class", "x axis")
 	.attr("transform", "translate(0," + height0 + ")")
 	.call(xAxisC);
 
-
-	/*
-	*brushは透明なrectをグループ上設置しマウスイベントを取得する。
-	*設置したrect上ではドラッグで範囲選択が可能
-	*範囲が選択されている状態でbrush.extent()メソッドを実行するとその範囲のデータ値を返す
-	*/
-/*
-	var brush = d3.svg.brush() //brushオブジェクト作成
-	.x(scaleX2copy) //全体グラフx軸を選択可能範囲に指定
-	.on("brush", brushed);
-
-	context.append("g") //brushグループを全体グラフに作成
-	.attr("class", "x brush")
-	.call(brush)
-	.selectAll("rect")
-	.attr("y", -6)
-	.attr("height", height0 + 7);
-
-
-	function brushed() {
-		console.log( brush.extent());
-		scaleX2.domain(brush.empty() ? scaleX.domain() : brush.extent()); //選択されたデータセットの範囲をscaleX2のdomainに反映
-		focus.select(".area").attr("d", area); //ズームグラフアップデート（focus描画）
-		focus.select(".x.axis").call(xAxisF); //ズームx軸アップデート
-	}
-	*/
-
-	//以上追加分
-
+	var endTime = new Date();
+	console.log((endTime - startTime) / 1000 + '秒経過');
 };
 
 
@@ -316,7 +187,7 @@ var funcChecked2 = (name,storage,chboxlist,chboxlist2,checked2,taiou,taiou2,chbo
 	console.log("black=%d",black);
 };
 
-var setForViz = (name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2) => {
+var setForViz = (name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime) => {
   console.log("chboxlength2 in svg.js=%d",chboxlength2);
 	d3.select("#svgdiv").select("svg").remove();
 	var svg = d3.select("#svgdiv").append("svg")
@@ -402,7 +273,7 @@ var setForViz = (name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsu
 			stackdataArr[h][3*m+2]= {x:3*m+3,y:0};
 		}
 	}
-	viz(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxmax);
+	viz(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxmax,startTime);
 	console.log("chboxlength2 in svg.js=%d",chboxlength2);
 	return{
 		chboxlist:chboxlist,

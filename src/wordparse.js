@@ -14,8 +14,11 @@ var makeOnClickS = (c) =>{
 	};
 }
 var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2) => {
-	console.log("name");
-	console.log(name);
+
+	var startTime = new Date();
+	console.log(startTime);
+
+
 	var h,i,j,k,l,m,n,c,r,g,b,x,y,z,bunsuu;
 	var hinshi = [];
 	var RGB = [];
@@ -26,8 +29,7 @@ var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxl
 	var target = document.getElementById("chbox");
 	var checkboxlist=[];
 	bun=[];
-	console.log("event");
-	console.log(event);
+
 	var data = JSON.parse(event.target.result);
 	return kuromoji.builder({dicPath: 'dict/'}).build((err, tokenizer) => {
 		const path = tokenizer.tokenize(data[0].a);
@@ -256,7 +258,7 @@ var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxl
 
 
 
-		var vResult = setForViz(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);//形態素解析後に1度目の描画
+		var vResult = setForViz(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime);//形態素解析後に1度目の描画
 		chboxlist = vResult.chboxlist;
 		chboxlist2 = vResult.chboxlist2;
 		RGBlist = vResult.RGBlist;
@@ -282,6 +284,7 @@ var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxl
 		return{
 			name:name,RGBlist:RGBlist,keitaisokaiseki:keitaisokaiseki,hatsugen:hatsugen,bun:bun,chboxlist:chboxlist,chboxlist2:chboxlist2,checked:checked,checked2:checked2,taiou:taiou,taiou2:taiou2,chboxlength:chboxlength,chboxlength2:chboxlength2
 		}
+
 	})
 };
 
