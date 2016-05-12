@@ -125,7 +125,7 @@ var select =(name,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,chbo
 		taiou:taiou,
 		taiou2:taiou2,
 		chboxlength:chboxlength,
-		chboxlength2:chboxlength2,
+		chboxlength2:chboxlength2
 	};
 }
 export {select};

@@ -1,5 +1,5 @@
-import {setForViz} from "./svg.js"
-import {funcReaderOnload} from "./wordparse.js"
+import {setForViz} from "./svg.js";
+import {funcReaderOnload} from "./wordparse.js";
 var keitaisokaiseki = []; //このlengthは段落数
 var RGBlist  = [];//checkboxのセレクト結果
 var chboxlist=[];//通し番号

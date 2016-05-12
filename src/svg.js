@@ -1,6 +1,6 @@
-import d3 from "d3"
+import d3 from "d3";
 
-var height0=200,width=1320
+var height0=200,width=1320;
 var height =200;
 
 var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxmax,startTime) => {
@@ -59,7 +59,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 	}).attr("y1", 0)
 	.attr("x2", function(d,i){return nagasa[i];}).attr("y2", height0);
 	context.selectAll("line")
-	.attr("stroke", function(d,i){return color2[i]})
+	.attr("stroke", function(d,i){return color2[i];})
 	.attr("stroke-width", function(d,i){
 		return(Math.sqrt(keitaisokaiseki[2*i].length));
 	})
@@ -84,7 +84,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 				e.innerHTML += "<font size=2><br><br></font>";
 			}
 		}
-	})
+	});
 
 	var scaleX2 = d3.scale.linear().domain([0,bunsuu]).range([0,width]);
 	var scaleX2copy = d3.scale.linear().domain([0,bunsuu]).range([0,width]);
