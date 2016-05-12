@@ -1,6 +1,6 @@
 import "kuromoji";
-import {select} from "./select.js"
-import {setForViz} from "./svg.js"
+import {select} from "./select.js";
+import {setForViz} from "./svg.js";
 var makeOnClick = (c) =>{
 	document.getElementById("b"+c).onclick = (e) => {
 		const id = "r"+c;
