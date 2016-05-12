@@ -1,49 +1,24 @@
-/* global kuromoji */
-import {setForViz} from "./svg.js"
-import {funcReaderOnload} from "./wordparse.js"
-
-//import "jquery"
-
-//var $ = require('jquery');
+import {setForViz} from "./svg.js";
+import {funcReaderOnload} from "./wordparse.js";
 var keitaisokaiseki = []; //このlengthは段落数
 var RGBlist  = [];//checkboxのセレクト結果
 var chboxlist=[];//通し番号
-
 var hatsugen =[];
 var bun = [];
 var chboxlist2=[];
-
-/*
-$('file-input').on('change',function(){
-
-});
-*/
-
-
+var checked = [];
+var checked2 = [];
+var taiou=[];
+var taiou2=[];
+var chboxlength,chboxlength2;
 document.getElementById('load-button').addEventListener('click', function () {
-  console.log("read start");
   var file = document.getElementById('file-input').files[0];
+  console.log("file");
+	console.log(file);
+  var name = file.name;
   var reader = new FileReader();
   reader.onload = function(event) {
-    console.log(event);
-    
-    var result = funcReaderOnload(event,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun);
-    keitaisokaiseki = result.keitaisokaiseki;
-    chboxlist = result.chboxlist;
-    chboxlist2 = result.chboxlist2;
-    hatsugen =  result.hatsugen;
-    bun = result.bun;
-    RGBlist = result.RGBlist;
-    console.log("onchangeの外");
-    document.getElementById('radio_buttons').onchange = () => {
-    	console.log("chboxlist2");
-    	console.log(chboxlist2);
-    	console.log("onchangeの中");
-    	setForViz(keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun);
-    	console.log("checkbox依存部分終わり");
-    };   
+    var result = funcReaderOnload(name,event,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
   };
-  console.log("reader.onload終了。これとなんちゃら(file)が並列してないといけない");
   reader.readAsText(file);
 });
-console.log("document.getElementById終了");

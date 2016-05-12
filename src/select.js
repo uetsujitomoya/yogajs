@@ -1,115 +1,131 @@
-var select =(checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,list,RGB,RGBlist,hatsugen) => {
-	var h,i,j,k,l,m,n;
-
-	for(k=0;k<miserables.nodes.length;k++){
-		checkboxlist[k]=[0,0,0,0,0];
-	}
+var select =(name,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2) => {
+	console.log(name+1+2+3);
+	console.log(storage);
+	var h,i,j,k,l,m,n,f;
+	taiou = [];
+	taiou2=[];
 
 	var target = document.getElementById("radio_buttons");//checkboxを出す場所
 
 	var c=0;
+	n=0;
+	var btn=[];
+	chboxlength=0;
+	chboxlength2=0;
+	var s=0;
+	for(m=0;m<keitaisokaiseki.length;m++){
+		if(m%2==1){
+			var RGBtensuu=[0,0,0];
+			for(i=0;i<keitaisokaiseki[m].length;++i){
+				if(bun[m][i]=="Ａ"||bun[m][i]=="Ｂ"||bun[m][i]=="Ｔ"||bun[m][i]=="A"||bun[m][i]=="B"||bun[m][i]=="T"||bun[m][i]==""){
+					continue;
+				}
+				n++;
+				chboxlist[n]=[];//こいつの長さは、チェックボックスの有無にかかわらず全文数なので、ifの外
+				chboxlist[n][0]=bun[m][i];
+				chboxlist[n][1]=0;
 
-	//keitaisokaisekiとnodesを照らしあわせる
-	for(m=0;m<keitaisokaiseki.length;++m){
-		list[m] = [];
-		for(i=0;i<keitaisokaiseki[m].length;++i){
-			list[m][i] = [];
-			for(j=0;j<keitaisokaiseki[m][i].length;++j){
-				for(k=0;k<miserables.nodes.length;++k){
-					if(keitaisokaiseki[m][i][j]==miserables.nodes[k]){
-						list[m][i][k]=1;
-						if(RGB[m][i][0]+RGB[m][i][1]+RGB[m][i][2]>=1){
+				c++;
+				chboxlength++;
 
-							if(checkboxlist[k][0]==0){
+				var sf =storage.getItem(name+"RGB"+c);
 
-								//target.innerHTML += "<input id=\"ken" + c + "\" type=checkbox checked /><label for="+c+">「" + miserables.nodes[k] + "」を「愛」に。</label><br />";
-
-								c++;
-								target.innerHTML += "<div id=\"" + c + "\">" + miserables.nodes[k] + "<br><label><input type=radio name=\"" + c + "\" value=0>どれにも含まない</div></label><br>";
-								//その他の選択肢
-
-								checkboxlist[k][0]=1;
-								chboxlist[c]=[];
-								chboxlist[c][0]=miserables.nodes[k];
-
-								//checkboxに出す単語とグループの組み合わせ、さらにcheckedか否かの保存
-
-								if(RGB[m][i][0]==1){
-									checkboxlist[k][1]=2;
-									chboxlist[c][1]=0;
-									document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=1 checked><font color=\"#ff7777\">「愛」に含む</font></label>";
-								}else{
-									document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=1>「愛」に含む</label>";
-								}
-
-								if(RGB[m][i][1]==1){
-									document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=2 checked><font color=\"#77ff77\">「交友」に含む</font></label>";
-									chboxlist[c][1]=1;
-								}else{
-									document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=2>「交友」に含む</label>";
-								}
-
-								if(RGB[m][i][2]==1){
-									document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=3 checked><font color=\"#7777ff\">「仕事」に含む</font></label>";
-									chboxlist[c][1]=2;
-								}else{
-									document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=3>「仕事」に含む</label>";
-								}
-
-								if(checkboxlist[k][1]+checkboxlist[k][2]+checkboxlist[k][3]>=0){
-									break;//miserables実は重複してる
-								}
-							}
+				if(sf!=null){
+					RGB[m][i][sf]=1;
+					for(f=0;f<=2;f++){
+						if(f!=sf){
+							RGB[m][i][f]=0;
 						}
 					}
 				}
+
+				console.log("RGB[%d][%d]",m,i);
+				console.log(RGB[m][i]);
+
+				taiou[c-1]=n-1;
+				if(RGB[m][i][0]+RGB[m][i][1]+RGB[m][i][2]>=2){
+					target.innerHTML += "<div id=\"b" + c + "\" style=\"cursor: pointer\"><u>" + (m+1) + "(C) " + bun[m][i] + "</u></div><div id=\"r" + c + "\"><label><input type=radio name=\"r" + c + "\" value=0>どれにも含まない</label></div><br>";
+
+				}else{
+					target.innerHTML += "<div id=\"b" + c + "\" style=\"cursor: pointer\"><font size=2><u>" + (m+1) + "(C) " + bun[m][i] + "</u></div><div id=\"r" + c + "\" class=\"hide\"<label><input type=radio name=\"r" + c + "\" value=0>どれにも含まない</label></div></font><br>";
+				}
+
+				if(RGB[m][i][0]==1){
+					chboxlist[n][1]=0;
+					document.getElementById("r"+c).innerHTML += "<label><input type=radio name=\"r" + c + "\" value=1 checked><font color=\"#ff7777\">【</font>「愛」に含む<font color=\"#ff7777\">】</font></label>";
+				}else{
+					document.getElementById("r"+c).innerHTML += "<label><input type=radio name=\"r" + c + "\" value=1><font color=\"#ff7777\">【</font>「愛」に含む<font color=\"#ff7777\">】</font></label>";
+				}
+				if(RGB[m][i][1]==1){
+					document.getElementById("r"+c).innerHTML += "<label><input type=radio name=\"r" + c + "\" value=2 checked><font color=\"#77ff77\">【</font>「交友」に含む<font color=\"#77ff77\">】</font></label>";
+					chboxlist[n][1]=1;
+				}else{
+					document.getElementById("r"+c).innerHTML += "<label><input type=radio name=\"r" + c + "\" value=2><font color=\"#77ff77\">【</font>「交友」に含む<font color=\"#77ff77\">】</font></label>";
+				}
+				if(RGB[m][i][2]==1){
+					document.getElementById("r"+c).innerHTML += "<label><input type=radio name=\"r" + c + "\" value=3 checked><font color=\"#7777ff\">【</font>「仕事」に含む<font color=\"#7777ff\">】</font></label>";
+					chboxlist[n][1]=2;
+				}else{
+					document.getElementById("r"+c).innerHTML += "<label><input type=radio name=\"r" + c + "\" value=3><font color=\"#7777ff\">【</font>「仕事」に含む<font color=\"#7777ff\">】</font></label>";
+				}
+			}
+		}else{//セラピストの質問
+			s++;
+			chboxlength2++;
+			chboxlist2[s]=[];
+			chboxlist2[s][0]=hatsugen[m];
+			chboxlist2[s][1]=4;
+			taiou2[s-1]=s-1;
+
+			var tf =storage.getItem(name+"RGBlist"+s);
+			console.log("s=%d,tf=%s",s,tf);
+
+			if(tf!=null){
+
+				for(f=3;f<=7;f++){
+					if(f==tf){
+						RGBlist[m/2][f]=1;
+					}else{
+						RGBlist[m/2][f]=0;
+					}
+				}
+			}
+
+			console.log("RGBlist[%d]",m/2);
+			console.log(RGBlist[m/2]);
+
+			if(RGBlist[m/2][3]==1){
+				target.innerHTML += "<div id=\"bs" + s + "\" style=\"cursor: pointer\"><font size=2 color=dimgray><u>"+ (m+1) + "(T) "  + hatsugen[m] + "</u></font></div><div id=\"rs" + s + "\" class=\"hide\"><label><input type=radio name=\"rs" + s + "\" value=3 checked><font color=deeppink>開かれた質問</font></label><label><input type=radio name=\"rs" + s + "\" value=4><font color=blue>閉じられた質問</font></label><label><input type=radio name=\"rs" + s + "\" value=5><font color=purple>相づち</font></label><label><input type=radio name=\"r"
+				+ s + "\" value=6><font color=orangered>解釈</font></label><label><input type=radio name=\"rs" + s + "\" value=7><font color=black>世間話</font></label></div><br>";
+			}else	if(RGBlist[m/2][5]==1){
+				target.innerHTML += "<div id=\"bs" + s + "\" style=\"cursor: pointer\"><font size=2 color=dimgray><u>"+ (m+1) + "(T) "  + hatsugen[m] + "</u></font></div><div id=\"rs" + s + "\" class=\"hide\"><label><input type=radio name=\"rs" + s + "\" value=3><font color=deeppink>開かれた質問</font></label><label><input type=radio name=\"rs" + s + "\" value=4><font color=blue>閉じられた質問</font></label><label><input type=radio name=\"rs" + s + "\" value=5 checked><font color=purple>相づち</font></label><label><input type=radio name=\"r"
+				+ s + "\" value=6><font color=orangered>解釈</font></label><label><input type=radio name=\"rs" + s + "\" value=7><font color=black>世間話</font></label></div><br>";
+			}else	if(RGBlist[m/2][4]==1){
+				target.innerHTML += "<div id=\"bs" + s + "\" style=\"cursor: pointer\"><font size=2 color=dimgray><u>"+ (m+1) + "(T) "  + hatsugen[m] + "</u></font></div><div id=\"rs" + s + "\" class=\"hide\"><label><input type=radio name=\"rs" + s + "\" value=3><font color=deeppink>開かれた質問</font></label><label><input type=radio name=\"rs" + s + "\" value=4 checked><font color=blue>閉じられた質問</font></label><label><input type=radio name=\"rs" + s + "\" value=5><font color=purple>相づち</font></label><label><input type=radio name=\"r"
+				+ s + "\" value=6><font color=orangered>解釈</font></label><label><input type=radio name=\"rs" + s + "\" value=7><font color=black>世間話</font></label></div><br>";
+			}else	if(RGBlist[m/2][6]==1){
+				target.innerHTML += "<div id=\"bs" + s + "\" style=\"cursor: pointer\"><u>"+ (m+1) + "(T) "  + hatsugen[m] + "</u></div><div id=\"rs" + s + "\"><label><input type=radio name=\"rs" + s + "\" value=3><font color=deeppink>開かれた質問</font></label><label><input type=radio name=\"rs" + s + "\" value=4><font color=blue>閉じられた質問</font></label><label><input type=radio name=\"rs" + s + "\" value=5><font color=purple>相づち</font></label><label><input type=radio name=\"r" + c
+				+ "\" value=6 checked><font color=orangered>解釈</font></label><label><input type=radio name=\"rs" + s + "\" value=7><font color=black>世間話</font></label></div><br>";
+			}else{
+				target.innerHTML += "<div id=\"bs" + s + "\" style=\"cursor: pointer\"><u>"+ (m+1) + "(T) "  + hatsugen[m] + "</u></div><div id=\"rs" + s + "\"><label><input type=radio name=\"rs" + s + "\" value=3><font color=deeppink>開かれた質問</font></label><label><input type=radio name=\"rs" + s + "\" value=4><font color=blue>閉じられた質問</font></label><label><input type=radio name=\"rs" + s + "\" value=5><font color=purple>相づち</font></label><label><input type=radio name=\"r" + c
+				+ "\" value=6><font color=orangered>解釈</font></label><label><input type=radio name=\"rs" + s + "\" value=7 checked><font color=black>世間話</font></label></div><br>";
 			}
 		}
 	}
 
-	if(c==0){
-		var greet = document.createElement('p'),
-		text = document.createTextNode('「愛」「交友」「仕事」のいずれかに該当しそうな単語が一つも見つかりませんでした。');
-		document.body.appendChild(greet).appendChild(text);
-	}//DOMを操作してみよう「愛」「交友」「仕事」のいずれかに該当しそうな単語が一つも見つかりませんでした。
-
-	console.log("keitaisokaiseki");
-	console.log(keitaisokaiseki.length);
-
-	//console.log("RGBlist");
-	//console.log(RGBlist);
-
-	for(m=0;m<keitaisokaiseki.length;m=m+2){
-	
-		c++;
-		n=c-chboxlist.length;
-		target.innerHTML += "<div id=\"" + c + "\">" + hatsugen[m] + "<br></div><br>";
-
-		chboxlist2[n]=[];
-		chboxlist2[n][0]=hatsugen[m];
-		chboxlist2[n][1]=4;
-
-		if(RGBlist[m/2][5]==1){
-			chboxlist2[n][1]=3;
-			console.log("「%s」は開かれた質問だと思います",hatsugen[m]);
-			document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=5 checked><font color=\"silver\"><u>無駄話・相づち等</u></font></label>";
-		}else{
-			document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=5>無駄話・相づち等</label>";
-		}
-
-		if(RGBlist[m/2][3]==1){
-			console.log("「%s」はその他だと思います",hatsugen[m]);
-			document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=3 checked><font color=\"#d4d\">開かれた質問</font></label>";
-			chboxlist2[n][1]=5;
-		}else{
-			document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=3>開かれた質問</label>";
-		}
-
-		document.getElementById(c).innerHTML += "<label><input type=radio name=\"" + c + "\" value=4>閉じられた質問</label>";
-
-	}
-	console.log("chboxlist2");
-	console.log(chboxlist2);
+	console.log("chboxlength2 in select.js=%d",chboxlength2);
+	return{
+		checkboxlist:checkboxlist,
+		chboxlist:chboxlist,
+		chboxlist2:chboxlist2,
+		RGB:RGB,
+		RGBlist:RGBlist,
+		checked:checked,
+		checked2:checked2,
+		taiou:taiou,
+		taiou2:taiou2,
+		chboxlength:chboxlength,
+		chboxlength2:chboxlength2
+	};
 }
-
 export {select};

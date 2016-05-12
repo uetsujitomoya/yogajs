@@ -2,40 +2,59 @@
 <html>
 <head>
   <title>
-    Force-Directed Graph
+    Yoga.js
   </title>
   <meta charset="utf-8">
   <style>
-
   .node {
     stroke-width: 3px;
   }
-
   .link {
     stroke: #999;
     stroke-opacity: .9;
   }
-
+  .hide {
+    display: none;
+  }
+  svg {
+    font: 10px sans-serif;
+  }
+  .area {
+    fill: steelblue;
+    clip-path: url(#clip);
+  }
+  .axis path,
+  .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+  }
+  .brush .extent {
+    stroke: #fff;
+    fill-opacity: .125;
+    shape-rendering: crispEdges;
+  }
   </style>
 </head>
 <body><font size="2">
   <input type="file" id="file-input"/>
-  <button id="load-button">左でjsonファイルを指定してから、ここをクリックして4秒ほど待つ</button>
+  <button id="load-button">まず最初に、左でjsonファイルを指定してから、ここをクリックして5～15秒ほど待つ</button>
+  <div id="timeKeeping"></div>
   <br>
   <br>
+  <div id="svgdiv"></div>
+  <font color=dimgray><b><u><font color=black size=4>縦軸</font></u></b>の単位：文の数、 <b><u><font color=black size=4>横軸</font></u></b>の単位：患者の全ての発言の全ての文字数</font><br>
+  折れ線グラフ：クライエントの発言について<font color="#ff7777">「愛」</font><font color="#77ff77">「交友」</font><font color="#7777ff">「仕事」</font><br>
+  縦棒：カウンセラーからの<font color="#b52f25">「開かれた質問」</font><font color="#2b4e91">「閉じられた質問」</font><font color="purple">「相づち」</font><font color="orange">「解釈」</font><font color="black">「無駄話」</font><br><br>
 
-  <div style="height:200px; overflow-y:scroll">
+  <font size=3 color=dimgray><b><u><font color=black size=4>左下のエリア</font></u></b>で、クライエントが発した文/カウンセラーが発した質問について分類してください。<b><u><font color=black size=4>グラフの縦棒</font></u></b>をマウスオーバーすると<b><u><font color=black size=4>右下のエリア</font></u></b>に縦棒周辺の内容が表示されます</font><br><br>
+  <div style="height:300px; width:650px; overflow-y:scroll; float:left">
     <form name="form1" id="chbox" action="">
       <div id="radio_buttons"></div>
     </form>
-  </div>
-  <br><br>
+  </div>　　
+  <div id="msg" style="height:300px; width:600px; overflow-y:scroll"></div>
 
-  <div id="svgdiv"></div>
-
-  折れ線グラフ：患者の発言について<font color="#ff7777">「愛」</font><font color="#77ff77">「交友」</font><font color="#7777ff">「仕事」</font><br>
-  縦棒：セラピストからの<font color="#d4d">「開かれた質問」</font><font color="dimgray">「閉じられた質問」</font><font color="silver">「その他」</font><br><br><br>
-  <div id="msg"></div>
 
   <script language="javascript" src="bundle.js"></script>
 
