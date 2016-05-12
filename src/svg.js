@@ -28,7 +28,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		if(i%3==0){return nagasa[i/3];}else if(i%3==1){return nagasa[(i-1)/3+1]-3;}else{return nagasa[(i-2)/3+1]-2;}
 
 	})//nagasa[i]+nagasa[i+1])/2
-	.y0(function(d){return height0})
+	.y0(function(d){return height0;})
 	.y1(function(d){return height0 - scaleY(d.y+d.y0)});
 
 
@@ -48,7 +48,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 	.enter()
 	.append("path")
 	.attr("d", area0)
-	.attr("fill",function(d,i){return colors[i]});
+	.attr("fill",function(d,i){return colors[i];});
 
 
 	var range = d3.range((width)-(width/(color2.length*2)), color2.length-1, -width/(color2.length));
@@ -106,7 +106,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 
 	var endTime = new Date();
 	console.log((endTime - startTime) / 1000 + '秒経過');
-	var timeKeeping=(endTime - startTime) / 1000 + '秒経過'
+	var timeKeeping=(endTime - startTime) / 1000 + '秒経過';
 	var timeKeepingArea = document.getElementById('timeKeeping');
 	timeKeepingArea.innerHTML = "<br>"+timeKeeping+"<br>";
 };
@@ -237,7 +237,7 @@ var setForViz = (name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsu
 				}
 			}
 		}
-		n++
+		n++;
 	}
 	for(c=0;c<checked2.length;c++){
 		if(checked2[c]==3){
@@ -256,7 +256,8 @@ var setForViz = (name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsu
 	var RGBmax=[];
 	var RGBmaxmax=1;
 
-	for(m=0;m<((keitaisokaiseki.length-1)/2);m++){//2個飛ばしにしたら後が面倒くさい。患者 1→0　3→1 長さ9なら番号は8まで
+	for(m=0;m<((keitaisokaiseki.length-1)/2);m++){
+		//2個飛ばしにしたら後が面倒くさい。患者 1→0,3→1,長さ9なら番号は8まで
 		RGBmax[m]=1;
 		for(h=0;h<3;h++){
 			RGBmax[m]=RGBmax[m]+RGBlist[m][h];
@@ -286,8 +287,8 @@ var setForViz = (name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsu
 		checked:checked,
 		checked2:checked2,
 		chboxlength:chboxlength,
-		chboxlength2:chboxlength2,
-	}
-}
+		chboxlength2:chboxlength2
+	};
+};
 
 export {setForViz};
