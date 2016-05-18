@@ -1,7 +1,7 @@
 var select =(name,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2) => {
 	console.log(name+1+2+3);
 	console.log(storage);
-	var h,i,j,k,l,m,n,f;
+	var i,m,n,f;
 	taiou = [];
 	taiou2=[];
 
@@ -9,13 +9,11 @@ var select =(name,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,chbo
 
 	var c=0;
 	n=0;
-	var btn=[];
 	chboxlength=0;
 	chboxlength2=0;
 	var s=0;
 	for(m=0;m<keitaisokaiseki.length;m++){
 		if(m%2==1){
-			var RGBtensuu=[0,0,0];
 			for(i=0;i<keitaisokaiseki[m].length;++i){
 				if(bun[m][i]=="Ａ"||bun[m][i]=="Ｂ"||bun[m][i]=="Ｔ"||bun[m][i]=="A"||bun[m][i]=="B"||bun[m][i]=="T"||bun[m][i]==""){
 					continue;
@@ -127,5 +125,5 @@ var select =(name,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,chbo
 		chboxlength:chboxlength,
 		chboxlength2:chboxlength2
 	};
-}
+};
 export {select};

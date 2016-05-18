@@ -19,15 +19,14 @@ var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxl
 	console.log(startTime);
 
 
-	var h,i,j,k,l,m,n,c,r,g,b,x,y,z,bunsuu;
+	var h,i,j,k,m,n,c,x,y,z;
 	var hinshi = [];
 	var RGB = [];
 	var tangoset = new Set();
 	var tangosett = [];
 	var miserables={"nodes":[],"links":[]};
-	var list = [];
-	var target = document.getElementById("chbox");
-	var checkboxlist=[];
+
+	checkboxlist=[];
 	bun=[];
 
 	var data = JSON.parse(event.target.result);
@@ -36,7 +35,6 @@ var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxl
 		n=0;
 		var tangosuu=0;
 		m=0;
-		var tangosuu2=0;
 		var kanjamoji=0;
 		var kanjatango=0;
 		var kanjabun=0;
@@ -145,7 +143,6 @@ var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxl
 					n++;
 					break;
 				}
-				bunsuu=0;
 				n++;
 				i++;
 			}
@@ -283,9 +280,9 @@ var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxl
 
 		return{
 			name:name,RGBlist:RGBlist,keitaisokaiseki:keitaisokaiseki,hatsugen:hatsugen,bun:bun,chboxlist:chboxlist,chboxlist2:chboxlist2,checked:checked,checked2:checked2,taiou:taiou,taiou2:taiou2,chboxlength:chboxlength,chboxlength2:chboxlength2
-		}
+		};
 
-	})
+	});
 };
 
 export {funcReaderOnload};
