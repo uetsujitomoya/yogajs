@@ -16,11 +16,10 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		nagasa[(m+1)/2]=nagasa[-1 + (m+1)/2]+hatsugen[m].length*width/bunsuu;
 	}
 	var stack = d3.layout.stack()
-	.x(function(d){return 1;})
+	.x(function(){return 1;})
 	.y(function(d){return d.y;})
 	.values(function(d){return d;});
 	var stackdata = stack(stackdataArr);
-	var scaleX = d3.scale.linear().domain([0,color2.length]).range([width/(color2.length),width]);
 
 	var scaleY = d3.scale.linear().domain([0,6]).range([0,height0]);
 	var colors = ["#d7d7ff","#d7ffd7","#ffd7d7"];
@@ -30,16 +29,10 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		if(i%3==0){return nagasa[i/3];}else if(i%3==1){return nagasa[(i-1)/3+1]-3;}else{return nagasa[(i-2)/3+1]-2;}
 
 	})//nagasa[i]+nagasa[i+1])/2
-	.y0(function(d){return height0;})
-	.y1(function(d){return height0 - scaleY(d.y+d.y0)});
-
-
-
-	var margin = {top: 50+height0, right: 10, bottom: 20, left: 40};
+	.y0(function(){return height0;})
+	.y1(function(d){return height0 - scaleY(d.y+d.y0);});
 
 	var margin2 = {top: 10, right: 10, bottom: 50, left: 40};
-
-
 
 	var context = svg.append("g") //全体グラフグループ作成
 	.attr("class", "context")
@@ -51,8 +44,6 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 	.append("path")
 	.attr("d", area0)
 	.attr("fill",function(d,i){return colors[i];});
-
-
 
 	var range = d3.range((width)-(width/(color2.length*2)), color2.length-1, -width/(color2.length));
 	context.selectAll("line.v")
@@ -81,10 +72,10 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		}
 
 		e.style.color = color2[color2.length-1-i];
-	})
+	});
 
 	var e = document.getElementById('msg');
-	var k,l;
+	var i,k,l;
 	e.innerHTML = "";
 	for(k=-3;k<=3;k++){
 		if(2*(i)+k<0||2*(i)+k>=hatsugen.length){
@@ -103,31 +94,29 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			e.innerHTML += "<font size=2><br><br></font>";
 		}
 	}
-});
-
-var scaleX2 = d3.scale.linear().domain([0,bunsuu]).range([0,width]);
-var scaleX2copy = d3.scale.linear().domain([0,bunsuu]).range([0,width]);
-var scaleY2 = d3.scale.linear().domain([0,RGBmaxmax]).range([height,0]);
-var xAxisF = d3.svg.axis().scale(scaleX2).orient("bottom");//focus
-var yAxisC = d3.svg.axis().scale(scaleY2).orient("left");//focus
-
-var xAxisC = d3.svg.axis().scale(scaleX2).orient("bottom");//context
-
-context.append("g") //focusのy目盛軸
-.attr("class", "y axis")
-.call(yAxisC);
-
-context.append("g") //全体x目盛軸
-.attr("class", "x axis")
-.attr("transform", "translate(0," + height0 + ")")
-.call(xAxisC);
 
 
-var endTime = new Date();
-console.log((endTime - startTime) / 1000 + '秒経過');
-var timeKeeping=(endTime - startTime) / 1000 + '秒経過';
-var timeKeepingArea = document.getElementById('timeKeeping');
-timeKeepingArea.innerHTML = "<br>"+timeKeeping+"<br>";
+	var scaleX2 = d3.scale.linear().domain([0,bunsuu]).range([0,width]);
+	var scaleY2 = d3.scale.linear().domain([0,RGBmaxmax]).range([height,0]);
+	var yAxisC = d3.svg.axis().scale(scaleY2).orient("left");//focus
+
+	var xAxisC = d3.svg.axis().scale(scaleX2).orient("bottom");//context
+
+	context.append("g") //focusのy目盛軸
+	.attr("class", "y axis")
+	.call(yAxisC);
+
+	context.append("g") //全体x目盛軸
+	.attr("class", "x axis")
+	.attr("transform", "translate(0," + height0 + ")")
+	.call(xAxisC);
+
+
+	var endTime = new Date();
+	console.log((endTime - startTime) / 1000 + '秒経過');
+	var timeKeeping=(endTime - startTime) / 1000 + '秒経過';
+	var timeKeepingArea = document.getElementById('timeKeeping');
+	timeKeepingArea.innerHTML = "<br>"+timeKeeping+"<br>";
 
 };
 
@@ -231,7 +220,7 @@ var setForViz = (name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsu
 	}
 	console.log("chboxlength2 in svg.js=%d",chboxlength2);
 
-	var h,i,j,c,m,n;
+	var h,i,c,m,n;
 
 	for(n=0;n<RGBlist.length;n++){
 		RGBlist[n][0]=0;

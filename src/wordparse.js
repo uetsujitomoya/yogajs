@@ -2,13 +2,13 @@ import "kuromoji";
 import {select} from "./select.js";
 import {setForViz} from "./svg.js";
 var makeOnClick = (c) =>{
-	document.getElementById("b"+c).onclick = (e) => {
+	document.getElementById("b"+c).onclick = () => {
 		const id = "r"+c;
 		document.getElementById(id).classList.toggle("hide");
 	};
 };
 var makeOnClickS = (c) =>{
-	document.getElementById("bs"+c).onclick = (e) => {
+	document.getElementById("bs"+c).onclick = () => {
 		const id = "rs"+c;
 		document.getElementById(id).classList.toggle("hide");
 	};
