@@ -6,7 +6,7 @@ var makeOnClick = (c) =>{
 		const id = "r"+c;
 		document.getElementById(id).classList.toggle("hide");
 	};
-}
+};
 var makeOnClickS = (c) =>{
 	document.getElementById("bs"+c).onclick = (e) => {
 		const id = "rs"+c;
