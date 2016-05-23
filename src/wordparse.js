@@ -12,7 +12,7 @@ var makeOnClickS = (c) =>{
 		const id = "rs"+c;
 		document.getElementById(id).classList.toggle("hide");
 	};
-}
+};
 var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2) => {
 
 	var startTime = new Date();
