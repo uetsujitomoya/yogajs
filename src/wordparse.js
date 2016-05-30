@@ -148,10 +148,10 @@ var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxl
 			}
 			m++;
 		}
-		console.log("%d 来談者文 %d 単語 %d 文字 %d 治療者文 %d 単語 %d 文字 %d",m,kanjabun,kanjatango,kanjamoji,serapibun,serapitango,serapimoji);
-		console.log("そうですか %d",soudesuka);
-		var uetsuji="うえつじともや";
-		console.log(uetsuji.length);
+		//console.log("%d 来談者文 %d 単語 %d 文字 %d 治療者文 %d 単語 %d 文字 %d",m,kanjabun,kanjatango,kanjamoji,serapibun,serapitango,serapimoji);
+		//console.log("そうですか %d",soudesuka);
+		//var uetsuji="うえつじともや";
+		//console.log(uetsuji.length);
 
 		var tango=[];
 		x=0;
@@ -277,6 +277,8 @@ var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxl
 		document.getElementById('radio_buttons').onchange = () => {
 			setForViz(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
 		};
+
+		//graphのラジオボタン変わったらまた描画
 
 		return{
 			name:name,RGBlist:RGBlist,keitaisokaiseki:keitaisokaiseki,hatsugen:hatsugen,bun:bun,chboxlist:chboxlist,chboxlist2:chboxlist2,checked:checked,checked2:checked2,taiou:taiou,taiou2:taiou2,chboxlength:chboxlength,chboxlength2:chboxlength2
