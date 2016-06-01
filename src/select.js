@@ -12,9 +12,9 @@ var select =(name,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,chbo
 	chboxlength=0;
 	chboxlength2=0;
 	var s=0;
-	//target.innerHTML += "<div id=\"graph\" style=\"cursor: pointer\"><u>" + (m+1) + "(C) " + bun[m][i] + "</u></div><div id=\"r" + c + "\"><label><input type=radio name=\"r" + c + "\" value=0>どれにも含まない</label></div><br>";
-	//document.getElementById("graph").innerHTML += "<label><input type=radio name=\"r" + c + "\" value=1 checked><font color=\"#ff7777\">【</font>「愛」に含む<font color=\"#ff7777\">】</font></label>"
-
+	target.innerHTML += "<div id=\"graph\" style=\"cursor: pointer\"><u>" + (m+1) + "(C) " + bun[m][i] + "</u></div><div id=\"r" + c + "\"><label><input type=radio name=\"r" + c + "\" value=0>どれにも含まない</label></div><br>";
+	document.getElementById("graph").innerHTML += "<label><input type=radio name=\"graph1\" value=11 checked>graph1</label>";
+	document.getElementById("graph").innerHTML += "<label><input type=radio name=\"graph2\" value=12 checked>graph2</label>";
 
 	for(m=0;m<keitaisokaiseki.length;m++){
 		if(m%2==1){

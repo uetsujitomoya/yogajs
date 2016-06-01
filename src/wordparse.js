@@ -276,7 +276,7 @@ var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxl
 
 		document.getElementById('radio_buttons').onchange = () => {
 			setForViz(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
-		};
+		};//graphの形状を切り替えた際もここで再描画される
 
 		//graphのラジオボタン変わったらまた描画
 
