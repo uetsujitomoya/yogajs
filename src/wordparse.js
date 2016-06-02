@@ -236,7 +236,7 @@ var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxl
 
 		var storage = localStorage;//初回読み込み
 
-
+		var graph;
 
 		var sResult = select(name,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
 
@@ -251,11 +251,11 @@ var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxl
 		taiou2 = sResult.taiou2;
 		chboxlength = sResult.chboxlength;
 		chboxlength2 = sResult.chboxlength2;
-		console.log("chboxlength2=%d",chboxlength2);
+		//graph = sResult.graph;
+		//console.log("chboxlength2=%d",chboxlength2)
 
 
-
-		var vResult = setForViz(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime);//形態素解析後に1度目の描画
+		var vResult = setForViz(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph);//形態素解析後に1度目の描画
 		chboxlist = vResult.chboxlist;
 		chboxlist2 = vResult.chboxlist2;
 		RGBlist = vResult.RGBlist;
@@ -275,7 +275,7 @@ var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxl
 
 
 		document.getElementById('radio_buttons').onchange = () => {
-			setForViz(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
+			setForViz(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph);
 		};//graphの形状を切り替えた際もここで再描画される
 
 		//graphのラジオボタン変わったらまた描画

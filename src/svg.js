@@ -187,7 +187,7 @@ var funcChecked2 = (name,storage,chboxlist,chboxlist2,checked2,taiou,taiou2,chbo
 	console.log("black=%d",black);
 };
 
-var setForViz = (name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime) => {
+var setForViz = (name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph) => {
 	console.log("chboxlength2 in svg.js=%d",chboxlength2);
 	d3.select("#svgdiv").select("svg").remove();
 	var svg = d3.select("#svgdiv").append("svg")
@@ -265,11 +265,28 @@ var setForViz = (name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsu
 		}
 	}
 
+	const radio = document.getElementById("graph").children;
+	for(let i=0;i<=2;i++){
+		if(radio[i].control.checked==true){
+			//storage.getItem(name+"RGBlist"+m)=
+			if(radio[i].control.value=="12"){
+				graph=2;
+			}else{
+				graph=1;
+			}
+		}
+	}
+
 	for(h=0;h<3;h++){
 		stackdataArr[h] = [];
 		for(m=0;m<((keitaisokaiseki.length-1)/2);m++){
 			stackdataArr[h][3*m]=new Object();
-			stackdataArr[h][3*m]= {x:3*m+1,y:(5*(RGBlist[m][h])/RGBmaxmax)};
+			if(graph==2){
+				stackdataArr[h][3*m]= {x:3*m+1,y:0};
+			}else{
+				stackdataArr[h][3*m]= {x:3*m+1,y:(5*(RGBlist[m][h])/RGBmaxmax)};
+			}
+
 			stackdataArr[h][3*m+1]=new Object();
 			stackdataArr[h][3*m+1]= {x:3*m+2,y:(5*(RGBlist[m][h])/RGBmaxmax)};
 			stackdataArr[h][3*m+2]=new Object();
@@ -277,7 +294,7 @@ var setForViz = (name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsu
 		}
 	}
 	viz(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxmax,startTime);
-	console.log("chboxlength2 in svg.js=%d",chboxlength2);
+	//console.log("chboxlength2 in svg.js=%d",chboxlength2);
 	return{
 		chboxlist:chboxlist,
 		chboxlist2:chboxlist2,
