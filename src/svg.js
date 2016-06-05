@@ -4,7 +4,7 @@ import d3 from "d3";
 var height0=200,width=1320;
 var height =200;
 
-var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxmax,startTime) => {
+var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxmax,startTime,graph) => {
 	var m;
 	var bunsuu=2;//前後の余白
 	for(m=1;m<hatsugen.length;m=m+2){//患者の発言で間隔を作る
@@ -15,36 +15,75 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 	for(m=1;m<hatsugen.length;m=m+2){
 		nagasa[(m+1)/2]=nagasa[-1 + (m+1)/2]+hatsugen[m].length*width/bunsuu;
 	}
-	var stack = d3.layout.stack()
-	.x(function(){return 1;})
-	.y(function(d){return d.y;})
-	.values(function(d){return d;});
-	var stackdata = stack(stackdataArr);
 
-	var scaleY = d3.scale.linear().domain([0,6]).range([0,height0]);
-	var colors = ["#d7d7ff","#d7ffd7","#ffd7d7"];
-	var colorBun=["white","#ffdddd","#ddffdd","#ddddff"];
-	var area0 = d3.svg.area()
-	.x(function(d,i){
-		if(i%3==0){return nagasa[i/3];}else if(i%3==1){return nagasa[(i-1)/3+1]-3;}else{return nagasa[(i-2)/3+1]-2;}
+	if(graph==3){
+		window.addEventListener("load", function(){
+			var canvas = d3.select("#layout9");
+			var svg = canvas.append("svg")
+			.attr("width",200)
+			.attr("height",200)
+			.attr("shape-rendering", "crispEdges");
+			var dataArr = [
+				{age:31},{age:0},{age:27},{age:33},{age:19},{age:32},{age:64},{age:33},{age:23},{age:32},
+				{age:17},{age:8},{age:52},{age:54},{age:12},{age:42},{age:32},{age:33},{age:18},{age:64},
+				{age:13},{age:0},{age:15},{age:45},{age:17},{age:32},{age:12},{age:16},{age:23},{age:19},
+				{age:16},{age:3},{age:41},{age:33},{age:18},{age:32},{age:64},{age:33},{age:23},{age:18},
+				{age:14},{age:8},{age:31},{age:54},{age:39},{age:42},{age:32},{age:33},{age:18},{age:17},
+				{age:28},{age:0},{age:21},{age:45},{age:26},{age:32},{age:12},{age:16},{age:23},{age:34}
+			];
+			var colors = ["blue","purple","red","orange","yellow","#0f0","green"];
+			var histogram = d3.layout.histogram()
+			.range([0,60])
+			.bins([0,10,20,35,45,50,60])//配列を指定することでbinの幅が均等でない集計も可能．
+			.value(function(d){return d.age;});
+			svg.selectAll("rect")
+			.data(histogram(dataArr))
+			.enter()
+			.append("rect")
+			.attr("x",function(d){return d.x * 20/6;}) //表示サイズを設定している．
+			.attr("y", function(d){return 200-d.y * 5;})
+			.attr("width", function(d){return d.dx * 20/6;})
+			.attr("height", function(d){return d.y * 5;})
+			.attr("fill",function(d,i){return colors[i];});
+		},false);
+	}else{
+		//stack
+		var stack = d3.layout.stack()
+		.x(function(){return 1;})
+		.y(function(d){return d.y;})
+		.values(function(d){return d;});
+		var stackdata = stack(stackdataArr);
 
-	})//nagasa[i]+nagasa[i+1])/2
-	.y0(function(){return height0;})
-	.y1(function(d){return height0 - scaleY(d.y+d.y0);});
+		var scaleY = d3.scale.linear().domain([0,6]).range([0,height0]);
+		var colors = ["#d7d7ff","#d7ffd7","#ffd7d7"];
+		var colorBun=["white","#ffdddd","#ddffdd","#ddddff"];
+		var area0 = d3.svg.area()
+		.x(function(d,i){
+			if(i%3==0){return nagasa[i/3];}else if(i%3==1){return nagasa[(i-1)/3+1]-3;}else{return nagasa[(i-2)/3+1]-2;}
 
-	var margin2 = {top: 10, right: 10, bottom: 50, left: 40};
+		})//nagasa[i]+nagasa[i+1])/2
+		.y0(function(){return height0;})
+		.y1(function(d){return height0 - scaleY(d.y+d.y0);});
 
-	var context = svg.append("g") //全体グラフグループ作成
-	.attr("class", "context")
-	.attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
+		var margin2 = {top: 10, right: 10, bottom: 50, left: 40};
 
-	context.selectAll("path")
-	.data(stackdata.reverse())
-	.enter()
-	.append("path")
-	.attr("d", area0)
-	.attr("fill",function(d,i){return colors[i];});
+		var context = svg.append("g") //全体グラフグループ作成
+		.attr("class", "context")
+		.attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
 
+
+		context.selectAll("path")
+		.data(stackdata.reverse())
+		.enter()
+		.append("path")
+		.attr("d", area0)
+		.attr("fill",function(d,i){return colors[i];});
+		//以上、stack
+	}
+
+
+
+	//棒
 	var range = d3.range((width)-(width/(color2.length*2)), color2.length-1, -width/(color2.length));
 	context.selectAll("line.v")
 	.data(range).enter().append("line")
@@ -293,7 +332,7 @@ var setForViz = (name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsu
 			stackdataArr[h][3*m+2]= {x:3*m+3,y:0};
 		}
 	}
-	viz(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxmax,startTime);
+	viz(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxmax,startTime,graph);
 	//console.log("chboxlength2 in svg.js=%d",chboxlength2);
 	return{
 		chboxlist:chboxlist,
