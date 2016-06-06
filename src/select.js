@@ -12,9 +12,9 @@ var select =(name,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,chbo
 	chboxlength=0;
 	chboxlength2=0;
 	var s=0;
-	target.innerHTML += "<div id=\"graph\" style=\"cursor: pointer\"><label><input type=radio name=\"graph3\" value=13>graph3</label></div><br>";
-	document.getElementById("graph").innerHTML += "<label><input type=radio name=\"graph1\" value=11>graph1</label>";
-	document.getElementById("graph").innerHTML += "<label><input type=radio name=\"graph2\" value=12>graph2</label>";
+	target.innerHTML += "<div id=\"graph\" style=\"cursor: pointer\"><label><input type=radio name=\"graph\" value=13>graph3</label></div><br>";
+	document.getElementById("graph").innerHTML += "<label><input type=radio name=\"graph\" value=11>graph1</label>";
+	document.getElementById("graph").innerHTML += "<label><input type=radio name=\"graph\" value=12>graph2</label>";
 
 	for(m=0;m<keitaisokaiseki.length;m++){
 		if(m%2==1){
