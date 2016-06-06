@@ -305,6 +305,7 @@ var setForViz = (name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsu
 	}
 
 	const radio = document.getElementById("graph").children;
+	console.info(radio);
 	for(let i=0;i<=2;i++){
 		if(radio[i].control.checked==true){
 			//storage.getItem(name+"RGBlist"+m)=
