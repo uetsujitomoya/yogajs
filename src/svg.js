@@ -16,6 +16,12 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		nagasa[(m+1)/2]=nagasa[-1 + (m+1)/2]+hatsugen[m].length*width/bunsuu;
 	}
 
+	var margin2 = {top: 10, right: 10, bottom: 50, left: 40};
+	
+	var context = svg.append("g") //全体グラフグループ作成
+	.attr("class", "context")
+	.attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
+
 	if(graph==3){
 		window.addEventListener("load", function(){
 			var canvas = d3.select("#layout9");
@@ -65,11 +71,6 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		.y0(function(){return height0;})
 		.y1(function(d){return height0 - scaleY(d.y+d.y0);});
 
-		var margin2 = {top: 10, right: 10, bottom: 50, left: 40};
-
-		var context = svg.append("g") //全体グラフグループ作成
-		.attr("class", "context")
-		.attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
 
 
 		context.selectAll("path")
@@ -311,6 +312,8 @@ var setForViz = (name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsu
 			//storage.getItem(name+"RGBlist"+m)=
 			if(radio[i].control.value=="12"){
 				graph=2;
+			}else if(radio[i].control.value=="13"){
+				graph=3;
 			}else{
 				graph=1;
 			}
