@@ -17,10 +17,14 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 	}
 
 	var margin2 = {top: 10, right: 10, bottom: 50, left: 40};
-	
+
 	var context = svg.append("g") //全体グラフグループ作成
 	.attr("class", "context")
 	.attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
+
+	var scaleY = d3.scale.linear().domain([0,6]).range([0,height0]);
+	var colors = ["#d7d7ff","#d7ffd7","#ffd7d7"];
+	var colorBun=["white","#ffdddd","#ddffdd","#ddddff"];
 
 	if(graph==3){
 		window.addEventListener("load", function(){
@@ -60,9 +64,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		.values(function(d){return d;});
 		var stackdata = stack(stackdataArr);
 
-		var scaleY = d3.scale.linear().domain([0,6]).range([0,height0]);
-		var colors = ["#d7d7ff","#d7ffd7","#ffd7d7"];
-		var colorBun=["white","#ffdddd","#ddffdd","#ddddff"];
+
 		var area0 = d3.svg.area()
 		.x(function(d,i){
 			if(i%3==0){return nagasa[i/3];}else if(i%3==1){return nagasa[(i-1)/3+1]-3;}else{return nagasa[(i-2)/3+1]-2;}
