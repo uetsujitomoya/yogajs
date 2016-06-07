@@ -18,46 +18,55 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 
 	var margin2 = {top: 10, right: 10, bottom: 50, left: 40};
 
-	var context = svg.append("g") //全体グラフグループ作成
-	.attr("class", "context")
-	.attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
 
-	var scaleY = d3.scale.linear().domain([0,6]).range([0,height0]);
-	var colors = ["#d7d7ff","#d7ffd7","#ffd7d7"];
-	var colorBun=["white","#ffdddd","#ddffdd","#ddddff"];
 
 	if(graph==3){
-		window.addEventListener("load", function(){
-			var canvas = d3.select("#layout9");
-			var svg = canvas.append("svg")
-			.attr("width",200)
-			.attr("height",200)
-			.attr("shape-rendering", "crispEdges");
-			var dataArr = [
-				{age:31},{age:0},{age:27},{age:33},{age:19},{age:32},{age:64},{age:33},{age:23},{age:32},
-				{age:17},{age:8},{age:52},{age:54},{age:12},{age:42},{age:32},{age:33},{age:18},{age:64},
-				{age:13},{age:0},{age:15},{age:45},{age:17},{age:32},{age:12},{age:16},{age:23},{age:19},
-				{age:16},{age:3},{age:41},{age:33},{age:18},{age:32},{age:64},{age:33},{age:23},{age:18},
-				{age:14},{age:8},{age:31},{age:54},{age:39},{age:42},{age:32},{age:33},{age:18},{age:17},
-				{age:28},{age:0},{age:21},{age:45},{age:26},{age:32},{age:12},{age:16},{age:23},{age:34}
-			];
-			var colors = ["blue","purple","red","orange","yellow","#0f0","green"];
-			var histogram = d3.layout.histogram()
-			.range([0,60])
-			.bins([0,10,20,35,45,50,60])//配列を指定することでbinの幅が均等でない集計も可能．
-			.value(function(d){return d.age;});
-			svg.selectAll("rect")
-			.data(histogram(dataArr))
-			.enter()
-			.append("rect")
-			.attr("x",function(d){return d.x * 20/6;}) //表示サイズを設定している．
-			.attr("y", function(d){return 200-d.y * 5;})
-			.attr("width", function(d){return d.dx * 20/6;})
-			.attr("height", function(d){return d.y * 5;})
-			.attr("fill",function(d,i){return colors[i];});
-		},false);
+
+		var dataset = [11, 25, 45, 30, 33];
+
+		var w = 500;
+		var h = 200;
+		var padding = 20;
+
+		var xScale = d3.scale.linear()
+		.domain([0, d3.max(dataset)])
+		.range([padding, w  - padding])
+		.nice();
+
+		var svg2 = d3.select("body").append("svg").attr({width:w, height:h});
+
+		var xAxis = d3.svg.axis()
+		.scale(xScale)
+		.orient("bottom");
+
+		svg2.append("g")
+		.attr({
+			class: "axis",
+			transform: "translate(0, 180)"
+		})
+		.call(xAxis);
+
+		svg2.selectAll("rect")
+		.data(dataset)
+		.enter()
+		.append("rect")
+		.attr({
+			x: padding,
+			y: function(d, i) { return i * 25; },
+			width: function(d) { return xScale(d) - padding; },
+			height: 20,
+			fill: "red"
+		});
 	}else{
 		//stack
+		var context = svg.append("g") //全体グラフグループ作成
+		.attr("class", "context")
+		.attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
+
+		var scaleY = d3.scale.linear().domain([0,6]).range([0,height0]);
+		var colors = ["#d7d7ff","#d7ffd7","#ffd7d7"];
+		var colorBun=["white","#ffdddd","#ddffdd","#ddddff"];
+
 		var stack = d3.layout.stack()
 		.x(function(){return 1;})
 		.y(function(d){return d.y;})
@@ -82,61 +91,65 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		.attr("d", area0)
 		.attr("fill",function(d,i){return colors[i];});
 		//以上、stack
+
+		//棒
+		var range = d3.range((width)-(width/(color2.length*2)), color2.length-1, -width/(color2.length));
+		context.selectAll("line.v")
+		.data(range).enter().append("line")
+		.attr("x1", function(d,i){
+			return nagasa[i];
+		}).attr("y1", 0)
+		.attr("x2", function(d,i){return nagasa[i];}).attr("y2", height0);
+		context.selectAll("line")
+		.attr("stroke", function(d,i){return color2[i];})
+		.attr("stroke-width", function(d,i){
+			return(Math.sqrt(keitaisokaiseki[2*i].length));
+		})
+		.on('mouseover', function(d,i){
+			var e = document.getElementById('msg');
+			var k,l;
+			e.innerHTML = "";
+			for(k=-3;k<=3;k++){
+				if(2*(i)+k<0||2*(i)+k>=hatsugen.length){
+					continue;
+				}
+				if(k==0){
+					e.innerHTML += "<b><u><font size=3>"+(1+2*i)+"(T) <font color="+color2[i]+">【</font>"+hatsugen[2*i]+"<font color="+color2[i]+">】</font></font></u></b><font size=2><br><br></font>";
+				}else if(k%2==0){
+					e.innerHTML += "<font size=2>"+(1+k+2*i)+"(T) <font color="+color2[k/2+i]+"><b>【</b></font>"+hatsugen[k+2*i]+"<font color="+color2[k/2+i]+"><b>】</b></font><br><br></font>";
+				}else{
+					e.innerHTML += (1+k+2*i)+"(C) ";
+					for(l=0;l<bun[k+2*i].length;l++){
+						if(bun[k+2*i][l]==""){continue;}
+						e.innerHTML += "<font size=2><font color="+colorBun[checkedBun[k+2*i][l]]+"><b>【</b></font>"+bun[k+2*i][l]+"<font color="+colorBun[checkedBun[k+2*i][l]]+"><b>】</b></font></font>";
+					}
+					e.innerHTML += "<font size=2><br><br></font>";
+				}
+			}
+		});
+
+		var scaleX2 = d3.scale.linear().domain([0,bunsuu]).range([0,width]);
+		var scaleY2 = d3.scale.linear().domain([0,RGBmaxmax]).range([height,0]);
+		var yAxisC = d3.svg.axis().scale(scaleY2).orient("left");//focus
+
+		var xAxisC = d3.svg.axis().scale(scaleX2).orient("bottom");//context
+
+		context.append("g") //focusのy目盛軸
+		.attr("class", "y axis")
+		.call(yAxisC);
+
+		context.append("g") //全体x目盛軸
+		.attr("class", "x axis")
+		.attr("transform", "translate(0," + height0 + ")")
+		.call(xAxisC);
 	}
 
 
 
-	//棒
-	var range = d3.range((width)-(width/(color2.length*2)), color2.length-1, -width/(color2.length));
-	context.selectAll("line.v")
-	.data(range).enter().append("line")
-	.attr("x1", function(d,i){
-		return nagasa[i];
-	}).attr("y1", 0)
-	.attr("x2", function(d,i){return nagasa[i];}).attr("y2", height0);
-	context.selectAll("line")
-	.attr("stroke", function(d,i){return color2[i];})
-	.attr("stroke-width", function(d,i){
-		return(Math.sqrt(keitaisokaiseki[2*i].length));
-	})
-	.on('mouseover', function(d,i){
-		var e = document.getElementById('msg');
-		var k,l;
-		e.innerHTML = "";
-		for(k=-3;k<=3;k++){
-			if(2*(i)+k<0||2*(i)+k>=hatsugen.length){
-				continue;
-			}
-			if(k==0){
-				e.innerHTML += "<b><u><font size=3>"+(1+2*i)+"(T) <font color="+color2[i]+">【</font>"+hatsugen[2*i]+"<font color="+color2[i]+">】</font></font></u></b><font size=2><br><br></font>";
-			}else if(k%2==0){
-				e.innerHTML += "<font size=2>"+(1+k+2*i)+"(T) <font color="+color2[k/2+i]+"><b>【</b></font>"+hatsugen[k+2*i]+"<font color="+color2[k/2+i]+"><b>】</b></font><br><br></font>";
-			}else{
-				e.innerHTML += (1+k+2*i)+"(C) ";
-				for(l=0;l<bun[k+2*i].length;l++){
-					if(bun[k+2*i][l]==""){continue;}
-					e.innerHTML += "<font size=2><font color="+colorBun[checkedBun[k+2*i][l]]+"><b>【</b></font>"+bun[k+2*i][l]+"<font color="+colorBun[checkedBun[k+2*i][l]]+"><b>】</b></font></font>";
-				}
-				e.innerHTML += "<font size=2><br><br></font>";
-			}
-		}
-	});
 
 
-	var scaleX2 = d3.scale.linear().domain([0,bunsuu]).range([0,width]);
-	var scaleY2 = d3.scale.linear().domain([0,RGBmaxmax]).range([height,0]);
-	var yAxisC = d3.svg.axis().scale(scaleY2).orient("left");//focus
 
-	var xAxisC = d3.svg.axis().scale(scaleX2).orient("bottom");//context
 
-	context.append("g") //focusのy目盛軸
-	.attr("class", "y axis")
-	.call(yAxisC);
-
-	context.append("g") //全体x目盛軸
-	.attr("class", "x axis")
-	.attr("transform", "translate(0," + height0 + ")")
-	.call(xAxisC);
 
 
 	var endTime = new Date();
