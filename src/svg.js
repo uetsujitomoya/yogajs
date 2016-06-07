@@ -4,7 +4,7 @@ import d3 from "d3";
 var height0=200,width=1320;
 var height =200;
 
-var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxmax,startTime,graph) => {
+var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxmax,startTime,graph,checked) => {
 	var m;
 	var bunsuu=2;//前後の余白
 	for(m=1;m<hatsugen.length;m=m+2){//患者の発言で間隔を作る
@@ -18,14 +18,54 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 
 	var margin2 = {top: 10, right: 10, bottom: 50, left: 40};
 
-
+	var colorBun=["white","#ffdddd","#ddffdd","#ddddff"];
 
 	if(graph==3){
+
+		var nagasa2=[];//区分
+		var mazekoze=[];//カウンセラーを発言毎に、クライエントを文ごとに収録
+		var mazekozeWhich=[];//カウンセラーなら0
+		let mazekozeColor=[];
+		let h=0;
+		//初手カウンセラー
+		nagasa2[0]=hatsugen[0].length*width/bunsuu;
+		mazekoze[0]=hatsugen[0];
+		mazekozeWhich[0]=0;
+		mazekozeColor[0]=color2[0];
+		let c=0;
+
+		for(m=1;m<hatsugen.length;m=m+2){
+			h++;
+			//クライエント
+			bun[m].forEach((d)=>{
+				if(d!=""){
+					nagasa2[h]=d.length*width/bunsuu;
+					mazekoze[h]=d;
+					mazekozeWhich[h]=1;
+					mazekozeColor[h]=colorBun[checked[c]];
+					h++;
+					c++;
+				}
+			});
+			if(m+1==hatsugen.length){
+				break;
+			}
+			//カウンセラー
+			nagasa2[h]=hatsugen[m+1].length*width/bunsuu;
+			mazekoze[h]=hatsugen[m+1];
+			mazekozeWhich[h]=0;
+			mazekozeColor[h]=color2[(m+1)/2];
+		}
+		alert('foo');
+		console.info(nagasa2);
+		console.info(mazekoze);
+		console.info(mazekozeWhich);
+		console.info(mazekozeColor);
 
 		var dataset = [11, 25, 45, 30, 33];
 
 		var w = 500;
-		var h = 200;
+		//var h = 200;
 		var padding = 20;
 
 		var xScale = d3.scale.linear()
@@ -33,31 +73,85 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		.range([padding, w  - padding])
 		.nice();
 
-		var svg2 = d3.select("body").append("svg").attr({width:w, height:h});
 
 		var xAxis = d3.svg.axis()
 		.scale(xScale)
 		.orient("bottom");
 
-		svg2.append("g")
+
+
+		var dataArr = [
+			nagasa2,
+			nagasa2
+		];//カウンセラ発言長とクライエント各文長の配列
+
+		//if文で返す
+		var scaleX = d3.scale.linear()
+		.domain([0, 1])
+		.range([0, 180]);
+
+		//階層構造をとるため，g要素を生成する部分とrect要素を生成している部分が連続している．
+		svg.selectAll("g")
+		.data(dataArr)
+		.enter()
+		.append("g")
+		.attr("transform", function(d,i){return "translate(0," + (i * 50) + ")";})
+		.selectAll("rect")
+		.data(function(d){return d;})
+		.enter()
+		.append("rect")//四角追加
+		.attr("x",function(d,i){
+			var arr = this.parentNode.__data__;//親ノード(SVGGElement)に設定されている配列を取得する．
+			var sum = d3.sum(arr);
+			var subSum = d3.sum(i==0 ? []:arr.slice(0,i));
+			return scaleX(subSum/sum) + 10;
+		})
+		.attr("y",10)
+		.attr("width",function(d){
+			var sum = d3.sum(this.parentNode.__data__);
+			return scaleX(d/sum);
+		})
+		.attr("height",30)
+		.attr("fill", function(d, i){
+			if(d==mazekozeWhich[i] ){
+				return mazekozeColor[i];
+			}else{
+				return "white";
+			}
+		})
+		.on('mouseover', function(d,i){
+			var e = document.getElementById('msg');
+			var k,l;
+			e.innerHTML = "";
+			for(k=-3;k<=3;k++){
+				if(2*(i)+k<0||2*(i)+k>=hatsugen.length){
+					continue;
+				}
+				if(k==0){
+					e.innerHTML += "<b><u><font size=3>"+(1+2*i)+"(T) <font color="+color2[i]+">【</font>"+hatsugen[2*i]+"<font color="+color2[i]+">】</font></font></u></b><font size=2><br><br></font>";
+				}else if(k%2==0){
+					e.innerHTML += "<font size=2>"+(1+k+2*i)+"(T) <font color="+color2[k/2+i]+"><b>【</b></font>"+hatsugen[k+2*i]+"<font color="+color2[k/2+i]+"><b>】</b></font><br><br></font>";
+				}else{
+					e.innerHTML += (1+k+2*i)+"(C) ";
+					for(l=0;l<bun[k+2*i].length;l++){
+						if(bun[k+2*i][l]==""){continue;}
+						e.innerHTML += "<font size=2><font color="+colorBun[checkedBun[k+2*i][l]]+"><b>【</b></font>"+bun[k+2*i][l]+"<font color="+colorBun[checkedBun[k+2*i][l]]+"><b>】</b></font></font>";
+					}
+					e.innerHTML += "<font size=2><br><br></font>";
+				}
+			}
+		});
+
+		//x軸
+		svg.append("g")
 		.attr({
 			class: "axis",
 			transform: "translate(0, 180)"
 		})
 		.call(xAxis);
 
-		svg2.selectAll("rect")
-		.data(dataset)
-		.enter()
-		.append("rect")
-		.attr({
-			x: padding,
-			y: function(d, i) { return i * 25; },
-			width: function(d) { return xScale(d) - padding; },
-			height: 20,
-			fill: "red"
-		});
 	}else{
+
 		//stack
 		var context = svg.append("g") //全体グラフグループ作成
 		.attr("class", "context")
@@ -65,7 +159,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 
 		var scaleY = d3.scale.linear().domain([0,6]).range([0,height0]);
 		var colors = ["#d7d7ff","#d7ffd7","#ffd7d7"];
-		var colorBun=["white","#ffdddd","#ddffdd","#ddddff"];
+
 
 		var stack = d3.layout.stack()
 		.x(function(){return 1;})
@@ -351,7 +445,7 @@ var setForViz = (name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsu
 			stackdataArr[h][3*m+2]= {x:3*m+3,y:0};
 		}
 	}
-	viz(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxmax,startTime,graph);
+	viz(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxmax,startTime,graph,checked);
 	//console.log("chboxlength2 in svg.js=%d",chboxlength2);
 	return{
 		chboxlist:chboxlist,
