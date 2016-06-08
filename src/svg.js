@@ -18,7 +18,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 
 	var margin2 = {top: 10, right: 10, bottom: 50, left: 40};
 
-	var colorBun=["white","#ffdddd","#ddffdd","#ddddff"];
+	var colorBun=["#c0c0c0","#ffc0c0","#c0ffc0","#c0c0ff"];
 
 	if(graph==3){
 
@@ -65,7 +65,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 
 		var w = width;
 		//var h = 200;
-		var padding = 20;
+		var padding = 0;
 
 
 
@@ -175,7 +175,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		.attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
 
 		var scaleY = d3.scale.linear().domain([0,6]).range([0,height0]);
-		var colors = ["#d7d7ff","#d7ffd7","#ffd7d7"];
+		var colors = ["#c0c0ff","#c0ffc0","#ffc0c0"];
 
 
 		var stack = d3.layout.stack()
