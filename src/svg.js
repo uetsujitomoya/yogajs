@@ -56,27 +56,18 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			mazekozeWhich[h]=0;
 			mazekozeColor[h]=color2[(m+1)/2];
 		}
-		alert('foo');
-		console.info(nagasa2);
-		console.info(mazekoze);
-		console.info(mazekozeWhich);
+		//console.info(nagasa2);
+		//console.info(mazekoze);
+		//console.info(mazekozeWhich);
 		console.info(mazekozeColor);
 
-		var dataset = [11, 25, 45, 30, 33];
+		//var dataset = [11, 25, 45, 30, 33];
 
-		var w = 500;
+		var w = width;
 		//var h = 200;
 		var padding = 20;
 
-		var xScale = d3.scale.linear()
-		.domain([0, d3.max(dataset)])
-		.range([padding, w  - padding])
-		.nice();
 
-
-		var xAxis = d3.svg.axis()
-		.scale(xScale)
-		.orient("bottom");
 
 
 
@@ -84,39 +75,60 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			nagasa2,
 			nagasa2
 		];//カウンセラ発言長とクライエント各文長の配列
+		console.info(dataArr);
+
+		var xScale = d3.scale.linear()
+		.domain([0, 1])
+		.range([padding, w  - padding]);
+		//.nice();
+
+
+
 
 		//if文で返す
-		var scaleX = d3.scale.linear()
-		.domain([0, 1])
-		.range([0, 180]);
-
+		//var scaleX = d3.scale.linear()
+		//.domain([0, 1])
+		//.range([0, 180]);
+		var k=0;
 		//階層構造をとるため，g要素を生成する部分とrect要素を生成している部分が連続している．
 		svg.selectAll("g")
 		.data(dataArr)
 		.enter()
 		.append("g")
-		.attr("transform", function(d,i){return "translate(0," + (i * 50) + ")";})
+		.attr("transform", function(d,i){
+			return "translate(0," + (i * 50) + ")";
+		})
 		.selectAll("rect")
 		.data(function(d){return d;})
 		.enter()
 		.append("rect")//四角追加
 		.attr("x",function(d,i){
-			var arr = this.parentNode.__data__;//親ノード(SVGGElement)に設定されている配列を取得する．
+			var arr = nagasa2;
 			var sum = d3.sum(arr);
 			var subSum = d3.sum(i==0 ? []:arr.slice(0,i));
-			return scaleX(subSum/sum) + 10;
+			console.info(xScale(subSum/sum) + 10);
+			return xScale(subSum/sum) + 10;
 		})
 		.attr("y",10)
 		.attr("width",function(d){
-			var sum = d3.sum(this.parentNode.__data__);
-			return scaleX(d/sum);
+			var sum = d3.sum(nagasa2);
+			return xScale(d/sum);
 		})
 		.attr("height",30)
 		.attr("fill", function(d, i){
-			if(d==mazekozeWhich[i] ){
+			if((k==0&& mazekozeWhich[i]==0)||(k==1&&mazekozeWhich[i]==1) ){
+				console.log(k);
+				if(i+1==mazekoze.length){
+					k++;
+				}
 				return mazekozeColor[i];
 			}else{
-				return "white";
+				console.log(i);
+				console.log(mazekoze.length);
+				if(i+1==mazekoze.length){
+					k++;
+				}
+				return "#f9f9f9";
 			}
 		})
 		.on('mouseover', function(d,i){
@@ -143,6 +155,11 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		});
 
 		//x軸
+
+		var xAxis = d3.svg.axis()
+		.scale(xScale)
+		.orient("bottom");
+
 		svg.append("g")
 		.attr({
 			class: "axis",
