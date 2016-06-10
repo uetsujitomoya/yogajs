@@ -89,7 +89,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		//var scaleX = d3.scale.linear()
 		//.domain([0, 1])
 		//.range([0, 180]);
-		var k=0;
+		let row=0;//graph3の行番号
 		//階層構造をとるため，g要素を生成する部分とrect要素を生成している部分が連続している．
 		svg.selectAll("g")
 		.data(dataArr)
@@ -116,25 +116,44 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		})
 		.attr("height",30)
 		.attr("fill", function(d, i){
-			if((k==0&& mazekozeWhich[i]==0)||(k==1&&mazekozeWhich[i]==1) ){
-				console.log(k);
+			if((row==0&& mazekozeWhich[i]==0)||(row==1&&mazekozeWhich[i]==1) ){
 				if(i+1==mazekoze.length){
-					k++;
+					row++;
 				}
 				return mazekozeColor[i];
 			}else{
-				console.log(i);
-				console.log(mazekoze.length);
 				if(i+1==mazekoze.length){
-					k++;
+					row++;
 				}
 				return "#f9f9f9";
 			}
 		})
 		.on('mouseover', function(d,i){
 			var e = document.getElementById('msg');
-			var k,l;
+			let k,l;
 			e.innerHTML = "";
+			if(mazekozeWhich[i]==0){
+				for(k=-4;k<=4;k++){
+					if(i+k<0||i+k>=hatsugen.length){
+						continue;
+					}
+					if(k==0){
+						e.innerHTML += "<b><u><font size=3>"+(1+2*i)+"(T) <font color="+color2[i]+">【</font>"+hatsugen[2*i]+"<font color="+color2[i]+">】</font></font></u></b><font size=2><br><br></font>";
+					}else if(k%2==0){
+						e.innerHTML += "<font size=2>"+(1+k+2*i)+"(T) <font color="+color2[k/2+i]+"><b>【</b></font>"+hatsugen[k+2*i]+"<font color="+color2[k/2+i]+"><b>】</b></font><br><br></font>";
+					}else{
+						e.innerHTML += (1+k+2*i)+"(C) ";
+						for(l=0;l<bun[k+2*i].length;l++){
+							if(bun[k+2*i][l]==""){continue;}
+							e.innerHTML += "<font size=2><font color="+colorBun[checkedBun[k+2*i][l]]+"><b>【</b></font>"+bun[k+2*i][l]+"<font color="+colorBun[checkedBun[k+2*i][l]]+"><b>】</b></font></font>";
+						}
+						e.innerHTML += "<font size=2><br><br></font>";
+					}
+				}
+			}else{
+
+			}
+			/*
 			for(k=-3;k<=3;k++){
 				if(2*(i)+k<0||2*(i)+k>=hatsugen.length){
 					continue;
@@ -152,6 +171,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 					e.innerHTML += "<font size=2><br><br></font>";
 				}
 			}
+			*/
 		});
 
 		//x軸
