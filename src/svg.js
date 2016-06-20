@@ -26,12 +26,14 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		var mazekoze=[];//カウンセラーを発言毎に、クライエントを文ごとに収録
 		var mazekozeWhich=[];//カウンセラーなら0
 		let mazekozeColor=[];
+		let mazekozeHatsugenNumber=[];
 		let h=0;
 		//初手カウンセラー
 		nagasa2[0]=hatsugen[0].length*width/bunsuu;
 		mazekoze[0]=hatsugen[0];
 		mazekozeWhich[0]=0;
 		mazekozeColor[0]=color2[0];
+		mazekozeHatsugenNumber[0]=[0];
 		let c=0;
 
 		for(m=1;m<hatsugen.length;m=m+2){
@@ -43,6 +45,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 					mazekoze[h]=d;
 					mazekozeWhich[h]=1;
 					mazekozeColor[h]=colorBun[checked[c]];
+					mazekozeHatsugenNumber[h]=m;
 					h++;
 					c++;
 				}
@@ -55,6 +58,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			mazekoze[h]=hatsugen[m+1];
 			mazekozeWhich[h]=0;
 			mazekozeColor[h]=color2[(m+1)/2];
+			mazekozeHatsugenNumber[h]=m+1;
 		}
 		//console.info(nagasa2);
 		//console.info(mazekoze);
@@ -132,20 +136,43 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			var e = document.getElementById('msg');
 			let k,l;
 			e.innerHTML = "";
+			/*
+			var signal = "blue";
+
+			switch (signal) {
+			case "red":
+			console.log("stop!");
+			break;
+
+			case "green":
+			case "blue":
+			console.log("go!");
+			break;
+
+			case "yellow":
+			console.log("slow down!");
+			break;
+
+			default:
+			console.log("wrong signal");
+			break;
+			*}
+			*/
+
 			if(mazekozeWhich[i]==0){
-				for(k=-4;k<=4;k++){
-					if(i+k<0||i+k>=hatsugen.length){
+				for(k=-3;k<=3;k++){
+					if(2*(mazekozeHatsugenNumber[i])+k<0||2*(mazekozeHatsugenNumber[i])+k>=hatsugen.length){
 						continue;
 					}
 					if(k==0){
-						e.innerHTML += "<b><u><font size=3>"+(1+2*i/2)+"(T) <font color="+color2[i/2]+">【</font>"+hatsugen[2*i/2]+"<font color="+color2[i/2]+">】</font></font></u></b><font size=2><br><br></font>";
+						e.innerHTML += "<b><u><font size=3>"+(1+2*mazekozeHatsugenNumber[i])+"(T) <font color="+color2[mazekozeHatsugenNumber[i]]+">【</font>"+hatsugen[2*mazekozeHatsugenNumber[i]]+"<font color="+color2[mazekozeHatsugenNumber[i]]+">】</font></font></u></b><font size=2><br><br></font>";
 					}else if(k%2==0){
-						e.innerHTML += "<font size=2>"+(1+k+2*i/2)+"(T) <font color="+color2[k/2+i/2]+"><b>【</b></font>"+hatsugen[k+2*i/2]+"<font color="+color2[k/2+i/2]+"><b>】</b></font><br><br></font>";
-					}else{
-						e.innerHTML += (1+k+2*i/2)+"(C) ";
-						for(l=0;l<bun[k+2*i/2].length;l++){
-							if(bun[k+2*i/2][l]==""){continue;}
-							e.innerHTML += "<font size=2><font color="+colorBun[checkedBun[k+2*i/2][l]]+"><b>【</b></font>"+bun[k+2*i/2][l]+"<font color="+colorBun[checkedBun[k+2*i/2][l]]+"><b>】</b></font></font>";
+						e.innerHTML += "<font size=2>"+(1+k+2*mazekozeHatsugenNumber[i])+"(T) <font color="+color2[k/2+mazekozeHatsugenNumber[i]]+"><b>【</b></font>"+hatsugen[k+2*mazekozeHatsugenNumber[i]]+"<font color="+color2[k/2+mazekozeHatsugenNumber[i]]+"><b>】</b></font><br><br></font>";
+					}else{//forループを回さないと各文ごとの表示ができない
+						e.innerHTML += (1+k+2*mazekozeHatsugenNumber[i])+"(C) ";
+						for(l=0;l<bun[k+2*mazekozeHatsugenNumber[i]].length;l++){
+							if(bun[k+2*mazekozeHatsugenNumber[i]][l]==""){continue;}
+							e.innerHTML += "<font size=2><font color="+colorBun[checkedBun[k+2*mazekozeHatsugenNumber[i]][l]]+"><b>【</b></font>"+bun[k+2*mazekozeHatsugenNumber[i]][l]+"<font color="+colorBun[checkedBun[k+2*mazekozeHatsugenNumber[i]][l]]+"><b>】</b></font></font>";
 						}
 						e.innerHTML += "<font size=2><br><br></font>";
 					}
@@ -153,22 +180,22 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			}
 			/*
 			for(k=-3;k<=3;k++){
-				if(2*(i)+k<0||2*(i)+k>=hatsugen.length){
-					continue;
-				}
-				if(k==0){
-					e.innerHTML += "<b><u><font size=3>"+(1+2*i)+"(T) <font color="+color2[i]+">【</font>"+hatsugen[2*i]+"<font color="+color2[i]+">】</font></font></u></b><font size=2><br><br></font>";
-				}else if(k%2==0){
-					e.innerHTML += "<font size=2>"+(1+k+2*i)+"(T) <font color="+color2[k/2+i]+"><b>【</b></font>"+hatsugen[k+2*i]+"<font color="+color2[k/2+i]+"><b>】</b></font><br><br></font>";
-				}else{
-					e.innerHTML += (1+k+2*i)+"(C) ";
-					for(l=0;l<bun[k+2*i].length;l++){
-						if(bun[k+2*i][l]==""){continue;}
-						e.innerHTML += "<font size=2><font color="+colorBun[checkedBun[k+2*i][l]]+"><b>【</b></font>"+bun[k+2*i][l]+"<font color="+colorBun[checkedBun[k+2*i][l]]+"><b>】</b></font></font>";
-					}
-					e.innerHTML += "<font size=2><br><br></font>";
-				}
-			}
+			if(2*(i)+k<0||2*(i)+k>=hatsugen.length){
+			continue;
+			*}
+			if(k==0){
+			e.innerHTML += "<b><u><font size=3>"+(1+2*i)+"(T) <font color="+color2[i]+">【</font>"+hatsugen[2*i]+"<font color="+color2[i]+">】</font></font></u></b><font size=2><br><br></font>";
+			*}else if(k%2==0){
+			e.innerHTML += "<font size=2>"+(1+k+2*i)+"(T) <font color="+color2[k/2+i]+"><b>【</b></font>"+hatsugen[k+2*i]+"<font color="+color2[k/2+i]+"><b>】</b></font><br><br></font>";
+			*}else{
+			e.innerHTML += (1+k+2*i)+"(C) ";
+			for(l=0;l<bun[k+2*i].length;l++){
+			if(bun[k+2*i][l]==""){continue;}
+			e.innerHTML += "<font size=2><font color="+colorBun[checkedBun[k+2*i][l]]+"><b>【</b></font>"+bun[k+2*i][l]+"<font color="+colorBun[checkedBun[k+2*i][l]]+"><b>】</b></font></font>";
+			*}
+			e.innerHTML += "<font size=2><br><br></font>";
+			*}
+			*}
 			*/
 		});
 
@@ -247,7 +274,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 					e.innerHTML += "<b><u><font size=3>"+(1+2*i)+"(T) <font color="+color2[i]+">【</font>"+hatsugen[2*i]+"<font color="+color2[i]+">】</font></font></u></b><font size=2><br><br></font>";
 				}else if(k%2==0){
 					e.innerHTML += "<font size=2>"+(1+k+2*i)+"(T) <font color="+color2[k/2+i]+"><b>【</b></font>"+hatsugen[k+2*i]+"<font color="+color2[k/2+i]+"><b>】</b></font><br><br></font>";
-				}else{
+				}else{//forループを回さないと各文ごとの表示ができない
 					e.innerHTML += (1+k+2*i)+"(C) ";
 					for(l=0;l<bun[k+2*i].length;l++){
 						if(bun[k+2*i][l]==""){continue;}
