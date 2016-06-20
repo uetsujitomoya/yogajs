@@ -33,7 +33,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		mazekoze[0]=hatsugen[0];
 		mazekozeWhich[0]=0;
 		mazekozeColor[0]=color2[0];
-		mazekozeHatsugenNumber[0]=[0];
+		mazekozeHatsugenNumber[0]=0;
 		let c=0;
 
 		for(m=1;m<hatsugen.length;m=m+2){
