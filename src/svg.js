@@ -138,20 +138,18 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 						continue;
 					}
 					if(k==0){
-						e.innerHTML += "<b><u><font size=3>"+(1+2*i)+"(T) <font color="+color2[i]+">【</font>"+hatsugen[2*i]+"<font color="+color2[i]+">】</font></font></u></b><font size=2><br><br></font>";
+						e.innerHTML += "<b><u><font size=3>"+(1+2*i/2)+"(T) <font color="+color2[i/2]+">【</font>"+hatsugen[2*i/2]+"<font color="+color2[i/2]+">】</font></font></u></b><font size=2><br><br></font>";
 					}else if(k%2==0){
-						e.innerHTML += "<font size=2>"+(1+k+2*i)+"(T) <font color="+color2[k/2+i]+"><b>【</b></font>"+hatsugen[k+2*i]+"<font color="+color2[k/2+i]+"><b>】</b></font><br><br></font>";
+						e.innerHTML += "<font size=2>"+(1+k+2*i/2)+"(T) <font color="+color2[k/2+i/2]+"><b>【</b></font>"+hatsugen[k+2*i/2]+"<font color="+color2[k/2+i/2]+"><b>】</b></font><br><br></font>";
 					}else{
-						e.innerHTML += (1+k+2*i)+"(C) ";
-						for(l=0;l<bun[k+2*i].length;l++){
-							if(bun[k+2*i][l]==""){continue;}
-							e.innerHTML += "<font size=2><font color="+colorBun[checkedBun[k+2*i][l]]+"><b>【</b></font>"+bun[k+2*i][l]+"<font color="+colorBun[checkedBun[k+2*i][l]]+"><b>】</b></font></font>";
+						e.innerHTML += (1+k+2*i/2)+"(C) ";
+						for(l=0;l<bun[k+2*i/2].length;l++){
+							if(bun[k+2*i/2][l]==""){continue;}
+							e.innerHTML += "<font size=2><font color="+colorBun[checkedBun[k+2*i/2][l]]+"><b>【</b></font>"+bun[k+2*i/2][l]+"<font color="+colorBun[checkedBun[k+2*i/2][l]]+"><b>】</b></font></font>";
 						}
 						e.innerHTML += "<font size=2><br><br></font>";
 					}
 				}
-			}else{
-
 			}
 			/*
 			for(k=-3;k<=3;k++){
@@ -231,6 +229,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			return nagasa[i];
 		}).attr("y1", 0)
 		.attr("x2", function(d,i){return nagasa[i];}).attr("y2", height0);
+
 		context.selectAll("line")
 		.attr("stroke", function(d,i){return color2[i];})
 		.attr("stroke-width", function(d,i){
