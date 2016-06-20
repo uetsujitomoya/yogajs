@@ -161,18 +161,18 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 
 			if(mazekozeWhich[i]==0){
 				for(k=-3;k<=3;k++){
-					if(2*(mazekozeHatsugenNumber[i])+k<0||2*(mazekozeHatsugenNumber[i])+k>=hatsugen.length){
+					if(mazekozeHatsugenNumber[i]+k<0||mazekozeHatsugenNumber[i]+k>=hatsugen.length){
 						continue;
 					}
 					if(k==0){
-						e.innerHTML += "<b><u><font size=3>"+(1+2*mazekozeHatsugenNumber[i])+"(T) <font color="+color2[mazekozeHatsugenNumber[i]]+">【</font>"+hatsugen[2*mazekozeHatsugenNumber[i]]+"<font color="+color2[mazekozeHatsugenNumber[i]]+">】</font></font></u></b><font size=2><br><br></font>";
+						e.innerHTML += "<b><u><font size=3>"+(1+mazekozeHatsugenNumber[i])+"(T) <font color="+color2[mazekozeHatsugenNumber[i]/2]+">【</font>"+hatsugen[mazekozeHatsugenNumber[i]]+"<font color="+color2[mazekozeHatsugenNumber[i]/2]+">】</font></font></u></b><font size=2><br><br></font>";
 					}else if(k%2==0){
-						e.innerHTML += "<font size=2>"+(1+k+2*mazekozeHatsugenNumber[i])+"(T) <font color="+color2[k/2+mazekozeHatsugenNumber[i]]+"><b>【</b></font>"+hatsugen[k+2*mazekozeHatsugenNumber[i]]+"<font color="+color2[k/2+mazekozeHatsugenNumber[i]]+"><b>】</b></font><br><br></font>";
+						e.innerHTML += "<font size=2>"+(1+k+mazekozeHatsugenNumber[i])+"(T) <font color="+color2[k/2+mazekozeHatsugenNumber[i]/2]+"><b>【</b></font>"+hatsugen[k+mazekozeHatsugenNumber[i]]+"<font color="+color2[k/2+mazekozeHatsugenNumber[i]/2]+"><b>】</b></font><br><br></font>";
 					}else{//forループを回さないと各文ごとの表示ができない
-						e.innerHTML += (1+k+2*mazekozeHatsugenNumber[i])+"(C) ";
-						for(l=0;l<bun[k+2*mazekozeHatsugenNumber[i]].length;l++){
-							if(bun[k+2*mazekozeHatsugenNumber[i]][l]==""){continue;}
-							e.innerHTML += "<font size=2><font color="+colorBun[checkedBun[k+2*mazekozeHatsugenNumber[i]][l]]+"><b>【</b></font>"+bun[k+2*mazekozeHatsugenNumber[i]][l]+"<font color="+colorBun[checkedBun[k+2*mazekozeHatsugenNumber[i]][l]]+"><b>】</b></font></font>";
+						e.innerHTML += (1+k+mazekozeHatsugenNumber[i])+"(C) ";
+						for(l=0;l<bun[k+mazekozeHatsugenNumber[i]].length;l++){
+							if(bun[k+mazekozeHatsugenNumber[i]][l]==""){continue;}
+							e.innerHTML += "<font size=2><font color="+colorBun[checkedBun[k+mazekozeHatsugenNumber[i]][l]]+"><b>【</b></font>"+bun[k+mazekozeHatsugenNumber[i]][l]+"<font color="+colorBun[checkedBun[k+mazekozeHatsugenNumber[i]][l]]+"><b>】</b></font></font>";
 						}
 						e.innerHTML += "<font size=2><br><br></font>";
 					}
