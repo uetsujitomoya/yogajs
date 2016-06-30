@@ -263,11 +263,11 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			}
 		});
 /////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////変更部分
 		var datae = [];
 		var jj;
 		for (jj=0; jj<nagasa.length; jj++){
-		 datae[jj] = {x: nagasa[jj], y:30, color: color2[jj]};
+		 datae[jj] = {x: nagasa[jj], y:30, color: color2[jj], text: 'a'};//F_color2moji(color2[jj)};
 		}
 			context.selectAll('circle')
 			.data(datae)
@@ -276,9 +276,37 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			.attr({
 			cx: (d) => d.x,
 			cy: (d) => d.y,
-			r: 30
+			r: 10
 			})
 			.style('fill', (d) => d.color);
+			
+			context.selectAll('text')
+			.data(datae)
+			.enter()
+			.append('text')
+			.text((d)=> d.text)
+			.attr({
+			x: (d) => d.x+10,
+			y: (d) => d.y,
+			})
+			;
+
+			//.style('fill', (d) => d.color)
+			
+			
+			/*
+		var F_color2moji = (colorA)=>{
+		if(colorA == "#b52f25"){
+			return "開かれた質問";
+		}else if(colorA == "purple"){
+			return = "解釈";
+		}else if(colorA == "#2b4e91"){
+			return = "閉じられた質問";
+		}else if(colorA =="orange"){
+			return = "解釈";
+		}else{return = "世間話";}
+		}
+		*/
 ////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////
 		var scaleX2 = d3.scale.linear().domain([0,bunsuu]).range([0,width]);
