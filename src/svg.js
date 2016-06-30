@@ -207,12 +207,15 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 
 		var area0 = d3.svg.area()
 		.x(function(d,i){
-			if(i%3==0){return nagasa[i/3];}else if(i%3==1){return nagasa[(i-1)/3+1]-3;}else{return nagasa[(i-2)/3+1]-2;}
+			if(i%3==0){return nagasa[i/3];}
+			else if(i%3==1){return nagasa[(i-1)/3+1]-3;}
+			else{return nagasa[(i-2)/3+1]-2;}
 
 		})//nagasa[i]+nagasa[i+1])/2
 		.y0(function(){return height0;})
 		.y1(function(d){return height0 - scaleY(d.y+d.y0);});
 
+		
 
 
 		context.selectAll("path")
@@ -231,6 +234,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			return nagasa[i];
 		}).attr("y1", 0)
 		.attr("x2", function(d,i){return nagasa[i];}).attr("y2", height0);
+		
 		context.selectAll("line")
 		.attr("stroke", function(d,i){return color2[i];})
 		.attr("stroke-width", function(d,i){
@@ -258,7 +262,25 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 				}
 			}
 		});
-
+/////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+		var datae = [];
+		var jj;
+		for (jj=0; jj<nagasa.length; jj++){
+		 datae[jj] = {x: nagasa[jj], y:30, color: color2[jj]};
+		}
+			context.selectAll('circle')
+			.data(datae)
+			.enter()
+			.append('circle')
+			.attr({
+			cx: (d) => d.x,
+			cy: (d) => d.y,
+			r: 30
+			})
+			.style('fill', (d) => d.color);
+////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
 		var scaleX2 = d3.scale.linear().domain([0,bunsuu]).range([0,width]);
 		var scaleY2 = d3.scale.linear().domain([0,RGBmaxmax]).range([height,0]);
 		var yAxisC = d3.svg.axis().scale(scaleY2).orient("left");//focus

@@ -34,6 +34,10 @@
     fill-opacity: .125;
     shape-rendering: crispEdges;
   }
+  .B {
+	display: inline;
+}
+
   </style>
 </head>
 <body><font size="2">
@@ -49,14 +53,14 @@
 
   <font size=3 color=dimgray><b><u><font color=black size=4>左下</font></u></b>のエリアで、クライエントが発した文/カウンセラーが発した質問について分類してください。グラフの<b><u><font color=black size=4>縦棒</font></u></b>をマウスオーバーすると<b><u><font color=black size=4>右下</font></u></b>のエリアに縦棒周辺の内容が表示されます</font><br><br>
 
-  <div style="border-style: solid; border-width: 1px; border-color:#F4F4F4; height:300px; width:650px; overflow-y:scroll; float:left">
+ <div id="A" style="display: inline-block; _display: inline; border-style: solid; border-width: 1px; border-color:#F4F4F4; height:300px; width:650px; overflow-y:scroll; float:left">
     <form name="form1" id="chbox" action="">
       <div id="radio_buttons"></div>
     </form>
   </div>
-  <div id="msg" style="border-style: solid; border-width: 1px; border-color:#f4f4f4; height:300px; width:600px; overflow-y:scroll"></div>
-
-
+  <div id="msg" style="display: inline-block; _display: inline; border-style: solid; border-width: 1px; border-color:#f4f4f4; height:300px; width:600px; overflow-y:scroll">
+  </div>
+<!--display: inline_block _display: inline;-->
   <script language="javascript" src="bundle.js"></script>
 
 </body>

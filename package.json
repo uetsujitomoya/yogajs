@@ -4,7 +4,7 @@
   "description": "first.",
   "main": "index.js",
   "scripts": {
-    "build": "node_modules¥.bin¥browserify src/index.js -o app/bundle.js -t babelify",
+    "build": "browserify src/index.js -o app/bundle.js -t babelify",
     "build2": "browserify src/index2.js -o app/bundle2.js -t babelify",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build2015": "browserify src/index.js -o app/bundle.js -t [ babelify --presets [ es2015 ] ]"
