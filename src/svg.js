@@ -60,15 +60,10 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			mazekozeColor[h]=color2[(m+1)/2];
 			mazekozeHatsugenNumber[h]=m+1;
 		}
-		//console.info(nagasa2);
-		//console.info(mazekoze);
-		//console.info(mazekozeWhich);
 		console.info(mazekozeColor);
 
-		//var dataset = [11, 25, 45, 30, 33];
 
 		var w = width;
-		//var h = 200;
 		var padding = 0;
 
 
@@ -258,7 +253,12 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		.attr("x2", function(d,i){return nagasa[i];}).attr("y2", height0);
 
 		context.selectAll("line")
-		.attr("stroke", function(d,i){return color2[i];})
+		.attr("stroke", function(d,i){
+			console.info("d");
+			console.info(d);
+			console.info(i);
+			return color2[i];
+		})
 		.attr("stroke-width", function(d,i){
 			return(Math.sqrt(keitaisokaiseki[2*i].length));
 		})
@@ -451,17 +451,18 @@ var setForViz = (name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsu
 	}
 	for(c=0;c<checked2.length;c++){
 		if(checked2[c]==3){
-			color2[c]="#b52f25";
+			color2[c]="#c0392b";
 		}else if(checked2[c]==5){
-			color2[c]="purple";
+			color2[c]="#9b59b6";
 		}else if(checked2[c]==4){
-			color2[c]="#2b4e91";
+			color2[c]="#2980b9";
 		}else if(checked2[c]==6){
-			color2[c]="orange";
+			color2[c]="#f1c40f";
 		}else{
-			color2[c]="black";
+			color2[c]="#2c3e50";
 		}
 	}
+	console.info(color2);
 
 	var RGBmax=[];
 	var RGBmaxmax=1;
