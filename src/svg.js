@@ -264,12 +264,41 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		});
 /////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////変更部分
+		/*
+		var F_color2moji = (colorA)=>{
+		if(colorA == "#b52f25"){
+			return 'a';//開かれた質問;
+		}else if(colorA == "purple"){
+			return  'a';//"解釈";
+		}else if(colorA == "#2b4e91"){
+			return  'b';//"閉じられた質問";
+		}else if(colorA =="orange"){
+			return  '解釈';
+		}else{return  '世間話';}
+		}
+		*/
 		var datae = [];
 		var jj;
+		var mojia = [];
+		mojia[2]='ha';
+		
 		for (jj=0; jj<nagasa.length; jj++){
-		datae[jj] = {x: nagasa[jj], y:30, color: color2[jj],text:'b'}//F_color2moji(color2[jj])}//, text:a} //F_color2moji(color2[jj])};//F_color2moji(color2[jj)};
+		if(color2[jj] == "#b52f25"){
+			mojia[jj]='開かれた質問';
+		}else if(color2[jj] == "purple"){
+			mojia[jj]="解釈";
+		}else if(color2[jj] == "#2b4e91"){
+			mojia[jj]="閉じられた質問";
+		}else if(color2[jj] =="orange"){
+			mojia[jj]='解釈';
+		}else{mojia[jj]='世間話'}
+		
 		}
-			context.selectAll('circle')
+		
+		for (jj=0; jj<nagasa.length; jj++){
+		datae[jj] = {x: nagasa[jj], y:10, color: color2[jj],text:mojia[jj]};//moji[jj]}//F_color2moji(color2[jj])}//, text:a}
+		}
+		context.selectAll('circle')
 			.data(datae)
 			.enter()
 			.append('circle')
@@ -286,26 +315,15 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			.append('text')
 			.text((d)=> d.text)
 			.attr({
-			x: (d) => d.x+9,
-			y: (d) => d.y,
+			x: (d) => d.x+5,
+			y: (d) => d.y+20,
 			})
 			;
 
 			//.style('fill', (d) => d.color)
 			
 			
-			
-		var F_color2moji = (colorA)=>{
-		if(colorA == "#b52f25"){
-			return 'a;'//開かれた質問;
-		}else if(colorA == "purple"){
-			return  'a';//"解釈";
-		}else if(colorA == "#2b4e91"){
-			return  'b';//"閉じられた質問";
-		}else if(colorA =="orange"){
-			return  '解釈';
-		}else{return  '世間話';}
-		}
+		
 		
 ////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////
