@@ -284,17 +284,36 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		
 		for (jj=0; jj<nagasa.length; jj++){
 		if(color2[jj] == "#b52f25"){
-			mojia[jj]='開かれた質問';
+			mojia[jj]='開 質問';
 		}else if(color2[jj] == "purple"){
-			mojia[jj]="解釈";
+			mojia[jj]="相槌";
 		}else if(color2[jj] == "#2b4e91"){
-			mojia[jj]="閉じられた質問";
+			mojia[jj]="閉 質問";
 		}else if(color2[jj] =="orange"){
 			mojia[jj]='解釈';
 		}else{mojia[jj]='世間話'}
 		
 		}
-		
+		/*
+		var sizeA = {
+		  width: 600,
+		  height:600
+		};
+			var	pie   = d3.layout.pie().value(function(d){ return d; }),
+				arc   = d3.svg.arc().innerRadius(0).outerRadius(sizeA.width / 2);
+			var datapi = [20,60,20];	
+			
+			context.selectALL(".arc")
+			.data(pie(data))
+			.enter()
+			.append("g")
+			.attr("transform", "translate(" + (sizeA.width / 2) + "," + (sizeA.height / 2) + ")")
+			.attr("class", "arc");
+			g.append("path")
+		  .attr("d", arc)
+		  .attr("stroke", "white");
+		*/
+	
 		for (jj=0; jj<nagasa.length; jj++){
 		datae[jj] = {x: nagasa[jj], y:10, color: color2[jj],text:mojia[jj]};//moji[jj]}//F_color2moji(color2[jj])}//, text:a}
 		}
@@ -314,17 +333,25 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			.enter()
 			.append('text')
 			.text((d)=> d.text)
+			.style("font-size",10)
 			.attr({
-			x: (d) => d.x+5,
-			y: (d) => d.y+20,
+			x: (d) => d.x+3,
+			y: (d) => d.y+25,
+			fill: (d) => d.color,
+			})
+			;			
+			
+			/*
+			context.selectALL('path')
+			.enter()
+			.append('path')
+			.attr({
+				cx: 10,
+				cy: 10,
+				r:10
 			})
 			;
-
-			//.style('fill', (d) => d.color)
-			
-			
-		
-		
+		*/
 ////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////
 		var scaleX2 = d3.scale.linear().domain([0,bunsuu]).range([0,width]);
