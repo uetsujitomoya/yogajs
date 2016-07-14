@@ -64,7 +64,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 
 
 		var w = width;
-		var padding = 0;
+		var padding = 10;
 
 
 
@@ -206,6 +206,22 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			transform: "translate(0, 180)"
 		})
 		.call(xAxis);
+
+		d3.select("svg")
+		.append("text")
+		.attr({
+			x:0,
+			y:20
+		})
+		.text("S");
+
+		d3.select("svg")
+		.append("text")
+		.attr({
+			x:0,
+			y:70
+		})
+		.text("C");
 
 	}else{
 
