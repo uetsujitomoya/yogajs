@@ -25,6 +25,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		var nagasa2=[];//区分
 		var mazekoze=[];//カウンセラーを発言毎に、クライエントを文ごとに収録
 		var mazekozeWhich=[];//カウンセラーなら0
+		
 		let mazekozeColor=[];
 		let h=0;
 		//初手カウンセラー
@@ -68,9 +69,6 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		var padding = 0;
 
 
-
-
-
 		var dataArr = [
 			nagasa2,
 			nagasa2
@@ -82,6 +80,29 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		.range([padding, w  - padding]);
 		//.nice();
 
+////////////////////////////////////////////////////////////////
+		var datae = [];
+		var jj;
+		var mojia = [];
+		
+		for (jj=0; jj<nagasa2.length; jj++){
+		if(color2[jj] == "#b52f25"){
+			mojia[jj]='開 質問';
+		}else if(color2[jj] == "purple"){
+			mojia[jj]="相槌";
+		}else if(color2[jj] == "#2b4e91"){
+			mojia[jj]="閉 質問";
+		}else if(color2[jj] =="orange"){
+			mojia[jj]='解釈';
+		}else{mojia[jj]='世間話'}
+		}
+		
+		for (jj=0; jj<nagasa2.length; jj++){
+		datae[jj] = {x: nagasa2[jj], y:40, color: mazekozeColor[jj],text:mojia[jj],which:mazekozeWhich[jj]};//moji[jj]}//F_color2moji(color2[jj])}//, text:a}
+		}
+		console.log(datae.length);
+		console.log(nagasa2.length);
+///////////////////////////////////////////////////////
 
 
 
@@ -96,7 +117,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		.enter()
 		.append("g")
 		.attr("transform", function(d,i){
-			return "translate(0," + (i * 50) + ")";
+			return "translate(0," + (i * 80) + ")";
 		})
 		.selectAll("rect")
 		.data(function(d){return d;})
@@ -114,7 +135,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			var sum = d3.sum(nagasa2);
 			return xScale(d/sum);
 		})
-		.attr("height",30)
+		.attr("height",50)
 		.attr("fill", function(d, i){
 			if((row==0&& mazekozeWhich[i]==0)||(row==1&&mazekozeWhich[i]==1) ){
 				if(i+1==mazekoze.length){
@@ -129,49 +150,32 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			}
 		})
 /////////////////////////////////////////////////////////////////////
-
-		var datae = [];
-		var jj;
-		var mojia = [];
-		mojia[2]='ha';
-		
-		for (jj=0; jj<nagasa.length; jj++){
-		if(color2[jj] == "#b52f25"){
-			mojia[jj]='開 質問';
-		}else if(color2[jj] == "purple"){
-			mojia[jj]="相槌";
-		}else if(color2[jj] == "#2b4e91"){
-			mojia[jj]="閉 質問";
-		}else if(color2[jj] =="orange"){
-			mojia[jj]='解釈';
-		}else{mojia[jj]='世間話'}
-		}
-				
-		for (jj=0; jj<nagasa.length; jj++){
-		datae[jj] = {x: nagasa[jj], y:40, color: color2[jj],text:mojia[jj]};//moji[jj]}//F_color2moji(color2[jj])}//, text:a}
-		}
-		svg.selectAll('circle')
-			.data(datae)
-			.enter()
-			.append('circle')
-			.attr({
-			cx: (d) => d.x,
-			cy: (d) => d.y,
-			r: 50
-			})
-			.style('fill', (d) => d.color);
-			/*
+/*
+		svg.selectAll("g")
+		.data(dataArr)
+		.enter()
+		.append("g")
+		.attr("transform", function(d){
+			return "translate(0," + (i * 80) + ")";
+		})*/
 			svg.selectAll('text')
 			.data(datae)
 			.enter()
 			.append('text')
-			.text((d)=> d.text)
-			.style("font-size",10)
-			.attr({
-			x: (d) => d.x+3,
-			y: (d) => d.y+25,
-			fill: (d) => d.color,
-			});		
+			.text(d.text)
+			.style("font-size",20)
+			
+			.attr("x",function(d,i){
+			var arr = nagasa2;
+			var sum = d3.sum(arr);
+			var subSum = d3.sum(i==0 ? []:arr.slice(0,i));
+			console.info(xScale(subSum/sum) + 10);
+			return xScale(subSum/sum) + 10;
+		})
+		.attr({
+		y:40,
+		})
+
 ///////////////////////*//////////////////////////////////////////////		
 		
 		
