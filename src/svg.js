@@ -94,7 +94,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			mojia[jj]="閉 質問";
 		}else if(color2[jj] =="orange"){
 			mojia[jj]='解釈';
-		}else{mojia[jj]='世間話'}
+		}else{mojia[jj]='世間話';}
 		}
 		
 		for (jj=0; jj<nagasa2.length; jj++){
@@ -148,7 +148,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 				}
 				return "#f9f9f9";
 			}
-		})
+		});
 /////////////////////////////////////////////////////////////////////
 /*
 		svg.selectAll("g")
@@ -162,7 +162,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			.data(datae)
 			.enter()
 			.append('text')
-			.text(d.text)
+			.text((d)=>d.text)
 			.style("font-size",20)
 			
 			.attr("x",function(d,i){
@@ -173,7 +173,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			return xScale(subSum/sum) + 10;
 		})
 		.attr({
-		y:40,
+		y:40
 		})
 
 ///////////////////////*//////////////////////////////////////////////		
