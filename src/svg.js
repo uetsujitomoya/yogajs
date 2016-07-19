@@ -105,7 +105,6 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			var arr = nagasa2;
 			var sum = d3.sum(arr);
 			var subSum = d3.sum(i==0 ? []:arr.slice(0,i));
-			console.info(xScale(subSum/sum) + 10);
 			return xScale(subSum/sum) + 10;
 		})
 		.attr("y",10)
@@ -213,7 +212,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			x:0,
 			y:20
 		})
-		.text("S");
+		.text("T");
 
 		d3.select("svg")
 		.append("text")
@@ -270,9 +269,6 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 
 		context.selectAll("line")
 		.attr("stroke", function(d,i){
-			console.info("d");
-			console.info(d);
-			console.info(i);
 			return color2[i];
 		})
 		.attr("stroke-width", function(d,i){
