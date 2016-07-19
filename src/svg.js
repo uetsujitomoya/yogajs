@@ -74,10 +74,9 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			nagasa2,
 			nagasa2
 		];//カウンセラ発言長とクライエント各文長の配列
-		console.info(dataArr);
 
 		var xScale = d3.scale.linear()
-		.domain([0, 1])
+		.domain([0, d3.sum(nagasa2)])
 		.range([padding, w  - padding]);
 		//.nice();
 
@@ -103,14 +102,14 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		.append("rect")//四角追加
 		.attr("x",function(d,i){
 			var arr = nagasa2;
-			var sum = d3.sum(arr);
+			//var sum = d3.sum(arr);
 			var subSum = d3.sum(i==0 ? []:arr.slice(0,i));
-			return xScale(subSum/sum) + 10;
+			return xScale(subSum) + 10;
 		})
 		.attr("y",10)
 		.attr("width",function(d){
-			var sum = d3.sum(nagasa2);
-			return xScale(d/sum);
+			//var sum = d3.sum(nagasa2);
+			return xScale(d);
 		})
 		.attr("height",30)
 		.attr("fill", function(d, i){
