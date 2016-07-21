@@ -81,10 +81,12 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		//.nice();
 
 ////////////////////////////////////////////////////////////////
+	
 		var datae = [];
 		var jj;
 		var mojia = [];
-		
+		var jjj=0;
+		/*
 		for (jj=0; jj<nagasa2.length; jj++){
 		if(color2[jj] == "#b52f25"){
 			mojia[jj]='開 質問';
@@ -96,12 +98,33 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			mojia[jj]='解釈';
 		}else{mojia[jj]='世間話';}
 		}
+		*/
+		for (jj=0; jj<nagasa2.length; jj++){
+		if(mazekozeColor[jj] == "#b52f25"){
+			mojia[jj]='開 質問';
+		}else if(mazekozeColor[jj] == "purple"){
+			mojia[jj]="相槌";
+		}else if(mazekozeColor[jj] == "#2b4e91"){
+			mojia[jj]="閉 質問";
+		}else if(mazekozeColor[jj] =="orange"){
+			mojia[jj]='解釈';
+		}else if(checked[jjj]==0){mojia[jj]='未分類';jjj++;
+		}else if(checked[jjj]==1){mojia[jj]='愛';jjj++
+		}else if(checked[jjj]==2){mojia[jj]='交友';jjj++
+		}else if(checked[jjj]==3){mojia[jj]='仕事';jjj++}
+		
+		
+		
+		else{mojia[jj]='世間話';}
+		}
 		
 		for (jj=0; jj<nagasa2.length; jj++){
 		datae[jj] = {x: nagasa2[jj], y:40, color: mazekozeColor[jj],text:mojia[jj],which:mazekozeWhich[jj]};//moji[jj]}//F_color2moji(color2[jj])}//, text:a}
 		}
-		console.log(datae.length);
-		console.log(nagasa2.length);
+		
+		
+	//	console.log(datae.length);
+	//	console.log(nagasa2.length);
 ///////////////////////////////////////////////////////
 
 
@@ -150,32 +173,41 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			}
 		});
 /////////////////////////////////////////////////////////////////////
-/*
+	
 		svg.selectAll("g")
-		.data(dataArr)
+		.data(datae)
 		.enter()
 		.append("g")
+		/*
 		.attr("transform", function(d){
-			return "translate(0," + (i * 80) + ")";
-		})*/
-			svg.selectAll('text')
+			if(d.which==1){
+			return "translate(0," + (d.which * 120) + ")";
+			}else{
+				return"translate(0," + (d.which * 0) + ")";
+			}
+			})*/
+		
+			.selectAll('text')
 			.data(datae)
 			.enter()
 			.append('text')
 			.text((d)=>d.text)
-			.style("font-size",20)
+			.style("font-size",15)
 			
 			.attr("x",function(d,i){
 			var arr = nagasa2;
 			var sum = d3.sum(arr);
+		//	var subSum = nagasa2;
 			var subSum = d3.sum(i==0 ? []:arr.slice(0,i));
-			console.info(xScale(subSum/sum) + 10);
+		//	console.info(xScale(subSum/sum) + 10);
 			return xScale(subSum/sum) + 10;
 		})
-		.attr({
-		y:40
-		})
-
+		.attr(
+		"y",function(d){
+			return 10+d.which*110;
+			}
+		)
+	
 ///////////////////////*//////////////////////////////////////////////		
 		
 		
@@ -332,7 +364,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		}else{return  '世間話';}
 		}
 		*/
-		/*
+		
 		var datae = [];
 		var jj;
 		var mojia = [];
@@ -408,8 +440,8 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 				r:10
 			})
 			;
-		*/
-////////////////////////////////////////////////////////////////
+		
+////////*////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////
 		var scaleX2 = d3.scale.linear().domain([0,bunsuu]).range([0,width]);
 		var scaleY2 = d3.scale.linear().domain([0,RGBmaxmax]).range([height,0]);
