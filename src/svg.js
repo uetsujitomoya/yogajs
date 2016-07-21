@@ -86,19 +86,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		var jj;
 		var mojia = [];
 		var jjj=0;
-		/*
-		for (jj=0; jj<nagasa2.length; jj++){
-		if(color2[jj] == "#b52f25"){
-			mojia[jj]='開 質問';
-		}else if(color2[jj] == "purple"){
-			mojia[jj]="相槌";
-		}else if(color2[jj] == "#2b4e91"){
-			mojia[jj]="閉 質問";
-		}else if(color2[jj] =="orange"){
-			mojia[jj]='解釈';
-		}else{mojia[jj]='世間話';}
-		}
-		*/
+		
 		for (jj=0; jj<nagasa2.length; jj++){
 		if(mazekozeColor[jj] == "#b52f25"){
 			mojia[jj]='開 質問';
@@ -108,7 +96,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			mojia[jj]="閉 質問";
 		}else if(mazekozeColor[jj] =="orange"){
 			mojia[jj]='解釈';
-		}else if(checked[jjj]==0){mojia[jj]='未分類';jjj++;
+		}else if(checked[jjj]==0){mojia[jj]='未';jjj++;
 		}else if(checked[jjj]==1){mojia[jj]='愛';jjj++
 		}else if(checked[jjj]==2){mojia[jj]='交友';jjj++
 		}else if(checked[jjj]==3){mojia[jj]='仕事';jjj++}
@@ -153,7 +141,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			console.info(xScale(subSum/sum) + 10);
 			return xScale(subSum/sum) + 10;
 		})
-		.attr("y",10)
+		.attr("y",30)
 		.attr("width",function(d){
 			var sum = d3.sum(nagasa2);
 			return xScale(d/sum);
@@ -178,16 +166,8 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		.data(datae)
 		.enter()
 		.append("g")
-		/*
-		.attr("transform", function(d){
-			if(d.which==1){
-			return "translate(0," + (d.which * 120) + ")";
-			}else{
-				return"translate(0," + (d.which * 0) + ")";
-			}
-			})*/
-		
-			.selectAll('text')
+			
+		.selectAll('text')
 			.data(datae)
 			.enter()
 			.append('text')
@@ -197,14 +177,13 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			.attr("x",function(d,i){
 			var arr = nagasa2;
 			var sum = d3.sum(arr);
-		//	var subSum = nagasa2;
 			var subSum = d3.sum(i==0 ? []:arr.slice(0,i));
 		//	console.info(xScale(subSum/sum) + 10);
 			return xScale(subSum/sum) + 10;
 		})
 		.attr(
 		"y",function(d){
-			return 10+d.which*110;
+			return 20+d.which*155;
 			}
 		)
 	
@@ -270,10 +249,6 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			transform: "translate(0, 180)"
 		})
 		.call(xAxis);
-/////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////
-
-			////////////////////////////////////////////////////////////
 	}else{
 
 		//stack
@@ -350,25 +325,11 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			}
 		});
 /////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////変更部分
-		/*
-		var F_color2moji = (colorA)=>{
-		if(colorA == "#b52f25"){
-			return 'a';//開かれた質問;
-		}else if(colorA == "purple"){
-			return  'a';//"解釈";
-		}else if(colorA == "#2b4e91"){
-			return  'b';//"閉じられた質問";
-		}else if(colorA =="orange"){
-			return  '解釈';
-		}else{return  '世間話';}
-		}
-		*/
+////////////////////////////////////////////////////////////////変更部分小林下
 		
 		var datae = [];
 		var jj;
 		var mojia = [];
-		mojia[2]='ha';
 		
 		for (jj=0; jj<nagasa.length; jj++){
 		if(color2[jj] == "#b52f25"){
@@ -383,7 +344,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		}
 				
 		for (jj=0; jj<nagasa.length; jj++){
-		datae[jj] = {x: nagasa[jj], y:10, color: color2[jj],text:mojia[jj]};//moji[jj]}//F_color2moji(color2[jj])}//, text:a}
+			datae[jj] = {x: nagasa[jj], y:10, color: color2[jj],text:mojia[jj]};//moji[jj]}//F_color2moji(color2[jj])}//, text:a}
 		}
 		context.selectAll('circle')
 			.data(datae)
@@ -392,55 +353,22 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			.attr({
 			cx: (d) => d.x,
 			cy: (d) => d.y,
-			r: 10
+			r: 13
 			})
 			.style('fill', (d) => d.color);
 			
-			context.selectAll('text')
+		context.selectAll('text')
 			.data(datae)
 			.enter()
 			.append('text')
 			.text((d)=> d.text)
-			.style("font-size",10)
+			.style("font-size",12)
 			.attr({
 			x: (d) => d.x+3,
 			y: (d) => d.y+25,
 			fill: (d) => d.color,
 			});
-			/*			
-			
-			var p = Math.PI * 2;
-			var arc 
-            .innerRadius:30
-            .outerRadius:40
-            .startAngle:0
-            .endAngle:p*3/4 
-			
-			/*
-			context.selectAll('arc')
-            // pathのd属性にarcで作ったpathデータを入れる。
-			.innerRadius(30)
-            .outerRadius(50)
-            .startAngle(0)
-            .endAngle(p*3/4); 
-			*/
-			/*
-			context.selectAll("path")
-			.enter()
-			.attr("d",arc);
-		//	.attr({x:12,y:12,})
-			//;
-			/*
-			context.selectALL('path')
-			.enter()
-			.append('path')
-			.attr({
-				cx: 10,
-				cy: 10,
-				r:10
-			})
-			;
-		
+
 ////////*////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////
 		var scaleX2 = d3.scale.linear().domain([0,bunsuu]).range([0,width]);
