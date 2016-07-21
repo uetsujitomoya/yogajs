@@ -22,3 +22,29 @@ document.getElementById('load-button').addEventListener('click', function () {
   };
   reader.readAsText(file);
 });
+
+document.getElementById('storageSave-button').addEventListener('click', function () {
+
+
+  let file_name="storage.txt";
+
+  var content=localStorage;
+
+  var blob = new Blob([ content ], { "type" : "text/plain" });
+
+  //ダウンロード実行
+  if (window.navigator.msSaveOrOpenBlob) {
+    //IEの場合
+    navigator.msSaveBlob(blob, file_name);
+  } else {
+    //IE以外(Chrome, Firefox)
+    var downloadLink = $('<a></a>');
+    downloadLink.attr('href', window.URL.createObjectURL(blob));
+    downloadLink.attr('download', file_name);
+    downloadLink.attr('target', '_blank');
+
+    $('body').append(downloadLink);
+    downloadLink[0].click();
+    downloadLink.remove();
+  }
+});
