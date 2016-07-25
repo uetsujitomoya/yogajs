@@ -1,3 +1,5 @@
+
+
 var select =(name,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2) => {
 	console.log(name+1+2+3);
 	console.info(storage);
@@ -119,7 +121,10 @@ var select =(name,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,chbo
 		}
 	}
 
-	console.log("chboxlength2 in select.js=%d",chboxlength2);
+
+
+
+
 	return{
 		checkboxlist:checkboxlist,
 		chboxlist:chboxlist,
@@ -133,5 +138,8 @@ var select =(name,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,chbo
 		chboxlength:chboxlength,
 		chboxlength2:chboxlength2
 	};
+
+
+
 };
 export {select};

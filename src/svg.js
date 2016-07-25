@@ -1,6 +1,16 @@
 import d3 from "d3";
 
 
+
+let love="#ffeeff";
+let friend="#c0ffc0";
+let work="#a0e0ff";
+let open;
+let close;
+let aiduchi;
+let seken;
+let kaishaku;
+
 var height0=200,width=1320;
 var height =200;
 
@@ -18,7 +28,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 
 	var margin2 = {top: 10, right: 10, bottom: 50, left: 40};
 
-	var colorBun=["#c0c0c0","#ffc0c0","#c0ffc0","#c0c0ff"];
+	var colorBun=["#c0c0c0",love,friend,work];
 
 	if(graph==3){
 
@@ -229,7 +239,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		.attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
 
 		var scaleY = d3.scale.linear().domain([0,6]).range([0,height0]);
-		var colors = ["#c0c0ff","#c0ffc0","#ffc0c0"];
+		var colors = [work,friend,love];
 
 
 		var stack = d3.layout.stack()
@@ -462,7 +472,7 @@ var setForViz = (name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsu
 	}
 	for(c=0;c<checked2.length;c++){
 		if(checked2[c]==3){
-			color2[c]="#c0392b";
+			color2[c]="#b0291b";
 		}else if(checked2[c]==5){
 			color2[c]="#9b59b6";
 		}else if(checked2[c]==4){

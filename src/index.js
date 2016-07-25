@@ -1,5 +1,6 @@
 //import {setForViz} from "./svg.js";
 import {funcReaderOnload} from "./wordparse.js";
+import $ from 'jquery';
 var keitaisokaiseki = []; //このlengthは段落数
 var RGBlist  = [];//checkboxのセレクト結果
 var chboxlist=[];//通し番号
@@ -22,7 +23,6 @@ document.getElementById('load-button').addEventListener('click', function () {
   };
   reader.readAsText(file);
 });
-
 document.getElementById('storageSave-button').addEventListener('click', function () {
 
 
