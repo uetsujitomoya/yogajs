@@ -1,6 +1,6 @@
 //import {setForViz} from "./svg.js";
 import {funcReaderOnload} from "./wordparse.js";
-import $ from 'jquery';
+//import $ from 'jquery';
 var keitaisokaiseki = []; //このlengthは段落数
 var RGBlist  = [];//checkboxのセレクト結果
 var chboxlist=[];//通し番号
@@ -14,8 +14,6 @@ var taiou2=[];
 var chboxlength,chboxlength2;
 document.getElementById('load-button').addEventListener('click', function () {
   var file = document.getElementById('file-input').files[0];
-  console.log("file");
-	console.log(file);
   var name = file.name;
   var reader = new FileReader();
   reader.onload = function(event) {
@@ -25,26 +23,8 @@ document.getElementById('load-button').addEventListener('click', function () {
 });
 document.getElementById('storageSave-button').addEventListener('click', function () {
 
+  var data=localStorage;
 
-  let file_name="storage.txt";
-
-  var content=localStorage;
-
-  var blob = new Blob([ content ], { "type" : "text/plain" });
-
-  //ダウンロード実行
-  if (window.navigator.msSaveOrOpenBlob) {
-    //IEの場合
-    navigator.msSaveBlob(blob, file_name);
-  } else {
-    //IE以外(Chrome, Firefox)
-    var downloadLink = $('<a></a>');
-    downloadLink.attr('href', window.URL.createObjectURL(blob));
-    downloadLink.attr('download', file_name);
-    downloadLink.attr('target', '_blank');
-
-    $('body').append(downloadLink);
-    downloadLink[0].click();
-    downloadLink.remove();
-  }
+  var fs = require('fs');
+  fs.writeFile('storage'+Date()+'.json', JSON.stringify(data, null, '    '));
 });
