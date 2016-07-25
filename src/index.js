@@ -25,6 +25,12 @@ document.getElementById('storageSave-button').addEventListener('click', function
 
   var data=localStorage;
 
-  var fs = require('fs');
-  fs.writeFile('storage'+Date()+'.json', JSON.stringify(data, null, '    '));
+
+  var ary = localStorage;
+  var blob = new Blob([ary], {type: "text/csv"});
+  var url = URL.createObjectURL(blob);
+  var a = document.querySelector("#results"); // id of the <a> element to render the download link
+  a.href = url;
+  a.download = "file.csv";
+
 });

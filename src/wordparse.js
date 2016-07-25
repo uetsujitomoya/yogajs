@@ -284,6 +284,8 @@ var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxl
 			name:name,RGBlist:RGBlist,keitaisokaiseki:keitaisokaiseki,hatsugen:hatsugen,bun:bun,chboxlist:chboxlist,chboxlist2:chboxlist2,checked:checked,checked2:checked2,taiou:taiou,taiou2:taiou2,chboxlength:chboxlength,chboxlength2:chboxlength2
 		};
 
+		
+
 	});
 };
 
