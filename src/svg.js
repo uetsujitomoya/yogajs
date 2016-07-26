@@ -70,15 +70,9 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			mazekozeColor[h]=color2[(m+1)/2];
 			mazekozeHatsugenNumber[h]=m+1;
 		}
-		console.info(mazekozeColor);
-
-
+		
 		var w = width;
 		var padding = 10;
-
-
-
-
 
 		var dataArr = [
 			nagasa2,
@@ -88,15 +82,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		var xScale = d3.scale.linear()
 		.domain([0, d3.sum(nagasa2)/10])
 		.range([padding, w  - padding]);
-		//.nice();
 
-
-
-
-		//if文で返す
-		//var scaleX = d3.scale.linear()
-		//.domain([0, 1])
-		//.range([0, 180]);
 		let row=0;//graph3の行番号
 		//階層構造をとるため，g要素を生成する部分とrect要素を生成している部分が連続している．
 		svg.selectAll("g")
@@ -139,29 +125,6 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			var e = document.getElementById('msg');
 			let k,l;
 			e.innerHTML = "";
-			/*
-			var signal = "blue";
-
-			switch (signal) {
-			case "red":
-			console.log("stop!");
-			break;
-
-			case "green":
-			case "blue":
-			console.log("go!");
-			break;
-
-			case "yellow":
-			console.log("slow down!");
-			break;
-
-			default:
-			console.log("wrong signal");
-			break;
-			*}
-			*/
-
 			if(mazekozeWhich[i]==0){
 				for(k=-3;k<=3;k++){
 					if(mazekozeHatsugenNumber[i]+k<0||mazekozeHatsugenNumber[i]+k>=hatsugen.length){
@@ -181,25 +144,6 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 					}
 				}
 			}
-			/*
-			for(k=-3;k<=3;k++){
-			if(2*(i)+k<0||2*(i)+k>=hatsugen.length){
-			continue;
-			*}
-			if(k==0){
-			e.innerHTML += "<b><u><font size=3>"+(1+2*i)+"(T) <font color="+color2[i]+">【</font>"+hatsugen[2*i]+"<font color="+color2[i]+">】</font></font></u></b><font size=2><br><br></font>";
-			*}else if(k%2==0){
-			e.innerHTML += "<font size=2>"+(1+k+2*i)+"(T) <font color="+color2[k/2+i]+"><b>【</b></font>"+hatsugen[k+2*i]+"<font color="+color2[k/2+i]+"><b>】</b></font><br><br></font>";
-			*}else{
-			e.innerHTML += (1+k+2*i)+"(C) ";
-			for(l=0;l<bun[k+2*i].length;l++){
-			if(bun[k+2*i][l]==""){continue;}
-			e.innerHTML += "<font size=2><font color="+colorBun[checkedBun[k+2*i][l]]+"><b>【</b></font>"+bun[k+2*i][l]+"<font color="+colorBun[checkedBun[k+2*i][l]]+"><b>】</b></font></font>";
-			*}
-			e.innerHTML += "<font size=2><br><br></font>";
-			*}
-			*}
-			*/
 		});
 
 		//x軸
@@ -241,13 +185,11 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		var scaleY = d3.scale.linear().domain([0,6]).range([0,height0]);
 		var colors = [work,friend,love];
 
-
 		var stack = d3.layout.stack()
 		.x(function(){return 1;})
 		.y(function(d){return d.y;})
 		.values(function(d){return d;});
 		var stackdata = stack(stackdataArr);
-
 
 		var area0 = d3.svg.area()
 		.x(function(d,i){
@@ -256,8 +198,6 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		})//nagasa[i]+nagasa[i+1])/2
 		.y0(function(){return height0;})
 		.y1(function(d){return height0 - scaleY(d.y+d.y0);});
-
-
 
 		context.selectAll("path")
 		.data(stackdata.reverse())
