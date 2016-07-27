@@ -26,7 +26,9 @@ document.getElementById('storageSave-button').addEventListener('click', function
   var data=localStorage;
 
 
-  var ary = localStorage;
+  var ary = window.localStorage; //http://hakuhin.jp/js/storage.html#STORAGE_00
+  console.log("ary");
+  console.log(ary);
   var blob = new Blob([ary], {type: "text/csv"});
   var url = URL.createObjectURL(blob);
   var a = document.querySelector("#results"); // id of the <a> element to render the download link
