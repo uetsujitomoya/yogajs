@@ -22,9 +22,10 @@ document.getElementById('load-button').addEventListener('click', function () {
 });
 document.getElementById('storageSave-button').addEventListener('click', function () {
 
-  let file_name="storage"+Date()+".csv";
+  //let file_name="storage"+Date()+".csv";
+  let file_name="storage.csv";
 
-  var ary = window.localStorage; //http://hakuhin.jp/js/storage.html#STORAGE_00
+  var storage = localStorage; //http://hakuhin.jp/js/storage.html#STORAGE_00
 
 
   // ウェブストレージに対応している http://hakuhin.jp/js/storage.html#STORAGE_GET_KEYS
@@ -35,7 +36,7 @@ document.getElementById('storageSave-button').addEventListener('click', function
   // ------------------------------------------------------------
   // キーの総数を取得する
   // ------------------------------------------------------------
-  var num = window.sessionStorage.length;
+  var num = window.localStorage.length;
 
   // ------------------------------------------------------------
   // ストレージからすべてのキーを取得する
@@ -55,6 +56,8 @@ document.getElementById('storageSave-button').addEventListener('click', function
     // 出力テスト
     console.log("name:" + csv_array[i][0] + " value:" + csv_array[i][1]);
   }
+  console.log("csv_array");
+  console.log(csv_array);
 
   //}
 
@@ -63,41 +66,16 @@ document.getElementById('storageSave-button').addEventListener('click', function
   //配列をTAB区切り文字列に変換
   var csv_string = "";
   for (i=0; i<csv_array.length; i++) {
-    csv_string += csv_array[i].join("\t");
-    csv_string += '\r\n';
-  }
-
-  //BOM追加
-  csv_string = "\ufffe" + csv_string; //UTF-16
-  console.log (csv_string);
-
-  //実行環境がLEかどうか判別...(3)
-  if (isLittleEndian()) {
-
-    //実行環境のエンディアンがLEならTypedArrayを利用
-    var array = [];
-    for (var i=0; i<csv_string.length; i++){
-      array.push(csv_string.charCodeAt(i));
-    }
-    var csv_contents = new Uint16Array(array);
-
-  } else {
-
-    //LEでない場合はDataViewでUTF-16LEのArrayBufferを作成
-    var array_buffer = new ArrayBuffer(csv_string.length * 2);
-    var data_view = new DataView(array_buffer);
-    for (var i=0,j=0; i<csv_string.length; i++,j=i*2) {
-      data_view.setUint16( j, csv_string.charCodeAt(i), true ); //第3引数にtrueを渡すとLEになる
-    }
-    var csv_contents = array_buffer
+    csv_string += csv_array[i].join(",");
+    csv_string += '\n';
   }
 
   //ファイル作成
-  var blob = new Blob([csv_contents] , {
-    type: "text/csv;charset=utf-16;"
+  var blob = new Blob([csv_string] , {
+    type: "text/csv"
   });
 
-  //ダウンロード実行
+  //ダウンロード実行...(2)
   if (window.navigator.msSaveOrOpenBlob) {
     //IEの場合
     navigator.msSaveBlob(blob, file_name);
@@ -111,14 +89,6 @@ document.getElementById('storageSave-button').addEventListener('click', function
     $('body').append(downloadLink);
     downloadLink[0].click();
     downloadLink.remove();
-  }
-
-  // --------------------------------------
-  // 実行環境のエンディアンがLEかどうか判別
-  // --------------------------------------
-  function isLittleEndian(){
-    if ((new Uint8Array((new Uint16Array([0x00ff])).buffer))[0]) return true;
-    return false;
   }
 });
 
