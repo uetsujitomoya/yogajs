@@ -28,43 +28,41 @@ document.getElementById('storageSave-button').addEventListener('click', function
 
 
   // ウェブストレージに対応している http://hakuhin.jp/js/storage.html#STORAGE_GET_KEYS
-  if(window.localStorage){
+  //if(window.localStorage){
 
 
 
-    // ------------------------------------------------------------
-    // キーの総数を取得する
-    // ------------------------------------------------------------
-    var num = window.sessionStorage.length;
+  // ------------------------------------------------------------
+  // キーの総数を取得する
+  // ------------------------------------------------------------
+  var num = window.sessionStorage.length;
 
-    // ------------------------------------------------------------
-    // ストレージからすべてのキーを取得する
-    // ------------------------------------------------------------
-    var i;
-    let csv_array=[];
-    for(i=0;i< num;i++){
-      csv_array[i]=[];
+  // ------------------------------------------------------------
+  // ストレージからすべてのキーを取得する
+  // ------------------------------------------------------------
+  var i;
+  let csv_array=[];
+  for(i=0;i< num;i++){
+    csv_array[i]=[];
 
-      // 位置を指定して、ストレージからキーを取得する
-      csv_array[i][0] = window.localStorage.key(i);
+    // 位置を指定して、ストレージからキーを取得する
+    csv_array[i][0] = window.localStorage.key(i);
 
-      // ストレージからデータを取得する
+    // ストレージからデータを取得する
 
-      csv_array[i][1] = window.localStorage.getItem(csv_array[i][0]);
+    csv_array[i][1] = window.localStorage.getItem(csv_array[i][0]);
 
-      // 出力テスト
-      console.log("name:" + csv_array[i][0] + " value:" + csv_array[i][1]);
-    }
-
+    // 出力テスト
+    console.log("name:" + csv_array[i][0] + " value:" + csv_array[i][1]);
   }
+
+  //}
 
   //CSVに記載するデータ配列
 
-  var file_name = 'test.csv';
-
   //配列をTAB区切り文字列に変換
   var csv_string = "";
-  for (var i=0; i<csv_array.length; i++) {
+  for (i=0; i<csv_array.length; i++) {
     csv_string += csv_array[i].join("\t");
     csv_string += '\r\n';
   }
@@ -122,11 +120,8 @@ document.getElementById('storageSave-button').addEventListener('click', function
     if ((new Uint8Array((new Uint16Array([0x00ff])).buffer))[0]) return true;
     return false;
   }
-}
+});
 
 //let csv_string=convertTocsv(ary);
-
-
-
 
 //http://qiita.com/kenchan0130/items/11c3abab109405379ffb
