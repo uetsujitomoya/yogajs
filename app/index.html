@@ -57,6 +57,9 @@
 .boxContainer {
     zoom: 1;
 }
+  .B {
+	display: inline;
+}
   </style>
 </head>
 <body><font size="2">
@@ -71,6 +74,7 @@
   ・カウンセラーの発言について<font color="#b52f25">「開かれた質問」</font><font color="#2b4e91">「閉じられた質問」</font><font color="purple">「相づち」</font><font color="orange">「解釈」</font><font color="black">「世間話」</font><br><br>
 
   <font size=3 color=dimgray><b><u><font color=black size=4>左下</font></u></b>のエリアで、クライエントが発した文/カウンセラーが発した質問について分類してください。グラフの<b><u><font color=black size=4>縦棒</font></u></b>をマウスオーバーすると<b><u><font color=black size=4>右下</font></u></b>のエリアに縦棒周辺の内容が表示されます</font><br><br>
+
   <div class="boxContainer">
     <div class="box" style="border-style: solid; border-width: 1px; border-color:#F4F4F4; height:300px; width:600px; overflow-y:scroll; floet:left;">
       <form name="form1" id="chbox" action="">
@@ -79,10 +83,11 @@
     </div>
     <div class="box" id="msg" style="border-style: solid; border-width: 1px; border-color:#f4f4f4; height:300px; width:600px; overflow-y:scroll"></div>
   </div>
+
+<!--display: inline_block _display: inline;-->
 <p><button id="storageSave-button">手動修正完了</button></p>
 <p>
 <a id="results">CSV from local store</a></p>
-
   <script language="javascript" src="bundle.js"></script>
 
 </body>

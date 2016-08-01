@@ -35,6 +35,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		var nagasa2=[];//区分
 		var mazekoze=[];//カウンセラーを発言毎に、クライエントを文ごとに収録
 		var mazekozeWhich=[];//カウンセラーなら0
+		
 		let mazekozeColor=[];
 		let mazekozeHatsugenNumber=[];
 		let h=0;
@@ -72,7 +73,13 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		}
 		
 		var w = width;
+<<<<<<< HEAD
 		var padding = 10;
+=======
+		//var h = 200;
+		var padding = 0;
+
+>>>>>>> kobayashi
 
 		var dataArr = [
 			nagasa2,
@@ -82,6 +89,47 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		var xScale = d3.scale.linear()
 		.domain([0, d3.sum(nagasa2)/10])
 		.range([padding, w  - padding]);
+<<<<<<< HEAD
+=======
+		//.nice();
+
+////////////////////////////////////////////////////////////////
+	
+		var datae = [];
+		var jj;
+		var mojia = [];
+		var jjj=0;
+		
+		for (jj=0; jj<nagasa2.length; jj++){
+		if(mazekozeColor[jj] == "#b52f25"){
+			mojia[jj]='開 質問';
+		}else if(mazekozeColor[jj] == "purple"){
+			mojia[jj]="相槌";
+		}else if(mazekozeColor[jj] == "#2b4e91"){
+			mojia[jj]="閉 質問";
+		}else if(mazekozeColor[jj] =="orange"){
+			mojia[jj]='解釈';
+		}else if(checked[jjj]==0){mojia[jj]='未';jjj++;
+		}else if(checked[jjj]==1){mojia[jj]='愛';jjj++
+		}else if(checked[jjj]==2){mojia[jj]='交友';jjj++
+		}else if(checked[jjj]==3){mojia[jj]='仕事';jjj++}
+		
+		
+		
+		else{mojia[jj]='世間話';}
+		}
+		
+		for (jj=0; jj<nagasa2.length; jj++){
+		datae[jj] = {x: nagasa2[jj], y:40, color: mazekozeColor[jj],text:mojia[jj],which:mazekozeWhich[jj]};//moji[jj]}//F_color2moji(color2[jj])}//, text:a}
+		}
+		
+		
+	//	console.log(datae.length);
+	//	console.log(nagasa2.length);
+///////////////////////////////////////////////////////
+
+
+>>>>>>> kobayashi
 
 		let row=0;//graph3の行番号
 		//階層構造をとるため，g要素を生成する部分とrect要素を生成している部分が連続している．
@@ -90,7 +138,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		.enter()
 		.append("g")
 		.attr("transform", function(d,i){
-			return "translate(0," + (i * 50) + ")";
+			return "translate(0," + (i * 80) + ")";
 		})
 		.selectAll("rect")
 		.data(function(d){return d;})
@@ -102,12 +150,12 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			var subSum = d3.sum(i==0 ? []:arr.slice(0,i));
 			return xScale(subSum)/10 + 10;
 		})
-		.attr("y",10)
+		.attr("y",30)
 		.attr("width",function(d){
 			//var sum = d3.sum(nagasa2);
 			return xScale(d)/10;
 		})
-		.attr("height",30)
+		.attr("height",50)
 		.attr("fill", function(d, i){
 			if((row==0&& mazekozeWhich[i]==0)||(row==1&&mazekozeWhich[i]==1) ){
 				if(i+1==mazekoze.length){
@@ -120,7 +168,38 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 				}
 				return "#f9f9f9";
 			}
+		});
+/////////////////////////////////////////////////////////////////////
+	
+		svg.selectAll("g")
+		.data(datae)
+		.enter()
+		.append("g")
+			
+		.selectAll('text')
+			.data(datae)
+			.enter()
+			.append('text')
+			.text((d)=>d.text)
+			.style("font-size",15)
+			
+			.attr("x",function(d,i){
+			var arr = nagasa2;
+			var sum = d3.sum(arr);
+			var subSum = d3.sum(i==0 ? []:arr.slice(0,i));
+		//	console.info(xScale(subSum/sum) + 10);
+			return xScale(subSum/sum) + 10;
 		})
+		.attr(
+		"y",function(d){
+			return 20+d.which*155;
+			}
+		)
+	
+///////////////////////*//////////////////////////////////////////////		
+		
+		
+		
 		.on('mouseover', function(d,i){
 			var e = document.getElementById('msg');
 			let k,l;
@@ -158,6 +237,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			transform: "translate(0, 180)"
 		})
 		.call(xAxis);
+<<<<<<< HEAD
 
 		d3.select("svg")
 		.append("text")
@@ -175,6 +255,8 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		})
 		.text("C");
 
+=======
+>>>>>>> kobayashi
 	}else{
 
 		//stack
@@ -193,12 +275,20 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 
 		var area0 = d3.svg.area()
 		.x(function(d,i){
-			if(i%3==0){return nagasa[i/3];}else if(i%3==1){return nagasa[(i-1)/3+1]-3;}else{return nagasa[(i-2)/3+1]-2;}
+			if(i%3==0){return nagasa[i/3];}
+			else if(i%3==1){return nagasa[(i-1)/3+1]-3;}
+			else{return nagasa[(i-2)/3+1]-2;}
 
 		})//nagasa[i]+nagasa[i+1])/2
 		.y0(function(){return height0;})
 		.y1(function(d){return height0 - scaleY(d.y+d.y0);});
 
+<<<<<<< HEAD
+=======
+		
+
+
+>>>>>>> kobayashi
 		context.selectAll("path")
 		.data(stackdata.reverse())
 		.enter()
@@ -215,7 +305,11 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			return nagasa[i];
 		}).attr("y1", 0)
 		.attr("x2", function(d,i){return nagasa[i];}).attr("y2", height0);
+<<<<<<< HEAD
 
+=======
+		
+>>>>>>> kobayashi
 		context.selectAll("line")
 		.attr("stroke", function(d,i){
 			return color2[i];
@@ -245,7 +339,53 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 				}
 			}
 		});
+/////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////変更部分小林下
+		
+		var datae = [];
+		var jj;
+		var mojia = [];
+		
+		for (jj=0; jj<nagasa.length; jj++){
+		if(color2[jj] == "#b52f25"){
+			mojia[jj]='開 質問';
+		}else if(color2[jj] == "purple"){
+			mojia[jj]="相槌";
+		}else if(color2[jj] == "#2b4e91"){
+			mojia[jj]="閉 質問";
+		}else if(color2[jj] =="orange"){
+			mojia[jj]='解釈';
+		}else{mojia[jj]='世間話'}
+		}
+				
+		for (jj=0; jj<nagasa.length; jj++){
+			datae[jj] = {x: nagasa[jj], y:10, color: color2[jj],text:mojia[jj]};//moji[jj]}//F_color2moji(color2[jj])}//, text:a}
+		}
+		context.selectAll('circle')
+			.data(datae)
+			.enter()
+			.append('circle')
+			.attr({
+			cx: (d) => d.x,
+			cy: (d) => d.y,
+			r: 13
+			})
+			.style('fill', (d) => d.color);
+			
+		context.selectAll('text')
+			.data(datae)
+			.enter()
+			.append('text')
+			.text((d)=> d.text)
+			.style("font-size",12)
+			.attr({
+			x: (d) => d.x+3,
+			y: (d) => d.y+25,
+			fill: (d) => d.color,
+			});
 
+////////*////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
 		var scaleX2 = d3.scale.linear().domain([0,bunsuu]).range([0,width]);
 		var scaleY2 = d3.scale.linear().domain([0,RGBmaxmax]).range([height,0]);
 		var yAxisC = d3.svg.axis().scale(scaleY2).orient("left");//focus
