@@ -204,10 +204,9 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 
 		.attr("x",function(d,i){
 			var arr = nagasa2;
-			var sum = d3.sum(arr);
+			//var sum = d3.sum(arr);
 			var subSum = d3.sum(i==0 ? []:arr.slice(0,i));
-			//	console.info(xScale(subSum/sum) + 10);
-			return xScale(subSum/sum) + 10;
+			return xScale(subSum)/10 + 10;
 		})
 		.attr(
 			"y",function(d){
