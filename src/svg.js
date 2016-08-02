@@ -5,16 +5,31 @@ import d3 from "d3";
 let love="#ffeeff";
 let friend="#c0ffc0";
 let work="#a0e0ff";
-let open;
-let close;
-let aiduchi;
-let seken;
-let kaishaku;
+
+/*
+if(checked2[c]==3){
+	color2[c]="#b0291b";
+}else if(checked2[c]==5){
+	color2[c]="#9b59b6";
+}else if(checked2[c]==4){
+	color2[c]="#2980b9";
+}else if(checked2[c]==6){
+	color2[c]="#f1c40f";
+}else{
+	color2[c]="#2c3e50";
+}
+*/
+
+let open3="#b0291b";
+let close4="#2980b9";
+let aiduchi5="#9b59b6";
+let seken7="#2c3e50";
+let kaishaku6="#f1c40f";
 
 var height0=200,width=1320;
 var height =200;
 
-var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxmax,startTime,graph,checked) => {
+var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxmax,startTime,graph,checked,ranshin) => {
 	var m;
 	var bunsuu=2;//前後の余白
 	for(m=1;m<hatsugen.length;m=m+2){//患者の発言で間隔を作る
@@ -92,14 +107,14 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		var mojia = [];
 		var jjj=0;
 
-		for (jj=0; jj<nagasa2.length; jj++){
-			if(mazekozeColor[jj] == "#b52f25"){
+		for (jj=0; jj<nagasa2.length; jj++){//色変えたからか。。
+			if(mazekozeColor[jj] == open3){
 				mojia[jj]='開 質問';
-			}else if(mazekozeColor[jj] == "purple"){
+			}else if(mazekozeColor[jj] == aiduchi5){
 				mojia[jj]="相槌";
-			}else if(mazekozeColor[jj] == "#2b4e91"){
+			}else if(mazekozeColor[jj] == close4){
 				mojia[jj]="閉 質問";
-			}else if(mazekozeColor[jj] =="orange"){
+			}else if(mazekozeColor[jj] ==kaishaku6){
 				mojia[jj]='解釈';
 			}else if(checked[jjj]==0){
 				mojia[jj]='未';jjj++;
@@ -245,6 +260,8 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			y:70
 		})
 		.text("C");
+		console.info("datae");
+		console.info(datae);
 
 	}else{
 
@@ -326,13 +343,13 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		var mojia1 = [];
 
 		for (jj3=0; jj3<nagasa.length; jj3++){
-			if(color2[jj3] == "#b52f25"){
+			if(color2[jj3] == open3){
 				mojia1[jj3]='開 質問';
-			}else if(color2[jj3] == "purple"){
+			}else if(color2[jj3] == aiduchi5){
 				mojia1[jj3]="相槌";
-			}else if(color2[jj3] == "#2b4e91"){
+			}else if(color2[jj3] == close4){
 				mojia1[jj3]="閉 質問";
-			}else if(color2[jj3] =="orange"){
+			}else if(color2[jj3] ==kaishaku6){
 				mojia1[jj3]='解釈';
 			}else{
 				mojia1[jj3]='世間話';
@@ -381,6 +398,9 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		.attr("class", "x axis")
 		.attr("transform", "translate(0," + height0 + ")")
 		.call(xAxisC);
+
+		console.info("datae3");
+		console.info(datae3);
 	}
 
 	var endTime = new Date();
@@ -458,7 +478,7 @@ var funcChecked2 = (name,storage,chboxlist,chboxlist2,checked2,taiou,taiou2,chbo
 	}
 };
 
-var setForViz = (name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph) => {
+var setForViz = (name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin) => {
 	d3.select("#svgdiv").select("svg").remove();
 	var svg = d3.select("#svgdiv").append("svg")
 	.attr("height",270)
@@ -507,15 +527,15 @@ var setForViz = (name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsu
 	}
 	for(c=0;c<checked2.length;c++){
 		if(checked2[c]==3){
-			color2[c]="#b0291b";
+			color2[c]=open3;
 		}else if(checked2[c]==5){
-			color2[c]="#9b59b6";
+			color2[c]=aiduchi5;
 		}else if(checked2[c]==4){
-			color2[c]="#2980b9";
+			color2[c]=close4;
 		}else if(checked2[c]==6){
-			color2[c]="#f1c40f";
+			color2[c]=kaishaku6;
 		}else{
-			color2[c]="#2c3e50";
+			color2[c]=seken7;
 		}
 	}
 
@@ -563,7 +583,7 @@ var setForViz = (name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsu
 			stackdataArr[h][3*m+2]= {x:3*m+3,y:0};
 		}
 	}
-	viz(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxmax,startTime,graph,checked);
+	viz(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxmax,startTime,graph,checked,ranshin);
 	//console.log("chboxlength2 in svg.js=%d",chboxlength2);
 	return{
 		chboxlist:chboxlist,

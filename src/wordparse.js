@@ -22,6 +22,7 @@ var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxl
 	var h,i,j,k,m,n,c,x,y,z;
 	var hinshi = [];
 	var RGB = [];
+	let ranshin = [];
 	var tangoset = new Set();
 	var tangosett = [];
 	var miserables={"nodes":[],"links":[]};
@@ -48,6 +49,7 @@ var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxl
 			hatsugen[m] = "";
 			hinshi[m] = [];
 			RGB[m] = [];
+			ranshin[m] = [];
 			if(m%2==0){
 				RGBlist[m/2] = [0,0,0,0,0,0,0,0];
 			}
@@ -59,6 +61,7 @@ var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxl
 				hinshi[m][i]=[];
 				keitaisokaiseki[m][i].length = 0;
 				RGB[m][i] = [0,0,0];
+				ranshin[m][i]=[0,0,0,0,0,0,0,0,0];
 				j=0;
 				while(n<path.length){
 					tangosuu++;
@@ -85,6 +88,34 @@ var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxl
 						}
 						if(path[n].basic_form=="友人"||path[n].basic_form=="親友"||path[n].basic_form=="友達"||path[n].basic_form=="友"||path[n].basic_form=="交友"||path[n].basic_form=="友好"){
 							RGB[m][i][1]=1;
+						}
+
+						if(path[n].basic_form=="病"||path[n].basic_form=="病気"||path[n].basic_form=="ストレス"||path[n].basic_form=="不調"||path[n].basic_form=="過食"||path[n].basic_form=="嘔吐"||path[n].basic_form=="過食嘔吐"){
+							ranshin[m][i][0]=1;
+						}
+						if(path[n].basic_form=="無気力"||path[n].basic_form=="気力"||path[n].basic_form=="やる気"){
+							ranshin[m][i][1]=1;
+						}
+						if(path[n].basic_form=="疑い"||path[n].basic_form=="疑う"||path[n].basic_form=="疑心暗鬼"||path[n].basic_form=="疑心"){
+							ranshin[m][i][2]=1;
+						}
+						if(path[n].basic_form=="注意"||path[n].basic_form=="不注意"||path[n].basic_form=="注意散漫"||path[n].basic_form=="無自覚"||path[n].basic_form=="自覚"){
+							ranshin[m][i][3]=1;
+						}
+						if(path[n].basic_form=="引き延ばし"||path[n].basic_form=="引き延ばす"||path[n].basic_form=="怠慢"||path[n].basic_form=="怠惰"){
+							ranshin[m][i][4]=1;
+						}
+						if(path[n].basic_form=="渇望"||path[n].basic_form=="切望"||path[n].basic_form=="欲しい"){
+							ranshin[m][i][5]=1;
+						}
+						if(path[n].basic_form=="妄想"||path[n].basic_form=="空想"||path[n].basic_form=="想い"||path[n].basic_form=="ふける"){
+							ranshin[m][i][6]=1;
+						}
+						if(path[n].basic_form=="抜け出す"||path[n].basic_form=="打破"||path[n].basic_form=="勝つ"||path[n].basic_form=="戦う"){
+							ranshin[m][i][7]=1;
+						}
+						if(path[n].basic_form=="不安定"||path[n].basic_form=="安定"||path[n].basic_form=="落ち着く"){
+							ranshin[m][i][8]=1;
 						}
 					}else if(m%2==0){
 						serapitango++;
@@ -255,7 +286,7 @@ var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxl
 		//console.log("chboxlength2=%d",chboxlength2)
 
 
-		var vResult = setForViz(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph);//形態素解析後に1度目の描画
+		var vResult = setForViz(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin);//形態素解析後に1度目の描画
 		chboxlist = vResult.chboxlist;
 		chboxlist2 = vResult.chboxlist2;
 		RGBlist = vResult.RGBlist;
@@ -263,19 +294,19 @@ var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxl
 		checked2 = vResult.checked2;
 		chboxlength = vResult.chboxlength;
 		chboxlength2 = vResult.chboxlength2;
+		chboxlength2 = vResult.ranshin;
 
 		//以下は後ろじゃなきゃアカン
 		for(c=1;c<=chboxlength;c++){
 			makeOnClick(c);
 		}
-		console.log("chboxlength2=%d",chboxlength2);
 		for(c=1;c<=chboxlength2;c++){
 			makeOnClickS(c);
 		}
 
 
 		document.getElementById('radio_buttons').onchange = () => {
-			setForViz(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph);
+			setForViz(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin);
 		};//graphの形状を切り替えた際もここで再描画される
 
 		//graphのラジオボタン変わったらまた描画
@@ -284,7 +315,7 @@ var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxl
 			name:name,RGBlist:RGBlist,keitaisokaiseki:keitaisokaiseki,hatsugen:hatsugen,bun:bun,chboxlist:chboxlist,chboxlist2:chboxlist2,checked:checked,checked2:checked2,taiou:taiou,taiou2:taiou2,chboxlength:chboxlength,chboxlength2:chboxlength2
 		};
 
-		
+
 
 	});
 };
