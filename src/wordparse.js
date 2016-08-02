@@ -286,6 +286,8 @@ var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxl
 		//console.log("chboxlength2=%d",chboxlength2)
 
 
+
+
 		var vResult = setForViz(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin);//形態素解析後に1度目の描画
 		chboxlist = vResult.chboxlist;
 		chboxlist2 = vResult.chboxlist2;
@@ -294,9 +296,9 @@ var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxl
 		checked2 = vResult.checked2;
 		chboxlength = vResult.chboxlength;
 		chboxlength2 = vResult.chboxlength2;
-		chboxlength2 = vResult.ranshin;
+		ranshin = vResult.ranshin;
 
-		//以下は後ろじゃなきゃアカン
+		//これは後ろじゃないと、選択肢が反映されない？
 		for(c=1;c<=chboxlength;c++){
 			makeOnClick(c);
 		}
@@ -312,7 +314,7 @@ var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxl
 		//graphのラジオボタン変わったらまた描画
 
 		return{
-			name:name,RGBlist:RGBlist,keitaisokaiseki:keitaisokaiseki,hatsugen:hatsugen,bun:bun,chboxlist:chboxlist,chboxlist2:chboxlist2,checked:checked,checked2:checked2,taiou:taiou,taiou2:taiou2,chboxlength:chboxlength,chboxlength2:chboxlength2
+			name:name,RGBlist:RGBlist,keitaisokaiseki:keitaisokaiseki,hatsugen:hatsugen,bun:bun,chboxlist:chboxlist,chboxlist2:chboxlist2,checked:checked,checked2:checked2,taiou:taiou,taiou2:taiou2,chboxlength:chboxlength,chboxlength2:chboxlength2,ranshin:ranshin
 		};
 
 

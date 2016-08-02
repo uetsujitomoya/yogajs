@@ -592,7 +592,8 @@ var setForViz = (name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsu
 		checked:checked,
 		checked2:checked2,
 		chboxlength:chboxlength,
-		chboxlength2:chboxlength2
+		chboxlength2:chboxlength2,
+		ranshin:ranshin
 	};
 };
 
