@@ -148,7 +148,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		.enter()
 		.append("g")
 		.attr("transform", function(d,i){
-			return "translate(0," + (i * 80) + ")";
+			return "translate(0," + (i * 50) + ")";
 		})
 		.selectAll("rect")
 		.data(function(d){return d;})
@@ -160,12 +160,12 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			var subSum = d3.sum(i==0 ? []:arr.slice(0,i));
 			return xScale(subSum)/10 + 10;
 		})
-		.attr("y",30)
+		.attr("y",10)
 		.attr("width",function(d){
 			//var sum = d3.sum(nagasa2);
 			return xScale(d)/10;
 		})
-		.attr("height",50)
+		.attr("height",20)
 		.attr("fill", function(d, i){
 			if((row==0&& mazekozeWhich[i]==0)||(row==1&&mazekozeWhich[i]==1) ){
 				if(i+1==mazekoze.length){
@@ -225,7 +225,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		})
 		.attr(
 			"y",function(d){
-				return 20+d.which*155;
+				return 35+d.which*50;
 			}
 		);
 
