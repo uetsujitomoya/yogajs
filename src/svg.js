@@ -85,7 +85,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		.range([padding, w  - padding]);
 		//.nice();
 
-////////////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////
 
 		var datae = [];
 		var jj;
@@ -93,32 +93,37 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		var jjj=0;
 
 		for (jj=0; jj<nagasa2.length; jj++){
-		if(mazekozeColor[jj] == "#b52f25"){
-			mojia[jj]='開 質問';
-		}else if(mazekozeColor[jj] == "purple"){
-			mojia[jj]="相槌";
-		}else if(mazekozeColor[jj] == "#2b4e91"){
-			mojia[jj]="閉 質問";
-		}else if(mazekozeColor[jj] =="orange"){
-			mojia[jj]='解釈';
-		}else if(checked[jjj]==0){mojia[jj]='未';jjj++;
-		}else if(checked[jjj]==1){mojia[jj]='愛';jjj++
-		}else if(checked[jjj]==2){mojia[jj]='交友';jjj++
-		}else if(checked[jjj]==3){mojia[jj]='仕事';jjj++}
+			if(mazekozeColor[jj] == "#b52f25"){
+				mojia[jj]='開 質問';
+			}else if(mazekozeColor[jj] == "purple"){
+				mojia[jj]="相槌";
+			}else if(mazekozeColor[jj] == "#2b4e91"){
+				mojia[jj]="閉 質問";
+			}else if(mazekozeColor[jj] =="orange"){
+				mojia[jj]='解釈';
+			}else if(checked[jjj]==0){
+				mojia[jj]='未';jjj++;
+			}else if(checked[jjj]==1){
+				mojia[jj]='愛';jjj++;
+			}else if(checked[jjj]==2){
+				mojia[jj]='交友';jjj++;
+			}else if(checked[jjj]==3){
+				mojia[jj]='仕事';jjj++;
+			}
 
 
 
-		else{mojia[jj]='世間話';}
+			else{mojia[jj]='世間話';}
 		}
 
 		for (jj=0; jj<nagasa2.length; jj++){
-		datae[jj] = {x: nagasa2[jj], y:40, color: mazekozeColor[jj],text:mojia[jj],which:mazekozeWhich[jj]};//moji[jj]}//F_color2moji(color2[jj])}//, text:a}
+			datae[jj] = {x: nagasa2[jj], y:40, color: mazekozeColor[jj],text:mojia[jj],which:mazekozeWhich[jj]};//moji[jj]}//F_color2moji(color2[jj])}//, text:a}
 		}
 
 
-	//	console.log(datae.length);
-	//	console.log(nagasa2.length);
-///////////////////////////////////////////////////////
+		//	console.log(datae.length);
+		//	console.log(nagasa2.length);
+		///////////////////////////////////////////////////////
 
 
 
@@ -160,7 +165,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 				return "#f9f9f9";
 			}
 		});
-/////////////////////////////////////////////////////////////////////
+		/////////////////////////////////////////////////////////////////////
 
 		svg.selectAll("g")
 		.data(datae)
@@ -168,26 +173,26 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		.append("g")
 
 		.selectAll('text')
-			.data(datae)
-			.enter()
-			.append('text')
-			.text((d)=>d.text)
-			.style("font-size",15)
+		.data(datae)
+		.enter()
+		.append('text')
+		.text((d)=>d.text)
+		.style("font-size",15)
 
-			.attr("x",function(d,i){
+		.attr("x",function(d,i){
 			var arr = nagasa2;
 			var sum = d3.sum(arr);
 			var subSum = d3.sum(i==0 ? []:arr.slice(0,i));
-		//	console.info(xScale(subSum/sum) + 10);
+			//	console.info(xScale(subSum/sum) + 10);
 			return xScale(subSum/sum) + 10;
 		})
 		.attr(
-		"y",function(d){
-			return 20+d.which*155;
+			"y",function(d){
+				return 20+d.which*155;
 			}
 		)
 
-///////////////////////*//////////////////////////////////////////////
+		///////////////////////*//////////////////////////////////////////////
 
 
 
@@ -287,7 +292,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			return nagasa[i];
 		}).attr("y1", 0)
 		.attr("x2", function(d,i){return nagasa[i];}).attr("y2", height0);
-		
+
 		context.selectAll("line")
 		.attr("stroke", function(d,i){
 			return color2[i];
@@ -317,53 +322,55 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 				}
 			}
 		});
-/////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////変更部分小林下
+		/////////////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////変更部分小林下
 
-		var datae = [];
-		var jj;
-		var mojia = [];
+		var datae3 = [];
+		var jj3;
+		var mojia1 = [];
 
-		for (jj=0; jj<nagasa.length; jj++){
-		if(color2[jj] == "#b52f25"){
-			mojia[jj]='開 質問';
-		}else if(color2[jj] == "purple"){
-			mojia[jj]="相槌";
-		}else if(color2[jj] == "#2b4e91"){
-			mojia[jj]="閉 質問";
-		}else if(color2[jj] =="orange"){
-			mojia[jj]='解釈';
-		}else{mojia[jj]='世間話'}
+		for (jj3=0; jj3<nagasa.length; jj3++){
+			if(color2[jj3] == "#b52f25"){
+				mojia1[jj3]='開 質問';
+			}else if(color2[jj3] == "purple"){
+				mojia1[jj3]="相槌";
+			}else if(color2[jj3] == "#2b4e91"){
+				mojia1[jj3]="閉 質問";
+			}else if(color2[jj3] =="orange"){
+				mojia1[jj3]='解釈';
+			}else{
+				mojia1[jj3]='世間話';
+			}
 		}
 
-		for (jj=0; jj<nagasa.length; jj++){
-			datae[jj] = {x: nagasa[jj], y:10, color: color2[jj],text:mojia[jj]};//moji[jj]}//F_color2moji(color2[jj])}//, text:a}
+		for (jj3=0; jj3<nagasa.length; jj3++){
+			datae3[jj3] = {x: nagasa[jj3], y:10, color: color2[jj3],text:mojia1[jj3]};//moji[jj3]}//F_color2moji(color2[jj3])}//, text:a}
 		}
 		context.selectAll('circle')
-			.data(datae)
-			.enter()
-			.append('circle')
-			.attr({
+		.data(datae3)
+		.enter()
+		.append('circle')
+		.attr({
 			cx: (d) => d.x,
 			cy: (d) => d.y,
 			r: 13
-			})
-			.style('fill', (d) => d.color);
+		})
+		.style('fill', (d) => d.color);
 
 		context.selectAll('text')
-			.data(datae)
-			.enter()
-			.append('text')
-			.text((d)=> d.text)
-			.style("font-size",12)
-			.attr({
+		.data(datae3)
+		.enter()
+		.append('text')
+		.text((d)=> d.text)
+		.style("font-size",12)
+		.attr({
 			x: (d) => d.x+3,
 			y: (d) => d.y+25,
-			fill: (d) => d.color,
-			});
+			fill: (d) => d.color
+		});
 
-////////*////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////
+		////////*////////////////////////////////////////////////////////
+		///////////////////////////////////////////////////////////////
 		var scaleX2 = d3.scale.linear().domain([0,bunsuu]).range([0,width]);
 		var scaleY2 = d3.scale.linear().domain([0,RGBmaxmax]).range([height,0]);
 		var yAxisC = d3.svg.axis().scale(scaleY2).orient("left");//focus
@@ -380,29 +387,12 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		.call(xAxisC);
 	}
 
-
-
-
-
-
-
-
-
 	var endTime = new Date();
-	console.log((endTime - startTime) / 1000 + '秒経過');
 	var timeKeeping=(endTime - startTime) / 1000 + '秒経過';
 	var timeKeepingArea = document.getElementById('timeKeeping');
 	timeKeepingArea.innerHTML = "<br>"+timeKeeping+"<br>";
 
 };
-
-
-
-
-
-
-
-
 
 var funcChecked = (name,storage,chboxlist,checked,taiou,chboxlength) => {
 	var c;
@@ -444,42 +434,35 @@ var funcChecked2 = (name,storage,chboxlist,chboxlist2,checked2,taiou,taiou2,chbo
 				if(radio[i].control.value=="3"){
 					checked2[taiou[c-1]] =3;
 					storage.setItem(name+"RGBlist"+c, 3);
-					console.log("c=%d,tf=3",c);
 					break;
 				}
 				if(radio[i].control.value=="4"){
 					checked2[c-1] =4;
 					storage.setItem(name+"RGBlist"+c, 4);
-					console.log("c=%d,tf=4",c);
 					break;
 				}
 				if(radio[i].control.value=="5"){
 					checked2[c-1] =5;
 					storage.setItem(name+"RGBlist"+c, 5);
-					console.log("c=%d,tf=5",c);
 					break;
 				}
 				if(radio[i].control.value=="6"){
 					checked2[c-1] =6;
 					storage.setItem(name+"RGBlist"+c, 6);
-					console.log("c=%d,tf=6",c);
 					break;
 				}
 			}else{
 				checked2[c-1] =7;
 				storage.setItem(name+"RGBlist"+c, 7);
-				console.log("c=%d,tf=7",c);
 			}
 		}
 		if(checked2[c-1]==7){
 			black++;
 		}
 	}
-	console.log("black=%d",black);
 };
 
 var setForViz = (name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph) => {
-	console.log("chboxlength2 in svg.js=%d",chboxlength2);
 	d3.select("#svgdiv").select("svg").remove();
 	var svg = d3.select("#svgdiv").append("svg")
 	.attr("height",270)
@@ -490,11 +473,9 @@ var setForViz = (name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsu
 	if(chboxlength>=1){
 		funcChecked(name,storage,chboxlist,checked,taiou,chboxlength);
 	}
-	console.log("chboxlength2 in svg.js=%d",chboxlength2);
 	if(chboxlength2>=1){
 		funcChecked2(name,storage,chboxlist,chboxlist2,checked2,taiou,taiou2,chboxlength,chboxlength2);
 	}
-	console.log("chboxlength2 in svg.js=%d",chboxlength2);
 
 	var h,i,c,m,n;
 
@@ -541,7 +522,6 @@ var setForViz = (name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsu
 			color2[c]="#2c3e50";
 		}
 	}
-	console.info(color2);
 
 	var RGBmax=[];
 	var RGBmaxmax=1;
@@ -558,7 +538,6 @@ var setForViz = (name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsu
 	}
 
 	const radio = document.getElementById("graph").children;
-	console.info(radio);
 	for(let i=0;i<=2;i++){
 		if(radio[i].control.checked==true){
 			//storage.getItem(name+"RGBlist"+m)=
