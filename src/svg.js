@@ -127,8 +127,8 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 				c++;
 			}
 
-			mazekozeRanshin[c]="";
-			c++;
+			//mazekozeRanshin[c]="";
+			//c++;
 		}
 
 		console.info("mazekozeRanshin");
@@ -288,17 +288,15 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		.enter()
 		.append('text')
 		.text((d)=>{
-			console.info("d");
-			console.info(d);
 			return d;
 		})
-		.style("font-size",5)
+		.style("font-size",15)
 
 		.attr("x",function(d,i){
 			var arr = nagasa2;
 			//var sum = d3.sum(arr);
 			var subSum = d3.sum(i==0 ? []:arr.slice(0,i));
-			return xScale(subSum)/10 + 10;
+			return xScale(subSum)/11;
 		})
 		.attr("y",90);
 
