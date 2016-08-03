@@ -8,15 +8,15 @@ let work="#a0e0ff";
 
 /*
 if(checked2[c]==3){
-	color2[c]="#b0291b";
+color2[c]="#b0291b";
 }else if(checked2[c]==5){
-	color2[c]="#9b59b6";
+color2[c]="#9b59b6";
 }else if(checked2[c]==4){
-	color2[c]="#2980b9";
+color2[c]="#2980b9";
 }else if(checked2[c]==6){
-	color2[c]="#f1c40f";
+color2[c]="#f1c40f";
 }else{
-	color2[c]="#2c3e50";
+color2[c]="#2c3e50";
 }
 */
 
@@ -54,12 +54,14 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		let mazekozeColor=[];
 		let mazekozeHatsugenNumber=[];
 		let h=0;
+		let mazekozeRanshin=[];
 		//初手カウンセラー
 		nagasa2[0]=hatsugen[0].length*width/bunsuu;
 		mazekoze[0]=hatsugen[0];
 		mazekozeWhich[0]=0;
 		mazekozeColor[0]=color2[0];
 		mazekozeHatsugenNumber[0]=0;
+
 		let c=0;
 
 		for(m=1;m<hatsugen.length;m=m+2){
@@ -74,6 +76,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 					mazekozeHatsugenNumber[h]=m;
 					h++;
 					c++;
+
 				}
 			});
 			if(m+1==hatsugen.length){
@@ -86,6 +89,50 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			mazekozeColor[h]=color2[(m+1)/2];
 			mazekozeHatsugenNumber[h]=m+1;
 		}
+
+		console.info("ranshin");
+		console.info(ranshin);
+
+		c=0;
+		for(let m=1;m<ranshin.length;m=m+2){
+			for(let i=0;i<ranshin[m].length;i++){
+				mazekozeRanshin[c]="";
+				if(ranshin[m][i][0]==1){
+					mazekozeRanshin[c]="病\n";
+				}
+				if(ranshin[m][i][1]==1){
+					mazekozeRanshin[c]="無気\n";
+				}
+				if(ranshin[m][i][2]==1){
+					mazekozeRanshin[c]="疑\n";
+				}
+				if(ranshin[m][i][3]==1){
+					mazekozeRanshin[c]="不注\n";
+				}
+				if(ranshin[m][i][4]==1){
+					mazekozeRanshin[c]="怠\n";
+				}
+				if(ranshin[m][i][5]==1){
+					mazekozeRanshin[c]="渇\n";
+				}
+				if(ranshin[m][i][6]==1){
+					mazekozeRanshin[c]="妄想\n";
+				}
+				if(ranshin[m][i][7]==1){
+					mazekozeRanshin[c]="新境\n";
+				}
+				if(ranshin[m][i][8]==1){
+					mazekozeRanshin[c]="落着";
+				}
+				c++;
+			}
+
+			mazekozeRanshin[c]="";
+			c++;
+		}
+
+		console.info("mazekozeRanshin");
+		console.info(mazekozeRanshin);
 
 		var w = width;
 		var padding = 10;
@@ -230,6 +277,30 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		);
 
 		///////////////////////*//////////////////////////////////////////////
+
+
+		svg.selectAll("g")
+		.data(mazekozeRanshin)
+		.enter()
+		.append("g")
+		.selectAll('text')
+		.data(mazekozeRanshin)
+		.enter()
+		.append('text')
+		.text((d)=>{
+			console.info("d");
+			console.info(d);
+			return d;
+		})
+		.style("font-size",5)
+
+		.attr("x",function(d,i){
+			var arr = nagasa2;
+			//var sum = d3.sum(arr);
+			var subSum = d3.sum(i==0 ? []:arr.slice(0,i));
+			return xScale(subSum)/10 + 10;
+		})
+		.attr("y",90);
 
 
 		//x軸

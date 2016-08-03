@@ -105,7 +105,7 @@ var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxl
 						if(path[n].basic_form=="引き延ばし"||path[n].basic_form=="引き延ばす"||path[n].basic_form=="怠慢"||path[n].basic_form=="怠惰"){
 							ranshin[m][i][4]=1;
 						}
-						if(path[n].basic_form=="渇望"||path[n].basic_form=="切望"||path[n].basic_form=="欲しい"){
+						if(path[n].basic_form=="渇望"||path[n].basic_form=="切望"||path[n].basic_form=="欲しい"||path[n].basic_form=="ほしい"){
 							ranshin[m][i][5]=1;
 						}
 						if(path[n].basic_form=="妄想"||path[n].basic_form=="空想"||path[n].basic_form=="想い"||path[n].basic_form=="ふける"){
