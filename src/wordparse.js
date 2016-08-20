@@ -70,6 +70,7 @@ var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxl
 					||path[n].surface_form=="…"||path[n].surface_form=="……"||path[n].surface_form=="・・・"||path[n].surface_form=="･･･"){
 						break;
 					}
+					bun[m][i] += path[n].surface_form;
 					if(m%2==1){
 						kanjatango++;
 						kanjamoji=kanjamoji+path[n].surface_form.length;
@@ -92,30 +93,39 @@ var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxl
 
 						if(path[n].basic_form=="病"||path[n].basic_form=="病気"||path[n].basic_form=="ストレス"||path[n].basic_form=="不調"||path[n].basic_form=="過食"||path[n].basic_form=="嘔吐"||path[n].basic_form=="過食嘔吐"){
 							ranshin[m][i][0]=1;
+							console.info("病気,%d,%d,%s",m,i,bun[m][i]);
 						}
 						if(path[n].basic_form=="無気力"||path[n].basic_form=="気力"||path[n].basic_form=="やる気"){
 							ranshin[m][i][1]=1;
+							console.info("無気力,%d,%d,%s",m,i,bun[m][i]);
 						}
 						if(path[n].basic_form=="疑い"||path[n].basic_form=="疑う"||path[n].basic_form=="疑心暗鬼"||path[n].basic_form=="疑心"){
 							ranshin[m][i][2]=1;
+							console.info("疑い,%d,%d,%s",m,i,bun[m][i]);
 						}
 						if(path[n].basic_form=="注意"||path[n].basic_form=="不注意"||path[n].basic_form=="注意散漫"||path[n].basic_form=="無自覚"||path[n].basic_form=="自覚"){
 							ranshin[m][i][3]=1;
+							console.info("不注意,%d,%d,%s",m,i,bun[m][i]);
 						}
 						if(path[n].basic_form=="引き延ばし"||path[n].basic_form=="引き延ばす"||path[n].basic_form=="怠慢"||path[n].basic_form=="怠惰"){
 							ranshin[m][i][4]=1;
+							console.info("怠慢,%d,%d,%s",m,i,bun[m][i]);
 						}
 						if(path[n].basic_form=="渇望"||path[n].basic_form=="切望"||path[n].basic_form=="欲しい"||path[n].basic_form=="ほしい"){
 							ranshin[m][i][5]=1;
+							console.info("渇望,%d,%d,%s",m,i,bun[m][i]);
 						}
 						if(path[n].basic_form=="妄想"||path[n].basic_form=="空想"||path[n].basic_form=="想い"||path[n].basic_form=="ふける"){
 							ranshin[m][i][6]=1;
+							console.info("妄想,%d,%d,%s",m,i,bun[m][i]);
 						}
 						if(path[n].basic_form=="抜け出す"||path[n].basic_form=="打破"||path[n].basic_form=="勝つ"||path[n].basic_form=="戦う"){
 							ranshin[m][i][7]=1;
+							console.info("新しい境地を見いだせぬこと,%d,%d,%s",m,i,bun[m][i]);
 						}
 						if(path[n].basic_form=="不安定"||path[n].basic_form=="安定"||path[n].basic_form=="落ち着く"){
 							ranshin[m][i][8]=1;
+							console.info("心の不安定さ,%d,%d,%s",m,i,bun[m][i]);
 						}
 					}else if(m%2==0){
 						serapitango++;
@@ -133,7 +143,7 @@ var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxl
 							RGBlist[m/2][6]=1;
 						}
 					}
-					bun[m][i] += path[n].surface_form;
+
 					if(path[n].pos_detail_1=="接尾"||path[n].basic_form=="*"||path[n].pos=="助詞"||path[n].basic_form=="、"||path[n].pos=="記号"||path[n].pos=="助動詞"||path[n].pos=="感動詞"||path[n].pos=="接頭詞"||path[n].pos_detail_1=="非自立"
 					||path[n].basic_form=="する"||path[n].basic_form=="いる"||path[n].basic_form=="こういう"||path[n].basic_form=="そういう"||path[n].basic_form=="こう"||path[n].basic_form=="する"||path[n].basic_form=="こうした"||path[n].basic_form=="いう"||path[n].basic_form=="する"
 					||path[n].basic_form=="なる"||path[n].basic_form=="その"||path[n].basic_form=="あの"||path[n].pos_detail_1=="数"||path[n].basic_form=="そう"||path[n].basic_form=="気持ち"||path[n].basic_form=="思い"||path[n].basic_form=="思う"||path[n].basic_form=="ある"){

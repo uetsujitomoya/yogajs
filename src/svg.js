@@ -298,7 +298,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			var subSum = d3.sum(i==0 ? []:arr.slice(0,i));
 			return xScale(subSum)/11;
 		})
-		.attr("y",90);
+		.attr("y",100);
 
 
 		//x軸
