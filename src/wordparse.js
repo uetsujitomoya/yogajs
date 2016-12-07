@@ -31,6 +31,13 @@ var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxl
 	bun=[];
 
 	var data = JSON.parse(event.target.result);
+
+//ここでKNP(XML)の処理を開始
+
+//辞書の読込
+
+//連結
+
 	return kuromoji.builder({dicPath: 'dict/'}).build((err, tokenizer) => {
 		const path = tokenizer.tokenize(data[0].a);
 		n=0;
