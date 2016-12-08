@@ -20,6 +20,13 @@ document.getElementById('load-button').addEventListener('click', function () {
   };
   reader.readAsText(file);
 });
+
+document.getElementById('knp-load-button').addEventListener('click',AcceptKnp());
+
+
+
+//storage出力
+
 document.getElementById('storageSave-button').addEventListener('click', function () {
 
   //let file_name="storage"+Date()+".csv";
