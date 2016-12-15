@@ -20,8 +20,9 @@ document.getElementById('load-button').addEventListener('click', function () {
   };
   reader.readAsText(file);
 });
-
+/*
 document.getElementById('knp-load-button').addEventListener('click',AcceptKnp());
+*/
 
 
 
