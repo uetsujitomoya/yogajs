@@ -10,4 +10,11 @@ var AcceptDictionary = (c) =>{
 
 var ReadDictionary = (c) =>{
 
+ //dictionaryが入ったことを認識→ストレージも変える
+
+  //csvを辞書に変換
+
+  //1.辞書の条件を配列かobjectとして定義しておく
+  //2.それをcsvの内容に入れ替える
+
 };
