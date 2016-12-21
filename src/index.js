@@ -25,6 +25,10 @@ document.getElementById('knp-load-button').addEventListener('click',AcceptKnp())
 */
 
 
+/*
+document.getElementById('buttonToInputDictionary').addEventListener('click',AcceptDictionary());
+*/
+
 
 //storage出力
 
