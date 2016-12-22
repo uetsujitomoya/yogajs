@@ -31,14 +31,14 @@ var select =(name,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,chbo
 				c++;
 				chboxlength++;
 
-				var sf =storage.getItem(name+"RGB"+c);
+				var stockedAnswerGroupNumber =storage.getItem(name+"RGB"+c);
 
-				if(sf!=null){
-					RGB[m][i][sf]=1;
+				if(stockedAnswerGroupNumber!=null){
+					RGB[m][i][stockedAnswerGroupNumber]=1;
 					for(f=0;f<=2;f++){
-						if(f!=sf){
+						if(f!=stockedAnswerGroupNumber){
 							RGB[m][i][f]=0;
-						}
+						}//全てゼロなら濃いグレーが出力
 					}
 				}
 
@@ -82,13 +82,13 @@ var select =(name,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,chbo
 			chboxlist2[s][1]=4;
 			taiou2[s-1]=s-1;
 
-			var tf =storage.getItem(name+"RGBlist"+s);
-			console.log("s=%d,tf=%s",s,tf);
+			var stockedQuestionGroupNumber =storage.getItem(name+"RGBlist"+s);
+			console.log("s=%d,stockedQuestionGroupNumber=%s",s,stockedQuestionGroupNumber);
 
-			if(tf!=null){
+			if(stockedQuestionGroupNumber!=null){
 
 				for(f=3;f<=7;f++){
-					if(f==tf){
+					if(f==stockedQuestionGroupNumber){
 						RGBlist[m/2][f]=1;
 					}else{
 						RGBlist[m/2][f]=0;

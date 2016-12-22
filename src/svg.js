@@ -522,6 +522,7 @@ var funcChecked = (name,storage,chboxlist,checked,taiou,chboxlength) => {
 				}
 			}else{
 				checked[taiou[c-1]] =0;
+                storage.setItem(name+"RGB"+c, 9);//未分類
 			}
 		}
 	}

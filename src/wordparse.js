@@ -15,6 +15,7 @@ var makeOnClickS = (c) =>{
 };
 var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2) => {
 
+
 	var startTime = new Date();
 	console.log(startTime);
 
@@ -22,6 +23,7 @@ var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxl
 	var h,i,j,k,m,n,c,x,y,z;
 	var hinshi = [];
 	var RGB = [];
+
 	let ranshin = [];
 	var tangoset = new Set();
 	var tangosett = [];
@@ -293,6 +295,7 @@ var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxl
 		chboxlist2 = sResult.chboxlist2;
 		RGB = sResult.RGB;
 		RGBlist = sResult.RGBlist;
+
 		checked = sResult.checked;
 		checked2 = sResult.checked2;
 		taiou = sResult.taiou;
