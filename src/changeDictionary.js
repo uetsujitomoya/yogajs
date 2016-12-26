@@ -27,6 +27,13 @@ var ReadDictionary = (c) =>{
 
     //ヒットしたら点数加えてブレイク
 
+
+    var testArray = [3, 8, 13, true, 'あいうえお', 8, 10];
+
+    window.alert(testArray.indexOf(8));             // 1がアラートされる
+    window.alert(testArray.indexOf('あいうえお'));  // 4がアラートされる
+
+
     //最後にその文がどの分類か判定
 
     //ストレージ名をわかりやすくし、分類ラベル名を文字列に変える
