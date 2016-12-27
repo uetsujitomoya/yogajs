@@ -1,5 +1,13 @@
 import {funcReaderOnload} from "./wordparse.js";
+import {AcceptKnp} from "./processKnp.js";
+import {AcceptDictionary} from "./changeDictionary.js";
 import $ from 'jquery';
+
+
+var dictionaryFromWord2Vec = csv2Array('HDFaceVertex.csv');
+console.log(dictionaryFromWord2Vec);
+
+
 var keitaisokaiseki = []; //このlengthは段落数
 var questionClassification  = [];//checkboxのセレクト結果
 var chboxlist=[];//通し番号
@@ -108,3 +116,21 @@ document.getElementById('storageSave-button').addEventListener('click', function
 //let csv_string=convertTocsv(ary);
 
 //http://qiita.com/kenchan0130/items/11c3abab109405379ffb
+
+
+
+function csv2Array(filePath) { //csvﾌｧｲﾙﾉ相対ﾊﾟｽor絶対ﾊﾟｽ
+    var csvData = [];
+    var data = new XMLHttpRequest();
+    data.open("GET", filePath, false); //true:非同期,false:同期
+    data.send(null);
+    var LF = String.fromCharCode(10); //改行ｺｰﾄﾞ
+    var lines = data.responseText.split(LF);
+    for (var i = 0; i < lines.length;++i) {
+        var cells = lines[i].split(",");
+        if( cells.length != 1 ) {
+            csvData.push(cells);
+        }
+    }
+    return csvData;
+}

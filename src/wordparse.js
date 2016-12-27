@@ -52,6 +52,9 @@ var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxl
 		var serapitango=0;
 		var serapibun=0;
 		var soudesuka=0;
+
+		//下の段階すっとばして例の辞書使う
+
 		while(n<path.length){
 			keitaisokaiseki[m] = [];
 			bun[m] = [];

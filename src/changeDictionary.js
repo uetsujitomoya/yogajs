@@ -21,23 +21,31 @@ var ReadDictionary = (c) =>{
   music = $.csv.toArrays(csv);
 
   //1.辞書の条件を配列かobjectとして定義しておく
-  //2.それをcsvの内容に入れ替える
+  //2.それをcsvの内容に入れ替える・・・は要らんか。
 
     //3.点数も表にする。
 
+
+
+    var dictionaryFromWord2Vec = csv2Array('HDFaceVertex.csv');
+    console.log(dictionaryFromWord2Vec);
+    //中身確認してから下を書き換える
+    //↑中身確認してダメだったら転置する
+
+
+
     //ヒットしたら点数加えてブレイク
-
-    var data = csv2Array('HDFaceVertex.csv');
-    console.log(data);
-
-
-
 
 
     var testArray = [3, 8, 13, true, 'あいうえお', 8, 10];
 
+
+    //形態素解析してループさせる
+
     window.alert(testArray.indexOf(8));             // 1がアラートされる
     window.alert(testArray.indexOf('あいうえお'));  // 4がアラートされる
+
+
 
 
     //最後にその文がどの分類か判定
@@ -46,6 +54,9 @@ var ReadDictionary = (c) =>{
 
 
     //dictionaryが入ったことを認識→ストレージも変える
+
+
+    //判定結果をモジュール化してwordparse.jsに受け渡す
 
     var test4;
 
