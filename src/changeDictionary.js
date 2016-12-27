@@ -56,7 +56,59 @@ var ReadDictionary = (c) =>{
     //dictionaryが入ったことを認識→ストレージも変える
 
 
-    //判定結果をモジュール化してwordparse.jsに受け渡す
+    //判定結果をモジュール化してwordparse.js・・・じゃなくてRGBとRGBlistに引き渡してselect.jsに受け渡す
+
+
+
+    var sResult = select(name,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
+
+    checkboxlist = sResult.checkboxlist;
+    chboxlist = sResult.chboxlist;
+    chboxlist2 = sResult.chboxlist2;
+    RGB = sResult.RGB;
+    RGBlist = sResult.RGBlist;
+
+    checked = sResult.checked;
+    checked2 = sResult.checked2;
+    taiou = sResult.taiou;
+    taiou2 = sResult.taiou2;
+    chboxlength = sResult.chboxlength;
+    chboxlength2 = sResult.chboxlength2;
+    //graph = sResult.graph;
+    //console.log("chboxlength2=%d",chboxlength2)
+
+
+
+
+    var vResult = setForViz(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin);//形態素解析後に1度目の描画
+    chboxlist = vResult.chboxlist;
+    chboxlist2 = vResult.chboxlist2;
+    RGBlist = vResult.RGBlist;
+    checked = vResult.checked;
+    checked2 = vResult.checked2;
+    chboxlength = vResult.chboxlength;
+    chboxlength2 = vResult.chboxlength2;
+    ranshin = vResult.ranshin;
+
+    //これは後ろじゃないと、選択肢が反映されない？
+    for(c=1;c<=chboxlength;c++){
+        makeOnClick(c);
+    }
+    for(c=1;c<=chboxlength2;c++){
+        makeOnClickS(c);
+    }
+
+
+    document.getElementById('radio_buttons').onchange = () => {
+        setForViz(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin);
+    };//graphの形状を切り替えた際もここで再描画される
+
+    //graphのラジオボタン変わったらまた描画
+
+    return{
+        name:name,RGBlist:RGBlist,keitaisokaiseki:keitaisokaiseki,hatsugen:hatsugen,bun:bun,chboxlist:chboxlist,chboxlist2:chboxlist2,checked:checked,checked2:checked2,taiou:taiou,taiou2:taiou2,chboxlength:chboxlength,chboxlength2:chboxlength2,ranshin:ranshin
+    };
+
 
     var test4;
 

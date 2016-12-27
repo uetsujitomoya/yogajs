@@ -17,6 +17,9 @@ var ReadKnp = (c) =>{
     //csvを辞書に変換
     music = $.csv.toArrays(csv);
 
+
+    //
+
     //1.辞書の条件を配列かobjectとして定義しておく
     //2.それをcsvの内容に入れ替える
 
