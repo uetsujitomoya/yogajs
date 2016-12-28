@@ -1,6 +1,11 @@
 
 
-var select =(name,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2) => {
+var select =(name,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,isUsingDictionaryWithWord2Vec) => {
+
+    if(isUsingDictionaryWithWord2Vec==1){
+        console.log("isUsingDictionaryWithWord2Vec==1");
+    }
+
 	var i,m,n,f;
 	taiou = [];
 	taiou2=[];
@@ -31,8 +36,9 @@ var select =(name,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,chbo
 				c++;
 				chboxlength++;
 
-				if(useNewDictionary==1){
-                    var stockedAnswerGroupNumber =storage.getItem(name+"AnswerWith"+newDictionaryName+c);
+				if(isUsingDictionaryWithWord2Vec==1){
+                    var stockedAnswerGroupNumber =storage.getItem(name+"AnswerWithNewDictionary"+c);
+                    //今後辞書ネームにも対応
 				}else{
                     var stockedAnswerGroupNumber =storage.getItem(name+"RGB"+c);
 				}

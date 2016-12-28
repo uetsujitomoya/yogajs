@@ -40,15 +40,15 @@ document.getElementById('load-button').addEventListener('click', function () {
   var reader = new FileReader();
   reader.onload = function(event) {
     //var result = funcReaderOnload(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
-      let resultWithNewDictionary = AcceptDictionary(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
+      let resultWithNewDictionary = AcceptDictionary(name,event,keitaisokaiseki,chboxlist,chboxlist2,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,newLoveDictionary,newWorkDictionary,newFriendDictionary);
   };
   reader.readAsText(file);
 
 });
 
-document.getElementById('knp-load-button').addEventListener('click',AcceptKnp(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2));
+//document.getElementById('knp-load-button').addEventListener('click',AcceptKnp(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2));
 
-document.getElementById('buttonToInputDictionary').addEventListener('click',AcceptDictionary(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2));
+//document.getElementById('buttonToInputDictionary').addEventListener('click',AcceptDictionary(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2));
 
 //storage出力
 

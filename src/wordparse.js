@@ -41,6 +41,7 @@ var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxl
 //連結
 
 	return kuromoji.builder({dicPath: 'dict/'}).build((err, tokenizer) => {
+        console.log("wordparse");
 		const path = tokenizer.tokenize(data[0].a);
 		n=0;
 		var tangosuu=0;
@@ -345,4 +346,4 @@ var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxl
 	});
 };
 
-export {funcReaderOnload};
+export {funcReaderOnload,makeOnClick,makeOnClickS};

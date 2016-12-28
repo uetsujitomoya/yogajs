@@ -501,14 +501,16 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 
 };
 
-var funcChecked = (jsonFileName,storage,chboxlist,checked,taiou,chboxlength) => {
+var funcChecked = (jsonFileName,storage,chboxlist,checked,taiou,chboxlength,isUsingDictionaryWithWord2Vec) => {
 	var c;
 	for(c=1;c<=chboxlength;c++){
+        let changedAnswerClassificationSaveTarget;
 
-		if(useNewDictionary==1){
-            let changedAnswerClassificationSaveTarget=jsonFileName+"AnswerWith"+newDictionaryName+c;
+		if(isUsingDictionaryWithWord2Vec==1){
+            changedAnswerClassificationSaveTarget = jsonFileName+"AnswerWithNewDictionary"+c;
+            //今後辞書名に対応
 		}else{
-			let changedAnswerClassificationSaveTarget=jsonFileName+"RGB"+c;
+			changedAnswerClassificationSaveTarget = jsonFileName+"RGB"+c;
         }
 
 		const radio = document.getElementById("r"+c).children;
@@ -577,7 +579,7 @@ var funcChecked2 = (name,storage,chboxlist,chboxlist2,checked2,taiou,taiou2,chbo
 	}
 };
 
-var setForViz = (name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin) => {
+var setForViz = (name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,isUsingDictionaryWithWord2Vec) => {
 	d3.select("#svgdiv").select("svg").remove();
 	var svg = d3.select("#svgdiv").append("svg")
 	.attr("height",270)
@@ -586,7 +588,7 @@ var setForViz = (name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsu
 	var color2=[];
 	var stackdataArr = [];
 	if(chboxlength>=1){
-		funcChecked(name,storage,chboxlist,checked,taiou,chboxlength);
+		funcChecked(name,storage,chboxlist,checked,taiou,chboxlength,isUsingDictionaryWithWord2Vec);
 	}
 	if(chboxlength2>=1){
 		funcChecked2(name,storage,chboxlist,chboxlist2,checked2,taiou,taiou2,chboxlength,chboxlength2);
