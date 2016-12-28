@@ -153,7 +153,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		var jj;
 		var mojia = [];
 		var jjj=0;
-
+/*
 		for (jj=0; jj<nagasa2.length; jj++){//色変えたからか。。
 			if(mazekozeColor[jj] == open3){
 				mojia[jj]='開 質問';
@@ -180,7 +180,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			datae[jj] = {x: nagasa2[jj], y:40, color: mazekozeColor[jj],text:mojia[jj],which:mazekozeWhich[jj]};
 			//moji[jj]}//F_color2moji(color2[jj])}//, text:a}
 		}
-
+*/
 
 		//	console.log(datae.length);
 		//	console.log(nagasa2.length);
@@ -276,7 +276,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			}
 		);
 
-		///////////////////////*//////////////////////////////////////////////
+		/////////////////////////////////////////////////////////////////////
 
 
 		svg.selectAll("g")
@@ -333,6 +333,8 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		console.info(datae);
 
 	}else{
+
+		//積み重ね折れ線
 
 		//stack
 		var context = svg.append("g") //全体グラフグループ作成

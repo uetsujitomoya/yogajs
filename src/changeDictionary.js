@@ -8,7 +8,7 @@ import {makeOnClickS,makeOnClick} from "./wordparse.js";
 
 
 
-var AcceptDictionary = (name,event,keitaisokaiseki,chboxlist,chboxlist2,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,newLoveDictionary,newWorkDictionary,newFriendDictionary) =>{
+var AcceptDictionary = (jsonFileName,event,keitaisokaiseki,chboxlist,chboxlist2,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,newLoveDictionary,newWorkDictionary,newFriendDictionary) =>{
 
 
 
@@ -129,6 +129,8 @@ var AcceptDictionary = (name,event,keitaisokaiseki,chboxlist,chboxlist2,hatsugen
         var serapibun=0;
         var soudesuka=0;
 
+        var storage = localStorage;//初回読み込み
+
         //下の段階すっとばして例の辞書使う
 
         while(wordNumberParsedInMorphologicalAnalysis<path.length){
@@ -177,11 +179,11 @@ var AcceptDictionary = (name,event,keitaisokaiseki,chboxlist,chboxlist2,hatsugen
                         if(newLoveDictionary[0].indexOf(wordLookedNow)!=-1){
                             RGB[hatsugenNumber][sentenceNumberInHatsugen][0]+=newLoveDictionary[1][newLoveDictionary[0].indexOf(wordLookedNow)];
                             //wordLookedNowがある行の1列目の値（類似度）を足す
-                        }else if(newLoveDictionary[0].indexOf(wordLookedNow)!=-1){
-                            RGB[hatsugenNumber][sentenceNumberInHatsugen][2]+=newLoveDictionary[1][newLoveDictionary[0].indexOf(wordLookedNow)];
+                        }else if(newWorkDictionary[0].indexOf(wordLookedNow)!=-1){
+                            RGB[hatsugenNumber][sentenceNumberInHatsugen][2]+=newWorkDictionary[1][newWorkDictionary[0].indexOf(wordLookedNow)];
                             //wordLookedNowがある行の1列目の値（類似度）を足す
-                        }else if(newLoveDictionary[0].indexOf(wordLookedNow)!=-1){
-                            RGB[hatsugenNumber][sentenceNumberInHatsugen][1]+=newLoveDictionary[1][newLoveDictionary[0].indexOf(wordLookedNow)];
+                        }else if(newFriendDictionary[0].indexOf(wordLookedNow)!=-1){
+                            RGB[hatsugenNumber][sentenceNumberInHatsugen][1]+=newFriendDictionary[1][newFriendDictionary[0].indexOf(wordLookedNow)];
                             //wordLookedNowがある行の1列目の値（類似度）を足す
                         }
 /*
@@ -271,6 +273,11 @@ var AcceptDictionary = (name,event,keitaisokaiseki,chboxlist,chboxlist2,hatsugen
 
                 //以下、新規追加のセンテンス判定
 
+                storage.setItem(jsonFileName+"AnswerWithNewDictionaryHatsugen"+hatsugenNumber+"Sentence"+sentenceNumberInHatsugen, bun[hatsugenNumber][sentenceNumberInHatsugen]);
+                storage.setItem(jsonFileName+"AnswerWithNewDictionaryHatsugen"+hatsugenNumber+"Sentence"+sentenceNumberInHatsugen+"LovePoint", RGB[hatsugenNumber][sentenceNumberInHatsugen][0]);
+                storage.setItem(jsonFileName+"AnswerWithNewDictionaryHatsugen"+hatsugenNumber+"Sentence"+sentenceNumberInHatsugen+"WorkPoint", 0);
+                storage.setItem(jsonFileName+"AnswerWithNewDictionaryHatsugen"+hatsugenNumber+"Sentence"+sentenceNumberInHatsugen+"FriendPoint", 0);
+
                 if(RGB[hatsugenNumber][sentenceNumberInHatsugen][0] >= RGB[hatsugenNumber][sentenceNumberInHatsugen][1]){
                     RGB[hatsugenNumber][sentenceNumberInHatsugen][1] =0;
                     if( RGB[hatsugenNumber][sentenceNumberInHatsugen][0] >= RGB[hatsugenNumber][sentenceNumberInHatsugen][2] ){
@@ -302,6 +309,9 @@ var AcceptDictionary = (name,event,keitaisokaiseki,chboxlist,chboxlist2,hatsugen
                     hatsugen[hatsugenNumber] += bun[hatsugenNumber][sentenceNumberInHatsugen];
                     hatsugen[hatsugenNumber] += "。";
                 }
+
+
+
                 if(wordNumberParsedInMorphologicalAnalysis==path.length){
                     if(hatsugenNumber%2==0 ){
                         if( sentenceNumberInHatsugen<=2 && tangosuu<=7){
@@ -416,13 +426,13 @@ var AcceptDictionary = (name,event,keitaisokaiseki,chboxlist,chboxlist2,hatsugen
         }
         */
 
-        var storage = localStorage;//初回読み込み
+
 
         var graph;
 
         let isUsingDictionaryWithWord2Vec = 1;
 
-        var sResult = select(name,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,isUsingDictionaryWithWord2Vec);
+        var sResult = select(jsonFileName,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,isUsingDictionaryWithWord2Vec);
 
         checkboxlist = sResult.checkboxlist;
         chboxlist = sResult.chboxlist;
@@ -442,7 +452,7 @@ var AcceptDictionary = (name,event,keitaisokaiseki,chboxlist,chboxlist2,hatsugen
 
 
 
-        var vResult = setForViz(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,isUsingDictionaryWithWord2Vec);//形態素解析後に1度目の描画
+        var vResult = setForViz(jsonFileName,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,isUsingDictionaryWithWord2Vec);//形態素解析後に1度目の描画
         chboxlist = vResult.chboxlist;
         chboxlist2 = vResult.chboxlist2;
         RGBlist = vResult.RGBlist;
@@ -462,13 +472,13 @@ var AcceptDictionary = (name,event,keitaisokaiseki,chboxlist,chboxlist2,hatsugen
 
 
         document.getElementById('radio_buttons').onchange = () => {
-            setForViz(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin);
+            setForViz(jsonFileName,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin);
         };//graphの形状を切り替えた際もここで再描画される
 
         //graphのラジオボタン変わったらまた描画
 
         return{
-            name:name,RGBlist:RGBlist,keitaisokaiseki:keitaisokaiseki,hatsugen:hatsugen,bun:bun,chboxlist:chboxlist,chboxlist2:chboxlist2,checked:checked,checked2:checked2,taiou:taiou,taiou2:taiou2,chboxlength:chboxlength,chboxlength2:chboxlength2,ranshin:ranshin
+            name:jsonFileName,RGBlist:RGBlist,keitaisokaiseki:keitaisokaiseki,hatsugen:hatsugen,bun:bun,chboxlist:chboxlist,chboxlist2:chboxlist2,checked:checked,checked2:checked2,taiou:taiou,taiou2:taiou2,chboxlength:chboxlength,chboxlength2:chboxlength2,ranshin:ranshin
         };
 
 
@@ -519,7 +529,7 @@ var AcceptDictionary = (name,event,keitaisokaiseki,chboxlist,chboxlist2,hatsugen
 
     //判定結果をモジュール化してwordparse.js・・・じゃなくてRGBとRGBlistに引き渡してselect.jsに受け渡す
 
-    var sResult = select(name,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
+    var sResult = select(jsonFileName,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
 
     checkboxlist = sResult.checkboxlist;
     chboxlist = sResult.chboxlist;
@@ -536,7 +546,7 @@ var AcceptDictionary = (name,event,keitaisokaiseki,chboxlist,chboxlist2,hatsugen
     //graph = sResult.graph;
     //console.log("chboxlength2=%d",chboxlength2)
 
-    var vResult = setForViz(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin);//形態素解析後に1度目の描画
+    var vResult = setForViz(jsonFileName,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin);//形態素解析後に1度目の描画
     chboxlist = vResult.chboxlist;
     chboxlist2 = vResult.chboxlist2;
     RGBlist = vResult.RGBlist;
@@ -556,13 +566,13 @@ var AcceptDictionary = (name,event,keitaisokaiseki,chboxlist,chboxlist2,hatsugen
 
 
     document.getElementById('radio_buttons').onchange = () => {
-        setForViz(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin);
+        setForViz(jsonFileName,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin);
     };//graphの形状を切り替えた際もここで再描画される
 
     //graphのラジオボタン変わったらまた描画
 
     return{
-        name:name,RGBlist:RGBlist,keitaisokaiseki:keitaisokaiseki,hatsugen:hatsugen,bun:bun,chboxlist:chboxlist,chboxlist2:chboxlist2,checked:checked,checked2:checked2,taiou:taiou,taiou2:taiou2,chboxlength:chboxlength,chboxlength2:chboxlength2,ranshin:ranshin
+        name:jsonFileName,RGBlist:RGBlist,keitaisokaiseki:keitaisokaiseki,hatsugen:hatsugen,bun:bun,chboxlist:chboxlist,chboxlist2:chboxlist2,checked:checked,checked2:checked2,taiou:taiou,taiou2:taiou2,chboxlength:chboxlength,chboxlength2:chboxlength2,ranshin:ranshin
     };
 
 

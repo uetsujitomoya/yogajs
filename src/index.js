@@ -160,3 +160,7 @@ function B (a, b, c) {
 function TransposeMatrix(ary) {
     return ary.reduce (B, []);
 }
+
+document.getElementById('storageSave-button').addEventListener('click', function () {
+    localStorage.clear();
+});
