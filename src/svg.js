@@ -501,28 +501,35 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 
 };
 
-var funcChecked = (name,storage,chboxlist,checked,taiou,chboxlength) => {
+var funcChecked = (jsonFileName,storage,chboxlist,checked,taiou,chboxlength) => {
 	var c;
 	for(c=1;c<=chboxlength;c++){
+
+		if(useNewDictionary==1){
+            let changedAnswerClassificationSaveTarget=jsonFileName+"AnswerWith"+newDictionaryName+c;
+		}else{
+			let changedAnswerClassificationSaveTarget=jsonFileName+"RGB"+c;
+        }
+
 		const radio = document.getElementById("r"+c).children;
 		for(let i = radio.length-3, l = radio.length; i < l; i++){
 			if(radio[i].control.checked==true){
 				if(radio[i].control.value=="1"){
 					checked[taiou[c-1]] =1;
-					storage.setItem(name+"RGB"+c, 0);
+					storage.setItem(changedAnswerClassificationSaveTarget, 0);
 					break;
 				}else if(radio[i].control.value=="2"){
 					checked[taiou[c-1]] =2;
-					storage.setItem(name+"RGB"+c, 1);
+					storage.setItem(changedAnswerClassificationSaveTarget, 1);
 					break;
 				}else if(radio[i].control.value=="3"){
 					checked[taiou[c-1]] =3;
-					storage.setItem(name+"RGB"+c, 2);
+					storage.setItem(changedAnswerClassificationSaveTarget, 2);
 					break;
 				}
 			}else{
 				checked[taiou[c-1]] =0;
-                storage.setItem(name+"RGB"+c, 9);//未分類
+                storage.setItem(changedAnswerClassificationSaveTarget, 9);//未分類
 			}
 		}
 	}

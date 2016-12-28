@@ -29,15 +29,10 @@ document.getElementById('load-button').addEventListener('click', function () {
   };
   reader.readAsText(file);
 });
-/*
-document.getElementById('knp-load-button').addEventListener('click',AcceptKnp());
-*/
 
+document.getElementById('knp-load-button').addEventListener('click',AcceptKnp(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2));
 
-/*
-document.getElementById('buttonToInputDictionary').addEventListener('click',AcceptDictionary());
-*/
-
+document.getElementById('buttonToInputDictionary').addEventListener('click',AcceptDictionary(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2));
 
 //storage出力
 

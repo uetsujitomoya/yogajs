@@ -3,7 +3,7 @@ import $ from 'jquery';
 
 
 
-var AcceptDictionary = (c) =>{
+var AcceptDictionary = (name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,talkOrijinalByTurn,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2) =>{
   var file = document.getElementById('file-input').files[0];
   var name = file.name;
   var reader = new FileReader();
@@ -23,42 +23,95 @@ var ReadDictionary = (c) =>{
   //1.辞書の条件を配列かobjectとして定義しておく
   //2.それをcsvの内容に入れ替える・・・は要らんか。
 
+
+
     //3.点数も表にする。
 
 
+    //csv
 
-    var dictionaryFromWord2Vec = csv2Array('HDFaceVertex.csv');
+
+    var baitoArray = csv2Array('baito.csv');
+    var hahaArray = csv2Array('haha.csv');
+    var imoutoArray = csv2Array('imouto.csv');
+    let newLoveDictionary = [];
+
+    newLoveDictionary=newLoveDictionary.push(baitoArray,hahaArray,imoutoArray);
+    //上がダメだったら0行目と1行目それぞれでpush
+
+    var jyoushiArray = csv2Array('jyoushi.csv');
+    var kareshiArray = csv2Array('kareshi.csv');
+    var shigotoArray = csv2Array('shigoto.csv');
+
+    let newWorkDictionary = [];
+    newWorkDictionary=newWorkDictionary.push(jyoushiArray,kareshiArray,shigotoArray);
+
+    var shinyuuArray = csv2Array('shinyuu.csv');
+    var tomodachiArray = csv2Array('tomodachi.csv');
+    var yuujinArray = csv2Array('yuujin.csv');
+
+    let newFriendDictionary = [];
+    newFriendDictionary=newFriendDictionary.push(shinyuuArray,tomodachiArray,yuujinArray);
+
     console.log(dictionaryFromWord2Vec);
     //中身確認してから下を書き換える
     //↑中身確認してダメだったら転置する
 
+    //csv9個分について　Arrayに追加する
 
+    let newOneDictionary=[];
 
     //ヒットしたら点数加えてブレイク
 
 
-    var testArray = [3, 8, 13, true, 'あいうえお', 8, 10];
+    //var testArray = [3, 8, 13, true, 'あいうえお', 8, 10];
 
 
     //形態素解析してループさせる
 
-    window.alert(testArray.indexOf(8));             // 1がアラートされる
-    window.alert(testArray.indexOf('あいうえお'));  // 4がアラートされる
+    //完成した1個のArrayについて、以下をおこなう。
+
+    //window.alert(testArray.indexOf(8));             // 1がアラートされる
+    //window.alert(testArray.indexOf('あいうえお'));  // 4がアラートされる
 
 
+    let wordLookedNow;
+    if(newLoveDictionary[0].indexOf(wordLookedNow)!=-1){
+        RGB[hatsugenNumber][sentenceNumberInHatsugen][0]+=newLoveDictionary[1][newLoveDictionary[0].indexOf(wordLookedNow)];
+        //wordLookedNowがある行の1列目の値（類似度）を足す
+    }else if(newLoveDictionary[0].indexOf(wordLookedNow)!=-1){
+        RGB[hatsugenNumber][sentenceNumberInHatsugen][2]+=newLoveDictionary[1][newLoveDictionary[0].indexOf(wordLookedNow)];
+        //wordLookedNowがある行の1列目の値（類似度）を足す
+    }else if(newLoveDictionary[0].indexOf(wordLookedNow)!=-1){
+        RGB[hatsugenNumber][sentenceNumberInHatsugen][1]+=newLoveDictionary[1][newLoveDictionary[0].indexOf(wordLookedNow)];
+        //wordLookedNowがある行の1列目の値（類似度）を足す
+    }
 
 
     //最後にその文がどの分類か判定
 
-    //ストレージ名をわかりやすくし、分類ラベル名を文字列に変える
+    if(RGB[hatsugenNumber][sentenceNumberInHatsugen][0] >= RGB[hatsugenNumber][sentenceNumberInHatsugen][1]){
+        RGB[hatsugenNumber][sentenceNumberInHatsugen][1] =0;
+        if( RGB[hatsugenNumber][sentenceNumberInHatsugen][0] >= RGB[hatsugenNumber][sentenceNumberInHatsugen][2] ){
+            RGB[hatsugenNumber][sentenceNumberInHatsugen][2] =0;
+        }else{
+            RGB[hatsugenNumber][sentenceNumberInHatsugen][0] =0;
+        }
+    }else{
+        RGB[hatsugenNumber][sentenceNumberInHatsugen][0] =0;
+        if( RGB[hatsugenNumber][sentenceNumberInHatsugen][1] >= RGB[hatsugenNumber][sentenceNumberInHatsugen][2] ){
+            RGB[hatsugenNumber][sentenceNumberInHatsugen][2] =0;
+        }else{
+            RGB[hatsugenNumber][sentenceNumberInHatsugen][1] =0;
+        }
+    }
 
+
+    //ストレージ名をわかりやすくし、分類ラベル名を文字列に変える
 
     //dictionaryが入ったことを認識→ストレージも変える
 
-
     //判定結果をモジュール化してwordparse.js・・・じゃなくてRGBとRGBlistに引き渡してselect.jsに受け渡す
-
-
 
     var sResult = select(name,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
 
@@ -76,9 +129,6 @@ var ReadDictionary = (c) =>{
     chboxlength2 = sResult.chboxlength2;
     //graph = sResult.graph;
     //console.log("chboxlength2=%d",chboxlength2)
-
-
-
 
     var vResult = setForViz(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin);//形態素解析後に1度目の描画
     chboxlist = vResult.chboxlist;
@@ -113,7 +163,6 @@ var ReadDictionary = (c) =>{
     var test4;
 
     test4=1;
-
 
 };
 

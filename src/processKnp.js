@@ -1,4 +1,4 @@
-var AcceptKnp = (c) =>{
+var AcceptKnp = (name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2) =>{
   var file = document.getElementById('file-input').files[0];
   var name = file.name;
   var reader = new FileReader();
@@ -18,7 +18,7 @@ var ReadKnp = (c) =>{
     music = $.csv.toArrays(csv);
 
 
-    //
+    //knp
 
     //1.辞書の条件を配列かobjectとして定義しておく
     //2.それをcsvの内容に入れ替える

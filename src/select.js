@@ -31,7 +31,13 @@ var select =(name,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,chbo
 				c++;
 				chboxlength++;
 
-				var stockedAnswerGroupNumber =storage.getItem(name+"RGB"+c);
+				if(useNewDictionary==1){
+                    var stockedAnswerGroupNumber =storage.getItem(name+"AnswerWith"+newDictionaryName+c);
+				}else{
+                    var stockedAnswerGroupNumber =storage.getItem(name+"RGB"+c);
+				}
+
+
 
 				if(stockedAnswerGroupNumber!=null){
 					RGB[m][i][stockedAnswerGroupNumber]=1;
@@ -55,19 +61,19 @@ var select =(name,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,chbo
 
 
 
-				if(RGB[m][i][0]==1){
+				if(RGB[m][i][0]!=0){
 					chboxlist[n][1]=0;
 					document.getElementById("r"+c).innerHTML += "<label><input type=radio name=\"r" + c + "\" value=1 checked><font color=\"#ff7777\">【</font>「愛」に含む<font color=\"#ff7777\">】</font></label>";
 				}else{
 					document.getElementById("r"+c).innerHTML += "<label><input type=radio name=\"r" + c + "\" value=1><font color=\"#ff7777\">【</font>「愛」に含む<font color=\"#ff7777\">】</font></label>";
 				}
-				if(RGB[m][i][1]==1){
+				if(RGB[m][i][1]!=0){
 					document.getElementById("r"+c).innerHTML += "<label><input type=radio name=\"r" + c + "\" value=2 checked><font color=\"#77ff77\">【</font>「交友」に含む<font color=\"#77ff77\">】</font></label>";
 					chboxlist[n][1]=1;
 				}else{
 					document.getElementById("r"+c).innerHTML += "<label><input type=radio name=\"r" + c + "\" value=2><font color=\"#77ff77\">【</font>「交友」に含む<font color=\"#77ff77\">】</font></label>";
 				}
-				if(RGB[m][i][2]==1){
+				if(RGB[m][i][2]!=0){
 					document.getElementById("r"+c).innerHTML += "<label><input type=radio name=\"r" + c + "\" value=3 checked><font color=\"#7777ff\">【</font>「仕事」に含む<font color=\"#7777ff\">】</font></label>";
 					chboxlist[n][1]=2;
 				}else{
