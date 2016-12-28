@@ -55,9 +55,11 @@ var ReadDictionary = (c) =>{
     newFriendDictionary=newFriendDictionary.push(shinyuuArray,tomodachiArray,yuujinArray);
     */
 
+/*
     let newLoveDictionary = csv2Array('newLoveDictionary.csv');
     let newWorkDictionary = csv2Array('newLoveDictionary.csv');
     let newFriendDictionary = csv2Array('newLoveDictionary.csv');
+    */
 
     console.log(dictionaryFromWord2Vec);
     //中身確認してから下を書き換える
@@ -80,7 +82,6 @@ var ReadDictionary = (c) =>{
     //window.alert(testArray.indexOf(8));             // 1がアラートされる
     //window.alert(testArray.indexOf('あいうえお'));  // 4がアラートされる
 
-
     let wordLookedNow;
     if(newLoveDictionary[0].indexOf(wordLookedNow)!=-1){
         RGB[hatsugenNumber][sentenceNumberInHatsugen][0]+=newLoveDictionary[1][newLoveDictionary[0].indexOf(wordLookedNow)];
@@ -92,7 +93,6 @@ var ReadDictionary = (c) =>{
         RGB[hatsugenNumber][sentenceNumberInHatsugen][1]+=newLoveDictionary[1][newLoveDictionary[0].indexOf(wordLookedNow)];
         //wordLookedNowがある行の1列目の値（類似度）を足す
     }
-
 
     //最後にその文がどの分類か判定
 
@@ -187,4 +187,9 @@ function csv2Array(filePath) { //csvﾌｧｲﾙﾉ相対ﾊﾟｽor絶対ﾊﾟ
         }
     }
     return csvData;
+}
+
+
+function TransposeMatrix(ary) {
+    return ary.map( (a, i) => a.map( (v, j) => ary[j][i] ) )
 }

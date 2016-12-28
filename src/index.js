@@ -6,9 +6,15 @@ import $ from 'jquery';
 
 //var dictionaryFromWord2Vec = csv2Array('HDFaceVertex.csv');
 
-let newLoveDictionary = csv2Array('newLoveDictionary.csv');
-let newWorkDictionary = csv2Array('newWorkDictionary.csv');
+let newLoveDictionary = csv2Array('loveUtf8.csv');
+newLoveDictionary = TransposeMatrix(newLoveDictionary);
+
+let newWorkDictionary = csv2Array('workUtf8.csv');
+newWorkDictionary = TransposeMatrix(newWorkDictionary);
+
 let newFriendDictionary = csv2Array('friendUtf8.csv');
+newFriendDictionary = TransposeMatrix(newFriendDictionary);
+
 console.log(newLoveDictionary);
 console.log(newWorkDictionary);
 console.log(newFriendDictionary);
@@ -27,13 +33,17 @@ var taiou2=[];
 var chboxlength,chboxlength2;
 var test2;
 document.getElementById('load-button').addEventListener('click', function () {
+
+
   var file = document.getElementById('file-input').files[0];
   var name = file.name;
   var reader = new FileReader();
   reader.onload = function(event) {
-    var result = funcReaderOnload(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
+    //var result = funcReaderOnload(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
+      let resultWithNewDictionary = AcceptDictionary(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
   };
   reader.readAsText(file);
+
 });
 
 document.getElementById('knp-load-button').addEventListener('click',AcceptKnp(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2));
@@ -134,4 +144,19 @@ function csv2Array(filePath) { //csvﾌｧｲﾙﾉ相対ﾊﾟｽor絶対ﾊﾟ
         }
     }
     return csvData;
+}
+
+
+function C (a, b, c) {
+    a[c] = (a[c] || []).concat (b);
+    return a;
+}
+
+
+function B (a, b, c) {
+    return b.reduce (C, a);
+}
+
+function TransposeMatrix(ary) {
+    return ary.reduce (B, []);
 }
