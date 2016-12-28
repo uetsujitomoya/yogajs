@@ -4,8 +4,14 @@ import {AcceptDictionary} from "./changeDictionary.js";
 import $ from 'jquery';
 
 
-var dictionaryFromWord2Vec = csv2Array('HDFaceVertex.csv');
-console.log(dictionaryFromWord2Vec);
+//var dictionaryFromWord2Vec = csv2Array('HDFaceVertex.csv');
+
+let newLoveDictionary = csv2Array('newLoveDictionary.csv');
+let newWorkDictionary = csv2Array('newWorkDictionary.csv');
+let newFriendDictionary = csv2Array('friendUtf8.csv');
+console.log(newLoveDictionary);
+console.log(newWorkDictionary);
+console.log(newFriendDictionary);
 
 
 var keitaisokaiseki = []; //このlengthは段落数

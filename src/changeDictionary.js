@@ -30,10 +30,11 @@ var ReadDictionary = (c) =>{
 
     //csv
 
-
+/*
     var baitoArray = csv2Array('baito.csv');
     var hahaArray = csv2Array('haha.csv');
     var imoutoArray = csv2Array('imouto.csv');
+
     let newLoveDictionary = [];
 
     newLoveDictionary=newLoveDictionary.push(baitoArray,hahaArray,imoutoArray);
@@ -52,6 +53,11 @@ var ReadDictionary = (c) =>{
 
     let newFriendDictionary = [];
     newFriendDictionary=newFriendDictionary.push(shinyuuArray,tomodachiArray,yuujinArray);
+    */
+
+    let newLoveDictionary = csv2Array('newLoveDictionary.csv');
+    let newWorkDictionary = csv2Array('newLoveDictionary.csv');
+    let newFriendDictionary = csv2Array('newLoveDictionary.csv');
 
     console.log(dictionaryFromWord2Vec);
     //中身確認してから下を書き換える
