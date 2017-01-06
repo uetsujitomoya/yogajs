@@ -6,11 +6,7 @@ import {select} from "./select.js";
 import {setForViz} from "./svg.js";
 import {makeOnClickS,makeOnClick} from "./wordparse.js";
 
-
-
 var AcceptDictionary = (jsonFileName,event,keitaisokaiseki,chboxlist,chboxlist2,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,newLoveDictionary,newWorkDictionary,newFriendDictionary) =>{
-
-
 
     console.log("AcceptDictionary");
 
@@ -22,43 +18,9 @@ var AcceptDictionary = (jsonFileName,event,keitaisokaiseki,chboxlist,chboxlist2,
   //1.辞書の条件を配列かobjectとして定義しておく
   //2.それをcsvの内容に入れ替える・・・は要らんか。
 
-
-
     //3.点数も表にする。
 
-
     //csv
-
-/*
-    var baitoArray = csv2Array('baito.csv');
-    var hahaArray = csv2Array('haha.csv');
-    var imoutoArray = csv2Array('imouto.csv');
-
-    let newLoveDictionary = [];
-
-    newLoveDictionary=newLoveDictionary.push(baitoArray,hahaArray,imoutoArray);
-    //上がダメだったら0行目と1行目それぞれでpush
-
-    var jyoushiArray = csv2Array('jyoushi.csv');
-    var kareshiArray = csv2Array('kareshi.csv');
-    var shigotoArray = csv2Array('shigoto.csv');
-
-    let newWorkDictionary = [];
-    newWorkDictionary=newWorkDictionary.push(jyoushiArray,kareshiArray,shigotoArray);
-
-    var shinyuuArray = csv2Array('shinyuu.csv');
-    var tomodachiArray = csv2Array('tomodachi.csv');
-    var yuujinArray = csv2Array('yuujin.csv');
-
-    let newFriendDictionary = [];
-    newFriendDictionary=newFriendDictionary.push(shinyuuArray,tomodachiArray,yuujinArray);
-    */
-
-/*
-    let newLoveDictionary = csv2Array('newLoveDictionary.csv');
-    let newWorkDictionary = csv2Array('newLoveDictionary.csv');
-    let newFriendDictionary = csv2Array('newLoveDictionary.csv');
-    */
 
     //console.log(dictionaryFromWord2Vec);
     //中身確認してから下を書き換える
@@ -70,9 +32,7 @@ var AcceptDictionary = (jsonFileName,event,keitaisokaiseki,chboxlist,chboxlist2,
 
     //ヒットしたら点数加えてブレイク
 
-
     //var testArray = [3, 8, 13, true, 'あいうえお', 8, 10];
-
 
     //形態素解析してループさせる
 
@@ -81,12 +41,10 @@ var AcceptDictionary = (jsonFileName,event,keitaisokaiseki,chboxlist,chboxlist2,
     //window.alert(testArray.indexOf(8));             // 1がアラートされる
     //window.alert(testArray.indexOf('あいうえお'));  // 4がアラートされる
 
-
     //以下、wordparseからパクった
 
     var startTime = new Date();
     console.log(startTime);
-
 
     var h,i,j,k,m,n,c,x,y,z;
     var hinshi = [];
@@ -109,15 +67,12 @@ var AcceptDictionary = (jsonFileName,event,keitaisokaiseki,chboxlist,chboxlist2,
 
 //連結
 
-
-
-
+    //KNPを使用する場合kuromoji不要
+    //Csvの??列目をhatsugenとして取り扱う（かかり先も持った2次元配列orOBJECTを要素とした1次元配列）
 
     return kuromoji.builder({dicPath: 'dict/'}).build((err, tokenizer) => {
         const path = tokenizer.tokenize(data[0].a);
         let wordNumberParsedInMorphologicalAnalysis=0;
-
-
 
         var tangosuu=0;
         let hatsugenNumber=0;
@@ -173,8 +128,9 @@ var AcceptDictionary = (jsonFileName,event,keitaisokaiseki,chboxlist,chboxlist2,
                         kanjatango++;
                         kanjamoji=kanjamoji+path[wordNumberParsedInMorphologicalAnalysis].surface_form.length;
 
-                        //ここで単語を愛・交友・仕事に判定
                         let wordLookedNow = path[wordNumberParsedInMorphologicalAnalysis].basic_form;
+
+                        //ここで係り受け解析を判定
 
                         if(newLoveDictionary[0].indexOf(wordLookedNow)!=-1){
                             RGB[hatsugenNumber][sentenceNumberInHatsugen][0]+=newLoveDictionary[1][newLoveDictionary[0].indexOf(wordLookedNow)];
@@ -186,24 +142,6 @@ var AcceptDictionary = (jsonFileName,event,keitaisokaiseki,chboxlist,chboxlist2,
                             RGB[hatsugenNumber][sentenceNumberInHatsugen][1]+=newFriendDictionary[1][newFriendDictionary[0].indexOf(wordLookedNow)];
                             //wordLookedNowがある行の1列目の値（類似度）を足す
                         }
-/*
-                        if(path[wordNumberParsedInMorphologicalAnalysis].basic_form=="母"||path[wordNumberParsedInMorphologicalAnalysis].basic_form=="主人"||path[wordNumberParsedInMorphologicalAnalysis].basic_form=="父さん"||path[wordNumberParsedInMorphologicalAnalysis].basic_form=="ご主人"||path[wordNumberParsedInMorphologicalAnalysis].basic_form=="お父さん"||path[wordNumberParsedInMorphologicalAnalysis].basic_form=="姉"||path[wordNumberParsedInMorphologicalAnalysis].basic_form=="姉さん"||path[wordNumberParsedInMorphologicalAnalysis].basic_form=="母親"
-                            ||path[wordNumberParsedInMorphologicalAnalysis].basic_form=="お姉さん"||path[wordNumberParsedInMorphologicalAnalysis].basic_form=="父"||path[wordNumberParsedInMorphologicalAnalysis].basic_form=="家族"){
-                            RGB[hatsugenNumber][sentenceNumberInHatsugen][0]=1;
-                        }
-                        if(path[wordNumberParsedInMorphologicalAnalysis].basic_form=="兄"||path[wordNumberParsedInMorphologicalAnalysis].basic_form=="子"||path[wordNumberParsedInMorphologicalAnalysis].basic_form=="子ども"||path[wordNumberParsedInMorphologicalAnalysis].basic_form=="妹"||path[wordNumberParsedInMorphologicalAnalysis].basic_form=="弟"){
-                            RGB[hatsugenNumber][sentenceNumberInHatsugen][0]=1;
-                        }
-                        if(path[wordNumberParsedInMorphologicalAnalysis].basic_form=="両親"||path[wordNumberParsedInMorphologicalAnalysis].basic_form=="お母様"||path[wordNumberParsedInMorphologicalAnalysis].basic_form=="お父様"){
-                            RGB[hatsugenNumber][sentenceNumberInHatsugen][0]=1;
-                        }
-                        if(path[wordNumberParsedInMorphologicalAnalysis].basic_form=="仕事"||path[wordNumberParsedInMorphologicalAnalysis].basic_form=="休み"||path[wordNumberParsedInMorphologicalAnalysis].basic_form=="アルバイト"||path[wordNumberParsedInMorphologicalAnalysis].basic_form=="働く"||path[wordNumberParsedInMorphologicalAnalysis].basic_form=="同僚"||path[wordNumberParsedInMorphologicalAnalysis].basic_form=="職場"||path[wordNumberParsedInMorphologicalAnalysis].basic_form=="上司"||path[wordNumberParsedInMorphologicalAnalysis].basic_form=="部下"){
-                            RGB[hatsugenNumber][sentenceNumberInHatsugen][2]=1;
-                        }
-                        if(path[wordNumberParsedInMorphologicalAnalysis].basic_form=="友人"||path[wordNumberParsedInMorphologicalAnalysis].basic_form=="親友"||path[wordNumberParsedInMorphologicalAnalysis].basic_form=="友達"||path[wordNumberParsedInMorphologicalAnalysis].basic_form=="友"||path[wordNumberParsedInMorphologicalAnalysis].basic_form=="交友"||path[wordNumberParsedInMorphologicalAnalysis].basic_form=="友好"){
-                            RGB[hatsugenNumber][sentenceNumberInHatsugen][1]=1;
-                        }
-                        */
 
                         if(path[wordNumberParsedInMorphologicalAnalysis].basic_form=="病"||path[wordNumberParsedInMorphologicalAnalysis].basic_form=="病気"||path[wordNumberParsedInMorphologicalAnalysis].basic_form=="ストレス"||path[wordNumberParsedInMorphologicalAnalysis].basic_form=="不調"||path[wordNumberParsedInMorphologicalAnalysis].basic_form=="過食"||path[wordNumberParsedInMorphologicalAnalysis].basic_form=="嘔吐"||path[wordNumberParsedInMorphologicalAnalysis].basic_form=="過食嘔吐"){
                             ranshin[hatsugenNumber][sentenceNumberInHatsugen][0]=1;
@@ -271,6 +209,7 @@ var AcceptDictionary = (jsonFileName,event,keitaisokaiseki,chboxlist,chboxlist2,
                     wordNumberInSentence++;
                 }
 
+                //KNPを考慮する場合、かかるかかられる関係を判定してかかる側を優先
                 //以下、新規追加のセンテンス判定
 
                 storage.setItem(jsonFileName+"AnswerWithNewDictionaryHatsugen"+hatsugenNumber+"Sentence"+sentenceNumberInHatsugen, bun[hatsugenNumber][sentenceNumberInHatsugen]);
@@ -310,8 +249,6 @@ var AcceptDictionary = (jsonFileName,event,keitaisokaiseki,chboxlist,chboxlist2,
                     hatsugen[hatsugenNumber] += "。";
                 }
 
-
-
                 if(wordNumberParsedInMorphologicalAnalysis==path.length){
                     if(hatsugenNumber%2==0 ){
                         if( sentenceNumberInHatsugen<=2 && tangosuu<=7){
@@ -338,10 +275,6 @@ var AcceptDictionary = (jsonFileName,event,keitaisokaiseki,chboxlist,chboxlist2,
             //以上、1発言毎
             hatsugenNumber++;
         }
-        //console.log("%d 来談者文 %d 単語 %d 文字 %d 治療者文 %d 単語 %d 文字 %d",m,kanjabun,kanjatango,kanjamoji,serapibun,serapitango,serapimoji);
-        //console.log("そうですか %d",soudesuka);
-        //var uetsuji="うえつじともや";
-        //console.log(uetsuji.length);
 
         var tango=[];
         x=0;
@@ -379,54 +312,6 @@ var AcceptDictionary = (jsonFileName,event,keitaisokaiseki,chboxlist,chboxlist2,
         for(i=0;i<tangosett.length;i++){
             miserables.nodes[i]=tangosett[i].t;
         }
-        /*
-        var RGBk=[];
-        for(h=0;h<=2;h++){
-            RGBk[h]=[];
-            for(k=0;k<miserables.nodes.length;k++){
-                RGBk[h][k]=0;
-                for(hatsugenNumber=1;hatsugenNumber<keitaisokaiseki.length;hatsugenNumber=hatsugenNumber+2){
-                    for(i=0;i<keitaisokaiseki[hatsugenNumber].length;i++){
-                        if(RGB[hatsugenNumber][i][h]==1){
-                            for(j=0;j<keitaisokaiseki[hatsugenNumber][i].length;j++){
-                                if(miserables.nodes[k]==keitaisokaiseki[hatsugenNumber][i][j]){
-                                    RGBk[h][k]=1;
-                                    break;
-                                }
-                            }
-                        }
-                        if(RGBk[h][k]==1){
-                            break;
-                        }
-                    }
-                    if(RGBk[h][k]==1){
-                        break;
-                    }
-                }
-            }
-        }
-
-        for(h=0;h<=2;h++){
-            for(k=0;k<miserables.nodes.length;k++){
-                if(RGBk[h][k]==1){
-                    for(hatsugenNumber=1;hatsugenNumber<keitaisokaiseki.length;hatsugenNumber=hatsugenNumber+2){
-                        for(i=0;i<keitaisokaiseki[hatsugenNumber].length;i++){
-                            if(RGB[hatsugenNumber][i][h]==0){
-                                for(j=0;j<keitaisokaiseki[hatsugenNumber][i].length;j++){
-                                    if(miserables.nodes[k]==keitaisokaiseki[hatsugenNumber][i][j]){
-                                        RGB[hatsugenNumber][i][h]=1;
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        */
-
-
 
         var graph;
 
@@ -446,11 +331,6 @@ var AcceptDictionary = (jsonFileName,event,keitaisokaiseki,chboxlist,chboxlist2,
         taiou2 = sResult.taiou2;
         chboxlength = sResult.chboxlength;
         chboxlength2 = sResult.chboxlength2;
-        //graph = sResult.graph;
-        //console.log("chboxlength2=%d",chboxlength2)
-
-
-
 
         var vResult = setForViz(jsonFileName,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,isUsingDictionaryWithWord2Vec);//形態素解析後に1度目の描画
         chboxlist = vResult.chboxlist;
@@ -470,7 +350,6 @@ var AcceptDictionary = (jsonFileName,event,keitaisokaiseki,chboxlist,chboxlist2,
             makeOnClickS(c);
         }
 
-
         document.getElementById('radio_buttons').onchange = () => {
             setForViz(jsonFileName,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin);
         };//graphの形状を切り替えた際もここで再描画される
@@ -481,28 +360,9 @@ var AcceptDictionary = (jsonFileName,event,keitaisokaiseki,chboxlist,chboxlist2,
             name:jsonFileName,RGBlist:RGBlist,keitaisokaiseki:keitaisokaiseki,hatsugen:hatsugen,bun:bun,chboxlist:chboxlist,chboxlist2:chboxlist2,checked:checked,checked2:checked2,taiou:taiou,taiou2:taiou2,chboxlength:chboxlength,chboxlength2:chboxlength2,ranshin:ranshin
         };
 
-
-
     });
 
-
     //以上、wordparseからパクった
-
-
-/*
-
-    let wordLookedNow;
-    if(newLoveDictionary[0].indexOf(wordLookedNow)!=-1){
-        RGB[hatsugenNumber][sentenceNumberInHatsugen][0]+=newLoveDictionary[1][newLoveDictionary[0].indexOf(wordLookedNow)];
-        //wordLookedNowがある行の1列目の値（類似度）を足す
-    }else if(newLoveDictionary[0].indexOf(wordLookedNow)!=-1){
-        RGB[hatsugenNumber][sentenceNumberInHatsugen][2]+=newLoveDictionary[1][newLoveDictionary[0].indexOf(wordLookedNow)];
-        //wordLookedNowがある行の1列目の値（類似度）を足す
-    }else if(newLoveDictionary[0].indexOf(wordLookedNow)!=-1){
-        RGB[hatsugenNumber][sentenceNumberInHatsugen][1]+=newLoveDictionary[1][newLoveDictionary[0].indexOf(wordLookedNow)];
-        //wordLookedNowがある行の1列目の値（類似度）を足す
-    }
-    */
 
     //最後にその文がどの分類か判定
 
@@ -528,6 +388,10 @@ var AcceptDictionary = (jsonFileName,event,keitaisokaiseki,chboxlist,chboxlist2,
     //dictionaryが入ったことを認識→ストレージも変える
 
     //判定結果をモジュール化してwordparse.js・・・じゃなくてRGBとRGBlistに引き渡してselect.jsに受け渡す
+
+
+
+    //の前にKNP判定
 
     var sResult = select(jsonFileName,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
 
@@ -574,6 +438,8 @@ var AcceptDictionary = (jsonFileName,event,keitaisokaiseki,chboxlist,chboxlist2,
     return{
         name:jsonFileName,RGBlist:RGBlist,keitaisokaiseki:keitaisokaiseki,hatsugen:hatsugen,bun:bun,chboxlist:chboxlist,chboxlist2:chboxlist2,checked:checked,checked2:checked2,taiou:taiou,taiou2:taiou2,chboxlength:chboxlength,chboxlength2:chboxlength2,ranshin:ranshin
     };
+
+
 
 
     var test4;
