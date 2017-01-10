@@ -3,7 +3,6 @@ import {AcceptKnp} from "./processKnp.js";
 import {AcceptDictionary} from "./changeDictionary.js";
 import $ from 'jquery';
 
-
 //var dictionaryFromWord2Vec = csv2Array('HDFaceVertex.csv');
 
 let newLoveDictionary = csv2Array('loveUtf8.csv');
@@ -18,7 +17,6 @@ newFriendDictionary = TransposeMatrix(newFriendDictionary);
 console.log(newLoveDictionary);
 console.log(newWorkDictionary);
 console.log(newFriendDictionary);
-
 
 var keitaisokaiseki = []; //このlengthは段落数
 var questionClassification  = [];//checkboxのセレクト結果
@@ -59,11 +57,8 @@ document.getElementById('storageSave-button').addEventListener('click', function
 
   var storage = localStorage; //http://hakuhin.jp/js/storage.html#STORAGE_00
 
-
   // ウェブストレージに対応している http://hakuhin.jp/js/storage.html#STORAGE_GET_KEYS
   //if(window.localStorage){
-
-
 
   // ------------------------------------------------------------
   // キーの総数を取得する
@@ -94,6 +89,8 @@ document.getElementById('storageSave-button').addEventListener('click', function
   //}
 
   //CSVに記載するデータ配列
+
+    //KNPもCSVで読み込ませる
 
   //配列をTAB区切り文字列に変換
   var csv_string = "";
@@ -128,8 +125,6 @@ document.getElementById('storageSave-button').addEventListener('click', function
 
 //http://qiita.com/kenchan0130/items/11c3abab109405379ffb
 
-
-
 function csv2Array(filePath) { //csvﾌｧｲﾙﾉ相対ﾊﾟｽor絶対ﾊﾟｽ
     var csvData = [];
     var data = new XMLHttpRequest();
@@ -146,12 +141,10 @@ function csv2Array(filePath) { //csvﾌｧｲﾙﾉ相対ﾊﾟｽor絶対ﾊﾟ
     return csvData;
 }
 
-
 function C (a, b, c) {
     a[c] = (a[c] || []).concat (b);
     return a;
 }
-
 
 function B (a, b, c) {
     return b.reduce (C, a);

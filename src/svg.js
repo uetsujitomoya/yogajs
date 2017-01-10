@@ -127,6 +127,8 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 				c++;
 			}
 
+			//９種の乱心ストレージ保存
+
 			//mazekozeRanshin[c]="";
 			//c++;
 		}

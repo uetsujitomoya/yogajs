@@ -10,6 +10,9 @@ var AcceptDictionary = (jsonFileName,event,keitaisokaiseki,chboxlist,chboxlist2,
 
     console.log("AcceptDictionary");
 
+
+    //自か他か辞書取得
+
  //dictionaryが入ったことを認識→ストレージも変える
 
   //csvを辞書に変換
@@ -91,6 +94,7 @@ var AcceptDictionary = (jsonFileName,event,keitaisokaiseki,chboxlist,chboxlist2,
         while(wordNumberParsedInMorphologicalAnalysis<path.length){
 
             //以下、1発言ごと
+            //間違ってたらこっからやり直せるようにしとく。やり直しナンバーもstorageに保存
 
             keitaisokaiseki[hatsugenNumber] = [];
             bun[hatsugenNumber] = [];
@@ -382,14 +386,11 @@ var AcceptDictionary = (jsonFileName,event,keitaisokaiseki,chboxlist,chboxlist2,
         }
     }
 
-
     //ストレージ名をわかりやすくし、分類ラベル名を文字列に変える
 
     //dictionaryが入ったことを認識→ストレージも変える
 
     //判定結果をモジュール化してwordparse.js・・・じゃなくてRGBとRGBlistに引き渡してselect.jsに受け渡す
-
-
 
     //の前にKNP判定
 
@@ -439,15 +440,11 @@ var AcceptDictionary = (jsonFileName,event,keitaisokaiseki,chboxlist,chboxlist2,
         name:jsonFileName,RGBlist:RGBlist,keitaisokaiseki:keitaisokaiseki,hatsugen:hatsugen,bun:bun,chboxlist:chboxlist,chboxlist2:chboxlist2,checked:checked,checked2:checked2,taiou:taiou,taiou2:taiou2,chboxlength:chboxlength,chboxlength2:chboxlength2,ranshin:ranshin
     };
 
-
-
-
     var test4;
 
     test4=1;
 
 };
-
 
 function csv2Array(filePath) { //csvﾌｧｲﾙﾉ相対ﾊﾟｽor絶対ﾊﾟｽ
     var csvData = [];
@@ -464,7 +461,6 @@ function csv2Array(filePath) { //csvﾌｧｲﾙﾉ相対ﾊﾟｽor絶対ﾊﾟ
     }
     return csvData;
 }
-
 
 function TransposeMatrix(ary) {
     return ary.map( (a, i) => a.map( (v, j) => ary[j][i] ) )
