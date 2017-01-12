@@ -73,7 +73,7 @@ var AcceptDictionary = (jsonFileName,event,keitaisokaiseki,chboxlist,chboxlist2,
     //KNPを使用する場合kuromoji不要
     //Csvの??列目をhatsugenとして取り扱う（かかり先も持った2次元配列orOBJECTを要素とした1次元配列）
 
-    return kuromoji.builder({dicPath: 'dict/'}).build((err, tokenizer) => {
+    return kuromoji.builder({dicPath: 'dict/'}).build((knpCsv, tokenizer) => {
         const path = tokenizer.tokenize(data[0].a);
         let wordNumberParsedInMorphologicalAnalysis=0;
 
@@ -214,6 +214,26 @@ var AcceptDictionary = (jsonFileName,event,keitaisokaiseki,chboxlist,chboxlist2,
                 }
 
                 //KNPを考慮する場合、かかるかかられる関係を判定してかかる側を優先
+
+                let Kihonku = new Object;//どこにかかるかを保存
+
+                //日本語か否か判定　kimizuka.hatenablog.com/entry/2013/12/22/011458
+                for(let n=0;n<knpCsv.length;n++){
+                    if(judgeJapanese(knpCsv[n][0])){//かつ、愛/交友/仕事に入ってるかもif文の条件に含める
+                        //とりあえず[n-1][1]を見て、掛かる先をみる
+                        //#の後の+を数えて、何文目か判定
+                        for(let m=n-1;m>=0;m--){
+                            if(judgeJapanese(knpCsv[m][0])==false){
+                                //+じゃないところを抜き出す
+                                parseInt(knpCsv[m][1], 10); //-123
+                                //単語判定、前のカウンセラー発言も含める？
+                            }
+                        }
+                    }
+                }
+
+                //かかられるがわよりかかるがわを優先して、1文ないし1ブロックを分類
+
                 //以下、新規追加のセンテンス判定
 
                 storage.setItem(jsonFileName+"AnswerWithNewDictionaryHatsugen"+hatsugenNumber+"Sentence"+sentenceNumberInHatsugen, bun[hatsugenNumber][sentenceNumberInHatsugen]);
@@ -464,6 +484,25 @@ function csv2Array(filePath) { //csvﾌｧｲﾙﾉ相対ﾊﾟｽor絶対ﾊﾟ
 
 function TransposeMatrix(ary) {
     return ary.map( (a, i) => a.map( (v, j) => ary[j][i] ) )
+}
+
+//日本語か否か判定　kimizuka.hatenablog.com/entry/2013/12/22/011458
+function judgeJapanese(txt) {
+    if (typeof txt !== "string") {
+        return false;
+    }
+
+    var i = txt.length,
+        escapeTxt;
+
+    while(i--) {
+        escapeTxt = escape(txt.substring(i, i + 1));
+        if (escapeTxt.length >= 6) {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 export {AcceptDictionary};
