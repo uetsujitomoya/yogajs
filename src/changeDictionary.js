@@ -6,6 +6,8 @@ import {select} from "./select.js";
 import {setForViz} from "./svg.js";
 import {makeOnClickS,makeOnClick} from "./wordparse.js";
 
+
+
 var AcceptDictionary = (jsonFileName,event,keitaisokaiseki,chboxlist,chboxlist2,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,newLoveDictionary,newWorkDictionary,newFriendDictionary) =>{
 
     console.log("AcceptDictionary");
@@ -66,17 +68,7 @@ var AcceptDictionary = (jsonFileName,event,keitaisokaiseki,chboxlist,chboxlist2,
 
 //ここでKNP(XML)の処理を開始
 
-    //基本句オブジェクト作成
-    let kihonku=[];
 
-    //かかってくる句の愛交友仕事が指定されていれば、その文の分類をやめる
-    let kihonku[]={
-        orijinal:,
-        kakattekuruKuNumber:,
-        kakariniikuKuNumber:,
-        task:
-    };
-    //要素：かかる句、かかられる句、愛交友仕事分類
 
 //辞書の読込
 
@@ -251,7 +243,6 @@ var AcceptDictionary = (jsonFileName,event,keitaisokaiseki,chboxlist,chboxlist2,
                 //そのタスクを基本句のタスクとする
                 //その基本句がかかるタスクに愛交友仕事のどれかが入ってる
                 //上側を優先して、その文のタスクを確定
-
 
                 judgeTaskOfSentence();
 
@@ -549,13 +540,6 @@ function judgeTaskOfSentence(){
     }
 }
 
-function judgeKakaruSide(kihonku){
-    //その丹後区にかかるものを判定
-    //かかる側を優先する
-    //if(係る側が愛か交友か仕事に分類されている){そっちを優先する}
-    if(kihonku[kihonku[kakarareru].kakattekuruNumber].task!=null){
-        kihonku[kakarareru].task = kihonku[kihonku[kakarareru].kakattekuruNumber].task;
-    }
-}
+
 
 export {AcceptDictionary};
