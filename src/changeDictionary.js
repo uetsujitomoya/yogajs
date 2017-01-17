@@ -66,6 +66,18 @@ var AcceptDictionary = (jsonFileName,event,keitaisokaiseki,chboxlist,chboxlist2,
 
 //ここでKNP(XML)の処理を開始
 
+    //基本句オブジェクト作成
+    let kihonku=[];
+
+    //かかってくる句の愛交友仕事が指定されていれば、その文の分類をやめる
+    let kihonku[]={
+        orijinal:,
+        kakattekuruKuNumber:,
+        kakariniikuKuNumber:,
+        task:
+    };
+    //要素：かかる句、かかられる句、愛交友仕事分類
+
 //辞書の読込
 
 //連結
@@ -95,6 +107,8 @@ var AcceptDictionary = (jsonFileName,event,keitaisokaiseki,chboxlist,chboxlist2,
 
             //以下、1発言ごと
             //間違ってたらこっからやり直せるようにしとく。やり直しナンバーもstorageに保存
+            let talkNumberReplacingCounselorAndClient;
+
 
             keitaisokaiseki[hatsugenNumber] = [];
             bun[hatsugenNumber] = [];
@@ -227,12 +241,23 @@ var AcceptDictionary = (jsonFileName,event,keitaisokaiseki,chboxlist,chboxlist2,
                                 //+じゃないところを抜き出す
                                 parseInt(knpCsv[m][1], 10); //-123
                                 //単語判定、前のカウンセラー発言も含める？
+                                judgeTaskOfWord();
                             }
                         }
                     }
                 }
 
+                //基本句の最初の単語をタスク判定
+                //そのタスクを基本句のタスクとする
+                //その基本句がかかるタスクに愛交友仕事のどれかが入ってる
+                //上側を優先して、その文のタスクを確定
+
+
+                judgeTaskOfSentence();
+
                 //かかられるがわよりかかるがわを優先して、1文ないし1ブロックを分類
+
+                judgeKakaruSide();
 
                 //以下、新規追加のセンテンス判定
 
@@ -449,7 +474,6 @@ var AcceptDictionary = (jsonFileName,event,keitaisokaiseki,chboxlist,chboxlist2,
         makeOnClickS(c);
     }
 
-
     document.getElementById('radio_buttons').onchange = () => {
         setForViz(jsonFileName,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin);
     };//graphの形状を切り替えた際もここで再描画される
@@ -503,6 +527,35 @@ function judgeJapanese(txt) {
     }
 
     return false;
+}
+
+function judgeTaskOfSentence(){
+    //最後にその文がどの分類か判定
+
+    if(RGB[hatsugenNumber][sentenceNumberInHatsugen][0] >= RGB[hatsugenNumber][sentenceNumberInHatsugen][1]){
+        RGB[hatsugenNumber][sentenceNumberInHatsugen][1] =0;
+        if( RGB[hatsugenNumber][sentenceNumberInHatsugen][0] >= RGB[hatsugenNumber][sentenceNumberInHatsugen][2] ){
+            RGB[hatsugenNumber][sentenceNumberInHatsugen][2] =0;
+        }else{
+            RGB[hatsugenNumber][sentenceNumberInHatsugen][0] =0;
+        }
+    }else{
+        RGB[hatsugenNumber][sentenceNumberInHatsugen][0] =0;
+        if( RGB[hatsugenNumber][sentenceNumberInHatsugen][1] >= RGB[hatsugenNumber][sentenceNumberInHatsugen][2] ){
+            RGB[hatsugenNumber][sentenceNumberInHatsugen][2] =0;
+        }else{
+            RGB[hatsugenNumber][sentenceNumberInHatsugen][1] =0;
+        }
+    }
+}
+
+function judgeKakaruSide(kihonku){
+    //その丹後区にかかるものを判定
+    //かかる側を優先する
+    //if(係る側が愛か交友か仕事に分類されている){そっちを優先する}
+    if(kihonku[kihonku[kakarareru].kakattekuruNumber].task!=null){
+        kihonku[kakarareru].task = kihonku[kihonku[kakarareru].kakattekuruNumber].task;
+    }
 }
 
 export {AcceptDictionary};
