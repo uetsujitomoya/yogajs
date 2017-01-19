@@ -1,5 +1,5 @@
 import {funcReaderOnload} from "./wordparse.js";
-import {AcceptKnp} from "./processKnp.js";
+import {AcceptKnp,processKnp} from "./processKnp.js";
 import {AcceptDictionary} from "./changeDictionary.js";
 import $ from 'jquery';
 
@@ -30,6 +30,9 @@ var taiou=[];
 var taiou2=[];
 var chboxlength,chboxlength2;
 var test2;
+
+processKnp(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
+
 document.getElementById('load-button').addEventListener('click', function () {
 
 
@@ -44,16 +47,18 @@ document.getElementById('load-button').addEventListener('click', function () {
 
 });
 
-document.getElementById('knpoadButton').addEventListener('click',function () {
+document.getElementById('knpLoadButton').addEventListener('click',function () {
 
 
-    var file = document.getElementById('file-input').files[0];
+
+
+    var file = document.getElementById('knpLoadButton').files[0];//csv読み込めない
     var name = file.name;
     var reader = new FileReader();
     reader.onload = function(event) {
         //var result = funcReaderOnload(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
         //let resultWithNewDictionary = AcceptDictionary(name,event,keitaisokaiseki,chboxlist,chboxlist2,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,newLoveDictionary,newWorkDictionary,newFriendDictionary);
-        let resultWithKNP = AcceptKnp(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2)
+        let resultWithKNP = processKnp(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2)
     };
     reader.readAsText(file);
 
@@ -170,3 +175,5 @@ function TransposeMatrix(ary) {
 document.getElementById('storageSave-button').addEventListener('click', function () {
     localStorage.clear();
 });
+
+export {csv2Array};
