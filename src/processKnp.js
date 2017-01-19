@@ -1,11 +1,14 @@
 
 //import {csv2Array} from "./index.js";
 
-let knpCsv = csv2Array('../knp/text0knptab.csv');
+let knpCsv = csv2Array('text0knptab.csv');
 
 
 
-let processKnp = (name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2) =>{
+let processKnp = (name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2) =>{
+
+    console.log("Enter processKNP");
+
     //読み込ませる
     AcceptKnp(knpCsv);
 
@@ -191,3 +194,5 @@ function csv2Array(filePath) { //csvﾌｧｲﾙﾉ相対ﾊﾟｽor絶対ﾊﾟ
     }
     return csvData;
 }
+
+export {processKnp};

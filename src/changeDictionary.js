@@ -1,5 +1,4 @@
 
-import $ from 'jquery';
 
 import "kuromoji";
 import {select} from "./select.js";

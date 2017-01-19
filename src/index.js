@@ -1,5 +1,6 @@
 import {funcReaderOnload} from "./wordparse.js";
-import {AcceptKnp,processKnp} from "./processKnp.js";
+import {AcceptKnp} from "./processKnp.js";
+import {processKnp} from "./processKnp.js";
 import {AcceptDictionary} from "./changeDictionary.js";
 import $ from 'jquery';
 
@@ -31,7 +32,11 @@ var taiou2=[];
 var chboxlength,chboxlength2;
 var test2;
 
-processKnp(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
+console.log("Before processKNP");
+
+let resultWithKNP = processKnp(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2);
+
+console.log("After resultWithKNP");
 
 document.getElementById('load-button').addEventListener('click', function () {
 
@@ -58,7 +63,7 @@ document.getElementById('knpLoadButton').addEventListener('click',function () {
     reader.onload = function(event) {
         //var result = funcReaderOnload(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
         //let resultWithNewDictionary = AcceptDictionary(name,event,keitaisokaiseki,chboxlist,chboxlist2,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,newLoveDictionary,newWorkDictionary,newFriendDictionary);
-        let resultWithKNP = processKnp(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2)
+        //let resultWithKNP = processKnp(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2)
     };
     reader.readAsText(file);
 
