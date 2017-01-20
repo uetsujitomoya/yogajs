@@ -1,25 +1,26 @@
 
-//import {csv2Array} from "./index.js";
+//import {TransposeMatrix} from "./index.js";
 
 
 
 
 
-let processKnp = (name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2) =>{
+let processKnp = (name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,newLoveDictionary,newWorkDictionary,newFriendDictionary,RGB) =>{
 
     let knpArray = csv2Array('text0knptabUtf8.csv');
 
+    console.log("knpArray");
     console.log(knpArray);
 
     let kihonku=[];
 
-    console.log("Enter processKNP");
+    //console.log("Enter processKNP");
 
     //読み込ませる←4行目で既に読み込ませてる
     //AcceptKnp(knpCsv);
 
     //基本句の定義
-    DefineKihonku(knpArray,kihonku);
+    DefineKihonku(knpArray,kihonku,newLoveDictionary,newWorkDictionary,newFriendDictionary,RGB);
 
     console.log(kihonku);
 
@@ -36,6 +37,7 @@ let processKnp = (name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassi
     });
 
     //上側を優先して、その文のタスクを確定
+    /*
 
     var sResult = select(jsonFileName,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
 
@@ -54,7 +56,10 @@ let processKnp = (name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassi
     //graph = sResult.graph;
     //console.log("chboxlength2=%d",chboxlength2)
 
+
     var vResult = setForViz(jsonFileName,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin);//形態素解析後に1度目の描画
+
+    */
 };
 
 let AcceptKnp = (name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2) =>{
@@ -95,7 +100,7 @@ let ReadKnp = (c) =>{
 
 };
 
-let DefineKihonku = (knpCsv,kihonku) => {
+let DefineKihonku = (knpCsv,kihonku,newLoveDictionary,newWorkDictionary,newFriendDictionary,RGB) => {
     //基本句オブジェクト作成
     /*
     knpCsv.forEach((row)=>{
@@ -116,11 +121,21 @@ let DefineKihonku = (knpCsv,kihonku) => {
     * */
 
     let kihonkuNumber=0;
+    let sentenceNumberInHatsugen=0;
+    let hatsugenNumber=0;
+
+    //console.log(newLoveDictionary);
+    //console.log(newWorkDictionary);
+    //console.log(newFriendDictionary);
 
     for(let KNP_csvRow=0;KNP_csvRow<knpCsv.length;KNP_csvRow++)
     {
-
-        if (judgeJapanese(knpCsv[KNP_csvRow][0]) == 1) {
+        if(knpCsv[KNP_csvRow][0]=="："){
+            sentenceNumberInHatsugen=0;
+            hatsugenNumber++;
+        }else if(knpCsv[KNP_csvRow][0]=="EOS"){
+            sentenceNumberInHatsugen++;
+        }else if (judgeJapanese(knpCsv[KNP_csvRow][0]) == 1) {
 
             kihonku[kihonkuNumber]={
                 words:[],
@@ -131,7 +146,9 @@ let DefineKihonku = (knpCsv,kihonku) => {
 
             kihonku[kihonkuNumber].words[0] = knpCsv[KNP_csvRow][1];
 
-            kihonku[kihonkuNumber].task = ClassifyTaskOfWord(kihonku[kihonkuNumber].words[0]);
+            //発言・文の判断
+
+            kihonku[kihonkuNumber].task = ClassifyTaskOfWord(hatsugenNumber,sentenceNumberInHatsugen,kihonku[kihonkuNumber].words[0],newLoveDictionary,newWorkDictionary,newFriendDictionary);
 
             KNP_csvRow++;
             while(judgeJapanese(knpCsv[KNP_csvRow][0]) == 1){
@@ -150,21 +167,36 @@ let ClassifyTaskOfKihonku = (kihonku,kihonkuNumber) => {
     ClassifyTaskOfWord(kihonku[kihonkuNumber].words[0]);
 };
 
-let ClassifyTaskOfWord = () => {
+let ClassifyTaskOfWord = (hatsugenNumber,sentenceNumberInHatsugen,wordLookedNow,newLoveDictionary,newWorkDictionary,newFriendDictionary) => {
     if(newLoveDictionary[0].indexOf(wordLookedNow)!=-1){
-        RGB[hatsugenNumber][sentenceNumberInHatsugen][0]+=newLoveDictionary[1][newLoveDictionary[0].indexOf(wordLookedNow)];
         //wordLookedNowがある行の1列目の値（類似度）を足す
+        return "love";
     }else if(newWorkDictionary[0].indexOf(wordLookedNow)!=-1){
-        RGB[hatsugenNumber][sentenceNumberInHatsugen][2]+=newWorkDictionary[1][newWorkDictionary[0].indexOf(wordLookedNow)];
         //wordLookedNowがある行の1列目の値（類似度）を足す
+        return "work";
     }else if(newFriendDictionary[0].indexOf(wordLookedNow)!=-1){
-        RGB[hatsugenNumber][sentenceNumberInHatsugen][1]+=newFriendDictionary[1][newFriendDictionary[0].indexOf(wordLookedNow)];
         //wordLookedNowがある行の1列目の値（類似度）を足す
+        return "friend"
     }
 };
 
 function ClassifyTaskOfSentence(){
     //最後にその文がどの分類か判定
+    /*
+     if(newLoveDictionary[0].indexOf(wordLookedNow)!=-1){
+     RGB[hatsugenNumber][sentenceNumberInHatsugen][0]+=newLoveDictionary[1][newLoveDictionary[0].indexOf(wordLookedNow)];
+     //wordLookedNowがある行の1列目の値（類似度）を足す
+     return "love";
+     }else if(newWorkDictionary[0].indexOf(wordLookedNow)!=-1){
+     RGB[hatsugenNumber][sentenceNumberInHatsugen][2]+=newWorkDictionary[1][newWorkDictionary[0].indexOf(wordLookedNow)];
+     //wordLookedNowがある行の1列目の値（類似度）を足す
+     return "work";
+     }else if(newFriendDictionary[0].indexOf(wordLookedNow)!=-1){
+     RGB[hatsugenNumber][sentenceNumberInHatsugen][1]+=newFriendDictionary[1][newFriendDictionary[0].indexOf(wordLookedNow)];
+     //wordLookedNowがある行の1列目の値（類似度）を足す
+     return "friend"
+     }
+    */
 
     if(RGB[hatsugenNumber][sentenceNumberInHatsugen][0] >= RGB[hatsugenNumber][sentenceNumberInHatsugen][1]){
         RGB[hatsugenNumber][sentenceNumberInHatsugen][1] =0;
@@ -225,7 +257,22 @@ function csv2Array(filePath) { //csvﾌｧｲﾙﾉ相対ﾊﾟｽor絶対ﾊﾟ
         }
     }
     console.log("return csvdata");
+
+    csvData = TransposeMatrix(csvData);
     return csvData;
+}
+
+function C (a, b, c) {
+    a[c] = (a[c] || []).concat (b);
+    return a;
+}
+
+function B (a, b, c) {
+    return b.reduce (C, a);
+}
+
+function TransposeMatrix(ary) {
+    return ary.reduce (B, []);
 }
 
 export {processKnp};

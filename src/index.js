@@ -15,10 +15,6 @@ newWorkDictionary = TransposeMatrix(newWorkDictionary);
 let newFriendDictionary = csv2Array('friendUtf8.csv');
 newFriendDictionary = TransposeMatrix(newFriendDictionary);
 
-console.log(newLoveDictionary);
-console.log(newWorkDictionary);
-console.log(newFriendDictionary);
-
 var keitaisokaiseki = []; //このlengthは段落数
 var questionClassification  = [];//checkboxのセレクト結果
 var chboxlist=[];//通し番号
@@ -30,11 +26,12 @@ var checked2 = [];
 var taiou=[];
 var taiou2=[];
 var chboxlength,chboxlength2;
+let RGB=[];
 var test2;
 
 console.log("Before processKNP");
 
-let resultWithKNP = processKnp(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2);
+let resultWithKNP = processKnp(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,newLoveDictionary,newWorkDictionary,newFriendDictionary,RGB);
 
 console.log("After resultWithKNP");
 
@@ -181,4 +178,4 @@ document.getElementById('storageSave-button').addEventListener('click', function
     localStorage.clear();
 });
 
-export {csv2Array};
+export {csv2Array,TransposeMatrix};
