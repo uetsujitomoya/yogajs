@@ -128,15 +128,20 @@ let DefineKihonku = (knpCsv,kihonku,newLoveDictionary,newWorkDictionary,newFrien
     //console.log(newWorkDictionary);
     //console.log(newFriendDictionary);
 
+    console.log(knpCsv.length);
+
     for(let KNP_csvRow=0;KNP_csvRow<knpCsv.length;KNP_csvRow++)
     {
+        console.log(KNP_csvRow);
         if(knpCsv[KNP_csvRow][0]=="："){
+            console.log("TURNING");
             sentenceNumberInHatsugen=0;
             hatsugenNumber++;
         }else if(knpCsv[KNP_csvRow][0]=="EOS"){
+            console.log("EOS");
             sentenceNumberInHatsugen++;
         }else if (judgeJapanese(knpCsv[KNP_csvRow][0]) == 1) {
-
+            console.log("This is Japanese.");
             kihonku[kihonkuNumber]={
                 words:[],
                 kakattekuruKuNumber:null,
@@ -258,7 +263,7 @@ function csv2Array(filePath) { //csvﾌｧｲﾙﾉ相対ﾊﾟｽor絶対ﾊﾟ
     }
     console.log("return csvdata");
 
-    csvData = TransposeMatrix(csvData);
+    //csvData = TransposeMatrix(csvData);
     return csvData;
 }
 
