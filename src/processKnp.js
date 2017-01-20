@@ -1,30 +1,38 @@
 
 //import {csv2Array} from "./index.js";
 
-let knpCsv = csv2Array('text0knptab.csv');
+
 
 
 
 let processKnp = (name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2) =>{
 
+    let knpArray = csv2Array('text0knptabUtf8.csv');
+
+    console.log(knpArray);
+
+    let kihonku=[];
+
     console.log("Enter processKNP");
 
-    //読み込ませる
-    AcceptKnp(knpCsv);
+    //読み込ませる←4行目で既に読み込ませてる
+    //AcceptKnp(knpCsv);
 
     //基本句の定義
-    DefineKihonku(knpCsv);
+    DefineKihonku(knpArray,kihonku);
+
+    console.log(kihonku);
 
     //基本句の最初の単語をタスク判定
-    knpCsv.forEach((i)=>{
-        judgeTaskOfKihonku(knpCsv);
+    kihonku.forEach((i)=>{
+        ClassifyTaskOfKihonku(kihonku,i);
     });
     //そのタスクを基本句のタスクとする
 
     //その基本句がかかるタスクに愛交友仕事のどれかが入ってる
     //基本句の最初の単語をタスク判定
-    knpCsv.forEach((i)=>{
-        judgeTaskOfSentence(knpCsv);
+    knpArray.forEach((i)=>{
+        ClassifyTaskOfSentence(knpArray);
     });
 
     //上側を優先して、その文のタスクを確定
@@ -87,38 +95,62 @@ let ReadKnp = (c) =>{
 
 };
 
-let DefineKihonku = () => {
+let DefineKihonku = (knpCsv,kihonku) => {
     //基本句オブジェクト作成
-    let kihonku=[];
-
-    //かかってくる句の愛交友仕事が指定されていれば、その文の分類をやめる
-    kihonku[kihonkuNumber]={
-        orijinal:[],
-        kakattekuruKuNumber:null,
-        kakariniikuKuNumber:null,
-        task:null
-    };
-
+    /*
+    knpCsv.forEach((row)=>{
+        //かかってくる句の愛交友仕事が指定されていれば、その文の分類をやめる
+    });
+    */
     //orijinalの配列をつくるkeitaisokaiseki[]
-
     //次の＋までを取得して単語とする
-    for(knpNumber=0;knpNumber<knpCsv.length;knpNumber++)
+
+    /*0列目が日本語なら
+    * 1.日本語じゃなく鳴るまで取得
+    *
+    * kihonku生成
+    *
+    * 2.wordsに詰め込む
+    *
+    * 3.タスクを知る
+    * */
+
+    let kihonkuNumber=0;
+
+    for(let KNP_csvRow=0;KNP_csvRow<knpCsv.length;KNP_csvRow++)
     {
-        if (judgeJapanese() == 1) {
-            kihonku[kihonkuNumber].words += knpCsv[kihonkuNumber][1];
-            continue;
+
+        if (judgeJapanese(knpCsv[KNP_csvRow][0]) == 1) {
+
+            kihonku[kihonkuNumber]={
+                words:[],
+                kakattekuruKuNumber:null,
+                kakariniikuKuNumber:null,
+                task:null
+            };
+
+            kihonku[kihonkuNumber].words[0] = knpCsv[KNP_csvRow][1];
+
+            kihonku[kihonkuNumber].task = ClassifyTaskOfWord(kihonku[kihonkuNumber].words[0]);
+
+            KNP_csvRow++;
+            while(judgeJapanese(knpCsv[KNP_csvRow][0]) == 1){
+                kihonku[kihonkuNumber].words += knpCsv[KNP_csvRow][1];
+                KNP_csvRow++;
+            }
+
+            kihonkuNumber++;
         }
-        break;
     }
 
     //要素：かかる句、かかられる句、愛交友仕事分類
 };
 
-let judgeTaskOfKihonku = () => {
-    judgeTaskOfWord(kihonku[kihonkuNumber].tango[0]);
+let ClassifyTaskOfKihonku = (kihonku,kihonkuNumber) => {
+    ClassifyTaskOfWord(kihonku[kihonkuNumber].words[0]);
 };
 
-let judgeTaskOfWord = () => {
+let ClassifyTaskOfWord = () => {
     if(newLoveDictionary[0].indexOf(wordLookedNow)!=-1){
         RGB[hatsugenNumber][sentenceNumberInHatsugen][0]+=newLoveDictionary[1][newLoveDictionary[0].indexOf(wordLookedNow)];
         //wordLookedNowがある行の1列目の値（類似度）を足す
@@ -131,7 +163,7 @@ let judgeTaskOfWord = () => {
     }
 };
 
-function judgeTaskOfSentence(){
+function ClassifyTaskOfSentence(){
     //最後にその文がどの分類か判定
 
     if(RGB[hatsugenNumber][sentenceNumberInHatsugen][0] >= RGB[hatsugenNumber][sentenceNumberInHatsugen][1]){
@@ -192,6 +224,7 @@ function csv2Array(filePath) { //csvﾌｧｲﾙﾉ相対ﾊﾟｽor絶対ﾊﾟ
             csvData.push(cells);
         }
     }
+    console.log("return csvdata");
     return csvData;
 }
 

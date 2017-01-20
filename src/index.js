@@ -1,5 +1,5 @@
-import {funcReaderOnload} from "./wordparse.js";
-import {AcceptKnp} from "./processKnp.js";
+//import {funcReaderOnload} from "./wordparse.js";
+//import {AcceptKnp} from "./processKnp.js";
 import {processKnp} from "./processKnp.js";
 import {AcceptDictionary} from "./changeDictionary.js";
 import $ from 'jquery';
