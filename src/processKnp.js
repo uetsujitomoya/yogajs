@@ -12,24 +12,22 @@ let processKnp = (name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassi
     console.log("knpArray");
     console.log(knpArray);
 
-    let kihonku=[];
-
     //console.log("Enter processKNP");
 
     //読み込ませる←4行目で既に読み込ませてる
     //AcceptKnp(knpCsv);
 
     //基本句の定義
-    DefineKihonku(knpArray,kihonku,newLoveDictionary,newWorkDictionary,newFriendDictionary,RGB);
+    OrganizeKNP(knpArray,hatsugen,newLoveDictionary,newWorkDictionary,newFriendDictionary,RGB);
 
-    console.log(kihonku);
-
+    console.log(hatsugen);
+/*
     //基本句の最初の単語をタスク判定
     kihonku.forEach((i)=>{
         ClassifyTaskOfKihonku(kihonku,i);
     });
     //そのタスクを基本句のタスクとする
-
+*/
     //その基本句がかかるタスクに愛交友仕事のどれかが入ってる
     //基本句の最初の単語をタスク判定
     knpArray.forEach((i)=>{
@@ -100,7 +98,29 @@ let ReadKnp = (c) =>{
 
 };
 
-let DefineKihonku = (knpCsv,kihonku,newLoveDictionary,newWorkDictionary,newFriendDictionary,RGB) => {
+let DefineHatsugen=(hatsugen,hatsugenNumber)=>{
+    hatsugen[hatsugenNumber]={
+        sentences:[],
+        group:null
+    };
+};
+let DefineSentence=(hatsugen,hatsugenNumber,sentenceNumberInHatsugen)=>{
+    hatsugen[hatsugenNumber].sentences[sentenceNumberInHatsugen]={
+        kihonku:[],
+        task:null
+    }
+};
+let DefineKihonku=(hatsugen,hatsugenNumber,sentenceNumberInHatsugen,kihonkuNumber)=>{
+    hatsugen[hatsugenNumber].sentences[sentenceNumberInHatsugen].kihonku[kihonkuNumber]={
+        words:[],
+        kakattekuruKuNumber:null,
+        kakariniikuKuNumber:null,
+        task:null
+    };
+};
+
+
+let OrganizeKNP = (knpCsv,hatsugen,newLoveDictionary,newWorkDictionary,newFriendDictionary,RGB) => {
     //基本句オブジェクト作成
     /*
     knpCsv.forEach((row)=>{
@@ -124,6 +144,9 @@ let DefineKihonku = (knpCsv,kihonku,newLoveDictionary,newWorkDictionary,newFrien
     let sentenceNumberInHatsugen=0;
     let hatsugenNumber=0;
 
+    DefineHatsugen(hatsugen,0);
+    DefineSentence(hatsugen,0,0);
+
     //console.log(newLoveDictionary);
     //console.log(newWorkDictionary);
     //console.log(newFriendDictionary);
@@ -137,27 +160,25 @@ let DefineKihonku = (knpCsv,kihonku,newLoveDictionary,newWorkDictionary,newFrien
             console.log("TURNING");
             sentenceNumberInHatsugen=0;
             hatsugenNumber++;
+            DefineHatsugen(hatsugen,hatsugenNumber);
         }else if(knpCsv[KNP_csvRow][0]=="EOS"){
             console.log("EOS");
             sentenceNumberInHatsugen++;
+            DefineSentence(hatsugen,hatsugenNumber,sentenceNumberInHatsugen);
         }else if (judgeJapanese(knpCsv[KNP_csvRow][0]) == 1) {
             console.log("This is Japanese.");
-            kihonku[kihonkuNumber]={
-                words:[],
-                kakattekuruKuNumber:null,
-                kakariniikuKuNumber:null,
-                task:null
-            };
 
-            kihonku[kihonkuNumber].words[0] = knpCsv[KNP_csvRow][1];
+            DefineKihonku(hatsugen,hatsugenNumber,sentenceNumberInHatsugen,kihonkuNumber);
+
+            hatsugen[hatsugenNumber].sentences[sentenceNumberInHatsugen].kihonku[kihonkuNumber].words[0] = knpCsv[KNP_csvRow][1];
 
             //発言・文の判断
 
-            kihonku[kihonkuNumber].task = ClassifyTaskOfWord(hatsugenNumber,sentenceNumberInHatsugen,kihonku[kihonkuNumber].words[0],newLoveDictionary,newWorkDictionary,newFriendDictionary);
+            hatsugen[hatsugenNumber].sentences[sentenceNumberInHatsugen].kihonku[kihonkuNumber].task = ClassifyTaskOfWord(hatsugenNumber,sentenceNumberInHatsugen,hatsugen[hatsugenNumber].sentences[sentenceNumberInHatsugen].kihonku[kihonkuNumber].words[0],newLoveDictionary,newWorkDictionary,newFriendDictionary);
 
             KNP_csvRow++;
             while(judgeJapanese(knpCsv[KNP_csvRow][0]) == 1){
-                kihonku[kihonkuNumber].words += knpCsv[KNP_csvRow][1];
+                hatsugen[hatsugenNumber].sentences[sentenceNumberInHatsugen].kihonku[kihonkuNumber].words += knpCsv[KNP_csvRow][1];
                 KNP_csvRow++;
             }
 
@@ -167,11 +188,11 @@ let DefineKihonku = (knpCsv,kihonku,newLoveDictionary,newWorkDictionary,newFrien
 
     //要素：かかる句、かかられる句、愛交友仕事分類
 };
-
+/*
 let ClassifyTaskOfKihonku = (kihonku,kihonkuNumber) => {
     ClassifyTaskOfWord(kihonku[kihonkuNumber].words[0]);
 };
-
+*/
 let ClassifyTaskOfWord = (hatsugenNumber,sentenceNumberInHatsugen,wordLookedNow,newLoveDictionary,newWorkDictionary,newFriendDictionary) => {
     if(newLoveDictionary[0].indexOf(wordLookedNow)!=-1){
         //wordLookedNowがある行の1列目の値（類似度）を足す
