@@ -166,9 +166,14 @@ let OrganizeKNP = (knpCsv,hatsugen,newLoveDictionary,newWorkDictionary,newFriend
             sentenceNumberInHatsugen++;
             DefineSentence(hatsugen,hatsugenNumber,sentenceNumberInHatsugen);
         }else if (judgeJapanese(knpCsv[KNP_csvRow][0]) == 1) {
+
+
+
             console.log("This is Japanese.");
 
             DefineKihonku(hatsugen,hatsugenNumber,sentenceNumberInHatsugen,kihonkuNumber);
+
+            hatsugen[hatsugenNumber].sentences[sentenceNumberInHatsugen].kihonku[kihonkuNumber].kakattekuruKuNumber=ExtractNumber(knpCsv[KNP_csvRow-1][1]);
 
             hatsugen[hatsugenNumber].sentences[sentenceNumberInHatsugen].kihonku[kihonkuNumber].words[0] = knpCsv[KNP_csvRow][1];
 
@@ -300,5 +305,12 @@ function B (a, b, c) {
 function TransposeMatrix(ary) {
     return ary.reduce (B, []);
 }
+
+let ExtractNumber=(originalText)=>{
+    let returnText;
+    returnText=parseInt(originalText, 10); //-123
+    // qiita.com/simiraaaa/items/2fc2c10e041963fc34fc
+    return returnText;
+};
 
 export {processKnp};
