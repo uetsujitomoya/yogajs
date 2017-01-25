@@ -107,7 +107,60 @@ let DefineHatsugen=(hatsugen,hatsugenNumber)=>{
 let DefineSentence=(hatsugen,hatsugenNumber,sentenceNumberInHatsugen)=>{
     hatsugen[hatsugenNumber].sentences[sentenceNumberInHatsugen]={
         kihonku:[],
-        task:null
+        task:null,
+        ClassifyTaskOfSentence:(hatsugenNumber,sentenceNumberInHatsugen,newLoveDictionary,newWorkDictionary,newFriendDictionary)=>{
+            //最後にその文がどの分類か判定
+            /*
+             if(newLoveDictionary[0].indexOf(wordLookedNow)!=-1){
+             RGB[hatsugenNumber][sentenceNumberInHatsugen][0]+=newLoveDictionary[1][newLoveDictionary[0].indexOf(wordLookedNow)];
+             //wordLookedNowがある行の1列目の値（類似度）を足す
+             return "love";
+             }else if(newWorkDictionary[0].indexOf(wordLookedNow)!=-1){
+             RGB[hatsugenNumber][sentenceNumberInHatsugen][2]+=newWorkDictionary[1][newWorkDictionary[0].indexOf(wordLookedNow)];
+             //wordLookedNowがある行の1列目の値（類似度）を足す
+             return "work";
+             }else if(newFriendDictionary[0].indexOf(wordLookedNow)!=-1){
+             RGB[hatsugenNumber][sentenceNumberInHatsugen][1]+=newFriendDictionary[1][newFriendDictionary[0].indexOf(wordLookedNow)];
+             //wordLookedNowがある行の1列目の値（類似度）を足す
+             return "friend"
+             }
+             */
+
+            //係り受けされていれば取得
+            //なければ最初に分類された単語の分類にしちゃう
+
+            //係り受け判定
+            //その句が何かに判定されて
+            //かつ、それにかかってくる句も何かに判定されていれば
+            //↓
+            //前の句の判定を採用し、文の前に置く
+            for(let kihonkuNumber=0;kihonkuNumber<this.kihonku.length;kihonkuNumber++){
+
+                if(this.kihonku[kihonkuNumber].task!=null&&this.kihonku[kihonkuNumber].kakattekuruKuNumber!=null){
+                    if(this.kihonku[this.kihonku[kihonkuNumber].kakattekuruKuNumber].task!=null){
+                        this.task=this.kihonku[kihonkuNumber].task;
+                        break;
+                    }
+                }
+
+            }
+
+            if(RGB[hatsugenNumber][sentenceNumberInHatsugen][0] >= RGB[hatsugenNumber][sentenceNumberInHatsugen][1]){
+                RGB[hatsugenNumber][sentenceNumberInHatsugen][1] =0;
+                if( RGB[hatsugenNumber][sentenceNumberInHatsugen][0] >= RGB[hatsugenNumber][sentenceNumberInHatsugen][2] ){
+                    RGB[hatsugenNumber][sentenceNumberInHatsugen][2] =0;
+                }else{
+                    RGB[hatsugenNumber][sentenceNumberInHatsugen][0] =0;
+                }
+            }else{
+                RGB[hatsugenNumber][sentenceNumberInHatsugen][0] =0;
+                if( RGB[hatsugenNumber][sentenceNumberInHatsugen][1] >= RGB[hatsugenNumber][sentenceNumberInHatsugen][2] ){
+                    RGB[hatsugenNumber][sentenceNumberInHatsugen][2] =0;
+                }else{
+                    RGB[hatsugenNumber][sentenceNumberInHatsugen][1] =0;
+                }
+            }
+        }
     }
 };
 let DefineKihonku=(hatsugen,hatsugenNumber,sentenceNumberInHatsugen,kihonkuNumber)=>{
@@ -163,11 +216,14 @@ let OrganizeKNP = (knpCsv,hatsugen,newLoveDictionary,newWorkDictionary,newFriend
             DefineHatsugen(hatsugen,hatsugenNumber);
         }else if(knpCsv[KNP_csvRow][0]=="EOS"){
             console.log("EOS");
+
+            //今までのまとめとして、文を分類
+            ClassfyTaskOfSentence(hatsugen,hatsugenNumber,sentenceNumberInHatsugen);
+
+            //次の文へ
             sentenceNumberInHatsugen++;
             DefineSentence(hatsugen,hatsugenNumber,sentenceNumberInHatsugen);
         }else if (judgeJapanese(knpCsv[KNP_csvRow][0]) == 1) {
-
-
 
             console.log("This is Japanese.");
 
@@ -179,15 +235,18 @@ let OrganizeKNP = (knpCsv,hatsugen,newLoveDictionary,newWorkDictionary,newFriend
 
             //発言・文の判断
 
-            hatsugen[hatsugenNumber].sentences[sentenceNumberInHatsugen].kihonku[kihonkuNumber].task = ClassifyTaskOfWord(hatsugenNumber,sentenceNumberInHatsugen,hatsugen[hatsugenNumber].sentences[sentenceNumberInHatsugen].kihonku[kihonkuNumber].words[0],newLoveDictionary,newWorkDictionary,newFriendDictionary);
+            hatsugen[hatsugenNumber].sentences[sentenceNumberInHatsugen].kihonku[kihonkuNumber].task = ClassifyTaskOfWord(hatsugenNumber,sentenceNumberInHatsugen,hatsugen,newLoveDictionary,newWorkDictionary,newFriendDictionary);
 
             KNP_csvRow++;
             while(judgeJapanese(knpCsv[KNP_csvRow][0]) == 1){
                 hatsugen[hatsugenNumber].sentences[sentenceNumberInHatsugen].kihonku[kihonkuNumber].words += knpCsv[KNP_csvRow][1];
                 KNP_csvRow++;
             }
+            KNP_csvRow--;//入れないと、EOSの行を飛ばしちゃう
 
             kihonkuNumber++;
+        }else{
+            //console.log(knpCsv[KNP_csvRow]);
         }
     }
 
@@ -211,40 +270,7 @@ let ClassifyTaskOfWord = (hatsugenNumber,sentenceNumberInHatsugen,wordLookedNow,
     }
 };
 
-function ClassifyTaskOfSentence(){
-    //最後にその文がどの分類か判定
-    /*
-     if(newLoveDictionary[0].indexOf(wordLookedNow)!=-1){
-     RGB[hatsugenNumber][sentenceNumberInHatsugen][0]+=newLoveDictionary[1][newLoveDictionary[0].indexOf(wordLookedNow)];
-     //wordLookedNowがある行の1列目の値（類似度）を足す
-     return "love";
-     }else if(newWorkDictionary[0].indexOf(wordLookedNow)!=-1){
-     RGB[hatsugenNumber][sentenceNumberInHatsugen][2]+=newWorkDictionary[1][newWorkDictionary[0].indexOf(wordLookedNow)];
-     //wordLookedNowがある行の1列目の値（類似度）を足す
-     return "work";
-     }else if(newFriendDictionary[0].indexOf(wordLookedNow)!=-1){
-     RGB[hatsugenNumber][sentenceNumberInHatsugen][1]+=newFriendDictionary[1][newFriendDictionary[0].indexOf(wordLookedNow)];
-     //wordLookedNowがある行の1列目の値（類似度）を足す
-     return "friend"
-     }
-    */
 
-    if(RGB[hatsugenNumber][sentenceNumberInHatsugen][0] >= RGB[hatsugenNumber][sentenceNumberInHatsugen][1]){
-        RGB[hatsugenNumber][sentenceNumberInHatsugen][1] =0;
-        if( RGB[hatsugenNumber][sentenceNumberInHatsugen][0] >= RGB[hatsugenNumber][sentenceNumberInHatsugen][2] ){
-            RGB[hatsugenNumber][sentenceNumberInHatsugen][2] =0;
-        }else{
-            RGB[hatsugenNumber][sentenceNumberInHatsugen][0] =0;
-        }
-    }else{
-        RGB[hatsugenNumber][sentenceNumberInHatsugen][0] =0;
-        if( RGB[hatsugenNumber][sentenceNumberInHatsugen][1] >= RGB[hatsugenNumber][sentenceNumberInHatsugen][2] ){
-            RGB[hatsugenNumber][sentenceNumberInHatsugen][2] =0;
-        }else{
-            RGB[hatsugenNumber][sentenceNumberInHatsugen][1] =0;
-        }
-    }
-}
 
 function judgeKakaruSide(kihonku,kakarareru){
     //その丹後区にかかるものを判定
