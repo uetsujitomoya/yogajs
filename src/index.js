@@ -11,6 +11,8 @@ newLoveDictionary = TransposeMatrix(newLoveDictionary);
 
 let newWorkDictionary = csv2Array('workUtf8.csv');
 newWorkDictionary = TransposeMatrix(newWorkDictionary);
+console.log("newWorkDictionary");
+console.log(newWorkDictionary);
 
 let newFriendDictionary = csv2Array('friendUtf8.csv');
 newFriendDictionary = TransposeMatrix(newFriendDictionary);

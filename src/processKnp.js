@@ -12,6 +12,10 @@ let processKnp = (name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassi
     console.log("knpArray");
     console.log(knpArray);
 
+    //RGB[0]=1;
+    console.log(RGB[0]);
+
+
     //console.log("Enter processKNP");
 
     //読み込ませる←4行目で既に読み込ませてる
@@ -30,10 +34,11 @@ let processKnp = (name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassi
 */
     //その基本句がかかるタスクに愛交友仕事のどれかが入ってる
     //基本句の最初の単語をタスク判定
+    /*
     knpArray.forEach((i)=>{
         ClassifyTaskOfSentence(knpArray);
     });
-
+*/
     //上側を優先して、その文のタスクを確定
     /*
 
@@ -98,17 +103,24 @@ let ReadKnp = (c) =>{
 
 };
 
-let DefineHatsugen=(hatsugen,hatsugenNumber)=>{
+let DefineHatsugen=(hatsugen,hatsugenNumber,RGB)=>{
+    //console.log(RGB);
     hatsugen[hatsugenNumber]={
         sentences:[],
         group:null
     };
+    if (!RGB[hatsugenNumber]) RGB[hatsugenNumber]=[];
 };
-let DefineSentence=(hatsugen,hatsugenNumber,sentenceNumberInHatsugen)=>{
+let DefineSentence=(hatsugen,hatsugenNumber,sentenceNumberInHatsugen,RGB)=>{
     hatsugen[hatsugenNumber].sentences[sentenceNumberInHatsugen]={
         kihonku:[],
         task:null,
-        ClassifyTaskOfSentence:(hatsugenNumber,sentenceNumberInHatsugen,newLoveDictionary,newWorkDictionary,newFriendDictionary)=>{
+        taskCountFromKihonku:{
+          love:0,
+            work:0,
+            friend:0
+        },
+        ClassifyTaskOfSentence:function(hatsugenNumber,sentenceNumberInHatsugen,newLoveDictionary,newWorkDictionary,newFriendDictionary,RGB){
             //最後にその文がどの分類か判定
             /*
              if(newLoveDictionary[0].indexOf(wordLookedNow)!=-1){
@@ -134,34 +146,39 @@ let DefineSentence=(hatsugen,hatsugenNumber,sentenceNumberInHatsugen)=>{
             //かつ、それにかかってくる句も何かに判定されていれば
             //↓
             //前の句の判定を採用し、文の前に置く
-            for(let kihonkuNumber=0;kihonkuNumber<this.kihonku.length;kihonkuNumber++){
+            for(let kihonkuNumber=0;kihonkuNumber< this.kihonku.length;kihonkuNumber++){
 
+                console.log(this.kihonku);
                 if(this.kihonku[kihonkuNumber].task!=null&&this.kihonku[kihonkuNumber].kakattekuruKuNumber!=null){
                     if(this.kihonku[this.kihonku[kihonkuNumber].kakattekuruKuNumber].task!=null){
                         this.task=this.kihonku[kihonkuNumber].task;
-                        break;
+                        return 0;
                     }
                 }
 
             }
 
-            if(RGB[hatsugenNumber][sentenceNumberInHatsugen][0] >= RGB[hatsugenNumber][sentenceNumberInHatsugen][1]){
-                RGB[hatsugenNumber][sentenceNumberInHatsugen][1] =0;
-                if( RGB[hatsugenNumber][sentenceNumberInHatsugen][0] >= RGB[hatsugenNumber][sentenceNumberInHatsugen][2] ){
-                    RGB[hatsugenNumber][sentenceNumberInHatsugen][2] =0;
+            if(this.taskCountFromKihonku.love >= this.taskCountFromKihonku.work){
+                if(this.taskCountFromKihonku.love>=this.taskCountFromKihonku.friend){
+                    this.task="love";
+                    RGB[hatsugenNumber][sentenceNumberInHatsugen][0]=1;
                 }else{
-                    RGB[hatsugenNumber][sentenceNumberInHatsugen][0] =0;
+                    this.task="friend";
+                    RGB[hatsugenNumber][sentenceNumberInHatsugen][2]=1;
                 }
             }else{
-                RGB[hatsugenNumber][sentenceNumberInHatsugen][0] =0;
-                if( RGB[hatsugenNumber][sentenceNumberInHatsugen][1] >= RGB[hatsugenNumber][sentenceNumberInHatsugen][2] ){
-                    RGB[hatsugenNumber][sentenceNumberInHatsugen][2] =0;
+                if(this.taskCountFromKihonku.work >= this.taskCountFromKihonku.friend){
+                    this.task="work";
+                    RGB[hatsugenNumber][sentenceNumberInHatsugen][1]=1;
                 }else{
-                    RGB[hatsugenNumber][sentenceNumberInHatsugen][1] =0;
+                    this.task="friend";
+                    RGB[hatsugenNumber][sentenceNumberInHatsugen][2]=1;
                 }
             }
+
         }
-    }
+    };
+    RGB[hatsugenNumber][sentenceNumberInHatsugen]=[3];
 };
 let DefineKihonku=(hatsugen,hatsugenNumber,sentenceNumberInHatsugen,kihonkuNumber)=>{
     hatsugen[hatsugenNumber].sentences[sentenceNumberInHatsugen].kihonku[kihonkuNumber]={
@@ -172,6 +189,25 @@ let DefineKihonku=(hatsugen,hatsugenNumber,sentenceNumberInHatsugen,kihonkuNumbe
     };
 };
 
+let ClassifyTaskOfWord =(hatsugen,hatsugenNumber,sentenceNumberInHatsugen,newLoveDictionary,newWorkDictionary,newFriendDictionary,kihonkuNumber,wordLookedNow)=>{
+    console.log(newLoveDictionary);
+    if(newLoveDictionary[0].indexOf(wordLookedNow)!=-1){
+        //wordLookedNowがある行の1列目の値（類似度）を足す
+
+        hatsugen[hatsugenNumber].sentences[sentenceNumberInHatsugen].taskCountFromKihonku.love++;
+        return "love";
+    }else if(newWorkDictionary[0].indexOf(wordLookedNow)!=-1){
+        //wordLookedNowがある行の1列目の値（類似度）を足す
+
+        hatsugen[hatsugenNumber].sentences[sentenceNumberInHatsugen].taskCountFromKihonku.work++;
+        return "work";
+    }else if(newFriendDictionary[0].indexOf(wordLookedNow)!=-1){
+        //wordLookedNowがある行の1列目の値（類似度）を足す
+
+        hatsugen[hatsugenNumber].sentences[sentenceNumberInHatsugen].taskCountFromKihonku.friend++;
+        return "friend";
+    }
+};
 
 let OrganizeKNP = (knpCsv,hatsugen,newLoveDictionary,newWorkDictionary,newFriendDictionary,RGB) => {
     //基本句オブジェクト作成
@@ -193,12 +229,16 @@ let OrganizeKNP = (knpCsv,hatsugen,newLoveDictionary,newWorkDictionary,newFriend
     * 3.タスクを知る
     * */
 
+
     let kihonkuNumber=0;
     let sentenceNumberInHatsugen=0;
     let hatsugenNumber=0;
 
-    DefineHatsugen(hatsugen,0);
-    DefineSentence(hatsugen,0,0);
+    console.log("RGB");
+    console.log(RGB);
+
+    DefineHatsugen(hatsugen,0,RGB);
+    DefineSentence(hatsugen,0,0,RGB);
 
     //console.log(newLoveDictionary);
     //console.log(newWorkDictionary);
@@ -209,20 +249,25 @@ let OrganizeKNP = (knpCsv,hatsugen,newLoveDictionary,newWorkDictionary,newFriend
     for(let KNP_csvRow=0;KNP_csvRow<knpCsv.length;KNP_csvRow++)
     {
         console.log(KNP_csvRow);
+        console.log("RGB");
+        console.log(RGB);
         if(knpCsv[KNP_csvRow][0]=="："){
             console.log("TURNING");
             sentenceNumberInHatsugen=0;
+            kihonkuNumber=0;
             hatsugenNumber++;
-            DefineHatsugen(hatsugen,hatsugenNumber);
+            console.log(RGB);
+            DefineHatsugen(hatsugen,hatsugenNumber,RGB);
         }else if(knpCsv[KNP_csvRow][0]=="EOS"){
             console.log("EOS");
 
             //今までのまとめとして、文を分類
-            ClassfyTaskOfSentence(hatsugen,hatsugenNumber,sentenceNumberInHatsugen);
+            hatsugen[hatsugenNumber].sentences[sentenceNumberInHatsugen].ClassifyTaskOfSentence(hatsugenNumber,sentenceNumberInHatsugen,newLoveDictionary,newWorkDictionary,newFriendDictionary,RGB);
 
             //次の文へ
+            kihonkuNumber=0;
             sentenceNumberInHatsugen++;
-            DefineSentence(hatsugen,hatsugenNumber,sentenceNumberInHatsugen);
+            DefineSentence(hatsugen,hatsugenNumber,sentenceNumberInHatsugen,RGB);
         }else if (judgeJapanese(knpCsv[KNP_csvRow][0]) == 1) {
 
             console.log("This is Japanese.");
@@ -235,7 +280,7 @@ let OrganizeKNP = (knpCsv,hatsugen,newLoveDictionary,newWorkDictionary,newFriend
 
             //発言・文の判断
 
-            hatsugen[hatsugenNumber].sentences[sentenceNumberInHatsugen].kihonku[kihonkuNumber].task = ClassifyTaskOfWord(hatsugenNumber,sentenceNumberInHatsugen,hatsugen,newLoveDictionary,newWorkDictionary,newFriendDictionary);
+            hatsugen[hatsugenNumber].sentences[sentenceNumberInHatsugen].kihonku[kihonkuNumber].task = ClassifyTaskOfWord(hatsugen,hatsugenNumber,sentenceNumberInHatsugen,newLoveDictionary,newWorkDictionary,newFriendDictionary,kihonkuNumber,knpCsv[KNP_csvRow][1]);
 
             KNP_csvRow++;
             while(judgeJapanese(knpCsv[KNP_csvRow][0]) == 1){
@@ -257,18 +302,7 @@ let ClassifyTaskOfKihonku = (kihonku,kihonkuNumber) => {
     ClassifyTaskOfWord(kihonku[kihonkuNumber].words[0]);
 };
 */
-let ClassifyTaskOfWord = (hatsugenNumber,sentenceNumberInHatsugen,wordLookedNow,newLoveDictionary,newWorkDictionary,newFriendDictionary) => {
-    if(newLoveDictionary[0].indexOf(wordLookedNow)!=-1){
-        //wordLookedNowがある行の1列目の値（類似度）を足す
-        return "love";
-    }else if(newWorkDictionary[0].indexOf(wordLookedNow)!=-1){
-        //wordLookedNowがある行の1列目の値（類似度）を足す
-        return "work";
-    }else if(newFriendDictionary[0].indexOf(wordLookedNow)!=-1){
-        //wordLookedNowがある行の1列目の値（類似度）を足す
-        return "friend"
-    }
-};
+
 
 
 
