@@ -2,6 +2,10 @@ import d3 from "d3";
 
 
 
+//let love="#ffeeff";
+//let friend="#c0ffc0";
+//let work="#a0e0ff";
+
 let love="#ffeeff";
 let friend="#c0ffc0";
 let work="#a0e0ff";

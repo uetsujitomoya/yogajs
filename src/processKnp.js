@@ -25,6 +25,8 @@ let processKnp = (name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassi
     OrganizeKNP(knpArray,hatsugen,newLoveDictionary,newWorkDictionary,newFriendDictionary,RGB);
 
     console.log(hatsugen);
+
+    console.log(RGB);
 /*
     //基本句の最初の単語をタスク判定
     kihonku.forEach((i)=>{
