@@ -1,11 +1,11 @@
 
 //import {TransposeMatrix} from "./index.js";
-
-
-
-
+import {select} from "./select.js";
+import {setForViz} from "./svg.js";
 
 let processKnp = (name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,newLoveDictionary,newWorkDictionary,newFriendDictionary,RGB) =>{
+
+    let isUsingKNP=1;
 
     let knpArray = csv2Array('text0knptabUtf8.csv');
 
@@ -14,7 +14,6 @@ let processKnp = (name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassi
 
     //RGB[0]=1;
     console.log(RGB[0]);
-
 
     //console.log("Enter processKNP");
 
@@ -65,7 +64,50 @@ let processKnp = (name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassi
     var vResult = setForViz(jsonFileName,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin);//形態素解析後に1度目の描画
 
     */
+
+    putToScreen();
+
 };
+
+let putToScreen = () => {
+    var sResult = select(jsonFileName,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,isUsingDictionaryWithWord2Vec);
+
+    checkboxlist = sResult.checkboxlist;
+    chboxlist = sResult.chboxlist;
+    chboxlist2 = sResult.chboxlist2;
+    RGB = sResult.RGB;
+    RGBlist = sResult.RGBlist;
+
+    checked = sResult.checked;
+    checked2 = sResult.checked2;
+    taiou = sResult.taiou;
+    taiou2 = sResult.taiou2;
+    chboxlength = sResult.chboxlength;
+    chboxlength2 = sResult.chboxlength2;
+
+    var vResult = setForViz(jsonFileName,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,isUsingDictionaryWithWord2Vec);//形態素解析後に1度目の描画
+    chboxlist = vResult.chboxlist;
+    chboxlist2 = vResult.chboxlist2;
+    RGBlist = vResult.RGBlist;
+    checked = vResult.checked;
+    checked2 = vResult.checked2;
+    chboxlength = vResult.chboxlength;
+    chboxlength2 = vResult.chboxlength2;
+    ranshin = vResult.ranshin;
+
+    //これは後ろじゃないと、選択肢が反映されない？
+    for(c=1;c<=chboxlength;c++){
+        makeOnClick(c);
+    }
+    for(c=1;c<=chboxlength2;c++){
+        makeOnClickS(c);
+    }
+
+    document.getElementById('radio_buttons').onchange = () => {
+        setForViz(jsonFileName,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin);
+    };//graphの形状を切り替えた際もここで再描画される
+};
+
 
 let AcceptKnp = (name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2) =>{
 

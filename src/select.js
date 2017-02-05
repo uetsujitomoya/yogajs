@@ -1,6 +1,26 @@
 
 
+
 var select =(name,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,isUsingDictionaryWithWord2Vec) => {
+
+	/*
+	if(isUsingKNP==1){
+		createSelectPartWithKNP();
+        return{
+            checkboxlist:checkboxlist,
+            chboxlist:chboxlist,
+            chboxlist2:chboxlist2,
+            RGB:RGB,
+            RGBlist:RGBlist,
+            checked:checked,
+            checked2:checked2,
+            taiou:taiou,
+            taiou2:taiou2,
+            chboxlength:chboxlength,
+            chboxlength2:chboxlength2
+        };
+	}
+	*/
 
     if(isUsingDictionaryWithWord2Vec==1){
         console.log("isUsingDictionaryWithWord2Vec==1");
@@ -39,11 +59,11 @@ var select =(name,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,chbo
 				if(isUsingDictionaryWithWord2Vec==1){
                     var stockedAnswerGroupNumber =storage.getItem(name+"AnswerWithNewDictionary"+c);
                     //今後辞書ネームにも対応
+				}else if(isUsingKNP==1){
+
 				}else{
                     var stockedAnswerGroupNumber =storage.getItem(name+"RGB"+c);
 				}
-
-
 
 				if(stockedAnswerGroupNumber!=null){
 					RGB[m][i][stockedAnswerGroupNumber]=1;
@@ -64,8 +84,6 @@ var select =(name,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,chbo
 				}else{
 					target.innerHTML += "<div id=\"b" + c + "\" style=\"cursor: pointer\"><font size=2><u>" + (m+1) + "(C) " + bun[m][i] + "</u></div><div id=\"r" + c + "\" class=\"hide\"<label><input type=radio name=\"r" + c + "\" value=0>どれにも含まない</label></div></font><br>";
 				}
-
-
 
 				if(RGB[m][i][0]!=0){
 					chboxlist[n][1]=0;
@@ -130,10 +148,6 @@ var select =(name,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,chbo
 		}
 	}
 
-
-
-
-
 	return{
 		checkboxlist:checkboxlist,
 		chboxlist:chboxlist,
@@ -147,8 +161,6 @@ var select =(name,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,chbo
 		chboxlength:chboxlength,
 		chboxlength2:chboxlength2
 	};
-
-
 
 };
 export {select};
