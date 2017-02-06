@@ -1,14 +1,20 @@
 #!/usr/bin/env python
 #coding:utf-8
 
-f = open('../160402.txt','r')
+import codecs
+
+f = codecs.open('../160402.txt','r','utf-8')
 Allf = f.read()
 
-text = Allf.replace('¡£','¡£\r\n')
+text = Allf.replace(u'ã€‚',u'ã€‚\r\n')
 #print text,
 
-txtForWrite = open('../160402ForPutIntoKNP.txt','w')
-txtForWrite.write(text)
+txtForWrite = codecs.open('../160402sjisForKNP.txt','w','shift_jis')
+
+for line in text:
+    txtForWrite.write(line)
+
+#txtForWrite.write(text)
 txtForWrite.close()
 
 f.close()
