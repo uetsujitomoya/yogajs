@@ -1,5 +1,5 @@
 
-//import {TransposeMatrix} from "./index.js";
+import {downloadAsCSV} from "./index.js";
 import {select} from "./select.js";
 import {setForViz} from "./svg.js";
 
@@ -7,7 +7,9 @@ let processKnp = (name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassi
 
     let isUsingKNP=1;
 
-    let knpArray = csv2Array('text0knptabUtf8.csv');
+    let readingCSVname = 'Book2.csv';
+
+    let knpArray = csv2Array(readingCSVname);
 
     console.log("knpArray");
     console.log(knpArray);
@@ -65,6 +67,8 @@ let processKnp = (name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassi
 
     */
 
+    //object2CSVほしい
+    //downloadAsCSV(readingCSVname+"2rgb",hatsugen);
     putToScreen();
 
 };
@@ -193,7 +197,8 @@ let DefineSentence=(hatsugen,hatsugenNumber,sentenceNumberInHatsugen,RGB)=>{
             for(let kihonkuNumber=0;kihonkuNumber< this.kihonku.length;kihonkuNumber++){
 
                 console.log(this.kihonku);
-                if(this.kihonku[kihonkuNumber].task!=null&&this.kihonku[kihonkuNumber].kakattekuruKuNumber!=null){
+                if(this.kihonku[kihonkuNumber].task!=null&&this.kihonku[kihonkuNumber].kakattekuruKuNumber!=null&&this.kihonku[kihonkuNumber].kakattekuruKuNumber!=-1){
+                    console.log("kihonkuNumber=%d,this.kihonku[kihonkuNumber].kakattekuruKuNumber=%d",kihonkuNumber,this.kihonku[kihonkuNumber].kakattekuruKuNumber);
                     if(this.kihonku[this.kihonku[kihonkuNumber].kakattekuruKuNumber].task!=null){
                         this.task=this.kihonku[kihonkuNumber].task;
                         return 0;
@@ -225,6 +230,7 @@ let DefineSentence=(hatsugen,hatsugenNumber,sentenceNumberInHatsugen,RGB)=>{
     RGB[hatsugenNumber][sentenceNumberInHatsugen]=[3];
 };
 let DefineKihonku=(hatsugen,hatsugenNumber,sentenceNumberInHatsugen,kihonkuNumber)=>{
+    console.log("hatsugenNumber=%d, sentenceNumber=%d",hatsugenNumber,sentenceNumberInHatsugen);
     hatsugen[hatsugenNumber].sentences[sentenceNumberInHatsugen].kihonku[kihonkuNumber]={
         words:[],
         kakattekuruKuNumber:null,
@@ -293,15 +299,16 @@ let OrganizeKNP = (knpCsv,hatsugen,newLoveDictionary,newWorkDictionary,newFriend
     for(let KNP_csvRow=0;KNP_csvRow<knpCsv.length;KNP_csvRow++)
     {
         console.log(KNP_csvRow);
-        console.log("RGB");
-        console.log(RGB);
-        if(knpCsv[KNP_csvRow][0]=="："){
+        //console.log("RGB");
+        //console.log(RGB);
+        if(knpCsv[KNP_csvRow][0]=="："){//最初のコロンでひっかかる
             console.log("TURNING");
             sentenceNumberInHatsugen=0;
             kihonkuNumber=0;
             hatsugenNumber++;
             console.log(RGB);
             DefineHatsugen(hatsugen,hatsugenNumber,RGB);
+            DefineSentence(hatsugen,hatsugenNumber,0,RGB);
         }else if(knpCsv[KNP_csvRow][0]=="EOS"){
             console.log("EOS");
 
