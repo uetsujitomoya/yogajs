@@ -1,5 +1,5 @@
-
-import {downloadAsCSV} from "./index.js";
+import $ from 'jquery';
+//import {downloadAsCSV} from "./index.js";
 import {select} from "./select.js";
 import {setForViz} from "./svg.js";
 
@@ -11,64 +11,15 @@ let processKnp = (name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassi
 
     let knpArray = csv2Array(readingCSVname);
 
-    console.log("knpArray");
-    console.log(knpArray);
-
-    //RGB[0]=1;
-    console.log(RGB[0]);
-
-    //console.log("Enter processKNP");
-
-    //読み込ませる←4行目で既に読み込ませてる
-    //AcceptKnp(knpCsv);
-
-    //基本句の定義
-    OrganizeKNP(knpArray,hatsugen,newLoveDictionary,newWorkDictionary,newFriendDictionary,RGB);
+    let resultArray = [];
+    OrganizeKNP(knpArray,hatsugen,newLoveDictionary,newWorkDictionary,newFriendDictionary,RGB,resultArray);
 
     console.log(hatsugen);
 
-    console.log(RGB);
-/*
-    //基本句の最初の単語をタスク判定
-    kihonku.forEach((i)=>{
-        ClassifyTaskOfKihonku(kihonku,i);
-    });
-    //そのタスクを基本句のタスクとする
-*/
-    //その基本句がかかるタスクに愛交友仕事のどれかが入ってる
-    //基本句の最初の単語をタスク判定
-    /*
-    knpArray.forEach((i)=>{
-        ClassifyTaskOfSentence(knpArray);
-    });
-*/
-    //上側を優先して、その文のタスクを確定
-    /*
-
-    var sResult = select(jsonFileName,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
-
-    checkboxlist = sResult.checkboxlist;
-    chboxlist = sResult.chboxlist;
-    chboxlist2 = sResult.chboxlist2;
-    RGB = sResult.RGB;
-    RGBlist = sResult.RGBlist;
-
-    checked = sResult.checked;
-    checked2 = sResult.checked2;
-    taiou = sResult.taiou;
-    taiou2 = sResult.taiou2;
-    chboxlength = sResult.chboxlength;
-    chboxlength2 = sResult.chboxlength2;
-    //graph = sResult.graph;
-    //console.log("chboxlength2=%d",chboxlength2)
-
-
-    var vResult = setForViz(jsonFileName,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin);//形態素解析後に1度目の描画
-
-    */
+    console.log(resultArray);
 
     //object2CSVほしい
-    //downloadAsCSV(readingCSVname+"2rgb",hatsugen);
+    downloadAsCSV(readingCSVname+"Result", resultArray);
     putToScreen();
 
 };
@@ -159,48 +110,30 @@ let DefineHatsugen=(hatsugen,hatsugenNumber,RGB)=>{
     };
     if (!RGB[hatsugenNumber]) RGB[hatsugenNumber]=[];
 };
-let DefineSentence=(hatsugen,hatsugenNumber,sentenceNumberInHatsugen,RGB)=>{
+let DefineSentence=(hatsugen,hatsugenNumber,sentenceNumberInHatsugen,RGB,wholeSentenceNumber)=>{
     hatsugen[hatsugenNumber].sentences[sentenceNumberInHatsugen]={
         kihonku:[],
         task:null,
+        wholeSentenceNumber:wholeSentenceNumber,
         taskCountFromKihonku:{
           love:0,
             work:0,
             friend:0
         },
-        ClassifyTaskOfSentence:function(hatsugenNumber,sentenceNumberInHatsugen,newLoveDictionary,newWorkDictionary,newFriendDictionary,RGB){
-            //最後にその文がどの分類か判定
-            /*
-             if(newLoveDictionary[0].indexOf(wordLookedNow)!=-1){
-             RGB[hatsugenNumber][sentenceNumberInHatsugen][0]+=newLoveDictionary[1][newLoveDictionary[0].indexOf(wordLookedNow)];
-             //wordLookedNowがある行の1列目の値（類似度）を足す
-             return "love";
-             }else if(newWorkDictionary[0].indexOf(wordLookedNow)!=-1){
-             RGB[hatsugenNumber][sentenceNumberInHatsugen][2]+=newWorkDictionary[1][newWorkDictionary[0].indexOf(wordLookedNow)];
-             //wordLookedNowがある行の1列目の値（類似度）を足す
-             return "work";
-             }else if(newFriendDictionary[0].indexOf(wordLookedNow)!=-1){
-             RGB[hatsugenNumber][sentenceNumberInHatsugen][1]+=newFriendDictionary[1][newFriendDictionary[0].indexOf(wordLookedNow)];
-             //wordLookedNowがある行の1列目の値（類似度）を足す
-             return "friend"
-             }
-             */
+        ClassifyTaskOfSentence:function(hatsugenNumber,sentenceNumberInHatsugen,newLoveDictionary,newWorkDictionary,newFriendDictionary,RGB,resultArray){
+            resultArray[this.wholeSentenceNumber]=[];
 
-            //係り受けされていれば取得
-            //なければ最初に分類された単語の分類にしちゃう
-
-            //係り受け判定
-            //その句が何かに判定されて
-            //かつ、それにかかってくる句も何かに判定されていれば
-            //↓
-            //前の句の判定を採用し、文の前に置く
+            console.log(this.kihonku);
             for(let kihonkuNumber=0;kihonkuNumber< this.kihonku.length;kihonkuNumber++){
+                for(let wordsNumber=0; wordsNumber < this.kihonku[kihonkuNumber].words.length ; wordsNumber++ ){
+                    resultArray[this.wholeSentenceNumber][0] += this.kihonku[kihonkuNumber].words[wordsNumber];
+                }
 
-                console.log(this.kihonku);
                 if(this.kihonku[kihonkuNumber].task!=null&&this.kihonku[kihonkuNumber].kakattekuruKuNumber!=null&&this.kihonku[kihonkuNumber].kakattekuruKuNumber!=-1){
                     console.log("kihonkuNumber=%d,this.kihonku[kihonkuNumber].kakattekuruKuNumber=%d",kihonkuNumber,this.kihonku[kihonkuNumber].kakattekuruKuNumber);
                     if(this.kihonku[this.kihonku[kihonkuNumber].kakattekuruKuNumber].task!=null){
                         this.task=this.kihonku[kihonkuNumber].task;
+                        resultArray[this.wholeSentenceNumber][1] = this.task;
                         return 0;
                     }
                 }
@@ -225,12 +158,15 @@ let DefineSentence=(hatsugen,hatsugenNumber,sentenceNumberInHatsugen,RGB)=>{
                 }
             }
 
+            resultArray[this.wholeSentenceNumber][1] = this.task;
+
         }
     };
+    console.log("wholeSentenceNumber=%d",wholeSentenceNumber);
     RGB[hatsugenNumber][sentenceNumberInHatsugen]=[3];
 };
 let DefineKihonku=(hatsugen,hatsugenNumber,sentenceNumberInHatsugen,kihonkuNumber)=>{
-    console.log("hatsugenNumber=%d, sentenceNumber=%d",hatsugenNumber,sentenceNumberInHatsugen);
+    //console.log("hatsugenNumber=%d, sentenceNumber=%d",hatsugenNumber,sentenceNumberInHatsugen);
     hatsugen[hatsugenNumber].sentences[sentenceNumberInHatsugen].kihonku[kihonkuNumber]={
         words:[],
         kakattekuruKuNumber:null,
@@ -242,94 +178,50 @@ let DefineKihonku=(hatsugen,hatsugenNumber,sentenceNumberInHatsugen,kihonkuNumbe
 let ClassifyTaskOfWord =(hatsugen,hatsugenNumber,sentenceNumberInHatsugen,newLoveDictionary,newWorkDictionary,newFriendDictionary,kihonkuNumber,wordLookedNow)=>{
     console.log(newLoveDictionary);
     if(newLoveDictionary[0].indexOf(wordLookedNow)!=-1){
-        //wordLookedNowがある行の1列目の値（類似度）を足す
-
         hatsugen[hatsugenNumber].sentences[sentenceNumberInHatsugen].taskCountFromKihonku.love++;
         return "love";
     }else if(newWorkDictionary[0].indexOf(wordLookedNow)!=-1){
-        //wordLookedNowがある行の1列目の値（類似度）を足す
-
         hatsugen[hatsugenNumber].sentences[sentenceNumberInHatsugen].taskCountFromKihonku.work++;
         return "work";
     }else if(newFriendDictionary[0].indexOf(wordLookedNow)!=-1){
-        //wordLookedNowがある行の1列目の値（類似度）を足す
-
         hatsugen[hatsugenNumber].sentences[sentenceNumberInHatsugen].taskCountFromKihonku.friend++;
         return "friend";
     }
 };
 
-let OrganizeKNP = (knpCsv,hatsugen,newLoveDictionary,newWorkDictionary,newFriendDictionary,RGB) => {
-    //基本句オブジェクト作成
-    /*
-    knpCsv.forEach((row)=>{
-        //かかってくる句の愛交友仕事が指定されていれば、その文の分類をやめる
-    });
-    */
-    //orijinalの配列をつくるkeitaisokaiseki[]
-    //次の＋までを取得して単語とする
-
-    /*0列目が日本語なら
-    * 1.日本語じゃなく鳴るまで取得
-    *
-    * kihonku生成
-    *
-    * 2.wordsに詰め込む
-    *
-    * 3.タスクを知る
-    * */
-
-
+let OrganizeKNP = (knpCsv,hatsugen,newLoveDictionary,newWorkDictionary,newFriendDictionary,RGB,resultArray) => {
     let kihonkuNumber=0;
     let sentenceNumberInHatsugen=0;
     let hatsugenNumber=0;
-
-    console.log("RGB");
-    console.log(RGB);
+    let wholeSentenceNumber=0;
 
     DefineHatsugen(hatsugen,0,RGB);
-    DefineSentence(hatsugen,0,0,RGB);
-
-    //console.log(newLoveDictionary);
-    //console.log(newWorkDictionary);
-    //console.log(newFriendDictionary);
-
-    console.log(knpCsv.length);
+    DefineSentence(hatsugen,0,0,RGB,wholeSentenceNumber);
+    wholeSentenceNumber++;
 
     for(let KNP_csvRow=0;KNP_csvRow<knpCsv.length;KNP_csvRow++)
     {
-        console.log(KNP_csvRow);
-        //console.log("RGB");
-        //console.log(RGB);
-        if(knpCsv[KNP_csvRow][0]=="："){//最初のコロンでひっかかる
+        if(knpCsv[KNP_csvRow][0]=="："){
             console.log("TURNING");
             sentenceNumberInHatsugen=0;
             kihonkuNumber=0;
             hatsugenNumber++;
-            console.log(RGB);
             DefineHatsugen(hatsugen,hatsugenNumber,RGB);
-            DefineSentence(hatsugen,hatsugenNumber,0,RGB);
+            DefineSentence(hatsugen,hatsugenNumber,0,RGB,wholeSentenceNumber);
+            wholeSentenceNumber++;
         }else if(knpCsv[KNP_csvRow][0]=="EOS"){
             console.log("EOS");
-
-            //今までのまとめとして、文を分類
-            hatsugen[hatsugenNumber].sentences[sentenceNumberInHatsugen].ClassifyTaskOfSentence(hatsugenNumber,sentenceNumberInHatsugen,newLoveDictionary,newWorkDictionary,newFriendDictionary,RGB);
-
-            //次の文へ
+            hatsugen[hatsugenNumber].sentences[sentenceNumberInHatsugen].ClassifyTaskOfSentence(hatsugenNumber,sentenceNumberInHatsugen,newLoveDictionary,newWorkDictionary,newFriendDictionary,RGB,resultArray);
             kihonkuNumber=0;
             sentenceNumberInHatsugen++;
-            DefineSentence(hatsugen,hatsugenNumber,sentenceNumberInHatsugen,RGB);
+            DefineSentence(hatsugen,hatsugenNumber,sentenceNumberInHatsugen,RGB,wholeSentenceNumber);
+            wholeSentenceNumber++;
         }else if (judgeJapanese(knpCsv[KNP_csvRow][0]) == 1) {
-
-            console.log("This is Japanese.");
-
             DefineKihonku(hatsugen,hatsugenNumber,sentenceNumberInHatsugen,kihonkuNumber);
 
             hatsugen[hatsugenNumber].sentences[sentenceNumberInHatsugen].kihonku[kihonkuNumber].kakattekuruKuNumber=ExtractNumber(knpCsv[KNP_csvRow-1][1]);
 
             hatsugen[hatsugenNumber].sentences[sentenceNumberInHatsugen].kihonku[kihonkuNumber].words[0] = knpCsv[KNP_csvRow][1];
-
-            //発言・文の判断
 
             hatsugen[hatsugenNumber].sentences[sentenceNumberInHatsugen].kihonku[kihonkuNumber].task = ClassifyTaskOfWord(hatsugen,hatsugenNumber,sentenceNumberInHatsugen,newLoveDictionary,newWorkDictionary,newFriendDictionary,kihonkuNumber,knpCsv[KNP_csvRow][1]);
 
@@ -338,23 +230,17 @@ let OrganizeKNP = (knpCsv,hatsugen,newLoveDictionary,newWorkDictionary,newFriend
                 hatsugen[hatsugenNumber].sentences[sentenceNumberInHatsugen].kihonku[kihonkuNumber].words += knpCsv[KNP_csvRow][1];
                 KNP_csvRow++;
             }
-            KNP_csvRow--;//入れないと、EOSの行を飛ばしちゃう
+            KNP_csvRow--;
 
             kihonkuNumber++;
-        }else{
-            //console.log(knpCsv[KNP_csvRow]);
         }
     }
-
-    //要素：かかる句、かかられる句、愛交友仕事分類
 };
 /*
 let ClassifyTaskOfKihonku = (kihonku,kihonkuNumber) => {
     ClassifyTaskOfWord(kihonku[kihonkuNumber].words[0]);
 };
 */
-
-
 
 
 function judgeKakaruSide(kihonku,kakarareru){
@@ -398,7 +284,6 @@ function csv2Array(filePath) { //csvﾌｧｲﾙﾉ相対ﾊﾟｽor絶対ﾊﾟ
             csvData.push(cells);
         }
     }
-    console.log("return csvdata");
 
     //csvData = TransposeMatrix(csvData);
     return csvData;
@@ -423,5 +308,54 @@ let ExtractNumber=(originalText)=>{
     // qiita.com/simiraaaa/items/2fc2c10e041963fc34fc
     return returnText;
 };
+
+let downloadResultAsCSV = (filename, hatsugen) => {
+    let csv_array=[];
+
+
+
+    downloadAsCSV(filename, csv_array);
+};
+
+function downloadAsCSV(filename, csv_array){
+
+    let filenameWithExtension = filename+".csv";
+
+    //配列をTAB区切り文字列に変換
+    var csv_string = "";
+    for (let i=0; i<csv_array.length; i++) {
+        console.log("i=%d",i);
+        if(!csv_array[i]==0){
+            for(let j=0; j < csv_array[i].length; j++ ){
+
+                csv_string += csv_array[i][j];
+                csv_string += ',';
+            }
+        }
+
+        csv_string += '\n';
+    }
+
+    //ファイル作成
+    var blob = new Blob([csv_string] , {
+        type: "text/csv"
+    });
+
+    //ダウンロード実行...(2)
+    if (window.navigator.msSaveOrOpenBlob) {
+        //IEの場合
+        navigator.msSaveBlob(blob, filenameWithExtension);
+    } else {
+        //IE以外(Chrome, Firefox)
+        var downloadLink = $('<a></a>');
+        downloadLink.attr('href', window.URL.createObjectURL(blob));
+        downloadLink.attr('download', filenameWithExtension);
+        downloadLink.attr('target', '_blank');
+
+        $('body').append(downloadLink);
+        downloadLink[0].click();
+        downloadLink.remove();
+    }
+}
 
 export {processKnp};

@@ -120,7 +120,7 @@ document.getElementById('storageSave-button').addEventListener('click', function
 });
 
 //この関数を実行するとCSVのDL画面に鳴る
-let downloadAsCSV=(filename, csv_array)=>{
+function downloadAsCSV(filename, csv_array){
 
     let filenameWithExtension = filename+".csv";
 
@@ -151,7 +151,7 @@ let downloadAsCSV=(filename, csv_array)=>{
         downloadLink[0].click();
         downloadLink.remove();
     }
-};
+}
 
 let storage2csv = () => {
     //var storage = localStorage; //http://hakuhin.jp/js/storage.html#STORAGE_00
