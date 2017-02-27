@@ -1,15 +1,21 @@
+//切り替える際に発言を切り替える
+
+//（０から数えて）３列目に人称
 import $ from 'jquery';
 //import {downloadAsCSV} from "./index.js";
 import {select} from "./select.js";
 import {setForViz} from "./svg.js";
 
-let processKnp = (name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,newLoveDictionary,newWorkDictionary,newFriendDictionary,RGB) =>{
+let processKnp = (startTime,jsonFileName,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,newLoveDictionary,newWorkDictionary,newFriendDictionary,RGB) =>{
 
     let isUsingKNP=1;
+    let isUsingDictionaryWithWord2Vec=0;
 
     let readingCSVname = 'Book2.csv';
 
     let knpArray = csv2Array(readingCSVname);
+
+    let storage = localStorage;//初回読み込み
 
     let resultArray = [];
     OrganizeKNP(knpArray,hatsugen,newLoveDictionary,newWorkDictionary,newFriendDictionary,RGB,resultArray);
@@ -20,12 +26,20 @@ let processKnp = (name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassi
 
     //object2CSVほしい
     downloadAsCSV(readingCSVname+"Result", resultArray);
-    putToScreen();
+    putToScreen(startTime,jsonFileName,keitaisokaiseki,chboxlist,chboxlist2,RGB,hatsugen,bun,checked,checked2,taiou,taiou2,isUsingDictionaryWithWord2Vec,isUsingKNP);
 
 };
 
-let putToScreen = () => {
-    var sResult = select(jsonFileName,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,isUsingDictionaryWithWord2Vec);
+let putToScreen = (startTime,jsonFileName,keitaisokaiseki,chboxlist,chboxlist2,RGB,hatsugen,bun,checked,checked2,taiou,taiou2,isUsingDictionaryWithWord2Vec,isUsingKNP) => {
+    let storage = localStorage;//初回読み込み
+    let checkboxlist=[];
+    let RGBlist=[];
+    let chboxlength=[];
+    let chboxlength2=[];
+    let ranshin=[];
+
+    var sResult = select(jsonFileName,storage,checkboxlist,keitaisokaiseki,chboxlist,chboxlist2,RGB,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,isUsingDictionaryWithWord2Vec,isUsingKNP
+    );
 
     checkboxlist = sResult.checkboxlist;
     chboxlist = sResult.chboxlist;
@@ -50,7 +64,7 @@ let putToScreen = () => {
     chboxlength2 = vResult.chboxlength2;
     ranshin = vResult.ranshin;
 
-    //これは後ろじゃないと、選択肢が反映されない？
+    //これは後ろじゃないと、選択肢が反映されない？どーしよ
     for(c=1;c<=chboxlength;c++){
         makeOnClick(c);
     }
@@ -120,42 +134,41 @@ let DefineSentence=(hatsugen,hatsugenNumber,sentenceNumberInHatsugen,RGB,wholeSe
             work:0,
             friend:0
         },
-        ClassifyTaskOfSentence:function(hatsugenNumber,sentenceNumberInHatsugen,newLoveDictionary,newWorkDictionary,newFriendDictionary,RGB,resultArray){
+        ClassifyTask:function(hatsugenNumber, sentenceNumberInHatsugen, loveDictionary, workDictionary, friendDictionary, RGB, resultArray){
             resultArray[this.wholeSentenceNumber]=[];
 
             console.log(this.kihonku);
             for(let kihonkuNumber=0;kihonkuNumber< this.kihonku.length;kihonkuNumber++){
                 for(let wordsNumber=0; wordsNumber < this.kihonku[kihonkuNumber].words.length ; wordsNumber++ ){
-                    resultArray[this.wholeSentenceNumber][0] += this.kihonku[kihonkuNumber].words[wordsNumber];
+                    resultArray[this.wholeSentenceNumber][0] += this.kihonku[kihonkuNumber].wordsGenbun[wordsNumber];
                 }
 
                 if(this.kihonku[kihonkuNumber].task!=null&&this.kihonku[kihonkuNumber].kakattekuruKuNumber!=null&&this.kihonku[kihonkuNumber].kakattekuruKuNumber!=-1){
                     console.log("kihonkuNumber=%d,this.kihonku[kihonkuNumber].kakattekuruKuNumber=%d",kihonkuNumber,this.kihonku[kihonkuNumber].kakattekuruKuNumber);
                     if(this.kihonku[this.kihonku[kihonkuNumber].kakattekuruKuNumber].task!=null){
-                        this.task=this.kihonku[kihonkuNumber].task;
+                        console.log("%s,%s,%s", resultArray[this.wholeSentenceNumber][0], this.kihonku[kihonkuNumber].task, this.kihonku[this.kihonku[kihonkuNumber].kakattekuruKuNumber].task);
+                        this.task=this.kihonku[this.kihonku[kihonkuNumber].kakattekuruKuNumber].task;
                         resultArray[this.wholeSentenceNumber][1] = this.task;
                         return 0;
                     }
                 }
-
             }
 
-            if(this.taskCountFromKihonku.love >= this.taskCountFromKihonku.work){
-                if(this.taskCountFromKihonku.love>=this.taskCountFromKihonku.friend){
-                    this.task="love";
-                    RGB[hatsugenNumber][sentenceNumberInHatsugen][0]=1;
-                }else{
-                    this.task="friend";
-                    RGB[hatsugenNumber][sentenceNumberInHatsugen][2]=1;
-                }
+            console.log( "%s,love=%d,work=%d,friend=%d", resultArray[this.wholeSentenceNumber][0], this.taskCountFromKihonku.love, this.taskCountFromKihonku.work, this.taskCountFromKihonku.friend );
+
+            if(this.taskCountFromKihonku.love > this.taskCountFromKihonku.work && this.taskCountFromKihonku.love>this.taskCountFromKihonku.friend){
+                this.task="love";
+                RGB[hatsugenNumber][sentenceNumberInHatsugen][0]=1;
+            }else if(this.taskCountFromKihonku.love < this.taskCountFromKihonku.friend && this.taskCountFromKihonku.work < this.taskCountFromKihonku.friend){
+                this.task="friend";
+                RGB[hatsugenNumber][sentenceNumberInHatsugen][2]=1;
+
+            }else if(this.taskCountFromKihonku.love < this.taskCountFromKihonku.work && this.taskCountFromKihonku.work > this.taskCountFromKihonku.friend){
+                this.task="work";
+                RGB[hatsugenNumber][sentenceNumberInHatsugen][1]=1;
+
             }else{
-                if(this.taskCountFromKihonku.work >= this.taskCountFromKihonku.friend){
-                    this.task="work";
-                    RGB[hatsugenNumber][sentenceNumberInHatsugen][1]=1;
-                }else{
-                    this.task="friend";
-                    RGB[hatsugenNumber][sentenceNumberInHatsugen][2]=1;
-                }
+                this.task="null";
             }
 
             resultArray[this.wholeSentenceNumber][1] = this.task;
@@ -169,6 +182,7 @@ let DefineKihonku=(hatsugen,hatsugenNumber,sentenceNumberInHatsugen,kihonkuNumbe
     //console.log("hatsugenNumber=%d, sentenceNumber=%d",hatsugenNumber,sentenceNumberInHatsugen);
     hatsugen[hatsugenNumber].sentences[sentenceNumberInHatsugen].kihonku[kihonkuNumber]={
         words:[],
+        wordsGenbun:[],
         kakattekuruKuNumber:null,
         kakariniikuKuNumber:null,
         task:null
@@ -211,7 +225,9 @@ let OrganizeKNP = (knpCsv,hatsugen,newLoveDictionary,newWorkDictionary,newFriend
             wholeSentenceNumber++;
         }else if(knpCsv[KNP_csvRow][0]=="EOS"){
             console.log("EOS");
-            hatsugen[hatsugenNumber].sentences[sentenceNumberInHatsugen].ClassifyTaskOfSentence(hatsugenNumber,sentenceNumberInHatsugen,newLoveDictionary,newWorkDictionary,newFriendDictionary,RGB,resultArray);
+            //２周目解析を行う
+
+            hatsugen[hatsugenNumber].sentences[sentenceNumberInHatsugen].ClassifyTask(hatsugenNumber,sentenceNumberInHatsugen,newLoveDictionary,newWorkDictionary,newFriendDictionary,RGB,resultArray);
             kihonkuNumber=0;
             sentenceNumberInHatsugen++;
             DefineSentence(hatsugen,hatsugenNumber,sentenceNumberInHatsugen,RGB,wholeSentenceNumber);
@@ -222,16 +238,17 @@ let OrganizeKNP = (knpCsv,hatsugen,newLoveDictionary,newWorkDictionary,newFriend
             hatsugen[hatsugenNumber].sentences[sentenceNumberInHatsugen].kihonku[kihonkuNumber].kakattekuruKuNumber=ExtractNumber(knpCsv[KNP_csvRow-1][1]);
 
             hatsugen[hatsugenNumber].sentences[sentenceNumberInHatsugen].kihonku[kihonkuNumber].words[0] = knpCsv[KNP_csvRow][1];
+            hatsugen[hatsugenNumber].sentences[sentenceNumberInHatsugen].kihonku[kihonkuNumber].wordsGenbun[0] = knpCsv[KNP_csvRow][0];
 
             hatsugen[hatsugenNumber].sentences[sentenceNumberInHatsugen].kihonku[kihonkuNumber].task = ClassifyTaskOfWord(hatsugen,hatsugenNumber,sentenceNumberInHatsugen,newLoveDictionary,newWorkDictionary,newFriendDictionary,kihonkuNumber,knpCsv[KNP_csvRow][1]);
 
             KNP_csvRow++;
             while(judgeJapanese(knpCsv[KNP_csvRow][0]) == 1){
                 hatsugen[hatsugenNumber].sentences[sentenceNumberInHatsugen].kihonku[kihonkuNumber].words += knpCsv[KNP_csvRow][1];
+                hatsugen[hatsugenNumber].sentences[sentenceNumberInHatsugen].kihonku[kihonkuNumber].wordsGenbun += knpCsv[KNP_csvRow][0];
                 KNP_csvRow++;
             }
             KNP_csvRow--;
-
             kihonkuNumber++;
         }
     }

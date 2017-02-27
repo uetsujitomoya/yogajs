@@ -1,7 +1,7 @@
+//入れ替える点の入力（トースト）
 
 
-
-var select =(name,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,isUsingDictionaryWithWord2Vec) => {
+var select =(name,storage,checkboxlist,keitaisokaiseki,chboxlist,chboxlist2,RGB,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,isUsingDictionaryWithWord2Vec,isUsingKNP) => {
 
 	/*
 	if(isUsingKNP==1){

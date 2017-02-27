@@ -16,7 +16,7 @@ var makeOnClickS = (c) =>{
 var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2) => {
 
 
-	var startTime = new Date();
+
 	console.log(startTime);
 
 

@@ -5,8 +5,9 @@ import {AcceptDictionary} from "./changeDictionary.js";
 import $ from 'jquery';
 
 //var dictionaryFromWord2Vec = csv2Array('HDFaceVertex.csv');
+var startTime = new Date();
 
-let newLoveDictionary = csv2Array('loveUtf8.csv');
+let newLoveDictionary = csv2Array('../oldLoveDic.csv');
 newLoveDictionary = TransposeMatrix(newLoveDictionary);
 
 let newWorkDictionary = csv2Array('workUtf8.csv');
@@ -33,12 +34,11 @@ var test2;
 
 console.log("Before processKNP");
 
-let resultWithKNP = processKnp(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,newLoveDictionary,newWorkDictionary,newFriendDictionary,RGB);
+let resultWithKNP = processKnp(startTime,name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,newLoveDictionary,newWorkDictionary,newFriendDictionary,RGB);
 
 console.log("After resultWithKNP");
 
 document.getElementById('load-button').addEventListener('click', function () {
-
 
   var file = document.getElementById('file-input').files[0];
   var name = file.name;
@@ -52,9 +52,6 @@ document.getElementById('load-button').addEventListener('click', function () {
 });
 
 document.getElementById('knpLoadButton').addEventListener('click',function () {
-
-
-
 
     var file = document.getElementById('knpLoadButton').files[0];//csv読み込めない
     var name = file.name;
@@ -80,7 +77,6 @@ document.getElementById('storageSave-button').addEventListener('click', ()=>{
 
 //let file_name="storage"+Date()+".csv";
 //let filenameWithExtension="storage.csv";
-
 
 //let csv_string=convertTocsv(ary);
 
