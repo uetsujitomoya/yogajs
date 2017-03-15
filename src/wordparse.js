@@ -16,7 +16,7 @@ var makeOnClickS = (c) =>{
 var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2) => {
 
 
-
+	var startTime = new Date();
 	console.log(startTime);
 
 
@@ -118,7 +118,7 @@ var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxl
 						}
 						if(path[n].basic_form=="注意"||path[n].basic_form=="不注意"||path[n].basic_form=="注意散漫"||path[n].basic_form=="無自覚"||path[n].basic_form=="自覚"){
 							ranshin[hatsugenNumber][sentenceNumberInHatsugen][3]=1;
-							console.info("不注意,%d,%d,%s",hatsugenNumber,sentenceNumberInHatsugen,bun[hatsugenNumber][sentenceNumberInHatsugen]);
+							console.info("不 注意,%d,%d,%s",hatsugenNumber,sentenceNumberInHatsugen,bun[hatsugenNumber][sentenceNumberInHatsugen]);
 						}
 						if(path[n].basic_form=="引き延ばし"||path[n].basic_form=="引き延ばす"||path[n].basic_form=="怠慢"||path[n].basic_form=="怠惰"){
 							ranshin[hatsugenNumber][sentenceNumberInHatsugen][4]=1;
@@ -207,8 +207,8 @@ var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxl
 		//var uetsuji="うえつじともや";
 		//console.log(uetsuji.length);
 
-		
-		
+
+
 		var arrayWithOnlyWords=[];
 
 		x=0;
@@ -240,14 +240,14 @@ var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxl
 					}
 					wordsSetWithoutOverlap.add(keitaisokaiseki[hatsugenNumber][sentenceNumberInHatsugen][wordNumberInSentence]);//tangoset終了
 				}
-				
-				
-				
-				
+
+
+
+
 			}
 		}
         wordsArrayWithoutOverlap = Array.from(wordsSetWithoutOverlap).map(function(t) {return {t};});
-		
+
 
 		for(sentenceNumberInHatsugen=0;sentenceNumberInHatsugen<wordsArrayWithoutOverlap.length;sentenceNumberInHatsugen++){
 			miserables.nodes[sentenceNumberInHatsugen]=wordsArrayWithoutOverlap[sentenceNumberInHatsugen].t;

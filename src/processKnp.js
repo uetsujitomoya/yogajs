@@ -6,7 +6,7 @@ import $ from 'jquery';
 import {select} from "./select.js";
 import {setForViz} from "./svg.js";
 
-let processKnp = (startTime,jsonFileName,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,newLoveDictionary,newWorkDictionary,newFriendDictionary,RGB) =>{
+let ClassifyWithKNP = (startTime,jsonFileName,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,newLoveDictionary,newWorkDictionary,newFriendDictionary,RGB) =>{
 
     let isUsingKNP=1;
     let isUsingDictionaryWithWord2Vec=0;
@@ -375,4 +375,4 @@ function downloadAsCSV(filename, csv_array){
     }
 }
 
-export {processKnp};
+export {ClassifyWithKNP};

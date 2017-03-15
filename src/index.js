@@ -1,8 +1,9 @@
 //import {funcReaderOnload} from "./wordparse.js";
 //import {AcceptKnp} from "./processKnp.js";
-import {processKnp} from "./processKnp.js";
-import {AcceptDictionary} from "./changeDictionary.js";
+import {ClassifyWithKNP} from "./processKnp.js"; //processKNP
+import {ClassifyWithWordDictionary} from "./changeDictionary.js"; //AcceptDictionary
 import $ from 'jquery';
+import {CreateSwitchClassificationMethod} from "./SwitchClassificationMethod.js"; //AcceptDictionary
 
 //var dictionaryFromWord2Vec = csv2Array('HDFaceVertex.csv');
 var startTime = new Date();
@@ -32,9 +33,22 @@ var chboxlength,chboxlength2;
 let RGB=[];
 var test2;
 
+CreateSwitchClassificationMethod();
+const SwitchClassificationMethodRadio = document.getElementById("SwitchClassificationMethod").children;
+if(SwitchClassificationMethodRadio[0].control.checked==true){
+    //単純な単語辞書を用いた分類
+    ClassifyWithWordDictionary(name,event,keitaisokaiseki,chboxlist,chboxlist2,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,newLoveDictionary,newWorkDictionary,newFriendDictionary);
+}else if(SwitchClassificationMethodRadio[1].control.checked==true){
+    //係り受け解析を用いた分類
+    ClassifyWithKNP(startTime,name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,newLoveDictionary,newWorkDictionary,newFriendDictionary,RGB);
+}else{
+    //SVMを用いた分類
+    ClassifyWithSVM();
+}
+
 console.log("Before processKNP");
 
-let resultWithKNP = processKnp(startTime,name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,newLoveDictionary,newWorkDictionary,newFriendDictionary,RGB);
+//let resultWithKNP = processKnp(startTime,name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,newLoveDictionary,newWorkDictionary,newFriendDictionary,RGB);
 
 console.log("After resultWithKNP");
 
@@ -128,7 +142,7 @@ function downloadAsCSV(filename, csv_array){
     }
 
     //ファイル作成
-    var blob = new Blob([csv_string] , {
+    let blob = new Blob([csv_string] , {
         type: "text/csv"
     });
 
