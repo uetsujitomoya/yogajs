@@ -1,4 +1,4 @@
-//import {funcReaderOnload} from "./wordparse.js";
+import {ClassifyWithFirstWordDictionary} from "./wordparse.js";
 //import {AcceptKnp} from "./processKnp.js";
 import {ClassifyWithKNP} from "./processKnp.js"; //processKNP
 import {ClassifyWithWordDictionary} from "./changeDictionary.js"; //AcceptDictionary
@@ -37,7 +37,19 @@ CreateSwitchClassificationMethod();
 const SwitchClassificationMethodRadio = document.getElementById("SwitchClassificationMethod").children;
 if(SwitchClassificationMethodRadio[0].control.checked==true){
     //単純な単語辞書を用いた分類
-    ClassifyWithWordDictionary(name,event,keitaisokaiseki,chboxlist,chboxlist2,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,newLoveDictionary,newWorkDictionary,newFriendDictionary);
+    //ClassifyWithWordDictionary(name,event,keitaisokaiseki,chboxlist,chboxlist2,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,newLoveDictionary,newWorkDictionary,newFriendDictionary);
+    document.getElementById('load-button').addEventListener('click', function () {
+
+        var file = document.getElementById('file-input').files[0];
+        var name = file.name;
+        var reader = new FileReader();
+        reader.onload = function(event) {
+            //var result = funcReaderOnload(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
+            let resultWithNewDictionary = ClassifyWithWordDictionary(name,event,keitaisokaiseki,chboxlist,chboxlist2,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,newLoveDictionary,newWorkDictionary,newFriendDictionary);
+        };
+        reader.readAsText(file);
+
+    });
 }else if(SwitchClassificationMethodRadio[1].control.checked==true){
     //係り受け解析を用いた分類
     ClassifyWithKNP(startTime,name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,newLoveDictionary,newWorkDictionary,newFriendDictionary,RGB);
@@ -59,7 +71,7 @@ document.getElementById('load-button').addEventListener('click', function () {
   var reader = new FileReader();
   reader.onload = function(event) {
     //var result = funcReaderOnload(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
-      let resultWithNewDictionary = AcceptDictionary(name,event,keitaisokaiseki,chboxlist,chboxlist2,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,newLoveDictionary,newWorkDictionary,newFriendDictionary);
+      let resultWithNewDictionary = ClassifyWithFirstWordDictionary(name,event,keitaisokaiseki,chboxlist,chboxlist2,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,newLoveDictionary,newWorkDictionary,newFriendDictionary);
   };
   reader.readAsText(file);
 

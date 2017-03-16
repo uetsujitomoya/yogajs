@@ -1,7 +1,30 @@
 //入れ替える点の入力（トースト）
 
+/*
+let Button= {
+	html:"",
+	orijinalSentence:""
+};*/
+
+let ButtonPart=()=>{
+    let Button=(orijinalSentence, task)=>{
+        this.orijinalSentence = orijinalSentence;
+        this.task = task;
+        this.html = "";
+        this.storageName="";
+    };
+
+    let ButtonRow;
+
+    let ButtonArray=[];
+    ButtonArray[0] = new Button(orijinalSentence, task);
+};
+
+
+
 
 var select =(name,storage,checkboxlist,keitaisokaiseki,chboxlist,chboxlist2,RGB,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,isUsingDictionaryWithWord2Vec,isUsingKNP) => {
+	console.log("entered select.js");
 
 	/*
 	if(isUsingKNP==1){
@@ -74,10 +97,11 @@ var select =(name,storage,checkboxlist,keitaisokaiseki,chboxlist,chboxlist2,RGB,
 					}
 				}
 
-				console.log("RGB[%d][%d]",m,i);
-				console.log(RGB[m][i]);
+				//console.log("RGB[%d][%d]",m,i);
+				//console.log(RGB[m][i]);//RGBが作られていない→分類別に対応。170315
 
 				taiou[c-1]=n-1;
+				console.log("c=%d,n=%d,m=%d,i=%d",c,n,m,i);
 				if(RGB[m][i][0]+RGB[m][i][1]+RGB[m][i][2]>=2){
 					target.innerHTML += "<div id=\"b" + c + "\" style=\"cursor: pointer\"><u>" + (m+1) + "(C) " + bun[m][i] + "</u></div><div id=\"r" + c + "\"><label><input type=radio name=\"r" + c + "\" value=0>どれにも含まない</label></div><br>";
 

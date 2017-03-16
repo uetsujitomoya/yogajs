@@ -13,7 +13,7 @@ var makeOnClickS = (c) =>{
 		document.getElementById(id).classList.toggle("hide");
 	};
 };
-var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2) => {
+var ClassifyWithFirstWordDictionary = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2) => {
 
 
 	var startTime = new Date();
@@ -174,11 +174,13 @@ var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxl
 				}
 				if(bun[hatsugenNumber][sentenceNumberInHatsugen]=="Ａ"||bun[hatsugenNumber][sentenceNumberInHatsugen]=="Ｂ"||bun[hatsugenNumber][sentenceNumberInHatsugen]=="Ｔ"||bun[hatsugenNumber][sentenceNumberInHatsugen]=="A"||bun[hatsugenNumber][sentenceNumberInHatsugen]=="B"||bun[hatsugenNumber][sentenceNumberInHatsugen]=="T"){
 					bun[hatsugenNumber][sentenceNumberInHatsugen]="";
+					console.log("EOS");
 					continue;
 				}
 				if(bun[hatsugenNumber][sentenceNumberInHatsugen]!="Ａ"&&bun[hatsugenNumber][sentenceNumberInHatsugen]!="Ｂ"&&bun[hatsugenNumber][sentenceNumberInHatsugen]!="Ｔ"&&bun[hatsugenNumber][sentenceNumberInHatsugen]!="A"&&bun[hatsugenNumber][sentenceNumberInHatsugen]!="B"&&bun[hatsugenNumber][sentenceNumberInHatsugen]!="T"&&bun[hatsugenNumber][sentenceNumberInHatsugen]!=""){
 					hatsugen[hatsugenNumber] += bun[hatsugenNumber][sentenceNumberInHatsugen];
 					hatsugen[hatsugenNumber] += "。";
+                    console.log("EOH");
 				}
 				if(n==path.length){
 					if(hatsugenNumber%2==0 ){
@@ -357,4 +359,4 @@ var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxl
 	});
 };
 
-export {funcReaderOnload,makeOnClick,makeOnClickS};
+export {ClassifyWithFirstWordDictionary,makeOnClick,makeOnClickS};

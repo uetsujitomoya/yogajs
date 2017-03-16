@@ -24,6 +24,28 @@ color2[c]="#2c3e50";
 }
 */
 
+let vizPart=(talker,task,orijinalSentence)=>{
+
+    let box=(talker,task,orijinalSentence)=>{
+        //this.viz=;
+    };
+
+    let boxArray=[];
+
+};
+
+let originalSentencePart=(talker,task,orijinalSentence)=>{
+    let sentenceViz=(talker,task,orijinalSentence)=>{
+        //this.viz=;
+    };
+
+    let sentenceVizArray=[];
+};
+
+
+
+
+
 let open3="#b0291b";
 let close4="#2980b9";
 let aiduchi5="#9b59b6";
