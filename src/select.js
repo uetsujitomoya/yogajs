@@ -18,6 +18,21 @@ let ButtonPart=()=>{
 
     let ButtonArray=[];
     ButtonArray[0] = new Button(orijinalSentence, task);
+
+
+};
+
+let makeRGB=(RGB,hatsugen)=>{
+  for(let hatsugenNumber=1;hatsugenNumber<hatsugen.length;hatsugenNumber=hatsugenNumber+2){
+  	RGB[hatsugenNumber]=[];
+  	hatsugen[hatsugenNumber].sentence.forEach((sentenceNumber)=>{
+  		if(hatsugen[hatsugenNumber].sentences[sentenceNumber].task==){
+
+		}
+  		RGB[hatsugenNumber][sentenceNumber]=;
+	});
+  });
+
 };
 
 
