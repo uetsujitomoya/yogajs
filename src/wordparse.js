@@ -305,7 +305,9 @@ var ClassifyWithFirstWordDictionary = (name,event,keitaisokaiseki,checkboxlist,c
 
 		var graph;
 
-		var sResult = select(name,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,isInTheTaskGroup,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
+
+		console.log("<font color='red'>go out wordparse.js to select.js</font>>");
+		var sResult = select(name,storage,checkboxlist,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,isUsingDictionaryWithWord2Vec,isUsingKNP);
 
 		checkboxlist = sResult.checkboxlist;
 		chboxlist = sResult.chboxlist;
