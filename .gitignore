@@ -1,3 +1,12 @@
 node_modules/
 app/bundle.js
 app/dict/
+*.txt
+*.jmn
+*.knp
+*.csv
+*.xlsx
+.idea/
+app/.csv
+json/
+knp/
