@@ -15,6 +15,9 @@ var makeOnClickS = (c) =>{
 };
 var ClassifyWithFirstWordDictionary = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2) => {
 
+    let isUsingDictionaryWithWord2Vec=0;
+	let isUsingKNP=0;
+
 
 	var startTime = new Date();
 	console.log(startTime);
@@ -306,7 +309,7 @@ var ClassifyWithFirstWordDictionary = (name,event,keitaisokaiseki,checkboxlist,c
 		var graph;
 
 
-		console.log("<font color='red'>go out wordparse.js to select.js</font>>");
+		console.log("%cgo out wordparse.js to select.js",'color:red');
 		var sResult = select(name,storage,checkboxlist,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,isUsingDictionaryWithWord2Vec,isUsingKNP);
 
 		checkboxlist = sResult.checkboxlist;
