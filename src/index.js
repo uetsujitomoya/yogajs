@@ -45,6 +45,7 @@ if(SwitchClassificationMethodRadio[0].control.checked==true){
         var reader = new FileReader();
         reader.onload = function(event) {
             //var result = funcReaderOnload(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
+            console.log("%center ClassifyWithWordDictionary",'color:red');
             let resultWithNewDictionary = ClassifyWithWordDictionary(name,event,keitaisokaiseki,chboxlist,chboxlist2,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,newLoveDictionary,newWorkDictionary,newFriendDictionary);
         };
         reader.readAsText(file);
@@ -52,9 +53,11 @@ if(SwitchClassificationMethodRadio[0].control.checked==true){
     });
 }else if(SwitchClassificationMethodRadio[1].control.checked==true){
     //係り受け解析を用いた分類
+    console.log("%center ClassifyWithWordKNP",'color:red');
     ClassifyWithKNP(startTime,name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,newLoveDictionary,newWorkDictionary,newFriendDictionary,RGB);
 }else{
     //SVMを用いた分類
+    console.log("%center ClassifyWithSVM",'color:red');
     ClassifyWithSVM();
 }
 
@@ -71,6 +74,7 @@ document.getElementById('load-button').addEventListener('click', function () {
   var reader = new FileReader();
   reader.onload = function(event) {
     //var result = funcReaderOnload(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
+      console.log("%center ClassifyWithFirstWordDictionary",'color:red');
       let resultWithNewDictionary = ClassifyWithFirstWordDictionary(name,event,keitaisokaiseki,chboxlist,chboxlist2,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,newLoveDictionary,newWorkDictionary,newFriendDictionary);
   };
   reader.readAsText(file);

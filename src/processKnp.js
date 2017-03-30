@@ -38,8 +38,7 @@ let putToScreen = (startTime,jsonFileName,keitaisokaiseki,chboxlist,chboxlist2,R
     let chboxlength2=[];
     let ranshin=[];
 
-    var sResult = select(jsonFileName,storage,checkboxlist,keitaisokaiseki,chboxlist,chboxlist2,RGB,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,isUsingDictionaryWithWord2Vec,isUsingKNP
-    );
+    var sResult = select(jsonFileName,storage,checkboxlist,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,isUsingDictionaryWithWord2Vec,isUsingKNP);
 
     checkboxlist = sResult.checkboxlist;
     chboxlist = sResult.chboxlist;

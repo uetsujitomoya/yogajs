@@ -23,27 +23,33 @@ let ButtonPart=()=>{
 };
 
 let makeRGB=(RGB,hatsugen)=>{
+    let loveNumber=0;
+    let workNumber=1;
+    let friendNumber=2;
+    let noClassNumber=3;
+
     for(let hatsugenNumber=1;hatsugenNumber<hatsugen.length;hatsugenNumber=hatsugenNumber+2){
         RGB[hatsugenNumber]=[];
+        console.log(hatsugen[hatsugenNumber]);
         hatsugen[hatsugenNumber].sentence.forEach((sentenceNumber)=>{
+            RGB[hatsugenNumber][sentenceNumber]=[0,0,0,0];
             if(hatsugen[hatsugenNumber].sentences[sentenceNumber].task=="love"){
-                RGB[hatsugenNumber][sentenceNumber]=0;
+                RGB[hatsugenNumber][sentenceNumber][loveNumber]=1;
             }else if(hatsugen[hatsugenNumber].sentences[sentenceNumber].task=="work"){
-                RGB[hatsugenNumber][sentenceNumber]=1;
+                RGB[hatsugenNumber][sentenceNumber][workNumber]=1;
             }else if(hatsugen[hatsugenNumber].sentences[sentenceNumber].task=="friend"){
-                RGB[hatsugenNumber][sentenceNumber]=2;
+                RGB[hatsugenNumber][sentenceNumber][friendNumber]=1;
             }else{
-                RGB[hatsugenNumber][sentenceNumber]=9;
+                RGB[hatsugenNumber][sentenceNumber][noClassNumber]=1;
             }
         });
     }
-
 };
 
 
 
 
-var select =(name,storage,checkboxlist,keitaisokaiseki,chboxlist,chboxlist2,RGB,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,isUsingDictionaryWithWord2Vec,isUsingKNP) => {
+var select =(jsonFileName,storage,checkboxlist,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,isUsingDictionaryWithWord2Vec,isUsingKNP) => {
     console.log("entered select.js");
 
   /*
@@ -64,6 +70,9 @@ var select =(name,storage,checkboxlist,keitaisokaiseki,chboxlist,chboxlist2,RGB,
    };
    }
    */
+  let RGB=[];
+
+    makeRGB(RGB,hatsugen);
 
     if(isUsingDictionaryWithWord2Vec==1){
         console.log("isUsingDictionaryWithWord2Vec==1");
@@ -86,6 +95,8 @@ var select =(name,storage,checkboxlist,keitaisokaiseki,chboxlist,chboxlist2,RGB,
     document.getElementById("graph").innerHTML += "<label><input type=radio name=\"graph\" value=13>graph3</label>";
 
     for(m=0;m<keitaisokaiseki.length;m++){
+        console.log("RGB[%d]",m);
+        console.log(RGB[m]);
         if(m%2==1){
             for(i=0;i<keitaisokaiseki[m].length;++i){
                 if(bun[m][i]=="Ａ"||bun[m][i]=="Ｂ"||bun[m][i]=="Ｔ"||bun[m][i]=="A"||bun[m][i]=="B"||bun[m][i]=="T"||bun[m][i]==""){
@@ -120,6 +131,8 @@ var select =(name,storage,checkboxlist,keitaisokaiseki,chboxlist,chboxlist2,RGB,
                 //console.log("RGB[%d][%d]",m,i);
                 //console.log(RGB[m][i]);//RGBが作られていない→分類別に対応。170315
 
+                console.log("RGB[%d][%d]",m,i);
+                console.log(RGB[m][i]);
                 taiou[c-1]=n-1;
                 console.log("c=%d,n=%d,m=%d,i=%d",c,n,m,i);
                 if(RGB[m][i][0]+RGB[m][i][1]+RGB[m][i][2]>=2){
@@ -148,7 +161,8 @@ var select =(name,storage,checkboxlist,keitaisokaiseki,chboxlist,chboxlist2,RGB,
                     document.getElementById("r"+c).innerHTML += "<label><input type=radio name=\"r" + c + "\" value=3><font color=\"#7777ff\">【</font>「仕事」に含む<font color=\"#7777ff\">】</font></label>";
                 }
             }
-        }else{//セラピストの質問
+        }else{
+            console.log("セラピストの質問");
             s++;
             chboxlength2++;
             chboxlist2[s]=[];
