@@ -61,25 +61,25 @@ if(SwitchClassificationMethodRadio[0].control.checked==true){
     ClassifyWithSVM();
 }
 
-console.log("Before processKNP");
+//console.log("Before processKNP");
 
 //let resultWithKNP = processKnp(startTime,name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,newLoveDictionary,newWorkDictionary,newFriendDictionary,RGB);
 
-console.log("After resultWithKNP");
+//console.log("After resultWithKNP");
 
-document.getElementById('load-button').addEventListener('click', function () {
+/*document.getElementById('load-button').addEventListener('click', function () {
 
   var file = document.getElementById('file-input').files[0];
   var name = file.name;
   var reader = new FileReader();
-  reader.onload = function(event) {
+  reader.onload = function(event) {*/
     //var result = funcReaderOnload(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
       console.log("%center ClassifyWithFirstWordDictionary",'color:red');
-      let resultWithNewDictionary = ClassifyWithFirstWordDictionary(name,event,keitaisokaiseki,chboxlist,chboxlist2,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,newLoveDictionary,newWorkDictionary,newFriendDictionary);
-  };
+      let resultWithNewDictionary = ClassifyWithFirstWordDictionary(name,keitaisokaiseki,chboxlist,chboxlist2,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,newLoveDictionary,newWorkDictionary,newFriendDictionary);
+  /*};
   reader.readAsText(file);
 
-});
+});*/
 
 document.getElementById('knpLoadButton').addEventListener('click',function () {
 

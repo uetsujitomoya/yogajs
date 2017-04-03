@@ -1,6 +1,8 @@
 import "kuromoji";
+import $ from 'jquery';
 import {select} from "../select.js";
 import {setForViz} from "../svg.js";
+
 var makeOnClick = (c) =>{
 	document.getElementById("b"+c).onclick = () => {
 		const id = "r"+c;
@@ -13,7 +15,7 @@ var makeOnClickS = (c) =>{
 		document.getElementById(id).classList.toggle("hide");
 	};
 };
-var ClassifyWithFirstWordDictionary = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2) => {
+var ClassifyWithFirstWordDictionary = (name,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2) => {
 
 	var startTime = new Date();
 	console.log(startTime);
@@ -30,9 +32,14 @@ var ClassifyWithFirstWordDictionary = (name,event,keitaisokaiseki,checkboxlist,c
 	checkboxlist=[];
 	bun=[];
 
-	var data = JSON.parse(event.target.result);
+	let orijinalText;
+	//var data = JSON.parse(event.target.result);
+    $.getJSON("./json/160803dummy.json" , function(data) {
+    	orijinalText=data[0].a;
+	});
+
 	return kuromoji.builder({dicPath: 'dict/'}).build((err, tokenizer) => {
-		const path = tokenizer.tokenize(data[0].a);
+		const path = tokenizer.tokenize(orijinalText);
 		n=0;
 		var tangosuu=0;
 		m=0;

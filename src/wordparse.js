@@ -13,7 +13,7 @@ var makeOnClickS = (c) =>{
 		document.getElementById(id).classList.toggle("hide");
 	};
 };
-var ClassifyWithFirstWordDictionary = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2) => {
+var ClassifyWithFirstWordDictionary = (name,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2) => {
 
     let isUsingDictionaryWithWord2Vec=0;
 	let isUsingKNP=0;
@@ -35,7 +35,7 @@ var ClassifyWithFirstWordDictionary = (name,event,keitaisokaiseki,checkboxlist,c
 	checkboxlist=[];
 	bun=[];
 
-	var data = JSON.parse(event.target.result);
+	var data = JSON.parse("../");
 
 //ここでKNP(XML)の処理を開始
 
