@@ -49,7 +49,7 @@ let makeRGB=(RGB,hatsugen)=>{
 
 
 
-var select =(jsonFileName,storage,checkboxlist,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,isUsingDictionaryWithWord2Vec,isUsingKNP) => {
+var select =(name,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2) => {
     console.log("entered select.js");
 
   /*
@@ -70,13 +70,13 @@ var select =(jsonFileName,storage,checkboxlist,keitaisokaiseki,chboxlist,chboxli
    };
    }
    */
-  let RGB=[];
+  //let RGB=[];
 
-    makeRGB(RGB,hatsugen);
+    //makeRGB(RGB,hatsugen);
 
-    if(isUsingDictionaryWithWord2Vec==1){
+    /*if(isUsingDictionaryWithWord2Vec==1){
         console.log("isUsingDictionaryWithWord2Vec==1");
-    }
+    }*/
 
     var i,m,n,f;
     taiou = [];
@@ -110,14 +110,17 @@ var select =(jsonFileName,storage,checkboxlist,keitaisokaiseki,chboxlist,chboxli
                 c++;
                 chboxlength++;
 
+/*
                 if(isUsingDictionaryWithWord2Vec==1){
                     var stockedAnswerGroupNumber =storage.getItem(name+"AnswerWithNewDictionary"+c);
                     //今後辞書ネームにも対応
                 }else if(isUsingKNP==1){
 
-                }else{
-                    var stockedAnswerGroupNumber =storage.getItem(name+"RGB"+c);
+                }else{*/
+                    let stockedAnswerGroupNumber =storage.getItem(name+"RGB"+c);
+                  /*
                 }
+                */
 
                 if(stockedAnswerGroupNumber!=null){
                     RGB[m][i][stockedAnswerGroupNumber]=1;

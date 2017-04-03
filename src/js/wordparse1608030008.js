@@ -1,6 +1,6 @@
 import "kuromoji";
-import {select} from "./select.js";
-import {setForViz} from "./svg.js";
+import {select} from "../select.js";
+import {setForViz} from "../svg.js";
 var makeOnClick = (c) =>{
 	document.getElementById("b"+c).onclick = () => {
 		const id = "r"+c;
@@ -13,7 +13,7 @@ var makeOnClickS = (c) =>{
 		document.getElementById(id).classList.toggle("hide");
 	};
 };
-var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2) => {
+var ClassifyWithFirstWordDictionary = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2) => {
 
 	var startTime = new Date();
 	console.log(startTime);
@@ -320,4 +320,4 @@ var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxl
 	});
 };
 
-export {funcReaderOnload};
+export {ClassifyWithFirstWordDictionary};
