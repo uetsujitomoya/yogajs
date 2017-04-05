@@ -3,7 +3,7 @@ import {ClassifyWithFirstWordDictionary} from "./js/wordparse1608030008.js";
 import {ClassifyWithKNP} from "./processKnp.js"; //processKNP
 import {ClassifyWithWordDictionary} from "./changeDictionary.js"; //AcceptDictionary
 import $ from 'jquery';
-import {CreateSwitchClassificationMethod} from "./SwitchClassificationMethod.js"; //AcceptDictionary
+//import {CreateSwitchClassificationMethod} from "./SwitchClassificationMethod.js"; //AcceptDictionary
 
 //var dictionaryFromWord2Vec = csv2Array('HDFaceVertex.csv');
 var startTime = new Date();
@@ -13,7 +13,7 @@ newLoveDictionary = TransposeMatrix(newLoveDictionary);
 
 let newWorkDictionary = csv2Array('workUtf8.csv');
 newWorkDictionary = TransposeMatrix(newWorkDictionary);
-console.log("newWorkDictionary");
+console.log("newWorkADictionary");
 console.log(newWorkDictionary);
 
 let newFriendDictionary = csv2Array('friendUtf8.csv');
@@ -33,33 +33,41 @@ var chboxlength,chboxlength2;
 let RGB=[];
 var test2;
 
+let switchClassificationMethod=()=>{
+    const SwitchClassificationMethodRadio = document.getElementById("SwitchClassificationMethod").children;
+    if(SwitchClassificationMethodRadio[0].control.checked==true){
+        //単純な単語辞書を用いた分類
+        //ClassifyWithWordDictionary(name,event,keitaisokaiseki,chboxlist,chboxlist2,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,newLoveDictionary,newWorkDictionary,newFriendDictionary);
+        document.getElementById('load-button').addEventListener('click', function () {
+
+            var file = document.getElementById('file-input').files[0];
+            var name = file.name;
+            var reader = new FileReader();
+            reader.onload = function(event) {
+                //var result = funcReaderOnload(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
+                console.log("%center ClassifyWithWordDictionary",'color:red');
+                let resultWithNewDictionary = ClassifyWithWordDictionary(name,event,keitaisokaiseki,chboxlist,chboxlist2,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,newLoveDictionary,newWorkDictionary,newFriendDictionary);
+            };
+            reader.readAsText(file);
+
+        });
+    }else if(SwitchClassificationMethodRadio[1].control.checked==true){
+        //係り受け解析を用いた分類
+        console.log("%center ClassifyWithWordKNP",'color:red');
+        ClassifyWithKNP(startTime,name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,newLoveDictionary,newWorkDictionary,newFriendDictionary,RGB);
+    }else{
+        //SVMを用いた分類
+        console.log("%center ClassifyWithSVM",'color:red');
+        ClassifyWithSVM();
+    }
+};
+
+/*上部分
+
 CreateSwitchClassificationMethod();
-const SwitchClassificationMethodRadio = document.getElementById("SwitchClassificationMethod").children;
-if(SwitchClassificationMethodRadio[0].control.checked==true){
-    //単純な単語辞書を用いた分類
-    //ClassifyWithWordDictionary(name,event,keitaisokaiseki,chboxlist,chboxlist2,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,newLoveDictionary,newWorkDictionary,newFriendDictionary);
-    document.getElementById('load-button').addEventListener('click', function () {
+switchClassificationMethod();
 
-        var file = document.getElementById('file-input').files[0];
-        var name = file.name;
-        var reader = new FileReader();
-        reader.onload = function(event) {
-            //var result = funcReaderOnload(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
-            console.log("%center ClassifyWithWordDictionary",'color:red');
-            let resultWithNewDictionary = ClassifyWithWordDictionary(name,event,keitaisokaiseki,chboxlist,chboxlist2,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,newLoveDictionary,newWorkDictionary,newFriendDictionary);
-        };
-        reader.readAsText(file);
-
-    });
-}else if(SwitchClassificationMethodRadio[1].control.checked==true){
-    //係り受け解析を用いた分類
-    console.log("%center ClassifyWithWordKNP",'color:red');
-    ClassifyWithKNP(startTime,name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,newLoveDictionary,newWorkDictionary,newFriendDictionary,RGB);
-}else{
-    //SVMを用いた分類
-    console.log("%center ClassifyWithSVM",'color:red');
-    ClassifyWithSVM();
-}
+*/
 
 //console.log("Before processKNP");
 
