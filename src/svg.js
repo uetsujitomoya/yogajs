@@ -524,10 +524,14 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		console.info(datae3);
 	}
 
+	/*
+
 	var endTime = new Date();
 	var timeKeeping=(endTime - startTime) / 1000 + '秒経過';
 	var timeKeepingArea = document.getElementById('timeKeeping');
 	timeKeepingArea.innerHTML = "<br>"+timeKeeping+"<br>";
+
+	*/
 
 };
 

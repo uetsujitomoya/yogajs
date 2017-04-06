@@ -62,7 +62,7 @@
 }
   </style>
 </head>
-<body><font size="2">
+<body>
 
   <!--上部分
 
@@ -97,26 +97,24 @@
     <button id="buttonToInputDictionary">KNP input</button>
   </p>
   -->
-
-  <div id="timeKeeping"></div>
-  <br>
-  <br>
-  <div id="svgdiv"></div>
   <font color=dimgray><b><u><font color=black size=4>縦軸</font></u></b>の単位：文の数、 <b><u><font color=black size=4>横軸</font></u></b>の単位：患者の全ての発言の全ての文字数</font><br>
   ・クライエントの発言について<font color="#ff7777">「愛」</font><font color="#00cc00">「交友」</font><font color="#7777ff">「仕事」</font><br>
-  ・カウンセラーの発言について<font color="#b52f25">「開かれた質問」</font><font color="#2b4e91">「閉じられた質問」</font><font color="purple">「相づち」</font><font color="orange">「解釈」</font><font color="black">「世間話」</font><br><br>
+  ・カウンセラーの発言について<font color="#b52f25">「開かれた質問」</font><font color="#2b4e91">「閉じられた質問」</font><font color="purple">「相づち」</font><font color="orange">「解釈」</font><font color="black">「世間話」</font>
+ <!-- <div id="timeKeeping"></div>-->
+  <div id="svgdiv"></div>
+<br>
 
-  <font size=3 color=dimgray><b><u><font color=black size=4>左下</font></u></b>のエリアで、クライエントが発した文/カウンセラーが発した質問について分類してください。グラフの<b><u><font color=black size=4>縦棒</font></u></b>をマウスオーバーすると<b><u><font color=black size=4>右下</font></u></b>のエリアに縦棒周辺の内容が表示されます</font><br><br>
+  <font size=3 color=#2c3e50><b><u><font color=black size=4>左下</font></u></b>のエリアで、クライエントが発した文/カウンセラーが発した質問について分類してください。グラフの<b><u><font color=black size=4>縦棒</font></u></b>をマウスオーバーすると<b><u><font color=black size=4>右下</font></u></b>のエリアに縦棒周辺の内容が表示されます</font><br><br>
 
   <div id="switchToChangeTalker"></div>
 
   <div class="boxContainer">
-    <div class="box" style="border-style: solid; border-width: 1px; border-color:#F4F4F4; height:300px; width:600px; overflow-y:scroll; floet:left;">
+    <div class="box" style="border-style: solid; border-width: 1px; border-color:#2c3e50; height:300px; width:600px; overflow-y:scroll; floet:left;">
       <form name="form1" id="chbox" action="">
         <div id="radio_buttons" style="floet:left;"></div>
       </form>
     </div>
-    <div class="box" id="msg" style="border-style: solid; border-width: 1px; border-color:#f4f4f4; height:300px; width:600px; overflow-y:scroll"></div>
+    <div class="box" id="msg" style="border-style: solid; border-width: 1px; border-color:#2c3e50; height:300px; width:600px; overflow-y:scroll"></div>
   </div>
 
 <!--display: inline_block _display: inline;-->
