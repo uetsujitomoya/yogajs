@@ -89,6 +89,8 @@ switchClassificationMethod();
 
 });*/
 
+  /*170410knpLoadButton
+
 document.getElementById('knpLoadButton').addEventListener('click',function () {
 
     var file = document.getElementById('knpLoadButton').files[0];//csv読み込めない
@@ -102,6 +104,8 @@ document.getElementById('knpLoadButton').addEventListener('click',function () {
     reader.readAsText(file);
 
 });
+
+  */
 
 //document.getElementById('buttonToInputDictionary').addEventListener('click',AcceptDictionary(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2));
 
@@ -153,9 +157,11 @@ function TransposeMatrix(ary) {
     return ary.reduce (B, []);
 }
 
+/*storageSave-button
 document.getElementById('storageSave-button').addEventListener('click', function () {
     localStorage.clear();
 });
+*/
 
 //この関数を実行するとCSVのDL画面に鳴る
 function downloadAsCSV(filename, csv_array){

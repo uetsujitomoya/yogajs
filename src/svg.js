@@ -1,7 +1,5 @@
 import d3 from "d3";
 
-
-
 //let love="#ffeeff";
 //let friend="#c0ffc0";
 //let work="#a0e0ff";
@@ -41,10 +39,6 @@ let originalSentencePart=(talker,task,orijinalSentence)=>{
 
     let sentenceVizArray=[];
 };
-
-
-
-
 
 let open3="#b0291b";
 let close4="#2980b9";
