@@ -107,11 +107,15 @@ document.getElementById('knpLoadButton').addEventListener('click',function () {
 
 //storage出力
 
+/*storageSave-button
+
 document.getElementById('storageSave-button').addEventListener('click', ()=>{
     let csv_array=storage2csv();
     //KNPもCSVで読み込ませる
     downloadAsCSV("storage",csv_array);
 });
+
+*/
 
 //let file_name="storage"+Date()+".csv";
 //let filenameWithExtension="storage.csv";
