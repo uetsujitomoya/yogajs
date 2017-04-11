@@ -530,6 +530,9 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 };
 
 var funcChecked = (jsonFileName,storage,chboxlist,checked,taiou,chboxlength,isUsingDictionaryWithWord2Vec) => {
+
+	let graphNumber =2;
+
 	var c;
 	for(c=1;c<=chboxlength;c++){
         let changedAnswerClassificationSaveTarget;
@@ -543,6 +546,8 @@ var funcChecked = (jsonFileName,storage,chboxlist,checked,taiou,chboxlength,isUs
 
 		const radio = document.getElementById("r"+c).children;
 		for(let i = radio.length-3, l = radio.length; i < l; i++){
+			//console.log("i=%d",i);
+            //console.log(radio[i]);
 			if(radio[i].control.checked==true){
 				if(radio[i].control.value=="1"){
 					checked[taiou[c-1]] =1;
@@ -608,6 +613,9 @@ var funcChecked2 = (name,storage,chboxlist,chboxlist2,checked2,taiou,taiou2,chbo
 };
 
 var setForViz = (name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,isUsingDictionaryWithWord2Vec) => {
+
+	let graphNumber=2;
+
 	d3.select("#svgdiv").select("svg").remove();
 	var svg = d3.select("#svgdiv").append("svg")
 	.attr("height",270)
@@ -683,12 +691,14 @@ var setForViz = (name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsu
 	}
 
 	const radio = document.getElementById("graph").children;
-	for(let i=0;i<=2;i++){
+	for(let i=0;i<=graphNumber-1;i++){
+		console.log("i=%d",i);
+		console.log(radio[i]);
 		if(radio[i].control.checked==true){
 			//storage.getItem(name+"RGBlist"+m)=
-			if(radio[i].control.value=="12"){
+			/*if(radio[i].control.value=="12"){
 				graph=2;
-			}else if(radio[i].control.value=="13"){
+			}else */if(radio[i].control.value=="13"){
 				graph=3;
 			}else{
 				graph=1;
