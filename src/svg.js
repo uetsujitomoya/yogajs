@@ -71,6 +71,11 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 
 	if(graph==3){
 
+		//ずらしたい
+
+		let graphShiftX = 58;
+        let axisShiftX = 68;
+
 		var nagasa2=[];//区分
 		var mazekoze=[];//カウンセラーを発言毎に、クライエントを文ごとに収録
 		var mazekozeWhich=[];//カウンセラーなら0
@@ -160,8 +165,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		console.info("mazekozeRanshin");
 		console.info(mazekozeRanshin);
 
-		var w = width;
-		var padding = 10;
+		//let width = width;
 
 		var dataArr = [
 			nagasa2,
@@ -170,49 +174,12 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 
 		var xScale = d3.scale.linear()
 		.domain([0, d3.sum(nagasa2)/10])
-		.range([padding, w  - padding]);
+		.range([axisShiftX, width - axisShiftX]);
 		//.nice();
 
 		////////////////////////////////////////////////////////////////
 
 		var datae = [];
-		var jj;
-		var mojia = [];
-		var jjj=0;
-/*
-		for (jj=0; jj<nagasa2.length; jj++){//色変えたからか。。
-			if(mazekozeColor[jj] == open3){
-				mojia[jj]='開 質問';
-			}else if(mazekozeColor[jj] == aiduchi5){
-				mojia[jj]="相槌";
-			}else if(mazekozeColor[jj] == close4){
-				mojia[jj]="閉 質問";
-			}else if(mazekozeColor[jj] ==kaishaku6){
-				mojia[jj]='解釈';
-			}else if(checked[jjj]==0){
-				mojia[jj]='未';jjj++;
-			}else if(checked[jjj]==1){
-				mojia[jj]='愛';jjj++;
-			}else if(checked[jjj]==2){
-				mojia[jj]='交友';jjj++;
-			}else if(checked[jjj]==3){
-				mojia[jj]='仕事';jjj++;
-			}else{
-				mojia[jj]='世間話';
-			}
-		}
-
-		for (jj=0; jj<nagasa2.length; jj++){
-			datae[jj] = {x: nagasa2[jj], y:40, color: mazekozeColor[jj],text:mojia[jj],which:mazekozeWhich[jj]};
-			//moji[jj]}//F_color2moji(color2[jj])}//, text:a}
-		}
-*/
-
-		//	console.log(datae.length);
-		//	console.log(nagasa2.length);
-		///////////////////////////////////////////////////////
-
-
 
 		let row=0;//graph3の行番号
 		//階層構造をとるため，g要素を生成する部分とrect要素を生成している部分が連続している．
@@ -231,7 +198,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			var arr = nagasa2;
 			//var sum = d3.sum(arr);
 			var subSum = d3.sum(i==0 ? []:arr.slice(0,i));
-			return xScale(subSum)/10 + 10;
+			return xScale(subSum)/10 + 10+graphShiftX;
 		})
 		.attr("y",10)
 		.attr("width",function(d){
@@ -278,6 +245,8 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		});
 		/////////////////////////////////////////////////////////////////////
 
+		//下側
+
 		svg.selectAll("g")
 		.data(datae)
 		.enter()
@@ -294,7 +263,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			var arr = nagasa2;
 			//var sum = d3.sum(arr);
 			var subSum = d3.sum(i==0 ? []:arr.slice(0,i));
-			return xScale(subSum)/10 + 10;
+			return xScale(subSum)/10 + 10+graphShiftX;
 		})
 		.attr(
 			"y",function(d){
@@ -322,7 +291,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			var arr = nagasa2;
 			//var sum = d3.sum(arr);
 			var subSum = d3.sum(i==0 ? []:arr.slice(0,i));
-			return xScale(subSum)/11;
+			return xScale(subSum)/11 + graphShiftX;
 		})
 		.attr("y",100);
 
