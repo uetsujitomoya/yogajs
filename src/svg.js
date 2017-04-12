@@ -273,6 +273,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 
 		/////////////////////////////////////////////////////////////////////
 
+		/*　9つの乱心　表示
 
 		svg.selectAll("g")
 		.data(mazekozeRanshin)
@@ -295,6 +296,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		})
 		.attr("y",100);
 
+		*/
 
 		//x軸
 
