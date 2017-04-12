@@ -50,6 +50,10 @@ var height0=200,width=1320;
 var height =200;
 
 var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxmax,startTime,graph,checked,ranshin) => {
+
+	let upperName="カウンセラー";
+	let lowerName="クライエント";
+
 	var m;
 	var bunsuu=2;//前後の余白
 	for(m=1;m<hatsugen.length;m=m+2){//患者の発言で間隔を作る
@@ -342,7 +346,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			x:0,
 			y:20
 		})
-		.text("T");
+		.text(upperName);
 
 		d3.select("svg")
 		.append("text")
@@ -350,7 +354,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			x:0,
 			y:70
 		})
-		.text("C");
+		.text(lowerName);
 		console.info("datae");
 		console.info(datae);
 
