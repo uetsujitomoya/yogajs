@@ -348,10 +348,18 @@ var ClassifyWithFirstWordDictionary = (name,keitaisokaiseki,checkboxlist,chboxli
 			makeOnClickS(c);
 		}
 
+		 //下記の切り替えをいい加減オブジェクト化したほうがやりやすい気がする
 
 		document.getElementById('radio_buttons').onchange = () => {
+
+            console.log("radio_buttons_onchange");
 			setForViz(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin);
 		};//graphの形状を切り替えた際もここで再描画される
+
+        document.getElementById('GraphSelectButton').onchange = () => {
+        	console.log("GraphSelectButton_onchange");
+            setForViz(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin);
+        };//graphの形状を切り替えた際もここで再描画される
 
 		//graphのラジオボタン変わったらまた描画
 

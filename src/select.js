@@ -22,6 +22,17 @@ let ButtonPart=()=>{
 
 };
 
+let createGraphSelectButton=()=>{
+    let GraphSelectButtonPlaceID = "GraphSelectButton";
+    let stackedChartName = "積み重ねグラフ";
+    let barChartName = "帯グラフ";
+    let target = document.getElementById(GraphSelectButtonPlaceID);//checkboxを出す場所
+    target.innerHTML += "<div id=\"graph\" style=\"cursor: pointer\"></div><br>";
+    document.getElementById("graph").innerHTML += "<label><input type=radio name=\"graph\" value=11>" + stackedChartName + "</label>";
+    //document.getElementById("graph").innerHTML += "<label><input type=radio name=\"graph\" value=12>graph2</label>";
+    document.getElementById("graph").innerHTML += "<label><input type=radio name=\"graph\" value=13>" + barChartName + "</label>";
+};
+
 let makeRGB=(RGB,hatsugen)=>{
     let loveNumber=0;
     let workNumber=1;
@@ -52,8 +63,6 @@ let makeRGB=(RGB,hatsugen)=>{
 var select =(name,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,chboxlist2,RGB,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2) => {
     console.log("entered select.js");
 
-    let stackedChartName = "積み重ねグラフ";
-    let barChartName = "帯グラフ";
 
   /*
    if(isUsingKNP==1){
@@ -92,10 +101,8 @@ var select =(name,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,chbo
     chboxlength=0;
     chboxlength2=0;
     var s=0;
-    target.innerHTML += "<div id=\"graph\" style=\"cursor: pointer\"></div><br>";
-    document.getElementById("graph").innerHTML += "<label><input type=radio name=\"graph\" value=11>" + stackedChartName + "</label>";
-    //document.getElementById("graph").innerHTML += "<label><input type=radio name=\"graph\" value=12>graph2</label>";
-    document.getElementById("graph").innerHTML += "<label><input type=radio name=\"graph\" value=13>" + barChartName + "</label>";
+
+    createGraphSelectButton();
 
     for(m=0;m<keitaisokaiseki.length;m++){
         console.log("RGB[%d]",m);

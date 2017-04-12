@@ -695,6 +695,8 @@ var setForViz = (name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsu
 	}
 
 	const radio = document.getElementById("graph").children;
+    console.log("radio");
+	console.log(radio);
 	for(let i=0;i<=graphNumber-1;i++){
 		console.log("i=%d",i);
 		console.log(radio[i]);
