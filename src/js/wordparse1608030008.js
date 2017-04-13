@@ -21,15 +21,7 @@ let selectGraphShape = function(name,storage,keitaisokaiseki,chboxlist,chboxlist
 
     document.getElementById('GraphSelectButton').onclick = () => {
 		 console.log("GraphSelectButton_onchange");
-		 vResult=setForViz(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin);
-		 chboxlist = vResult.chboxlist;
-		 chboxlist2 = vResult.chboxlist2;
-		 RGBlist = vResult.RGBlist;
-		 checked = vResult.checked;
-		 checked2 = vResult.checked2;
-		 chboxlength = vResult.chboxlength;
-		 chboxlength2 = vResult.chboxlength2;
-		 ranshin = vResult.ranshin;
+		 getVizResult(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,vResult)
 
     };//graphの形状を切り替えた際もここで再描画される
 };
@@ -58,7 +50,10 @@ var ClassifyWithFirstWordDictionary = (name,keitaisokaiseki,checkboxlist,chboxli
 	});
 
 	return kuromoji.builder({dicPath: 'dict/'}).build((err, tokenizer) => {
-		const path = tokenizer.tokenize(orijinalText);
+
+        let visResult;
+
+        const path = tokenizer.tokenize(orijinalText);
 		n=0;
 		var tangosuu=0;
 		m=0;
@@ -311,16 +306,7 @@ var ClassifyWithFirstWordDictionary = (name,keitaisokaiseki,checkboxlist,chboxli
 		//graph = sResult.graph;
 		//console.log("chboxlength2=%d",chboxlength2)
 
-
-		var vResult = setForViz(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin);//形態素解析後に1度目の描画
-		chboxlist = vResult.chboxlist;
-		chboxlist2 = vResult.chboxlist2;
-		RGBlist = vResult.RGBlist;
-		checked = vResult.checked;
-		checked2 = vResult.checked2;
-		chboxlength = vResult.chboxlength;
-		chboxlength2 = vResult.chboxlength2;
-		chboxlength2 = vResult.ranshin;
+		getVizResult(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,visResult);
 
 		//以下は後ろじゃなきゃアカン
 		for(c=1;c<=chboxlength;c++){
@@ -330,7 +316,7 @@ var ClassifyWithFirstWordDictionary = (name,keitaisokaiseki,checkboxlist,chboxli
 			makeOnClickS(c);
 		}
 
-        selectGraphShape(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,vResult);
+        selectGraphShape(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,visResult);
 
 		document.getElementById('radio_buttons').onchange = () => {
 			setForViz(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin);
@@ -341,10 +327,20 @@ var ClassifyWithFirstWordDictionary = (name,keitaisokaiseki,checkboxlist,chboxli
 		return{
 			name:name,RGBlist:RGBlist,keitaisokaiseki:keitaisokaiseki,hatsugen:hatsugen,bun:bun,chboxlist:chboxlist,chboxlist2:chboxlist2,checked:checked,checked2:checked2,taiou:taiou,taiou2:taiou2,chboxlength:chboxlength,chboxlength2:chboxlength2
 		};
-
-
-
 	});
 };
+
+let getVizResult=(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,visResult)=>{
+    visResult = setForViz(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin);//形態素解析後に1度目の描画
+    chboxlist = visResult.chboxlist;
+    chboxlist2 = visResult.chboxlist2;
+    RGBlist = visResult.RGBlist;
+    checked = visResult.checked;
+    checked2 = visResult.checked2;
+    chboxlength = visResult.chboxlength;
+    chboxlength2 = visResult.chboxlength2;
+    chboxlength2 = visResult.ranshin;
+};
+
 
 export {ClassifyWithFirstWordDictionary};
