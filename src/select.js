@@ -219,6 +219,10 @@ var select =(name,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,chbo
         }
     }
 
+    console.log("%c radio_buttons and grapheselectbutton",'color:red');
+    console.log(document.getElementById('radio_buttons'));
+    console.log(document.getElementById('GraphSelectButton'));
+
     return{
         checkboxlist:checkboxlist,
         chboxlist:chboxlist,

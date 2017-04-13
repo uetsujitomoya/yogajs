@@ -15,6 +15,25 @@ var makeOnClickS = (c) =>{
 		document.getElementById(id).classList.toggle("hide");
 	};
 };
+
+let selectGraphShape = function(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,vResult) {
+    console.log("%centerred selectGraphShape",'color:red');
+
+    document.getElementById('GraphSelectButton').onclick = () => {
+		 console.log("GraphSelectButton_onchange");
+		 vResult=setForViz(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin);
+		 chboxlist = vResult.chboxlist;
+		 chboxlist2 = vResult.chboxlist2;
+		 RGBlist = vResult.RGBlist;
+		 checked = vResult.checked;
+		 checked2 = vResult.checked2;
+		 chboxlength = vResult.chboxlength;
+		 chboxlength2 = vResult.chboxlength2;
+		 ranshin = vResult.ranshin;
+
+    };//graphの形状を切り替えた際もここで再描画される
+};
+
 var ClassifyWithFirstWordDictionary = (name,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2) => {
 
 	var startTime = new Date();
@@ -311,6 +330,7 @@ var ClassifyWithFirstWordDictionary = (name,keitaisokaiseki,checkboxlist,chboxli
 			makeOnClickS(c);
 		}
 
+        selectGraphShape(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,vResult);
 
 		document.getElementById('radio_buttons').onchange = () => {
 			setForViz(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin);

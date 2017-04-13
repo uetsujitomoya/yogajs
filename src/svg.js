@@ -589,6 +589,8 @@ var funcChecked2 = (name,storage,chboxlist,chboxlist2,checked2,taiou,taiou2,chbo
 
 var setForViz = (name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,isUsingDictionaryWithWord2Vec) => {
 
+    console.log("%centerred setForViz",'color:red');
+
 	let graphNumber=2;
 
 	d3.select("#svgdiv").select("svg").remove();

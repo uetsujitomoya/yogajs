@@ -1,3 +1,5 @@
+//dont use for user evaluation
+
 import "kuromoji";
 import {select} from "./select.js";
 import {setForViz} from "./svg.js";
@@ -13,6 +15,30 @@ var makeOnClickS = (c) =>{
 		document.getElementById(id).classList.toggle("hide");
 	};
 };
+
+let getVisResult;
+
+let selectGraphShape = function(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,vResult) {
+    console.log("%centerred selectGraphShape",'color:red');
+
+    document.getElementById('GraphSelectButton').onclick = () => {
+        alert('GrapheSelectButton');
+		/*
+        console.log("GraphSelectButton_onchange");
+        vResult=setForViz(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin);
+        chboxlist = vResult.chboxlist;
+        chboxlist2 = vResult.chboxlist2;
+        RGBlist = vResult.RGBlist;
+        checked = vResult.checked;
+        checked2 = vResult.checked2;
+        chboxlength = vResult.chboxlength;
+        chboxlength2 = vResult.chboxlength2;
+        ranshin = vResult.ranshin;
+		 */
+    };//graphの形状を切り替えた際もここで再描画される
+
+};
+
 var ClassifyWithFirstWordDictionary = (name,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2) => {
 
     let isUsingDictionaryWithWord2Vec=0;
@@ -327,18 +353,19 @@ var ClassifyWithFirstWordDictionary = (name,keitaisokaiseki,checkboxlist,chboxli
 		//graph = sResult.graph;
 		//console.log("chboxlength2=%d",chboxlength2)
 
+        console.log("%ccome back wordparse 354",'color:red');
 
+		var visResult = setForViz(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin);//形態素解析後に1度目の描画
+		chboxlist = visResult.chboxlist;
+		chboxlist2 = visResult.chboxlist2;
+		RGBlist = visResult.RGBlist;
+		checked = visResult.checked;
+		checked2 = visResult.checked2;
+		chboxlength = visResult.chboxlength;
+		chboxlength2 = visResult.chboxlength2;
+		ranshin = visResult.ranshin;
 
-
-		var vResult = setForViz(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin);//形態素解析後に1度目の描画
-		chboxlist = vResult.chboxlist;
-		chboxlist2 = vResult.chboxlist2;
-		RGBlist = vResult.RGBlist;
-		checked = vResult.checked;
-		checked2 = vResult.checked2;
-		chboxlength = vResult.chboxlength;
-		chboxlength2 = vResult.chboxlength2;
-		ranshin = vResult.ranshin;
+        console.log("%ccome back wordparse 366",'color:red');
 
 		//これは後ろじゃないと、選択肢が反映されない？
 		for(c=1;c<=chboxlength;c++){
@@ -348,18 +375,27 @@ var ClassifyWithFirstWordDictionary = (name,keitaisokaiseki,checkboxlist,chboxli
 			makeOnClickS(c);
 		}
 
-		 //下記の切り替えをいい加減オブジェクト化したほうがやりやすい気がする
+		//下記の切り替えをいい加減オブジェクト化したほうがやりやすい気がする
 
-		document.getElementById('radio_buttons').onchange = () => {
+		selectGraphShape(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,visResult);
 
+
+		document.getElementById('radio_buttons').onchange = function(){
+			/*
             console.log("radio_buttons_onchange");
-			setForViz(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin);
+			visResult=setForViz(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin);
+            chboxlist = visResult.chboxlist;
+            chboxlist2 = visResult.chboxlist2;
+            RGBlist = visResult.RGBlist;
+            checked = visResult.checked;
+            checked2 = visResult.checked2;
+            chboxlength = visResult.chboxlength;
+            chboxlength2 = visResult.chboxlength2;
+            ranshin = visResult.ranshin;
+            */
 		};//graphの形状を切り替えた際もここで再描画される
 
-        document.getElementById('GraphSelectButton').onchange = () => {
-        	console.log("GraphSelectButton_onchange");
-            setForViz(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin);
-        };//graphの形状を切り替えた際もここで再描画される
+
 
 		//graphのラジオボタン変わったらまた描画
 

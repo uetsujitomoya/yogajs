@@ -45,7 +45,7 @@ let switchClassificationMethod=()=>{
             var reader = new FileReader();
             reader.onload = function(event) {
                 //var result = funcReaderOnload(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
-                console.log("%center ClassifyWithWordDictionary",'color:red');
+                console.log("%center ClassifyWithWordDictionary 48",'color:red');
                 let resultWithNewDictionary = ClassifyWithWordDictionary(name,event,keitaisokaiseki,chboxlist,chboxlist2,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,newLoveDictionary,newWorkDictionary,newFriendDictionary);
             };
             reader.readAsText(file);
@@ -53,11 +53,11 @@ let switchClassificationMethod=()=>{
         });
     }else if(SwitchClassificationMethodRadio[1].control.checked==true){
         //係り受け解析を用いた分類
-        console.log("%center ClassifyWithWordKNP",'color:red');
+        console.log("%center ClassifyWithWordKNP 56",'color:red');
         ClassifyWithKNP(startTime,name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,newLoveDictionary,newWorkDictionary,newFriendDictionary,RGB);
     }else{
         //SVMを用いた分類
-        console.log("%center ClassifyWithSVM",'color:red');
+        console.log("%center ClassifyWithSVM 60",'color:red');
         ClassifyWithSVM();
     }
 };
@@ -82,7 +82,7 @@ switchClassificationMethod();
   var reader = new FileReader();
   reader.onload = function(event) {*/
     //var result = funcReaderOnload(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
-      console.log("%center ClassifyWithFirstWordDictionary",'color:red');
+      console.log("%center ClassifyWithFirstWordDictionary 85",'color:red');
       let resultWithNewDictionary = ClassifyWithFirstWordDictionary(name,keitaisokaiseki,chboxlist,chboxlist2,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,newLoveDictionary,newWorkDictionary,newFriendDictionary);
   /*};
   reader.readAsText(file);
