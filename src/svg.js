@@ -40,6 +40,16 @@ let originalSentencePart=(talker,task,orijinalSentence)=>{
     let sentenceVizArray=[];
 };
 
+const addTextToSVG=(x,y,text)=>{
+    d3.select("svg")
+        .append("text")
+        .attr({
+            x:x,
+            y:y
+        })
+        .text(text);
+};
+
 let open3="#b0291b";
 let close4="#2980b9";
 let aiduchi5="#9b59b6";
@@ -51,11 +61,11 @@ var height =200;
 
 var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxmax,startTime,graph,checked,ranshin) => {
 
-	let upperName="カウンセラー";
-	let lowerName="クライエント";
-	let counselorInTextView="カ";
-	let clientInTextView="ク";
-	let fontSizeInTectView=3;
+	const upperName = "カウンセラー";
+    const lowerName = "クライエント";
+    const counselorInTextView = "カ";
+    const clientInTextView = "ク";
+    const fontSizeInTextView = 3;
 
 	var m;
 	var bunsuu=2;//前後の余白
@@ -72,9 +82,11 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 
 	var colorBun=["#c0c0c0",love,friend,work];
 
+    const axisDescriptionY = 240;
+
 	if(graph==3){
 
-		//ずらしたい
+		const axisDescription = "横軸の単位：全ての発言の全ての文字数";
 
 		let graphShiftX = 58;
         let axisShiftX = 68;
@@ -232,16 +244,16 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 						continue;
 					}
 					if(k==0){
-						e.innerHTML += "<b><u><font size=" + fontSizeInTectView + ">"+(1+mazekozeHatsugenNumber[i])+"("+counselorInTextView+") <font color="+color2[mazekozeHatsugenNumber[i]/2]+">【</font>"+hatsugen[mazekozeHatsugenNumber[i]]+"<font color="+color2[mazekozeHatsugenNumber[i]/2]+">】</font></font></u></b><font size=" + fontSizeInTectView + "><br><br></font>";
+						e.innerHTML += "<b><u><font size=" + fontSizeInTextView + ">"+(1+mazekozeHatsugenNumber[i])+"("+counselorInTextView+") <font color="+color2[mazekozeHatsugenNumber[i]/2]+">【</font>"+hatsugen[mazekozeHatsugenNumber[i]]+"<font color="+color2[mazekozeHatsugenNumber[i]/2]+">】</font></font></u></b><font size=" + fontSizeInTextView + "><br><br></font>";
 					}else if(k%2==0){
-						e.innerHTML += "<font size=" + fontSizeInTectView + ">"+(1+k+mazekozeHatsugenNumber[i])+"("+counselorInTextView+") <font color="+color2[k/2+mazekozeHatsugenNumber[i]/2]+"><b>【</b></font>"+hatsugen[k+mazekozeHatsugenNumber[i]]+"<font color="+color2[k/2+mazekozeHatsugenNumber[i]/2]+"><b>】</b></font><br><br></font>";
+						e.innerHTML += "<font size=" + fontSizeInTextView + ">"+(1+k+mazekozeHatsugenNumber[i])+"("+counselorInTextView+") <font color="+color2[k/2+mazekozeHatsugenNumber[i]/2]+"><b>【</b></font>"+hatsugen[k+mazekozeHatsugenNumber[i]]+"<font color="+color2[k/2+mazekozeHatsugenNumber[i]/2]+"><b>】</b></font><br><br></font>";
 					}else{//forループを回さないと各文ごとの表示ができない
 						e.innerHTML += (1+k+mazekozeHatsugenNumber[i])+"("+clientInTextView+") ";
 						for(l=0;l<bun[k+mazekozeHatsugenNumber[i]].length;l++){
 							if(bun[k+mazekozeHatsugenNumber[i]][l]==""){continue;}
-							e.innerHTML += "<font size=" + fontSizeInTectView + "><font color="+colorBun[checkedBun[k+mazekozeHatsugenNumber[i]][l]]+"><b>【</b></font>"+bun[k+mazekozeHatsugenNumber[i]][l]+"<font color="+colorBun[checkedBun[k+mazekozeHatsugenNumber[i]][l]]+"><b>】</b></font></font>";
+							e.innerHTML += "<font size=" + fontSizeInTextView + "><font color="+colorBun[checkedBun[k+mazekozeHatsugenNumber[i]][l]]+"><b>【</b></font>"+bun[k+mazekozeHatsugenNumber[i]][l]+"<font color="+colorBun[checkedBun[k+mazekozeHatsugenNumber[i]][l]]+"><b>】</b></font></font>";
 						}
-						e.innerHTML += "<font size=" + fontSizeInTectView + "><br><br></font>";
+						e.innerHTML += "<font size=" + fontSizeInTextView + "><br><br></font>";
 					}
 				}
 			}
@@ -329,12 +341,17 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			y:70
 		})
 		.text(lowerName);
+
+		addTextToSVG(0,axisDescriptionY,axisDescription);
+
 		console.info("datae");
 		console.info(datae);
 
 	}else{
 
 		//積み重ね折れ線
+
+        const axisDescription = "縦軸の単位：文の数、 横軸の単位：患者の全ての発言の全ての文字数";
 
 		//stack
 		var context = svg.append("g") //全体グラフグループ作成
@@ -393,16 +410,16 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 					continue;
 				}
 				if(k==0){
-					e.innerHTML += "<b><u><font size=" + fontSizeInTectView + ">"+(1+2*i)+"("+counselorInTextView+") <font color="+color2[i]+">【</font>"+hatsugen[2*i]+"<font color="+color2[i]+">】</font></font></u></b><font size=" + fontSizeInTectView + "><br><br></font>";
+					e.innerHTML += "<b><u><font size=" + fontSizeInTextView + ">"+(1+2*i)+"("+counselorInTextView+") <font color="+color2[i]+">【</font>"+hatsugen[2*i]+"<font color="+color2[i]+">】</font></font></u></b><font size=" + fontSizeInTextView + "><br><br></font>";
 				}else if(k%2==0){
-					e.innerHTML += "<font size=" + fontSizeInTectView + ">"+(1+k+2*i)+"("+counselorInTextView+") <font color="+color2[k/2+i]+"><b>【</b></font>"+hatsugen[k+2*i]+"<font color="+color2[k/2+i]+"><b>】</b></font><br><br></font>";
+					e.innerHTML += "<font size=" + fontSizeInTextView + ">"+(1+k+2*i)+"("+counselorInTextView+") <font color="+color2[k/2+i]+"><b>【</b></font>"+hatsugen[k+2*i]+"<font color="+color2[k/2+i]+"><b>】</b></font><br><br></font>";
 				}else{//forループを回さないと各文ごとの表示ができない
 					e.innerHTML += (1+k+2*i)+"("+clientInTextView+") ";
 					for(l=0;l<bun[k+2*i].length;l++){
 						if(bun[k+2*i][l]==""){continue;}
-						e.innerHTML += "<font size=" + fontSizeInTectView + "><font color="+colorBun[checkedBun[k+2*i][l]]+"><b>【</b></font>"+bun[k+2*i][l]+"<font color="+colorBun[checkedBun[k+2*i][l]]+"><b>】</b></font></font>";
+						e.innerHTML += "<font size=" + fontSizeInTextView + "><font color="+colorBun[checkedBun[k+2*i][l]]+"><b>【</b></font>"+bun[k+2*i][l]+"<font color="+colorBun[checkedBun[k+2*i][l]]+"><b>】</b></font></font>";
 					}
-					e.innerHTML += "<font size=" + fontSizeInTectView + "><br><br></font>";
+					e.innerHTML += "<font size=" + fontSizeInTextView + "><br><br></font>";
 				}
 			}
 		});
@@ -449,16 +466,16 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 					continue;
 				}
 				if(k==0){
-					e.innerHTML += "<b><u><font size=" + fontSizeInTectView + ">"+(1+2*i)+"("+counselorInTextView+") <font color="+color2[i]+">【</font>"+hatsugen[2*i]+"<font color="+color2[i]+">】</font></font></u></b><font size=" + fontSizeInTectView + "><br><br></font>";
+					e.innerHTML += "<b><u><font size=" + fontSizeInTextView + ">"+(1+2*i)+"("+counselorInTextView+") <font color="+color2[i]+">【</font>"+hatsugen[2*i]+"<font color="+color2[i]+">】</font></font></u></b><font size=" + fontSizeInTextView + "><br><br></font>";
 				}else if(k%2==0){
-					e.innerHTML += "<font size=" + fontSizeInTectView + ">"+(1+k+2*i)+"("+counselorInTextView+") <font color="+color2[k/2+i]+"><b>【</b></font>"+hatsugen[k+2*i]+"<font color="+color2[k/2+i]+"><b>】</b></font><br><br></font>";
+					e.innerHTML += "<font size=" + fontSizeInTextView + ">"+(1+k+2*i)+"("+counselorInTextView+") <font color="+color2[k/2+i]+"><b>【</b></font>"+hatsugen[k+2*i]+"<font color="+color2[k/2+i]+"><b>】</b></font><br><br></font>";
 				}else{//forループを回さないと各文ごとの表示ができない
 					e.innerHTML += (1+k+2*i)+"("+clientInTextView+") ";
 					for(l=0;l<bun[k+2*i].length;l++){
 						if(bun[k+2*i][l]==""){continue;}
-						e.innerHTML += "<font size=" + fontSizeInTectView + "><font color="+colorBun[checkedBun[k+2*i][l]]+"><b>【</b></font>"+bun[k+2*i][l]+"<font color="+colorBun[checkedBun[k+2*i][l]]+"><b>】</b></font></font>";
+						e.innerHTML += "<font size=" + fontSizeInTextView + "><font color="+colorBun[checkedBun[k+2*i][l]]+"><b>【</b></font>"+bun[k+2*i][l]+"<font color="+colorBun[checkedBun[k+2*i][l]]+"><b>】</b></font></font>";
 					}
-					e.innerHTML += "<font size=" + fontSizeInTectView + "><br><br></font>";
+					e.innerHTML += "<font size=" + fontSizeInTextView + "><br><br></font>";
 				}
 			}
 		});
@@ -492,19 +509,8 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		.attr("transform", "translate(0," + height0 + ")")
 		.call(xAxisC);
 
-		console.info("datae3");
-		console.info(datae3);
+        addTextToSVG(0,axisDescriptionY,axisDescription);
 	}
-
-	/*
-
-	var endTime = new Date();
-	var timeKeeping=(endTime - startTime) / 1000 + '秒経過';
-	var timeKeepingArea = document.getElementById('timeKeeping');
-	timeKeepingArea.innerHTML = "<br>"+timeKeeping+"<br>";
-
-	*/
-
 };
 
 var funcChecked = (jsonFileName,storage,chboxlist,checked,taiou,chboxlength,isUsingDictionaryWithWord2Vec) => {
