@@ -6,6 +6,12 @@ import $ from 'jquery';
 //import {CreateSwitchClassificationMethod} from "./SwitchClassificationMethod.js"; //AcceptDictionary
 
 //var dictionaryFromWord2Vec = csv2Array('HDFaceVertex.csv');
+
+let storageArrayFromKamata= csv2Array("csv/storage170421fromKamata.csv");
+console.log("storageFromKamata");
+console.log(storageArrayFromKamata);
+
+
 var startTime = new Date();
 
 let newLoveDictionary = csv2Array('../oldLoveDic.csv');
@@ -111,7 +117,7 @@ document.getElementById('knpLoadButton').addEventListener('click',function () {
 
 //storage出力
 
-/*storageSave-button
+/*storageSave-button*/
 
 document.getElementById('storageSave-button').addEventListener('click', ()=>{
     let csv_array=storage2csv();
@@ -119,7 +125,7 @@ document.getElementById('storageSave-button').addEventListener('click', ()=>{
     downloadAsCSV("storage",csv_array);
 });
 
-*/
+
 
 //let file_name="storage"+Date()+".csv";
 //let filenameWithExtension="storage.csv";
@@ -161,7 +167,7 @@ function TransposeMatrix(ary) {
 document.getElementById('storageSave-button').addEventListener('click', function () {
     localStorage.clear();
 });
-*/
+ */
 
 //この関数を実行するとCSVのDL画面に鳴る
 function downloadAsCSV(filename, csv_array){
@@ -170,7 +176,7 @@ function downloadAsCSV(filename, csv_array){
 
     //配列をTAB区切り文字列に変換
     var csv_string = "";
-    for (i=0; i<csv_array.length; i++) {
+    for (let i=0; i<csv_array.length; i++) {
         csv_string += csv_array[i].join(",");
         csv_string += '\n';
     }

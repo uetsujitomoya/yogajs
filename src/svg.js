@@ -641,7 +641,6 @@ var setForViz = (name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsu
 					}else if(checked[c-1]==3){
 						RGBlist[n][2]=RGBlist[n][2]+1;
 						checkedBun[m][i]=3;
-
 					}
 				}
 			}
