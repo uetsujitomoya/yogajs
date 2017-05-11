@@ -185,8 +185,8 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		//	console.log(datae.length);
 		//	console.log(nagasa2.length);
 		///////////////////////////////////////////////////////
-
-
+		console.log("mazekozeHatsugenNumber");
+		console.log(mazekozeHatsugenNumber);
 
 		let row=0;//graph3の行番号
 		//階層構造をとるため，g要素を生成する部分とrect要素を生成している部分が連続している．
