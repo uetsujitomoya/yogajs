@@ -49,7 +49,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 
 		var nagasa2=[];//区分
 		var mazekoze=[];//カウンセラーを発言毎に、クライエントを文ごとに収録
-		var mazekozeWhich=[];//カウンセラーなら0
+		var isAnswerInMazekoze=[];//カウンセラーなら0
 
 		let mazekozeColor=[];
 		let mazekozeHatsugenNumber=[];
@@ -58,7 +58,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		//初手カウンセラー
 		nagasa2[0]=hatsugen[0].length*width/bunsuu;
 		mazekoze[0]=hatsugen[0];
-		mazekozeWhich[0]=0;
+		isAnswerInMazekoze[0]=0;
 		mazekozeColor[0]=color2[0];
 		mazekozeHatsugenNumber[0]=0;
 
@@ -71,7 +71,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 				if(d!=""){
 					nagasa2[h]=d.length*width/bunsuu;
 					mazekoze[h]=d;
-					mazekozeWhich[h]=1;
+					isAnswerInMazekoze[h]=1;
 					mazekozeColor[h]=colorBun[checked[c]];
 					mazekozeHatsugenNumber[h]=m;
 					h++;
@@ -85,7 +85,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			//カウンセラー
 			nagasa2[h]=hatsugen[m+1].length*width/bunsuu;
 			mazekoze[h]=hatsugen[m+1];
-			mazekozeWhich[h]=0;
+			isAnswerInMazekoze[h]=0;
 			mazekozeColor[h]=color2[(m+1)/2];
 			mazekozeHatsugenNumber[h]=m+1;
 		}
@@ -177,7 +177,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		}
 
 		for (jj=0; jj<nagasa2.length; jj++){
-			datae[jj] = {x: nagasa2[jj], y:40, color: mazekozeColor[jj],text:mojia[jj],which:mazekozeWhich[jj]};
+			datae[jj] = {x: nagasa2[jj], y:40, color: mazekozeColor[jj],text:mojia[jj],which:isAnswerInMazekoze[jj]};
 			//moji[jj]}//F_color2moji(color2[jj])}//, text:a}
 		}
 
@@ -214,7 +214,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		})
 		.attr("height",20)
 		.attr("fill", function(d, i){
-			if((row==0&& mazekozeWhich[i]==0)||(row==1&&mazekozeWhich[i]==1) ){
+			if((row==0&& isAnswerInMazekoze[i]==0)||(row==1&&isAnswerInMazekoze[i]==1) ){
 				if(i+1==mazekoze.length){
 					row++;
 				}
@@ -226,26 +226,26 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 				return "#f9f9f9";
 			}
 		})
-		.on('mouseover', function(d,i){
-			var e = document.getElementById('msg');
-			let k,l;
-			e.innerHTML = "";
-			if(mazekozeWhich[i]==0){
-				for(k=-3;k<=3;k++){
-					if(mazekozeHatsugenNumber[i]+k<0||mazekozeHatsugenNumber[i]+k>=hatsugen.length){
+		.on('mouseover', function(d,rectNumber){
+			var msgPart = document.getElementById('msg');
+			let gapFromMouseoverRect,l;
+			msgPart.innerHTML = "";
+			if(isAnswerInMazekoze[rectNumber]==0){
+				for(gapFromMouseoverRect=-3;gapFromMouseoverRect<=3;gapFromMouseoverRect++){
+					if(mazekozeHatsugenNumber[rectNumber]+gapFromMouseoverRect<0||mazekozeHatsugenNumber[rectNumber]+gapFromMouseoverRect>=hatsugen.length){
 						continue;
 					}
-					if(k==0){
-						e.innerHTML += "<b><u><font size=3>"+(1+mazekozeHatsugenNumber[i])+"(T) <font color="+color2[mazekozeHatsugenNumber[i]/2]+">【</font>"+hatsugen[mazekozeHatsugenNumber[i]]+"<font color="+color2[mazekozeHatsugenNumber[i]/2]+">】</font></font></u></b><font size=2><br><br></font>";
-					}else if(k%2==0){
-						e.innerHTML += "<font size=2>"+(1+k+mazekozeHatsugenNumber[i])+"(T) <font color="+color2[k/2+mazekozeHatsugenNumber[i]/2]+"><b>【</b></font>"+hatsugen[k+mazekozeHatsugenNumber[i]]+"<font color="+color2[k/2+mazekozeHatsugenNumber[i]/2]+"><b>】</b></font><br><br></font>";
+					if(gapFromMouseoverRect==0){
+						msgPart.innerHTML += "<b><u><font size=3>"+(1+mazekozeHatsugenNumber[rectNumber])+"(T) <font color="+color2[mazekozeHatsugenNumber[rectNumber]/2]+">【</font>"+hatsugen[mazekozeHatsugenNumber[rectNumber]]+"<font color="+color2[mazekozeHatsugenNumber[rectNumber]/2]+">】</font></font></u></b><font size=2><br><br></font>";
+					}else if(gapFromMouseoverRect%2==0){
+						msgPart.innerHTML += "<font size=2>"+(1+gapFromMouseoverRect+mazekozeHatsugenNumber[rectNumber])+"(T) <font color="+color2[gapFromMouseoverRect/2+mazekozeHatsugenNumber[rectNumber]/2]+"><b>【</b></font>"+hatsugen[gapFromMouseoverRect+mazekozeHatsugenNumber[rectNumber]]+"<font color="+color2[gapFromMouseoverRect/2+mazekozeHatsugenNumber[rectNumber]/2]+"><b>】</b></font><br><br></font>";
 					}else{//forループを回さないと各文ごとの表示ができない
-						e.innerHTML += (1+k+mazekozeHatsugenNumber[i])+"(C) ";
-						for(l=0;l<bun[k+mazekozeHatsugenNumber[i]].length;l++){
-							if(bun[k+mazekozeHatsugenNumber[i]][l]==""){continue;}
-							e.innerHTML += "<font size=2><font color="+colorBun[checkedBun[k+mazekozeHatsugenNumber[i]][l]]+"><b>【</b></font>"+bun[k+mazekozeHatsugenNumber[i]][l]+"<font color="+colorBun[checkedBun[k+mazekozeHatsugenNumber[i]][l]]+"><b>】</b></font></font>";
+						msgPart.innerHTML += (1+gapFromMouseoverRect+mazekozeHatsugenNumber[rectNumber])+"(C) ";
+						for(l=0;l<bun[gapFromMouseoverRect+mazekozeHatsugenNumber[rectNumber]].length;l++){
+							if(bun[gapFromMouseoverRect+mazekozeHatsugenNumber[rectNumber]][l]==""){continue;}
+							msgPart.innerHTML += "<font size=2><font color="+colorBun[checkedBun[gapFromMouseoverRect+mazekozeHatsugenNumber[rectNumber]][l]]+"><b>【</b></font>"+bun[gapFromMouseoverRect+mazekozeHatsugenNumber[rectNumber]][l]+"<font color="+colorBun[checkedBun[gapFromMouseoverRect+mazekozeHatsugenNumber[rectNumber]][l]]+"><b>】</b></font></font>";
 						}
-						e.innerHTML += "<font size=2><br><br></font>";
+						msgPart.innerHTML += "<font size=2><br><br></font>";
 					}
 				}
 			}
