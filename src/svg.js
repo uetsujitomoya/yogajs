@@ -93,7 +93,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 
 		var nagasa2=[];//区分
 		var mazekoze=[];//カウンセラーを発言毎に、クライエントを文ごとに収録
-		var mazekozeWhich=[];//カウンセラーなら0
+		var isAnswerInMazekoze=[];//カウンセラーなら0
 
 		let mazekozeColor=[];
 		let mazekozeHatsugenNumber=[];
@@ -102,7 +102,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		//初手カウンセラー
 		nagasa2[0]=hatsugen[0].length*width/bunsuu;
 		mazekoze[0]=hatsugen[0];
-		mazekozeWhich[0]=0;
+		isAnswerInMazekoze[0]=0;
 		mazekozeColor[0]=color2[0];
 		mazekozeHatsugenNumber[0]=0;
 
@@ -115,7 +115,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 				if(d!=""){
 					nagasa2[h]=d.length*width/bunsuu;
 					mazekoze[h]=d;
-					mazekozeWhich[h]=1;
+					isAnswerInMazekoze[h]=1;
 					mazekozeColor[h]=colorBun[checked[c]];
 					mazekozeHatsugenNumber[h]=m;
 					h++;
@@ -129,7 +129,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			//カウンセラー
 			nagasa2[h]=hatsugen[m+1].length*width/bunsuu;
 			mazekoze[h]=hatsugen[m+1];
-			mazekozeWhich[h]=0;
+			isAnswerInMazekoze[h]=0;
 			mazekozeColor[h]=color2[(m+1)/2];
 			mazekozeHatsugenNumber[h]=m+1;
 		}
@@ -195,6 +195,46 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		////////////////////////////////////////////////////////////////
 
 		var datae = [];
+<<<<<<< HEAD
+=======
+		var jj;
+		var mojia = [];
+		var jjj=0;
+
+		for (jj=0; jj<nagasa2.length; jj++){//色変えたからか。。
+			if(mazekozeColor[jj] == open3){
+				mojia[jj]='開 質問';
+			}else if(mazekozeColor[jj] == aiduchi5){
+				mojia[jj]="相槌";
+			}else if(mazekozeColor[jj] == close4){
+				mojia[jj]="閉 質問";
+			}else if(mazekozeColor[jj] ==kaishaku6){
+				mojia[jj]='解釈';
+			}else if(checked[jjj]==0){
+				mojia[jj]='未';jjj++;
+			}else if(checked[jjj]==1){
+				mojia[jj]='愛';jjj++;
+			}else if(checked[jjj]==2){
+				mojia[jj]='交友';jjj++;
+			}else if(checked[jjj]==3){
+				mojia[jj]='仕事';jjj++;
+			}else{
+				mojia[jj]='世間話';
+			}
+		}
+
+		for (jj=0; jj<nagasa2.length; jj++){
+			datae[jj] = {x: nagasa2[jj], y:40, color: mazekozeColor[jj],text:mojia[jj],which:isAnswerInMazekoze[jj]};
+			//moji[jj]}//F_color2moji(color2[jj])}//, text:a}
+		}
+
+
+		//	console.log(datae.length);
+		//	console.log(nagasa2.length);
+		///////////////////////////////////////////////////////
+		console.log("mazekozeHatsugenNumber");
+		console.log(mazekozeHatsugenNumber);
+>>>>>>> readJSONmanually
 
 		let row=0;//graph3の行番号
 		//階層構造をとるため，g要素を生成する部分とrect要素を生成している部分が連続している．
@@ -222,7 +262,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		})
 		.attr("height",20)
 		.attr("fill", function(d, i){
-			if((row==0&& mazekozeWhich[i]==0)||(row==1&&mazekozeWhich[i]==1) ){
+			if((row==0&& isAnswerInMazekoze[i]==0)||(row==1&&isAnswerInMazekoze[i]==1) ){
 				if(i+1==mazekoze.length){
 					row++;
 				}
@@ -234,15 +274,16 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 				return "#f9f9f9";
 			}
 		})
-		.on('mouseover', function(d,i){
-			var e = document.getElementById('msg');
-			let k,l;
-			e.innerHTML = "";
-			if(mazekozeWhich[i]==0){
-				for(k=-3;k<=3;k++){
-					if(mazekozeHatsugenNumber[i]+k<0||mazekozeHatsugenNumber[i]+k>=hatsugen.length){
+		.on('mouseover', function(d,rectNumber){
+			var msgPart = document.getElementById('msg');
+			let gapFromMouseoverRect,l;
+			msgPart.innerHTML = "";
+			if(isAnswerInMazekoze[rectNumber]==0){
+				for(gapFromMouseoverRect=-3;gapFromMouseoverRect<=3;gapFromMouseoverRect++){
+					if(mazekozeHatsugenNumber[rectNumber]+gapFromMouseoverRect<0||mazekozeHatsugenNumber[rectNumber]+gapFromMouseoverRect>=hatsugen.length){
 						continue;
 					}
+<<<<<<< HEAD
 					if(k==0){
 						e.innerHTML += "<b><u><font size=" + fontSizeInTextView + ">"+(1+mazekozeHatsugenNumber[i])+"("+counselorInTextView+") <font color="+color2[mazekozeHatsugenNumber[i]/2]+">【</font>"+hatsugen[mazekozeHatsugenNumber[i]]+"<font color="+color2[mazekozeHatsugenNumber[i]/2]+">】</font></font></u></b><font size=" + fontSizeInTextView + "><br><br></font>";
 					}else if(k%2==0){
@@ -254,6 +295,19 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 							e.innerHTML += "<font size=" + fontSizeInTextView + "><font color="+colorBun[checkedBun[k+mazekozeHatsugenNumber[i]][l]]+"><b>【</b></font>"+bun[k+mazekozeHatsugenNumber[i]][l]+"<font color="+colorBun[checkedBun[k+mazekozeHatsugenNumber[i]][l]]+"><b>】</b></font></font>";
 						}
 						e.innerHTML += "<font size=" + fontSizeInTextView + "><br><br></font>";
+=======
+					if(gapFromMouseoverRect==0){
+						msgPart.innerHTML += "<b><u><font size=3>"+(1+mazekozeHatsugenNumber[rectNumber])+"(T) <font color="+color2[mazekozeHatsugenNumber[rectNumber]/2]+">【</font>"+hatsugen[mazekozeHatsugenNumber[rectNumber]]+"<font color="+color2[mazekozeHatsugenNumber[rectNumber]/2]+">】</font></font></u></b><font size=2><br><br></font>";
+					}else if(gapFromMouseoverRect%2==0){
+						msgPart.innerHTML += "<font size=2>"+(1+gapFromMouseoverRect+mazekozeHatsugenNumber[rectNumber])+"(T) <font color="+color2[gapFromMouseoverRect/2+mazekozeHatsugenNumber[rectNumber]/2]+"><b>【</b></font>"+hatsugen[gapFromMouseoverRect+mazekozeHatsugenNumber[rectNumber]]+"<font color="+color2[gapFromMouseoverRect/2+mazekozeHatsugenNumber[rectNumber]/2]+"><b>】</b></font><br><br></font>";
+					}else{//forループを回さないと各文ごとの表示ができない
+						msgPart.innerHTML += (1+gapFromMouseoverRect+mazekozeHatsugenNumber[rectNumber])+"(C) ";
+						for(l=0;l<bun[gapFromMouseoverRect+mazekozeHatsugenNumber[rectNumber]].length;l++){
+							if(bun[gapFromMouseoverRect+mazekozeHatsugenNumber[rectNumber]][l]==""){continue;}
+							msgPart.innerHTML += "<font size=2><font color="+colorBun[checkedBun[gapFromMouseoverRect+mazekozeHatsugenNumber[rectNumber]][l]]+"><b>【</b></font>"+bun[gapFromMouseoverRect+mazekozeHatsugenNumber[rectNumber]][l]+"<font color="+colorBun[checkedBun[gapFromMouseoverRect+mazekozeHatsugenNumber[rectNumber]][l]]+"><b>】</b></font></font>";
+						}
+						msgPart.innerHTML += "<font size=2><br><br></font>";
+>>>>>>> readJSONmanually
 					}
 				}
 			}
