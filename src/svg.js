@@ -195,8 +195,6 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		////////////////////////////////////////////////////////////////
 
 		var datae = [];
-<<<<<<< HEAD
-=======
 		var jj;
 		var mojia = [];
 		var jjj=0;
@@ -234,7 +232,6 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		///////////////////////////////////////////////////////
 		console.log("mazekozeHatsugenNumber");
 		console.log(mazekozeHatsugenNumber);
->>>>>>> readJSONmanually
 
 		let row=0;//graph3の行番号
 		//階層構造をとるため，g要素を生成する部分とrect要素を生成している部分が連続している．
@@ -283,19 +280,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 					if(mazekozeHatsugenNumber[rectNumber]+gapFromMouseoverRect<0||mazekozeHatsugenNumber[rectNumber]+gapFromMouseoverRect>=hatsugen.length){
 						continue;
 					}
-<<<<<<< HEAD
-					if(k==0){
-						e.innerHTML += "<b><u><font size=" + fontSizeInTextView + ">"+(1+mazekozeHatsugenNumber[i])+"("+counselorInTextView+") <font color="+color2[mazekozeHatsugenNumber[i]/2]+">【</font>"+hatsugen[mazekozeHatsugenNumber[i]]+"<font color="+color2[mazekozeHatsugenNumber[i]/2]+">】</font></font></u></b><font size=" + fontSizeInTextView + "><br><br></font>";
-					}else if(k%2==0){
-						e.innerHTML += "<font size=" + fontSizeInTextView + ">"+(1+k+mazekozeHatsugenNumber[i])+"("+counselorInTextView+") <font color="+color2[k/2+mazekozeHatsugenNumber[i]/2]+"><b>【</b></font>"+hatsugen[k+mazekozeHatsugenNumber[i]]+"<font color="+color2[k/2+mazekozeHatsugenNumber[i]/2]+"><b>】</b></font><br><br></font>";
-					}else{//forループを回さないと各文ごとの表示ができない
-						e.innerHTML += (1+k+mazekozeHatsugenNumber[i])+"("+clientInTextView+") ";
-						for(l=0;l<bun[k+mazekozeHatsugenNumber[i]].length;l++){
-							if(bun[k+mazekozeHatsugenNumber[i]][l]==""){continue;}
-							e.innerHTML += "<font size=" + fontSizeInTextView + "><font color="+colorBun[checkedBun[k+mazekozeHatsugenNumber[i]][l]]+"><b>【</b></font>"+bun[k+mazekozeHatsugenNumber[i]][l]+"<font color="+colorBun[checkedBun[k+mazekozeHatsugenNumber[i]][l]]+"><b>】</b></font></font>";
-						}
-						e.innerHTML += "<font size=" + fontSizeInTextView + "><br><br></font>";
-=======
+
 					if(gapFromMouseoverRect==0){
 						msgPart.innerHTML += "<b><u><font size=3>"+(1+mazekozeHatsugenNumber[rectNumber])+"(T) <font color="+color2[mazekozeHatsugenNumber[rectNumber]/2]+">【</font>"+hatsugen[mazekozeHatsugenNumber[rectNumber]]+"<font color="+color2[mazekozeHatsugenNumber[rectNumber]/2]+">】</font></font></u></b><font size=2><br><br></font>";
 					}else if(gapFromMouseoverRect%2==0){
@@ -307,7 +292,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 							msgPart.innerHTML += "<font size=2><font color="+colorBun[checkedBun[gapFromMouseoverRect+mazekozeHatsugenNumber[rectNumber]][l]]+"><b>【</b></font>"+bun[gapFromMouseoverRect+mazekozeHatsugenNumber[rectNumber]][l]+"<font color="+colorBun[checkedBun[gapFromMouseoverRect+mazekozeHatsugenNumber[rectNumber]][l]]+"><b>】</b></font></font>";
 						}
 						msgPart.innerHTML += "<font size=2><br><br></font>";
->>>>>>> readJSONmanually
+
 					}
 				}
 			}
