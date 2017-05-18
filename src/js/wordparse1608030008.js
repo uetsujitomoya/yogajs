@@ -45,7 +45,7 @@ var ClassifyWithFirstWordDictionary = (name,keitaisokaiseki,checkboxlist,chboxli
 
 	let orijinalText;
 	//var data = JSON.parse(event.target.result);
-    $.getJSON("./json/160803dummy.json" , function(data) {
+    $.getJSON("./json/1030.json" , function(data) {
     	orijinalText=data[0].a;
 	});
 

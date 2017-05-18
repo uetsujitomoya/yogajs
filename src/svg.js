@@ -60,10 +60,10 @@ let aiduchi5="#9b59b6";
 let seken7="#2c3e50";
 let kaishaku6="#f1c40f";
 
-var height0=200,width=1320;
+var height0=200;
 var height =200;
 
-var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxmax,startTime,graph,checked,ranshin) => {
+var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxmax,startTime,graph,checked,ranshin,width,bunsuu) => {
 
 	const upperName = "カウンセラー";
     const lowerName = "クライエント";
@@ -72,10 +72,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
     const fontSizeInTextView = 3;
 
 	var m;
-	var bunsuu=2;//前後の余白
-	for(m=1;m<hatsugen.length;m=m+2){//患者の発言で間隔を作る
-		bunsuu = bunsuu + hatsugen[m].length;
-	}
+	
 	var nagasa=[];//縦棒の位置
 	nagasa[0]=1*width/(bunsuu+1);
 	for(m=1;m<hatsugen.length;m=m+2){
@@ -627,6 +624,13 @@ var funcChecked2 = (name,storage,chboxlist,chboxlist2,checked2,taiou,taiou2,chbo
 
 var setForViz = (name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,isUsingDictionaryWithWord2Vec) => {
 
+    var bunsuu=2;//前後の余白
+    for(m=1;m<hatsugen.length;m=m+2){//患者の発言で間隔を作る
+        bunsuu = bunsuu + hatsugen[m].length;
+    }
+
+    var width=2*bunsuu;
+
     console.log("%centerred setForViz",'color:red');
 
 	let graphNumber=2;
@@ -739,7 +743,7 @@ var setForViz = (name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsu
 			stackdataArr[h][3*m+2]= {x:3*m+3,y:0};
 		}
 	}
-	viz(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxmax,startTime,graph,checked,ranshin);
+	viz(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxmax,startTime,graph,checked,ranshin,width,bunsuu);
 	//console.log("chboxlength2 in svg.js=%d",chboxlength2);
 	return{
 		chboxlist:chboxlist,
