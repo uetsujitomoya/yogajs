@@ -45,7 +45,7 @@ var ClassifyWithFirstWordDictionary = (name,keitaisokaiseki,checkboxlist,chboxli
 
 	let orijinalText;
 	//var data = JSON.parse(event.target.result);
-    $.getJSON("./json/1030.json" , function(data) {
+	$.getJSON("./json/1030.json" , function(data) {
     	orijinalText=data[0].a;
 	});
 
@@ -318,20 +318,27 @@ var ClassifyWithFirstWordDictionary = (name,keitaisokaiseki,checkboxlist,chboxli
 
         selectGraphShape(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,visResult);
 
+        
+
 		document.getElementById('radio_buttons').onchange = () => {
-			setForViz(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin);
+			setForViz(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,zoom_value);
 		};//graphの形状を切り替えた際もここで再描画される
 
 		//graphのラジオボタン変わったらまた描画
-
+		document.getElementById('zoom').addEventListener('click',function(){getVizResult(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,visResult);});
 		return{
 			name:name,RGBlist:RGBlist,keitaisokaiseki:keitaisokaiseki,hatsugen:hatsugen,bun:bun,chboxlist:chboxlist,chboxlist2:chboxlist2,checked:checked,checked2:checked2,taiou:taiou,taiou2:taiou2,chboxlength:chboxlength,chboxlength2:chboxlength2
 		};
 	});
 };
 
+
 let getVizResult=(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,visResult)=>{
-    visResult = setForViz(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin);//形態素解析後に1度目の描画
+   
+    let zoom_value = document.getElementById("zoom_value").value;
+    console.log(zoom_value);
+
+    visResult = setForViz(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,zoom_value);//形態素解析後に1度目の描画
     chboxlist = visResult.chboxlist;
     chboxlist2 = visResult.chboxlist2;
     RGBlist = visResult.RGBlist;

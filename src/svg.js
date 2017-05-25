@@ -622,14 +622,16 @@ var funcChecked2 = (name,storage,chboxlist,chboxlist2,checked2,taiou,taiou2,chbo
 	}
 };
 
-var setForViz = (name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,isUsingDictionaryWithWord2Vec) => {
+var setForViz = (name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,zoom_value) => {
+
+    let isUsingDictionaryWithWord2Vec = 0;
 
     var bunsuu=2;//前後の余白
     for(m=1;m<hatsugen.length;m=m+2){//患者の発言で間隔を作る
         bunsuu = bunsuu + hatsugen[m].length;
     }
-
-    var width=2*bunsuu;
+    console.info(zoom_value);
+    var width=zoom_value*bunsuu;
 
     console.log("%centerred setForViz",'color:red');
 
