@@ -28,6 +28,7 @@ let selectGraphShape = function(name,storage,keitaisokaiseki,chboxlist,chboxlist
 
 var ClassifyWithFirstWordDictionary = (name,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2) => {
 
+	let jsonName = "160803dummy";
 	var startTime = new Date();
 	console.log(startTime);
 
@@ -45,7 +46,7 @@ var ClassifyWithFirstWordDictionary = (name,keitaisokaiseki,checkboxlist,chboxli
 
 	let orijinalText;
 	//var data = JSON.parse(event.target.result);
-	$.getJSON("./json/1030.json" , function(data) {
+	$.getJSON("./json/"+jsonName+".json" , function(data) {
     	orijinalText=data[0].a;
 	});
 
