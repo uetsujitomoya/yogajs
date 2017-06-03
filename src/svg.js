@@ -1,3 +1,7 @@
+//<コンパイル方法>
+//yogajsまで移動
+//npm run build でコンパイル
+
 import d3 from "d3";
 
 //let love="#ffeeff";
@@ -56,10 +60,10 @@ let aiduchi5="#9b59b6";
 let seken7="#2c3e50";
 let kaishaku6="#f1c40f";
 
-var height0=200,width=1320;
+var height0=200;
 var height =200;
 
-var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxmax,startTime,graph,checked,ranshin) => {
+var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxmax,startTime,graph,checked,ranshin,width,bunsuu) => {
 
 	const upperName = "カウンセラー";
     const lowerName = "クライエント";
@@ -68,10 +72,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
     const fontSizeInTextView = 3;
 
 	var m;
-	var bunsuu=2;//前後の余白
-	for(m=1;m<hatsugen.length;m=m+2){//患者の発言で間隔を作る
-		bunsuu = bunsuu + hatsugen[m].length;
-	}
+	
 	var nagasa=[];//縦棒の位置
 	nagasa[0]=1*width/(bunsuu+1);
 	for(m=1;m<hatsugen.length;m=m+2){
@@ -271,30 +272,54 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 				return "#f9f9f9";
 			}
 		})
-		.on('mouseover', function(d,rectNumber){
-			var msgPart = document.getElementById('msg');
-			let gapFromMouseoverRect,l;
-			msgPart.innerHTML = "";
-			if(isAnswerInMazekoze[rectNumber]==0){
-				for(gapFromMouseoverRect=-3;gapFromMouseoverRect<=3;gapFromMouseoverRect++){
-					if(mazekozeHatsugenNumber[rectNumber]+gapFromMouseoverRect<0||mazekozeHatsugenNumber[rectNumber]+gapFromMouseoverRect>=hatsugen.length){
-						continue;
-					}
 
-					if(gapFromMouseoverRect==0){
-						msgPart.innerHTML += "<b><u><font size=3>"+(1+mazekozeHatsugenNumber[rectNumber])+"(T) <font color="+color2[mazekozeHatsugenNumber[rectNumber]/2]+">【</font>"+hatsugen[mazekozeHatsugenNumber[rectNumber]]+"<font color="+color2[mazekozeHatsugenNumber[rectNumber]/2]+">】</font></font></u></b><font size=2><br><br></font>";
-					}else if(gapFromMouseoverRect%2==0){
-						msgPart.innerHTML += "<font size=2>"+(1+gapFromMouseoverRect+mazekozeHatsugenNumber[rectNumber])+"(T) <font color="+color2[gapFromMouseoverRect/2+mazekozeHatsugenNumber[rectNumber]/2]+"><b>【</b></font>"+hatsugen[gapFromMouseoverRect+mazekozeHatsugenNumber[rectNumber]]+"<font color="+color2[gapFromMouseoverRect/2+mazekozeHatsugenNumber[rectNumber]/2]+"><b>】</b></font><br><br></font>";
-					}else{//forループを回さないと各文ごとの表示ができない
-						msgPart.innerHTML += (1+gapFromMouseoverRect+mazekozeHatsugenNumber[rectNumber])+"(C) ";
-						for(l=0;l<bun[gapFromMouseoverRect+mazekozeHatsugenNumber[rectNumber]].length;l++){
-							if(bun[gapFromMouseoverRect+mazekozeHatsugenNumber[rectNumber]][l]==""){continue;}
-							msgPart.innerHTML += "<font size=2><font color="+colorBun[checkedBun[gapFromMouseoverRect+mazekozeHatsugenNumber[rectNumber]][l]]+"><b>【</b></font>"+bun[gapFromMouseoverRect+mazekozeHatsugenNumber[rectNumber]][l]+"<font color="+colorBun[checkedBun[gapFromMouseoverRect+mazekozeHatsugenNumber[rectNumber]][l]]+"><b>】</b></font></font>";
-						}
-						msgPart.innerHTML += "<font size=2><br><br></font>";
+		.on('mouseover', function(d,i){
+			var e = document.getElementById('msg');
+			let k,l;
+			e.innerHTML = "";
+			if(mazekozeWhich[i]==0){    //カウンセラー
+			    for(k=-3;k<=3;k++){
+			        if(mazekozeHatsugenNumber[i]+k<0||mazekozeHatsugenNumber[i]+k>=hatsugen.length){
+			            continue;
+			        }
+			        if(k==0){
+			            e.innerHTML += "<b><u><font size=" + fontSizeInTextView + ">"+(1+mazekozeHatsugenNumber[i])+"("+counselorInTextView+") <font color="+color2[mazekozeHatsugenNumber[i]/2]+">【</font>"+hatsugen[mazekozeHatsugenNumber[i]]+"<font color="+color2[mazekozeHatsugenNumber[i]/2]+">】</font></font></u></b><font size=" + fontSizeInTextView + "><br><br></font>";
+			        }else if(k%2==0){
+			            e.innerHTML += "<font size=" + fontSizeInTextView + ">"+(1+k+mazekozeHatsugenNumber[i])+"("+counselorInTextView+") <font color="+color2[k/2+mazekozeHatsugenNumber[i]/2]+"><b>【</b></font>"+hatsugen[k+mazekozeHatsugenNumber[i]]+"<font color="+color2[k/2+mazekozeHatsugenNumber[i]/2]+"><b>】</b></font><br><br></font>";
+			        }else{//forループを回さないと各文ごとの表示ができない
+			            e.innerHTML += (1+k+mazekozeHatsugenNumber[i])+"("+clientInTextView+") ";
+			            for(l=0;l<bun[k+mazekozeHatsugenNumber[i]].length;l++){
+			                if(bun[k+mazekozeHatsugenNumber[i]][l]==""){continue;}
+			                e.innerHTML += "<font size=" + fontSizeInTextView + "><font color="+colorBun[checkedBun[k+mazekozeHatsugenNumber[i]][l]]+"><b>【</b></font>"+bun[k+mazekozeHatsugenNumber[i]][l]+"<font color="+colorBun[checkedBun[k+mazekozeHatsugenNumber[i]][l]]+"><b>】</b></font></font>";
+			            }
+			            e.innerHTML += "<font size=" + fontSizeInTextView + "><br><br></font>";
+			        }
+			    }
+			}else{  //患者
+			    for(k=-3;k<=3;k++){
+			        if(mazekozeHatsugenNumber[i]+k<0||mazekozeHatsugenNumber[i]+k>=hatsugen.length){
+			            continue;
+			        }
+			        if(k==0){
+			            e.innerHTML += (1+k+mazekozeHatsugenNumber[i])+"("+clientInTextView+") ";
+			            for(l=0;l<bun[k+mazekozeHatsugenNumber[i]].length;l++){
+			                if(bun[k+mazekozeHatsugenNumber[i]][l]==""){continue;}
+			                e.innerHTML += "<u><font size=" + fontSizeInTextView + "><font color="+colorBun[checkedBun[k+mazekozeHatsugenNumber[i]][l]]+"><b>【</b></font>"+bun[k+mazekozeHatsugenNumber[i]][l]+"<font color="+colorBun[checkedBun[k+mazekozeHatsugenNumber[i]][l]]+"><b>】</b></font></font></u>";
+			            }
+			            e.innerHTML += "<font size=" + fontSizeInTextView + "><br><br></font>";
+			        }else if(k%2==0){
+			            e.innerHTML += (1+k+mazekozeHatsugenNumber[i])+"("+clientInTextView+") ";
+			            for(l=0;l<bun[k+mazekozeHatsugenNumber[i]].length;l++){
+			                if(bun[k+mazekozeHatsugenNumber[i]][l]==""){continue;}
+			                e.innerHTML += "<font size=" + fontSizeInTextView + "><font color="+colorBun[checkedBun[k+mazekozeHatsugenNumber[i]][l]]+"><b>【</b></font>"+bun[k+mazekozeHatsugenNumber[i]][l]+"<font color="+colorBun[checkedBun[k+mazekozeHatsugenNumber[i]][l]]+"><b>】</b></font></font>";
+			            }
+			            e.innerHTML += "<font size=" + fontSizeInTextView + "><br><br></font>";
 
-					}
-				}
+
+			        }else{//forループを回さないと各文ごとの表示ができない
+			            e.innerHTML += "<font size=" + fontSizeInTextView + ">"+(1+k+mazekozeHatsugenNumber[i])+"("+counselorInTextView+") <font color="+color2[k/2+mazekozeHatsugenNumber[i]/2]+"><b>【</b></font>"+hatsugen[k+mazekozeHatsugenNumber[i]]+"<font color="+color2[k/2+mazekozeHatsugenNumber[i]/2]+"><b>】</b></font><br><br></font>";
+			        }
+			    }
 			}
 		});
 		/////////////////////////////////////////////////////////////////////
@@ -635,7 +660,16 @@ var funcChecked2 = (name,storage,chboxlist,chboxlist2,checked2,taiou,taiou2,chbo
 	}
 };
 
-var setForViz = (name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,isUsingDictionaryWithWord2Vec) => {
+var setForViz = (name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,zoom_value) => {
+
+    let isUsingDictionaryWithWord2Vec = 0;
+
+    var bunsuu=2;//前後の余白
+    for(m=1;m<hatsugen.length;m=m+2){//患者の発言で間隔を作る
+        bunsuu = bunsuu + hatsugen[m].length;
+    }
+    console.info(zoom_value);
+    var width=zoom_value*bunsuu;
 
     console.log("%centerred setForViz",'color:red');
 
@@ -748,7 +782,7 @@ var setForViz = (name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsu
 			stackdataArr[h][3*m+2]= {x:3*m+3,y:0};
 		}
 	}
-	viz(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxmax,startTime,graph,checked,ranshin);
+	viz(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxmax,startTime,graph,checked,ranshin,width,bunsuu);
 	//console.log("chboxlength2 in svg.js=%d",chboxlength2);
 	return{
 		chboxlist:chboxlist,
