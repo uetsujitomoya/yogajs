@@ -277,7 +277,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			var e = document.getElementById('msg');
 			let k,l;
 			e.innerHTML = "";
-			if(mazekozeWhich[i]==0){    //カウンセラー
+			if(isAnswerInMazekoze[i]==0){    //カウンセラー
 			    for(k=-3;k<=3;k++){
 			        if(mazekozeHatsugenNumber[i]+k<0||mazekozeHatsugenNumber[i]+k>=hatsugen.length){
 			            continue;
