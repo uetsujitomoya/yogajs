@@ -3,6 +3,41 @@ import $ from 'jquery';
 import {select} from "../select.js";
 import {setForViz} from "../svg.js";
 
+
+let readJson = (originalText,event,jsonName) => {
+    let signal = "blue";
+
+    switch (signal) {
+        case "red":
+            readJsonAutomatically(jsonName,originalText);
+            break;
+		/*
+		 case "green":
+		 case "blue":
+		 console.log("go!");
+		 break;
+		 case "yellow":
+		 console.log("slow down!");
+		 break;*/
+        default:
+            readJsonManually(originalText,event);
+            break;
+    }
+
+};
+
+let readJsonAutomatically=(jsonName,originalText)=>{
+    $.getJSON("./json/"+jsonName+".json" , function(data) {
+        originalText=data[0].a;
+    });
+};
+
+let readJsonManually=(originalText,event)=>{
+	console.log(event);
+    originalText = JSON.parse(event.target.result);
+};
+
+
 var makeOnClick = (c) =>{
 	document.getElementById("b"+c).onclick = () => {
 		const id = "r"+c;
@@ -26,7 +61,7 @@ let selectGraphShape = function(name,storage,keitaisokaiseki,chboxlist,chboxlist
     };//graphの形状を切り替えた際もここで再描画される
 };
 
-var ClassifyWithFirstWordDictionary = (name,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2) => {
+var ClassifyWithFirstWordDictionary = (name,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,originalText) => {
 
 	let jsonName = "160803dummy";
 	var startTime = new Date();
@@ -44,17 +79,22 @@ var ClassifyWithFirstWordDictionary = (name,keitaisokaiseki,checkboxlist,chboxli
 	checkboxlist=[];
 	bun=[];
 
-	let orijinalText;
 	//var data = JSON.parse(event.target.result);
+	/*
 	$.getJSON("./json/"+jsonName+".json" , function(data) {
     	orijinalText=data[0].a;
 	});
+	*/
 
+	//readJson(originalText,event,jsonName);
+
+    console.log("%c enter kuromoji 91",'color:red');
 	return kuromoji.builder({dicPath: 'dict/'}).build((err, tokenizer) => {
 
         let visResult;
-
-        const path = tokenizer.tokenize(orijinalText);
+        console.log("%c entered kuromoji 95",'color:red');
+        console.log(originalText);
+        const path = tokenizer.tokenize(originalText);
 		n=0;
 		var tangosuu=0;
 		m=0;

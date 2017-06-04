@@ -1,4 +1,5 @@
 import {ClassifyWithFirstWordDictionary} from "./js/wordparse1608030008.js";
+//import {ClassifyWithFirstWordDictionary} from "./wordparse.js";
 //import {AcceptKnp} from "./processKnp.js";
 import {ClassifyWithKNP} from "./processKnp.js"; //processKNP
 import {ClassifyWithWordDictionary} from "./changeDictionary.js"; //AcceptDictionary
@@ -38,6 +39,8 @@ var taiou2=[];
 var chboxlength,chboxlength2;
 let RGB=[];
 var test2;
+let RGBlist=[];
+let checkboxlist=[];
 
 let switchClassificationMethod=()=>{
     const SwitchClassificationMethodRadio = document.getElementById("SwitchClassificationMethod").children;
@@ -52,7 +55,8 @@ let switchClassificationMethod=()=>{
             reader.onload = function(event) {
                 //var result = funcReaderOnload(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
                 console.log("%center ClassifyWithWordDictionary 48",'color:red');
-                let resultWithNewDictionary = ClassifyWithWordDictionary(name,event,keitaisokaiseki,chboxlist,chboxlist2,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,newLoveDictionary,newWorkDictionary,newFriendDictionary);
+                //let resultWithNewDictionary = ClassifyWithWordDictionary(name,event,keitaisokaiseki,chboxlist,chboxlist2,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,newLoveDictionary,newWorkDictionary,newFriendDictionary);
+                let result = ClassifyWithFirstWordDictionary(name,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
             };
             reader.readAsText(file);
 
@@ -81,19 +85,20 @@ switchClassificationMethod();
 
 //console.log("After resultWithKNP");
 
-/*document.getElementById('load-button').addEventListener('click', function () {
+document.getElementById('load-button').addEventListener('click', function () {
 
   var file = document.getElementById('file-input').files[0];
   var name = file.name;
   var reader = new FileReader();
-  reader.onload = function(event) {*/
-    //var result = funcReaderOnload(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
+  reader.onload = function(event) {
+    //let result = funcReaderOnload(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
+      let originalText=event.target.result;
       console.log("%center ClassifyWithFirstWordDictionary 85",'color:red');
-      let resultWithNewDictionary = ClassifyWithFirstWordDictionary(name,keitaisokaiseki,chboxlist,chboxlist2,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,newLoveDictionary,newWorkDictionary,newFriendDictionary);
-  /*};
+      let resultWithNewDictionary = ClassifyWithFirstWordDictionary(name,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,originalText);
+  };
   reader.readAsText(file);
 
-});*/
+});
 
   /*170410knpLoadButton
 
