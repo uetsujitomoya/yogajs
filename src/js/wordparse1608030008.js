@@ -129,7 +129,7 @@ var ClassifyWithFirstWordDictionary = (name,keitaisokaiseki,checkboxlist,chboxli
 					tangosuu++;
 
 					if(path[n].basic_form=="。"||path[n].basic_form=="？"||path[n].basic_form=="?"||path[n].basic_form=="："||path[n].basic_form==":"||path[n].word_id=="2613630"||path[n].surface_form=="･･･？："||path[n].surface_form==")："
-					||path[n].surface_form=="…"||path[n].surface_form=="……"||path[n].surface_form=="・・・"||path[n].surface_form=="･･･"){
+					||path[n].surface_form=="…"||path[n].surface_form=="……"||path[n].surface_form=="・・・"||path[n].surface_form=="･･･"||path[n].surface_form.indexOf('〈') != -1||path[n].surface_form.indexOf('〉') != -1){
 						break;
 					}
 					if(m%2==1){
@@ -227,7 +227,7 @@ var ClassifyWithFirstWordDictionary = (name,keitaisokaiseki,checkboxlist,chboxli
 					}
 					break;
 				}
-				if(path[n].word_id=="2613630"||path[n].basic_form=="："||path[n].basic_form==":"||path[n].surface_form=="･･･？："||path[n].surface_form==")："){
+				if(path[n].word_id=="2613630"||path[n].basic_form=="："||path[n].basic_form==":"||path[n].surface_form=="･･･？："||path[n].surface_form==")："||path[n].surface_form.indexOf('〈') != -1||path[n].surface_form.indexOf('〉') != -1){
 					if(m%2==0 ){
 						if( i<=2 && tangosuu<=7){
 							RGBlist[m/2][5]=1;
