@@ -69,7 +69,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
     const lowerName = "クライエント";
     const counselorInTextView = "カ";
     const clientInTextView = "ク";
-    const fontSizeInTextView = 3;
+    const fontSizeInTextView = 2;
 
 	var m;
 	
