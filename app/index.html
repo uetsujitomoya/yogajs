@@ -5,6 +5,8 @@
     Yoga.js
   </title>
   <meta charset="utf-8">
+  <link rel="stylesheet" href="bootstrap.min.css" />
+  <link rel="stylesheet" href="bootstrap-slider.min.css" />
   <style>
   .node {
     stroke-width: 3px;
@@ -103,13 +105,19 @@
         <label>倍率：<input type="text" name="name" value="3" size="5" id="zoom_value"></label>
         <button id="zoom">変更</button><br>
         <!--<input type="submit" value="送信"><input type="reset" value="リセット"> -->
-        
+
+       <input id="slider1" type="text" data-slider-min="1" data-slider-max="10" data-slider-step="1" data-slider-value="3" />
+       <span id="CurrentSliderValLabel"> 倍率: <span id="SliderVal">3</span></span>
+       <br />
+
+
+
 
         <!-- <font color=dimgray><b><u><font color=black size=4>縦軸</font></u></b>の単位：文の数、 <b><u><font color=black size=4>横軸</font></u></b>の単位：患者の全ての発言の全ての文字数</font><br> -->
         ・クライエントの発言について<font color="#ff7777">「愛」</font><font color="#00cc00">「交友」</font><font color="#7777ff">「仕事」</font><br>
         ・カウンセラーの発言について<font color="#b52f25">「開かれた質問」</font><font color="#2b4e91">「閉じられた質問」</font><font color="purple">「相づち」</font><font color="orange">「解釈」</font><font color="black">「世間話」</font>
         <!-- <div id="timeKeeping"></div>-->
-        <div id="svgdiv" style="height:300px; width:1000px; overflow-x:scroll"></div>
+        <div id="svgdiv" style="height:300px; width:1200px; overflow-x:scroll"></div>
         <br>
 
         <font size=3 color=#2c3e50><b><u><font color=black size=4>左下</font></u></b>のエリアで、クライエントが発した文/カウンセラーが発した質問について分類してください。グラフの<b><u><font color=black size=4>縦棒</font></u></b>をマウスオーバーすると<b><u><font color=black size=4>右下</font></u></b>のエリアに縦棒周辺の内容が表示されます</font><br><br>
