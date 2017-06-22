@@ -537,7 +537,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 					e.innerHTML += (1+k+2*i)+"("+clientInTextView+") ";
 					for(l=0;l<bun[k+2*i].length;l++){
 						if(bun[k+2*i][l]==""){continue;}
-						e.innerHTML += "<font size=" + fontSizeInTextView + "><font color="+colorBun[checkedBun[k+2*i][l]]+"><b>【</b></font>"+bun[k+2*i][l]+"<font color="+colorBun[checkedBun[k+2*i][l]]+"><b>】</b></font></font>";
+						e.innerHTML += "<font size=" + fontSizeInTextView + "><font color="+colorBun[checkedBun[k+2*i][l]]+"><b>【</b></font>"+bun[k+2*i][l]+"<font color="+colorBun[checkedBun[k+2*i][l]]+"><b>】</b></font></font><br>   ";
 					}
 					e.innerHTML += "<font size=" + fontSizeInTextView + "><br><br></font>";
 				}
