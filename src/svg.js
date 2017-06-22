@@ -195,40 +195,40 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 
 		////////////////////////////////////////////////////////////////
 
-		var datae = [];
+		var rectDataObjectArray = [];
 		var jj;
-		var mojia = [];
+		var textOnRect = [];
 		var jjj=0;
 
 		for (jj=0; jj<nagasa2.length; jj++){//色変えたからか。。
 			if(mazekozeColor[jj] == open3){
-				mojia[jj]='開 質問';
+				textOnRect[jj]='開 質問';
 			}else if(mazekozeColor[jj] == aiduchi5){
-				mojia[jj]="相槌";
+				textOnRect[jj]="相槌";
 			}else if(mazekozeColor[jj] == close4){
-				mojia[jj]="閉 質問";
+				textOnRect[jj]="閉 質問";
 			}else if(mazekozeColor[jj] ==kaishaku6){
-				mojia[jj]='解釈';
+				textOnRect[jj]='解釈';
 			}else if(checked[jjj]==0){
-				mojia[jj]='未';jjj++;
+				textOnRect[jj]='未';jjj++;
 			}else if(checked[jjj]==1){
-				mojia[jj]='愛';jjj++;
+				textOnRect[jj]='愛';jjj++;
 			}else if(checked[jjj]==2){
-				mojia[jj]='交友';jjj++;
+				textOnRect[jj]='交友';jjj++;
 			}else if(checked[jjj]==3){
-				mojia[jj]='仕事';jjj++;
+				textOnRect[jj]='仕事';jjj++;
 			}else{
-				mojia[jj]='世間話';
+				textOnRect[jj]='世間話';
 			}
 		}
 
 		for (jj=0; jj<nagasa2.length; jj++){
-			datae[jj] = {x: nagasa2[jj], y:40, color: mazekozeColor[jj],text:mojia[jj],which:isAnswerInMazekoze[jj]};
+			rectDataObjectArray[jj] = {x: nagasa2[jj], y:40, color: mazekozeColor[jj],text:textOnRect[jj],which:isAnswerInMazekoze[jj]};
 			//moji[jj]}//F_color2moji(color2[jj])}//, text:a}
 		}
 
 
-		//	console.log(datae.length);
+		//	console.log(rectDataObjectArray.length);
 		//	console.log(nagasa2.length);
 		///////////////////////////////////////////////////////
 		console.log("mazekozeHatsugenNumber");
@@ -324,15 +324,16 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 		});
 		/////////////////////////////////////////////////////////////////////
 
-		//下側
+		//下側の文字？じゃなかった
 
+		/*
 		svg.selectAll("g")
-		.data(datae)
+		.data(rectDataObjectArray)
 		.enter()
 		.append("g")
 
 		.selectAll('text')
-		.data(datae)
+		.data(rectDataObjectArray)
 		.enter()
 		.append('text')
 		.text((d)=>d.text)
@@ -349,6 +350,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 				return 35+d.which*50;
 			}
 		);
+		*/
 
 		/////////////////////////////////////////////////////////////////////
 
@@ -408,8 +410,8 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 
 		addTextToSVG(0,axisDescriptionY,axisDescription);
 
-		console.info("datae");
-		console.info(datae);
+		console.info("rectDataObjectArray");
+		console.info(rectDataObjectArray);
 
 	}else{
 
@@ -544,6 +546,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			}
 		});
 
+		/*
 		context.selectAll('text')
 		.data(datae3)
 		.enter()
@@ -555,6 +558,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 			y: (d) => d.y+25,
 			fill: (d) => d.color
 		});
+		*/
 
 		////////*////////////////////////////////////////////////////////
 		///////////////////////////////////////////////////////////////

@@ -23,7 +23,6 @@ let readJson = (originalText,event,jsonName) => {
             readJsonManually(originalText,event);
             break;
     }
-
 };
 
 let readJsonAutomatically=(jsonName,originalText)=>{
@@ -366,7 +365,9 @@ var ClassifyWithFirstWordDictionary = (name,keitaisokaiseki,checkboxlist,chboxli
 		};
 
 		//graphのラジオボタン変わったらまた描画
-		document.getElementById('zoom').addEventListener('click',function(){getVizResult(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,visResult);});
+		document.getElementById('zoom').addEventListener('click',function(){
+			getVizResult(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,visResult);
+		});
 		return{
 			name:name,RGBlist:RGBlist,keitaisokaiseki:keitaisokaiseki,hatsugen:hatsugen,bun:bun,chboxlist:chboxlist,chboxlist2:chboxlist2,checked:checked,checked2:checked2,taiou:taiou,taiou2:taiou2,chboxlength:chboxlength,chboxlength2:chboxlength2
 		};
