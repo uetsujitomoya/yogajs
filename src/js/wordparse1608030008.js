@@ -373,7 +373,8 @@ var ClassifyWithFirstWordDictionary = (name,keitaisokaiseki,checkboxlist,chboxli
 		$("#slider1").slider();
 		$("#slider1").on("slide", function(slideEvt) {
 		    $("#SliderVal").text(slideEvt.value);
-		    getVizResult(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,visResult);
+		    let zoom_value = slideEvt.value;
+		    setForViz(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,zoom_value);
 		});
 
 
