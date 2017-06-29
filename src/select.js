@@ -155,13 +155,20 @@ var select =(jsonName,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,
                 console.log("RGB[%d][%d]",m,i);
                 console.log(RGB[m][i]);
                 taiou[answerNumber-1]=n-1;
+
+               
+
                 console.log("c=%d,n=%d,m=%d,i=%d",answerNumber,n,m,i);
+                
+
                 if(RGB[m][i][0]+RGB[m][i][1]+RGB[m][i][2]>=2){
                     target.innerHTML += "<div id=\"b" + answerNumber + "\" style=\"cursor: pointer\"><u>" + (m+1) + "(C) " + bun[m][i] + "</u></div><div id=\"r" + answerNumber + "\"><label><input type=radio name=\"r" + answerNumber + "\" value=0>どれにも含まない</label></div><br>";
 
                 }else{
                     target.innerHTML += "<div id=\"b" + answerNumber + "\" style=\"cursor: pointer\"><font size=2><u>" + (m+1) + "(C) " + bun[m][i] + "</u></div><div id=\"r" + answerNumber + "\" class=\"hide\"<label><input type=radio name=\"r" + answerNumber + "\" value=0>どれにも含まない</label></div></font><br>";
                 }
+
+                
 
                 if(RGB[m][i][0]!=0){
                     chboxlist[n][1]=0;
@@ -181,6 +188,11 @@ var select =(jsonName,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,
                 }else{
                     document.getElementById("r"+answerNumber).innerHTML += "<label><input type=radio name=\"r" + answerNumber + "\" value=3><font color=\"#7777ff\">【</font>「仕事」に含む<font color=\"#7777ff\">】</font></label>";
                 }
+
+                document.getElementById("b"+answerNumber).innerHTML +=" <button id=\"change" + answerNumber + "\">発言者変更</button>";
+
+
+
             }
         }else{
             console.log("セラピストの質問");
@@ -224,8 +236,21 @@ var select =(jsonName,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,
                 target.innerHTML += "<div id=\"bs" + questionNumber + "\" style=\"cursor: pointer\"><u>"+ (m+1) + "(T) "  + hatsugen[m] + "</u></div><div id=\"rs" + questionNumber + "\"><label><input type=radio name=\"rs" + questionNumber + "\" value=3><font color=deeppink>開かれた質問</font></label><label><input type=radio name=\"rs" + questionNumber + "\" value=4><font color=blue>閉じられた質問</font></label><label><input type=radio name=\"rs" + questionNumber + "\" value=5><font color=purple>相づち</font></label><label><input type=radio name=\"rs" + questionNumber
                     + "\" value=6><font color=orangered>解釈</font></label><label><input type=radio name=\"rs" + questionNumber + "\" value=7 checked><font color=black>世間話</font></label></div><br>";
             }
+            document.getElementById("bs"+questionNumber).innerHTML +=" <button id=\"change" + questionNumber + "\">発言者変更</button>";
+
         }
     }
+
+    answerNumbermax = answerNumber;
+
+    for(answerNumber = 0 ; answerNumber <= answerNumbermax ; answerNumber++){
+        document.getElementById("change" + answerNumber).addEventListener('click',function(){
+            getVizResult(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,visResult);
+        });
+    }
+    
+
+
 
     console.log("%c radio_buttons and grapheselectbutton",'color:red');
     console.log(document.getElementById('radio_buttons'));
