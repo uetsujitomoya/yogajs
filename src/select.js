@@ -72,25 +72,25 @@ var select =(jsonName,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,
     convertCSV2Storage(jsonName,storage);
 
 
-  /*
-   if(isUsingKNP==1){
-   createSelectPartWithKNP();
-   return{
-   checkboxlist:checkboxlist,
-   chboxlist:chboxlist,
-   chboxlist2:chboxlist2,
-   RGB:RGB,
-   RGBlist:RGBlist,
-   checked:checked,
-   checked2:checked2,
-   taiou:taiou,
-   taiou2:taiou2,
-   chboxlength:chboxlength,
-   chboxlength2:chboxlength2
-   };
-   }
-   */
-  //let RGB=[];
+    /*
+     if(isUsingKNP==1){
+     createSelectPartWithKNP();
+     return{
+     checkboxlist:checkboxlist,
+     chboxlist:chboxlist,
+     chboxlist2:chboxlist2,
+     RGB:RGB,
+     RGBlist:RGBlist,
+     checked:checked,
+     checked2:checked2,
+     taiou:taiou,
+     taiou2:taiou2,
+     chboxlength:chboxlength,
+     chboxlength2:chboxlength2
+     };
+     }
+     */
+    //let RGB=[];
 
     //makeRGB(RGB,hatsugen);
 
@@ -128,17 +128,17 @@ var select =(jsonName,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,
                 answerNumber++;
                 chboxlength++;
 
-/*
-                if(isUsingDictionaryWithWord2Vec==1){
-                    var stockedAnswerGroupNumber =storage.getItem(name+"AnswerWithNewDictionary"+c);
-                    //今後辞書ネームにも対応
-                }else if(isUsingKNP==1){
-
-                }else{*/
-                    let stockedAnswerGroupNumber =storage.getItem(jsonName+"RGB"+answerNumber);
-                  /*
-                }
-                */
+                /*
+                                if(isUsingDictionaryWithWord2Vec==1){
+                                    var stockedAnswerGroupNumber =storage.getItem(name+"AnswerWithNewDictionary"+c);
+                                    //今後辞書ネームにも対応
+                                }else if(isUsingKNP==1){
+                
+                                }else{*/
+                let stockedAnswerGroupNumber =storage.getItem(jsonName+"RGB"+answerNumber);
+                /*
+              }
+              */
 
                 if(stockedAnswerGroupNumber!=null){
                     RGB[m][i][stockedAnswerGroupNumber]=1;
@@ -189,7 +189,8 @@ var select =(jsonName,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,
                     document.getElementById("r"+answerNumber).innerHTML += "<label><input type=radio name=\"r" + answerNumber + "\" value=3><font color=\"#7777ff\">【</font>「仕事」に含む<font color=\"#7777ff\">】</font></label>";
                 }
 
-                document.getElementById("b"+answerNumber).innerHTML +=" <button id=\"change" + answerNumber + "\">発言者変更</button>";
+
+                document.getElementById("b"+answerNumber).innerHTML +=" <button id=\"change_answer" + answerNumber + "\">発言者変更</button>";
 
 
 
@@ -236,21 +237,12 @@ var select =(jsonName,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,
                 target.innerHTML += "<div id=\"bs" + questionNumber + "\" style=\"cursor: pointer\"><u>"+ (m+1) + "(T) "  + hatsugen[m] + "</u></div><div id=\"rs" + questionNumber + "\"><label><input type=radio name=\"rs" + questionNumber + "\" value=3><font color=deeppink>開かれた質問</font></label><label><input type=radio name=\"rs" + questionNumber + "\" value=4><font color=blue>閉じられた質問</font></label><label><input type=radio name=\"rs" + questionNumber + "\" value=5><font color=purple>相づち</font></label><label><input type=radio name=\"rs" + questionNumber
                     + "\" value=6><font color=orangered>解釈</font></label><label><input type=radio name=\"rs" + questionNumber + "\" value=7 checked><font color=black>世間話</font></label></div><br>";
             }
-            document.getElementById("bs"+questionNumber).innerHTML +=" <button id=\"change" + questionNumber + "\">発言者変更</button>";
+            document.getElementById("bs"+questionNumber).innerHTML +=" <button id=\"change_question" + questionNumber + "\">発言者変更</button>";
 
         }
     }
 
-    answerNumbermax = answerNumber;
-
-    for(answerNumber = 0 ; answerNumber <= answerNumbermax ; answerNumber++){
-        document.getElementById("change" + answerNumber).addEventListener('click',function(){
-            getVizResult(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,visResult);
-        });
-    }
-    
-
-
+ 
 
     console.log("%c radio_buttons and grapheselectbutton",'color:red');
     console.log(document.getElementById('radio_buttons'));
@@ -267,7 +259,9 @@ var select =(jsonName,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,
         taiou:taiou,
         taiou2:taiou2,
         chboxlength:chboxlength,
-        chboxlength2:chboxlength2
+        chboxlength2:chboxlength2,
+        answerNumber:answerNumber,
+        questionNumber:questionNumber
     };
 
 };
