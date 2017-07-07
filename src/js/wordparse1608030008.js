@@ -4,6 +4,9 @@ import {select} from "../select.js";
 import {setForViz} from "../svg.js";
 import slider from "bootstrap-slider";
 
+let insertStr=(str, index, insert)=>{
+    return str.slice(0, index) + insert + str.slice(index, str.length);
+}
 
 let readJson = (originalText,event,jsonName) => {
     let signal = "blue";

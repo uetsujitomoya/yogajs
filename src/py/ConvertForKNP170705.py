@@ -12,9 +12,10 @@ textKaigyo = Allf.replace('。', '。\r\n')
 #text = Allf.replace(u'。',u'。\r\n')
 #print text,
 
-textDeleted1 = textKaigyo.replace('。', '。\r\n')
+textDeleted1 = textKaigyo.replace('〈', '')
+textDeleted2 = textDeleted1.replace('〉', '')
 
-txtForWrite = open('../../txt/170628convertedForKNP_170628_1002.txt','w')
+txtForWrite = open('../../txt/170628convertedForKNP170705_170705.txt','w')
 txtForWrite.write(textKaigyo)
 
 #txtForWrite = codecs.open('../1030Rap.txt','w','shift_jis')
