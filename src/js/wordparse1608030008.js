@@ -345,8 +345,8 @@ var ClassifyWithFirstWordDictionary = (name,keitaisokaiseki,checkboxlist,chboxli
 		taiou2 = sResult.taiou2;
 		chboxlength = sResult.chboxlength;
 		chboxlength2 = sResult.chboxlength2;
-		var answerNumber = sResult.answerNumber;
-		var questionNumber = sResult.questionNumber;
+		var answerNumbermax = sResult.answerNumbermax;
+		var questionNumbermax = sResult.questionNumbermax;
 
 		//graph = sResult.graph;
 		//console.log("chboxlength2=%d",chboxlength2)
@@ -375,17 +375,15 @@ var ClassifyWithFirstWordDictionary = (name,keitaisokaiseki,checkboxlist,chboxli
 			getVizResult(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,visResult);
 		});
 
-		answerNumbermax = answerNumber;
-		questionNumbermax = questionNumber;
 
-
-		for(answerNumber = 0 ; answerNumber <= answerNumbermax ; answerNumber++){
+		for(let answerNumber = 1 ; answerNumber <= answerNumbermax ; answerNumber++){
+		    console.info(answerNumber);
 		    document.getElementById("change_answer" + answerNumber).addEventListener('click',function(){
 		        getVizResult(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,visResult);
 		    });
 		}
     
-		for(questionNumber = 0 ; questionNumber <= questionNumbermax ; questionNumber++){
+		for(let questionNumber = 1 ; questionNumber <= questionNumbermax ; questionNumber++){
 		    document.getElementById("change_question" + questionNumber).addEventListener('click',function(){
 		        getVizResult(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,visResult);
 		    });

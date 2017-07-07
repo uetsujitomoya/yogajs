@@ -160,6 +160,7 @@ var select =(jsonName,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,
 
                 console.log("c=%d,n=%d,m=%d,i=%d",answerNumber,n,m,i);
                 
+                target.innerHTML +=" <button id=\"change_answer" + answerNumber + "\">発言者変更</button>";
 
                 if(RGB[m][i][0]+RGB[m][i][1]+RGB[m][i][2]>=2){
                     target.innerHTML += "<div id=\"b" + answerNumber + "\" style=\"cursor: pointer\"><u>" + (m+1) + "(C) " + bun[m][i] + "</u></div><div id=\"r" + answerNumber + "\"><label><input type=radio name=\"r" + answerNumber + "\" value=0>どれにも含まない</label></div><br>";
@@ -190,7 +191,7 @@ var select =(jsonName,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,
                 }
 
 
-                document.getElementById("b"+answerNumber).innerHTML +=" <button id=\"change_answer" + answerNumber + "\">発言者変更</button>";
+               
 
 
 
@@ -221,6 +222,8 @@ var select =(jsonName,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,
             console.log("RGBlist[%d]",m/2);
             console.log(RGBlist[m/2]);
 
+            target.innerHTML +=" <button id=\"change_question" + questionNumber + "\">発言者変更</button>";
+
             if(RGBlist[m/2][3]==1){
                 target.innerHTML += "<div id=\"bs" + questionNumber + "\" style=\"cursor: pointer\"><font size=2 color=dimgray><u>"+ (m+1) + "(T) "  + hatsugen[m] + "</u></font></div><div id=\"rs" + questionNumber + "\" class=\"hide\"><label><input type=radio name=\"rs" + questionNumber + "\" value=3 checked><font color=deeppink>開かれた質問</font></label><label><input type=radio name=\"rs" + questionNumber + "\" value=4><font color=blue>閉じられた質問</font></label><label><input type=radio name=\"rs" + questionNumber + "\" value=5><font color=purple>相づち</font></label><label><input type=radio name=\"rs"
                     + questionNumber + "\" value=6><font color=orangered>解釈</font></label><label><input type=radio name=\"rs" + questionNumber + "\" value=7><font color=black>世間話</font></label></div><br>";
@@ -237,12 +240,14 @@ var select =(jsonName,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,
                 target.innerHTML += "<div id=\"bs" + questionNumber + "\" style=\"cursor: pointer\"><u>"+ (m+1) + "(T) "  + hatsugen[m] + "</u></div><div id=\"rs" + questionNumber + "\"><label><input type=radio name=\"rs" + questionNumber + "\" value=3><font color=deeppink>開かれた質問</font></label><label><input type=radio name=\"rs" + questionNumber + "\" value=4><font color=blue>閉じられた質問</font></label><label><input type=radio name=\"rs" + questionNumber + "\" value=5><font color=purple>相づち</font></label><label><input type=radio name=\"rs" + questionNumber
                     + "\" value=6><font color=orangered>解釈</font></label><label><input type=radio name=\"rs" + questionNumber + "\" value=7 checked><font color=black>世間話</font></label></div><br>";
             }
-            document.getElementById("bs"+questionNumber).innerHTML +=" <button id=\"change_question" + questionNumber + "\">発言者変更</button>";
+            
 
         }
     }
 
- 
+
+    var answerNumbermax = answerNumber;
+    var questionNumbermax = questionNumber;
 
     console.log("%c radio_buttons and grapheselectbutton",'color:red');
     console.log(document.getElementById('radio_buttons'));
@@ -260,8 +265,8 @@ var select =(jsonName,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,
         taiou2:taiou2,
         chboxlength:chboxlength,
         chboxlength2:chboxlength2,
-        answerNumber:answerNumber,
-        questionNumber:questionNumber
+        answerNumbermax:answerNumbermax,
+        questionNumbermax:questionNumbermax
     };
 
 };
