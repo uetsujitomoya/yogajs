@@ -35,15 +35,40 @@ var ClassifyWithFirstWordDictionary = (name,wordArrayInASentence,checkboxlist,ch
 
 
     let parsedText = {
+        text:orijinalText,
         hatsugenArray : []
     }
 
     let hatsugen = {
+        text:null,
         talker:null,
-
+        quesrtionCategory:null,
+        sentenceArray:[]
     }
 
+    let sentence = {
+        text:null,
+        answerCategory:null,
+        clauseArray:[],
+        wordArray:[]
+    }
 
+    let word={
+        basic_form:basic_form,
+        surface_form:surface_form,
+    //pathのプロパティに「questionCategory」「AnswerCategory」「hinshi」などを追加すればいい気はする。
+        //てかkuromoji.js使わないんだった。。KNPからうまく取得せよ
+    }
+
+    //subjectかobjectに登場人物が入ってるverbを抽出せよ。
+
+    let clause={
+        verb:null,
+        object:null,
+        subject:null
+    }
+
+//talker間違ってるときは、if(talker=="client"){talker=therapist}else{talker=client}
 
 
 
