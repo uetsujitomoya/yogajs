@@ -238,12 +238,10 @@ var ClassifyWithFirstWordDictionary = (name,wordArrayInASentence,checkboxlist,ch
 							RGBlist[hatsugenCnt/2][5]=1;
 						}
 					}
-<<<<<<< HEAD
 					wordsCntAfterMorphologicalAnalysis++;
-=======
 
-					n++;
->>>>>>> tonton585
+					//n++;
+
 					break;
 				}
 				wordsCntAfterMorphologicalAnalysis++;
@@ -388,13 +386,13 @@ var ClassifyWithFirstWordDictionary = (name,wordArrayInASentence,checkboxlist,ch
 		for(let answerNumber = 1 ; answerNumber <= answerNumbermax ; answerNumber++){
 		    console.info(answerNumber);
 		    document.getElementById("change_answer" + answerNumber).addEventListener('click',function(){
-		        getVizResult(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,visResult);
+                getVizResult(name,storage,wordArrayInASentence,chboxlist,chboxlist2,RGBlist,hatsugenArray,contentArrayOfASentence,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,visResult);
 		    });
 		}
     
 		for(let questionNumber = 1 ; questionNumber <= questionNumbermax ; questionNumber++){
 		    document.getElementById("change_question" + questionNumber).addEventListener('click',function(){
-		        getVizResult(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,visResult);
+                getVizResult(name,storage,wordArrayInASentence,chboxlist,chboxlist2,RGBlist,hatsugenArray,contentArrayOfASentence,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,visResult);
 		    });
 		}
 
