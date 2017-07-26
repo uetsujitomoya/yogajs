@@ -67,8 +67,8 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 
 	const upperName = "カウンセラー";
     const lowerName = "クライエント";
-    const counselorInTextView = '<img src = "./picture/counselor.jpg" width ="20" height = "20">';
-    const clientInTextView = '<img src = "./picture/patient.jpg" width ="20" height = "20">';
+    const counselorInTextView = '<img src = "./picture/counselor2.jpg" width ="20">';
+    const clientInTextView = '<img src = "./picture/client.jpg" width ="17">';
     const fontSizeInTextView = 2;
 
 	var m;
