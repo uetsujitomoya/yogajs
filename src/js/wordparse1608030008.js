@@ -4,6 +4,8 @@ import {select} from "../select.js";
 import {setForViz} from "../svg.js";
 import slider from "bootstrap-slider";
 
+let zoom_value = 3;
+
 let insertStr=(str, index, insert)=>{
     return str.slice(0, index) + insert + str.slice(index, str.length);
 }
@@ -414,7 +416,7 @@ var ClassifyWithFirstWordDictionary = (name,wordArrayInASentence,checkboxlist,ch
 
 let getVizResult=(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,visResult)=>{
    
-    let zoom_value = document.getElementById("zoom_value").value;
+    //let zoom_value = document.getElementById("zoom_value").value;
     console.log(zoom_value);
 
     visResult = setForViz(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,zoom_value);//形態素解析後に1度目の描画
