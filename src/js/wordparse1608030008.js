@@ -96,6 +96,8 @@ var ClassifyWithFirstWordDictionary = (name,wordArrayInASentence,checkboxlist,ch
     console.log("%c enter kuromoji 91",'color:red');
 	return kuromoji.builder({dicPath: 'dict/'}).build((err, tokenizer) => {
 
+		let zoom_value=3
+
         let visResult;
         console.log("%c entered kuromoji 95",'color:red');
         console.log(originalText);
@@ -360,7 +362,7 @@ var ClassifyWithFirstWordDictionary = (name,wordArrayInASentence,checkboxlist,ch
 		//graph = sResult.graph;
 		//console.log("chboxlength2=%d",chboxlength2)
 
-		getVizResult(name,storage,wordArrayInASentence,chboxlist,chboxlist2,RGBlist,hatsugenArray,contentArrayOfASentence,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,visResult);
+        setForViz(name,storage,wordArrayInASentence,chboxlist,chboxlist2,RGBlist,hatsugenArray,contentArrayOfASentence,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,zoom_value);
 
 		//以下は後ろじゃなきゃアカン
 		for(c=1;c<=chboxlength;c++){
@@ -375,26 +377,26 @@ var ClassifyWithFirstWordDictionary = (name,wordArrayInASentence,checkboxlist,ch
 		//graphの形状を切り替えた際もここで再描画される
 
 		document.getElementById('radio_buttons').onchange = () => {
-            getVizResult(name,storage,wordArrayInASentence,chboxlist,chboxlist2,RGBlist,hatsugenArray,contentArrayOfASentence,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,visResult);
+            setForViz(name,storage,wordArrayInASentence,chboxlist,chboxlist2,RGBlist,hatsugenArray,contentArrayOfASentence,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,zoom_value);
 		};
 
 		//graphのラジオボタン変わったらまた描画
-
+/*
 		document.getElementById('zoom').addEventListener('click',function(){
-			getVizResult(name,storage,wordArrayInASentence,chboxlist,chboxlist2,RGBlist,hatsugenArray,contentArrayOfASentence,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,visResult);
-		});
+            setForViz(name,storage,wordArrayInASentence,chboxlist,chboxlist2,RGBlist,hatsugenArray,contentArrayOfASentence,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,zoom_value);
+		});*/
 
 
 		for(let answerNumber = 1 ; answerNumber <= answerNumbermax ; answerNumber++){
 		    console.info(answerNumber);
 		    document.getElementById("change_answer" + answerNumber).addEventListener('click',function(){
-                getVizResult(name,storage,wordArrayInASentence,chboxlist,chboxlist2,RGBlist,hatsugenArray,contentArrayOfASentence,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,visResult);
+                setForViz(name,storage,wordArrayInASentence,chboxlist,chboxlist2,RGBlist,hatsugenArray,contentArrayOfASentence,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,zoom_value);
 		    });
 		}
     
 		for(let questionNumber = 1 ; questionNumber <= questionNumbermax ; questionNumber++){
 		    document.getElementById("change_question" + questionNumber).addEventListener('click',function(){
-                getVizResult(name,storage,wordArrayInASentence,chboxlist,chboxlist2,RGBlist,hatsugenArray,contentArrayOfASentence,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,visResult);
+                setForViz(name,storage,wordArrayInASentence,chboxlist,chboxlist2,RGBlist,hatsugenArray,contentArrayOfASentence,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,zoom_value);
 		    });
 		}
 
@@ -403,7 +405,7 @@ var ClassifyWithFirstWordDictionary = (name,wordArrayInASentence,checkboxlist,ch
 		$("#slider1").slider();
 		$("#slider1").on("slide", function(slideEvt) {
 		    $("#SliderVal").text(slideEvt.value);
-		    let zoom_value = slideEvt.value;
+		    zoom_value = slideEvt.value;
 		    setForViz(name,storage,wordArrayInASentence,chboxlist,chboxlist2,RGBlist,hatsugenArray,contentArrayOfASentence,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,zoom_value);
 		});
 
@@ -413,7 +415,7 @@ var ClassifyWithFirstWordDictionary = (name,wordArrayInASentence,checkboxlist,ch
 	});
 };
 
-
+/*
 let getVizResult=(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,visResult)=>{
    
     //let zoom_value = document.getElementById("zoom_value").value;
@@ -428,7 +430,7 @@ let getVizResult=(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hats
     chboxlength = visResult.chboxlength;
     chboxlength2 = visResult.chboxlength2;
     chboxlength2 = visResult.ranshin;
-};
+};*/
 
 
 export {ClassifyWithFirstWordDictionary};
