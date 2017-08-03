@@ -2,7 +2,7 @@ import "kuromoji";
 import $ from 'jquery';
 import {select} from "../select.js";
 import {setForViz} from "../svg.js";
-import slider from "bootstrap-slider";
+import Slider from "bootstrap-slider";
 
 let insertStr=(str, index, insert)=>{
     return str.slice(0, index) + insert + str.slice(index, str.length);
@@ -421,6 +421,8 @@ var ClassifyWithFirstWordDictionary = (name,wordArrayInASentence,checkboxlist,ch
 
 
 	    //スライダー
+        var slider = require("bootstrap-slider");
+
 		$("#slider1").slider();
 		$("#slider1").on("slide", function(slideEvt) {
 		    $("#SliderVal").text(slideEvt.value);
