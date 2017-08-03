@@ -56,12 +56,12 @@ var makeOnClickS = (c) =>{
 	};
 };
 
-let selectGraphShape = function(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,vResult) {
+let selectGraphShape = function(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,vResult,object_imported_into_setForViz) {
     console.log("%centerred selectGraphShape",'color:red');
 
     document.getElementById('GraphSelectButton').onclick = () => {
 		 console.log("GraphSelectButton_onchange");
-		 getVizResult(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,vResult)
+        setForViz(name,storage,object_imported_into_setForViz.wordArrayInASentence,chboxlist,chboxlist2,RGBlist,object_imported_into_setForViz.hatsugenArray,object_imported_into_setForViz.contentArrayOfASentence,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,object_imported_into_setForViz.zoom_value);
 
     };//graphの形状を切り替えた際もここで再描画される
 };
@@ -362,6 +362,27 @@ var ClassifyWithFirstWordDictionary = (name,wordArrayInASentence,checkboxlist,ch
 		//graph = sResult.graph;
 		//console.log("chboxlength2=%d",chboxlength2)
 
+		let object_imported_into_setForViz = {
+            name:name,
+			storage:storage,
+			wordArrayInASentence:wordArrayInASentence,
+			chboxlist:chboxlist,
+			chboxlist2:chboxlist2,
+			RGBlist:RGBlist,
+			hatsugenArray:hatsugenArray,
+			contentArrayOfASentence:contentArrayOfASentence,
+			checked:checked,
+			checked2:checked2,
+			taiou:taiou,
+			taiou2:taiou2,
+			chboxlength:chboxlength,
+			chboxlength2:chboxlength2,
+			startTime:startTime,
+			graph:graph,
+			ranshin:ranshin,
+			zoom_value:zoom_value
+		}
+
         setForViz(name,storage,wordArrayInASentence,chboxlist,chboxlist2,RGBlist,hatsugenArray,contentArrayOfASentence,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,zoom_value);
 
 		//以下は後ろじゃなきゃアカン
@@ -372,7 +393,7 @@ var ClassifyWithFirstWordDictionary = (name,wordArrayInASentence,checkboxlist,ch
 			makeOnClickS(c);
 		}
 
-        selectGraphShape(name,storage,wordArrayInASentence,chboxlist,chboxlist2,RGBlist,hatsugenArray,contentArrayOfASentence,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,visResult);
+        selectGraphShape(name,storage,wordArrayInASentence,chboxlist,chboxlist2,RGBlist,hatsugenArray,contentArrayOfASentence,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,visResult,object_imported_into_setForViz);
 
 		//graphの形状を切り替えた際もここで再描画される
 
@@ -386,21 +407,6 @@ var ClassifyWithFirstWordDictionary = (name,wordArrayInASentence,checkboxlist,ch
             setForViz(name,storage,wordArrayInASentence,chboxlist,chboxlist2,RGBlist,hatsugenArray,contentArrayOfASentence,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,zoom_value);
 		});*/
 
-
-		for(let answerNumber = 1 ; answerNumber <= answerNumbermax ; answerNumber++){
-		    console.info(answerNumber);
-		    document.getElementById("change_answer" + answerNumber).addEventListener('click',function(){
-                setForViz(name,storage,wordArrayInASentence,chboxlist,chboxlist2,RGBlist,hatsugenArray,contentArrayOfASentence,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,zoom_value);
-		    });
-		}
-    
-		for(let questionNumber = 1 ; questionNumber <= questionNumbermax ; questionNumber++){
-		    document.getElementById("change_question" + questionNumber).addEventListener('click',function(){
-                setForViz(name,storage,wordArrayInASentence,chboxlist,chboxlist2,RGBlist,hatsugenArray,contentArrayOfASentence,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,zoom_value);
-		    });
-		}
-
-
 	    //スライダー
 		$("#slider1").slider();
 		$("#slider1").on("slide", function(slideEvt) {
@@ -408,6 +414,24 @@ var ClassifyWithFirstWordDictionary = (name,wordArrayInASentence,checkboxlist,ch
 		    zoom_value = slideEvt.value;
 		    setForViz(name,storage,wordArrayInASentence,chboxlist,chboxlist2,RGBlist,hatsugenArray,contentArrayOfASentence,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,zoom_value);
 		});
+
+		/*
+
+		//for talker change button
+
+        for(let answerNumber = 1 ; answerNumber <= answerNumbermax ; answerNumber++){
+            console.info(answerNumber);
+            document.getElementById("change_answer" + answerNumber).addEventListener('click',function(){
+                setForViz(name,storage,wordArrayInASentence,chboxlist,chboxlist2,RGBlist,hatsugenArray,contentArrayOfASentence,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,zoom_value);
+            });
+        }
+
+        for(let questionNumber = 1 ; questionNumber <= questionNumbermax ; questionNumber++){
+            document.getElementById("change_question" + questionNumber).addEventListener('click',function(){
+                setForViz(name,storage,wordArrayInASentence,chboxlist,chboxlist2,RGBlist,hatsugenArray,contentArrayOfASentence,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,zoom_value);
+            });
+        }
+        */
 
 		return{
 			name:name,RGBlist:RGBlist,keitaisokaiseki:wordArrayInASentence,hatsugen:hatsugenArray,bun:contentArrayOfASentence,chboxlist:chboxlist,chboxlist2:chboxlist2,checked:checked,checked2:checked2,taiou:taiou,taiou2:taiou2,chboxlength:chboxlength,chboxlength2:chboxlength2

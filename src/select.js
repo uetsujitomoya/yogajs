@@ -159,7 +159,7 @@ var select =(jsonName,storage,checkboxlist,keitaisokaiseki,miserables,chboxlist,
                
 
                 console.log("c=%d,n=%d,m=%d,i=%d",answerNumber,n,m,i);
-                
+
                 //target.innerHTML +=" <button id=\"change_answer" + answerNumber + "\">発言者変更</button>";
 
                 if(RGB[m][i][0]+RGB[m][i][1]+RGB[m][i][2]>=2){
