@@ -2,6 +2,29 @@ import "kuromoji";
 import $ from 'jquery';
 import {select} from "../select.js";
 import {setForViz} from "../svg.js";
+import {csv2array} from "../csv2Array"
+import {viz_relation_chart} from "../js/viz_relation_chart"
+
+
+let wordparse2object=()=>{
+  read_CSV();
+  wordparse();
+  make_object();
+  viz_relation_chart()
+}
+
+let read_CSV = () => {
+
+}
+
+let wordparse=()=>{
+
+}
+
+let make_object=()=>{
+
+}
+
 
 
 let insertStr=(str, index, insert)=>{
