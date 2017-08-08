@@ -11,6 +11,13 @@ let read_KNP = () => {
 
 let find_character = () => {
 　　//if かな exist
+    if(knpcsv[row][0]=="ひらがな"){
+        knpcsv[row].foreach((col)=>{
+            if(knpcsv[row][col]=="ひと"){
+                //その登場人物のインスタントをつくる
+            }
+        })
+    }
 }
 
 let find_verb = () => {
