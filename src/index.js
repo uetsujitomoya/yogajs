@@ -3,9 +3,15 @@ import {ClassifyWithFirstWordDictionary} from "./js/wordparse1608030008.js";
 import {ClassifyWithKNP} from "./processKnp.js"; //processKNP
 import {ClassifyWithWordDictionary} from "./changeDictionary.js"; //AcceptDictionary
 import $ from 'jquery';
+
+import {wordparse2object} from "./js/wordparse2object.js"
 //import {CreateSwitchClassificationMethod} from "./SwitchClassificationMethod.js"; //AcceptDictionary
 
 //var dictionaryFromWord2Vec = csv2Array('HDFaceVertex.csv');
+
+wordparse2object()
+
+//以下、今までの(170809)
 
 let storageArrayFromKamata= csv2Array("csv/storage170421fromKamata.csv");
 console.log("storageFromKamata");

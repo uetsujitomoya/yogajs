@@ -4,17 +4,15 @@ import {select} from "../select.js";
 import {setForViz} from "../svg.js";
 import {csv2array} from "../csv2Array"
 import {viz_relation_chart} from "../js/viz_relation_chart"
+import {read_KNP} from "../js/read_KNP.js"
 
 
 let wordparse2object=()=>{
-  read_CSV();
+    console.log("wordparse2object")
+  read_KNP();
   wordparse();
   make_object();
   viz_relation_chart()
-}
-
-let read_CSV = () => {
-
 }
 
 let wordparse=()=>{
@@ -467,4 +465,4 @@ let getVizResult=(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hats
 };
 
 
-export {ClassifyWithFirstWordDictionary};
+export {ClassifyWithFirstWordDictionary,wordparse2object};

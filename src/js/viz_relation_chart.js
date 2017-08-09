@@ -3,8 +3,8 @@
  */
 
 let viz_relation_chart = () => {
-    viz_circle();
-    viz_arrow();
+    //viz_circle();
+    //viz_arrow();
 }
 
 let viz_circle = () => {
