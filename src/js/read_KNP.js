@@ -24,6 +24,9 @@ let read_KNP = () => {
     console.log(knparray)
     find_character(knparray);
     console.log(KNP_character_array)
+
+    organize_KNPresult()
+
     find_verb();
     //if verb was found,
     find_dependency();
@@ -65,7 +68,7 @@ let find_dependency = () => {
 }
 
 let find_subject = () => {
-
+　　
 }
 
 let find_object = () => {
