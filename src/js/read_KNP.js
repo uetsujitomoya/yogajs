@@ -8,6 +8,8 @@ import {getCSV} from "../js/getCSV.js"
 
 let KNP_character_array = [];
 
+let KNP_verb_array=[]
+
 class KNP_character {
     constructor(name) {
         this.name = name
@@ -19,15 +21,31 @@ class KNP_character {
     }
 }
 
+
+class KNP_verb {
+    constructor(rowNo,row_array,upper_row_array) {
+        this.rowNo = rowNo;
+        this.subject = "null"
+        this.object = "null"
+        this.kakarareruNo = upper_row_array[1]
+        this.surface_form = row_array[0]
+        this.basic_form = row_array[2]
+    }
+}
+
+//文節取得
+
+
 let read_KNP = () => {
     let knparray = csv2Array("../csv/1707051018knptab.csv");
     console.log(knparray)
     find_character(knparray);
     console.log(KNP_character_array)
 
-    organize_KNPresult()
+    //organize_KNPresult()
 
-    find_verb();
+    find_verb(knparray);
+    console.log(KNP_verb_array)
     //if verb was found,
     find_dependency();
 }
@@ -35,7 +53,7 @@ let read_KNP = () => {
 let find_character = (knparray) => {
     //if かな exist
     knparray.forEach((row)=>{
-        console.log(row)
+        //console.log(row)
         if(contains_japanese(row[0])){
             let temp_japanese = row[0]
             row.forEach((element)=>{
@@ -58,8 +76,20 @@ let find_character = (knparray) => {
     })
 }
 
-let find_verb = () => {
+let find_verb = (knparray) => {
     //if 動詞 exist -> find_dependency
+
+    for( let rowNo = 0 ; rowNo < knparray.length ;rowNo++ ){
+        if(contains_japanese(knparray[rowNo][0])){
+            let temp_japanese = knparray[rowNo][0]
+            console.log(knparray[rowNo][3])
+            if ( knparray[rowNo][3]=="動詞") {
+                let temp_character_name=knparray[rowNo][0];
+                //上の行も引数にしないといけない
+                KNP_verb_array.push(new KNP_verb(rowNo,knparray[rowNo],knparray[rowNo-1]))
+            }
+        }
+    }
 }
 
 let find_dependency = () => {
@@ -68,7 +98,7 @@ let find_dependency = () => {
 }
 
 let find_subject = () => {
-　　
+
 }
 
 let find_object = () => {
