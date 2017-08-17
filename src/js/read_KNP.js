@@ -5,10 +5,13 @@
 import {csv2Array} from "../csv2Array.js"
 import {contains_japanese} from "../js/contains_japanese.js"
 import {getCSV} from "../js/getCSV.js"
+import {reconstruct_KNP} from "../js/reconstruct_KNP.js"
 
 let KNP_character_array = [];
 
 let KNP_verb_array=[]
+
+
 
 class KNP_character {
     constructor(name) {
@@ -33,8 +36,6 @@ class KNP_verb {
     }
 }
 
-//文節取得
-
 
 let read_KNP = () => {
     let knparray = csv2Array("../csv/1707051018knptab.csv");
@@ -47,8 +48,21 @@ let read_KNP = () => {
     find_verb(knparray);
     console.log(KNP_verb_array)
     //if verb was found,
+    let KNP_sentence_array = reconstruct_KNP(knparray);
+    console.log(KNP_sentence_array)
+
+
     find_dependency();
 }
+/*
+let reconstruct_KNP = (raw_2d_array) => {
+    raw_2d_array.forEach((row_array)=>{
+        if(row_array[0]=="#"){
+
+        }
+    })
+}
+*/
 
 let find_character = (knparray) => {
     //if かな exist
