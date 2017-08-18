@@ -123,6 +123,7 @@ class KNP_sentence{
                 console.log(this.bunsetsu_array[kakarareru_bunsetsu_num])
                 if(kakaru_bunsetsu.kakaru_bunsetsu_id == this.bunsetsu_array[kakarareru_bunsetsu_num].id){
                     this.bunsetsu_array[kakarareru_bunsetsu_num].kakarareru_bunsetsu_id_array.push(kakaru_bunsetsu.id)
+                    console.log(this.bunsetsu_array[kakarareru_bunsetsu_num])
                     break;
                 }
             }
@@ -136,6 +137,8 @@ class KNP_sentence{
                 console.log(this.kihonku_array[kakarareru_kihonku_num])
                 if(kakaru_kihonku.kakatu_kihonku_id == this.kihonku_array[kakarareru_kihonku_num].id){
                     this.kihonku_array[kakarareru_kihonku_num].kakarareru_kihonku_id_array.push(kakaru_kihonku.id)
+                    console.log(this.kihonku_array[kakarareru_kihonku_num])
+                    break;
                 }
             }
         })
