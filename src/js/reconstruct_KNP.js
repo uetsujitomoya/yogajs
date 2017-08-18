@@ -91,7 +91,7 @@ class KNP_sentence{
                 console.info(temp_2d_array_for_kihonku)
                 this.kihonku_array[kihonku_num_in_sentence] = new KNP_kihonku_in_sentence(kihonku_num_in_sentence,temp_2d_array_for_kihonku)//文の中の通し番号での基本句array
                 temp_2d_array_for_kihonku=[]
-                kihonku_num_in_sentence=0
+                kihonku_num_in_sentence++
 
                 console.info(temp_2d_array_for_bunsetsu)
                 this.bunsetsu_array[bunsetsu_num_in_sentence] = new KNP_bunsetsu(bunsetsu_num_in_sentence,temp_2d_array_for_bunsetsu)//文の中の通し番号での文節array
