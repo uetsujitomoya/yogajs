@@ -45,8 +45,8 @@ let read_KNP = () => {
 
     //organize_KNPresult()
 
-    find_verb(knparray);
-    console.log(KNP_verb_array)
+    //find_verb(knparray);
+    //console.log(KNP_verb_array)
     //if verb was found,
     let KNP_sentence_array = reconstruct_KNP(knparray);
     console.log(KNP_sentence_array)

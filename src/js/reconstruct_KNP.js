@@ -2,6 +2,10 @@
  * Created by uetsujitomoya on 2017/08/17.
  */
 
+let first_japanese_row_num_in_sentence = 3 ;
+let starting_kihonku_row_num_in_sentence = 2 ;
+let starting_bunsetsu_row_num_in_sentence = 1 ;
+
 let reconstruct_KNP = (raw_2d_array) => {
     let KNP_sentence_array=[]
     let temp_sentence_2d_array=[]
@@ -45,7 +49,7 @@ let count_kihonku=(input_2d_array)=>{
  * */
 
 class KNP_sentence{
-    constructor(raw_rowNo,raw_2d_array) {
+    constructor(raw_rowNo,sentence_2d_array) {
 
         //動詞判定・登場人物判定と組み合わせる
 
@@ -57,10 +61,10 @@ class KNP_sentence{
         //this.csv_raw_array=[]
         this.rowNo=raw_rowNo
         this.bunsetsu_array=[]
-        this.bunsetsu_array.length=count_bunsetsu(raw_2d_array)
+        this.bunsetsu_array.length=count_bunsetsu(sentence_2d_array)
 
         this.kihonku_array=[]
-        this.kihonku_array.length=count_kihonku(raw_2d_array)
+        this.kihonku_array.length=count_kihonku(sentence_2d_array)
 
         this.surface_form = "null"
         //this.basic_form = row_array[2]
@@ -68,31 +72,34 @@ class KNP_sentence{
         let temp_2d_array_for_bunsetsu=[]
         let temp_2d_array_for_kihonku=[]
 
-        temp_2d_array_for_bunsetsu.push(raw_2d_array[1])//0文節目　開始宣言をプッシュ
+        temp_2d_array_for_bunsetsu.push(sentence_2d_array[starting_bunsetsu_row_num_in_sentence])//0文節目　開始宣言をプッシュ
 
-        temp_2d_array_for_bunsetsu.push(raw_2d_array[2])//0基本句目　開始宣言をプッシュ
-        temp_2d_array_for_kihonku.push(raw_2d_array[2])//0基本句目　開始宣言をプッシュ
+        temp_2d_array_for_bunsetsu.push(sentence_2d_array[starting_kihonku_row_num_in_sentence])//0基本句目　開始宣言をプッシュ
+        temp_2d_array_for_kihonku.push(sentence_2d_array[starting_kihonku_row_num_in_sentence])//0基本句目　開始宣言をプッシュ
 
         let bunsetsu_num_in_sentence=0
         let kihonku_num_in_sentence=0
 
-        for(let temp_rowNo=2;temp_rowNo<raw_2d_array.length;temp_rowNo++){
-            let temp_surface_form=raw_2d_array[temp_rowNo][0];
-            if(temp_surface_form=="+" && raw_2d_array[temp_rowNo-1][0]!="*"){//文節内 2こ目以降の基本句
+        for( let temp_rowNo = first_japanese_row_num_in_sentence ; temp_rowNo < sentence_2d_array.length ; temp_rowNo++ ){
+            let temp_surface_form=sentence_2d_array[temp_rowNo][0];
+            if(temp_surface_form=="+" && sentence_2d_array[temp_rowNo-1][0]!="*"){//文節内 2こ目以降の基本句
+                console.info(temp_2d_array_for_kihonku)
                 this.kihonku_array[kihonku_num_in_sentence] = new KNP_kihonku_in_sentence(kihonku_num_in_sentence,temp_2d_array_for_kihonku)//文の中の通し番号での基本句array
                 temp_2d_array_for_kihonku=[]
                 kihonku_num_in_sentence++
             }else if( temp_surface_form == "*" ){
+                console.info(temp_2d_array_for_kihonku)
                 this.kihonku_array[kihonku_num_in_sentence] = new KNP_kihonku_in_sentence(kihonku_num_in_sentence,temp_2d_array_for_kihonku)//文の中の通し番号での基本句array
                 temp_2d_array_for_kihonku=[]
                 kihonku_num_in_sentence=0
 
+                console.info(temp_2d_array_for_bunsetsu)
                 this.bunsetsu_array[bunsetsu_num_in_sentence] = new KNP_bunsetsu(bunsetsu_num_in_sentence,temp_2d_array_for_bunsetsu)//文の中の通し番号での文節array
                 temp_2d_array_for_bunsetsu=[]
                 bunsetsu_num_in_sentence++
             }
-            temp_2d_array_for_bunsetsu.push(raw_2d_array[temp_rowNo])
-            temp_2d_array_for_kihonku.push(raw_2d_array[temp_rowNo])
+            temp_2d_array_for_bunsetsu.push(sentence_2d_array[temp_rowNo])
+            temp_2d_array_for_kihonku.push(sentence_2d_array[temp_rowNo])
         }
 
         this.bunsetsu_array[bunsetsu_num_in_sentence] = new KNP_bunsetsu(bunsetsu_num_in_sentence,temp_2d_array_for_bunsetsu)
@@ -124,7 +131,7 @@ class KNP_sentence{
 
     input_each_kakarareru_kihonku_id(){
         this.kihonku_array.forEach((kakaru_kihonku)=>{
-
+            console.log(this.kihonku_array)
             for(let kakarareru_kihonku_num = 0 ; kakarareru_kihonku_num < this.kihonku_array.length ; kakarareru_kihonku_num++){
                 console.log(this.kihonku_array[kakarareru_kihonku_num])
                 if(kakaru_kihonku.kakatu_kihonku_id == this.kihonku_array[kakarareru_kihonku_num].id){
