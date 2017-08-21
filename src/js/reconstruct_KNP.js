@@ -50,6 +50,11 @@ let count_kihonku=(input_2d_array)=>{
 
 class KNP_sentence{
     constructor(raw_rowNo,sentence_2d_array) {
+        console.log("raw_rowNo %d",raw_rowNo)
+        console.log(sentence_2d_array)
+        if(sentence_2d_array.length==1){
+            return 0
+        }//空白センテンス処理
 
         //動詞判定・登場人物判定と組み合わせる
 
@@ -102,6 +107,8 @@ class KNP_sentence{
             temp_2d_array_for_kihonku.push(sentence_2d_array[temp_rowNo])
         }
 
+        console.log("bunsetsu_num_in_sentence %d",bunsetsu_num_in_sentence)
+        console.log(temp_2d_array_for_bunsetsu)
         this.bunsetsu_array[bunsetsu_num_in_sentence] = new KNP_bunsetsu(bunsetsu_num_in_sentence,temp_2d_array_for_bunsetsu)
         this.kihonku_array[kihonku_num_in_sentence] = new KNP_kihonku_in_sentence(kihonku_num_in_sentence,temp_2d_array_for_kihonku)//文の中の通し番号での基本句array
         /*
@@ -147,7 +154,7 @@ class KNP_sentence{
 
 class KNP_bunsetsu {
     constructor(num,input_2d_array) {
-        console.log(input_2d_array)
+        //console.log(input_2d_array)
 
         this.csv_raw_array=input_2d_array
         //this.rowNo=rowNo
