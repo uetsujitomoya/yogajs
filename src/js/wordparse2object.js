@@ -54,11 +54,6 @@ let selectGraphShape = function(name,storage,keitaisokaiseki,chboxlist,chboxlist
 
 var ClassifyWithFirstWordDictionary = (name,wordArrayInASentence,checkboxlist,chboxlist,chboxlist2,RGBlist,hatsugenArray,contentArrayOfASentence,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,originalText) => {
 
-
-
-
-
-
 //いつものやつで話者分類まではつくっとくべき。
     //てかKNP-人間関係図といつもの分類-いつもの可視化はバッサリ区別していいんじゃね
 
@@ -117,16 +112,11 @@ var ClassifyWithFirstWordDictionary = (name,wordArrayInASentence,checkboxlist,ch
         hatsugenArray : []
     }
 
-
-
 //talker間違ってるときは、if(talker=="client"){talker=therapist}else{talker=client}
-
-
 
     let jsonName = "160803dummy";
     var startTime = new Date();
     console.log(startTime);
-
 
     var h,sentenceCntInHatsugen,wordCntInASentence,k,hatsugenCnt,wordsCntAfterMorphologicalAnalysis,c,x,y,z;
     var hinshi = [];

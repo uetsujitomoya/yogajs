@@ -4,6 +4,44 @@
 
 //createsvg();
 
+let color_of_client = "red"
+let color_of_people_around_client = "gray"
+
+class node{
+    constructor(character,sentence){
+        this.character=character
+        this.r=0
+        this.x=0
+        this.y=0
+        this.text=""
+        this.bold=""
+        if(character.isClient){
+            this.color=color_of_client
+        }else{
+            this.color=color_of_people_around_client
+        }
+
+    }
+}
+class arrow{
+    constructor(character_of_start_point,character_of_end_point,sentence,node_array){
+
+
+    }
+}
+
+
+let show_node = () => {
+
+}
+
+
+let show_arrow = (node) => {
+
+}
+
+
+
 function createsvg () {
     var svg = d3.select("#example").append("svg")
         .attr({

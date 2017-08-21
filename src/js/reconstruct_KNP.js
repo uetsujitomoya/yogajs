@@ -217,8 +217,6 @@ class KNP_kihonku_in_clause {
     }
 }
 
-
-
 class KNP_word {
     constructor(rowNo,row_array,upper_row_array) {
 
