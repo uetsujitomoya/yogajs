@@ -3,7 +3,7 @@
  */
 
 import {csv2Array} from "../csv2Array.js"
-import {contains_japanese} from "../js/contains_japanese.js"
+
 import {getCSV} from "../js/getCSV.js"
 import {reconstruct_KNP} from "../js/reconstruct_KNP.js"
 
