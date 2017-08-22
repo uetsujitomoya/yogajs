@@ -17,3 +17,13 @@ let find_verb = (knparray) => {
         }
     }
 }
+class KNP_verb {
+    constructor(rowNo,row_array,upper_row_array) {
+        this.rowNo = rowNo;
+        this.subject = "null"
+        this.object = "null"
+        this.kakarareruNo = upper_row_array[1]
+        this.surface_form = row_array[0]
+        this.basic_form = row_array[2]
+    }
+}

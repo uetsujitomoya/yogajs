@@ -7,40 +7,23 @@ import {csv2Array} from "../csv2Array.js"
 import {getCSV} from "../js/getCSV.js"
 import {reconstruct_KNP} from "../js/reconstruct_KNP.js"
 
+import {find_character} from "../js/find_character.js"
+
 let KNP_character_array = [];
 
 let KNP_verb_array=[]
 
 
 
-class KNP_character {
-    constructor(name) {
-        this.name = name
-        if(this.name=="私"){
-            this.client = 1
-        }else{
-            this.client = 0
-        }
-    }
-}
 
 
-class KNP_verb {
-    constructor(rowNo,row_array,upper_row_array) {
-        this.rowNo = rowNo;
-        this.subject = "null"
-        this.object = "null"
-        this.kakarareruNo = upper_row_array[1]
-        this.surface_form = row_array[0]
-        this.basic_form = row_array[2]
-    }
-}
+
 
 
 let read_KNP = () => {
     let knparray = csv2Array("../csv/1707051018knptab.csv");
     console.log(knparray)
-    find_character(knparray);
+    find_character(knparray,KNP_character_array);
     console.log(KNP_character_array)
 
     //organize_KNPresult()

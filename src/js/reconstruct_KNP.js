@@ -49,7 +49,7 @@ let count_kihonku=(input_2d_array)=>{
  * */
 
 class KNP_sentence{
-    constructor(raw_rowNo,sentence_2d_arrayKNP_character_array) {
+    constructor(raw_rowNo,sentence_2d_array,KNP_character_array) {
         //console.log("raw_rowNo %d",raw_rowNo)
         //console.log(sentence_2d_array)
         if(sentence_2d_array.length==1){
@@ -180,11 +180,11 @@ class KNP_bunsetsu {
         this.existsObject=false
         this.isVerb=false
 
-        find_subject(this,KNP_character_array)
+        existsSubject(this,KNP_character_array)
         if(!this.existsSubject){
-            find_object(this,KNP_character_array)
+            existsObject(this,KNP_character_array)
             if(!this.existsSubject){
-                find_verb(this)
+                //find_verb(this)
             }
         }
 
@@ -245,9 +245,10 @@ class KNP_word {
 
 let existsSubject=(bunsetsu,KNP_character_array)=>{
 
+    const bunsetsu_info_row = bunsetsu.csv_raw_array[0]
     const temp_character_name=bunsetsu.csv_raw_array[1][0]
-    for(var col_num=0;col_num<bunsetsu[0].length;col_num++){
-        if ( bunsetsu[0][col_num].match("ガ格")&&isCharacter(KNP_character_array,temp_character_name)) {
+    for(var col_num=0;col_num<bunsetsu_info_row.length;col_num++){
+        if ( bunsetsu_info_row[col_num].match("ガ格")&&isCharacter(KNP_character_array,temp_character_name)) {
             bunsetsu.isSubject=true
             bunsetsu.subject=temp_character_name
             break;
@@ -257,9 +258,10 @@ let existsSubject=(bunsetsu,KNP_character_array)=>{
 
 let existsObject=(bunsetsu,KNP_character_array)=>{
 
+    const bunsetsu_info_row = bunsetsu.csv_raw_array[0]
     const temp_character_name=bunsetsu.csv_raw_array[1][0]
-    for(let col_num=0;col_num<bunsetsu[0].length;col_num++){
-        if ( ( bunsetsu[0][col_num].match("ヲ格") || bunsetsu[0][col_num].match("ニ格") ) && isCharacter(KNP_character_array,temp_character_name) ) {
+    for(let col_num=0;col_num<bunsetsu_info_row.length;col_num++){
+        if ( ( bunsetsu_info_row[col_num].match("ヲ格") || bunsetsu_info_row[col_num].match("ニ格") ) && isCharacter(KNP_character_array,temp_character_name) ) {
             bunsetsu.isObject=true
             bunsetsu.object=temp_character_name
             break;

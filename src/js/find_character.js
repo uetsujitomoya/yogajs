@@ -4,7 +4,7 @@
 
 import {contains_japanese} from "../js/contains_japanese.js"
 
-let find_character = (knparray) => {
+let find_character = (knparray,KNP_character_array) => {
     //if かな exist
     knparray.forEach((row)=>{
         //console.log(row)
@@ -20,7 +20,7 @@ let find_character = (knparray) => {
                             //verbを追加
                             isNewCharacter = false;
                             //太さ加算
-                            character.character_node.bold_qty++
+                            //character.character_node.bold_qty++
                         }
                     })
                     if(isNewCharacter==true){
@@ -64,4 +64,19 @@ class Node{
 
 let add_bold_of_node = () => {
 
+}
+
+export {find_character}
+
+
+
+class KNP_character {
+    constructor(name) {
+        this.name = name
+        if(this.name=="私"){
+            this.client = 1
+        }else{
+            this.client = 0
+        }
+    }
 }
