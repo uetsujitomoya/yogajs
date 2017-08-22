@@ -6,7 +6,7 @@ let first_japanese_row_num_in_sentence = 3 ;
 let starting_kihonku_row_num_in_sentence = 2 ;
 let starting_bunsetsu_row_num_in_sentence = 1 ;
 
-let reconstruct_KNP = (raw_2d_array) => {
+let reconstruct_KNP = (raw_2d_array,KNP_character_array) => {
     let KNP_sentence_array=[]
     let temp_sentence_2d_array=[]
     let temp_rowNo=0;
@@ -14,7 +14,7 @@ let reconstruct_KNP = (raw_2d_array) => {
         if(row_array[0]!="EOS"){
             temp_sentence_2d_array.push(row_array)
         }else{
-            KNP_sentence_array.push(new KNP_sentence(temp_rowNo,temp_sentence_2d_array))
+            KNP_sentence_array.push(new KNP_sentence(temp_rowNo,temp_sentence_2d_array,KNP_character_array))
             temp_sentence_2d_array=[]
         }
         temp_rowNo++
@@ -49,9 +49,9 @@ let count_kihonku=(input_2d_array)=>{
  * */
 
 class KNP_sentence{
-    constructor(raw_rowNo,sentence_2d_array) {
-        console.log("raw_rowNo %d",raw_rowNo)
-        console.log(sentence_2d_array)
+    constructor(raw_rowNo,sentence_2d_arrayKNP_character_array) {
+        //console.log("raw_rowNo %d",raw_rowNo)
+        //console.log(sentence_2d_array)
         if(sentence_2d_array.length==1){
             return 0
         }//空白センテンス処理
@@ -88,18 +88,18 @@ class KNP_sentence{
         for( let temp_rowNo = first_japanese_row_num_in_sentence ; temp_rowNo < sentence_2d_array.length ; temp_rowNo++ ){
             let temp_surface_form=sentence_2d_array[temp_rowNo][0];
             if(temp_surface_form=="+" && sentence_2d_array[temp_rowNo-1][0]!="*"){//文節内 2こ目以降の基本句
-                console.info(temp_2d_array_for_kihonku)
+                //console.info(temp_2d_array_for_kihonku)
                 this.kihonku_array[kihonku_num_in_sentence] = new KNP_kihonku_in_sentence(kihonku_num_in_sentence,temp_2d_array_for_kihonku)//文の中の通し番号での基本句array
                 temp_2d_array_for_kihonku=[]
                 kihonku_num_in_sentence++
             }else if( temp_surface_form == "*" ){
-                console.info(temp_2d_array_for_kihonku)
+                //console.info(temp_2d_array_for_kihonku)
                 this.kihonku_array[kihonku_num_in_sentence] = new KNP_kihonku_in_sentence(kihonku_num_in_sentence,temp_2d_array_for_kihonku)//文の中の通し番号での基本句array
                 temp_2d_array_for_kihonku=[]
                 kihonku_num_in_sentence++
 
-                console.info(temp_2d_array_for_bunsetsu)
-                this.bunsetsu_array[bunsetsu_num_in_sentence] = new KNP_bunsetsu(bunsetsu_num_in_sentence,temp_2d_array_for_bunsetsu)//文の中の通し番号での文節array
+                //console.info(temp_2d_array_for_bunsetsu)
+                this.bunsetsu_array[bunsetsu_num_in_sentence] = new KNP_bunsetsu(bunsetsu_num_in_sentence,temp_2d_array_for_bunsetsu,KNP_character_array)//文の中の通し番号での文節array
                 temp_2d_array_for_bunsetsu=[]
                 bunsetsu_num_in_sentence++
             }
@@ -107,9 +107,9 @@ class KNP_sentence{
             temp_2d_array_for_kihonku.push(sentence_2d_array[temp_rowNo])
         }
 
-        console.log("bunsetsu_num_in_sentence %d",bunsetsu_num_in_sentence)
-        console.log(temp_2d_array_for_bunsetsu)
-        this.bunsetsu_array[bunsetsu_num_in_sentence] = new KNP_bunsetsu(bunsetsu_num_in_sentence,temp_2d_array_for_bunsetsu)
+        //console.log("bunsetsu_num_in_sentence %d",bunsetsu_num_in_sentence)
+        //console.log(temp_2d_array_for_bunsetsu)
+        this.bunsetsu_array[bunsetsu_num_in_sentence] = new KNP_bunsetsu(bunsetsu_num_in_sentence,temp_2d_array_for_bunsetsu,KNP_character_array)
         this.kihonku_array[kihonku_num_in_sentence] = new KNP_kihonku_in_sentence(kihonku_num_in_sentence,temp_2d_array_for_kihonku)//文の中の通し番号での基本句array
         /*
         raw_2d_array.forEach((row_array)=>{
@@ -120,6 +120,8 @@ class KNP_sentence{
         //最後に、掛かり先を探索して埋める
         this.input_each_kakarareru_bunsetsu_id();
         this.input_each_kakarareru_kihonku_id();
+        console.log(raw_rowNo)
+        console.log(this.bunsetsu_array)
     }
 
     input_each_kakarareru_bunsetsu_id () {
@@ -127,10 +129,10 @@ class KNP_sentence{
         this.bunsetsu_array.forEach((kakaru_bunsetsu)=>{
             for(let kakarareru_bunsetsu_num = 0 ; kakarareru_bunsetsu_num < this.bunsetsu_array.length ; kakarareru_bunsetsu_num++){
 
-                console.log(this.bunsetsu_array[kakarareru_bunsetsu_num])
+                //console.log(this.bunsetsu_array[kakarareru_bunsetsu_num])
                 if(kakaru_bunsetsu.kakaru_bunsetsu_id == this.bunsetsu_array[kakarareru_bunsetsu_num].id){
                     this.bunsetsu_array[kakarareru_bunsetsu_num].kakarareru_bunsetsu_id_array.push(kakaru_bunsetsu.id)
-                    console.log(this.bunsetsu_array[kakarareru_bunsetsu_num])
+                    //console.log(this.bunsetsu_array[kakarareru_bunsetsu_num])
                     break;
                 }
             }
@@ -139,12 +141,12 @@ class KNP_sentence{
 
     input_each_kakarareru_kihonku_id(){
         this.kihonku_array.forEach((kakaru_kihonku)=>{
-            console.log(this.kihonku_array)
+            //console.log(this.kihonku_array)
             for(let kakarareru_kihonku_num = 0 ; kakarareru_kihonku_num < this.kihonku_array.length ; kakarareru_kihonku_num++){
-                console.log(this.kihonku_array[kakarareru_kihonku_num])
+                //console.log(this.kihonku_array[kakarareru_kihonku_num])
                 if(kakaru_kihonku.kakatu_kihonku_id == this.kihonku_array[kakarareru_kihonku_num].id){
                     this.kihonku_array[kakarareru_kihonku_num].kakarareru_kihonku_id_array.push(kakaru_kihonku.id)
-                    console.log(this.kihonku_array[kakarareru_kihonku_num])
+                    //console.log(this.kihonku_array[kakarareru_kihonku_num])
                     break;
                 }
             }
@@ -153,7 +155,7 @@ class KNP_sentence{
 }
 
 class KNP_bunsetsu {
-    constructor(num,input_2d_array) {
+    constructor(num,input_2d_array,KNP_character_array) {
         //console.log(input_2d_array)
 
         this.csv_raw_array=input_2d_array
@@ -173,12 +175,26 @@ class KNP_bunsetsu {
         input_2d_array.forEach((row_array)=>{
             this.surface_form += row_array[0]
         })
+
+        this.existsSubject=false
+        this.existsObject=false
+        this.isVerb=false
+
+        find_subject(this,KNP_character_array)
+        if(!this.existsSubject){
+            find_object(this,KNP_character_array)
+            if(!this.existsSubject){
+                find_verb(this)
+            }
+        }
+
+
     }
 }
 
 class KNP_kihonku_in_sentence {
     constructor(num,input_2d_array) {
-        console.log(input_2d_array)
+        //console.log(input_2d_array)
 
         this.csv_raw_array=input_2d_array
         //this.rowNo=rowNo
@@ -225,6 +241,39 @@ class KNP_word {
         this.hinshi=row_array[3]
 
     }
+}
+
+let existsSubject=(bunsetsu,KNP_character_array)=>{
+
+    const temp_character_name=bunsetsu.csv_raw_array[1][0]
+    for(var col_num=0;col_num<bunsetsu[0].length;col_num++){
+        if ( bunsetsu[0][col_num].match("ガ格")&&isCharacter(KNP_character_array,temp_character_name)) {
+            bunsetsu.isSubject=true
+            bunsetsu.subject=temp_character_name
+            break;
+        }
+    }
+}
+
+let existsObject=(bunsetsu,KNP_character_array)=>{
+
+    const temp_character_name=bunsetsu.csv_raw_array[1][0]
+    for(let col_num=0;col_num<bunsetsu[0].length;col_num++){
+        if ( ( bunsetsu[0][col_num].match("ヲ格") || bunsetsu[0][col_num].match("ニ格") ) && isCharacter(KNP_character_array,temp_character_name) ) {
+            bunsetsu.isObject=true
+            bunsetsu.object=temp_character_name
+            break;
+        }
+    }
+}
+
+let isCharacter=(KNP_character_array,temp_character_name)=>{
+    KNP_character_array.forEach((character)=>{
+        if(temp_character_name==character.name){
+            return true
+        }
+    })
+    return false
 }
 
 export {reconstruct_KNP}
