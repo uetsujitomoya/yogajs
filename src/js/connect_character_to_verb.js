@@ -22,3 +22,26 @@ let search_bunsetsu_with_character= (bunsetsu_array,bunsetsu_num_including_verb)
         }
     }
 }
+
+//search verb of subject/object
+
+let search_subject_of_verb = (sentence,verb_clause_num) =>{
+    //let verb_clause = sentence.bunsetsu_array[verb_clause_num]
+  for(let temp_clause_num = verb_clause_num; temp_clause_num>=0; temp_clause_num++){
+      let temp_clause=sentence.bunsetsu_array[temp_clause_num]
+      if(temp_clause.includesSubject){
+          sentence.bunsetsu_array[ verb_clause_num ].subject_of_verb = temp_clause.subject
+          break;
+      }
+  }
+}
+
+let search_object_of_verb = (sentence,verb_clause) =>{
+    for(let temp_clause_num = verb_clause_num; temp_clause_num>=0; temp_clause_num++){
+        let temp_clause=sentence.bunsetsu_array[temp_clause_num]
+        if(temp_clause.includesObject){
+            sentence.bunsetsu_array[ verb_clause_num ].object_of_verb = temp_clause.object
+            break;
+        }
+    }
+}
