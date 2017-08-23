@@ -37,16 +37,16 @@ function createsvg () {
     // pathの計算で使うので、半径と矢印の微調整パラメータを別定義にしている。
     var r1 = 30;
     var r2 = 20;
-    var ref1 = 8;
+    var yajirushi_refX = 8;
     var c1 = [100, 90, r1];
     var c2 = [200, 120, r2];
-    var carray = [c1, c2];
+    var circle_data_array = [c1, c2];
 
     var marker = svg.append("defs").append("marker")
         .attr({
             'id': "arrowhead",
             // 矢印の位置を一番後ろから手前に少しずらす
-            'refX': ref1,
+            'refX': yajirushi_refX,
             'refY': 2,
             'markerWidth': 4,
             'markerHeight': 4,
@@ -61,7 +61,7 @@ function createsvg () {
     var color = d3.scale.category10();
 
     var g = svg.selectAll('g')
-        .data(carray).enter().append('g')
+        .data(circle_data_array).enter().append('g')
         .attr({
             transform: function(d) {
                 return "translate(" + d[0] + "," + d[1] + ")";
@@ -89,7 +89,7 @@ function createsvg () {
 
     var path = svg.append('path')
         .attr({
-            'd': line(carray),
+            'd': line(circle_data_array),
             'stroke': 'lightgreen',
             'stroke-width': 5,
             'fill': 'none',
@@ -98,7 +98,7 @@ function createsvg () {
 
     // pathの長さを調べて、丸の半径２個分＋矢印を後ろに下げる分の長さを引きます。
     var totalLength = path.node().getTotalLength();
-    var t = totalLength - (r1+r2+ref1);
+    var t = totalLength - (r1+r2+yajirushi_refX);
     path.attr({
         // 破線の指定を行います。
         'stroke-dasharray': "0 " + r1 + " " + t + " " + r2,
@@ -106,5 +106,101 @@ function createsvg () {
         'stroke-dashoffset': 0,
     });
 };
+
+
+
+
+function createsvg () {
+    // id:exampleが指定されているタグ(ここではdivタグ)の下に、svgを追加します。
+    // widthとheightを指定します。
+    var svg = d3.select("#example").append("svg")
+        .attr({
+            width: 640,
+            height: 480,
+        });
+};
+
+let append_circle = (svg,cx,cy,r) => {
+// svgの下にcircleを追加します。
+    // cx,cy:中心座標(x,y)、r:半径を指定します。
+    svg.append('circle')
+        .attr({
+            'cx': cx,
+            'cy': cy,
+            'r': r,
+        });
+}
+
+let append_circles = (svg, character_array) => {
+    var circle = svg.selectAll('circle').data(character_array).enter().append('circle')
+        .attr({
+            'cx': function(d) { return d.Node.node_cx; },
+            'cy': function(d) { return d.Node.node_cy; },
+            'r': function(d) { return d.Node.circle_r; },
+            'fill': function(d) { return d.Node.circle_color; }
+        });
+}
+
+let append_circle_groups = (svg,character_array) => {
+    var node_g = svg.selectAll('g')
+        .data(character_array).enter().append('g')
+        .attr({
+            // 座標はg側で設定する
+            // 座標設定を動的に行う
+            transform: function(d) {
+                return "translate(" + d.node.x + "," + d.node.y + ")";
+            },
+        });
+
+    // g.appendでデータ毎に要素を追加できる
+    node_g.append('circle')
+        .attr({
+            'r': function(d) { return d.node.y; },
+            'fill': function(d) { return d.node.color; },
+        });
+    node_g.append('text')
+        .attr({
+            // 真ん中若干下に配置されるように、文字色は白に。
+            'text-anchor': "middle",
+            'dy': ".35em",
+            'fill': "white",
+        })
+        // iは0から始まるので、+1しておく
+        .text(function(d) { return d.name; });
+}
+
+
+let append_arrow = (svg,arrow_data_array) => {
+    var marker = svg.append("defs").append("marker")
+        .attr({
+            'id': "arrowhead",
+            'refX': 0,
+            'refY': 2,
+            'markerWidth': 4,
+            'markerHeight': 4,
+            'orient': "auto"
+        });
+    // 矢印の形をpathで定義します。
+    marker.append("path")
+        .attr({
+            d: "M 0,0 V 4 L4,2 Z",
+            fill: "steelblue"
+        });
+
+    var line = d3.svg.line()
+        .interpolate('basis')
+        .x(function(d) {return d[0];})
+        .y(function(d) {return d[1];});
+
+    var path = svg.append('path')
+        .attr({
+            'd': line(arrow_data_array),
+            'stroke': 'lightgreen',
+            'stroke-width': 5,
+            'fill': 'none',
+            // pathの属性として、上で定義した矢印を指定します
+            'marker-end':"url(#arrowhead)",
+        });
+}
 
 export {createsvg}

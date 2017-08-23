@@ -2,6 +2,8 @@
  * Created by uetsujitomoya on 2017/08/17.
  */
 
+import　{find_verb_from_csv} from "find_verb.js"
+
 let first_japanese_row_num_in_sentence = 3 ;
 let starting_kihonku_row_num_in_sentence = 2 ;
 let starting_bunsetsu_row_num_in_sentence = 1 ;
@@ -174,6 +176,7 @@ class KNP_bunsetsu {
         this.surface_form = ""
         input_2d_array.forEach((row_array)=>{
             this.surface_form += row_array[0]
+            this.word_array.push( new KNP_word(row_array) )
         })
 
         this.existsSubject=false
@@ -184,11 +187,9 @@ class KNP_bunsetsu {
         if(!this.existsSubject){
             existsObject(this,KNP_character_array)
             if(!this.existsSubject){
-                //find_verb(this)
+                find_verb(this)
             }
         }
-
-
     }
 }
 
@@ -234,7 +235,7 @@ class KNP_kihonku_in_clause {
 }
 
 class KNP_word {
-    constructor(rowNo,row_array,upper_row_array) {
+    constructor(row_array) {
 
         this.csv_raw_array=[]
         this.rowNo=rowNo
