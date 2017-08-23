@@ -163,7 +163,10 @@ class KNP_bunsetsu {
         this.csv_raw_array=input_2d_array
         //this.rowNo=rowNo
         this.id = num+"D"
+
         this.kihonku_array=[]
+        this.kihonku_array.length=count_kihonku(input_2d_array)
+
         this.word_array=[]
 
         /*
@@ -183,6 +186,8 @@ class KNP_bunsetsu {
         this.existsObject=false
         this.isVerb=false
 
+        this.make_kihonku_array_in_bunsetsu( input_2d_array )
+
         existsSubject(this,KNP_character_array)
         if(!this.existsSubject){
             existsObject(this,KNP_character_array)
@@ -191,7 +196,23 @@ class KNP_bunsetsu {
             }
         }
     }
+
+    make_kihonku_array_in_bunsetsu( bunsetsu_raw_2d_array ){
+        let kihonku_num_in_bunsetsu = 0
+        let temp_2d_array_for_kihonku=[]
+        for( let temp_rowNo = 1 ; temp_rowNo < bunsetsu_raw_2d_array.length ; temp_rowNo++ ){
+            if(temp_surface_form=="+"){//文節内 2こ目以降の基本句
+                //console.info(temp_2d_array_for_kihonku)
+                this.kihonku_array[kihonku_num_in_bunsetsu] = new KNP_kihonku_in_bunsetsu(kihonku_num_in_bunsetsu,temp_2d_array_for_kihonku)//文の中の通し番号での基本句array
+                temp_2d_array_for_kihonku=[]
+                kihonku_num_in_bunsetsu++
+            }
+            temp_2d_array_for_kihonku.push(bunsetsu_raw_2d_array[temp_rowNo])
+        }
+        this.kihonku_array[kihonku_num_in_bunsetsu] = new KNP_kihonku_in_bunsetsu(kihonku_num_in_bunsetsu,temp_2d_array_for_kihonku)//文の中の通し番号での基本句array
+    }
 }
+
 
 class KNP_kihonku_in_sentence {
     constructor(num,input_2d_array) {
@@ -215,7 +236,7 @@ class KNP_kihonku_in_sentence {
     }
 }
 
-class KNP_kihonku_in_clause {
+class KNP_kihonku_in_bunsetsu {
     constructor(rowNo,row_array,upper_row_array) {
 
         this.csv_raw_array=[]
