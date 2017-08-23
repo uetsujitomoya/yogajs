@@ -221,7 +221,11 @@ class KNP_kihonku_in_sentence {
         this.csv_raw_array=input_2d_array
         //this.rowNo=rowNo
         this.id = num+"D"
+
         this.word_array=[]
+        for(let rowNo =1;rowNo<row_array.length;rowNo++){
+            this.word_array.push(new KNP_word(input_2d_array[rowNo]))
+        }
         /*
         if(this.word_array[0][3]=="動詞"){
             this.verb_data={}
@@ -237,12 +241,15 @@ class KNP_kihonku_in_sentence {
 }
 
 class KNP_kihonku_in_bunsetsu {
-    constructor(rowNo,row_array,upper_row_array) {
+    constructor(rowNo,row_array) {
 
         this.csv_raw_array=[]
         this.rowNo=rowNo
-        this.num = num+"D"
+        //this.num = num+"D"
         this.word_array=[]
+        for(let rowNo =1;rowNo<row_array.length;rowNo++){
+
+        }
         if(this.word_array[0][3]=="動詞"){
             this.verb_data={}
         }
@@ -259,7 +266,7 @@ class KNP_word {
     constructor(row_array) {
 
         this.csv_raw_array=[]
-        this.rowNo=rowNo
+        //this.rowNo=rowNo
         this.hinshi=row_array[3]
 
     }
