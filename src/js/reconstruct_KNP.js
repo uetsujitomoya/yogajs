@@ -2,7 +2,7 @@
  * Created by uetsujitomoya on 2017/08/17.
  */
 
-//import　{find_verb_from_csv} from "find_verb.js"
+import　{find_verb_in_bunsetsu} from "../js/find_verb.js"
 
 let first_japanese_row_num_in_sentence = 3 ;
 let starting_kihonku_row_num_in_sentence = 2 ;
@@ -192,7 +192,7 @@ class KNP_bunsetsu {
         if(!this.existsSubject){
             existsObject(this,KNP_character_array)
             if(!this.existsSubject){
-                //find_verb(this)
+                find_verb_in_bunsetsu(this)
             }
         }
     }
