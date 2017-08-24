@@ -2,7 +2,7 @@
  * Created by uetsujitomoya on 2017/08/17.
  */
 
-import　{find_verb_in_bunsetsu} from "../js/find_verb.js"
+import　{includesVerb} from "../js/find_verb.js"
 
 let first_japanese_row_num_in_sentence = 3 ;
 let starting_kihonku_row_num_in_sentence = 2 ;
@@ -192,17 +192,18 @@ class KNP_bunsetsu {
         if(!this.existsSubject){
             existsObject(this,KNP_character_array)
             if(!this.existsSubject){
-                find_verb_in_bunsetsu(this)
+                this.find_verb_in_bunsetsu(this)
             }
         }
+        console.log(this)
     }
 
     make_kihonku_array_in_bunsetsu( bunsetsu_raw_2d_array ){
         let kihonku_num_in_bunsetsu = 0
         let temp_2d_array_for_kihonku=[]
         if(bunsetsu_raw_2d_array.length>=1){
-            console.log("bunsetsu_raw_2d_array")
-            console.log(bunsetsu_raw_2d_array)
+            //console.log("bunsetsu_raw_2d_array")
+            //console.log(bunsetsu_raw_2d_array)
             let japanese_starting_num = 2
             for( let temp_rowNo = japanese_starting_num ; temp_rowNo < bunsetsu_raw_2d_array.length ; temp_rowNo++ ){
                 let temp_row=bunsetsu_raw_2d_array[temp_rowNo]
@@ -217,6 +218,13 @@ class KNP_bunsetsu {
             this.kihonku_array[kihonku_num_in_bunsetsu] = new KNP_kihonku_in_bunsetsu(temp_2d_array_for_kihonku)//文の中の通し番号での基本句array
         }
     }
+
+    find_verb_in_bunsetsu () {
+    if(includesVerb(this.word_array[0].raw_array)){
+        this.isVerb=true
+        this.verb= bunsetsu.word_array[0].basic_form
+    }
+}
 }
 
 
@@ -232,8 +240,8 @@ class KNP_kihonku_in_sentence {
         for(let rowNo =1;rowNo<input_2d_array.length;rowNo++){
             this.word_array.push(new KNP_word(input_2d_array[rowNo]))
         }
-        console.log("word_array_in_kihonku %s",this.id)
-        console.log(this.word_array)
+        //console.log("word_array_in_kihonku %s",this.id)
+        //console.log(this.word_array)
         /*
         if(this.word_array[0][3]=="動詞"){
             this.verb_data={}
@@ -276,6 +284,7 @@ class KNP_kihonku_in_bunsetsu {
 
 class KNP_word {
     constructor(row_array) {
+        this.raw_array=row_array
 
         this.csv_raw_array=[]
         //this.rowNo=rowNo

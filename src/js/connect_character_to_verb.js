@@ -36,7 +36,7 @@ let search_subject_of_verb = (sentence,verb_clause_num) =>{
   }
 }
 
-let search_object_of_verb = (sentence,verb_clause) =>{
+let search_object_of_verb = (sentence,verb_clause_num) =>{
     for(let temp_clause_num = verb_clause_num; temp_clause_num>=0; temp_clause_num++){
         let temp_clause=sentence.bunsetsu_array[temp_clause_num]
         if(temp_clause.includesObject){

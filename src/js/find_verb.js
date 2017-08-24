@@ -23,7 +23,7 @@ class KNP_verb {
 }
 
 let find_verb_from_csv =(rowNo, knparray)=>{
-    if(contains_japanese(knparray[rowNo][0])){
+    if(contains_japanese(knparray[rowNo])){
         let temp_japanese = knparray[rowNo][0]
         console.log(knparray[rowNo][3])
         if ( includesVerb(knparray[rowNo])) {
@@ -35,17 +35,13 @@ let find_verb_from_csv =(rowNo, knparray)=>{
 }
 
 let includesVerb=(word_row)=>{
+    console.log(word_row)
     if(word_row[3]=="同士"){
         return true
     }
     return false
 }
 
-let find_verb_in_bunsetsu = (bunsetsu) => {
-    if(includesVerb(bunsetsu.word_array[0].raw_array)){
-        bunsetsu.isVerb=true
-        bunsetsu.verb= bunsetsu.word_array[0].basic_form
-    }
-}
 
-export {find_verb_from_csv,find_verbs,find_verb_in_bunsetsu}
+
+export {find_verb_from_csv,find_verbs,includesVerb}
