@@ -114,10 +114,10 @@ class KNP_sentence{
         this.bunsetsu_array[bunsetsu_num_in_sentence] = new KNP_bunsetsu(bunsetsu_num_in_sentence,temp_2d_array_for_bunsetsu,KNP_character_array)
         this.kihonku_array[kihonku_num_in_sentence] = new KNP_kihonku_in_sentence(kihonku_num_in_sentence,temp_2d_array_for_kihonku)//文の中の通し番号での基本句array
         /*
-        raw_2d_array.forEach((row_array)=>{
-            
-        })
-        */
+         raw_2d_array.forEach((row_array)=>{
+
+         })
+         */
 
         //最後に、掛かり先を探索して埋める
         this.input_each_kakarareru_bunsetsu_id();
@@ -170,10 +170,10 @@ class KNP_bunsetsu {
         this.word_array=[]
 
         /*
-        if(this.word_array[0][3]=="動詞"){
-            this.verb_data={}
-        }
-        */
+         if(this.word_array[0][3]=="動詞"){
+         this.verb_data={}
+         }
+         */
         this.kakaru_bunsetsu_id = input_2d_array[0][1]
         this.kakarareru_bunsetsu_id_array = []
         this.surface_form = ""
@@ -191,8 +191,8 @@ class KNP_bunsetsu {
         existsSubject(this,KNP_character_array)
         if(!this.existsSubject){
             existsObject(this,KNP_character_array)
-            if(!this.existsSubject){
-                this.find_verb_in_bunsetsu(this)
+            if(!this.existsObject){
+                this.find_verb_in_bunsetsu()
             }
         }
         console.log(this)
@@ -220,11 +220,17 @@ class KNP_bunsetsu {
     }
 
     find_verb_in_bunsetsu () {
-    if(includesVerb(this.word_array[0].raw_array)){
-        this.isVerb=true
-        this.verb= bunsetsu.word_array[0].basic_form
+        console.log("entered find_verb_in_bunsetsu")
+        let first_japanise_row_num =2
+        console.log(this.word_array[first_japanise_row_num].raw_array)
+
+        if(includesVerb(this.word_array[first_japanise_row_num].raw_array)){
+            this.isVerb=true
+            this.verb= this.word_array[first_japanise_row_num].basic_form
+            console.log("this.verb")
+            console.log(this.verb)
+        }
     }
-}
 }
 
 
@@ -243,10 +249,10 @@ class KNP_kihonku_in_sentence {
         //console.log("word_array_in_kihonku %s",this.id)
         //console.log(this.word_array)
         /*
-        if(this.word_array[0][3]=="動詞"){
-            this.verb_data={}
-        }
-        */
+         if(this.word_array[0][3]=="動詞"){
+         this.verb_data={}
+         }
+         */
         this.kakaru_kihonku_id = input_2d_array[0][1]
         this.kakarareru_kihonku_id_array = []
         this.surface_form = ""
@@ -270,9 +276,9 @@ class KNP_kihonku_in_bunsetsu {
 
         }
         /*
-        if(row_array[1][3]=="動詞"){
-            this.verb_data={}
-        }*/
+         if(row_array[1][3]=="動詞"){
+         this.verb_data={}
+         }*/
 
         this.subject = "null"
         this.object = "null"
