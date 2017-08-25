@@ -45,3 +45,5 @@ let search_object_of_verb = (sentence,verb_clause_num) =>{
         }
     }
 }
+
+export {search_object_of_verb,search_subject_of_verb}

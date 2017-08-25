@@ -25,7 +25,7 @@ class KNP_verb {
 let find_verb_from_csv =(rowNo, knparray)=>{
     if(contains_japanese(knparray[rowNo])){
         let temp_japanese = knparray[rowNo][0]
-        console.log(knparray[rowNo][3])
+        //console.log(knparray[rowNo][3])
         if ( includesVerb(knparray[rowNo])) {
             let temp_character_name=knparray[rowNo][0];
             //上の行も引数にしないといけない

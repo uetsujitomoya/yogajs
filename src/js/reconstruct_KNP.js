@@ -5,6 +5,7 @@
 import　{includesVerb} from "../js/find_verb.js"
 
 let first_japanese_row_num_in_sentence = 3 ;
+let first_japanese_row_num_in_bunsetsu = 2 ;
 let starting_kihonku_row_num_in_sentence = 2 ;
 let starting_bunsetsu_row_num_in_sentence = 1 ;
 
@@ -122,7 +123,7 @@ class KNP_sentence{
         //最後に、掛かり先を探索して埋める
         this.input_each_kakarareru_bunsetsu_id();
         this.input_each_kakarareru_kihonku_id();
-        console.log(raw_rowNo)
+        console.log("EOS,row id = %d",raw_rowNo)
         console.log(this.bunsetsu_array)
     }
 
@@ -158,6 +159,7 @@ class KNP_sentence{
 
 class KNP_bunsetsu {
     constructor(num,input_2d_array,KNP_character_array) {
+        console.log(KNP_character_array)
         //console.log(input_2d_array)
 
         this.csv_raw_array=input_2d_array
@@ -188,12 +190,31 @@ class KNP_bunsetsu {
 
         this.make_kihonku_array_in_bunsetsu( input_2d_array )
 
-        existsSubject(this,KNP_character_array)
-        if(!this.existsSubject){
-            existsObject(this,KNP_character_array)
-            if(!this.existsObject){
-                this.find_verb_in_bunsetsu()
+        //characterか否か。違うならverbへ
+        //characterならobjectかsubjectか
+
+        let temp_character_name=this.csv_raw_array[first_japanese_row_num_in_bunsetsu][0]
+
+        console.log(temp_character_name)
+
+        if(isCharacter(KNP_character_array,temp_character_name)){
+            alert("%s is character",temp_character_name)
+            const bunsetsu_info_row = this.csv_raw_array[0]
+
+            //colごとになめる
+            for(let col_num=0;col_num<bunsetsu_info_row.length;col_num++){
+                if (( bunsetsu_info_row[col_num].match("ヲ格") || bunsetsu_info_row[col_num].match("ニ格"))) {
+                    alert("%s is object",this.surface_form)
+                    this.add_about_object(KNP_character_array)
+                    break;
+                } else if (bunsetsu_info_row[col_num].match("ガ格")) {
+                    alert("%s is subject",this.surface_form)
+                    this.add_about_subject()
+                    break;
+                }
             }
+        }else{
+            this.find_verb_in_bunsetsu()
         }
         console.log(this)
     }
@@ -219,16 +240,31 @@ class KNP_bunsetsu {
         }
     }
 
-    find_verb_in_bunsetsu () {
-        console.log("entered find_verb_in_bunsetsu")
-        let first_japanise_row_num =2
-        console.log(this.word_array[first_japanise_row_num].raw_array)
+    add_about_object(KNP_character_array){
 
-        if(includesVerb(this.word_array[first_japanise_row_num].raw_array)){
+        this.isObject=true
+        this.object=temp_character_name
+        console.log("%s is object",temp_character_name)
+
+    }
+
+    add_about_subject(KNP_character_array){
+        this.isSubject=true
+        this.subject=temp_character_name
+        console.log("%s is subject",temp_character_name)
+
+    }
+
+    find_verb_in_bunsetsu () {
+        //console.log("entered find_verb_in_bunsetsu")
+        //let first_japanise_row_num =2
+        //console.log(this.word_array[first_japanise_row_num].raw_array)
+
+        if(includesVerb(this.word_array[first_japanese_row_num_in_bunsetsu].raw_array)){
             this.isVerb=true
-            this.verb= this.word_array[first_japanise_row_num].basic_form
-            console.log("this.verb")
-            console.log(this.verb)
+            this.verb= this.word_array[first_japanese_row_num_in_bunsetsu].basic_form
+            //console.log("this.verb")
+            //console.log(this.verb)
         }
     }
 }
@@ -326,11 +362,14 @@ let existsObject=(bunsetsu,KNP_character_array)=>{
 }
 
 let isCharacter=(KNP_character_array,temp_character_name)=>{
-    KNP_character_array.forEach((character)=>{
-        if(temp_character_name==character.name){
+    console.log(temp_character_name)
+    for(let chara_num=0;chara_num<KNP_character_array.length;chara_num++){
+
+        if(temp_character_name==KNP_character_array[chara_num].name){
+             console.log("icchi")
             return true
         }
-    })
+    }
     return false
 }
 
