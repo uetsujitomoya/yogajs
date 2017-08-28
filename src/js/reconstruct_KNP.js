@@ -246,7 +246,7 @@ class KNP_bunsetsu {
         console.log(temp_character_name)
 
         if(isCharacter(KNP_character_array,temp_character_name)){
-            alert("%s is character",temp_character_name)
+            console.log("%s is character",temp_character_name)
             const bunsetsu_info_row = this.csv_raw_array[0]
 
             //colごとになめる
@@ -291,15 +291,15 @@ class KNP_bunsetsu {
     add_about_object(KNP_character_array){
 
         this.isObject=true
-        this.object=temp_character_name
-        console.log("%s is object",temp_character_name)
+        this.object=this.surface_form
+        //console.log("%s is object",temp_character_name)
 
     }
 
     add_about_subject(KNP_character_array){
         this.isSubject=true
-        this.subject=temp_character_name
-        console.log("%s is subject",temp_character_name)
+        this.subject=this.surface_form
+        //console.log("%s is subject",temp_character_name)
 
     }
 
