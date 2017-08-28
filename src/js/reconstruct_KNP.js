@@ -3,6 +3,7 @@
  */
 
 import　{includesVerb} from "../js/find_verb.js"
+import verbInSentence from "../js/create_verbInSentence_class.js"
 
 let first_japanese_row_num_in_sentence = 3 ;
 let first_japanese_row_num_in_bunsetsu = 2 ;
@@ -66,6 +67,8 @@ class KNP_sentence{
         //PARAの探索（3列目にPを含む文字列があればPARAがそこにあると判定し、文節配列と基本句配列にPARAを挿入）
         //そのためには、始めに文節配列・基本句配列のlengthだけ決めてしまったほうが良い
 
+        this.verb_array=[]
+
         //this.csv_raw_array=[]
         this.rowNo=raw_rowNo
         this.bunsetsu_array=[]
@@ -88,6 +91,8 @@ class KNP_sentence{
         let bunsetsu_num_in_sentence=0
         let kihonku_num_in_sentence=0
 
+
+
         for( let temp_rowNo = first_japanese_row_num_in_sentence ; temp_rowNo < sentence_2d_array.length ; temp_rowNo++ ){
             let temp_surface_form=sentence_2d_array[temp_rowNo][0];
             if(temp_surface_form=="+" && sentence_2d_array[temp_rowNo-1][0]!="*"){//文節内 2こ目以降の基本句
@@ -103,6 +108,12 @@ class KNP_sentence{
 
                 //console.info(temp_2d_array_for_bunsetsu)
                 this.bunsetsu_array[bunsetsu_num_in_sentence] = new KNP_bunsetsu(bunsetsu_num_in_sentence,temp_2d_array_for_bunsetsu,KNP_character_array)//文の中の通し番号での文節array
+
+                //verb_array作成
+                if(this.bunsetsu_array[bunsetsu_num_in_sentence].isVerb){
+                    this.verb_array.push(new verbInSentence(bunsetsu_num_in_sentence))
+                }
+
                 temp_2d_array_for_bunsetsu=[]
                 bunsetsu_num_in_sentence++
             }
@@ -113,6 +124,12 @@ class KNP_sentence{
         //console.log("bunsetsu_num_in_sentence %d",bunsetsu_num_in_sentence)
         //console.log(temp_2d_array_for_bunsetsu)
         this.bunsetsu_array[bunsetsu_num_in_sentence] = new KNP_bunsetsu(bunsetsu_num_in_sentence,temp_2d_array_for_bunsetsu,KNP_character_array)
+
+        //verb_array作成
+        if(this.bunsetsu_array[bunsetsu_num_in_sentence].isVerb){
+            this.verb_array.push(new verbInSentence(bunsetsu_num_in_sentence))
+        }
+
         this.kihonku_array[kihonku_num_in_sentence] = new KNP_kihonku_in_sentence(kihonku_num_in_sentence,temp_2d_array_for_kihonku)//文の中の通し番号での基本句array
         /*
          raw_2d_array.forEach((row_array)=>{
@@ -125,6 +142,15 @@ class KNP_sentence{
         this.input_each_kakarareru_kihonku_id();
         console.log("EOS,row id = %d",raw_rowNo)
         console.log(this.bunsetsu_array)
+
+        console.log("this.verb_array")
+        console.log(this.verb_array)
+        this.verb_array.forEach((verb)=>{
+            this.search_subject_of_verb(verb.bunsetsuNum_inSentence)
+            this.search_object_of_verb(verb.bunsetsuNum_inSentence)
+        })
+
+
     }
 
     input_each_kakarareru_bunsetsu_id () {
@@ -154,6 +180,28 @@ class KNP_sentence{
                 }
             }
         })
+    }
+
+    search_subject_of_verb (verb_clause_num) {
+        //let verb_clause = sentence.bunsetsu_array[verb_clause_num]
+        for(let temp_clause_num = verb_clause_num; temp_clause_num>=0; temp_clause_num--){
+            let temp_clause=this.bunsetsu_array[temp_clause_num]
+            console.log(temp_clause)
+            if(temp_clause.existsSubject){
+                this.bunsetsu_array[ verb_clause_num ].subject_of_verb = temp_clause.subject
+                break;
+            }
+        }
+    }
+
+    search_object_of_verb (verb_clause_num) {
+        for(let temp_clause_num = verb_clause_num; temp_clause_num>=0; temp_clause_num--){
+            let temp_clause=this.bunsetsu_array[temp_clause_num]
+            if(temp_clause.existsObject){
+                this.bunsetsu_array[ verb_clause_num ].object_of_verb = temp_clause.object
+                break;
+            }
+        }
     }
 }
 
@@ -204,11 +252,11 @@ class KNP_bunsetsu {
             //colごとになめる
             for(let col_num=0;col_num<bunsetsu_info_row.length;col_num++){
                 if (( bunsetsu_info_row[col_num].match("ヲ格") || bunsetsu_info_row[col_num].match("ニ格"))) {
-                    alert("%s is object",this.surface_form)
+                    console.log("%s is object",this.surface_form)
                     this.add_about_object(KNP_character_array)
                     break;
                 } else if (bunsetsu_info_row[col_num].match("ガ格")) {
-                    alert("%s is subject",this.surface_form)
+                    console.log("%s is subject",this.surface_form)
                     this.add_about_subject()
                     break;
                 }
@@ -267,6 +315,8 @@ class KNP_bunsetsu {
             //console.log(this.verb)
         }
     }
+
+
 }
 
 
@@ -366,7 +416,7 @@ let isCharacter=(KNP_character_array,temp_character_name)=>{
     for(let chara_num=0;chara_num<KNP_character_array.length;chara_num++){
 
         if(temp_character_name==KNP_character_array[chara_num].name){
-             console.log("icchi")
+            console.log("icchi")
             return true
         }
     }
