@@ -15,6 +15,11 @@ class arrow{
     }
 }
 
+//verb情報+object+subject情報
+
+
+//1.subject+verbのみ→◯
+//2.object+subject+verb→矢印
 
 let show_node = () => {
 
@@ -169,22 +174,30 @@ let append_circle_groups = (svg,character_array) => {
         .text(function(d) { return d.name; });
 }
 
+const path_stroke_with = 5
+const pathStrokeColor = 'lightgreen'
+
+const markerRefX=0
+const markerRefY=0
+const markerWidth=4
+const markerHeight=4
+const markerFillColor = "steelblue"
 
 let append_arrow = (svg,arrow_data_array) => {
     var marker = svg.append("defs").append("marker")
         .attr({
             'id': "arrowhead",
-            'refX': 0,
-            'refY': 2,
-            'markerWidth': 4,
-            'markerHeight': 4,
+            'refX': markerRefX,
+            'refY': markerRefY,
+            'markerWidth': markerWidth,
+            'markerHeight': markerHeight,
             'orient': "auto"
         });
     // 矢印の形をpathで定義します。
     marker.append("path")
         .attr({
-            d: "M 0,0 V 4 L4,2 Z",
-            fill: "steelblue"
+            d: "M 0,0 v 4 l0,2 Z",
+            fill: markerFillColor
         });
 
     var line = d3.svg.line()
@@ -195,8 +208,8 @@ let append_arrow = (svg,arrow_data_array) => {
     var path = svg.append('path')
         .attr({
             'd': line(arrow_data_array),
-            'stroke': 'lightgreen',
-            'stroke-width': 5,
+            'stroke': pathStrokeColor,
+            'stroke-width': path_stroke_with,
             'fill': 'none',
             // pathの属性として、上で定義した矢印を指定します
             'marker-end':"url(#arrowhead)",

@@ -140,8 +140,7 @@ class KNP_sentence{
         //最後に、掛かり先を探索して埋める
         this.input_each_kakarareru_bunsetsu_id();
         this.input_each_kakarareru_kihonku_id();
-        console.log("EOS,row id = %d",raw_rowNo)
-        console.log(this.bunsetsu_array)
+
 
         console.log("this.verb_array")
         console.log(this.verb_array)
@@ -150,6 +149,8 @@ class KNP_sentence{
             this.search_object_of_verb(verb.bunsetsuNum_inSentence)
         })
 
+        console.log("EOS,row id = %d",raw_rowNo)
+        console.log(this)
 
     }
 
@@ -189,6 +190,7 @@ class KNP_sentence{
             console.log(temp_clause)
             if(temp_clause.existsSubject){
                 this.bunsetsu_array[ verb_clause_num ].subject_of_verb = temp_clause.subject
+                alert(this.bunsetsu_array[ verb_clause_num ].subject_of_verb)
                 break;
             }
         }
@@ -199,6 +201,7 @@ class KNP_sentence{
             let temp_clause=this.bunsetsu_array[temp_clause_num]
             if(temp_clause.existsObject){
                 this.bunsetsu_array[ verb_clause_num ].object_of_verb = temp_clause.object
+                alert(this.bunsetsu_array[ verb_clause_num ].object_of_verb)
                 break;
             }
         }
@@ -292,6 +295,7 @@ class KNP_bunsetsu {
 
         this.isObject=true
         this.object=this.surface_form
+        alert(this.object)
         //console.log("%s is object",temp_character_name)
 
     }
@@ -299,6 +303,7 @@ class KNP_bunsetsu {
     add_about_subject(KNP_character_array){
         this.isSubject=true
         this.subject=this.surface_form
+        alert(this.subject)
         //console.log("%s is subject",temp_character_name)
 
     }
@@ -315,8 +320,6 @@ class KNP_bunsetsu {
             //console.log(this.verb)
         }
     }
-
-
 }
 
 
@@ -386,26 +389,26 @@ class KNP_word {
 }
 
 let existsSubject=(bunsetsu,KNP_character_array)=>{
-
     const bunsetsu_info_row = bunsetsu.csv_raw_array[0]
     const temp_character_name=bunsetsu.csv_raw_array[1][0]
     for(var col_num=0;col_num<bunsetsu_info_row.length;col_num++){
         if ( bunsetsu_info_row[col_num].match("ガ格")&&isCharacter(KNP_character_array,temp_character_name)) {
             bunsetsu.isSubject=true
             bunsetsu.subject=temp_character_name
+            alert(bunsetsu.subject)
             break;
         }
     }
 }
 
 let existsObject=(bunsetsu,KNP_character_array)=>{
-
     const bunsetsu_info_row = bunsetsu.csv_raw_array[0]
     const temp_character_name=bunsetsu.csv_raw_array[1][0]
     for(let col_num=0;col_num<bunsetsu_info_row.length;col_num++){
         if ( ( bunsetsu_info_row[col_num].match("ヲ格") || bunsetsu_info_row[col_num].match("ニ格") ) && isCharacter(KNP_character_array,temp_character_name) ) {
             bunsetsu.isObject=true
             bunsetsu.object=temp_character_name
+            alert(bunsetsu.object)
             break;
         }
     }
@@ -413,8 +416,7 @@ let existsObject=(bunsetsu,KNP_character_array)=>{
 
 let isCharacter=(KNP_character_array,temp_character_name)=>{
     console.log(temp_character_name)
-    for(let chara_num=0;chara_num<KNP_character_array.length;chara_num++){
-
+    for(let chara_num=0;chara_num < KNP_character_array.length;chara_num++){
         if(temp_character_name==KNP_character_array[chara_num].name){
             console.log("icchi")
             return true
