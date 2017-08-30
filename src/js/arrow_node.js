@@ -6,8 +6,19 @@
 
 import d3 from "d3";
 
-let color_of_client = "red"
-let color_of_people_around_client = "gray"
+const color_of_client = "red"
+const color_of_people_around_client = "gray"
+const circleStrokeWidth = 5
+
+const path_stroke_with = 5
+const pathStrokeColor = color_of_client
+
+const markerRefX=0
+const markerRefY=0
+const markerWidth=4
+const markerHeight=4
+const markerFillColor = color_of_client
+
 
 
 class arrow{
@@ -64,7 +75,7 @@ function createsvg () {
     marker.append("path")
         .attr({
             d: "M 0,0 V 4 L4,2 Z",
-            fill: "steelblue"
+            fill: markerFillColor
         });
 
     var color = d3.scale.category10();
@@ -80,14 +91,16 @@ function createsvg () {
     g.append('circle')
         .attr({
             'r': function(d) { return d[2]; },
-            'fill': function(d,i) { return color(i); },
+            'stroke':function(d,i){if(i==0){return color_of_client}else{return color_of_people_around_client}},
+            'fill': "white",
+            'stroke-width': circleStrokeWidth
         });
 
     g.append('text')
         .attr({
             'text-anchor': "middle",
             'dy': ".35em",
-            'fill': 'white',
+            'fill': 'black',
         })
         .text(function(d,i) { return i+1; });
 
@@ -99,7 +112,7 @@ function createsvg () {
     var path = svg.append('path')
         .attr({
             'd': line(circle_data_array),
-            'stroke': 'lightgreen',
+            'stroke': pathStrokeColor,
             'stroke-width': 5,
             'fill': 'none',
             'marker-end':"url(#arrowhead)",
@@ -181,14 +194,6 @@ let append_circle_groups = (svg,character_array) => {
         .text(function(d) { return d.name; });
 }
 
-const path_stroke_with = 5
-const pathStrokeColor = 'lightgreen'
-
-const markerRefX=0
-const markerRefY=0
-const markerWidth=4
-const markerHeight=4
-const markerFillColor = "steelblue"
 
 let append_arrow = (svg,arrow_data_array) => {
     var marker = svg.append("defs").append("marker")

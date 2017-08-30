@@ -148,9 +148,12 @@ class KNP_Sentence{
 
         console.log("this.verb_array")
         console.log(this.verb_array)
+
+        let tempVerbNum=0
         this.verb_array.forEach((verb)=>{
-            this.search_subject_of_verb(verb.bunsetsuNum_inSentence)
-            this.search_object_of_verb(verb.bunsetsuNum_inSentence)
+            this.search_subject_of_verb(verb.bunsetsuNum_inSentence,tempVerbNum)
+            this.search_object_of_verb(verb.bunsetsuNum_inSentence,tempVerbNum)
+            tempVerbNum++
         })
 
         console.log("EOS,row id = %d",raw_rowNo)
@@ -187,7 +190,7 @@ class KNP_Sentence{
         })
     }
 
-    search_subject_of_verb (verb_clause_num) {
+    search_subject_of_verb (verb_clause_num,tempVerbNum) {
         //let verb_clause = sentence.bunsetsu_array[verb_clause_num]
         for(let temp_clause_num = verb_clause_num; temp_clause_num>=0; temp_clause_num--){
             let temp_clause=this.bunsetsu_array[temp_clause_num]
@@ -195,17 +198,19 @@ class KNP_Sentence{
             if(temp_clause.isSubject){
                 this.bunsetsu_array[ verb_clause_num ].subject_of_verb = temp_clause.subject
                 //alert(this.bunsetsu_array[ verb_clause_num ].subject_of_verb)
+                this.verb_array[tempVerbNum].subject=temp_clause.subject
                 break;
             }
         }
     }
 
-    search_object_of_verb (verb_clause_num) {
+    search_object_of_verb (verb_clause_num,tempVerbNum) {
         for(let temp_clause_num = verb_clause_num; temp_clause_num>=0; temp_clause_num--){
             let temp_clause=this.bunsetsu_array[temp_clause_num]
             if(temp_clause.isObject){
                 this.bunsetsu_array[ verb_clause_num ].object_of_verb = temp_clause.object
                 //alert(this.bunsetsu_array[ verb_clause_num ].object_of_verb)
+                this.verb_array[tempVerbNum].object=temp_clause.object
                 break;
             }
         }
