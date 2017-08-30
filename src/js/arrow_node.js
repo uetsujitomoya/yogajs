@@ -4,6 +4,8 @@
 
 //createsvg();
 
+import d3 from "d3";
+
 let color_of_client = "red"
 let color_of_people_around_client = "gray"
 
@@ -33,6 +35,8 @@ let show_arrow = (node) => {
 
 
 function createsvg () {
+    console.log("entered createsvg")
+
     var svg = d3.select("#example").append("svg")
         .attr({
             width: 640,
@@ -110,10 +114,12 @@ function createsvg () {
         // 破線の開始相対位置を指定します
         'stroke-dashoffset': 0,
     });
+
+    console.log("end of createsvg")
 };
 
 
-
+/*
 
 function createsvg () {
     // id:exampleが指定されているタグ(ここではdivタグ)の下に、svgを追加します。
@@ -124,6 +130,7 @@ function createsvg () {
             height: 480,
         });
 };
+*/
 
 let append_circle = (svg,cx,cy,r) => {
 // svgの下にcircleを追加します。

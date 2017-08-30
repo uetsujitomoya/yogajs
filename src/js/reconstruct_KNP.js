@@ -4,6 +4,7 @@
 
 import　{includesVerb} from "../js/find_verb.js"
 import verbInSentence from "../js/create_verbInSentence_class.js"
+import {createsvg} from "../js/arrow_node.js"
 
 let first_japanese_row_num_in_sentence = 3 ;
 let first_japanese_row_num_in_bunsetsu = 2 ;
@@ -18,11 +19,14 @@ let reconstruct_KNP = (raw_2d_array,KNP_character_array) => {
         if(row_array[0]!="EOS"){
             temp_sentence_2d_array.push(row_array)
         }else{
-            KNP_sentence_array.push(new KNP_sentence(temp_rowNo,temp_sentence_2d_array,KNP_character_array))
+            KNP_sentence_array.push(new KNP_Sentence(temp_rowNo,temp_sentence_2d_array,KNP_character_array))
             temp_sentence_2d_array=[]
         }
         temp_rowNo++
     })
+    console.log("to enter createsvg")
+    createsvg()
+    return KNP_sentence_array
 }
 
 let count_bunsetsu=(input_2d_array)=>{
@@ -52,7 +56,7 @@ let count_kihonku=(input_2d_array)=>{
  *2次元配列を4次元配列に組み替える
  * */
 
-class KNP_sentence{
+class KNP_Sentence{
     constructor(raw_rowNo,sentence_2d_array,KNP_character_array) {
         //console.log("raw_rowNo %d",raw_rowNo)
         //console.log(sentence_2d_array)
@@ -107,11 +111,11 @@ class KNP_sentence{
                 kihonku_num_in_sentence++
 
                 //console.info(temp_2d_array_for_bunsetsu)
-                this.bunsetsu_array[bunsetsu_num_in_sentence] = new KNP_bunsetsu(bunsetsu_num_in_sentence,temp_2d_array_for_bunsetsu,KNP_character_array)//文の中の通し番号での文節array
+                this.bunsetsu_array[bunsetsu_num_in_sentence] = new KNP_Bunsetsu(bunsetsu_num_in_sentence,temp_2d_array_for_bunsetsu,KNP_character_array)//文の中の通し番号での文節array
 
                 //verb_array作成
                 if(this.bunsetsu_array[bunsetsu_num_in_sentence].isVerb){
-                    this.verb_array.push(new verbInSentence(bunsetsu_num_in_sentence))
+                    this.verb_array.push(new verbInSentence(bunsetsu_num_in_sentence,temp_2d_array_for_bunsetsu))
                 }
 
                 temp_2d_array_for_bunsetsu=[]
@@ -123,11 +127,11 @@ class KNP_sentence{
 
         //console.log("bunsetsu_num_in_sentence %d",bunsetsu_num_in_sentence)
         //console.log(temp_2d_array_for_bunsetsu)
-        this.bunsetsu_array[bunsetsu_num_in_sentence] = new KNP_bunsetsu(bunsetsu_num_in_sentence,temp_2d_array_for_bunsetsu,KNP_character_array)
+        this.bunsetsu_array[bunsetsu_num_in_sentence] = new KNP_Bunsetsu(bunsetsu_num_in_sentence,temp_2d_array_for_bunsetsu,KNP_character_array)
 
         //verb_array作成
         if(this.bunsetsu_array[bunsetsu_num_in_sentence].isVerb){
-            this.verb_array.push(new verbInSentence(bunsetsu_num_in_sentence))
+            this.verb_array.push(new verbInSentence(bunsetsu_num_in_sentence,temp_2d_array_for_bunsetsu))
         }
 
         this.kihonku_array[kihonku_num_in_sentence] = new KNP_kihonku_in_sentence(kihonku_num_in_sentence,temp_2d_array_for_kihonku)//文の中の通し番号での基本句array
@@ -188,9 +192,9 @@ class KNP_sentence{
         for(let temp_clause_num = verb_clause_num; temp_clause_num>=0; temp_clause_num--){
             let temp_clause=this.bunsetsu_array[temp_clause_num]
             console.log(temp_clause)
-            if(temp_clause.existsSubject){
+            if(temp_clause.isSubject){
                 this.bunsetsu_array[ verb_clause_num ].subject_of_verb = temp_clause.subject
-                alert(this.bunsetsu_array[ verb_clause_num ].subject_of_verb)
+                //alert(this.bunsetsu_array[ verb_clause_num ].subject_of_verb)
                 break;
             }
         }
@@ -199,16 +203,16 @@ class KNP_sentence{
     search_object_of_verb (verb_clause_num) {
         for(let temp_clause_num = verb_clause_num; temp_clause_num>=0; temp_clause_num--){
             let temp_clause=this.bunsetsu_array[temp_clause_num]
-            if(temp_clause.existsObject){
+            if(temp_clause.isObject){
                 this.bunsetsu_array[ verb_clause_num ].object_of_verb = temp_clause.object
-                alert(this.bunsetsu_array[ verb_clause_num ].object_of_verb)
+                //alert(this.bunsetsu_array[ verb_clause_num ].object_of_verb)
                 break;
             }
         }
     }
 }
 
-class KNP_bunsetsu {
+class KNP_Bunsetsu {
     constructor(num,input_2d_array,KNP_character_array) {
         console.log(KNP_character_array)
         //console.log(input_2d_array)
@@ -235,8 +239,8 @@ class KNP_bunsetsu {
             this.word_array.push( new KNP_word(row_array) )
         })
 
-        this.existsSubject=false
-        this.existsObject=false
+        //this.existsSubject=false
+        //this.existsObject=false
         this.isVerb=false
 
         this.make_kihonku_array_in_bunsetsu( input_2d_array )
@@ -295,7 +299,7 @@ class KNP_bunsetsu {
 
         this.isObject=true
         this.object=this.surface_form
-        alert(this.object)
+        //alert(this.object)
         //console.log("%s is object",temp_character_name)
 
     }
@@ -303,7 +307,7 @@ class KNP_bunsetsu {
     add_about_subject(KNP_character_array){
         this.isSubject=true
         this.subject=this.surface_form
-        alert(this.subject)
+        //alert(this.subject)
         //console.log("%s is subject",temp_character_name)
 
     }
@@ -395,7 +399,7 @@ let existsSubject=(bunsetsu,KNP_character_array)=>{
         if ( bunsetsu_info_row[col_num].match("ガ格")&&isCharacter(KNP_character_array,temp_character_name)) {
             bunsetsu.isSubject=true
             bunsetsu.subject=temp_character_name
-            alert(bunsetsu.subject)
+            //alert(bunsetsu.subject)
             break;
         }
     }
@@ -408,7 +412,7 @@ let existsObject=(bunsetsu,KNP_character_array)=>{
         if ( ( bunsetsu_info_row[col_num].match("ヲ格") || bunsetsu_info_row[col_num].match("ニ格") ) && isCharacter(KNP_character_array,temp_character_name) ) {
             bunsetsu.isObject=true
             bunsetsu.object=temp_character_name
-            alert(bunsetsu.object)
+            //alert(bunsetsu.object)
             break;
         }
     }

@@ -32,10 +32,11 @@ let read_KNP = () => {
     //console.log(KNP_verb_array)
     //if verb was found,
     let KNP_sentence_array = reconstruct_KNP(knparray,KNP_character_array);
+    console.log("get out reconstruct_KNP")
     console.log(KNP_sentence_array)
 
 
-    find_dependency();
+    //find_dependency();
 }
 /*
 let reconstruct_KNP = (raw_2d_array) => {
