@@ -3,11 +3,21 @@
  */
 
 export default class Node {
-    constructor(character){
+    constructor(verb){
+        this.subject=verb.subject
+        this.isSubject=false
         this.nodeX=0
         this.nodeY=0
         this.r=0
-        this.strokeColor="gray"
+        if(this.isSubject){
+            this.strokeColor="red"
+        }else{
+            this.strokeColor="gray"
+        }
         this.nodeCharacter=character
+        this.strokeWidth=1
+    }
+    addStrokeWidth(){
+        this.strokeWidth++
     }
 }

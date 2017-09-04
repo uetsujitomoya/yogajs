@@ -199,8 +199,8 @@ let append_arrow = (svg,arrow_data_array) => {
     var marker = svg.append("defs").append("marker")
         .attr({
             'id': "arrowhead",
-            'refX': markerRefX,
-            'refY': markerRefY,
+            'refX': markerRefX,//path方向
+            'refY': markerRefY,//pathに垂直な方向
             'markerWidth': markerWidth,
             'markerHeight': markerHeight,
             'orient': "auto"

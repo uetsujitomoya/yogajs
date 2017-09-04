@@ -9,6 +9,8 @@ import {reconstruct_KNP} from "../js/reconstruct_KNP.js"
 
 import {find_character} from "../js/find_character.js"
 
+import {createNodeAndArrowArray} from "../js/createNodeAndArrowArray.js"
+
 let KNP_character_array = [];
 
 let KNP_verb_array=[]
@@ -34,6 +36,7 @@ let read_KNP = () => {
     let KNP_sentence_array = reconstruct_KNP(knparray,KNP_character_array);
     console.log("get out reconstruct_KNP")
     console.log(KNP_sentence_array)
+    createNodeAndArrowArray(KNP_sentence_array)
 
 
     //find_dependency();
