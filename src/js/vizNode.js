@@ -2,9 +2,18 @@
  * Created by uetsujitomoya on 2017/09/04.
  */
 
-let vizNodes=(svg,arrowArray)=>{
+let color_of_client
+let color_of_people_around_client
+
+
+let vizNodes=(svg,nodeArray)=>{
     var g = svg.selectAll('g')
         .data(nodeArray).enter().append('g')
+        .attr({
+            transform: function(d) {
+                return "translate(" + d.x + "," + d.y + ")";
+            },
+        });
 
     g.append('circle')
         .attr({
@@ -21,22 +30,4 @@ let vizNodes=(svg,arrowArray)=>{
             'fill': 'black',
         })
         .text(function(d,i) { return i+1; });
-
-
-
-    // 線の関数"line()"を定義
-    var line = d3.svg.line()
-        .interpolate('basis')
-        .x(function(d) {return d.x;})
-        .y(function(d) {return d.y;});
-
-    // 線要素定義
-    var path = svg.append('path')
-        .attr({
-            'd': line(arrowArray),
-            'stroke': 'lightgreen',
-            'stroke-width': 5,
-            'fill': 'none',
-            'marker-end':"url(#arrowhead)",
-        });
 }
