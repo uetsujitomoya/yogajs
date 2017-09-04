@@ -5,6 +5,7 @@
 import　{includesVerb} from "../js/find_verb.js"
 import verbInSentence from "../js/create_verbInSentence_class.js"
 import {createsvg} from "../js/arrow_node.js"
+import {createNodeAndArrowArray} from "../js/createNodeAndArrowArray.js"
 
 let first_japanese_row_num_in_sentence = 3 ;
 let first_japanese_row_num_in_bunsetsu = 2 ;
@@ -25,7 +26,8 @@ let reconstruct_KNP = (raw_2d_array,KNP_character_array) => {
         temp_rowNo++
     })
     console.log("to enter createsvg")
-    count_pairs_of_subject_and_object(KNP_sentence_array)
+    //count_pairs_of_subject_and_object(KNP_sentence_array)
+    createNodeAndArrowArray(KNP_sentence_array)
     createsvg()
     return KNP_sentence_array
 }

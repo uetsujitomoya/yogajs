@@ -5,42 +5,52 @@
 import Node from "../js/defineNodeClass.js";
 import Arrow from "../js/defineArrowClass.js"
 
-let createNodeAndArrowArray=(KNP_sentence_array)=>{
+let createNodeAndArrowArray=(sentenceArray)=>{
     let arrowArray=[]
     let nodeArray=[]
-    KNP_sentence_array.forEach((sentence)=>{
+    //KNP_sentence_array.forEach((sentence)=>{
+    for(let sentenceNum=0;sentenceNum<sentenceArray.length;sentenceNum++){
+        let sentence=sentenceArray[sentenceNum]
+        console.log(sentence)
+
+        let containsVerbArray = {
+            value: 'verb_array' in sentence ? sentence.verb_array : 'No'
+        }
+
+        if(containsVerbArray.value=='No'){continue}
+
         sentence.verb_array.forEach((verb)=>{
 
             if(existsObject(verb)){
                 let isNewArrow=true
                 for(let tempNodeNum=0;tempNodeNum<nodeArray.length;tempNodeNum++){
-                    if ( isSameArrow ( nodeArray[tempNodeNum] , verb ) ) {
+                    if ( isSameArrow ( arrowArray[tempNodeNum] , verb ) ) {
+                        nodeArray[tempNodeNum].addNodeStrokeWidth()
+                        isNewArrow=false
+                        break
+                    }
+                }
+                if(isNewArrow){
+                    arrowArray.push(new Arrow(verb))
+                }
+            }else if(existsSubject(verb)){
+                let isNewNode=true
+                for(let tempNodeNum=0;tempNodeNum<nodeArray.length;tempNodeNum++){
+                    if ( isSameNode ( nodeArray[tempNodeNum] , verb ) ) {
                         nodeArray[tempNodeNum].addNodeStrokeWidth()
                         isNewNode=false
                         break
                     }
                 }
-                if(isNewArrow){
-                    arrowArray.push(new Arrow())
-                }
-
-            }else if(existsSubject(verb)){
-                let isNewNode=true
-                for(let tempArrowNum=0;tempArrowNum<nodeArray.length;tempArrowNum++){
-                    if(一致){
-                        arrowArray[tempArrowNum].addNodeStrokeWidth()
-                        isNewNode=false
-                        break
-                    }
-                }
                 if(isNewNode){
-                    arrowNode.push(new Node())
+                    nodeArray.push(new Node(verb))
                 }
             }
-            //加算も要る
-
         })
-    })
+    }
+
+    console.log(nodeArray)
+    console.log(arrowArray)
 }
 
 let isSameArrow=(node,verb)=>{
@@ -51,12 +61,21 @@ let isSameArrow=(node,verb)=>{
     }
 }
 
-let existsObject=()=>{
+let existsObject=(verb)=>{
+    if(verb.object=='null'){
+        return false
+    }else{
+        return true
+    }
 
 }
 
-let existsSubject=()=>{
-
+let existsSubject=(verb)=>{
+    if(verb.subject='null'){
+        return false
+    }else{
+        return true
+    }
 }
 
 //let isNewNode=()=>{

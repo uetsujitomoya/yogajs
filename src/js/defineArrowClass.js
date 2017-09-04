@@ -4,6 +4,8 @@
 
 export default class Arrow{
     constructor(verb){
+
+
         this.subject=verb.subject
         this.object=verb.object
         this.startPointX=0

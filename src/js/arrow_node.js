@@ -23,8 +23,6 @@ const markerFillColor = color_of_client
 
 class arrow{
     constructor(character_of_start_point,character_of_end_point,sentence,node_array){
-
-
     }
 }
 
