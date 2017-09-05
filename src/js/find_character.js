@@ -4,6 +4,8 @@
 
 import {contains_japanese} from "../js/contains_japanese.js"
 
+const characterKeyword="カテゴリ:人>"
+
 let find_character = (knparray,KNP_character_array) => {
     //if かな exist
     knparray.forEach((row)=>{
@@ -11,7 +13,7 @@ let find_character = (knparray,KNP_character_array) => {
         if(contains_japanese(row[0])){
             let temp_japanese = row[0]
             row.forEach((element)=>{
-                if ( element.match("カテゴリ:人")) {
+                if ( element.match(characterKeyword)) {
                     let temp_character_name=row[0];
                     let isNewCharacter = true
                     //被ってなければその登場人物のインスタントをつくる
