@@ -4,6 +4,7 @@
 
 import Node from "../js/defineNodeClass.js";
 import Arrow from "../js/defineArrowClass.js"
+import {vizNodes} from "../js/vizNode"
 
 let createNodeAndArrowArray=(sentenceArray)=>{
     console.log("entered createNodeArrowarray")
@@ -53,6 +54,8 @@ let createNodeAndArrowArray=(sentenceArray)=>{
 
     console.log(nodeArray)
     console.log(arrowArray)
+    vizNodes(nodeArray)
+
 }
 
 let isSameArrow=(arrow,verb)=>{
