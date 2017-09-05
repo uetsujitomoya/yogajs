@@ -28,7 +28,7 @@ let createNodeAndArrowArray=(sentenceArray)=>{
                 let isNewArrow=true
                 for(let tempArrowNum=0;tempArrowNum<nodeArray.length;tempArrowNum++){
                     if ( isSameArrow ( arrowArray[tempArrowNum] , verb ) ) {
-                        //nodeArray[tempArrowNum].addArrowStrokeWidth()
+                        arrowArray[tempArrowNum].arrowStrokeWidth++
                         isNewArrow=false
                         break
                     }
@@ -40,7 +40,7 @@ let createNodeAndArrowArray=(sentenceArray)=>{
                 let isNewNode=true
                 for(let tempNodeNum=0;tempNodeNum<nodeArray.length;tempNodeNum++){
                     if ( isSameNode ( nodeArray[tempNodeNum] , verb ) ) {
-                        //nodeArray[tempNodeNum].addNodeStrokeWidth()
+                        nodeArray[tempNodeNum].circleStrokeWidth++
                         isNewNode=false
                         break
                     }

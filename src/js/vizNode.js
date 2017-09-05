@@ -37,7 +37,7 @@ let vizNodes=(nodeArray)=>{
             'dy': ".35em",
             'fill': 'black',
         })
-        .text(function(d,i) { return i+1; });
+        .text(function(d) { return d.nodeCharacter });
 }
 
 export {vizNodes}

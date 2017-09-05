@@ -11,7 +11,7 @@ export default class Node {
         this.isSubject=false
         this.x=300+200*Math.sin( (nodeNum/5) * Math.PI)
         this.y=200+200*Math.cos( (nodeNum/5) * Math.PI)
-        this.r=5
+        this.r=30
         if(this.isSubject){
             this.strokeColor="red"
         }else{
