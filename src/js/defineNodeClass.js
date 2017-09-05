@@ -17,7 +17,7 @@ export default class Node {
         }else{
             this.strokeColor="gray"
         }
-        this.nodeCharacter=character
+        this.nodeCharacter=verb.subject
         this.strokeWidth=1
     }
     addStrokeWidth(){

@@ -27,7 +27,7 @@ let createNodeAndArrowArray=(sentenceArray)=>{
                 let isNewArrow=true
                 for(let tempArrowNum=0;tempArrowNum<nodeArray.length;tempArrowNum++){
                     if ( isSameArrow ( arrowArray[tempArrowNum] , verb ) ) {
-                        nodeArray[tempArrowNum].addArrowStrokeWidth()
+                        //nodeArray[tempArrowNum].addArrowStrokeWidth()
                         isNewArrow=false
                         break
                     }
@@ -39,7 +39,7 @@ let createNodeAndArrowArray=(sentenceArray)=>{
                 let isNewNode=true
                 for(let tempNodeNum=0;tempNodeNum<nodeArray.length;tempNodeNum++){
                     if ( isSameNode ( nodeArray[tempNodeNum] , verb ) ) {
-                        nodeArray[tempNodeNum].addNodeStrokeWidth()
+                        //nodeArray[tempNodeNum].addNodeStrokeWidth()
                         isNewNode=false
                         break
                     }
@@ -89,7 +89,7 @@ let existsSubject=(verb)=>{
     if(verb.subject=='null'){
         return false
     }else{
-        alert("exist Node!")
+        //alert("exist Node!")
         return true
     }
 }
