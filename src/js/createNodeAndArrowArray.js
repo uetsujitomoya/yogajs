@@ -6,12 +6,14 @@ import Node from "../js/defineNodeClass.js";
 import Arrow from "../js/defineArrowClass.js"
 
 let createNodeAndArrowArray=(sentenceArray)=>{
+    console.log("entered createNodeArrowarray")
+    console.log(sentenceArray)
     let arrowArray=[]
     let nodeArray=[]
     //KNP_sentence_array.forEach((sentence)=>{
     for(let sentenceNum=0;sentenceNum<sentenceArray.length;sentenceNum++){
         let sentence=sentenceArray[sentenceNum]
-        console.log(sentence)
+        //console.log(sentence)
 
         let containsVerbArray = {
             value: 'verb_array' in sentence ? sentence.verb_array : 'No'
@@ -62,6 +64,8 @@ let isSameArrow=(arrow,verb)=>{
 }
 
 let isSameNode=(node,verb)=>{
+    //console.log(node)
+    //console.log(verb)
     if (node.subject==verb.subject){
         return true
     }else{
@@ -70,51 +74,32 @@ let isSameNode=(node,verb)=>{
 }
 
 let existsObject=(verb)=>{
+    //console.log(verb)
     if(verb.object=='null'){
         return false
     }else{
         return true
     }
-
 }
 
 let existsSubject=(verb)=>{
-    if(verb.subject='null'){
+
+    //console.log("enter existsSubject")
+    //console.log(verb.subject)
+    if(verb.subject=='null'){
         return false
     }else{
+        alert("exist Node!")
         return true
     }
 }
 
-//let isNewNode=()=>{
-
-
-
-//let isNewArrow=()=>{
-
-
-
 let createNode=()=>{
-
 
 }
 
 let createArrow=()=>{
 
 }
-/*
-class Node{
-    constructor(){
-        this.xml
-        this.y;
-        this.r;
-        this.strokeColor
-    }
-}
-class Arrow{
-    constructor(){
-
-    }
-}*/
 
 export {createNodeAndArrowArray}

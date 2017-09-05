@@ -3,7 +3,7 @@
  */
 
 export default class Arrow{
-    constructor(verb){
+    constructor(verb,arrowNum,svg){
 
 
         this.subject=verb.subject

@@ -35,7 +35,7 @@ let find_verb_from_csv =(rowNo, knparray)=>{
 }
 
 let includesVerb=(word_row)=>{
-    console.log(word_row)
+    //console.log(word_row)
     if(word_row[3]=="動詞"){
         return true
     }

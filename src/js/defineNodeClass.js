@@ -3,12 +3,15 @@
  */
 
 export default class Node {
-    constructor(verb){
+    constructor(verb,nodeNum,svg){
+
+
+
         this.subject=verb.subject
         this.isSubject=false
-        this.nodeX=0
-        this.nodeY=0
-        this.r=0
+        this.nodeX=Math.sin( (nodeNum/5) * Math.PI)
+        this.nodeY=Math.cos( (nodeNum/5) * Math.PI)
+        this.r=5
         if(this.isSubject){
             this.strokeColor="red"
         }else{
