@@ -36,7 +36,6 @@ let read_KNP = () => {
     let KNP_sentence_array = reconstruct_KNP(knparray,KNP_character_array);
     console.log("get out reconstruct_KNP")
     console.log(KNP_sentence_array)
-    createNodeAndArrowArray(KNP_sentence_array)
 
 
     //find_dependency();

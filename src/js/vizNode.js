@@ -10,6 +10,7 @@ let color_of_people_around_client="gray"
 
 
 let vizNodes=(nodeArray)=>{
+    console.log("entered vizNodes")
     var svg = d3.select("#example").append("svg")
         .attr({
             width: 640,
@@ -41,6 +42,7 @@ let vizNodes=(nodeArray)=>{
         .text(function(d) { return d.nodeCharacter });
 
     $("#ex2").slider({})
+    console.log("ended vizNodes")
 }
 
 export {vizNodes}
