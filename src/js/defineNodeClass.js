@@ -4,13 +4,15 @@
 
 let nodeNum=0
 
+const enshuBunkatsuNum=3
+
 export default class Node {
     constructor(verb){
 
         this.subject=verb.subject
         this.isSubject=false
-        this.y=200+150*Math.sin( (nodeNum/5) * 2*Math.PI)
-        this.x=200+150*Math.cos( (nodeNum/5) * 2*Math.PI)
+        this.y=200+150*Math.sin( (nodeNum/ enshuBunkatsuNum ) * 2*Math.PI)
+        this.x=200+150*Math.cos( (nodeNum/ enshuBunkatsuNum ) * 2*Math.PI)
         this.r=30
         if(this.isSubject){
             this.strokeColor="red"
