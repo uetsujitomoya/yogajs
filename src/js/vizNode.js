@@ -3,6 +3,7 @@
  */
 
 import d3 from "d3";
+import $ from "jquery"
 
 let color_of_client="red"
 let color_of_people_around_client="gray"
@@ -38,6 +39,8 @@ let vizNodes=(nodeArray)=>{
             'fill': 'black',
         })
         .text(function(d) { return d.nodeCharacter });
+
+    $("#ex2").slider({})
 }
 
 export {vizNodes}
