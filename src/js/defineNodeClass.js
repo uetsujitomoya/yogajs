@@ -9,8 +9,8 @@ export default class Node {
 
         this.subject=verb.subject
         this.isSubject=false
-        this.x=300+200*Math.sin( (nodeNum/5) * Math.PI)
-        this.y=200+200*Math.cos( (nodeNum/5) * Math.PI)
+        this.y=200+150*Math.sin( (nodeNum/5) * 2*Math.PI)
+        this.x=200+150*Math.cos( (nodeNum/5) * 2*Math.PI)
         this.r=30
         if(this.isSubject){
             this.strokeColor="red"
