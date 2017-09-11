@@ -37,9 +37,9 @@ let read_KNP = () => {
     console.log("get out reconstruct_KNP")
     console.log(KNP_sentence_array)
 
-
     //find_dependency();
 }
+
 /*
 let reconstruct_KNP = (raw_2d_array) => {
     raw_2d_array.forEach((row_array)=>{
@@ -49,10 +49,6 @@ let reconstruct_KNP = (raw_2d_array) => {
     })
 }
 */
-
-
-
-
 
 let find_dependency = () => {
     find_subject();
