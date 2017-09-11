@@ -22,7 +22,7 @@ let reconstruct_KNP = (raw_2d_array,KNP_character_array) => {
             temp_sentence_2d_array.push(row_array)
         }else{
             console.log(sentenceNum)
-            KNP_sentence_array.push(new KNP_Sentence(temp_rowNo,temp_sentence_2d_array,KNP_character_array))
+            KNP_sentence_array.push(new KNP_Sentence(temp_rowNo,temp_sentence_2d_array,KNP_character_array,sentenceNum))
             sentenceNum++
             temp_sentence_2d_array=[]
         }
@@ -30,6 +30,7 @@ let reconstruct_KNP = (raw_2d_array,KNP_character_array) => {
     })
     //console.log("to enter createsvg")
     //count_pairs_of_subject_and_object(KNP_sentence_array)
+
     createNodeAndArrowArray(KNP_sentence_array)
     //createsvg()
     return KNP_sentence_array
@@ -63,7 +64,7 @@ let count_kihonku=(input_2d_array)=>{
  * */
 
 class KNP_Sentence{
-    constructor(raw_rowNo,sentence_2d_array,KNP_character_array) {
+    constructor(raw_rowNo,sentence_2d_array,KNP_character_array,sentenceNum) {
         //console.log("raw_rowNo %d",raw_rowNo)
         //console.log(sentence_2d_array)
         if(sentence_2d_array.length==1){
@@ -121,7 +122,7 @@ class KNP_Sentence{
 
                 //verb_array作成
                 if(this.bunsetsu_array[bunsetsu_num_in_sentence].isVerb){
-                    this.verb_array.push(new verbInSentence(bunsetsu_num_in_sentence,temp_2d_array_for_bunsetsu))
+                    this.verb_array.push(new verbInSentence(bunsetsu_num_in_sentence,temp_2d_array_for_bunsetsu,sentenceNum))
                 }
 
                 temp_2d_array_for_bunsetsu=[]
@@ -137,7 +138,7 @@ class KNP_Sentence{
 
         //verb_array作成
         if(this.bunsetsu_array[bunsetsu_num_in_sentence].isVerb){
-            this.verb_array.push(new verbInSentence(bunsetsu_num_in_sentence,temp_2d_array_for_bunsetsu))
+            this.verb_array.push(new verbInSentence(bunsetsu_num_in_sentence,temp_2d_array_for_bunsetsu,sentenceNum))
         }
 
         this.kihonku_array[kihonku_num_in_sentence] = new KNP_kihonku_in_sentence(kihonku_num_in_sentence,temp_2d_array_for_kihonku)//文の中の通し番号での基本句array
@@ -448,11 +449,12 @@ let isCharacter=(KNP_character_array,temp_character_name)=>{
 }
 
 class verbInSentence{
-    constructor(bunsetsuNum_inSentence,bunsetsuRawArray){
+    constructor(bunsetsuNum_inSentence,bunsetsuRawArray,sentenceNum){
         this.bunsetsuNum_inSentence = bunsetsuNum_inSentence
+        this.sentenceNum=sentenceNum
         this.surface_form=bunsetsuRawArray[2][0]
-        this.subject ="null"
-        this.object="null"
+        this.subject =null
+        this.object=null
     }
     rewriteSubject(character){
         this.subject=character;
