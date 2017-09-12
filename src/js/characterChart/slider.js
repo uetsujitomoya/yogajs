@@ -12,7 +12,11 @@ import {removeSVG} from "../vizNode.js"
 
 let manageSlider = (sentenceArray) => {
 
-    document.querySelector("#ex2").dataSliderMax = sentenceArray.length;
+    console.log(sentenceArray.length)
+    document.querySelector("#ex2").dataSliderMax = ""+sentenceArray.length+"";
+    console.log(document.querySelector("#ex2").dataSliderMax)
+    document.querySelector("#ex2").dataSliderValue = "[0,"+sentenceArray.length+"";
+
 
     $("#ex2").slider({})
     //console.log(document.getElementById("#ex2"))

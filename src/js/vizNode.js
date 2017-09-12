@@ -47,9 +47,7 @@ let vizNodes=(nodeArray)=>{
         })
         .text(function(d) { return d.nodeCharacter });
 
-    //vizArrow(svg,nodeArray)
-
-
+    vizArrow(svg,nodeArray)
 }
 
 let vizArrow=(svg,nodeArray)=>{

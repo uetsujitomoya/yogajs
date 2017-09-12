@@ -61,7 +61,7 @@ let createNodeAndArrowArray=(sentenceArray)=>{
 }
 
 let isSameArrow=(arrow,verb)=>{
-    console.log(arrow)
+    //console.log(arrow)
     if ( (arrow.subject==verb.subject) && (arrow.object==verb.object)){
         return true
     }else{
