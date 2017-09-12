@@ -54,8 +54,8 @@ let createNodeAndArrowArray=(sentenceArray)=>{
         })
     }
 
-    //console.log(nodeArray)
-    //console.log(arrowArray)
+    console.log(nodeArray)
+    console.log(arrowArray)
     vizNodes(nodeArray)
 
 }

@@ -12,13 +12,18 @@ import {removeSVG} from "../vizNode.js"
 
 let manageSlider = (sentenceArray) => {
 
+    let el=document.querySelector("#ex2")
     console.log(sentenceArray.length)
-    document.querySelector("#ex2").dataSliderMax = sentenceArray.length+'';
+    el.dataset.sliderMax = sentenceArray.length+'';
     console.log(document.querySelector("#ex2").dataSliderMax)
-    document.querySelector("#ex2").dataSliderValue = '[0,'+sentenceArray.length+'';
+    el.dataset.sliderValue = '[0,'+sentenceArray.length+'';
 
 
-    $("#ex2").slider({})
+    $("#ex2").slider({
+        formatter: function(value) {
+            return 'この範囲を見ています: ' + value;
+        }
+    })
     //console.log(document.getElementById("#ex2"))
 
     $("#ex2").on("slide", function(slideEvt) {
@@ -41,7 +46,7 @@ let applySlider = (selectedAreaArray,sentenceArray) => {
 
     removeSVG()
 
-    const selectedArea = {
+    let selectedArea = {
         start:selectedAreaArray[0],
         end:selectedAreaArray[1]
     }
@@ -50,7 +55,7 @@ let applySlider = (selectedAreaArray,sentenceArray) => {
 
 
 let redrawCharacterChart = (sentenceArray,selectedArea) =>{
-    var refinedSentenceArray= sentenceArray.concat();
+    let refinedSentenceArray= sentenceArray.concat();
 
     //sentenceArrayの最初と最後数個の要素を排除して、新sentenceArrayとして入力する
 
