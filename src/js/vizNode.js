@@ -16,7 +16,7 @@ const markerFillColor ="red"
 const characterChartAreaID = "#example"
 
 let vizNodes=(nodeArray)=>{
-    console.log("entered vizNodes")
+    //console.log("entered vizNodes")
     var svg = d3.select(characterChartAreaID).append("svg")
         .attr({
             width: 640,
@@ -47,7 +47,10 @@ let vizNodes=(nodeArray)=>{
         })
         .text(function(d) { return d.nodeCharacter });
 
-    vizArrow(svg,nodeArray)
+    if(nodeArray.length>=2){
+        vizArrow(svg,nodeArray)
+    }
+
 }
 
 let vizArrow=(svg,nodeArray)=>{
