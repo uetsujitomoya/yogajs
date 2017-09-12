@@ -10,3 +10,4 @@ app/dict/
 app/.csv
 json/
 knp/
+*.log
