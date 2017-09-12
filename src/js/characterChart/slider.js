@@ -3,8 +3,18 @@
  */
 
 
+import d3 from "d3";
+import $ from "jquery"
 
-import {createNodeAndArrowArray} from "../js/createNodeAndArrowArray.js"
+import {createNodeAndArrowArray} from "../js/createNodeAndArrowArray.js";
+
+let manageSlider = (sentenceArray) => {
+
+    $("#ex2").slider({})
+    $("#ex2").on("slide", function(slideEvt) {
+        applySlider(slideEvt.value,sentenceArray)
+    });
+}
 
 let applySlider = () => {
     //yaru
@@ -16,7 +26,13 @@ let applySlider = () => {
     //どの動詞が何文目か情報
     //re-viz
 
+
+
     removeSVG()
+
+    const selectedArea = {
+
+    }
     redrawCharacterChart(sentenceArray,selectedArea)
 }
 
@@ -26,9 +42,12 @@ let redrawCharacterChart = (sentenceArray,selectedArea) =>{
 
     //sentenceArrayの最初と最後数個の要素を排除して、新sentenceArrayとして入力する
 
-    createNodeAndArrowArray(refinedSentenceArray)
+
+    createNodeAndArrowArray(refinedSentenceArray);
 }
 
-let removeSVG = () => {
-    d3.select("#svgdiv").select("svg").remove()
-}
+
+
+
+
+export{manageSlider}

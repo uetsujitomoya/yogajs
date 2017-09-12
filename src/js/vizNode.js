@@ -13,9 +13,11 @@ const yajirushi_refX = 8;
 
 const markerFillColor ="red"
 
+const characterChartAreaID = "#example"
+
 let vizNodes=(nodeArray)=>{
     console.log("entered vizNodes")
-    var svg = d3.select("#example").append("svg")
+    var svg = d3.select(characterChartAreaID).append("svg")
         .attr({
             width: 640,
             height: 480,
@@ -45,10 +47,9 @@ let vizNodes=(nodeArray)=>{
         })
         .text(function(d) { return d.nodeCharacter });
 
-    vizArrow(svg,nodeArray)
+    //vizArrow(svg,nodeArray)
 
-    $("#ex2").slider({})
-    console.log("ended vizNodes")
+
 }
 
 let vizArrow=(svg,nodeArray)=>{
@@ -95,4 +96,8 @@ let vizArrow=(svg,nodeArray)=>{
     });
 }
 
-export {vizNodes}
+let removeSVG = () => {
+    d3.select(characterChartAreaID).select("svg").remove()
+}
+
+export {vizNodes,removeSVG}

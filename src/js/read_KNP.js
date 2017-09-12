@@ -11,16 +11,11 @@ import {find_character} from "../js/find_character.js"
 
 import {createNodeAndArrowArray} from "../js/createNodeAndArrowArray.js"
 
+import {manageSlider} from "characterChart/slider.js"
+
 let KNP_character_array = [];
 
 let KNP_verb_array=[]
-
-
-
-
-
-
-
 
 let read_KNP = () => {
     let knparray = csv2Array("../csv/1707051018knptab.csv");
@@ -33,9 +28,12 @@ let read_KNP = () => {
     //find_verb(knparray);
     //console.log(KNP_verb_array)
     //if verb was found,
-    let KNP_sentence_array = reconstruct_KNP(knparray,KNP_character_array);
+    let KNP_sentence_array = reconstruct_KNP( knparray , KNP_character_array );
     console.log("get out reconstruct_KNP")
     console.log(KNP_sentence_array)
+
+    createNodeAndArrowArray(KNP_sentence_array,characterChartAreaID)
+    manageSlider(KNP_sentence_array,characterChartAreaID)
 
     //find_dependency();
 }
