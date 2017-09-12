@@ -5,6 +5,7 @@
 import Node from "../js/defineNodeClass.js";
 import Arrow from "../js/defineArrowClass.js"
 import {vizNodes} from "../js/vizNode"
+import {initialValueOfSubjectAndObjectInVerb} from "./createNodeAndArrowArray.js"
 
 let createNodeAndArrowArray=(sentenceArray)=>{
     console.log("entered createNodeArrowarray")
@@ -78,7 +79,7 @@ let isSameNode=(node,verb)=>{
 
 let existsObject=(verb)=>{
     //console.log(verb)
-    if(verb.object=='null'){
+    if(verb.object==initialValueOfSubjectAndObjectInVerb){
         return false
     }else{
         return true
@@ -89,7 +90,7 @@ let existsSubject=(verb)=>{
 
     //console.log("enter existsSubject")
     //console.log(verb.subject)
-    if(verb.subject=='null'){
+    if(verb.subject==initialValueOfSubjectAndObjectInVerb){
         return false
     }else{
         //alert("exist Node!")
