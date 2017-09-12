@@ -21,7 +21,7 @@ let manageSlider = (sentenceArray) => {
 
     $("#ex2").slider({
         formatter: function(value) {
-            return 'この範囲を見ています: ' + value;
+            return 'この範囲を見ています…… ' + value;
         }
     })
     //console.log(document.getElementById("#ex2"))

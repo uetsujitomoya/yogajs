@@ -9,7 +9,7 @@ const color_of_client="red"
 const color_of_people_around_client="gray"
 
 const r=60
-const yajirushi_refX = 8;
+const yajirushi_refX = 16;
 
 const markerFillColor ="red"
 

@@ -6,6 +6,8 @@ import {contains_japanese} from "../js/contains_japanese.js"
 
 const characterKeyword="カテゴリ:人>"
 
+//Aさんを追加→1単語とする
+
 let find_character = (knparray,KNP_character_array) => {
     //if かな exist
     knparray.forEach((row)=>{
