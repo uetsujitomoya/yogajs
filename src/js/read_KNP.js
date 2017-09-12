@@ -4,14 +4,14 @@
 
 import {csv2Array} from "../csv2Array.js"
 
-import {getCSV} from "../js/getCSV.js"
-import {reconstruct_KNP} from "../js/reconstruct_KNP.js"
+import {getCSV} from "./getCSV.js"
+import {reconstruct_KNP} from "./reconstruct_KNP.js"
 
-import {find_character} from "../js/find_character.js"
+import {find_character} from "./find_character.js"
 
-import {createNodeAndArrowArray} from "../js/createNodeAndArrowArray.js"
+import {createNodeAndArrowArray} from "./createNodeAndArrowArray.js"
 
-import {manageSlider} from "characterChart/slider.js"
+import {manageSlider} from "./characterChart/slider.js"
 
 let KNP_character_array = [];
 
@@ -32,8 +32,8 @@ let read_KNP = () => {
     console.log("get out reconstruct_KNP")
     console.log(KNP_sentence_array)
 
-    createNodeAndArrowArray(KNP_sentence_array,characterChartAreaID)
-    manageSlider(KNP_sentence_array,characterChartAreaID)
+    createNodeAndArrowArray(KNP_sentence_array)
+    manageSlider(KNP_sentence_array)
 
     //find_dependency();
 }
