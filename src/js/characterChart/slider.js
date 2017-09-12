@@ -55,7 +55,7 @@ let redrawCharacterChart = (sentenceArray,selectedArea) =>{
     //sentenceArrayの最初と最後数個の要素を排除して、新sentenceArrayとして入力する
 
     //まず末尾から
-    refinedSentenceArray.splice(selectedArea.end, sentenceArray.length - selectedArea )
+    refinedSentenceArray.splice(selectedArea.end, sentenceArray.length - selectedArea.end )
     refinedSentenceArray.splice(0, selectedArea.start )
 
 
