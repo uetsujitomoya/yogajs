@@ -16,7 +16,7 @@ let manageSlider = (sentenceArray) => {
     });
 }
 
-let applySlider = () => {
+let applySlider = (selectedAreaArray,sentenceArray) => {
     //yaru
     //gyouretukosuuhaaku
     //「文」の個数把握
@@ -31,7 +31,8 @@ let applySlider = () => {
     removeSVG()
 
     const selectedArea = {
-
+        start:selectedAreaArray[0],
+        end:selectedAreaArray[1]
     }
     redrawCharacterChart(sentenceArray,selectedArea)
 }
@@ -41,6 +42,10 @@ let redrawCharacterChart = (sentenceArray,selectedArea) =>{
     var refinedSentenceArray = sentenceArray
 
     //sentenceArrayの最初と最後数個の要素を排除して、新sentenceArrayとして入力する
+
+    //まず末尾から
+    refinedSentenceArray.splice(selectedArea.end, sentenceArray.length - selectedArea )
+    refinedSentenceArray.splice(0, selectedArea.start )
 
 
     createNodeAndArrowArray(refinedSentenceArray);
