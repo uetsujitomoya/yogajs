@@ -8,10 +8,11 @@ import {vizNodes} from "../js/vizNode"
 import {initialValueOfSubjectAndObjectInVerb} from "./createNodeAndArrowArray.js"
 
 let createNodeAndArrowArray=(sentenceArray)=>{
-    console.log("entered createNodeArrowarray")
-    console.log(sentenceArray)
+    //console.log("entered createNodeArrowarray")
+    //console.log(sentenceArray)
     let arrowArray=[]
     let nodeArray=[]
+    console.log(arrowArray.length)
     //KNP_sentence_array.forEach((sentence)=>{
     for(let sentenceNum=0;sentenceNum<sentenceArray.length;sentenceNum++){
         let sentence=sentenceArray[sentenceNum]
@@ -27,7 +28,7 @@ let createNodeAndArrowArray=(sentenceArray)=>{
 
             if(existsObject(verb)){
                 let isNewArrow=true
-                for(let tempArrowNum=0;tempArrowNum<nodeArray.length;tempArrowNum++){
+                for(let tempArrowNum=0;tempArrowNum<arrowArray.length;tempArrowNum++){
                     if ( isSameArrow ( arrowArray[tempArrowNum] , verb ) ) {
                         arrowArray[tempArrowNum].arrowStrokeWidth++
                         isNewArrow=false
@@ -60,6 +61,7 @@ let createNodeAndArrowArray=(sentenceArray)=>{
 }
 
 let isSameArrow=(arrow,verb)=>{
+    console.log(arrow)
     if ( (arrow.subject==verb.subject) && (arrow.object==verb.object)){
         return true
     }else{

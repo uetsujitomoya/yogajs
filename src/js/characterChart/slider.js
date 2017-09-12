@@ -12,8 +12,13 @@ import {removeSVG} from "../vizNode.js"
 
 let manageSlider = (sentenceArray) => {
 
+    document.querySelector("#ex2").dataSliderMax = sentenceArray.length;
+
     $("#ex2").slider({})
+    //console.log(document.getElementById("#ex2"))
+
     $("#ex2").on("slide", function(slideEvt) {
+        console.log(slideEvt.value)
         applySlider(slideEvt.value,sentenceArray)
     });
 }
