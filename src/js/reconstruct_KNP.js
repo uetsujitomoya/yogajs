@@ -30,7 +30,6 @@ let reconstruct_KNP = ( raw_2d_array , KNP_character_array) => {
     //console.log("to enter createsvg")
     //count_pairs_of_subject_and_object(KNP_sentence_array)
 
-
     //createsvg()
     return KNP_sentence_array
 }

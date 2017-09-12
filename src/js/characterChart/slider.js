@@ -16,7 +16,7 @@ let manageSlider = (sentenceArray) => {
     console.log(sentenceArray.length)
     el.dataset.sliderMax = sentenceArray.length+'';
     console.log(document.querySelector("#ex2").dataSliderMax)
-    el.dataset.sliderValue = '[0,'+sentenceArray.length+'';
+    el.dataset.sliderValue = '[0,'+sentenceArray.length+']';
 
 
     $("#ex2").slider({
@@ -42,8 +42,6 @@ let applySlider = (selectedAreaArray,sentenceArray) => {
     //どの動詞が何文目か情報
     //re-viz
 
-
-
     removeSVG()
 
     let selectedArea = {
@@ -52,7 +50,6 @@ let applySlider = (selectedAreaArray,sentenceArray) => {
     }
     redrawCharacterChart(sentenceArray,selectedArea)
 }
-
 
 let redrawCharacterChart = (sentenceArray,selectedArea) =>{
     let refinedSentenceArray= sentenceArray.concat();
@@ -67,9 +64,5 @@ let redrawCharacterChart = (sentenceArray,selectedArea) =>{
     console.log(sentenceArray.length)
     createNodeAndArrowArray(refinedSentenceArray);
 }
-
-
-
-
 
 export{manageSlider}
