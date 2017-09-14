@@ -10,10 +10,51 @@ const characterKeyword="カテゴリ:人>"
 
 let find_character = (knparray,KNP_character_array) => {
     //if かな exist
+
+    for(const row of knparray){//"さん"判断にindex使いたいからアカンわ。
+        if(contains_japanese(row[0])){
+            let temp_japanese = row[0]
+            for(const element of row){
+                if ( element.match(characterKeyword)) {
+                    if(isNewCharacter()){
+                        createNewCharacter()
+                    }
+                }
+            }
+            //さんの場合、1つ前遡って足して、Aさん
+            if(row[0]=="さん"){
+                if(isNewCharacter()){
+                    createNewCharacter()
+                }
+            }
+        }
+    }
+
+
+
     knparray.forEach((row)=>{
         //console.log(row)
         if(contains_japanese(row[0])){
             let temp_japanese = row[0]
+            for(const element of row){
+                if ( element.match(characterKeyword)) {
+                    let temp_character_name=row[0];
+                    let isNewCharacter = true
+                    //被ってなければその登場人物のインスタントをつくる
+                    KNP_character_array.forEach((character)=>{
+                        if(temp_character_name==character.name){
+                            //verbを追加
+                            isNewCharacter = false;
+                            //太さ加算
+                            //character.character_node.bold_qty++
+                        }
+                    })
+                    if(isNewCharacter==true){
+                        KNP_character_array.push(new KNP_character(temp_character_name))
+                    }
+                }
+            }
+            /*
             row.forEach((element)=>{
                 if ( element.match(characterKeyword)) {
                     let temp_character_name=row[0];
@@ -32,8 +73,34 @@ let find_character = (knparray,KNP_character_array) => {
                     }
                 }
             })
+            */
+            //さんの場合、1つ前遡って足して、Aさん
+            if(row[0]=="さん"){
+                const tempCharacter = knparray[index-1][0]+row[0]
+                if(isNewCharacter(tempCharacter)){
+                    createNewCharacter(tempCharacter)
+                }
+            }
         }
     })
+}
+
+let isNewCharacter=(tempCharacterName,characterArray)=> {
+    for(const character of characterArray){
+        if((tempCharacterName==character.name){
+            //verbを追加
+            return false;
+
+            //太さ加算
+            //character.character_node.bold_qty++
+        }
+    }
+    return true
+}
+
+let createNewCharacter=()=>{
+    //Nodeを出現させるとしたらどこまでつくるかも書く
+
 }
 
 class character{
