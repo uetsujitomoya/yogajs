@@ -457,4 +457,11 @@ let getVizResult=(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hats
 };*/
 
 
+const isLoveWord=(query)=>{
+	if(loveDictionaryArray.indexOf(query)){
+		return true
+	}
+	return false
+}
+
 export {ClassifyWithFirstWordDictionary};

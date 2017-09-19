@@ -55,25 +55,25 @@ let find_character = (knparray,KNP_character_array) => {
                 }
             }
             /*
-            row.forEach((element)=>{
-                if ( element.match(characterKeyword)) {
-                    let temp_character_name=row[0];
-                    let isNewCharacter = true
-                    //被ってなければその登場人物のインスタントをつくる
-                    KNP_character_array.forEach((character)=>{
-                        if(temp_character_name==character.name){
-                            //verbを追加
-                            isNewCharacter = false;
-                            //太さ加算
-                            //character.character_node.bold_qty++
-                        }
-                    })
-                    if(isNewCharacter==true){
-                        KNP_character_array.push(new KNP_character(temp_character_name))
-                    }
-                }
-            })
-            */
+             row.forEach((element)=>{
+             if ( element.match(characterKeyword)) {
+             let temp_character_name=row[0];
+             let isNewCharacter = true
+             //被ってなければその登場人物のインスタントをつくる
+             KNP_character_array.forEach((character)=>{
+             if(temp_character_name==character.name){
+             //verbを追加
+             isNewCharacter = false;
+             //太さ加算
+             //character.character_node.bold_qty++
+             }
+             })
+             if(isNewCharacter==true){
+             KNP_character_array.push(new KNP_character(temp_character_name))
+             }
+             }
+             })
+             */
             //さんの場合、1つ前遡って足して、Aさん
             if(row[0]=="さん"){
                 const tempCharacter = knparray[index-1][0]+row[0]
