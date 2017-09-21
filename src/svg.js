@@ -81,16 +81,16 @@ const addTextToSVG=(x,y,text)=>{
         .text(text);
 };
 
-let open3="#b0291b";
-let close4="#2980b9";
-let aiduchi5="#9b59b6";
-let seken7="#2c3e50";
-let kaishaku6="#f1c40f";
+const open3="#b0291b"
+const close4="#2980b9"
+const aiduchi5="#9b59b6"
+const seken7="#2c3e50"
+const kaishaku6="#f1c40f"
 
-var height0=200;
-var height =200;
+const height0=200;
+const height =200;
 
-var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxmax,startTime,graph,checked,ranshin,width,bunsuu) => {
+const viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxmax,startTime,graph,checked,ranshin,width,bunsuu) => {
 
     const upperName = "カウンセラー";
     const lowerName = "クライエント";

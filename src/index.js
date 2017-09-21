@@ -21,7 +21,7 @@ console.log(storageArrayFromKamata);
 
 var startTime = new Date();
 
-let newLoveDictionary = csv2Array('../oldLoveDic.csv');
+const newLoveDictionary = csv2Array('../oldLoveDic.csv');
 newLoveDictionary = TransposeMatrix(newLoveDictionary);
 
 let newWorkDictionary = csv2Array('workUtf8.csv');
