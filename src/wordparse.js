@@ -1,19 +1,19 @@
 import "kuromoji";
 import {select} from "./select.js";
 import {setForViz} from "./svg.js";
-var makeOnClick = (c) =>{
+export const makeOnClick = (c) =>{
 	document.getElementById("b"+c).onclick = () => {
 		const id = "r"+c;
 		document.getElementById(id).classList.toggle("hide");
 	};
 };
-var makeOnClickS = (c) =>{
+export const makeOnClickS = (c) =>{
 	document.getElementById("bs"+c).onclick = () => {
 		const id = "rs"+c;
 		document.getElementById(id).classList.toggle("hide");
 	};
 };
-var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2) => {
+export const funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2) => {
 
 	var startTime = new Date();
 	console.log(startTime);
@@ -287,4 +287,3 @@ var funcReaderOnload = (name,event,keitaisokaiseki,checkboxlist,chboxlist,chboxl
 	});
 };
 
-export {funcReaderOnload};

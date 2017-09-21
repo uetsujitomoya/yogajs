@@ -2,8 +2,8 @@
 //yogajsまで移動
 //npm run build でコンパイル
 
-import d3 from "d3"
-import textures from "textures"
+import d3 from "d3";
+import textures from "textures";
 
 //let love="#ffeeff";
 //let friend="#c0ffc0";
@@ -90,7 +90,7 @@ const kaishaku6="#f1c40f"
 const height0=200;
 const height =200;
 
-const viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxmax,startTime,graph,checked,ranshin,width,bunsuu) => {
+const viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxmax,startTime,graphTypeNum,checked,ranshin,width,bunsuu) => {
 
     const upperName = "カウンセラー";
     const lowerName = "クライエント";
@@ -98,7 +98,7 @@ const viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBma
     const clientInTextView = '<img src = "./picture/client.jpg" width ="17">';
     const fontSizeInTextView = 2;
 
-    var m;
+    let m;
 
     var nagasa=[];//縦棒の位置
     nagasa[0]=1*width/(bunsuu+1);
@@ -112,7 +112,7 @@ const viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBma
 
     const axisDescriptionY = 240;
 
-    if(graph==3){
+    if(graphTypeNum==3){
 
         const axisDescription = "横軸の単位：全ての発言の全ての文字数";
 
