@@ -339,11 +339,11 @@ var ClassifyWithFirstWordDictionary = (name,wordArrayInASentence,checkboxlist,ch
 			}
 		}
 
-		let storage = localStorage;//初回読み込み
+		var storage = localStorage;//初回読み込み
 
-		let graph;
+		var graph;
 
-		let sResult = select(name,storage,checkboxlist,wordArrayInASentence,miserables,chboxlist,chboxlist2,answerSentenceCategory,RGBlist,hatsugenArray,contentArrayOfASentence,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
+		var sResult = select(name,storage,checkboxlist,wordArrayInASentence,miserables,chboxlist,chboxlist2,answerSentenceCategory,RGBlist,hatsugenArray,contentArrayOfASentence,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
 
 		checkboxlist = sResult.checkboxlist;
 		chboxlist = sResult.chboxlist;
@@ -356,8 +356,8 @@ var ClassifyWithFirstWordDictionary = (name,wordArrayInASentence,checkboxlist,ch
 		taiou2 = sResult.taiou2;
 		chboxlength = sResult.chboxlength;
 		chboxlength2 = sResult.chboxlength2;
-		let answerNumbermax = sResult.answerNumbermax;
-		let questionNumbermax = sResult.questionNumbermax;
+		var answerNumbermax = sResult.answerNumbermax;
+		var questionNumbermax = sResult.questionNumbermax;
 
 		//graph = sResult.graph;
 		//console.log("chboxlength2=%d",chboxlength2)
@@ -456,5 +456,12 @@ let getVizResult=(name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hats
     chboxlength2 = visResult.ranshin;
 };*/
 
+
+const isLoveWord=(query)=>{
+	if(loveDictionaryArray.indexOf(query)){
+		return true
+	}
+	return false
+}
 
 export {ClassifyWithFirstWordDictionary};
