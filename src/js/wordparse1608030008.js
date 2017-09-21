@@ -341,9 +341,9 @@ var ClassifyWithFirstWordDictionary = (name,wordArrayInASentence,checkboxlist,ch
 
 		let storage = localStorage;//初回読み込み
 
-		var graph;
+		let graph;
 
-		var sResult = select(name,storage,checkboxlist,wordArrayInASentence,miserables,chboxlist,chboxlist2,answerSentenceCategory,RGBlist,hatsugenArray,contentArrayOfASentence,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
+		let sResult = select(name,storage,checkboxlist,wordArrayInASentence,miserables,chboxlist,chboxlist2,answerSentenceCategory,RGBlist,hatsugenArray,contentArrayOfASentence,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
 
 		checkboxlist = sResult.checkboxlist;
 		chboxlist = sResult.chboxlist;
@@ -356,8 +356,8 @@ var ClassifyWithFirstWordDictionary = (name,wordArrayInASentence,checkboxlist,ch
 		taiou2 = sResult.taiou2;
 		chboxlength = sResult.chboxlength;
 		chboxlength2 = sResult.chboxlength2;
-		var answerNumbermax = sResult.answerNumbermax;
-		var questionNumbermax = sResult.questionNumbermax;
+		let answerNumbermax = sResult.answerNumbermax;
+		let questionNumbermax = sResult.questionNumbermax;
 
 		//graph = sResult.graph;
 		//console.log("chboxlength2=%d",chboxlength2)
