@@ -26,7 +26,7 @@ color2[c]="#2c3e50";
 }
 */
 
-let vizPart=(talker,task,orijinalSentence)=>{
+const vizPart=(talker,task,orijinalSentence)=>{
 
     let box=(talker,task,orijinalSentence)=>{
         //this.viz=;
@@ -36,7 +36,7 @@ let vizPart=(talker,task,orijinalSentence)=>{
 
 };
 
-let originalSentencePart=(talker,task,orijinalSentence)=>{
+const originalSentencePart=(talker,task,orijinalSentence)=>{
     let sentenceViz=(talker,task,orijinalSentence)=>{
         //this.viz=;
     };
@@ -54,16 +54,16 @@ const addTextToSVG=(x,y,text)=>{
         .text(text);
 };
 
-let open3="#b0291b";
-let close4="#2980b9";
-let aiduchi5="#9b59b6";
-let seken7="#2c3e50";
-let kaishaku6="#f1c40f";
+const open3="#b0291b";
+const close4="#2980b9";
+const aiduchi5="#9b59b6";
+const seken7="#2c3e50";
+const kaishaku6="#f1c40f";
 
-var height0=200;
-var height =200;
+const height0=200;
+const height =200;
 
-var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxmax,startTime,graph,checked,ranshin,width,bunsuu) => {
+const viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxmax,startTime,graph,checked,ranshin,width,bunsuu) => {
 
 	const upperName = "カウンセラー";
     const lowerName = "クライエント";
@@ -581,7 +581,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 	}
 };
 
-var funcChecked = (jsonFileName,storage,chboxlist,checked,taiou,chboxlength,isUsingDictionaryWithWord2Vec) => {
+const funcChecked = (jsonFileName,storage,chboxlist,checked,taiou,chboxlength,isUsingDictionaryWithWord2Vec) => {
 
 	let graphNumber =2;
 
@@ -622,11 +622,11 @@ var funcChecked = (jsonFileName,storage,chboxlist,checked,taiou,chboxlength,isUs
 	}
 };
 
-var funcChecked2 = (name,storage,chboxlist,chboxlist2,checked2,taiou,taiou2,chboxlength,chboxlength2) => {
+const funcChecked2 = (name,storage,chboxlist,chboxlist2,checked2,taiou,taiou2,chboxlength,chboxlength2) => {
 
-	var c;
+	let c;
 
-	var black=0;
+	let black=0;
 	for(c=1;c<=chboxlength2;c++){
 		const radio = document.getElementById("rs"+c).children;
 		for(let i = radio.length-5, l = radio.length; i < l; i++){
@@ -664,16 +664,16 @@ var funcChecked2 = (name,storage,chboxlist,chboxlist2,checked2,taiou,taiou2,chbo
 	}
 };
 
-var setForViz = (name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,zoom_value) => {
+const setForViz = (name,storage,keitaisokaiseki,chboxlist,chboxlist2,RGBlist,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,startTime,graph,ranshin,zoom_value) => {
 
     let isUsingDictionaryWithWord2Vec = 0;
 
-    var bunsuu=2;//前後の余白
+    let  bunsuu=2;//前後の余白
     for(m=1;m<hatsugen.length;m=m+2){//患者の発言で間隔を作る
         bunsuu = bunsuu + hatsugen[m].length;
     }
     console.info(zoom_value);
-    var width=zoom_value*bunsuu;
+    let width=zoom_value*bunsuu;
 
     console.log("%centerred setForViz",'color:red');
 

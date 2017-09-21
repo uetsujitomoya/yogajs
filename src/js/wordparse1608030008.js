@@ -339,7 +339,7 @@ var ClassifyWithFirstWordDictionary = (name,wordArrayInASentence,checkboxlist,ch
 			}
 		}
 
-		var storage = localStorage;//初回読み込み
+		let storage = localStorage;//初回読み込み
 
 		var graph;
 
