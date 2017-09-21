@@ -3,4 +3,4 @@
  */
 let createSelectPartWithKNP = () => {
 
-};
+}
