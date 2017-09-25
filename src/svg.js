@@ -451,7 +451,7 @@ const viz = (stackdataArr, color2, bun, hatsugen, svg, checkedBun, keitaisokaise
 
     var area0 = d3.svg.area()
             .x(function (d, i) {
-              if (i % 3 == 0) { return nagasa[i / 3] } else if (i % 3 == 1) { return nagasa[(i - 1) / 3 + 1] - 3 } else { return nagasa[(i - 2) / 3 + 1] - 2 }
+              if (i % 3 === 0) { return nagasa[i / 3] } else if (i % 3 === 1) { return nagasa[(i - 1) / 3 + 1] - 3 } else { return nagasa[(i - 2) / 3 + 1] - 2 }
             })// nagasa[i]+nagasa[i+1])/2
             .y0(function () { return height0 })
             .y1(function (d) { return height0 - scaleY(d.y + d.y0) })
@@ -488,14 +488,14 @@ const viz = (stackdataArr, color2, bun, hatsugen, svg, checkedBun, keitaisokaise
                 if (2 * (i) + k < 0 || 2 * (i) + k >= hatsugen.length) {
                   continue
                 }
-                if (k == 0) {
+                if (k === 0) {
                   e.innerHTML += '<b><u><font size=' + fontSizeInTextView + '>' + (1 + 2 * i) + '' + counselorInTextView + ' <font color=' + color2[i] + '>【</font>' + hatsugen[2 * i] + '<font color=' + color2[i] + '>】</font></font></u></b><font size=' + fontSizeInTextView + '><br><br>'
-                } else if (k % 2 == 0) {
+                } else if (k % 2 === 0) {
                   e.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + k + 2 * i) + '' + counselorInTextView + ' <font color=' + color2[k / 2 + i] + '><b>【</b></font>' + hatsugen[k + 2 * i] + '<font color=' + color2[k / 2 + i] + '><b>】</b></font><br><br>'
                 } else { // forループを回さないと各文ごとの表示ができない
                   e.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + k + 2 * i) + '' + clientInTextView + ' '
                   for (l = 0; l < bun[k + 2 * i].length; l++) {
-                    if (bun[k + 2 * i][l] == '') { continue }
+                    if (bun[k + 2 * i][l] === '') { continue }
                     e.innerHTML += '<font size=' + fontSizeInTextView + '><font color=' + colorBun[checkedBun[k + 2 * i][l]] + '><b>【</b></font>' + bun[k + 2 * i][l] + '<font color=' + colorBun[checkedBun[k + 2 * i][l]] + '><b>】</b></font></font>'
                   }
                   e.innerHTML += '<font size=' + fontSizeInTextView + '><br><br></font>'
@@ -510,13 +510,13 @@ const viz = (stackdataArr, color2, bun, hatsugen, svg, checkedBun, keitaisokaise
     var mojia1 = []
 
     for (jj3 = 0; jj3 < nagasa.length; jj3++) {
-      if (color2[jj3] == open3) {
+      if (color2[jj3] === open3) {
         mojia1[jj3] = '開 質問'
-      } else if (color2[jj3] == aiduchi5) {
+      } else if (color2[jj3] === aiduchi5) {
         mojia1[jj3] = '相槌'
-      } else if (color2[jj3] == close4) {
+      } else if (color2[jj3] === close4) {
         mojia1[jj3] = '閉 質問'
-      } else if (color2[jj3] == kaishaku6) {
+      } else if (color2[jj3] === kaishaku6) {
         mojia1[jj3] = '解釈'
       } else {
         mojia1[jj3] = '世間話'
@@ -544,14 +544,14 @@ const viz = (stackdataArr, color2, bun, hatsugen, svg, checkedBun, keitaisokaise
                 if (2 * (i) + k < 0 || 2 * (i) + k >= hatsugen.length) {
                   continue
                 }
-                if (k == 0) {
+                if (k === 0) {
                   e.innerHTML += '<b><u><font size=' + fontSizeInTextView + '>' + (1 + 2 * i) + '' + counselorInTextView + ' <font color=' + color2[i] + '>【</font>' + hatsugen[2 * i] + '<font color=' + color2[i] + '>】</font></font></u></b><font size=' + fontSizeInTextView + '><br><br>'
-                } else if (k % 2 == 0) {
+                } else if (k % 2 === 0) {
                   e.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + k + 2 * i) + '' + counselorInTextView + ' <font color=' + color2[k / 2 + i] + '><b>【</b></font>' + hatsugen[k + 2 * i] + '<font color=' + color2[k / 2 + i] + '><b>】</b></font><br><br>'
                 } else { // forループを回さないと各文ごとの表示ができない
                   e.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + k + 2 * i) + '' + clientInTextView + ' '
                   for (l = 0; l < bun[k + 2 * i].length; l++) {
-                    if (bun[k + 2 * i][l] == '') { continue }
+                    if (bun[k + 2 * i][l] === '') { continue }
                     e.innerHTML += '<font size=' + fontSizeInTextView + '><font color=' + colorBun[checkedBun[k + 2 * i][l]] + '><b>【</b></font>' + bun[k + 2 * i][l] + '<font color=' + colorBun[checkedBun[k + 2 * i][l]] + '><b>】</b></font></font><br>   '
                   }
                   e.innerHTML += '<font size=' + fontSizeInTextView + '><br><br></font>'
@@ -601,7 +601,7 @@ var funcChecked = (jsonFileName, storage, chboxlist, checked, taiou, chboxlength
   for (c = 1; c <= chboxlength; c++) {
     let changedAnswerClassificationSaveTarget
 
-    if (isUsingDictionaryWithWord2Vec == 1) {
+    if (isUsingDictionaryWithWord2Vec === 1) {
       changedAnswerClassificationSaveTarget = jsonFileName + 'AnswerWithNewDictionary' + c
             // 今後辞書名に対応
     } else {
@@ -612,16 +612,16 @@ var funcChecked = (jsonFileName, storage, chboxlist, checked, taiou, chboxlength
     for (let i = radio.length - 3, l = radio.length; i < l; i++) {
             // console.log("i=%d",i);
             // console.log(radio[i]);
-      if (radio[i].control.checked == true) {
-        if (radio[i].control.value == '1') {
+      if (radio[i].control.checked === true) {
+        if (radio[i].control.value === '1') {
           checked[taiou[c - 1]] = 1
           storage.setItem(changedAnswerClassificationSaveTarget, 0)
           break
-        } else if (radio[i].control.value == '2') {
+        } else if (radio[i].control.value === '2') {
           checked[taiou[c - 1]] = 2
           storage.setItem(changedAnswerClassificationSaveTarget, 1)
           break
-        } else if (radio[i].control.value == '3') {
+        } else if (radio[i].control.value === '3') {
           checked[taiou[c - 1]] = 3
           storage.setItem(changedAnswerClassificationSaveTarget, 2)
           break
@@ -641,24 +641,24 @@ var funcChecked2 = (name, storage, chboxlist, chboxlist2, checked2, taiou, taiou
   for (c = 1; c <= chboxlength2; c++) {
     const radio = document.getElementById('rs' + c).children
     for (let i = radio.length - 5, l = radio.length; i < l; i++) {
-      if (radio[i].control.checked == true) {
+      if (radio[i].control.checked === true) {
                 // storage.getItem(name+"RGBlist"+m)=
-        if (radio[i].control.value == '3') {
+        if (radio[i].control.value === '3') {
           checked2[taiou[c - 1]] = 3
           storage.setItem(name + 'RGBlist' + c, 3)
           break
         }
-        if (radio[i].control.value == '4') {
+        if (radio[i].control.value === '4') {
           checked2[c - 1] = 4
           storage.setItem(name + 'RGBlist' + c, 4)
           break
         }
-        if (radio[i].control.value == '5') {
+        if (radio[i].control.value === '5') {
           checked2[c - 1] = 5
           storage.setItem(name + 'RGBlist' + c, 5)
           break
         }
-        if (radio[i].control.value == '6') {
+        if (radio[i].control.value === '6') {
           checked2[c - 1] = 6
           storage.setItem(name + 'RGBlist' + c, 6)
           break
@@ -668,7 +668,7 @@ var funcChecked2 = (name, storage, chboxlist, chboxlist2, checked2, taiou, taiou
         storage.setItem(name + 'RGBlist' + c, 7)
       }
     }
-    if (checked2[c - 1] == 7) {
+    if (checked2[c - 1] === 7) {
       black++
     }
   }
@@ -717,14 +717,14 @@ var setForViz = (name, storage, keitaisokaiseki, chboxlist, chboxlist2, RGBlist,
     for (i = 0; i < keitaisokaiseki[m].length; i++) {
       checkedBun[m][i] = 0
       for (c = 1; c < chboxlist.length; c++) {
-        if (bun[m][i] == chboxlist[c][0]) {
-          if (checked[c - 1] == 1) {
+        if (bun[m][i] === chboxlist[c][0]) {
+          if (checked[c - 1] === 1) {
             RGBlist[n][0] = RGBlist[n][0] + 1
             checkedBun[m][i] = 1
-          } else if (checked[c - 1] == 2) {
+          } else if (checked[c - 1] === 2) {
             RGBlist[n][1] = RGBlist[n][1] + 1
             checkedBun[m][i] = 2
-          } else if (checked[c - 1] == 3) {
+          } else if (checked[c - 1] === 3) {
             RGBlist[n][2] = RGBlist[n][2] + 1
             checkedBun[m][i] = 3
           }
@@ -734,13 +734,13 @@ var setForViz = (name, storage, keitaisokaiseki, chboxlist, chboxlist2, RGBlist,
     n++
   }
   for (c = 0; c < checked2.length; c++) {
-    if (checked2[c] == 3) {
+    if (checked2[c] === 3) {
       color2[c] = open3
-    } else if (checked2[c] == 5) {
+    } else if (checked2[c] === 5) {
       color2[c] = aiduchi5
-    } else if (checked2[c] == 4) {
+    } else if (checked2[c] === 4) {
       color2[c] = close4
-    } else if (checked2[c] == 6) {
+    } else if (checked2[c] === 6) {
       color2[c] = kaishaku6
     } else {
       color2[c] = seken7
@@ -767,11 +767,11 @@ var setForViz = (name, storage, keitaisokaiseki, chboxlist, chboxlist2, RGBlist,
   for (let i = 0; i <= graphNumber - 1; i++) {
     console.log('i=%d', i)
     console.log(radio[i])
-    if (radio[i].control.checked == true) {
+    if (radio[i].control.checked === true) {
             // storage.getItem(name+"RGBlist"+m)=
 			/* if(radio[i].control.value=="12"){
 			 graph=2;
-			 }else */if (radio[i].control.value == '13') {
+			 }else */if (radio[i].control.value === '13') {
    graph = 3
  } else {
    graph = 1
@@ -783,7 +783,7 @@ var setForViz = (name, storage, keitaisokaiseki, chboxlist, chboxlist2, RGBlist,
     stackdataArr[h] = []
     for (m = 0; m < ((keitaisokaiseki.length - 1) / 2); m++) {
       stackdataArr[h][3 * m] = new Object()
-      if (graph == 2) {
+      if (graph === 2) {
         stackdataArr[h][3 * m] = {x: 3 * m + 1, y: 0}
       } else {
         stackdataArr[h][3 * m] = {x: 3 * m + 1, y: (5 * (RGBlist[m][h]) / RGBmaxmax)}
