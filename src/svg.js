@@ -112,7 +112,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 
     const axisDescriptionY = 240;
 
-    if(graph==3){
+    if(graph===3){
 
         const axisDescription = "横軸の単位：全ての発言の全ての文字数";
 
@@ -140,7 +140,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
             h++;
             //クライエント
             bun[m].forEach((d)=>{
-                if(d!=""){
+                if(d!==""){
                     nagasa2[h]=d.length*width/bunsuu;
                     mazekoze[h]=d;
                     isAnswerInMazekoze[h]=1;
@@ -151,7 +151,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 
                 }
             });
-            if(m+1==hatsugen.length){
+            if(m+1===hatsugen.length){
                 break;
             }
             //カウンセラー
@@ -169,31 +169,31 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
         for(let m=1;m<ranshin.length;m=m+2){
             for(let i=0;i<ranshin[m].length;i++){
                 mazekozeRanshin[c]="";
-                if(ranshin[m][i][0]==1){
+                if(ranshin[m][i][0]===1){
                     mazekozeRanshin[c]="病\n";
                 }
-                if(ranshin[m][i][1]==1){
+                if(ranshin[m][i][1]===1){
                     mazekozeRanshin[c]="無気\n";
                 }
-                if(ranshin[m][i][2]==1){
+                if(ranshin[m][i][2]===1){
                     mazekozeRanshin[c]="疑\n";
                 }
-                if(ranshin[m][i][3]==1){
+                if(ranshin[m][i][3]===1){
                     mazekozeRanshin[c]="不注\n";
                 }
-                if(ranshin[m][i][4]==1){
+                if(ranshin[m][i][4]===1){
                     mazekozeRanshin[c]="怠\n";
                 }
-                if(ranshin[m][i][5]==1){
+                if(ranshin[m][i][5]===1){
                     mazekozeRanshin[c]="渇\n";
                 }
-                if(ranshin[m][i][6]==1){
+                if(ranshin[m][i][6]===1){
                     mazekozeRanshin[c]="妄想\n";
                 }
-                if(ranshin[m][i][7]==1){
+                if(ranshin[m][i][7]===1){
                     mazekozeRanshin[c]="新境\n";
                 }
-                if(ranshin[m][i][8]==1){
+                if(ranshin[m][i][8]===1){
                     mazekozeRanshin[c]="落着";
                 }
                 c++;
@@ -228,21 +228,21 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
         var jjj=0;
 
         for (jj=0; jj<nagasa2.length; jj++){//色変えたからか。。
-            if(mazekozeColor[jj] == open3){
+            if(mazekozeColor[jj] === open3){
                 textOnRect[jj]='開 質問';
-            }else if(mazekozeColor[jj] == aiduchi5){
+            }else if(mazekozeColor[jj] === aiduchi5){
                 textOnRect[jj]="相槌";
-            }else if(mazekozeColor[jj] == close4){
+            }else if(mazekozeColor[jj] === close4){
                 textOnRect[jj]="閉 質問";
-            }else if(mazekozeColor[jj] ==kaishaku6){
+            }else if(mazekozeColor[jj] ===kaishaku6){
                 textOnRect[jj]='解釈';
-            }else if(checked[jjj]==0){
+            }else if(checked[jjj]===0){
                 textOnRect[jj]='未';jjj++;
-            }else if(checked[jjj]==1){
+            }else if(checked[jjj]===1){
                 textOnRect[jj]='愛';jjj++;
-            }else if(checked[jjj]==2){
+            }else if(checked[jjj]===2){
                 textOnRect[jj]='交友';jjj++;
-            }else if(checked[jjj]==3){
+            }else if(checked[jjj]===3){
                 textOnRect[jj]='仕事';jjj++;
             }else{
                 textOnRect[jj]='世間話';
@@ -277,7 +277,7 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
             .attr("x",function(d,i){
                 var arr = nagasa2;
                 //var sum = d3.sum(arr);
-                var subSum = d3.sum(i==0 ? []:arr.slice(0,i));
+                var subSum = d3.sum(i===0 ? []:arr.slice(0,i));
                 return xScale(subSum)/10 + 10+graphShiftX;
             })
             .attr("y",10)
@@ -287,13 +287,13 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
             })
             .attr("height",20)
             .attr("fill", function(d, i){
-                if((row==0&& isAnswerInMazekoze[i]==0)||(row==1&&isAnswerInMazekoze[i]==1) ){
-                    if(i+1==mazekoze.length){
+                if((row===0&& isAnswerInMazekoze[i]===0)||(row===1&&isAnswerInMazekoze[i]===1) ){
+                    if(i+1===mazekoze.length){
                         row++;
                     }
                     return mazekozeColor[i];
                 }else{
-                    if(i+1==mazekoze.length){
+                    if(i+1===mazekoze.length){
                         row++;
                     }
                     return "#f9f9f9";
@@ -304,19 +304,19 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
                 var e = document.getElementById('msg');
                 let k,l;
                 e.innerHTML = "";
-                if(isAnswerInMazekoze[i]==0){    //カウンセラー
+                if(isAnswerInMazekoze[i]===0){    //カウンセラー
                     for(k=-3;k<=3;k++){
                         if(mazekozeHatsugenNumber[i]+k<0||mazekozeHatsugenNumber[i]+k>=hatsugen.length){
                             continue;
                         }
-                        if(k==0){
+                        if(k===0){
                             e.innerHTML += "<b><u><font size=" + fontSizeInTextView + ">"+(1+mazekozeHatsugenNumber[i])+""+counselorInTextView+" <font color="+color2[mazekozeHatsugenNumber[i]/2]+">【</font>"+hatsugen[mazekozeHatsugenNumber[i]]+"<font color="+color2[mazekozeHatsugenNumber[i]/2]+">】</font></u></b><font size=" + fontSizeInTextView + "><br><br>";
-                        }else if(k%2==0){
+                        }else if(k%2===0){
                             e.innerHTML += "<font size=" + fontSizeInTextView + ">"+(1+k+mazekozeHatsugenNumber[i])+""+counselorInTextView+" <font color="+color2[k/2+mazekozeHatsugenNumber[i]/2]+"><b>【</b></font>"+hatsugen[k+mazekozeHatsugenNumber[i]]+"<font color="+color2[k/2+mazekozeHatsugenNumber[i]/2]+"><b>】</b></font><br><br>";
                         }else{//forループを回さないと各文ごとの表示ができない
                             e.innerHTML += "<font size=" + fontSizeInTextView + ">"+(1+k+mazekozeHatsugenNumber[i])+""+clientInTextView+" ";
                             for(l=0;l<bun[k+mazekozeHatsugenNumber[i]].length;l++){
-                                if(bun[k+mazekozeHatsugenNumber[i]][l]==""){continue;}
+                                if(bun[k+mazekozeHatsugenNumber[i]][l]===""){continue;}
                                 e.innerHTML += "<font size=" + fontSizeInTextView + "><font color="+colorBun[checkedBun[k+mazekozeHatsugenNumber[i]][l]]+"><b>【</b></font>"+bun[k+mazekozeHatsugenNumber[i]][l]+"<font color="+colorBun[checkedBun[k+mazekozeHatsugenNumber[i]][l]]+"><b>】</b></font>";
                             }
                             e.innerHTML += "<font size=" + fontSizeInTextView + "><br><br>";
@@ -327,17 +327,17 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
                         if(mazekozeHatsugenNumber[i]+k<0||mazekozeHatsugenNumber[i]+k>=hatsugen.length){
                             continue;
                         }
-                        if(k==0){
+                        if(k === 0){
                             e.innerHTML += "<font size=" + fontSizeInTextView + ">"+(1+k+mazekozeHatsugenNumber[i])+""+clientInTextView+" ";
                             for(l=0;l<bun[k+mazekozeHatsugenNumber[i]].length;l++){
-                                if(bun[k+mazekozeHatsugenNumber[i]][l]==""){continue;}
+                                if(bun[k+mazekozeHatsugenNumber[i]][l]===""){continue;}
                                 e.innerHTML += "<u><font size=" + fontSizeInTextView + "><font color="+colorBun[checkedBun[k+mazekozeHatsugenNumber[i]][l]]+"><b>【</b></font>"+bun[k+mazekozeHatsugenNumber[i]][l]+"<font color="+colorBun[checkedBun[k+mazekozeHatsugenNumber[i]][l]]+"><b>】</b></font></font></u>";
                             }
                             e.innerHTML += "<font size=" + fontSizeInTextView + "><br><br></font>";
-                        }else if(k%2==0){
+                        }else if(k%2===0){
                             e.innerHTML += "<font size=" + fontSizeInTextView + ">"+(1+k+mazekozeHatsugenNumber[i])+""+clientInTextView+" ";
                             for(l=0;l<bun[k+mazekozeHatsugenNumber[i]].length;l++){
-                                if(bun[k+mazekozeHatsugenNumber[i]][l]==""){continue;}
+                                if(bun[k+mazekozeHatsugenNumber[i]][l]===""){continue;}
                                 e.innerHTML += "<font size=" + fontSizeInTextView + "><font color="+colorBun[checkedBun[k+mazekozeHatsugenNumber[i]][l]]+"><b>【</b></font>"+bun[k+mazekozeHatsugenNumber[i]][l]+"<font color="+colorBun[checkedBun[k+mazekozeHatsugenNumber[i]][l]]+"><b>】</b></font>";
                             }
                             e.innerHTML += "<font size=" + fontSizeInTextView + "><br><br>";
@@ -462,8 +462,8 @@ var viz=(stackdataArr,color2,bun,hatsugen,svg,checkedBun,keitaisokaiseki,RGBmaxm
 
         var area0 = d3.svg.area()
             .x(function(d,i){
-                if(i%3==0){return nagasa[i/3];}
-                else if(i%3==1){return nagasa[(i-1)/3+1]-3;}
+                if( i % 3 === 0 ){return nagasa[i/3];}
+                else if(i%3===1){return nagasa[(i-1)/3+1]-3;}
                 else{return nagasa[(i-2)/3+1]-2;}
 
             })//nagasa[i]+nagasa[i+1])/2
