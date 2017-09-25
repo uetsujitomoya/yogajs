@@ -93,12 +93,12 @@ export const funcReaderOnload = (name, event, keitaisokaiseki, checkboxlist, chb
             if (path[n].surface_form == '何' && path[n + 1].surface_form == 'か') {
 
             } else if (path[n].basic_form == 'いかが' || path[n].basic_form == 'なんで' || path[n].basic_form == 'どうして' || path[n].basic_form == 'どの' || path[n].basic_form == 'どのように' || path[n].basic_form == 'いつ' || path[n].basic_form == 'どういう' || path[n].basic_form == 'どなた' || path[n].basic_form == 'どう' || path[n].surface_form == '何' || path[n].basic_form == '誰' || path[n].basic_form == 'どんな' || path[n].basic_form == 'どのような' || path[n].basic_form == 'どこ') {
-            RGBlist[m / 2][3] = 1
-          } else if (path[n].surface_form == 'か' && path[n].pos == '助詞') {
-            RGBlist[m / 2][4] = 1
-          } else if (path[n].surface_form == 'ね' && path[n].pos == '助詞') {
-          RGBlist[m / 2][6] = 1
-        }
+              RGBlist[m / 2][3] = 1
+            } else if (path[n].surface_form == 'か' && path[n].pos == '助詞') {
+              RGBlist[m / 2][4] = 1
+            } else if (path[n].surface_form == 'ね' && path[n].pos == '助詞') {
+              RGBlist[m / 2][6] = 1
+            }
           }
           bun[m][i] += path[n].surface_form
           if (path[n].pos_detail_1 == '接尾' || path[n].basic_form == '*' || path[n].pos == '助詞' || path[n].basic_form == '、' || path[n].pos == '記号' || path[n].pos == '助動詞' || path[n].pos == '感動詞' || path[n].pos == '接頭詞' || path[n].pos_detail_1 == '非自立' ||
@@ -197,9 +197,9 @@ export const funcReaderOnload = (name, event, keitaisokaiseki, checkboxlist, chb
             if (RGB[m][i][h] == 1) {
               for (j = 0; j < keitaisokaiseki[m][i].length; j++) {
                 if (miserables.nodes[k] == keitaisokaiseki[m][i][j]) {
-                RGBk[h][k] = 1
-                break
-              }
+                  RGBk[h][k] = 1
+                  break
+                }
               }
             }
             if (RGBk[h][k] == 1) {
@@ -220,11 +220,11 @@ export const funcReaderOnload = (name, event, keitaisokaiseki, checkboxlist, chb
             for (i = 0; i < keitaisokaiseki[m].length; i++) {
               if (RGB[m][i][h] == 0) {
                 for (j = 0; j < keitaisokaiseki[m][i].length; j++) {
-                if (miserables.nodes[k] == keitaisokaiseki[m][i][j]) {
-                  RGB[m][i][h] = 1
-                  break
+                  if (miserables.nodes[k] == keitaisokaiseki[m][i][j]) {
+                    RGB[m][i][h] = 1
+                    break
+                  }
                 }
-              }
               }
             }
           }

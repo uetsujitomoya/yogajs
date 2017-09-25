@@ -235,12 +235,12 @@ const viz = (stackdataArr, color2, bun, hatsugen, svg, checkedBun, keitaisokaise
       } else if (checked[jjj] === 1) {
         textOnRect[jj] = '愛'; jjj++
       } else if (checked[jjj] === 2) {
-          textOnRect[jj] = '交友'; jjj++
-        } else if (checked[jjj] === 3) {
-          textOnRect[jj] = '仕事'; jjj++
-        } else {
-          textOnRect[jj] = '世間話'
-        }
+        textOnRect[jj] = '交友'; jjj++
+      } else if (checked[jjj] === 3) {
+        textOnRect[jj] = '仕事'; jjj++
+      } else {
+        textOnRect[jj] = '世間話'
+      }
     }
 
     for (jj = 0; jj < nagasa2.length; jj++) {

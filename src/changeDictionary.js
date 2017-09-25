@@ -189,10 +189,10 @@ var ClassifyWithWordDictionary = (jsonFileName, event, keitaisokaiseki, chboxlis
             } else if (path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'いかが' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'なんで' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'どうして' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'どの' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'どのように' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'いつ' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'どういう' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'どなた' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'どう' || path[wordNumberParsedInMorphologicalAnalysis].surface_form == '何' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == '誰' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'どんな' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'どのような' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'どこ') {
               RGBlist[hatsugenNumber / 2][3] = 1
             } else if (path[wordNumberParsedInMorphologicalAnalysis].surface_form == 'か' && path[wordNumberParsedInMorphologicalAnalysis].pos == '助詞') {
-                RGBlist[hatsugenNumber / 2][4] = 1
-              } else if (path[wordNumberParsedInMorphologicalAnalysis].surface_form == 'ね' && path[wordNumberParsedInMorphologicalAnalysis].pos == '助詞') {
-                  RGBlist[hatsugenNumber / 2][6] = 1
-                }
+              RGBlist[hatsugenNumber / 2][4] = 1
+            } else if (path[wordNumberParsedInMorphologicalAnalysis].surface_form == 'ね' && path[wordNumberParsedInMorphologicalAnalysis].pos == '助詞') {
+              RGBlist[hatsugenNumber / 2][6] = 1
+            }
           }
 
           if (path[wordNumberParsedInMorphologicalAnalysis].pos_detail_1 == '接尾' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == '*' || path[wordNumberParsedInMorphologicalAnalysis].pos == '助詞' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == '、' || path[wordNumberParsedInMorphologicalAnalysis].pos == '記号' || path[wordNumberParsedInMorphologicalAnalysis].pos == '助動詞' || path[wordNumberParsedInMorphologicalAnalysis].pos == '感動詞' || path[wordNumberParsedInMorphologicalAnalysis].pos == '接頭詞' || path[wordNumberParsedInMorphologicalAnalysis].pos_detail_1 == '非自立' ||

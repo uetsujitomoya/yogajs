@@ -7084,8 +7084,8 @@ exports.inflateUndermine = inflateUndermine;
                 if ((secondByte & 0xC0) === 0x80) {
                   tempCodePoint = (firstByte & 0x1F) << 0x6 | (secondByte & 0x3F)
                   if (tempCodePoint > 0x7F) {
-                  codePoint = tempCodePoint
-                }
+                    codePoint = tempCodePoint
+                  }
                 }
                 break
               case 3:
@@ -7094,8 +7094,8 @@ exports.inflateUndermine = inflateUndermine;
                 if ((secondByte & 0xC0) === 0x80 && (thirdByte & 0xC0) === 0x80) {
                   tempCodePoint = (firstByte & 0xF) << 0xC | (secondByte & 0x3F) << 0x6 | (thirdByte & 0x3F)
                   if (tempCodePoint > 0x7FF && (tempCodePoint < 0xD800 || tempCodePoint > 0xDFFF)) {
-                  codePoint = tempCodePoint
-                }
+                    codePoint = tempCodePoint
+                  }
                 }
                 break
               case 4:
@@ -7105,8 +7105,8 @@ exports.inflateUndermine = inflateUndermine;
                 if ((secondByte & 0xC0) === 0x80 && (thirdByte & 0xC0) === 0x80 && (fourthByte & 0xC0) === 0x80) {
                   tempCodePoint = (firstByte & 0xF) << 0x12 | (secondByte & 0x3F) << 0xC | (thirdByte & 0x3F) << 0x6 | (fourthByte & 0x3F)
                   if (tempCodePoint > 0xFFFF && tempCodePoint < 0x110000) {
-                  codePoint = tempCodePoint
-                }
+                    codePoint = tempCodePoint
+                  }
                 }
             }
           }
@@ -7871,9 +7871,9 @@ exports.inflateUndermine = inflateUndermine;
                 continue
               } else if (i + 1 === length) {
           // unpaired lead
-              if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
-              continue
-            }
+                if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
+                continue
+              }
 
         // valid lead
               leadSurrogate = codePoint
@@ -7915,16 +7915,16 @@ exports.inflateUndermine = inflateUndermine;
         codePoint & 0x3F | 0x80
       )
           } else if (codePoint < 0x110000) {
-          if ((units -= 4) < 0) break
-          bytes.push(
+            if ((units -= 4) < 0) break
+            bytes.push(
         codePoint >> 0x12 | 0xF0,
         codePoint >> 0xC & 0x3F | 0x80,
         codePoint >> 0x6 & 0x3F | 0x80,
         codePoint & 0x3F | 0x80
       )
-        } else {
-          throw new Error('Invalid code point')
-        }
+          } else {
+            throw new Error('Invalid code point')
+          }
         }
 
         return bytes
@@ -8859,27 +8859,27 @@ exports.inflateUndermine = inflateUndermine;
             var e = new Error('stream.push() after EOF')
             stream.emit('error', e)
           } else if (state.endEmitted && addToFront) {
-          var e = new Error('stream.unshift() after end event')
-          stream.emit('error', e)
-        } else {
-          if (state.decoder && !addToFront && !encoding) { chunk = state.decoder.write(chunk) }
+            var e = new Error('stream.unshift() after end event')
+            stream.emit('error', e)
+          } else {
+            if (state.decoder && !addToFront && !encoding) { chunk = state.decoder.write(chunk) }
 
-          if (!addToFront) { state.reading = false }
+            if (!addToFront) { state.reading = false }
 
       // if we want the data now, just emit it.
-          if (state.flowing && state.length === 0 && !state.sync) {
-            stream.emit('data', chunk)
-            stream.read(0)
-          } else {
+            if (state.flowing && state.length === 0 && !state.sync) {
+              stream.emit('data', chunk)
+              stream.read(0)
+            } else {
         // update the buffer info.
-            state.length += state.objectMode ? 1 : chunk.length
-            if (addToFront) { state.buffer.unshift(chunk) } else { state.buffer.push(chunk) }
+              state.length += state.objectMode ? 1 : chunk.length
+              if (addToFront) { state.buffer.unshift(chunk) } else { state.buffer.push(chunk) }
 
-            if (state.needReadable) { emitReadable(stream) }
+              if (state.needReadable) { emitReadable(stream) }
+            }
+
+            maybeReadMore(stream, state)
           }
-
-          maybeReadMore(stream, state)
-        }
         } else if (!addToFront) {
           state.reading = false
         }
@@ -12579,19 +12579,19 @@ exports.inflateUndermine = inflateUndermine;
               }).tween('zoom:zoom', function () {
                 var dx = size[0], dy = size[1], cx = center0 ? center0[0] : dx / 2, cy = center0 ? center0[1] : dy / 2, i = d3.interpolateZoom([ (cx - view.x) / view.k, (cy - view.y) / view.k, dx / view.k ], [ (cx - view1.x) / view1.k, (cy - view1.y) / view1.k, dx / view1.k ])
                 return function (t) {
-                var l = i(t), k = dx / l[2]
-                this.__chart__ = view = {
-                  x: cx - l[0] * k,
-                  y: cy - l[1] * k,
-                  k: k
+                  var l = i(t), k = dx / l[2]
+                  this.__chart__ = view = {
+                    x: cx - l[0] * k,
+                    y: cy - l[1] * k,
+                    k: k
+                  }
+                  zoomed(dispatch)
                 }
-                zoomed(dispatch)
-              }
               }).each('interrupt.zoom', function () {
-              zoomended(dispatch)
-            }).each('end.zoom', function () {
-              zoomended(dispatch)
-            })
+                zoomended(dispatch)
+              }).each('end.zoom', function () {
+                zoomended(dispatch)
+              })
             } else {
               this.__chart__ = view
               zoomstarted(dispatch)
@@ -14824,19 +14824,19 @@ exports.inflateUndermine = inflateUndermine;
               } else if (notHemisphere && point0 && smallRadius ^ v) {
                 var t
                 if (!(c & c0) && (t = intersect(point1, point0, true))) {
-                clean = 0
-                if (smallRadius) {
-                  listener.lineStart()
-                  listener.point(t[0][0], t[0][1])
-                  listener.point(t[1][0], t[1][1])
-                  listener.lineEnd()
-                } else {
-                  listener.point(t[1][0], t[1][1])
-                  listener.lineEnd()
-                  listener.lineStart()
-                  listener.point(t[0][0], t[0][1])
+                  clean = 0
+                  if (smallRadius) {
+                    listener.lineStart()
+                    listener.point(t[0][0], t[0][1])
+                    listener.point(t[1][0], t[1][1])
+                    listener.lineEnd()
+                  } else {
+                    listener.point(t[1][0], t[1][1])
+                    listener.lineEnd()
+                    listener.lineStart()
+                    listener.point(t[0][0], t[0][1])
+                  }
                 }
-              }
               }
               if (v && (!point0 || !d3_geo_sphericalEqual(point0, point1))) {
                 listener.point(point1[0], point1[1])
@@ -15053,27 +15053,27 @@ exports.inflateUndermine = inflateUndermine;
               if (v && v_) listener.point(x, y); else {
                 var l = {
                   a: {
-                  x: x_,
-                  y: y_
-                },
+                    x: x_,
+                    y: y_
+                  },
                   b: {
-                  x: x,
-                  y: y
-                }
+                    x: x,
+                    y: y
+                  }
                 }
                 if (clipLine(l)) {
                   if (!v_) {
-                  listener.lineStart()
-                  listener.point(l.a.x, l.a.y)
-                }
+                    listener.lineStart()
+                    listener.point(l.a.x, l.a.y)
+                  }
                   listener.point(l.b.x, l.b.y)
                   if (!v) listener.lineEnd()
                   clean = false
                 } else if (v) {
-                listener.lineStart()
-                listener.point(x, y)
-                clean = false
-              }
+                  listener.lineStart()
+                  listener.point(x, y)
+                  clean = false
+                }
               }
             }
             x_ = x, y_ = y, v_ = v
@@ -16314,15 +16314,15 @@ exports.inflateUndermine = inflateUndermine;
                 x: x0,
                 y: abs(x2 - x0) < ε ? y2 : y1
               } : abs(y3 - y1) < ε && x1 - x3 > ε ? {
-              x: abs(y2 - y1) < ε ? x2 : x1,
-              y: y1
-            } : abs(x3 - x1) < ε && y3 - y0 > ε ? {
-              x: x1,
-              y: abs(x2 - x1) < ε ? y2 : y0
-            } : abs(y3 - y0) < ε && x3 - x0 > ε ? {
-              x: abs(y2 - y0) < ε ? x2 : x0,
-              y: y0
-            } : null), cell.site, null))
+                x: abs(y2 - y1) < ε ? x2 : x1,
+                y: y1
+              } : abs(x3 - x1) < ε && y3 - y0 > ε ? {
+                x: x1,
+                y: abs(x2 - x1) < ε ? y2 : y0
+              } : abs(y3 - y0) < ε && x3 - x0 > ε ? {
+                x: abs(y2 - y0) < ε ? x2 : x0,
+                y: y0
+              } : null), cell.site, null))
               ++nHalfEdges
             }
           }
@@ -16871,13 +16871,13 @@ exports.inflateUndermine = inflateUndermine;
               var nx = n.x, ny = n.y
               if (nx != null) {
                 if (abs(nx - x) + abs(ny - y) < 0.01) {
-                insertChild(n, d, x, y, x1, y1, x2, y2)
-              } else {
-                var nPoint = n.point
-                n.x = n.y = n.point = null
-                insertChild(n, nPoint, nx, ny, x1, y1, x2, y2)
-                insertChild(n, d, x, y, x1, y1, x2, y2)
-              }
+                  insertChild(n, d, x, y, x1, y1, x2, y2)
+                } else {
+                  var nPoint = n.point
+                  n.x = n.y = n.point = null
+                  insertChild(n, nPoint, nx, ny, x1, y1, x2, y2)
+                  insertChild(n, d, x, y, x1, y1, x2, y2)
+                }
               } else {
                 n.x = x, n.y = y, n.point = d
               }
@@ -17440,9 +17440,9 @@ exports.inflateUndermine = inflateUndermine;
                   source: target,
                   target: source
                 } : {
-                source: source,
-                target: target
-              })
+                  source: source,
+                  target: target
+                })
               }
             }
           }
@@ -17501,10 +17501,10 @@ exports.inflateUndermine = inflateUndermine;
               var dx = quad.cx - node.x, dy = quad.cy - node.y, dw = x2 - x1, dn = dx * dx + dy * dy
               if (dw * dw / theta2 < dn) {
                 if (dn < chargeDistance2) {
-                var k = quad.charge / dn
-                node.px -= dx * k
-                node.py -= dy * k
-              }
+                  var k = quad.charge / dn
+                  node.px -= dx * k
+                  node.py -= dy * k
+                }
                 return true
               }
               if (quad.point && dn && dn < chargeDistance2) {
@@ -18249,8 +18249,8 @@ exports.inflateUndermine = inflateUndermine;
               if (isect == 1) {
                 for (k = a._pack_prev; k !== j._pack_prev; k = k._pack_prev, s2++) {
                   if (d3_layout_packIntersects(k, c)) {
-                  break
-                }
+                    break
+                  }
                 }
               }
               if (isect) {
@@ -20345,8 +20345,8 @@ exports.inflateUndermine = inflateUndermine;
             }).append('rect').attr('x', function (d) {
               return /[ew]$/.test(d) ? -3 : null
             }).attr('y', function (d) {
-            return /^[ns]/.test(d) ? -3 : null
-          }).attr('width', 6).attr('height', 6).style('visibility', 'hidden')
+              return /^[ns]/.test(d) ? -3 : null
+            }).attr('width', 6).attr('height', 6).style('visibility', 'hidden')
             resize.style('display', brush.empty() ? 'none' : null)
             var gUpdate = d3.transition(g), backgroundUpdate = d3.transition(background), range
             if (x) {
@@ -20384,24 +20384,24 @@ exports.inflateUndermine = inflateUndermine;
                 var xi = d3_interpolateArray(xExtent, extent1.x), yi = d3_interpolateArray(yExtent, extent1.y)
                 xExtentDomain = yExtentDomain = null
                 return function (t) {
-                xExtent = extent1.x = xi(t)
-                yExtent = extent1.y = yi(t)
+                  xExtent = extent1.x = xi(t)
+                  yExtent = extent1.y = yi(t)
+                  event_({
+                    type: 'brush',
+                    mode: 'resize'
+                  })
+                }
+              }).each('end.brush', function () {
+                xExtentDomain = extent1.i
+                yExtentDomain = extent1.j
                 event_({
                   type: 'brush',
                   mode: 'resize'
                 })
-              }
-              }).each('end.brush', function () {
-              xExtentDomain = extent1.i
-              yExtentDomain = extent1.j
-              event_({
-                type: 'brush',
-                mode: 'resize'
+                event_({
+                  type: 'brushend'
+                })
               })
-              event_({
-                type: 'brushend'
-              })
-            })
             } else {
               event_({
                 type: 'brushstart'
@@ -20737,8 +20737,8 @@ exports.inflateUndermine = inflateUndermine;
       } ], [ '%b %d', function (d) {
         return d.getDate() != 1
       } ], [ '%B', function (d) {
-      return d.getMonth()
-    } ], [ '%Y', d3_true ] ])
+        return d.getMonth()
+      } ], [ '%Y', d3_true ] ])
       var d3_time_scaleMilliseconds = {
         range: function (start, stop, step) {
           return d3.range(Math.ceil(start / step) * step, +stop, step).map(d3_time_scaleDate)
@@ -20766,8 +20766,8 @@ exports.inflateUndermine = inflateUndermine;
       } ], [ '%b %d', function (d) {
         return d.getUTCDate() != 1
       } ], [ '%B', function (d) {
-      return d.getUTCMonth()
-    } ], [ '%Y', d3_true ] ])
+        return d.getUTCMonth()
+      } ], [ '%Y', d3_true ] ])
       d3_time_scaleUtcMethods.year = d3_time.year.utc
       d3_time.scale.utc = function () {
         return d3_time_scale(d3.scale.linear(), d3_time_scaleUtcMethods, d3_time_scaleUtcFormat)
@@ -23294,19 +23294,19 @@ exports.inflateUndermine = inflateUndermine;
                 if (key === null) {
                   done = true
                   if (running <= 0) {
-                  callback(null)
-                }
+                    callback(null)
+                  }
                   return
                 }
                 running += 1
                 iterator(obj[key], key, only_once(function (err) {
                   running -= 1
                   if (err) {
-                  callback(err)
-                  errored = true
-                } else {
-                  replenish()
-                }
+                    callback(err)
+                    errored = true
+                  } else {
+                    replenish()
+                  }
                 }))
               }
             })()
@@ -23864,21 +23864,21 @@ exports.inflateUndermine = inflateUndermine;
             process: function () {
               if (!q.paused && workers < q.concurrency && q.tasks.length) {
                 while (workers < q.concurrency && q.tasks.length) {
-                var tasks = q.payload
+                  var tasks = q.payload
                             ? q.tasks.splice(0, q.payload)
                             : q.tasks.splice(0, q.tasks.length)
 
-                var data = _map(tasks, function (task) {
-                  return task.data
-                })
+                  var data = _map(tasks, function (task) {
+                    return task.data
+                  })
 
-                if (q.tasks.length === 0) {
-                  q.empty()
+                  if (q.tasks.length === 0) {
+                    q.empty()
+                  }
+                  workers += 1
+                  var cb = only_once(_next(q, tasks))
+                  worker(data, cb)
                 }
-                workers += 1
-                var cb = only_once(_next(q, tasks))
-                worker(data, cb)
-              }
               }
             },
             length: function () {
@@ -23987,14 +23987,14 @@ exports.inflateUndermine = inflateUndermine;
             fn.apply(null, args.concat([_restParam(function (err, args) {
               if (typeof console === 'object') {
                 if (err) {
-                if (console.error) {
-                  console.error(err)
+                  if (console.error) {
+                    console.error(err)
+                  }
+                } else if (console[name]) {
+                  _arrayEach(args, function (x) {
+                    console[name](x)
+                  })
                 }
-              } else if (console[name]) {
-                _arrayEach(args, function (x) {
-                  console[name](x)
-                })
-              }
               }
             })]))
           })
@@ -24025,8 +24025,8 @@ exports.inflateUndermine = inflateUndermine;
                 var q = queues[key]
                 delete queues[key]
                 for (var i = 0, l = q.length; i < l; i++) {
-                q[i].apply(null, args)
-              }
+                  q[i].apply(null, args)
+                }
               })]))
             }
           })
@@ -24863,13 +24863,13 @@ exports.inflateUndermine = inflateUndermine;
             bytes[j++] = (unicode_code & 0x3F) | 0x80
           } else if (unicode_code < (1 << 21)) {
                 // 4-byte
-          bytes[j++] = (unicode_code >>> 18) | 0xF0
-          bytes[j++] = ((unicode_code >> 12) & 0x3F) | 0x80
-          bytes[j++] = ((unicode_code >> 6) & 0x3F) | 0x80
-          bytes[j++] = (unicode_code & 0x3F) | 0x80
-        } else {
+            bytes[j++] = (unicode_code >>> 18) | 0xF0
+            bytes[j++] = ((unicode_code >> 12) & 0x3F) | 0x80
+            bytes[j++] = ((unicode_code >> 6) & 0x3F) | 0x80
+            bytes[j++] = (unicode_code & 0x3F) | 0x80
+          } else {
                 // malformed UCS4 code
-        }
+          }
         }
 
         return bytes.subarray(0, j)
@@ -25049,8 +25049,8 @@ d = (h[l++] | h[l++] << 8 | h[l++] << 16 | h[l++] << 24) >>> 0; (a.length & 4294
           }).attr('x2', function (d) {
             return d.target.x
           }).attr('y2', function (d) {
-          return d.target.y
-        })
+            return d.target.y
+          })
 
           node.attr('x', function (d) {
             return d.x

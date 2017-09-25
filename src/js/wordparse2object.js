@@ -216,10 +216,10 @@ var ClassifyWithFirstWordDictionary = (name, wordArrayInASentence, checkboxlist,
             } else if (wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'いかが' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'なんで' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'どうして' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'どの' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'どのように' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'いつ' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'どういう' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'どなた' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'どう' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form == '何' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '誰' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'どんな' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'どのような' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'どこ') {
               RGBlist[hatsugenCnt / 2][3] = 1
             } else if (wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form == 'か' && wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].pos == '助詞') {
-                RGBlist[hatsugenCnt / 2][4] = 1
-              } else if (wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form == 'ね' && wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].pos == '助詞') {
-                  RGBlist[hatsugenCnt / 2][6] = 1
-                }
+              RGBlist[hatsugenCnt / 2][4] = 1
+            } else if (wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form == 'ね' && wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].pos == '助詞') {
+              RGBlist[hatsugenCnt / 2][6] = 1
+            }
           }
           contentArrayOfASentence[hatsugenCnt][sentenceCntInHatsugen] += wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form
           if (wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].pos_detail_1 == '接尾' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '*' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].pos == '助詞' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '、' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].pos == '記号' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].pos == '助動詞' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].pos == '感動詞' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].pos == '接頭詞' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].pos_detail_1 == '非自立' ||
@@ -342,9 +342,9 @@ var ClassifyWithFirstWordDictionary = (name, wordArrayInASentence, checkboxlist,
               if (answerSentenceCategory[hatsugenCnt][sentenceCntInHatsugen][h] == 0) {
                 for (wordCntInASentence = 0; wordCntInASentence < wordArrayInASentence[hatsugenCnt][sentenceCntInHatsugen].length; wordCntInASentence++) {
                   if (miserables.nodes[k] == wordArrayInASentence[hatsugenCnt][sentenceCntInHatsugen][wordCntInASentence]) {
-                      answerSentenceCategory[hatsugenCnt][sentenceCntInHatsugen][h] = 1
-                      break
-                    }
+                    answerSentenceCategory[hatsugenCnt][sentenceCntInHatsugen][h] = 1
+                    break
+                  }
                 }
               }
             }
