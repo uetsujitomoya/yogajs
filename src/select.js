@@ -7,6 +7,8 @@
  }; */
 
 const kaishakuName = '解釈と助言'
+const selfTextColor = "black"
+const spiritualTextColor = "black"
 
 import {convertCSV2Storage} from './convertCSV2Storage.js'
 
@@ -59,7 +61,12 @@ const makeRGB = (RGB, hatsugen) => {
   }
 }
 
-var select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, chboxlist, chboxlist2, answerClassification3dArrayforCreatingSelect, RGBlist, hatsugen, bun, checked, checked2, taiou, taiou2, chboxlength, chboxlength2) => {
+const createAnswerRadioButton = (answerNumber, value, color, answerGroupName) => {
+  const targetInRow = document.getElementById('r' + answerNumber)
+  targetInRow.innerHTML += '<label><input type=radio name="r' + answerNumber + '" value=' + value + '><font color="' + color + '">【</font>「' + answerGroupName + '」に含む<font color="' + color + '">】</font></label>'
+}
+
+const select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, chboxlist, chboxlist2, answerClassification3dArrayforCreatingSelect, RGBlist, hatsugen, bun, checked, checked2, taiou, taiou2, chboxlength, chboxlength2) => {
   console.log('entered select.js')
 
   console.log('jsonName')
@@ -181,15 +188,15 @@ var select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, chbo
         }
 
         if (answerClassification3dArrayforCreatingSelect[m][i][3] !== 0) {
-          createAnswerRadioButton(answerNumber, 4, color, '自己')
+          createAnswerRadioButton(answerNumber, 4, selfTextColor, '自己')
         } else {
-          createAnswerRadioButton(answerNumber, 4, color, '自己')
+          createAnswerRadioButton(answerNumber, 4, selfTextColor, '自己')
         }
 
         if (answerClassification3dArrayforCreatingSelect[m][i][4] !== 0) {
-          createAnswerRadioButton(answerNumber, 5, color, 'スピリチュアル')
+          createAnswerRadioButton(answerNumber, 5, spiritualTextColor, 'スピリチュアル')
         } else {
-          createAnswerRadioButton(answerNumber, 5, color, 'スピリチュアル')
+          createAnswerRadioButton(answerNumber, 5, spiritualTextColor, 'スピリチュアル')
         }
       }
     } else {
@@ -238,10 +245,7 @@ var select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, chbo
     }
   }
 
-  const createAnswerRadioButton = (answerNumber, value, color, answerGroupName) => {
-    const targetInRow = document.getElementById('r' + answerNumber)
-    targetInRow.innerHTML += '<label><input type=radio name="r' + answerNumber + '" value=' + value + '><font color="' + color + '">【</font>「' + answerGroupName + '」に含む<font color="' + color + '">】</font></label>'
-  }
+
 
   const createAnswerRadioButtonRow = (answerNumber, value, color, answerGroupName) => {
     const targetInRow = document.getElementById('r' + answerNumber)
