@@ -458,4 +458,4 @@ const isLoveWord = (query) => {
   return false
 }
 
-export {ClassifyWithFirstWordDictionary}
+export {ClassifyWithFirstWordDictionary,makeOnClick,makeOnClickS}

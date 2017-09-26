@@ -22,7 +22,7 @@ let find_character = (knparray,KNP_character_array) => {
                 }
             }
             //さんの場合、1つ前遡って足して、Aさん
-            if(row[0]=="さん"){
+            if(row[0]==="さん"){
                 if(isNewCharacter()){
                     createNewCharacter()
                 }
@@ -42,14 +42,14 @@ let find_character = (knparray,KNP_character_array) => {
                     let isNewCharacter = true
                     //被ってなければその登場人物のインスタントをつくる
                     KNP_character_array.forEach((character)=>{
-                        if(temp_character_name==character.name){
+                        if(temp_character_name===character.name){
                             //verbを追加
                             isNewCharacter = false;
                             //太さ加算
                             //character.character_node.bold_qty++
                         }
                     })
-                    if(isNewCharacter==true){
+                    if(isNewCharacter === true){
                         KNP_character_array.push(new KNP_character(temp_character_name))
                     }
                 }
@@ -75,7 +75,7 @@ let find_character = (knparray,KNP_character_array) => {
              })
              */
             //さんの場合、1つ前遡って足して、Aさん
-            if(row[0]=="さん"){
+            if(row[0] === "さん"){
                 const tempCharacter = knparray[index-1][0]+row[0]
                 if(isNewCharacter(tempCharacter)){
                     createNewCharacter(tempCharacter)
@@ -87,7 +87,7 @@ let find_character = (knparray,KNP_character_array) => {
 
 let isNewCharacter=(tempCharacterName,characterArray)=> {
     for(const character of characterArray){
-        if((tempCharacterName==character.name){
+        if(tempCharacterName === character.name){
             //verbを追加
             return false;
 
@@ -144,7 +144,7 @@ export {find_character}
 class KNP_character {
     constructor(name) {
         this.name = name
-        if(this.name=="私"){
+        if(this.name === "私"){
             this.client = 1
         }else{
             this.client = 0

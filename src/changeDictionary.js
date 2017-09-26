@@ -2,7 +2,7 @@
 import 'kuromoji'
 import {select} from './select.js'
 import {setForViz} from './svg.js'
-import {makeOnClickS, makeOnClick} from './wordparse.js'
+import {makeOnClickS, makeOnClick} from './js/wordparse1608030008.js'
 
 var ClassifyWithWordDictionary = (jsonFileName, event, keitaisokaiseki, chboxlist, chboxlist2, hatsugen, bun, checked, checked2, taiou, taiou2, chboxlength, chboxlength2, newLoveDictionary, newWorkDictionary, newFriendDictionary) => {
   console.log('AcceptDictionary')
