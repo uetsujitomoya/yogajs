@@ -1,20 +1,16 @@
 /**
  * Created by uetsujitomoya on 2017/02/03.
  */
-//一人称辞書はKNPで出てくるので、KNPから関数を飛ばしてくる
+// 一人称辞書はKNPで出てくるので、KNPから関数を飛ばしてくる
 
-let classifyWithSubject=()=>{
+let classifyWithSubject = () => {
+    // KNPkaratobashitekuru
+  let dictionary
 
-    //KNPkaratobashitekuru
-    let dictionary;
+  let readDictionary = () => {
 
-    let readDictionary=()=>{
+  }
 
-    };
-
-    let classify=()=>{
-    };
-};
-
-
-
+  let classify = () => {
+  }
+}

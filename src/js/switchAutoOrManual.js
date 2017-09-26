@@ -3,12 +3,12 @@
  */
 
 let switchAutoOrManual = () => {
-    let signal = "blue";
+  let signal = 'blue'
 
-    switch (signal) {
-        case "red":
-            readJsonAutomatically();
-            break;
+  switch (signal) {
+    case 'red':
+      readJsonAutomatically()
+      break
             /*
         case "green":
         case "blue":
@@ -16,18 +16,17 @@ let switchAutoOrManual = () => {
             break;
         case "yellow":
             console.log("slow down!");
-            break;*/
-        default:
-            readJsonManually();
-            break;
-    }
+            break; */
+    default:
+      readJsonManually()
+      break
+  }
+}
 
-};
+let readJsonAutomatically = () => {
 
-let readJsonAutomatically=()=>{
+}
 
-};
+let readJsonManually = () => {
 
-let readJsonManually=()=>{
-
-};
+}

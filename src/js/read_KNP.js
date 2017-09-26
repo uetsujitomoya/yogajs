@@ -2,40 +2,40 @@
  * Created by uetsujitomoya on 2017/08/08.
  */
 
-import {csv2Array} from "../csv2Array.js"
+import {csv2Array} from '../csv2Array.js'
 
-import {getCSV} from "./getCSV.js"
-import {reconstruct_KNP} from "./reconstruct_KNP.js"
+import {getCSV} from './getCSV.js'
+import {reconstruct_KNP} from './reconstruct_KNP.js'
 
-import {find_character} from "./find_character.js"
+import {find_character} from './find_character.js'
 
-import {createNodeAndArrowArray} from "./createNodeAndArrowArray.js"
+import {createNodeAndArrowArray} from './createNodeAndArrowArray.js'
 
-import {manageSlider} from "./characterChart/slider.js"
+import {manageSlider} from './characterChart/slider.js'
 
-let KNP_character_array = [];
+let KNP_character_array = []
 
-let KNP_verb_array=[]
+let KNP_verb_array = []
 
 let read_KNP = () => {
-    let knparray = csv2Array("../csv/1707051018knptab.csv");
-    console.log(knparray)
-    find_character(knparray,KNP_character_array);
-    console.log(KNP_character_array)
+  let knparray = csv2Array('../csv/1707051018knptab.csv')
+  console.log(knparray)
+  find_character(knparray, KNP_character_array)
+  console.log(KNP_character_array)
 
-    //organize_KNPresult()
+    // organize_KNPresult()
 
-    //find_verb(knparray);
-    //console.log(KNP_verb_array)
-    //if verb was found,
-    let KNP_sentence_array = reconstruct_KNP( knparray , KNP_character_array );
-    console.log("get out reconstruct_KNP")
-    console.log(KNP_sentence_array)
+    // find_verb(knparray);
+    // console.log(KNP_verb_array)
+    // if verb was found,
+  let KNP_sentence_array = reconstruct_KNP(knparray, KNP_character_array)
+  console.log('get out reconstruct_KNP')
+  console.log(KNP_sentence_array)
 
-    createNodeAndArrowArray(KNP_sentence_array)
-    manageSlider(KNP_sentence_array)
+  createNodeAndArrowArray(KNP_sentence_array)
+  manageSlider(KNP_sentence_array)
 
-    //find_dependency();
+    // find_dependency();
 }
 
 /*
@@ -49,8 +49,8 @@ let reconstruct_KNP = (raw_2d_array) => {
 */
 
 let find_dependency = () => {
-    find_subject();
-    find_object();
+  find_subject()
+  find_object()
 }
 
 let find_subject = () => {

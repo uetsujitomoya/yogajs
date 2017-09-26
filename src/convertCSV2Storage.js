@@ -1,26 +1,24 @@
-import {csv2Array} from "./csv2Array.js";
-import {TransposeMatrix} from "./TransposeMatrix.js";
+import {csv2Array} from './csv2Array.js'
+import {TransposeMatrix} from './TransposeMatrix.js'
 
+let convertCSV2Storage = (jsonName, storage) => {
+  let storageArrayFromKamata = csv2Array('csv/storage170421fromKamata.csv')
+    // objectの書いてあるところを確認
 
+    // let storageTransposeArrayFromKamata=TransposeMatrix(storageArrayFromKamata);
 
-let convertCSV2Storage=(jsonName,storage)=>{
-    let storageArrayFromKamata= csv2Array("csv/storage170421fromKamata.csv");
-    //objectの書いてあるところを確認
+  let answerNumber
+  let questionNumber
 
-    //let storageTransposeArrayFromKamata=TransposeMatrix(storageArrayFromKamata);
+    // storage構造を把握
 
-    let answerNumber;
-    let questionNumber;
+    // 1列目に一致したら2列目に変える
 
-    //storage構造を把握
+  let colNumber = 0
 
-    //1列目に一致したら2列目に変える
-
-    let colNumber=0;
-
-    storageArrayFromKamata.forEach((col)=>{
-        storage.setItem(col[0], col[1]);
-    });
+  storageArrayFromKamata.forEach((col) => {
+    storage.setItem(col[0], col[1])
+  })
 
     /*
     for(let i = radio.length-3, l = radio.length; i < l; i++){
@@ -83,18 +81,16 @@ let convertCSV2Storage=(jsonName,storage)=>{
         }
     }
     */
+}
 
-};
+let convertCSV2Object = () => {
+// CSV読む
 
+    // Objectに変える
+}
 
-let convertCSV2Object=()=>{
-//CSV読む
+let applyObjectForStorage = () => {
 
-    //Objectに変える
-};
+}
 
-let applyObjectForStorage=()=>{
-
-};
-
-export {convertCSV2Storage};
+export {convertCSV2Storage}
