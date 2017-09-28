@@ -2,76 +2,77 @@
 <html>
 <head>
 
-  <title>
-    Yoga.js
-  </title>
-  <meta charset="utf-8">
+    <title>
+        Yoga.js
+    </title>
+    <meta charset="utf-8">
 
-  <style>
 
-      body{
-          margin-left:30px;
-          margin-top:20px;
-      }
-
-  .node {
-    stroke-width: 3px;
-  }
-  .link {
-    stroke: #999;
-    stroke-opacity: .9;
-  }
-  .hide {
-    display: none;
-  }
-  svg {
-    font: 10px sans-serif;
-  }
-  .area {
-    fill: steelblue;
-    clip-path: url(#clip);
-  }
-  .axis path,
-  .axis line {
-    fill: none;
-    stroke: #000;
-    shape-rendering: crispEdges;
-  }
-  .brush .extent {
-    stroke: #fff;
-    fill-opacity: .125;
-    shape-rendering: crispEdges;
-  }
-  .box {
-	float: left;
-}
-
-.boxContainer {
-	overflow: hidden;
-}
-
-/* clearfix */
-.boxContainer:before,
-.boxContainer:after {
-    content: "";
-    display: table;
-}
-
-.boxContainer:after {
-    clear: both;
-}
-
-/* For IE 6/7 (trigger hasLayout) */
-.boxContainer {
-    zoom: 1;
-}
-  .B {
-	display: inline;
-}
-  </style>
-    <!--
     <link rel="stylesheet" href="css/bootstrap.min.css" />
-    -->
+    <style>
+
+        body{
+            margin-left:30px;
+            margin-top:20px;
+        }
+
+        .node {
+            stroke-width: 3px;
+        }
+        .link {
+            stroke: #999;
+            stroke-opacity: .9;
+        }
+        .hide {
+            display: none;
+        }
+        svg {
+            font: 10px sans-serif;
+        }
+        .area {
+            fill: steelblue;
+            clip-path: url(#clip);
+        }
+        .axis path,
+        .axis line {
+            fill: none;
+            stroke: #000;
+            shape-rendering: crispEdges;
+        }
+        .brush .extent {
+            stroke: #fff;
+            fill-opacity: .125;
+            shape-rendering: crispEdges;
+        }
+        .box {
+            float: left;
+        }
+
+        .boxContainer {
+            overflow: hidden;
+        }
+
+        /* clearfix */
+        .boxContainer:before,
+        .boxContainer:after {
+            content: "";
+            display: table;
+        }
+
+        .boxContainer:after {
+            clear: both;
+        }
+
+        /* For IE 6/7 (trigger hasLayout) */
+        .boxContainer {
+            zoom: 1;
+        }
+        .B {
+            display: inline;
+        }
+    </style>
+
+
     <link rel="stylesheet" href="css/bootstrap-slider.min.css" />
 
 </head>
@@ -128,17 +129,17 @@
 
   -->
 
-        <!--<input type="submit" value="送信"><input type="reset" value="リセット"> -->
+<!--<input type="submit" value="送信"><input type="reset" value="リセット"> -->
 
 <!-- <font color=dimgray><b><u><font color=black size=4>縦軸</font></u></b>の単位：文の数、 <b><u><font color=black size=4>横軸</font></u></b>の単位：患者の全ての発言の全ての文字数</font><br> -->
 
 
-        <!-- <font color=dimgray><b><u><font color=black size=4>縦軸</font></u></b>の単位：文の数、 <b><u><font color=black size=4>横軸</font></u></b>の単位：患者の全ての発言の全ての文字数</font><br> -->
-        ・カウンセラーの発言について<font color="#b52f25">「開かれた質問」</font><font color="#2b4e91">「閉じられた質問」</font><font color="purple">「相づち」</font><font color="orange">「解釈と助言」</font><font color="black">「世間話」</font>
-  <br>・クライエントの発言について<font color="#ff7777">「愛」</font><font color="#00cc00">「交友」</font><font color="#7777ff">「仕事」</font>
+<!-- <font color=dimgray><b><u><font color=black size=4>縦軸</font></u></b>の単位：文の数、 <b><u><font color=black size=4>横軸</font></u></b>の単位：患者の全ての発言の全ての文字数</font><br> -->
+・カウンセラーの発言について<font color="#b52f25">「開かれた質問」</font><font color="#2b4e91">「閉じられた質問」</font><font color="purple">「相づち」</font><font color="orange">「解釈と助言」</font><font color="black">「世間話」</font>
+<br>・クライエントの発言について<font color="#ff7777">「愛」</font><font color="#00cc00">「交友」</font><font color="#7777ff">「仕事」</font>
 
-        <!-- <div id="timeKeeping"></div>-->
-        <div id="svgdiv" style="height:300px; width:1200px; overflow-x:scroll"></div>
+<!-- <div id="timeKeeping"></div>-->
+<div id="svgdiv" style="height:300px; width:1200px; overflow-x:scroll"></div>
 
 
 <font size=3 color=#2c3e50><b><u><font color=black size=4>左下</font></u></b>のエリアで、クライエントが発した文/カウンセラーが発した質問について分類してください。グラフの<b><u><font color=black size=4>縦棒</font></u></b>をマウスオーバーすると<b><u><font color=black size=4>右下</font></u></b>のエリアに縦棒周辺の内容が表示されます</font><br><br>
