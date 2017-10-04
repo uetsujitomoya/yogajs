@@ -189,12 +189,14 @@ const select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, ch
 
         if (answerClassification3dArrayforCreatingSelect[m][i][3] !== 0) {
           createAnswerRadioButton(answerNumber, 4, selfTextColor, '自己')
+          chboxlist[n][1] = 3
         } else {
           createAnswerRadioButton(answerNumber, 4, selfTextColor, '自己')
         }
 
         if (answerClassification3dArrayforCreatingSelect[m][i][4] !== 0) {
           createAnswerRadioButton(answerNumber, 5, spiritualTextColor, 'スピリチュアル')
+          chboxlist[n][1] = 4
         } else {
           createAnswerRadioButton(answerNumber, 5, spiritualTextColor, 'スピリチュアル')
         }

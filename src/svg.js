@@ -109,6 +109,8 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
   //var colorBun = ['#c0c0c0', loveColor, friendColor, workColor]
   const answerTextureChoiceArray = [answerTextureFunctions.noGroup, answerTextureFunctions.love, answerTextureFunctions.friend, answerTextureFunctions.work, answerTextureFunctions.self, answerTextureFunctions.spiritual]
 
+  console.log(answerTextureChoiceArray)
+
   const axisDescriptionY = 240
 
   if (graphTypeNum === 3) {
@@ -288,6 +290,13 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
                   row++
                 }
                 return barChartAllHatsugenColorArray[i] //質問の場合はtextureを使いたい
+                //一個の関数にして振り分けたい（配列やreturnはまずそう）
+                /*
+                if(/*answer){
+                  //moyou
+                }else{
+                  //questionColor
+                }*/
               } else {
                 if (i + 1 === mazekoze.length) {
                   row++
