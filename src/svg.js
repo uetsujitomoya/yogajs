@@ -245,10 +245,10 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
 
     /// /////////////////////////////////////////////////////////////
 
-    var rectDataObjectArray = []
-    var textOnRectNum
-    var textOnRect = []
-    var checkedNum = 0
+    let rectDataObjectArray = []
+    let textOnRectNum
+    let textOnRect = []
+    let checkedNum = 0
 
     for (textOnRectNum = 0; textOnRectNum < nagasa2.length; textOnRectNum++) { // 色変えたからか。。
       if (barChartAllHatsugenColorArray[textOnRectNum] === openColor) {
@@ -259,21 +259,28 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
         textOnRect[textOnRectNum] = categoryOfTextOnRect.closedQuestion
       } else if (barChartAllHatsugenColorArray[textOnRectNum] === kaishakuColor) {
         textOnRect[textOnRectNum] = categoryOfTextOnRect.interpretation
-      } else if (checked[checkedNum] === 0) {
-        textOnRect[textOnRectNum] = categoryOfTextOnRect.noGroup; checkedNum++
-      } else if (checked[checkedNum] === 1) {
-        textOnRect[textOnRectNum] = categoryOfTextOnRect.love; checkedNum++
-      } else if (checked[checkedNum] === 2) {
-        textOnRect[textOnRectNum] = categoryOfTextOnRect.work; checkedNum++
-      } else if (checked[checkedNum] === 3) {
-        textOnRect[textOnRectNum] = categoryOfTextOnRect.friendship; checkedNum++
-      } else if (checked[checkedNum] === 4) {
-        textOnRect[textOnRectNum] = categoryOfTextOnRect.self; checkedNum++
-      } else if (checked[checkedNum] === 5) {
-        textOnRect[textOnRectNum] = categoryOfTextOnRect.spiritual; checkedNum++
-      } else {
-        textOnRect[textOnRectNum] = categoryOfTextOnRect.smallTalk
+      } else{
+        //console.log('checked = %d',checkedNum)
+        console.log('checked[%d]=%d', checkedNum,checked[checkedNum])
+
+        if (checked[checkedNum] === 0) {
+          textOnRect[textOnRectNum] = categoryOfTextOnRect.noGroup; checkedNum++
+        } else if (checked[checkedNum] === 1) {
+          textOnRect[textOnRectNum] = categoryOfTextOnRect.love; checkedNum++
+        } else if (checked[checkedNum] === 2) {
+          textOnRect[textOnRectNum] = categoryOfTextOnRect.work; checkedNum++
+        } else if (checked[checkedNum] === 3) {
+          textOnRect[textOnRectNum] = categoryOfTextOnRect.friendship; checkedNum++
+        } else if (checked[checkedNum] === 4) {
+          textOnRect[textOnRectNum] = categoryOfTextOnRect.self; checkedNum++
+        } else if (checked[checkedNum] === 5) {
+          textOnRect[textOnRectNum] = categoryOfTextOnRect.spiritual; checkedNum++
+        } else {
+          textOnRect[textOnRectNum] = categoryOfTextOnRect.smallTalk
+        }
       }
+
+
     }
 
     for (textOnRectNum = 0; textOnRectNum < nagasa2.length; textOnRectNum++) {
