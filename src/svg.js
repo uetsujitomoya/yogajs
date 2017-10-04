@@ -14,31 +14,31 @@ const friendColor = '#c0ffc0'
 const workColor = '#a0e0ff'
 const barChartBackgroundColor = '#f9f9f9'
 
-const answerTextureFunctions = {
-  love: textures.paths()
-    .d('waves')
-    .thicker()
-    .stroke(loveColor),
-  friend: textures.lines()
-    .orientation('3/8')
-    .stroke(friendColor),
-  work: textures.lines()
-    .orientation('vertical', 'horizontal')
-    .size(4)
-    .strokeWidth(1)
-    .shapeRendering('crispEdges')
-    .stroke(workColor),
-  self: textures.paths()
-    .d('caps')
-    .lighter()
-    .thicker()
-    .stroke('darkorange'),
-  spiritual: textures.paths()
-    .d('woven')
-    .lighter()
-    .thicker(),
-  noGroup: '#c0c0c0'
-}
+
+const loveTexture=textures.paths()
+  .d('waves')
+  .thicker()
+  .stroke(loveColor)
+const friendTexture= textures.lines()
+  .orientation('3/8')
+  .stroke(friendColor)
+const workTexture= textures.lines()
+  .orientation('vertical', 'horizontal')
+  .size(4)
+  .strokeWidth(1)
+  .shapeRendering('crispEdges')
+  .stroke(workColor)
+const selfTexture = textures.paths()
+  .d('caps')
+  .lighter()
+  .thicker()
+  .stroke('darkorange')
+const spiritualTexture = textures.paths()
+  .d('woven')
+  .lighter()
+  .thicker()
+const noCategoryAnswerColor= '#c0c0c0'
+
 
 const categoryOfTextOnRect={
   openQuestion: '開 質問',
@@ -121,9 +121,9 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
   var margin2 = {top: 10, right: 10, bottom: 50, left: 40}
 
   //var colorBun = ['#c0c0c0', loveColor, friendColor, workColor]
-  const answerTextureChoiceArray = [answerTextureFunctions.noGroup, answerTextureFunctions.love, answerTextureFunctions.friend, answerTextureFunctions.work, answerTextureFunctions.self, answerTextureFunctions.spiritual]
+  const answerTextureChoiceArray = ['noGroup', 'love', 'answerTextureFunctions.friend', 'answerTextureFunctions.work', 'answerTextureFunctions.self', 'answerTextureFunctions.spiritual']
 
-  console.log(answerTextureChoiceArray)
+ console.log(answerTextureChoiceArray)
 
   const axisDescriptionY = 240
 
@@ -280,11 +280,11 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
     console.log('mazekozeHatsugenNumber')
     console.log(mazekozeHatsugenNumArray)
 
-    svg.call(answerTextureFunctions.love)
-    svg.call(answerTextureFunctions.work)
-    svg.call(answerTextureFunctions.friendship)
-    svg.call(answerTextureFunctions.self)
-    svg.call(answerTextureFunctions.spiritual)
+    svg.call(loveTexture)
+    svg.call(workTexture)
+    svg.call(friendTexture)
+    svg.call(selfTexture)
+    svg.call(spiritualTexture)
 
     let row = 0// graph3の行番号
     // 階層構造をとるため，g要素を生成する部分とrect要素を生成している部分が連続している．
@@ -327,19 +327,19 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
 
           switch (textOnRect[i]){
             case categoryOfTextOnRect.love:
-              return answerTextureFunctions.love.url()
+              return loveTexture.url()
               break;
             case categoryOfTextOnRect.work:
-              return answerTextureFunctions.work.url()
+              return workTexture.url()
               break;
             case categoryOfTextOnRect.friendship:
-              return answerTextureFunctions.friendship.url()
+              return friendTexture.url()
               break;
             case categoryOfTextOnRect.self:
-              return answerTextureFunctions.self.url()
+              return selfTexture.url()
               break;
             case categoryOfTextOnRect.spiritual:
-              return answerTextureFunctions.spiritual.url()
+              return spiritualTexture.url()
               break;
             case categoryOfTextOnRect.openQuestion:
               return openColor
