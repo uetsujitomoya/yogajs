@@ -672,6 +672,8 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
   }
 }
 
+const answerRadioFullLength=5
+
 const readAnswerRadio = (jsonFileName, storage, chboxlist, answerRadioResult, taiou, chboxlength, isUsingDictionaryWithWord2Vec) => {
   let graphNumber = 2
 
@@ -686,28 +688,29 @@ const readAnswerRadio = (jsonFileName, storage, chboxlist, answerRadioResult, ta
       changedAnswerClassificationSaveTarget = jsonFileName + 'RGB' + c
     }
 
-    const radio = document.getElementById('r' + c).children
-    for (let i = radio.length - 3, l = radio.length; i < l; i++) {
+    const answerRadio = document.getElementById('r' + c).children
+    for (let i = answerRadio.length - answerRadioFullLength, l = answerRadio.length; i < l; i++) {
       // console.log("i=%d",i);
       // console.log(radio[i]);
-      if (radio[i].control.checked === true) {
-        if (radio[i].control.value === '1') {
+      if (answerRadio[i].control.checked === true) {
+        console.log(answerRadio[i].control.value)
+        if (answerRadio[i].control.value === '1') {
           answerRadioResult[taiou[c - 1]] = 1
           storage.setItem(changedAnswerClassificationSaveTarget, 0)
           break
-        } else if (radio[i].control.value === '2') {
+        } else if (answerRadio[i].control.value === '2') {
           answerRadioResult[taiou[c - 1]] = 2
           storage.setItem(changedAnswerClassificationSaveTarget, 1)
           break
-        } else if (radio[i].control.value === '3') {
+        } else if (answerRadio[i].control.value === '3') {
           answerRadioResult[taiou[c - 1]] = 3
           storage.setItem(changedAnswerClassificationSaveTarget, 2)
           break
-        }else if (radio[i].control.value === '4') {
+        }else if (answerRadio[i].control.value === '4') {
           answerRadioResult[taiou[c - 1]] = 8
           storage.setItem(changedAnswerClassificationSaveTarget, 3)
           break
-        }else if (radio[i].control.value === '5') {
+        }else if (answerRadio[i].control.value === '5') {
           answerRadioResult[taiou[c - 1]] = 9
           storage.setItem(changedAnswerClassificationSaveTarget, 4)
           break
