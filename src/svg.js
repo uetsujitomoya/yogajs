@@ -9,25 +9,32 @@ import textures from 'textures'
 // let friend="#c0ffc0";
 // let work="#a0e0ff";
 
-const loveColor = '#ffeeff'
-const friendColor = '#c0ffc0'
-const workColor = '#a0e0ff'
+const loveColor = '#ffaaff'
+const friendColor = '#a0ffa0'
+const workColor = '#90c0ff'
 const barChartBackgroundColor = '#f9f9f9'
+
+const loveBGColor = '#ffeeff'
+const friendBGColor = '#c0ffc0'
+const workBGColor = '#a0e0ff'
 
 
 const loveTexture=textures.paths()
   .d('waves')
   .thicker()
   .stroke(loveColor)
+  .background(loveBGColor)
 const friendTexture= textures.lines()
   .orientation('3/8')
   .stroke(friendColor)
+  .background(friendBGColor)
 const workTexture= textures.lines()
   .orientation('vertical', 'horizontal')
   .size(4)
   .strokeWidth(1)
   .shapeRendering('crispEdges')
   .stroke(workColor)
+  .background(workBGColor)
 const selfTexture = textures.paths()
   .d('caps')
   .lighter()
