@@ -703,13 +703,13 @@ const readAnswerRadio = (jsonFileName, storage, chboxlist, answerRadioResult, ta
           answerRadioResult[taiou[c - 1]] = 3
           storage.setItem(changedAnswerClassificationSaveTarget, 2)
           break
-        }else if (radio[i].control.value === '8') {
+        }else if (radio[i].control.value === '4') {
           answerRadioResult[taiou[c - 1]] = 8
-          storage.setItem(changedAnswerClassificationSaveTarget, "self")
+          storage.setItem(changedAnswerClassificationSaveTarget, 3)
           break
-        }else if (radio[i].control.value === '9') {
+        }else if (radio[i].control.value === '5') {
           answerRadioResult[taiou[c - 1]] = 9
-          storage.setItem(changedAnswerClassificationSaveTarget, "spiritual")
+          storage.setItem(changedAnswerClassificationSaveTarget, 4)
           break
         }
       } else {

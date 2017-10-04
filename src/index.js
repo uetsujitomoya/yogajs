@@ -49,7 +49,7 @@ let checkboxlist = []
 
 let switchClassificationMethod = () => {
   const SwitchClassificationMethodRadio = document.getElementById('SwitchClassificationMethod').children
-  if (SwitchClassificationMethodRadio[0].control.checked == true) {
+  if (SwitchClassificationMethodRadio[0].control.checked === true) {
         // 単純な単語辞書を用いた分類
         // ClassifyWithWordDictionary(name,event,keitaisokaiseki,chboxlist,chboxlist2,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,newLoveDictionary,newWorkDictionary,newFriendDictionary);
     document.getElementById('load-button').addEventListener('click', function () {
@@ -64,7 +64,7 @@ let switchClassificationMethod = () => {
       }
       reader.readAsText(file)
     })
-  } else if (SwitchClassificationMethodRadio[1].control.checked == true) {
+  } else if (SwitchClassificationMethodRadio[1].control.checked === true) {
         // 係り受け解析を用いた分類
     console.log('%center ClassifyWithWordKNP 56', 'color:red')
     ClassifyWithKNP(startTime, name, event, keitaisokaiseki, chboxlist, chboxlist2, questionClassification, hatsugen, bun, checked, checked2, taiou, taiou2, newLoveDictionary, newWorkDictionary, newFriendDictionary, RGB)
