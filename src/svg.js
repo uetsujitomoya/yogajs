@@ -279,9 +279,10 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
           textOnRect[textOnRectNum] = categoryOfTextOnRect.smallTalk
         }
       }
-
-
     }
+
+    console.log('textOnRect')
+    console.log(textOnRect)
 
     for (textOnRectNum = 0; textOnRectNum < nagasa2.length; textOnRectNum++) {
       rectDataObjectArray[textOnRectNum] = {x: nagasa2[textOnRectNum], y: 40, color: barChartAllHatsugenColorArray[textOnRectNum], text: textOnRect[textOnRectNum], which: isAnswerInFullConversation_array[textOnRectNum]}
@@ -299,6 +300,8 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
     svg.call(friendTexture)
     svg.call(selfTexture)
     svg.call(spiritualTexture)
+
+
 
     let row = 0// graph3の行番号
     // 階層構造をとるため，g要素を生成する部分とrect要素を生成している部分が連続している．
@@ -721,11 +724,11 @@ const readAnswerRadio = (jsonFileName, storage, chboxlist, answerRadioResult, ta
           storage.setItem(changedAnswerClassificationSaveTarget, 2)
           break
         }else if (answerRadio[i].control.value === '4') {
-          answerRadioResult[taiou[c - 1]] = 8
+          answerRadioResult[taiou[c - 1]] = 4
           storage.setItem(changedAnswerClassificationSaveTarget, 3)
           break
         }else if (answerRadio[i].control.value === '5') {
-          answerRadioResult[taiou[c - 1]] = 9
+          answerRadioResult[taiou[c - 1]] = 5
           storage.setItem(changedAnswerClassificationSaveTarget, 4)
           break
         }
