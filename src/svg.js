@@ -13,8 +13,8 @@ const loveColor = '#ffaaff'
 const friendColor = '#a0ffa0'
 const workColor = '#90c0ff'
 const answerTextureColor={
-  self:'darkorange',
-  spiritual:'darkpurple'
+  self:'#ffd700',
+  spiritual:'#9370db'
 }
 const barChartBackgroundColor = '#f9f9f9'
 
@@ -23,8 +23,8 @@ const friendBGColor = '#c0ffc0'
 const workBGColor = '#a0e0ff'
 
 const answerBGColor={
-  self:'orange',
-  spiritual:'purple'
+  self:'#f0e68c',
+  spiritual:'#ba79b1'
 }
 
 
