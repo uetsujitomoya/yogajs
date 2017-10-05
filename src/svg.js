@@ -12,11 +12,20 @@ import textures from 'textures'
 const loveColor = '#ffaaff'
 const friendColor = '#a0ffa0'
 const workColor = '#90c0ff'
+const answerTextureColor={
+  self:'darkorange',
+  spiritual:'darkpurple'
+}
 const barChartBackgroundColor = '#f9f9f9'
 
 const loveBGColor = '#ffeeff'
 const friendBGColor = '#c0ffc0'
 const workBGColor = '#a0e0ff'
+
+const answerBGColor={
+  self:'orange',
+  spiritual:'purple'
+}
 
 
 const loveTexture=textures.paths()
@@ -40,10 +49,12 @@ const selfTexture = textures.paths()
   .lighter()
   .thicker()
   .stroke('darkorange')
+  .background(answerBGColor.self)
 const spiritualTexture = textures.paths()
   .d('woven')
   .lighter()
   .thicker()
+  .background(answerBGColor.spiritual)
 const noCategoryAnswerColor= '#c0c0c0'
 
 
@@ -268,9 +279,9 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
         } else if (checked[checkedNum] === 1) {
           textOnRect[textOnRectNum] = categoryOfTextOnRect.love; checkedNum++
         } else if (checked[checkedNum] === 2) {
-          textOnRect[textOnRectNum] = categoryOfTextOnRect.work; checkedNum++
-        } else if (checked[checkedNum] === 3) {
           textOnRect[textOnRectNum] = categoryOfTextOnRect.friendship; checkedNum++
+        } else if (checked[checkedNum] === 3) {
+          textOnRect[textOnRectNum] = categoryOfTextOnRect.work; checkedNum++
         } else if (checked[checkedNum] === 4) {
           textOnRect[textOnRectNum] = categoryOfTextOnRect.self; checkedNum++
         } else if (checked[checkedNum] === 5) {
