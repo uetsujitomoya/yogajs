@@ -7,7 +7,7 @@ function csv2Array (filePath) { // csvﾌｧｲﾙﾉ相対ﾊﾟｽor絶対ﾊ�
   var lines = data.responseText.split(LF)
   for (var i = 0; i < lines.length; ++i) {
     var cells = lines[i].split(',')
-    if (cells.length != 1) {
+    if (cells.length !== 1) {
       csvData.push(cells)
     }
   }

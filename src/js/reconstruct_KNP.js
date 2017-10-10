@@ -254,33 +254,37 @@ class KNP_Bunsetsu {
 
     this.make_kihonku_array_in_bunsetsu(input_2d_array)
 
-    // characterか否か。違うならverbへ
-    // characterならobjectかsubjectか
-
     let temp_character_name = this.csv_raw_array[first_japanese_row_num_in_bunsetsu][0]
 
-    // console.log(temp_character_name)
-
-    if (isCharacter(KNP_character_array, temp_character_name)) {
-      // console.log("%s is character",temp_character_name)
+    if (isCharacter(KNP_character_array, temp_character_name)) {//こっからややこしい
       const bunsetsu_info_row = this.csv_raw_array[0]
-
-      // colごとになめる
       for (let col_num = 0; col_num < bunsetsu_info_row.length; col_num++) {
         if ((bunsetsu_info_row[col_num].match('ヲ格') || bunsetsu_info_row[col_num].match('ニ格'))) {
-          // console.log("%s is object",this.surface_form)
           this.add_about_object(KNP_character_array)
           break
         } else if (bunsetsu_info_row[col_num].match('ガ格')) {
-          // console.log("%s is subject",this.surface_form)
           this.add_about_subject()
           break
         }
       }
-    } else {
+    } else if(temp_character_name==="さん"){
+      //なんかする。ヲ各かニ各は一緒
+    }else{
       this.find_verb_in_bunsetsu()
     }
-    // console.log(this)
+  }
+
+  addAboutSubjectOrObject(bunsetsu_info_row){
+    const bunsetsu_info_row = this.csv_raw_array[0]
+    for (let col_num = 0; col_num < bunsetsu_info_row.length; col_num++) {
+      if ((bunsetsu_info_row[col_num].match('ヲ格') || bunsetsu_info_row[col_num].match('ニ格'))) {
+        this.add_about_object(KNP_character_array)
+        break
+      } else if (bunsetsu_info_row[col_num].match('ガ格')) {
+        this.add_about_subject()
+        break
+      }
+    }
   }
 
   make_kihonku_array_in_bunsetsu (bunsetsu_raw_2d_array) {
@@ -292,7 +296,7 @@ class KNP_Bunsetsu {
       let japanese_starting_num = 2
       for (let temp_rowNo = japanese_starting_num; temp_rowNo < bunsetsu_raw_2d_array.length; temp_rowNo++) {
         let temp_row = bunsetsu_raw_2d_array[temp_rowNo]
-        if (temp_row[0] == '+') { // 文節内 2こ目以降の基本句
+        if (temp_row[0] === '+') { // 文節内 2こ目以降の基本句
           // console.info(temp_2d_array_for_kihonku)
           this.kihonku_array[kihonku_num_in_bunsetsu] = new KNP_kihonku_in_bunsetsu(temp_2d_array_for_kihonku)// 文の中の通し番号での基本句array
           temp_2d_array_for_kihonku = []
