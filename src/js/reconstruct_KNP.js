@@ -254,34 +254,36 @@ class KNP_Bunsetsu {
 
     this.make_kihonku_array_in_bunsetsu(input_2d_array)
 
-    let temp_character_name = this.csv_raw_array[first_japanese_row_num_in_bunsetsu][0]
+    /*AさんBさんにも対応*/
+    const temp_character_name = this.csv_raw_array[first_japanese_row_num_in_bunsetsu][0]
 
-    if (isCharacter(KNP_character_array, temp_character_name)) {//こっからややこしい
-      const bunsetsu_info_row = this.csv_raw_array[0]
-      for (let col_num = 0; col_num < bunsetsu_info_row.length; col_num++) {
-        if ((bunsetsu_info_row[col_num].match('ヲ格') || bunsetsu_info_row[col_num].match('ニ格'))) {
-          this.add_about_object(KNP_character_array)
-          break
-        } else if (bunsetsu_info_row[col_num].match('ガ格')) {
-          this.add_about_subject()
-          break
-        }
+
+
+    if (isCharacter(KNP_character_array, temp_character_name)) {
+
+      this.addAboutSubjectOrObject(this.csv_raw_array[0],temp_character_name)
+
+    } else if(this.csv_raw_array.length>first_japanese_row_num_in_bunsetsu+1){/*AさんBさんにも対応*/
+      const tempCharacterNameWithHonorific = this.csv_raw_array[first_japanese_row_num_in_bunsetsu][0]+this.csv_raw_array[first_japanese_row_num_in_bunsetsu+1][0]
+      if (isCharacter(KNP_character_array, tempCharacterNameWithHonorific)) {
+
+        this.addAboutSubjectOrObject(this.csv_raw_array[0],tempCharacterNameWithHonorific)
+
+      }else{
+        this.find_verb_in_bunsetsu()
       }
-    } else if(temp_character_name==="さん"){
-      //なんかする。ヲ各かニ各は一緒
     }else{
       this.find_verb_in_bunsetsu()
     }
   }
 
-  addAboutSubjectOrObject(bunsetsu_info_row){
-    const bunsetsu_info_row = this.csv_raw_array[0]
+  addAboutSubjectOrObject(bunsetsu_info_row,characterName){
     for (let col_num = 0; col_num < bunsetsu_info_row.length; col_num++) {
       if ((bunsetsu_info_row[col_num].match('ヲ格') || bunsetsu_info_row[col_num].match('ニ格'))) {
-        this.add_about_object(KNP_character_array)
+        this.add_about_object(characterName)
         break
       } else if (bunsetsu_info_row[col_num].match('ガ格')) {
-        this.add_about_subject()
+        this.add_about_subject(characterName)
         break
       }
     }
@@ -308,16 +310,16 @@ class KNP_Bunsetsu {
     }
   }
 
-  add_about_object (KNP_character_array) {
+  add_about_object (characterName) {
     this.isObject = true
-    this.object = this.surface_form
+    this.object = characterName
     // alert(this.object)
     // console.log("%s is object",temp_character_name)
   }
 
-  add_about_subject (KNP_character_array) {
+  add_about_subject (characterName) {
     this.isSubject = true
-    this.subject = this.surface_form
+    this.subject = characterName
     // alert(this.subject)
     // console.log("%s is subject",temp_character_name)
   }
@@ -428,7 +430,7 @@ let existsObject = (bunsetsu, KNP_character_array) => {
 let isCharacter = (KNP_character_array, temp_character_name) => {
   // console.log(temp_character_name)
   for (let chara_num = 0; chara_num < KNP_character_array.length; chara_num++) {
-    if (temp_character_name == KNP_character_array[chara_num].name) {
+    if (temp_character_name === KNP_character_array[chara_num].name) {
       // console.log("icchi")
       return true
     }
