@@ -5,9 +5,9 @@
 import Node from '../js/defineNodeClass.js'
 import Arrow from '../js/defineArrowClass.js'
 import {vizNodes} from '../js/vizNode'
-//import {initialValueOfSubjectAndObjectInVerb} from './createNodeAndArrowArray.js'
+import {initialValueOfSubjectAndObjectInVerb} from './find_verb.js'
 
-let initialValueOfSubjectAndObjectInVerb
+//let initialValueOfSubjectAndObjectInVerb
 
 const createNodeAndArrowArray = (sentenceArray) => {
     // console.log("entered createNodeArrowarray")
