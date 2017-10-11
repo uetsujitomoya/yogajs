@@ -110,9 +110,9 @@ var select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, chbo
   for (m = 0; m < keitaisokaiseki.length; m++) {
     console.log('RGB[%d]', m)
     console.log(answerClassification3dArrayforCreatingSelect[m])
-    if (m % 2 == 1) {
+    if (m % 2 === 1) {
       for (i = 0; i < keitaisokaiseki[m].length; ++i) {
-        if (bun[m][i] == 'Ａ' || bun[m][i] == 'Ｂ' || bun[m][i] == 'Ｔ' || bun[m][i] == 'A' || bun[m][i] == 'B' || bun[m][i] == 'T' || bun[m][i] == '') {
+        if (bun[m][i] === 'Ａ' || bun[m][i] === 'Ｂ' || bun[m][i] === 'Ｔ' || bun[m][i] === 'A' || bun[m][i] === 'B' || bun[m][i] === 'T' || bun[m][i] === '') {
           continue
         }
         n++

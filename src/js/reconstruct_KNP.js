@@ -28,11 +28,7 @@ let reconstruct_KNP = (raw_2d_array, KNP_character_array,nodeArray) =>
     }
     temp_rowNo++
   })
-  // console.log("to enter createsvg")
-  // count_pairs_of_subject_and_object(KNP_sentence_array)
-
-  // createsvg()
-  return {KNP_sentence_array:sentenceArray,sentenceArray:sentenceArray
+  return {KNP_sentence_array:sentenceArray,sentenceArray:sentenceArray}
 }
 
 let count_bunsetsu = (input_2d_array) => {
