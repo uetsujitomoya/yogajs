@@ -11,17 +11,18 @@ const first_japanese_row_num_in_bunsetsu = 2
 const starting_kihonku_row_num_in_sentence = 2
 const starting_bunsetsu_row_num_in_sentence = 1
 
-let reconstruct_KNP = (raw_2d_array, KNP_character_array) => {
+let reconstruct_KNP = (raw_2d_array, KNP_character_array,nodeArray) =>
+{//係り受けを調べる
   let sentenceNum = 0
-  let KNP_sentence_array = []
+  let sentenceArray = []
   let temp_sentence_2d_array = []
   let temp_rowNo = 0
   raw_2d_array.forEach((row_array) => {
     if (row_array[0] !== 'EOS') {
       temp_sentence_2d_array.push(row_array)
     } else {
-      console.log(sentenceNum)
-      KNP_sentence_array.push(new KNP_Sentence(temp_rowNo, temp_sentence_2d_array, KNP_character_array, sentenceNum))
+      //console.log(sentenceNum)
+      sentenceArray.push(new KNP_Sentence(temp_rowNo, temp_sentence_2d_array, KNP_character_array, sentenceNum))
       sentenceNum++
       temp_sentence_2d_array = []
     }
@@ -31,7 +32,7 @@ let reconstruct_KNP = (raw_2d_array, KNP_character_array) => {
   // count_pairs_of_subject_and_object(KNP_sentence_array)
 
   // createsvg()
-  return KNP_sentence_array
+  return {KNP_sentence_array:sentenceArray,sentenceArray:sentenceArray
 }
 
 let count_bunsetsu = (input_2d_array) => {

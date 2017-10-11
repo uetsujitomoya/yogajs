@@ -19,7 +19,7 @@ export default class Node {
       this.strokeColor = 'gray'
     }
     this.nodeCharacter = verb.subject
-    this.circleStrokeWidth = 1
+    this.circleStrokeWidth = 0
     nodeNum++
   }
   addStrokeWidth () {

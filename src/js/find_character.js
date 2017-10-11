@@ -6,34 +6,15 @@ import {contains_japanese} from "../js/contains_japanese.js"
 
 const characterKeyword="カテゴリ:人>"
 
+const characterDefaultName=null
+
+const color_of_client='red'
+const color_of_people_around_client='gray'
+
 //Aさんを追加→1単語とする
 
-let find_character = (knparray,KNP_character_array) => {
-  //if かな exist
-
-  /*
-  for(const row of knparray){//"さん"判断にindex使いたいからアカンわ。
-    if(contains_japanese(row[0])){
-      let temp_japanese = row[0]
-      for(const element of row){
-        if ( element.match(characterKeyword)) {
-          if(isNewCharacter()){
-            createNewCharacter()
-          }
-        }
-      }
-      //さんの場合、1つ前遡って足して、Aさん
-      if(row[0]==="さん"){
-        if(isNewCharacter()){
-          createNewCharacter()
-        }
-      }
-    }
-  }*/
-
-
-
-  knparray.forEach((row,index)=>{
+const find_character = (knpArray,KNP_character_array,nodeArray) => {
+  knpArray.forEach((row,index)=>{
     //console.log(row)
     if(contains_japanese(row[0])){
 
@@ -52,17 +33,18 @@ let find_character = (knparray,KNP_character_array) => {
             }
           })
           if(isNewCharacter === true){
-            KNP_character_array.push(new KNP_character(temp_character_name))
+
+            createNewCharacter(temp_character_name,KNP_character_array,nodeArray)
           }
         }
       }
 
       if(row[0] === "さん"){
-        const tempCharacter = knparray[index-1][0]+row[0]
+        const tempCharacter = knpArray[index-1][0]+row[0]
         //console.log(tempCharacter)
 
         if(isNewCharacter(tempCharacter,KNP_character_array)){
-          createNewCharacter(tempCharacter,KNP_character_array)
+          createNewCharacter(tempCharacter,KNP_character_array,nodeArray)
         }
       }
 
@@ -70,7 +52,7 @@ let find_character = (knparray,KNP_character_array) => {
   })
 }
 
-let isNewCharacter=(tempCharacterName,characterArray)=> {
+const isNewCharacter=(tempCharacterName,characterArray)=> {
   characterArray.forEach((character)=>{
     if(tempCharacterName === character.name){
       //verbを追加
@@ -82,21 +64,21 @@ let isNewCharacter=(tempCharacterName,characterArray)=> {
   return true
 }
 
-let createNewCharacter=(name,array)=>{
+const createNewCharacter=(name,characterArray,nodeArray)=>{
   //Nodeを出現させるとしたらどこまでつくるかも書く
-  array.push(new KNP_character(name))
+  characterArray.push(new KNP_character(name))
+  //Nodeもここで追加する。
+  nodeArray.push(new Node(name))
 }
 
 class character{
   constructor(){
-    this.chalacter_name="null"
+    this.chalacter_name=characterDefaultName
     this.isClient=false
     this.character_node = new Node(character_name,sentence,this.isClient)
 
   }
 }
-
-
 
 class Node{
   constructor(character_name,sentence,isClient){
@@ -115,15 +97,11 @@ class Node{
   }
 }
 
-
-
 let add_bold_of_node = () => {
 
 }
 
 export {find_character}
-
-
 
 class KNP_character {
   constructor(name) {

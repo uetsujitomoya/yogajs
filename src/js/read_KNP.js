@@ -17,36 +17,30 @@ let KNP_character_array = []
 
 let KNP_verb_array = []
 
+
 let read_KNP = () => {
   let knparray = csv2Array('../csv/1707051018knptab.csv')
   console.log(knparray)
-  find_character(knparray, KNP_character_array)
-  console.log(KNP_character_array)
+  let nodeArray=[]
+  find_character(knparray, KNP_character_array,nodeArray)
+  //console.log(KNP_character_array)
+  console.log(nodeArray)
 
     // organize_KNPresult()
 
     // find_verb(knparray);
     // console.log(KNP_verb_array)
     // if verb was found,
-  let KNP_sentence_array = reconstruct_KNP(knparray, KNP_character_array)
+  let reconstructedKNP = reconstruct_KNP(knparray, KNP_character_array,nodeArray)
   console.log('get out reconstruct_KNP')
-  console.log(KNP_sentence_array)
+  console.log(reconstructedKNP.sentenceArray)
 
-  createNodeAndArrowArray(KNP_sentence_array)
-  manageSlider(KNP_sentence_array)
+  createNodeAndArrowArray(reconstructedKNP)
+  manageSlider(reconstructedKNP.sentenceArray)
 
     // find_dependency();
 }
 
-/*
-let reconstruct_KNP = (raw_2d_array) => {
-    raw_2d_array.forEach((row_array)=>{
-        if(row_array[0]=="#"){
-
-        }
-    })
-}
-*/
 
 let find_dependency = () => {
   find_subject()
