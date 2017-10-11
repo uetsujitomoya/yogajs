@@ -3,6 +3,7 @@
  */
 
 import {contains_japanese} from "../js/contains_japanese.js"
+import Node from './defineNodeClass.js'
 
 const characterKeyword="カテゴリ:人>"
 
@@ -13,8 +14,8 @@ const color_of_people_around_client='gray'
 
 //Aさんを追加→1単語とする
 
-const find_character = (knpArray,KNP_character_array,nodeArray) => {
-  knpArray.forEach((row,index)=>{
+const find_character = (knpArray,characterArray,nodeArray) => {
+  knpArray.forEach((row,rowIdx)=>{
     //console.log(row)
     if(contains_japanese(row[0])){
 
@@ -24,7 +25,7 @@ const find_character = (knpArray,KNP_character_array,nodeArray) => {
           let temp_character_name=row[0];
           let isNewCharacter = true
           //被ってなければその登場人物のインスタントをつくる
-          KNP_character_array.forEach((character)=>{
+          characterArray.forEach((character)=>{
             if(temp_character_name===character.name){
               //verbを追加
               isNewCharacter = false;
@@ -32,22 +33,16 @@ const find_character = (knpArray,KNP_character_array,nodeArray) => {
               //character.character_node.bold_qty++
             }
           })
-          if(isNewCharacter === true){
-
-            createNewCharacter(temp_character_name,KNP_character_array,nodeArray)
-          }
+          if(isNewCharacter === true){ createNewCharacter(temp_character_name,characterArray,nodeArray) }
         }
       }
 
       if(row[0] === "さん"){
-        const tempCharacter = knpArray[index-1][0]+row[0]
-        //console.log(tempCharacter)
-
-        if(isNewCharacter(tempCharacter,KNP_character_array)){
-          createNewCharacter(tempCharacter,KNP_character_array,nodeArray)
+        const tempCharacter = knpArray[rowIdx-1][0]+row[0]
+        if(isNewCharacter(tempCharacter,characterArray)){
+          createNewCharacter(tempCharacter,characterArray,nodeArray)
         }
       }
-
     }
   })
 }
@@ -76,10 +71,13 @@ class character{
     this.chalacter_name=characterDefaultName
     this.isClient=false
     this.character_node = new Node(character_name,sentence,this.isClient)
-
+    this.nodeX=null
+    this.nodeY=null
+    this.nodeCircleStrokeWidth=0
   }
 }
 
+/*
 class Node{
   constructor(character_name,sentence,isClient){
     //this.character=character
@@ -96,6 +94,7 @@ class Node{
 
   }
 }
+*/
 
 let add_bold_of_node = () => {
 

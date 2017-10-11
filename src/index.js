@@ -14,8 +14,6 @@ wordparse2object()
 // 以下、今までの(170809)
 
 let storageArrayFromKamata = csv2Array('csv/storage170421fromKamata.csv')
-console.log('storageFromKamata')
-console.log(storageArrayFromKamata)
 
 var startTime = new Date()
 
@@ -24,8 +22,6 @@ newLoveDictionary = TransposeMatrix(newLoveDictionary)
 
 let newWorkDictionary = csv2Array('workUtf8.csv')
 newWorkDictionary = TransposeMatrix(newWorkDictionary)
-console.log('newWorkADictionary')
-console.log(newWorkDictionary)
 
 let newFriendDictionary = csv2Array('friendUtf8.csv')
 newFriendDictionary = TransposeMatrix(newFriendDictionary)
@@ -48,7 +44,7 @@ let checkboxlist = []
 
 let switchClassificationMethod = () => {
   const SwitchClassificationMethodRadio = document.getElementById('SwitchClassificationMethod').children
-  if (SwitchClassificationMethodRadio[0].control.checked == true) {
+  if (SwitchClassificationMethodRadio[0].control.checked === true) {
         // 単純な単語辞書を用いた分類
         // ClassifyWithWordDictionary(name,event,keitaisokaiseki,chboxlist,chboxlist2,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,newLoveDictionary,newWorkDictionary,newFriendDictionary);
     document.getElementById('load-button').addEventListener('click', function () {
@@ -63,7 +59,7 @@ let switchClassificationMethod = () => {
       }
       reader.readAsText(file)
     })
-  } else if (SwitchClassificationMethodRadio[1].control.checked == true) {
+  } else if (SwitchClassificationMethodRadio[1].control.checked === true) {
         // 係り受け解析を用いた分類
     console.log('%center ClassifyWithWordKNP 56', 'color:red')
     ClassifyWithKNP(startTime, name, event, keitaisokaiseki, chboxlist, chboxlist2, questionClassification, hatsugen, bun, checked, checked2, taiou, taiou2, newLoveDictionary, newWorkDictionary, newFriendDictionary, RGB)
@@ -86,7 +82,7 @@ switchClassificationMethod();
 // let resultWithKNP = processKnp(startTime,name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,newLoveDictionary,newWorkDictionary,newFriendDictionary,RGB);
 
 // console.log("After resultWithKNP");
-
+/*
 document.getElementById('load-button').addEventListener('click', function () {
   var file = document.getElementById('file-input').files[0]
   var name = file.name
@@ -98,7 +94,7 @@ document.getElementById('load-button').addEventListener('click', function () {
     let resultWithNewDictionary = ClassifyWithFirstWordDictionary(name, keitaisokaiseki, checkboxlist, chboxlist, chboxlist2, RGBlist, hatsugen, bun, checked, checked2, taiou, taiou2, chboxlength, chboxlength2, originalText)
   }
   reader.readAsText(file)
-})
+})*/
 
   /* 170410knpLoadButton
 
@@ -123,13 +119,13 @@ document.getElementById('knpLoadButton').addEventListener('click',function () {
 // storage出力
 
 /* storageSave-button */
-
+/*
 document.getElementById('storageSave-button').addEventListener('click', () => {
   let csv_array = storage2csv()
     // KNPもCSVで読み込ませる
   downloadAsCSV('storage', csv_array)
 })
-
+*/
 // let file_name="storage"+Date()+".csv";
 // let filenameWithExtension="storage.csv";
 

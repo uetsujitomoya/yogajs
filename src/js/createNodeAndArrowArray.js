@@ -9,11 +9,11 @@ import {initialValueOfSubjectAndObjectInVerb} from './find_verb.js'
 
 //let initialValueOfSubjectAndObjectInVerb
 
-const createNodeAndArrowArray = (sentenceArray) => {
+const createNodeAndArrowArray = (sentenceArray, nodeArray) => {
     // console.log("entered createNodeArrowarray")
     // console.log(sentenceArray)
   let arrowArray = []
-  let nodeArray = []
+  //let nodeArray = []
   console.log(arrowArray.length)
     // KNP_sentence_array.forEach((sentence)=>{
   for (let sentenceNum = 0; sentenceNum < sentenceArray.length; sentenceNum++) {

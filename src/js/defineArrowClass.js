@@ -4,8 +4,11 @@
 
 export default class Arrow {
   constructor (verb, arrowNum, svg) {
-    this.subject = verb.subject
-    this.object = verb.object
+    this.subject = {
+      name:verb.subject,
+      nodeIdx:null
+    }
+    this.object={name:verb.object,nodeIdx:null}
 
     this.strokeColor = 'gray'
     this.arrowStrokeWidth = 1
