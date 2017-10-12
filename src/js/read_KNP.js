@@ -16,15 +16,14 @@ let verbArray = []
 
 let read_KNP = () => {
 
-  let KNP_array = csv2Array('../csv/171012knptab.csv')
-
+  let KNP_array = csv2Array('../csv/1707051018knptab.csv')
   console.log(KNP_array)
 
   let nodeArray=[]
   find_character(KNP_array, characterArray, nodeArray)
   console.log(nodeArray)
 
-  fixNodePoint(characterArray.length,nodeArray)
+  fixNodePoint(characterArray.length, nodeArray)
 
   let reconstructedKNP = reconstruct_KNP(KNP_array, characterArray, nodeArray)
   console.log('get out reconstruct_KNP')

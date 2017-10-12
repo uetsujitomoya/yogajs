@@ -18,16 +18,3 @@ export default class KNP_kihonku_in_sentence {
     })
   }
 }
-/*
-export default class KNP_kihonku_in_bunsetsu {
-  constructor (row_array) {
-    this.csv_raw_array = []
-    this.word_array = []
-    for (let rowNo = 1; rowNo < row_array.length; rowNo++) {
-    }
-    this.subject = 'null'
-    this.object = 'null'
-    this.kakaruNo = 'null'
-    this.surface_form = row_array[0]
-  }
-}*/

@@ -2,24 +2,24 @@
  * Created by uetsujitomoya on 2017/08/17.
  */
 
-import　{includesVerb} from './find_verb.js'
+
+import {isCharacter} from './characterChart/isCharacter'
 // import verbInSentence from "../js/create_verbInSentence_class.js"
 import {createsvg} from './arrow_node.js'
 import KNP_Sentence from './characterChart/defineSentenceClass'
 
+//const firstJapaneseRowIdxInBunsetsu = 2
 
-const firstJapaneseRowIdxInBunsetsu = 2
-
-let reconstruct_KNP = (raw_2d_array, KNP_character_array,nodeArray) =>
+const reconstruct_KNP = (raw_2d_array, KNP_character_array,nodeArray) =>
 {//係り受けを調べる
   let sentenceNum = 0
   let sentenceArray = []
   let tempSentence2dArray = []
   let temp_rowNo = 0
   console.log(raw_2d_array)
-  for(const row_array of raw_2d_array){
-    if (row_array[0] !== 'EOS') {
-      tempSentence2dArray.push(row_array)
+  for(const row of raw_2d_array){
+    if (row[0] !== 'EOS') {
+      tempSentence2dArray.push(row)
     } else {
       //console.log(sentenceNum)
      sentenceArray.push(
@@ -33,49 +33,27 @@ let reconstruct_KNP = (raw_2d_array, KNP_character_array,nodeArray) =>
   return {KNP_sentence_array:sentenceArray,sentenceArray:sentenceArray}
 }
 
-let existsSubject = (bunsetsu, KNP_character_array) => {
-  const bunsetsu_info_row = bunsetsu.csv_raw_array[0]
-  const temp_character_name = bunsetsu.csv_raw_array[1][0]
-  for (var col_num = 0; col_num < bunsetsu_info_row.length; col_num++) {
-    if (bunsetsu_info_row[col_num].match('ガ格') && isCharacter(KNP_character_array, temp_character_name)) {
+const existsSubject = (bunsetsu, characterArray) => {
+  const bunsetsuInfoRow = bunsetsu.csv_raw_array[0]
+  const tmpCharacterName = bunsetsu.csv_raw_array[1][0]
+  for (var col_num = 0; col_num < bunsetsuInfoRow.length; col_num++) {
+    if (bunsetsuInfoRow[col_num].match('ガ格') && isCharacter(characterArray, tmpCharacterName)) {
       bunsetsu.isSubject = true
-      bunsetsu.subject = temp_character_name
+      bunsetsu.subject = tmpCharacterName
       break
     }
   }
 }
 
-let existsObject = (bunsetsu, KNP_character_array) => {
-  const bunsetsu_info_row = bunsetsu.csv_raw_array[0]
-  const temp_character_name = bunsetsu.csv_raw_array[1][0]
-  for (let col_num = 0; col_num < bunsetsu_info_row.length; col_num++) {
-    if ((bunsetsu_info_row[col_num].match('ヲ格') || bunsetsu_info_row[col_num].match('ニ格')) && isCharacter(KNP_character_array, temp_character_name)) {
+const existsObject = (bunsetsu, characterArray) => {
+  const bunsetsuInfoRow = bunsetsu.csv_raw_array[0]
+  const tmpCharacterName = bunsetsu.csv_raw_array[1][0]
+  for (let col_num = 0; col_num < bunsetsuInfoRow.length; col_num++) {
+    if ((bunsetsuInfoRow[col_num].match('ヲ格') || bunsetsuInfoRow[col_num].match('ニ格')) && isCharacter(characterArray, tmpCharacterName)) {
       bunsetsu.isObject = true
-      bunsetsu.object = temp_character_name
+      bunsetsu.object = tmpCharacterName
       break
     }
-  }
-}
-
-let isCharacter = (KNP_character_array, temp_character_name) => {
-  for (let chara_num = 0; chara_num < KNP_character_array.length; chara_num++) {
-    if (temp_character_name === KNP_character_array[chara_num].name) {
-      return true
-    }
-  }
-  return false
-}
-
-class verbInSentence {
-  constructor (bunsetsuNum_inSentence, bunsetsuRawArray, sentenceNum) {
-    this.bunsetsuNum_inSentence = bunsetsuNum_inSentence
-    this.sentenceNum = sentenceNum
-    this.surface_form = bunsetsuRawArray[2][0]
-    this.subject = null
-    this.object = null
-  }
-  rewriteSubject (character) {
-    this.subject = character
   }
 }
 

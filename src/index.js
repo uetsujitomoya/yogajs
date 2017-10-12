@@ -6,7 +6,6 @@ import $ from 'jquery'
 
 import {wordparse2object} from './js/wordparse2object.js'
 // import {CreateSwitchClassificationMethod} from "./SwitchClassificationMethod.js"; //AcceptDictionary
-
 // var dictionaryFromWord2Vec = csv2Array('HDFaceVertex.csv');
 
 wordparse2object()

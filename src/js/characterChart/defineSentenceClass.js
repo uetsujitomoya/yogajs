@@ -1,13 +1,16 @@
-
-import KNP_Bunsetsu from './defineSentenceClass.js'
+import KNP_Bunsetsu from './defineBunsetsuClass.js'
 import KNP_kihonku_in_sentence from './defineKihonkuClass.js'
+import {rodata} from '../rodata'
+import verbInSentence from '../defineClassOfVerbInSentence'
 
 const startingBunsetsuRowIdxInSentence = 1
 const startingKihonkuRowIdxInSentence = 2
 const firstJapaneseRowIdxInSentence = 3
 
-const bunsetsuSymbol = '*'
-const kihonkuSymbol = '+'
+
+
+const bunsetsuSymbol = rodata.bunsetsuSymbol
+const kihonkuSymbol = rodata.kihonkuSymbol
 
 export default class KNP_Sentence {
   constructor (rawRowIdx, sentence2dArray, characterArray, sentenceIdx, nodeArray) {
@@ -23,7 +26,7 @@ export default class KNP_Sentence {
     this.bunsetsu_array = []
     //console.log(sentence2dArray)
 
-    //this.bunsetsu_array.length = count_bunsetsu(sentence2dArray)
+    this.bunsetsu_array.length = count_bunsetsu(sentence2dArray)
 
     this.kihonku_array = []
     this.kihonku_array.length = count_kihonku(sentence2dArray)
@@ -31,16 +34,16 @@ export default class KNP_Sentence {
     this.surface_form = 'null'
     // this.basic_form = row_array[2]
 
-    let temp_2d_array_for_bunsetsu = []
-    let temp_2d_array_for_kihonku = []
+    let temp2dArrayForBunsetsu = []
+    let temp2dArrayForKihonku = []
 
-    temp_2d_array_for_bunsetsu.push(sentence2dArray[startingBunsetsuRowIdxInSentence])// 0文節目　開始宣言をプッシュ
+    temp2dArrayForBunsetsu.push(sentence2dArray[startingBunsetsuRowIdxInSentence])// 0文節目　開始宣言をプッシュ
 
-    temp_2d_array_for_bunsetsu.push(sentence2dArray[startingKihonkuRowIdxInSentence])// 0基本句目　開始宣言をプッシュ
-    temp_2d_array_for_kihonku.push(sentence2dArray[startingKihonkuRowIdxInSentence])// 0基本句目　開始宣言をプッシュ
+    temp2dArrayForBunsetsu.push(sentence2dArray[startingKihonkuRowIdxInSentence])// 0基本句目　開始宣言をプッシュ
+    temp2dArrayForKihonku.push(sentence2dArray[startingKihonkuRowIdxInSentence])// 0基本句目　開始宣言をプッシュ
 
-    let bunsetsu_num_in_sentence = 0
-    let kihonku_num_in_sentence = 0
+    let bunsetsuIdxInSentence = 0
+    let kihonkuIdxInSentence = 0
 
     for (let temp_rowNo = firstJapaneseRowIdxInSentence; temp_rowNo < sentence2dArray.length; temp_rowNo++) {
 
@@ -48,39 +51,38 @@ export default class KNP_Sentence {
 
       if (temp_surface_form === kihonkuSymbol && sentence2dArray[temp_rowNo - 1][0] !== bunsetsuSymbol) {
 
-        this.kihonku_array[kihonku_num_in_sentence] = new KNP_kihonku_in_sentence(kihonku_num_in_sentence, temp_2d_array_for_kihonku)// 文の中の通し番号での基本句array
-        temp_2d_array_for_kihonku = []
-        kihonku_num_in_sentence++
+        this.kihonku_array[kihonkuIdxInSentence] = new KNP_kihonku_in_sentence(kihonkuIdxInSentence, temp2dArrayForKihonku)// 文の中の通し番号での基本句array
+        temp2dArrayForKihonku = []
+        kihonkuIdxInSentence++
 
       } else if (temp_surface_form === bunsetsuSymbol) {
 
-        this.kihonku_array[kihonku_num_in_sentence] = new KNP_kihonku_in_sentence(kihonku_num_in_sentence, temp_2d_array_for_kihonku)// 文の中の通し番号での基本句array
-        temp_2d_array_for_kihonku = []
-        kihonku_num_in_sentence++
-        this.bunsetsu_array[bunsetsu_num_in_sentence] = new KNP_Bunsetsu(bunsetsu_num_in_sentence, temp_2d_array_for_bunsetsu, characterArray)// 文の中の通し番号での文節array
+        this.kihonku_array[kihonkuIdxInSentence] = new KNP_kihonku_in_sentence(kihonkuIdxInSentence, temp2dArrayForKihonku)// 文の中の通し番号での基本句array
+        temp2dArrayForKihonku = []
+        kihonkuIdxInSentence++
+        this.bunsetsu_array[bunsetsuIdxInSentence] = new KNP_Bunsetsu(bunsetsuIdxInSentence, temp2dArrayForBunsetsu, characterArray)// 文の中の通し番号での文節array
 
         // verb_array作成
-        if (this.bunsetsu_array[bunsetsu_num_in_sentence].isVerb) { this.verb_array.push(new verbInSentence(bunsetsu_num_in_sentence, temp_2d_array_for_bunsetsu, sentenceIdx)) }
-        temp_2d_array_for_bunsetsu = []
-        bunsetsu_num_in_sentence++
+        if (this.bunsetsu_array[bunsetsuIdxInSentence].isVerb) { this.verb_array.push(new verbInSentence(bunsetsuIdxInSentence, temp2dArrayForBunsetsu, sentenceIdx)) }
+        temp2dArrayForBunsetsu = []
+        bunsetsuIdxInSentence++
 
       }
 
-      temp_2d_array_for_bunsetsu.push(sentence2dArray[temp_rowNo])
-      temp_2d_array_for_kihonku.push(sentence2dArray[temp_rowNo])
+      temp2dArrayForBunsetsu.push(sentence2dArray[temp_rowNo])
+      temp2dArrayForKihonku.push(sentence2dArray[temp_rowNo])
     }
 
-
-    this.bunsetsu_array[bunsetsu_num_in_sentence] = new KNP_Bunsetsu(bunsetsu_num_in_sentence, temp_2d_array_for_bunsetsu, characterArray)
+    this.bunsetsu_array[bunsetsuIdxInSentence] = new KNP_Bunsetsu(bunsetsuIdxInSentence, temp2dArrayForBunsetsu, characterArray)
 
     // verb_array作成
-/*
-    if (this.bunsetsu_array[bunsetsu_num_in_sentence].isVerb) {
-      this.verb_array.push(new verbInSentence(bunsetsu_num_in_sentence, temp_2d_array_for_bunsetsu, sentenceIdx))
+
+    if (this.bunsetsu_array[bunsetsuIdxInSentence].isVerb) {
+      this.verb_array.push(new verbInSentence(bunsetsuIdxInSentence, temp2dArrayForBunsetsu, sentenceIdx))
     }
-    this.kihonku_array[kihonku_num_in_sentence] = new KNP_kihonku_in_sentence(kihonku_num_in_sentence, temp_2d_array_for_kihonku)
+    this.kihonku_array[kihonkuIdxInSentence] = new KNP_kihonku_in_sentence(kihonkuIdxInSentence, temp2dArrayForKihonku)
     this.input_each_kakarareru_bunsetsu_id()
-    this.input_each_kakarareru_kihonku_id()*/
+    this.input_each_kakarareru_kihonku_id()
 
 
     for (let tempVerbNum = 0; tempVerbNum < this.verb_array.length; tempVerbNum++) {
@@ -136,14 +138,14 @@ export default class KNP_Sentence {
 }
 
 let count_bunsetsu = (input_2d_array) => {
-  let cnt = 0/*
+  let cnt = 0
   for(const row_array of input_2d_array){
     if(typeof row_array!=='undefined'){
       if (row_array[0] === bunsetsuSymbol) {
         cnt++
       }
     }
-  }*/
+  }
   return cnt
 }
 
