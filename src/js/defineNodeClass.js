@@ -4,6 +4,8 @@
 
 let nodeNum = 0
 
+const r = 60
+
 const enshuBunkatsuNum = 3
 
 export default class Node {
@@ -12,7 +14,7 @@ export default class Node {
     this.isSubject = false
     this.y = 200 + 150 * Math.sin((nodeNum / enshuBunkatsuNum) * 2 * Math.PI)
     this.x = 200 + 150 * Math.cos((nodeNum / enshuBunkatsuNum) * 2 * Math.PI)
-    this.r = 30
+    this.r = r
     if (this.isSubject) {
       this.strokeColor = 'red'
     } else {
@@ -26,3 +28,5 @@ export default class Node {
     this.strokeWidth++
   }
 }
+
+export {r}

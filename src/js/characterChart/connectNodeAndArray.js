@@ -1,7 +1,8 @@
-const connectNodeAndArray = (array,r) => {
-  //nodeとarrayを紐付ける
+import {r} from '../defineNodeClass'
 
-  array.nodeDataArray = [ [ array.subject.x , array.object.y , r ] , [ array.object.x , array.object.y , r ] ]
+const connectNodeAndArray = (arrow) => {
+  //nodeとarrayを紐付ける
+  arrow.pointArray = [ [ arrow.subject.x , arrow.object.y , r ] , [ arrow.object.x , arrow.object.y , r ] ]
 }
 
 export {connectNodeAndArray}

@@ -4,18 +4,21 @@
 
 import d3 from 'd3'
 import $ from 'jquery'
+import {vizArrow} from './vizArrow'
+import {connectNodeAndArray} from './characterChart/connectNodeAndArray'
+import {r} from './defineNodeClass'
 
 const color_of_client = 'red'
 const color_of_people_around_client = 'gray'
 
-const r = 60
+//const r = 60
 const yajirushi_refX = 16
 
 const markerFillColor = 'red'
 
 const characterChartAreaID = '#example'
 
-let vizNodes = (nodeArray) => {
+let vizNodes = (nodeArray,arrowArray) => {
     // console.log("entered vizNodes")
   var svg = d3.select(characterChartAreaID).append('svg')
         .attr({
@@ -47,11 +50,20 @@ let vizNodes = (nodeArray) => {
         })
         .text(function (d) { return d.nodeCharacter })
 
+  /*
   if (nodeArray.length >= 2) {
     vizArrow(svg, nodeArray)
   }
+  */
+
+  for(arrow of arrowArray){
+    connectNodeAndArray(arrow)
+    vizArrow(svg, arrow.pointArray)
+  }
+
 }
 
+/*
 let vizArrow = (svg, nodeArray) => {
   let circle_data_array = [[nodeArray[0].x, nodeArray[0].y, r], [nodeArray[1].x, nodeArray[1].y, r]]
 
@@ -94,7 +106,7 @@ let vizArrow = (svg, nodeArray) => {
         // 破線の開始相対位置を指定します
     'stroke-dashoffset': 0
   })
-}
+}*/
 
 let removeSVG = () => {
   d3.select(characterChartAreaID).select('svg').remove()

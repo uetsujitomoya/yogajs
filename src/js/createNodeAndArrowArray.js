@@ -6,6 +6,7 @@ import Node from '../js/defineNodeClass.js'
 import Arrow from '../js/defineArrowClass.js'
 import {vizNodes} from '../js/vizNode'
 import {initialValueOfSubjectAndObjectInVerb} from './find_verb.js'
+import {connectNodeAndArray} from './characterChart/connectNodeAndArray'
 
 //let initialValueOfSubjectAndObjectInVerb
 
@@ -57,7 +58,8 @@ const createNodeAndArrowArray = (sentenceArray, nodeArray) => {
 
   console.log(nodeArray)
   console.log(arrowArray)
-  vizNodes(nodeArray)
+
+  vizNodes(nodeArray,arrowArray)
 }
 
 let isSameArrow = (arrow, verb) => {
