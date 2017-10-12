@@ -15,7 +15,7 @@ wordparse2object()
 
 let storageArrayFromKamata = csv2Array('csv/storage170421fromKamata.csv')
 
-var startTime = new Date()
+//var startTime = new Date()
 
 let newLoveDictionary = csv2Array('../oldLoveDic.csv')
 newLoveDictionary = TransposeMatrix(newLoveDictionary)

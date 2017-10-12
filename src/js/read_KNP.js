@@ -16,7 +16,8 @@ let verbArray = []
 
 let read_KNP = () => {
 
-  let KNP_array = csv2Array('../csv/1707051018knptab.csv')
+  let KNP_array = csv2Array('../csv/171012knptab.csv')
+
   console.log(KNP_array)
 
   let nodeArray=[]
