@@ -7,8 +7,6 @@ const startingBunsetsuRowIdxInSentence = 1
 const startingKihonkuRowIdxInSentence = 2
 const firstJapaneseRowIdxInSentence = 3
 
-
-
 const bunsetsuSymbol = rodata.bunsetsuSymbol
 const kihonkuSymbol = rodata.kihonkuSymbol
 
