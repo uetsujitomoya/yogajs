@@ -96,11 +96,13 @@ const select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, ch
 
         if (stockedAnswerGroupNumber !== null) {
           answerClassification3dArrayforCreatingSelect[hatsugenIdx][bunIdx][stockedAnswerGroupNumber] = 1
+          /*
           for (categoryIdx = 0; categoryIdx < categorizedAnswerCategoryQty; categoryIdx++) {
             if (categoryIdx !== stockedAnswerGroupNumber) {
               answerClassification3dArrayforCreatingSelect[hatsugenIdx][bunIdx][categoryIdx] = 0
             }// 全てゼロなら濃いグレーが出力
           }
+          */
         }
         taiou[answerNumber - 1] = n - 1
 
@@ -159,7 +161,7 @@ const select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, ch
           if (categoryIdx === stockedQuestionGroupNumber) {
             RGBlist[hatsugenIdx / 2][categoryIdx] = 1
           } else {
-            RGBlist[hatsugenIdx / 2][categoryIdx] = 0
+            //RGBlist[hatsugenIdx / 2][categoryIdx] = 0
           }
         }
       }
