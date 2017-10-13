@@ -122,7 +122,7 @@ const kaishakuColor = '#f1c40f'
 const height0 = 200
 const height = 200
 
-const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, checkedBun, keitaisokaiseki, RGBmaxmax, startTime, graphTypeNum, checked, ranshin, width, bunsuu) => {
+const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, answerCategoryNumArray, keitaisokaiseki, RGBmaxmax, startTime, graphTypeNum, checked, ranshin, width, bunsuu) => {
   const upperName = 'カウンセラー'
   const lowerName = 'クライエント'
   const counselorInTextView = '<img src = "./picture/counselor2.jpg" width ="20">'
@@ -159,7 +159,7 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
     let barChartAllHatsugenColorArray = []
     let barChartAllHatsugenCategoryArray=[]
 
-    let mazekozeHatsugenNumArray = []
+    let mazekozeHatsugenIdxArray = []
     let h = 0
     let mazekozeRanshinArray = []
     // 初手カウンセラー
@@ -168,7 +168,7 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
     isAnswerInFullConversation_array[0] = 0
     barChartAllHatsugenColorArray[0] = colorArrayInAllQuestionHatsugen[0]
     barChartAllHatsugenCategoryArray[0] =
-      mazekozeHatsugenNumArray[0] = 0
+      mazekozeHatsugenIdxArray[0] = 0
 
     let c = 0
 
@@ -181,7 +181,7 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
           mazekoze[h] = d
           isAnswerInFullConversation_array[h] = 1
           barChartAllHatsugenColorArray[h] = answerTextureChoiceArray[checked[c]]
-          mazekozeHatsugenNumArray[h] = m
+          mazekozeHatsugenIdxArray[h] = m
           h++
           c++
         }
@@ -194,7 +194,7 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
       mazekoze[h] = hatsugen[m + 1]
       isAnswerInFullConversation_array[h] = 0
       barChartAllHatsugenColorArray[h] = colorArrayInAllQuestionHatsugen[(m + 1) / 2]
-      mazekozeHatsugenNumArray[h] = m + 1
+      mazekozeHatsugenIdxArray[h] = m + 1
     }
 
     //console.info('ranshin')
@@ -307,7 +307,7 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
     //	console.log(nagasa2.length);
     /// ////////////////////////////////////////////////////
     console.log('mazekozeHatsugenNumber')
-    console.log(mazekozeHatsugenNumArray)
+    console.log(mazekozeHatsugenIdxArray)
 
     svg.call(loveTexture)
     svg.call(workTexture)
@@ -404,85 +404,55 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
         var msg = document.getElementById('msg')
         let k, l
         msg.innerHTML = ''
-        if (isAnswerInFullConversation_array[i] === 0) {    // カウンセラー
+        if (isAnswerInFullConversation_array[i] === 0) {    // カウンセラーのグラフを触った時
           for (k = -3; k <= 3; k++) {
-            if (mazekozeHatsugenNumArray[i] + k < 0 || mazekozeHatsugenNumArray[i] + k >= hatsugen.length) {
+            if (mazekozeHatsugenIdxArray[i] + k < 0 || mazekozeHatsugenIdxArray[i] + k >= hatsugen.length) {
               continue
             }
             if (k === 0) {
-              msg.innerHTML += '<b><u><font size=' + fontSizeInTextView + '>' + (1 + mazekozeHatsugenNumArray[i]) + '' + counselorInTextView + ' <font color=' + colorArrayInAllQuestionHatsugen[mazekozeHatsugenNumArray[i] / 2] + '>【</font>' + hatsugen[mazekozeHatsugenNumArray[i]] + '<font color=' + colorArrayInAllQuestionHatsugen[mazekozeHatsugenNumArray[i] / 2] + '>】</font></u></b><font size=' + fontSizeInTextView + '><br><br>'
+              msg.innerHTML += '<b><u><font size=' + fontSizeInTextView + '>' + (1 + mazekozeHatsugenIdxArray[i]) + '' + counselorInTextView + ' <font color=' + colorArrayInAllQuestionHatsugen[mazekozeHatsugenIdxArray[i] / 2] + '>【</font>' + hatsugen[mazekozeHatsugenIdxArray[i]] + '<font color=' + colorArrayInAllQuestionHatsugen[mazekozeHatsugenIdxArray[i] / 2] + '>】</font></u></b><font size=' + fontSizeInTextView + '><br><br>'
             } else if (k % 2 === 0) {
-              msg.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + k + mazekozeHatsugenNumArray[i]) + '' + counselorInTextView + ' <font color=' + colorArrayInAllQuestionHatsugen[k / 2 + mazekozeHatsugenNumArray[i] / 2] + '><b>【</b></font>' + hatsugen[k + mazekozeHatsugenNumArray[i]] + '<font color=' + colorArrayInAllQuestionHatsugen[k / 2 + mazekozeHatsugenNumArray[i] / 2] + '><b>】</b></font><br><br>'
+              msg.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + k + mazekozeHatsugenIdxArray[i]) + '' + counselorInTextView + ' <font color=' + colorArrayInAllQuestionHatsugen[k / 2 + mazekozeHatsugenIdxArray[i] / 2] + '><b>【</b></font>' + hatsugen[k + mazekozeHatsugenIdxArray[i]] + '<font color=' + colorArrayInAllQuestionHatsugen[k / 2 + mazekozeHatsugenIdxArray[i] / 2] + '><b>】</b></font><br><br>'
             } else { // forループを回さないと各文ごとの表示ができない
-              msg.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + k + mazekozeHatsugenNumArray[i]) + '' + clientInTextView + ' '
-              for (l = 0; l < bun[k + mazekozeHatsugenNumArray[i]].length; l++) {
-                if (bun[k + mazekozeHatsugenNumArray[i]][l] === '') { continue }
-                msg.innerHTML += '<font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArray[checkedBun[k + mazekozeHatsugenNumArray[i]][l]] + '><b>【</b></font>' + bun[k + mazekozeHatsugenNumArray[i]][l] + '<font color=' + answerTextureChoiceArray[checkedBun[k + mazekozeHatsugenNumArray[i]][l]] + '><b>】</b></font>'
-                console.log( bun[k + mazekozeHatsugenNumArray[i]][l] )
-                console.log( answerTextureChoiceArray[checkedBun[k + mazekozeHatsugenNumArray[i]][l]] )
+              msg.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + k + mazekozeHatsugenIdxArray[i]) + '' + clientInTextView + ' '
+              for (l = 0; l < bun[k + mazekozeHatsugenIdxArray[i]].length; l++) {
+                if (bun[k + mazekozeHatsugenIdxArray[i]][l] === '') { continue }
+                msg.innerHTML += '<font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArray[answerCategoryNumArray[k + mazekozeHatsugenIdxArray[i]][l]] + '><b>【</b></font>' + bun[k + mazekozeHatsugenIdxArray[i]][l] + '<font color=' + answerTextureChoiceArray[answerCategoryNumArray[k + mazekozeHatsugenIdxArray[i]][l]] + '><b>】</b></font>'
+                console.log( bun[k + mazekozeHatsugenIdxArray[i]][l] )
+                console.log( answerCategoryNumArray[k + mazekozeHatsugenIdxArray[i]][l] )
               }
               msg.innerHTML += '<font size=' + fontSizeInTextView + '><br><br>'
             }
           }
-        } else {  // 患者
+        } else {  // 患者のグラフを触った時
           for (k = -3; k <= 3; k++) {
-            if (mazekozeHatsugenNumArray[i] + k < 0 || mazekozeHatsugenNumArray[i] + k >= hatsugen.length) {
+            if (mazekozeHatsugenIdxArray[i] + k < 0 || mazekozeHatsugenIdxArray[i] + k >= hatsugen.length) {
               continue
             }
             if (k === 0) {
-              msg.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + k + mazekozeHatsugenNumArray[i]) + '' + clientInTextView + ' '
-              for (l = 0; l < bun[k + mazekozeHatsugenNumArray[i]].length; l++) {
-                if (bun[k + mazekozeHatsugenNumArray[i]][l] === '') { continue }
-                msg.innerHTML += '<u><font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArray[checkedBun[k + mazekozeHatsugenNumArray[i]][l]] + '><b>【</b></font>' + bun[k + mazekozeHatsugenNumArray[i]][l] + '<font color=' + answerTextureChoiceArray[checkedBun[k + mazekozeHatsugenNumArray[i]][l]] + '><b>】</b></font></font></u>'
-                console.log( bun[k + mazekozeHatsugenNumArray[i]][l] )
-                console.log(answerTextureChoiceArray[checkedBun[k + mazekozeHatsugenNumArray[i]][l]])
+              msg.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + k + mazekozeHatsugenIdxArray[i]) + '' + clientInTextView + ' '
+              for (l = 0; l < bun[k + mazekozeHatsugenIdxArray[i]].length; l++) {
+                if (bun[k + mazekozeHatsugenIdxArray[i]][l] === '') { continue }
+                msg.innerHTML += '<u><font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArray[answerCategoryNumArray[k + mazekozeHatsugenIdxArray[i]][l]] + '><b>【</b></font>' + bun[k + mazekozeHatsugenIdxArray[i]][l] + '<font color=' + answerTextureChoiceArray[answerCategoryNumArray[k + mazekozeHatsugenIdxArray[i]][l]] + '><b>】</b></font></font></u>'
+                console.log( bun[k + mazekozeHatsugenIdxArray[i]][l] )
+                console.log(answerCategoryNumArray[k + mazekozeHatsugenIdxArray[i]][l])
               }
               msg.innerHTML += '<font size=' + fontSizeInTextView + '><br><br></font>'
             } else if (k % 2 === 0) {
-              msg.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + k + mazekozeHatsugenNumArray[i]) + '' + clientInTextView + ' '
-              for (l = 0; l < bun[k + mazekozeHatsugenNumArray[i]].length; l++) {
-                if (bun[k + mazekozeHatsugenNumArray[i]][l] === '') { continue }
-                msg.innerHTML += '<font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArray[checkedBun[k + mazekozeHatsugenNumArray[i]][l]] + '><b>【</b></font>' + bun[k + mazekozeHatsugenNumArray[i]][l] + '<font color=' + answerTextureChoiceArray[checkedBun[k + mazekozeHatsugenNumArray[i]][l]] + '><b>】</b></font>'
-                console.log(bun[k + mazekozeHatsugenNumArray[i]][l])
-                console.log(answerTextureChoiceArray[checkedBun[k + mazekozeHatsugenNumArray[i]][l]])
+              msg.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + k + mazekozeHatsugenIdxArray[i]) + '' + clientInTextView + ' '
+              for (l = 0; l < bun[k + mazekozeHatsugenIdxArray[i]].length; l++) {
+                if (bun[k + mazekozeHatsugenIdxArray[i]][l] === '') { continue }
+                msg.innerHTML += '<font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArray[answerCategoryNumArray[k + mazekozeHatsugenIdxArray[i]][l]] + '><b>【</b></font>' + bun[k + mazekozeHatsugenIdxArray[i]][l] + '<font color=' + answerTextureChoiceArray[answerCategoryNumArray[k + mazekozeHatsugenIdxArray[i]][l]] + '><b>】</b></font>'
+                console.log(bun[k + mazekozeHatsugenIdxArray[i]][l])
+                console.log(answerCategoryNumArray[k + mazekozeHatsugenIdxArray[i]][l])
               }
               msg.innerHTML += '<font size=' + fontSizeInTextView + '><br><br>'
             } else { // forループを回さないと各文ごとの表示ができない
-              msg.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + k + mazekozeHatsugenNumArray[i]) + '' + counselorInTextView + ' <font color=' + colorArrayInAllQuestionHatsugen[k / 2 + mazekozeHatsugenNumArray[i] / 2] + '><b>【</b></font>' + hatsugen[k + mazekozeHatsugenNumArray[i]] + '<font color=' + colorArrayInAllQuestionHatsugen[k / 2 + mazekozeHatsugenNumArray[i] / 2] + '><b>】</b></font><br><br>'
+              msg.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + k + mazekozeHatsugenIdxArray[i]) + '' + counselorInTextView + ' <font color=' + colorArrayInAllQuestionHatsugen[k / 2 + mazekozeHatsugenIdxArray[i] / 2] + '><b>【</b></font>' + hatsugen[k + mazekozeHatsugenIdxArray[i]] + '<font color=' + colorArrayInAllQuestionHatsugen[k / 2 + mazekozeHatsugenIdxArray[i] / 2] + '><b>】</b></font><br><br>'
             }
           }
         }
       })
-    /// //////////////////////////////////////////////////////////////////
-
-    // 下側の文字？じゃなかった
-
-    /*
-     svg.selectAll("g")
-     .data(rectDataObjectArray)
-     .enter()
-     .append("g")
-
-     .selectAll('text')
-     .data(rectDataObjectArray)
-     .enter()
-     .append('text')
-     .text((d)=>d.text)
-     .style("font-size",15)
-
-     .attr("x",function(d,i){
-     var arr = nagasa2;
-     //var sum = d3.sum(arr);
-     var subSum = d3.sum(i==0 ? []:arr.slice(0,i));
-     return xScale(subSum)/10 + 10+graphShiftX;
-     })
-     .attr(
-     "y",function(d){
-     return 35+d.which*50;
-     }
-     );
-     */
-
     /// //////////////////////////////////////////////////////////////////
 
     /*　9つの乱心　表示
@@ -567,7 +537,7 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
     var area0 = d3.svg.area()
       .x(function (d, i) {
         if (i % 3 === 0) { return nagasa[i / 3] } else if (i % 3 === 1) { return nagasa[(i - 1) / 3 + 1] - 3 } else { return nagasa[(i - 2) / 3 + 1] - 2 }
-      })// nagasa[i]+nagasa[i+1])/2
+      })
       .y0(function () { return height0 })
       .y1(function (d) { return height0 - scaleY(d.y + d.y0) })
 
@@ -611,14 +581,12 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
             e.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + k + 2 * i) + '' + clientInTextView + ' '
             for (l = 0; l < bun[k + 2 * i].length; l++) {
               if (bun[k + 2 * i][l] === '') { continue }
-              e.innerHTML += '<font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArray[checkedBun[k + 2 * i][l]] + '><b>【</b></font>' + bun[k + 2 * i][l] + '<font color=' + answerTextureChoiceArray[checkedBun[k + 2 * i][l]] + '><b>】</b></font></font>'
+              e.innerHTML += '<font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArray[answerCategoryNumArray[k + 2 * i][l]] + '><b>【</b></font>' + bun[k + 2 * i][l] + '<font color=' + answerTextureChoiceArray[answerCategoryNumArray[k + 2 * i][l]] + '><b>】</b></font></font>'
             }
             e.innerHTML += '<font size=' + fontSizeInTextView + '><br><br></font>'
           }
         }
       })
-    /// //////////////////////////////////////////////////////////////
-    /// /////////////////////////////////////////////////////////////変更部分小林下
 
     let datae3 = []
     let jj3
@@ -639,7 +607,7 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
     }
 
     for (jj3 = 0; jj3 < nagasa.length; jj3++) {
-      datae3[jj3] = {x: nagasa[jj3], y: 10, color: colorArrayInAllQuestionHatsugen[jj3], text: mojia1[jj3]}// moji[jj3]}//F_color2moji(color2[jj3])}//, text:a}
+      datae3[jj3] = {x: nagasa[jj3], y: 10, color: colorArrayInAllQuestionHatsugen[jj3], text: mojia1[jj3]}
     }
     context.selectAll('circle')
       .data(datae3)
@@ -667,34 +635,18 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
             e.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + k + 2 * i) + '' + clientInTextView + ' '
             for (l = 0; l < bun[k + 2 * i].length; l++) {
               if (bun[k + 2 * i][l] === '') { continue }
-              e.innerHTML += '<font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArray[checkedBun[k + 2 * i][l]] + '><b>【</b></font>' + bun[k + 2 * i][l] + '<font color=' + answerTextureChoiceArray[checkedBun[k + 2 * i][l]] + '><b>】</b></font></font><br>   '
+              e.innerHTML += '<font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArray[answerCategoryNumArray[k + 2 * i][l]] + '><b>【</b></font>' + bun[k + 2 * i][l] + '<font color=' + answerTextureChoiceArray[answerCategoryNumArray[k + 2 * i][l]] + '><b>】</b></font></font><br>   '
             }
             e.innerHTML += '<font size=' + fontSizeInTextView + '><br><br></font>'
           }
         }
       })
 
-    /*
-     context.selectAll('text')
-     .data(datae3)
-     .enter()
-     .append('text')
-     .text((d)=> d.text)
-     .style("font-size",12)
-     .attr({
-     x: (d) => d.x+3,
-     y: (d) => d.y+25,
-     fill: (d) => d.color
-     });
-     */
+    const scaleX2 = d3.scale.linear().domain([0, bunsuu]).range([0, width])
+    const scaleY2 = d3.scale.linear().domain([0, RGBmaxmax]).range([height, 0])
+    const yAxisC = d3.svg.axis().scale(scaleY2).orient('left')// focus
 
-    /// /////*////////////////////////////////////////////////////////
-    /// ////////////////////////////////////////////////////////////
-    var scaleX2 = d3.scale.linear().domain([0, bunsuu]).range([0, width])
-    var scaleY2 = d3.scale.linear().domain([0, RGBmaxmax]).range([height, 0])
-    var yAxisC = d3.svg.axis().scale(scaleY2).orient('left')// focus
-
-    var xAxisC = d3.svg.axis().scale(scaleX2).orient('bottom')// context
+    const xAxisC = d3.svg.axis().scale(scaleX2).orient('bottom')// context
 
     context.append('g') // focusのy目盛軸
       .attr('class', 'y axis')
@@ -806,7 +758,7 @@ const setForViz = (name, storage, keitaisokaiseki, chboxlist, chboxlist2, RGBlis
   let isUsingDictionaryWithWord2Vec = 0
 
   var bunsuu = 2// 前後の余白
-  for (m = 1; m < hatsugen.length; m = m + 2) { // 患者の発言で間隔を作る
+  for (let m = 1; m < hatsugen.length; m = m + 2) { // 患者の発言で間隔を作る
     bunsuu = bunsuu + hatsugen[m].length
   }
   console.info(zoom_value)
@@ -830,7 +782,7 @@ const setForViz = (name, storage, keitaisokaiseki, chboxlist, chboxlist2, RGBlis
     readQuestionRadio(name, storage, chboxlist, chboxlist2, questionRadioResult, taiou, taiou2, chboxlength, chboxlength2)
   }
 
-  var h, i, c, m, n
+  let h, i, c, m, n
 
   for (n = 0; n < RGBlist.length; n++) {
     RGBlist[n][0] = 0
@@ -838,23 +790,29 @@ const setForViz = (name, storage, keitaisokaiseki, chboxlist, chboxlist2, RGBlis
     RGBlist[n][2] = 0
   }
 
-  var checkedBun = []
+  let answerCategoryNumArray = []
   n = 0// m=1;m<keitaisokaiseki.length;m=m+2の外
   for (m = 1; m < keitaisokaiseki.length; m = m + 2) {
-    checkedBun[m] = []// svgでの描画ではm→i
+    answerCategoryNumArray[m] = []// svgでの描画ではm→i
     for (i = 0; i < keitaisokaiseki[m].length; i++) {
-      checkedBun[m][i] = 0
+      answerCategoryNumArray[m][i] = 0
       for (c = 1; c < chboxlist.length; c++) {
         if (bun[m][i] === chboxlist[c][0]) {
           if (answerRadioResult[c - 1] === 1) {
             RGBlist[n][0] = RGBlist[n][0] + 1
-            checkedBun[m][i] = 1
+            answerCategoryNumArray[m][i] = 1
           } else if (answerRadioResult[c - 1] === 2) {
             RGBlist[n][1] = RGBlist[n][1] + 1
-            checkedBun[m][i] = 2
+            answerCategoryNumArray[m][i] = 2
           } else if (answerRadioResult[c - 1] === 3) {
             RGBlist[n][2] = RGBlist[n][2] + 1
-            checkedBun[m][i] = 3
+            answerCategoryNumArray[m][i] = 3
+          } else if (answerRadioResult[c - 1] === 4) {
+            RGBlist[n][3] = RGBlist[n][3] + 1
+            answerCategoryNumArray[m][i] = 4
+          } else if (answerRadioResult[c - 1] === 5) {
+            RGBlist[n][4] = RGBlist[n][4] + 1
+            answerCategoryNumArray[m][i] = 5
           }
         }
       }
@@ -925,7 +883,7 @@ const setForViz = (name, storage, keitaisokaiseki, chboxlist, chboxlist2, RGBlis
       stackdataArr[h][3 * m + 2] = {x: 3 * m + 3, y: 0}
     }
   }
-  viz(stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, checkedBun, keitaisokaiseki, RGBmaxmax, startTime, graph, answerRadioResult, ranshin, width, bunsuu)
+  viz(stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, answerCategoryNumArray, keitaisokaiseki, RGBmaxmax, startTime, graph, answerRadioResult, ranshin, width, bunsuu)
   // console.log("chboxlength2 in svg.js=%d",chboxlength2);
   return {
     chboxlist: chboxlist,
