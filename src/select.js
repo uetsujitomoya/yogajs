@@ -47,10 +47,16 @@ const makeRGB = (RGB, hatsugen) => {
   }
 }
 
-const createAnswerRadioButton = (answerNumber, value, color, answerGroupName) => {
+const createAnswerRadioButton = (answerNumber, value, color, answerGroupName, checked) => {
   const targetInRow = document.getElementById('r' + answerNumber)
-  targetInRow.innerHTML += '<label><input type=radio name="r' + answerNumber + '" value=' + value + '><font color="' + color + '">【</font>「' + answerGroupName + '」に含む<font color="' + color + '">】</font></label>'
-}
+  if(checked){
+    targetInRow.innerHTML += '<label><input type=radio name="r' + answerNumber + '" value=' + value + ' checked><font color="' + color + '">【</font>「' + answerGroupName + '」に含む<font color="' + color + '">】</font></label>'
+
+  }else{
+    targetInRow.innerHTML += '<label><input type=radio name="r' + answerNumber + '" value=' + value + '><font color="' + color + '">【</font>「' + answerGroupName + '」に含む<font color="' + color + '">】</font></label>'
+
+  }
+  }
 
 const select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, chboxlist, chboxlist2, answerClassification3dArrayforCreatingSelect, RGBlist, hatsugen, bun, checked, checked2, taiou, taiou2, chboxlength, chboxlength2) => {
   console.log('entered select.js')
@@ -135,17 +141,17 @@ const select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, ch
         }
 
         if (answerClassification3dArrayforCreatingSelect[hatsugenIdx][bunIdx][3] !== 0) {
-          createAnswerRadioButton(answerNumber, 4, selfTextColor, '自己')
+          createAnswerRadioButton(answerNumber, 4, selfTextColor, '自己', true)
           chboxlist[n][1] = 3
         } else {
-          createAnswerRadioButton(answerNumber, 4, selfTextColor, '自己')
+          createAnswerRadioButton(answerNumber, 4, selfTextColor, '自己', false)
         }
 
         if (answerClassification3dArrayforCreatingSelect[hatsugenIdx][bunIdx][4] !== 0) {
-          createAnswerRadioButton(answerNumber, 5, spiritualTextColor, 'スピリチュアル')
+          createAnswerRadioButton(answerNumber, 5, spiritualTextColor, 'スピリチュアル', true)
           chboxlist[n][1] = 4
         } else {
-          createAnswerRadioButton(answerNumber, 5, spiritualTextColor, 'スピリチュアル')
+          createAnswerRadioButton(answerNumber, 5, spiritualTextColor, 'スピリチュアル', false)
         }
       }
     } else {
