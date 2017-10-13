@@ -145,7 +145,7 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
 
   const axisDescriptionY = 240
 
-  if (graphTypeNum === 3) {
+  if (graphTypeNum !== 1) {
     const axisDescription = '横軸の単位：全ての発言の全ての文字数'
 
     let graphShiftX = 58
@@ -274,7 +274,7 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
         textOnRect[textOnRectNum] = categoryOfTextOnRect.smallTalk
       }else{
         //console.log('checked = %d',checkedNum)
-        console.log('checked[%d]=%d', checkedNum,checked[checkedNum])
+        //console.log('checked[%d]=%d', checkedNum,checked[checkedNum])
 
         if (checked[checkedNum] === 0) {
           textOnRect[textOnRectNum] = categoryOfTextOnRect.noGroup; checkedNum++
@@ -739,10 +739,12 @@ const readAnswerRadio = (jsonFileName, storage, chboxlist, answerRadioResult, ta
         }else if (answerRadio[i].control.value === '4') {
           answerRadioResult[taiou[c - 1]] = 4
           storage.setItem(changedAnswerClassificationSaveTarget, 3)
+          console.log('set self')
           break
         }else if (answerRadio[i].control.value === '5') {
           answerRadioResult[taiou[c - 1]] = 5
           storage.setItem(changedAnswerClassificationSaveTarget, 4)
+          console.log('set spiritual')
           break
         }
       } else {

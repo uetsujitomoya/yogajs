@@ -95,17 +95,20 @@ const select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, ch
         const categorizedAnswerCategoryQty=5
 
         if (stockedAnswerGroupNumber !== null) {
+          console.log('a %s',stockedAnswerGroupNumber)
           answerClassification3dArrayforCreatingSelect[hatsugenIdx][bunIdx][stockedAnswerGroupNumber] = 1
-          /*
+
           for (categoryIdx = 0; categoryIdx < categorizedAnswerCategoryQty; categoryIdx++) {
-            if (categoryIdx !== stockedAnswerGroupNumber) {
+            if (categoryIdx != stockedAnswerGroupNumber) {
               answerClassification3dArrayforCreatingSelect[hatsugenIdx][bunIdx][categoryIdx] = 0
             }// 全てゼロなら濃いグレーが出力
           }
-          */
+
         }
         taiou[answerNumber - 1] = n - 1
 
+
+        //どれにも属さない
         if (answerClassification3dArrayforCreatingSelect[hatsugenIdx][bunIdx][0] + answerClassification3dArrayforCreatingSelect[hatsugenIdx][bunIdx][1] + answerClassification3dArrayforCreatingSelect[hatsugenIdx][bunIdx][2] >= 2) {
           target.innerHTML += '<div id="b' + answerNumber + '" style="cursor: pointer"><u>' + (hatsugenIdx + 1) + '(C) ' + bun[hatsugenIdx][bunIdx] + '</u></div><div id="r' + answerNumber + '"><label><input type=radio name="r' + answerNumber + '" value=0>どれにも含まない</label></div><br>'
         } else {
@@ -157,11 +160,12 @@ const select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, ch
       var stockedQuestionGroupNumber = storage.getItem(jsonName + 'RGBlist' + questionNumber)
 
       if (stockedQuestionGroupNumber !== null) {
+        console.log('q %s',stockedQuestionGroupNumber)
         for (categoryIdx = 3; categoryIdx <= 7; categoryIdx++) {
-          if (categoryIdx === stockedQuestionGroupNumber) {
+          if (categoryIdx == stockedQuestionGroupNumber) {
             RGBlist[hatsugenIdx / 2][categoryIdx] = 1
           } else {
-            //RGBlist[hatsugenIdx / 2][categoryIdx] = 0
+            RGBlist[hatsugenIdx / 2][categoryIdx] = 0
           }
         }
       }
