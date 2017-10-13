@@ -223,4 +223,5 @@ const select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, ch
     questionNumbermax: questionNumbermax
   }
 }
+
 export {select}

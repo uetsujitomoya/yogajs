@@ -141,7 +141,7 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
   //var colorBun = ['#c0c0c0', loveColor, friendColor, workColor]
   const answerTextureChoiceArray = ['noGroup', 'love', 'answerTextureFunctions.friend', 'answerTextureFunctions.work', 'answerTextureFunctions.self', 'answerTextureFunctions.spiritual']
 
- console.log(answerTextureChoiceArray)
+  console.log(answerTextureChoiceArray)
 
   const axisDescriptionY = 240
 
@@ -270,7 +270,9 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
         textOnRect[textOnRectNum] = categoryOfTextOnRect.closedQuestion
       } else if (barChartAllHatsugenColorArray[textOnRectNum] === kaishakuColor) {
         textOnRect[textOnRectNum] = categoryOfTextOnRect.interpretation
-      } else{
+      } else　if(barChartAllHatsugenColorArray[textOnRectNum] === sekenColor) {
+        textOnRect[textOnRectNum] = categoryOfTextOnRect.smallTalk
+      }else{
         //console.log('checked = %d',checkedNum)
         console.log('checked[%d]=%d', checkedNum,checked[checkedNum])
 
@@ -287,7 +289,7 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
         } else if (checked[checkedNum] === 5) {
           textOnRect[textOnRectNum] = categoryOfTextOnRect.spiritual; checkedNum++
         } else {
-          textOnRect[textOnRectNum] = categoryOfTextOnRect.smallTalk
+          alert('undefined')
         }
       }
     }
