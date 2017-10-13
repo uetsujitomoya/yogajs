@@ -7,20 +7,20 @@ let insertStr = (str, index, insert) => {
   return str.slice(0, index) + insert + str.slice(index, str.length)
 }
 
-var makeOnClick = (c) => {
+const makeOnClick = (c) => {
   document.getElementById('b' + c).onclick = () => {
     const id = 'r' + c
     document.getElementById(id).classList.toggle('hide')
   }
 }
-var makeOnClickS = (c) => {
+const makeOnClickS = (c) => {
   document.getElementById('bs' + c).onclick = () => {
     const id = 'rs' + c
     document.getElementById(id).classList.toggle('hide')
   }
 }
 
-let selectGraphShape = function (name, storage, keitaisokaiseki, chboxlist, chboxlist2, RGBlist, hatsugen, bun, checked, checked2, taiou, taiou2, chboxlength, chboxlength2, startTime, graph, ranshin, vResult) {
+const selectGraphShape = function (name, storage, keitaisokaiseki, chboxlist, chboxlist2, RGBlist, hatsugen, bun, checked, checked2, taiou, taiou2, chboxlength, chboxlength2, startTime, graph, ranshin, vResult) {
   console.log('%centerred selectGraphShape', 'color:red')
 
   document.getElementById('GraphSelectButton').onclick = () => {
@@ -29,7 +29,7 @@ let selectGraphShape = function (name, storage, keitaisokaiseki, chboxlist, chbo
   }// graphの形状を切り替えた際もここで再描画される
 }
 
-var ClassifyWithFirstWordDictionary = (name, wordArrayInASentence, checkboxlist, chboxlist, chboxlist2, RGBlist, hatsugenArray, contentArrayOfASentence, checked, checked2, taiou, taiou2, chboxlength, chboxlength2, originalText) => {
+const ClassifyWithFirstWordDictionary = (name, wordArrayInASentence, checkboxlist, chboxlist, chboxlist2, RGBlist, hatsugenArray, contentArrayOfASentence, checked, checked2, taiou, taiou2, chboxlength, chboxlength2, originalText) => {
 // いつものやつで話者分類まではつくっとくべき。
     // てかKNP-人間関係図といつもの分類-いつもの可視化はバッサリ区別していいんじゃね
 
@@ -50,7 +50,6 @@ var ClassifyWithFirstWordDictionary = (name, wordArrayInASentence, checkboxlist,
   }
 
     // subjectかobjectに登場人物が入ってるverbを抽出せよ。
-
     // 「*」から「*」までが1つの「文節」（「*」B列のかかり先表示はよくわからないので無視していい。……ことはない。ヴィジュアライズなKNPパイプ表現と非対応だが、より自然。次に係る基本句ではなく、次に係る文節単位で考えられている。「教育費を」）
 
   let KNP_clause = {
@@ -64,7 +63,6 @@ var ClassifyWithFirstWordDictionary = (name, wordArrayInASentence, checkboxlist,
      行内のどれかの(ループ？)
      　　　　　　　要素に「用言」を含むか　の判定
     * */
-
     // EOSで1文と定義
 
   let KNPsentence = {
@@ -253,8 +251,8 @@ var ClassifyWithFirstWordDictionary = (name, wordArrayInASentence, checkboxlist,
           }
           break
         }
-        if (wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].word_id == '2613630' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '：' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == ':' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form == '･･･？：' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form == ')：' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form.indexOf('〈') != -1 || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form.indexOf('〉') != -1) {
-          if (hatsugenCnt % 2 == 0) {
+        if (wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].word_id === '2613630' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '：' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == ':' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form == '･･･？：' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form == ')：' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form.indexOf('〈') != -1 || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form.indexOf('〉') != -1) {
+          if (hatsugenCnt % 2 === 0) {
             if (sentenceCntInHatsugen <= 2 && wordsQtyInASentence <= 7) {
               RGBlist[hatsugenCnt / 2][5] = 1
             }
@@ -289,14 +287,14 @@ var ClassifyWithFirstWordDictionary = (name, wordArrayInASentence, checkboxlist,
           y = 0
           if (x > 0) {
             for (z = 0; z < x; z++) {
-              if (tango[z] == wordArrayInASentence[hatsugenCnt][sentenceCntInHatsugen][wordCntInASentence]) {
+              if (tango[z] === wordArrayInASentence[hatsugenCnt][sentenceCntInHatsugen][wordCntInASentence]) {
                 y = 1
                 break
               }
             }
           }
           x++
-          if (y == 1) {
+          if (y === 1) {
             continue// 次のjへ
           }
           tangoset.add(wordArrayInASentence[hatsugenCnt][sentenceCntInHatsugen][wordCntInASentence])// tangoset終了
@@ -315,19 +313,19 @@ var ClassifyWithFirstWordDictionary = (name, wordArrayInASentence, checkboxlist,
         RGBk[h][k] = 0
         for (hatsugenCnt = 1; hatsugenCnt < wordArrayInASentence.length; hatsugenCnt = hatsugenCnt + 2) {
           for (sentenceCntInHatsugen = 0; sentenceCntInHatsugen < wordArrayInASentence[hatsugenCnt].length; sentenceCntInHatsugen++) {
-            if (answerSentenceCategory[hatsugenCnt][sentenceCntInHatsugen][h] == 1) {
+            if (answerSentenceCategory[hatsugenCnt][sentenceCntInHatsugen][h] === 1) {
               for (wordCntInASentence = 0; wordCntInASentence < wordArrayInASentence[hatsugenCnt][sentenceCntInHatsugen].length; wordCntInASentence++) {
-                if (miserables.nodes[k] == wordArrayInASentence[hatsugenCnt][sentenceCntInHatsugen][wordCntInASentence]) {
+                if (miserables.nodes[k] === wordArrayInASentence[hatsugenCnt][sentenceCntInHatsugen][wordCntInASentence]) {
                   RGBk[h][k] = 1
                   break
                 }
               }
             }
-            if (RGBk[h][k] == 1) {
+            if (RGBk[h][k] === 1) {
               break
             }
           }
-          if (RGBk[h][k] == 1) {
+          if (RGBk[h][k] === 1) {
             break
           }
         }
@@ -336,12 +334,12 @@ var ClassifyWithFirstWordDictionary = (name, wordArrayInASentence, checkboxlist,
 
     for (h = 0; h <= 2; h++) {
       for (k = 0; k < miserables.nodes.length; k++) {
-        if (RGBk[h][k] == 1) {
+        if (RGBk[h][k] === 1) {
           for (hatsugenCnt = 1; hatsugenCnt < wordArrayInASentence.length; hatsugenCnt = hatsugenCnt + 2) {
             for (sentenceCntInHatsugen = 0; sentenceCntInHatsugen < wordArrayInASentence[hatsugenCnt].length; sentenceCntInHatsugen++) {
-              if (answerSentenceCategory[hatsugenCnt][sentenceCntInHatsugen][h] == 0) {
+              if (answerSentenceCategory[hatsugenCnt][sentenceCntInHatsugen][h] === 0) {
                 for (wordCntInASentence = 0; wordCntInASentence < wordArrayInASentence[hatsugenCnt][sentenceCntInHatsugen].length; wordCntInASentence++) {
-                  if (miserables.nodes[k] == wordArrayInASentence[hatsugenCnt][sentenceCntInHatsugen][wordCntInASentence]) {
+                  if (miserables.nodes[k] === wordArrayInASentence[hatsugenCnt][sentenceCntInHatsugen][wordCntInASentence]) {
                     answerSentenceCategory[hatsugenCnt][sentenceCntInHatsugen][h] = 1
                     break
                   }
