@@ -56,7 +56,7 @@ const createAnswerRadioButton = (answerNumber, value, color, answerGroupName, ch
     targetInRow.innerHTML += '<label><input type=radio name="r' + answerNumber + '" value=' + value + '><font color="' + color + '">【</font>「' + answerGroupName + '」に含む<font color="' + color + '">】</font></label>'
 
   }
-  }
+}
 
 const select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, chboxlist, chboxlist2, answerClassification3dArrayforCreatingSelect, RGBlist, hatsugen, bun, checked, checked2, taiou, taiou2, chboxlength, chboxlength2) => {
   console.log('entered select.js')

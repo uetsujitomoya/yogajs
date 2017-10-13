@@ -43,7 +43,7 @@ var test2
 let RGBlist = []
 let checkboxlist = []
 
-let switchClassificationMethod = () => {
+const switchClassificationMethod = () => {
   const SwitchClassificationMethodRadio = document.getElementById('SwitchClassificationMethod').children
   if (SwitchClassificationMethodRadio[0].control.checked === true) {
         // 単純な単語辞書を用いた分類

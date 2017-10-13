@@ -4,6 +4,7 @@
 
 import d3 from 'd3'
 import textures from 'textures'
+import {rodata} from './js/rodata'
 
 // let love="#ffeeff";
 // let friend="#c0ffc0";
@@ -139,7 +140,7 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
   var margin2 = {top: 10, right: 10, bottom: 50, left: 40}
 
   //var colorBun = ['#c0c0c0', loveColor, friendColor, workColor]
-  const answerTextureChoiceArray = ['noGroup', 'love', 'answerTextureFunctions.friend', 'answerTextureFunctions.work', 'answerTextureFunctions.self', 'answerTextureFunctions.spiritual']
+  const answerTextureChoiceArray = [noCategoryAnswerColor, loveColor, friendColor, workColor, rodata.color.self.t, rodata.color.spiritual.t]
 
   console.log(answerTextureChoiceArray)
 
@@ -417,6 +418,8 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
               for (l = 0; l < bun[k + mazekozeHatsugenNumArray[i]].length; l++) {
                 if (bun[k + mazekozeHatsugenNumArray[i]][l] === '') { continue }
                 msg.innerHTML += '<font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArray[checkedBun[k + mazekozeHatsugenNumArray[i]][l]] + '><b>【</b></font>' + bun[k + mazekozeHatsugenNumArray[i]][l] + '<font color=' + answerTextureChoiceArray[checkedBun[k + mazekozeHatsugenNumArray[i]][l]] + '><b>】</b></font>'
+                console.log( bun[k + mazekozeHatsugenNumArray[i]][l] )
+                console.log( answerTextureChoiceArray[checkedBun[k + mazekozeHatsugenNumArray[i]][l]] )
               }
               msg.innerHTML += '<font size=' + fontSizeInTextView + '><br><br>'
             }
@@ -431,6 +434,8 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
               for (l = 0; l < bun[k + mazekozeHatsugenNumArray[i]].length; l++) {
                 if (bun[k + mazekozeHatsugenNumArray[i]][l] === '') { continue }
                 msg.innerHTML += '<u><font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArray[checkedBun[k + mazekozeHatsugenNumArray[i]][l]] + '><b>【</b></font>' + bun[k + mazekozeHatsugenNumArray[i]][l] + '<font color=' + answerTextureChoiceArray[checkedBun[k + mazekozeHatsugenNumArray[i]][l]] + '><b>】</b></font></font></u>'
+                console.log( bun[k + mazekozeHatsugenNumArray[i]][l] )
+                console.log(answerTextureChoiceArray[checkedBun[k + mazekozeHatsugenNumArray[i]][l]])
               }
               msg.innerHTML += '<font size=' + fontSizeInTextView + '><br><br></font>'
             } else if (k % 2 === 0) {
@@ -438,6 +443,8 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
               for (l = 0; l < bun[k + mazekozeHatsugenNumArray[i]].length; l++) {
                 if (bun[k + mazekozeHatsugenNumArray[i]][l] === '') { continue }
                 msg.innerHTML += '<font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArray[checkedBun[k + mazekozeHatsugenNumArray[i]][l]] + '><b>【</b></font>' + bun[k + mazekozeHatsugenNumArray[i]][l] + '<font color=' + answerTextureChoiceArray[checkedBun[k + mazekozeHatsugenNumArray[i]][l]] + '><b>】</b></font>'
+                console.log(bun[k + mazekozeHatsugenNumArray[i]][l])
+                console.log(answerTextureChoiceArray[checkedBun[k + mazekozeHatsugenNumArray[i]][l]])
               }
               msg.innerHTML += '<font size=' + fontSizeInTextView + '><br><br>'
             } else { // forループを回さないと各文ごとの表示ができない
