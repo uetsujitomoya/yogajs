@@ -771,7 +771,6 @@ const setForViz = (name, storage, keitaisokaiseki, chboxlist, chboxlist2, RGBlis
   d3.select('#svgdiv').select('svg').remove()
   var svg = d3.select('#svgdiv').append('svg')
     .attr('height', 270)
-
     .attr('width', width)
   var colorArrayInAllQuestionHatsugen = []
   var stackdataArr = []
