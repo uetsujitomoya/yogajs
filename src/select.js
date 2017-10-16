@@ -12,7 +12,7 @@ const spiritualTextColor = "black"
 
 import {convertCSV2Storage} from './convertCSV2Storage.js'
 
-let createGraphSelectButton = () => {
+const createGraphSelectButton = () => {
   let GraphSelectButtonPlaceID = 'GraphSelectButton'
   let stackedChartName = '積み重ねグラフ'
   let barChartName = '帯グラフ'
