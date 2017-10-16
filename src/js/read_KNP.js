@@ -23,7 +23,7 @@ let read_KNP = () => {
   find_character(KNP_array, characterArray, nodeArray)
   console.log(nodeArray)
 
-  fixNodePoint(characterArray.length, nodeArray)
+  fixNodePoint(nodeArray)
 
   let reconstructedKNP = reconstruct_KNP(KNP_array, characterArray, nodeArray)
   console.log('get out reconstruct_KNP')

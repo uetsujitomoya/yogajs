@@ -1,10 +1,10 @@
-const fixNodePoint =(characterArrayLength,nodeArray)=> {
+const fixNodePoint =(nodeArray)=> {
   //characterの母数が出揃ってからNodeの座標を決める。
+ for(let node of nodeArray){
+   node.fixPoint(nodeArray.length)
+ }
 
-  nodeArray.forEach((node,nodeIdx)=>{
-    node.y = 200 + 150 * Math.sin((nodeIdx / characterArrayLength) * 2 * Math.PI)
-    node.x = 200 + 150 * Math.cos((nodeIdx / characterArrayLength) * 2 * Math.PI)
-  })
+
 }
 
 export {fixNodePoint}

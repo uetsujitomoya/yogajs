@@ -7,4 +7,17 @@ const isCharacter = (KNP_character_array, temp_character_name) => {
   return false
 }
 
-export {isCharacter}
+const searchNodeArrayForCharacterAndPoint=(nodeArray,tmpName)=>{
+  for(const node of nodeArray){
+    if(tmpName===node.name){
+      return{
+        isCharacter:true,
+        x:node.pointX,
+        y:node.pointY
+      }
+    }
+  }
+  return{isCharacter:false}
+}
+
+export {isCharacter,searchNodeArrayForCharacterAndPoint}
