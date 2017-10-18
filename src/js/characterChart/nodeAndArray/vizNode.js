@@ -6,7 +6,10 @@ import d3 from 'd3'
 import $ from 'jquery'
 import {vizArrow} from './vizArrow'
 import {connectNodeAndArray} from './connectNodeAndArray'
-import {r} from './defineNode'
+//import {r} from './defineNode'
+import{rodata} from '../../rodata'
+
+const r = rodata.nodeR
 
 const color_of_client = 'red'
 const color_of_people_around_client = 'gray'

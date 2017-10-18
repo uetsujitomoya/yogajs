@@ -6,9 +6,9 @@ const rodata={
   yajirushi_refX : 16,
   markerFillColor : 'red',
 
-  nodeR : 60,
-  orbitR :150,
-  orbitOPoint:200
+  nodeR : 15,
+  orbitR :350,
+  orbitOPoint:400
 }
 
 export {rodata}
