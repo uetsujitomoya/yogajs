@@ -20,46 +20,49 @@ const characterChartAreaID = '#example'
 
 let vizNodes = (nodeArray,arrowArray) => {
     // console.log("entered vizNodes")
-  var svg = d3.select(characterChartAreaID).append('svg')
+
+  let svg = d3.select(characterChartAreaID).append('svg')
         .attr({
-          width: 640,
-          height: 480
+          width: 1300,
+          height: 800
         })
 
-  var g = svg.selectAll('g')
+  //console.log(nodeArray)
+  let nodes = svg.selectAll('g')
         .data(nodeArray).enter().append('g')
         .attr({
           transform: function (d) {
+            //console.log(d)
+            console.log(d.x)
+            console.log(d.y)
             return 'translate(' + d.x + ',' + d.y + ')'
           }
         })
 
-  g.append('circle')
+  nodes.append('circle')
         .attr({
           'r': function (d) { return r },
-          'stroke': function (d, i) { if (i == 0) { return color_of_client } else { return color_of_people_around_client } },
+          'stroke': function (d, i) { if (i === 0) { return color_of_client } else { return color_of_people_around_client } },
           'fill': 'white',
-          'stroke-width': (d) => { return d.circleStrokeWidth }
+          'stroke-width': (d) => { return　1 /*d.circleStrokeWidth*/ }
         })
 
-  g.append('text')
+  nodes.append('text')
         .attr({
           'text-anchor': 'middle',
           'dy': '.35em',
           'fill': 'black'
         })
-        .text(function (d) { return d.nodeCharacter })
+        .text(function (d) {
+          //if(d.nodeCharacter==="Aさん"){alert("Aさん")}
+          return d.nodeCharacter
+        })
+  console.log(nodes)
 
-  /*
-  if (nodeArray.length >= 2) {
-    vizArrow(svg, nodeArray)
-  }
-  */
-
-  for(let arrow of arrowArray){
+/*  for(let arrow of arrowArray){
     connectNodeAndArray(arrow)
     vizArrow(svg, arrow.pointArray)
-  }
+  }*/
 
 }
 

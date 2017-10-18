@@ -5,12 +5,12 @@
 import {csv2Array} from '../../csv2Array.js'
 import {getCSV} from '../getCSV.js'
 import {reconstructKNP} from '../reconstructKNP.js'
-import {find_character} from './findCharacter.js'
+import {findCharacter} from './findCharacter.js'
 import {createNodeAndArrowArray} from './nodeAndArray/createNodeAndArrowArray.js'
 import {manageSlider} from './slider.js'
 import {fixNodePoint} from './fixNodePoint'
 
-let characterArray = []
+let charaArray = []
 
 let verbArray = []
 
@@ -20,16 +20,16 @@ const createCharacterChart = () => {
   console.log(KNP_array)
 
   let nodeArray=[]
-  find_character(KNP_array, characterArray, nodeArray)
+  findCharacter(KNP_array, charaArray, nodeArray)
   console.log(nodeArray)
 
-  fixNodePoint(nodeArray)
+  fixNodePoint(charaArray)
 
-  let reconstructedKNP = reconstructKNP(KNP_array, characterArray, nodeArray)
+  let reconstructedKNP = reconstructKNP(KNP_array, charaArray, nodeArray)
   console.log('get out reconstructKNP')
   console.log(reconstructedKNP.sentenceArray)
 
-  createNodeAndArrowArray(reconstructedKNP.sentenceArray, nodeArray)
+  createNodeAndArrowArray(reconstructedKNP.sentenceArray, charaArray)
   manageSlider(reconstructedKNP.sentenceArray)
 }
 

@@ -2,7 +2,7 @@
  * Created by uetsujitomoya on 2017/09/04.
  */
 
-import Node from './defineNode.js'
+//import Node from './defineNode.js'
 import Arrow from './defineArrow.js'
 import {vizNodes} from './vizNode'
 import {initialValueOfSubjectAndObjectInVerb} from '../reconstructKNP/defineVerb.js'
@@ -27,7 +27,7 @@ const createNodeAndArrowArray = (sentenceArray, nodeArray) => {
 
     if (containsVerbArray.value === 'No') { continue }
 
-    console.log(sentence.verb_array)
+    //console.log(sentence.verb_array)
 
     sentence.verb_array.forEach((verb) => {
 
@@ -45,7 +45,7 @@ const createNodeAndArrowArray = (sentenceArray, nodeArray) => {
             arrowArray.push(new Arrow(verb))
           }
         }else{
-          let isNewNode = true
+          //let isNewNode = true
           for (let tmpNodeCnt = 0; tmpNodeCnt < nodeArray.length; tmpNodeCnt++) {
             if (isSameNode(nodeArray[tmpNodeCnt], verb)) {
               nodeArray[tmpNodeCnt].circleStrokeWidth++
@@ -53,9 +53,9 @@ const createNodeAndArrowArray = (sentenceArray, nodeArray) => {
               break
             }
           }
-          if (isNewNode) {
+          /*if (isNewNode) {
             nodeArray.push(new Node(verb))
-          }
+          }*/
         }
 
       }

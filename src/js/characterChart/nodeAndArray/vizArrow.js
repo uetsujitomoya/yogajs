@@ -8,7 +8,7 @@ const markerFillColor = rodata.markerFillColor
 const r = rodata.nodeR
 const yajirushi_refX = rodata.yajirushi_refX
 
-let vizNodes = (svg, arrowArray) => {
+let vizArrow = (svg, arrowArray) => {
   var gOfArrow = svg.selectAll('g')
         .data(nodeArray).enter().append('g')
 
@@ -55,7 +55,7 @@ let vizNodes = (svg, arrowArray) => {
   })
 }
 
-const vizArrow = (svg, arrowPointArray) => {
+const vizArrows = (svg, arrowPointArray) => {
   //let circle_data_array = [[nodeArray[0].x, nodeArray[0].y, r], [nodeArray[1].x, nodeArray[1].y, r]]
   console.log(arrowPointArray)
 

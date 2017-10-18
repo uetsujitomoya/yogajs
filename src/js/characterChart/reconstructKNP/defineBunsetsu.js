@@ -7,7 +7,7 @@ import {judgeAboutAddingSubjectCharaOrObjectChara} from './judgeAboutAddingSubje
 const firstJapaneseRowIdxInBunsetsu=rodata.firstJapaneseRowIdxInBunsetsu
 
 export default class Bunsetsu {
-  constructor (num, input_2d_array, characterArray) {
+  constructor (num, input_2d_array, charaArray) {
     this.csv_raw_array = input_2d_array
     this.id = num + 'D'
 
@@ -30,7 +30,7 @@ export default class Bunsetsu {
 
     const tmpCharaName = this.csv_raw_array[firstJapaneseRowIdxInBunsetsu][0]
 
-    judgeAboutAddingSubjectCharaOrObjectChara(characterArray,tmpCharaName,this)
+    judgeAboutAddingSubjectCharaOrObjectChara(charaArray,tmpCharaName,this)
   }
 
   addAboutSubjectOrObject(bunsetsuInfoRow,charaName,node){

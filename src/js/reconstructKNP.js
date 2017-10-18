@@ -10,7 +10,7 @@ import Sentence from './characterChart/reconstructKNP/defineSentence'
 
 //const firstJapaneseRowIdxInBunsetsu = 2
 
-const reconstructKNP = (raw_2d_array, characterArray, nodeArray) =>
+const reconstructKNP = (raw_2d_array, charaArray, nodeArray) =>
 {//係り受けを調べる
   let sentenceNum = 0
   let sentenceArray = []
@@ -23,7 +23,7 @@ const reconstructKNP = (raw_2d_array, characterArray, nodeArray) =>
     } else {
       //console.log(sentenceNum)
      sentenceArray.push(
-       new Sentence(tmpRowNo, tempSentence2dArray, characterArray, sentenceNum, nodeArray)
+       new Sentence(tmpRowNo, tempSentence2dArray, charaArray, sentenceNum, nodeArray)
      )
       sentenceNum++
       tempSentence2dArray = []

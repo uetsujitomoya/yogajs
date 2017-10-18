@@ -4,6 +4,12 @@
 
 import {contains_japanese} from "../contains_japanese.js"
 import Node from './nodeAndArray/defineNode.js'
+import {rodata} from '../rodata'
+
+const r=rodata.nodeR
+const orbitR=rodata.orbitR
+const orbitOPoint = rodata.orbitOPoint
+let nodeCnt=0
 
 const characterKeyword="カテゴリ:人>"
 
@@ -14,7 +20,7 @@ const color_of_people_around_client='gray'
 
 //Aさんを追加→1単語とする
 
-const find_character = (knpArray,characterArray,nodeArray) => {
+const findCharacter = (knpArray, characterArray, nodeArray) => {
   knpArray.forEach((row,rowIdx)=>{
     //console.log(row)
     if(contains_japanese(row[0])){
@@ -66,16 +72,36 @@ const createNewCharacter=(name,characterArray,nodeArray)=>{
   nodeArray.push(new Node(name))
 }
 
-class character{
-  constructor(){
+/*class character{
+  constructor(name,arrayLength){
     this.chalacter_name=characterDefaultName
     this.isClient=false
     this.character_node = new Node(character_name,sentence,this.isClient)
     this.nodeX=null
     this.nodeY=null
     this.nodeCircleStrokeWidth=0
+    this.r = r
+    if (this.isSubject) {
+      this.strokeColor = 'red'
+    } else {
+      this.strokeColor = 'gray'
+    }
+    this.nodeCharacter = name
+    this.circleStrokeWidth = 0
+    this.nodeIdx=nodeCnt
+    this.viz=false
+    nodeCnt++
   }
-}
+  addStrokeWidth () {
+    this.strokeWidth++
+    this.viz=true
+  }
+  fixPoint(nodeListLength){
+    this.radian = (this.nodeIdx/nodeListLength)*2*Math.PI
+    this.y = orbitOPoint + orbitR * Math.sin(this.radian)
+    this.x = orbitOPoint + orbitR * Math.cos(this.radian)
+  }
+}*/
 
 /*
 class Node{
@@ -100,7 +126,7 @@ let add_bold_of_node = () => {
 
 }
 
-export {find_character}
+export {findCharacter}
 
 class Character {
   constructor(name,idx) {
@@ -111,5 +137,29 @@ class Character {
       this.client = 0
     }
     this.nodeIdx=idx
+    this.nodeX=null
+    this.nodeY=null
+    this.nodeCircleStrokeWidth=0
+    this.r = r
+    if (this.isSubject) {
+      this.strokeColor = 'red'
+    } else {
+      this.strokeColor = 'gray'
+    }
+    this.nodeCharacter = name
+    this.circleStrokeWidth = 0
+    this.nodeIdx=nodeCnt
+    this.viz=false
+    nodeCnt++
+  }
+  addStrokeWidth () {
+    this.strokeWidth++
+    this.viz=true
+  }
+  fixPoint(nodeListLength){
+    this.radian = (this.nodeIdx/nodeListLength)*2*Math.PI
+    this.y = orbitOPoint + orbitR * Math.sin(this.radian)
+    this.x = orbitOPoint + orbitR * Math.cos(this.radian)
+
   }
 }

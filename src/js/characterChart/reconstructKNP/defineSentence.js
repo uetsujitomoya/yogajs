@@ -11,7 +11,7 @@ const bunsetsuSymbol = rodata.bunsetsuSymbol
 const kihonkuSymbol = rodata.kihonkuSymbol
 
 export default class Sentence {
-  constructor (rawRowIdx, sentence2dArray, characterArray, sentenceIdx, nodeArray) {
+  constructor (rawRowIdx, sentence2dArray, charaArray, sentenceIdx, nodeArray) {
 
     if (sentence2dArray.length === 1) {
       return 0
@@ -58,7 +58,7 @@ export default class Sentence {
         this.kihonku_array[kihonkuIdxInSentence] = new KihonkuInSentence(kihonkuIdxInSentence, temp2dArrayForKihonku)// 文の中の通し番号での基本句array
         temp2dArrayForKihonku = []
         kihonkuIdxInSentence++
-        this.bunsetsu_array[bunsetsuIdxInSentence] = new Bunsetsu(bunsetsuIdxInSentence, temp2dArrayForBunsetsu, characterArray)// 文の中の通し番号での文節array
+        this.bunsetsu_array[bunsetsuIdxInSentence] = new Bunsetsu(bunsetsuIdxInSentence, temp2dArrayForBunsetsu, charaArray)// 文の中の通し番号での文節array
 
         // verb_array作成
         if (this.bunsetsu_array[bunsetsuIdxInSentence].isVerb) { this.verb_array.push(new verbInSentence(bunsetsuIdxInSentence, temp2dArrayForBunsetsu, sentenceIdx)) }
@@ -71,7 +71,7 @@ export default class Sentence {
       temp2dArrayForKihonku.push(sentence2dArray[temp_rowNo])
     }
 
-    this.bunsetsu_array[bunsetsuIdxInSentence] = new Bunsetsu(bunsetsuIdxInSentence, temp2dArrayForBunsetsu, characterArray)
+    this.bunsetsu_array[bunsetsuIdxInSentence] = new Bunsetsu(bunsetsuIdxInSentence, temp2dArrayForBunsetsu, charaArray)
 
     // verb_array作成
 

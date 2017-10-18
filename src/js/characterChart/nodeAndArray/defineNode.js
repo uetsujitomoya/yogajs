@@ -22,7 +22,7 @@ export default class Node {
       this.strokeColor = 'gray'
     }
     this.nodeCharacter = name
-    this.circleStrokeWidth = 0
+    this.circleStrokeWidth = 1
     this.nodeIdx=nodeCnt
     this.viz=false
     nodeCnt++
