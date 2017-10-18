@@ -30,30 +30,34 @@ const createNodeAndArrowArray = (sentenceArray, nodeArray) => {
     console.log(sentence.verb_array)
 
     sentence.verb_array.forEach((verb) => {
-      if (existsObject(verb)) {
-        let isNewArrow = true
-        for (let tmpArrowCnt = 0; tmpArrowCnt < arrowArray.length; tmpArrowCnt++) {
-          if (isSameArrow(arrowArray[tmpArrowCnt], verb)) {
-            arrowArray[tmpArrowCnt].arrowStrokeWidth++
-            isNewArrow = false
-            break
+
+      if (existsSubject(verb)) {
+        if (existsObject(verb)) {
+          let isNewArrow = true
+          for (let tmpArrowCnt = 0; tmpArrowCnt < arrowArray.length; tmpArrowCnt++) {
+            if (isSameArrow(arrowArray[tmpArrowCnt], verb)) {
+              arrowArray[tmpArrowCnt].arrowStrokeWidth++
+              isNewArrow = false
+              break
+            }
+          }
+          if (isNewArrow) {
+            arrowArray.push(new Arrow(verb))
+          }
+        }else{
+          let isNewNode = true
+          for (let tmpNodeCnt = 0; tmpNodeCnt < nodeArray.length; tmpNodeCnt++) {
+            if (isSameNode(nodeArray[tmpNodeCnt], verb)) {
+              nodeArray[tmpNodeCnt].circleStrokeWidth++
+              isNewNode = false
+              break
+            }
+          }
+          if (isNewNode) {
+            nodeArray.push(new Node(verb))
           }
         }
-        if (isNewArrow) {
-          arrowArray.push(new Arrow(verb))
-        }
-      } else if (existsSubject(verb)) {
-        let isNewNode = true
-        for (let tmpNodeCnt = 0; tmpNodeCnt < nodeArray.length; tmpNodeCnt++) {
-          if (isSameNode(nodeArray[tmpNodeCnt], verb)) {
-            nodeArray[tmpNodeCnt].circleStrokeWidth++
-            isNewNode = false
-            break
-          }
-        }
-        if (isNewNode) {
-          nodeArray.push(new Node(verb))
-        }
+
       }
     })
   }
