@@ -2,6 +2,12 @@
  * Created by uetsujitomoya on 2017/09/04.
  */
 
+import{rodata} from '../../rodata'
+
+const markerFillColor = rodata.markerFillColor
+const r = rodata.nodeR
+const yajirushi_refX = rodata.yajirushi_refX
+
 let vizNodes = (svg, arrowArray) => {
   var gOfArrow = svg.selectAll('g')
         .data(nodeArray).enter().append('g')
@@ -51,12 +57,13 @@ let vizNodes = (svg, arrowArray) => {
 
 const vizArrow = (svg, arrowPointArray) => {
   //let circle_data_array = [[nodeArray[0].x, nodeArray[0].y, r], [nodeArray[1].x, nodeArray[1].y, r]]
+  console.log(arrowPointArray)
 
   var marker = svg.append('defs').append('marker')
     .attr({
       'id': 'arrowhead',
       // 矢印の位置を一番後ろから手前に少しずらす
-      'refX': yajirushi_refX,
+      'refX': rodata.yajirushi_refX,
       'refY': 2,
       'markerWidth': 4,
       'markerHeight': 4,
@@ -75,7 +82,7 @@ const vizArrow = (svg, arrowPointArray) => {
 
   var path = svg.append('path')
     .attr({
-      'd': line(nodeCircleDataArray),
+      'd': line(arrowPointArray),
       'stroke': 'red',
       'stroke-width': 5,
       'fill': 'none',

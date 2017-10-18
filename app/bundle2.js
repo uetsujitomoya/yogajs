@@ -39233,7 +39233,7 @@ var _isCharacter = require('./isCharacter');
 
 var _find_verb = require('../find_verb');
 
-//import KNP_kihonku_in_bunsetsu from './defineKihonkuClass'
+//import KihonkuInBunsetsu from './defineKihonkuClass'
 
 var firstJapaneseRowIdxInBunsetsu = _rodata.rodata.firstJapaneseRowIdxInBunsetsu;
 
@@ -39295,7 +39295,7 @@ var KNP_Bunsetsu = (function () {
       }
     }
   }, {
-    key: 'makeKihonkuArrayInBunsetsu',
+    key: 'createKihonkuArrayInBunsetsu',
     value: function makeKihonkuArrayInBunsetsu(bunsetsuRaw2dArray) {
       var kihonkuIdxInBunsetsu = 0;
       var temp2dArrayForKihonku = [];
@@ -39407,11 +39407,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'd
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-var _defineBunsetsuClassJs = require('./defineBunsetsuClass.js');
+var _defineBunsetsuClassJs = require('./defineBunsetsu.js');
 
 var _defineBunsetsuClassJs2 = _interopRequireDefault(_defineBunsetsuClassJs);
 
-var _defineKihonkuClassJs = require('./defineKihonkuClass.js');
+var _defineKihonkuClassJs = require('./defineKihonku.js');
 
 var _defineKihonkuClassJs2 = _interopRequireDefault(_defineKihonkuClassJs);
 
@@ -39498,17 +39498,17 @@ var KNP_Sentence = (function () {
       this.verb_array.push(new _defineClassOfVerbInSentence2['default'](bunsetsuIdxInSentence, temp2dArrayForBunsetsu, sentenceIdx));
     }
     this.kihonku_array[kihonkuIdxInSentence] = new _defineKihonkuClassJs2['default'](kihonkuIdxInSentence, temp2dArrayForKihonku);
-    this.input_each_kakarareru_bunsetsu_id();
-    this.input_each_kakarareru_kihonku_id();
+    this.inputEachKakarareruBunsetsuID();
+    this.inputEachKakarareruKihonkuID();
 
     for (var tempVerbNum = 0; tempVerbNum < this.verb_array.length; tempVerbNum++) {
-      this.search_object_of_verb(this.verb_array[tempVerbNum].bunsetsuNum_inSentence, tempVerbNum);
-      this.search_subject_of_verb(this.verb_array[tempVerbNum].bunsetsuNum_inSentence, tempVerbNum);
+      this.findObjectOfVerb(this.verb_array[tempVerbNum].bunsetsuNum_inSentence, tempVerbNum);
+      this.findSubjectOfVerb(this.verb_array[tempVerbNum].bunsetsuNum_inSentence, tempVerbNum);
     }
   }
 
   _createClass(KNP_Sentence, [{
-    key: 'input_each_kakarareru_bunsetsu_id',
+    key: 'inputEachKakarareruBunsetsuID',
     value: function input_each_kakarareru_bunsetsu_id() {
       // 動詞なら、その動詞にかかるのを探していく
       var _iteratorNormalCompletion = true;
@@ -39542,7 +39542,7 @@ var KNP_Sentence = (function () {
       }
     }
   }, {
-    key: 'input_each_kakarareru_kihonku_id',
+    key: 'inputEachKakarareruKihonkuID',
     value: function input_each_kakarareru_kihonku_id() {
       var _iteratorNormalCompletion2 = true;
       var _didIteratorError2 = false;
@@ -39575,7 +39575,7 @@ var KNP_Sentence = (function () {
       }
     }
   }, {
-    key: 'search_subject_of_verb',
+    key: 'findSubjectOfVerb',
     value: function search_subject_of_verb(verb_clause_num, tempVerbNum) {
       for (var temp_clause_num = verb_clause_num; temp_clause_num >= 0; temp_clause_num--) {
         var temp_clause = this.bunsetsu_array[temp_clause_num];
@@ -39587,7 +39587,7 @@ var KNP_Sentence = (function () {
       }
     }
   }, {
-    key: 'search_object_of_verb',
+    key: 'findObjectOfVerb',
     value: function search_object_of_verb(verb_clause_num, tempVerbNum) {
       for (var temp_clause_num = verb_clause_num; temp_clause_num >= 0; temp_clause_num--) {
         var temp_clause = this.bunsetsu_array[temp_clause_num];
@@ -39908,17 +39908,17 @@ Object.defineProperty(exports, '__esModule', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _jsDefineNodeClassJs = require('../js/defineNodeClass.js');
+var _jsDefineNodeClassJs = require('../js/defineNode.js');
 
 var _jsDefineNodeClassJs2 = _interopRequireDefault(_jsDefineNodeClassJs);
 
-var _jsDefineArrowClassJs = require('../js/defineArrowClass.js');
+var _jsDefineArrowClassJs = require('../js/defineArrow.js');
 
 var _jsDefineArrowClassJs2 = _interopRequireDefault(_jsDefineArrowClassJs);
 
 var _jsVizNode = require('../js/vizNode');
 
-var _find_verbJs = require('./find_verb.js');
+var _find_verbJs = require('./defineVerb.js');
 
 var _characterChartConnectNodeAndArray = require('./characterChart/connectNodeAndArray');
 
@@ -40201,7 +40201,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var _jsContains_japaneseJs = require("../js/contains_japanese.js");
 
-var _defineNodeClassJs = require('./defineNodeClass.js');
+var _defineNodeClassJs = require('./defineNode.js');
 
 var _defineNodeClassJs2 = _interopRequireDefault(_defineNodeClassJs);
 
@@ -40454,9 +40454,9 @@ var _csv2ArrayJs = require('../csv2Array.js');
 
 var _getCSVJs = require('./getCSV.js');
 
-var _reconstruct_KNPJs = require('./reconstruct_KNP.js');
+var _reconstruct_KNPJs = require('./reconstructKNP.js');
 
-var _find_characterJs = require('./find_character.js');
+var _find_characterJs = require('./findCharacter.js');
 
 var _createNodeAndArrowArrayJs = require('./createNodeAndArrowArray.js');
 
@@ -40480,7 +40480,7 @@ var read_KNP = function read_KNP() {
   (0, _characterChartFixNodePoint.fixNodePoint)(nodeArray);
 
   var reconstructedKNP = (0, _reconstruct_KNPJs.reconstruct_KNP)(KNP_array, characterArray, nodeArray);
-  console.log('get out reconstruct_KNP');
+  console.log('get out reconstructKNP');
   console.log(reconstructedKNP.sentenceArray);
 
   (0, _createNodeAndArrowArrayJs.createNodeAndArrowArray)(reconstructedKNP, nodeArray);
@@ -41397,7 +41397,7 @@ var _csv2Array = require('../csv2Array');
 
 var _jsViz_relation_chart = require('../js/viz_relation_chart');
 
-var _jsRead_KNPJs = require('../js/read_KNP.js');
+var _jsRead_KNPJs = require('../js/createCharacterChart.js');
 
 var wordparse2object = function wordparse2object() {
   console.log('wordparse2object');

@@ -4,11 +4,11 @@ import {select} from '../select.js'
 import {setForViz} from '../svg.js'
 import {csv2array} from '../csv2Array'
 import {viz_relation_chart} from '../js/viz_relation_chart'
-import {read_KNP} from '../js/read_KNP.js'
+import {createCharacterChart} from './characterChart/createCharacterChart.js'
 
 let wordparse2object = () => {
   console.log('wordparse2object')
-  read_KNP()
+  createCharacterChart()
   wordparse()
   make_object()
   viz_relation_chart()

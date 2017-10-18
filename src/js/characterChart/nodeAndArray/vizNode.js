@@ -5,8 +5,8 @@
 import d3 from 'd3'
 import $ from 'jquery'
 import {vizArrow} from './vizArrow'
-import {connectNodeAndArray} from './characterChart/connectNodeAndArray'
-import {r} from './defineNodeClass'
+import {connectNodeAndArray} from './connectNodeAndArray'
+import {r} from './defineNode'
 
 const color_of_client = 'red'
 const color_of_people_around_client = 'gray'
@@ -56,7 +56,7 @@ let vizNodes = (nodeArray,arrowArray) => {
   }
   */
 
-  for(arrow of arrowArray){
+  for(let arrow of arrowArray){
     connectNodeAndArray(arrow)
     vizArrow(svg, arrow.pointArray)
   }

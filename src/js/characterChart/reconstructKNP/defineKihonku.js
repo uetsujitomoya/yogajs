@@ -1,4 +1,4 @@
-import KNP_word from './defineWordClass'
+import KNP_word from './defineWord'
 
 export default class KNP_kihonku_in_sentence {
   constructor (num, input_2d_array) {

@@ -1,6 +1,6 @@
 const isCharacter = (KNP_character_array, temp_character_name) => {
-  for (let chara_num = 0; chara_num < KNP_character_array.length; chara_num++) {
-    if (temp_character_name === KNP_character_array[chara_num].name) {
+  for (let charaCnt = 0; charaCnt < KNP_character_array.length; charaCnt++) {
+    if (temp_character_name === KNP_character_array[charaCnt].name) {
       return true
     }
   }
@@ -11,9 +11,11 @@ const searchNodeArrayForCharacterAndPoint=(nodeArray,tmpName)=>{
   for(const node of nodeArray){
     if(tmpName===node.name){
       return{
+        name:node.name,
         isCharacter:true,
         x:node.pointX,
-        y:node.pointY
+        y:node.pointY,
+        nodeIdx:node.idx
       }
     }
   }

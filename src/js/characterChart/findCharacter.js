@@ -2,8 +2,8 @@
  * Created by uetsujitomoya on 2017/08/21.
  */
 
-import {contains_japanese} from "../js/contains_japanese.js"
-import Node from './defineNodeClass.js'
+import {contains_japanese} from "../contains_japanese.js"
+import Node from './nodeAndArray/defineNode.js'
 
 const characterKeyword="カテゴリ:人>"
 
@@ -61,7 +61,7 @@ const isNewCharacter=(tempCharacterName,characterArray)=> {
 
 const createNewCharacter=(name,characterArray,nodeArray)=>{
   //Nodeを出現させるとしたらどこまでつくるかも書く
-  characterArray.push(new KNP_character(name))
+  characterArray.push(new Character(name,characterArray.length))
   //Nodeもここで追加する。
   nodeArray.push(new Node(name))
 }
@@ -102,13 +102,14 @@ let add_bold_of_node = () => {
 
 export {find_character}
 
-class KNP_character {
-  constructor(name) {
+class Character {
+  constructor(name,idx) {
     this.name = name
-    if(this.name === "私"){
+    if(this.name === "私"||this.name==='Aさん'){
       this.client = 1
     }else{
       this.client = 0
     }
+    this.nodeIdx=idx
   }
 }

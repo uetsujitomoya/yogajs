@@ -1,4 +1,4 @@
-import {r} from '../defineNodeClass'
+import {r} from './defineNode'
 
 const connectNodeAndArray = (arrow) => {
   //nodeとarrayを紐付ける

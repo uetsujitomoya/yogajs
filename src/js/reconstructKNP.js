@@ -3,19 +3,19 @@
  */
 
 
-import {isCharacter} from './characterChart/isCharacter'
+import {isCharacter} from './characterChart/reconstructKNP/isCharacter'
 // import verbInSentence from "../js/create_verbInSentence_class.js"
-import {createsvg} from './arrow_node.js'
-import KNP_Sentence from './characterChart/defineSentenceClass'
+import {createsvg} from './characterChart/nodeAndArray/arrow_node.js'
+import Sentence from './characterChart/reconstructKNP/defineSentence'
 
 //const firstJapaneseRowIdxInBunsetsu = 2
 
-const reconstruct_KNP = (raw_2d_array, KNP_character_array,nodeArray) =>
+const reconstructKNP = (raw_2d_array, characterArray, nodeArray) =>
 {//係り受けを調べる
   let sentenceNum = 0
   let sentenceArray = []
   let tempSentence2dArray = []
-  let temp_rowNo = 0
+  let tmpRowNo = 0
   console.log(raw_2d_array)
   for(const row of raw_2d_array){
     if (row[0] !== 'EOS') {
@@ -23,12 +23,12 @@ const reconstruct_KNP = (raw_2d_array, KNP_character_array,nodeArray) =>
     } else {
       //console.log(sentenceNum)
      sentenceArray.push(
-       new KNP_Sentence(temp_rowNo, tempSentence2dArray, KNP_character_array, sentenceNum, nodeArray)
+       new Sentence(tmpRowNo, tempSentence2dArray, characterArray, sentenceNum, nodeArray)
      )
       sentenceNum++
       tempSentence2dArray = []
     }
-    temp_rowNo++
+    tmpRowNo++
   }
   return {KNP_sentence_array:sentenceArray,sentenceArray:sentenceArray}
 }
@@ -57,4 +57,4 @@ const existsObject = (bunsetsu, characterArray) => {
   }
 }
 
-export {reconstruct_KNP}
+export {reconstructKNP}
