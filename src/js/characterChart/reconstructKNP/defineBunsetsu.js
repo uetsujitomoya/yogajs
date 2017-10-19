@@ -2,7 +2,7 @@ import {rodata} from '../../rodata'
 import KNP_word from './defineWord'
 import {isCharacter,searchNodeArrayForCharacterAndPoint} from './isCharacter'
 import {includesVerb} from './defineVerb'
-import {judgeAboutAddingSubjectCharaOrObjectChara} from './judgeAboutAddingSubjectCharaOrObjectChara'
+import {judgeAboutAddingSubjectCharaOrObjectChara} from './SubjectOrObject/judgeAboutAddingSubjectCharaOrObjectChara'
 
 const firstJapaneseRowIdxInBunsetsu=rodata.firstJapaneseRowIdxInBunsetsu
 
@@ -11,16 +11,16 @@ export default class Bunsetsu {
     this.csv_raw_array = input_2d_array
     this.id = num + 'D'
 
-    this.kihonku_array = []
-   // this.kihonku_array.length = count_kihonku(input_2d_array)
+    this.kihonkuArray = []
+   // this.kihonkuArray.length = count_kihonku(input_2d_array)
 
     this.word_array = []
 
     this.kakaru_bunsetsu_id = input_2d_array[0][1]
     this.kakarareru_bunsetsu_id_array = []
-    this.surface_form = ''
+    this.surfaceForm = ''
     input_2d_array.forEach((row_array) => {
-      this.surface_form += row_array[0]
+      this.surfaceForm += row_array[0]
       this.word_array.push(new KNP_word(row_array))
     })
     this.isVerb = false
@@ -54,13 +54,13 @@ export default class Bunsetsu {
       for (let rowCnt = japaneseStartingNum; rowCnt < bunsetsuRaw2dArray.length; rowCnt++) {
         let tempRow = bunsetsuRaw2dArray[rowCnt]
         if (tempRow[0] === rodata.kihonkuSymbol) { // 文節内 2こ目以降の基本句
-          this.kihonku_array[kihonkuIdxInBunsetsu] = new KihonkuInBunsetsu(temp2dArrayForKihonku)// 文の中の通し番号での基本句array
+          this.kihonkuArray[kihonkuIdxInBunsetsu] = new KihonkuInBunsetsu(temp2dArrayForKihonku)// 文の中の通し番号での基本句array
           temp2dArrayForKihonku = []
           kihonkuIdxInBunsetsu++
         }
         temp2dArrayForKihonku.push(tempRow)
       }
-      this.kihonku_array[kihonkuIdxInBunsetsu] = new KihonkuInBunsetsu(temp2dArrayForKihonku)// 文の中の通し番号での基本句array
+      this.kihonkuArray[kihonkuIdxInBunsetsu] = new KihonkuInBunsetsu(temp2dArrayForKihonku)// 文の中の通し番号での基本句array
     }
   }
 
@@ -110,6 +110,6 @@ class KihonkuInBunsetsu {
     this.subject = 'null'
     this.object = 'null'
     this.kakaruNo = 'null'
-    this.surface_form = row_array[0]
+    this.surfaceForm = row_array[0]
   }
 }

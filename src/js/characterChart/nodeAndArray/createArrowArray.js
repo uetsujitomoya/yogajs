@@ -10,28 +10,28 @@ import {connectNodeAndArray} from './connectNodeAndArray'
 
 //let initialValueOfSubjectAndObjectInVerb
 
-const createNodeAndArrowArray = (sentenceArray, nodeArray) => {
+const createNodeAndArrowArray = (bunArray, nodeArray) => {
     // console.log("entered createNodeArrowarray")
-    // console.log(sentenceArray)
+    // console.log(bunArray)
   let arrowArray = []
   //let nodeArray = []
   console.log(arrowArray.length)
 
   resetCircleStrokeWidth(nodeArray)
 
-  for (let sentenceCnt = 0; sentenceCnt < sentenceArray.length; sentenceCnt++) {
-    let sentence = sentenceArray[sentenceCnt]
-        // console.log(sentence)
+  for (let bunCnt = 0; bunCnt < bunArray.length; bunCnt++) {
+    let bun = bunArray[bunCnt]
+        // console.log(bun)
 
     let containsVerbArray = {
-      value: 'verb_array' in sentence ? sentence.verb_array : 'No'
+      value: 'verb_array' in bun ? bun.verb_array : 'No'
     }
 
     if (containsVerbArray.value === 'No') { continue }
 
-    //console.log(sentence.verb_array)
+    //console.log(bun.verb_array)
 
-    sentence.verb_array.forEach((verb) => {
+    bun.verb_array.forEach((verb) => {
 
       if (existsSubject(verb)) {
         console.log(verb)
@@ -115,6 +115,7 @@ const existsSubject = (verb) => {
 }
 
 const resetCircleStrokeWidth=(nodeArray)=>{
+  //slider用
   for(let node of nodeArray){
     node.circleStrokeWidth=0
   }

@@ -2,6 +2,7 @@ import Bunsetsu from './defineBunsetsu.js'
 import KihonkuInSentence from './defineKihonku.js'
 import {rodata} from '../../rodata'
 import verbInSentence from './defineVerbInSentence'
+import {searchPreviousSentencesForSubject} from './SubjectOrObject/searchPreviousSentencesForSubject'
 
 const startingBunsetsuRowIdxInSentence = 1
 const startingKihonkuRowIdxInSentence = 2
@@ -11,9 +12,9 @@ const bunsetsuSymbol = rodata.bunsetsuSymbol
 const kihonkuSymbol = rodata.kihonkuSymbol
 
 export default class Sentence {
-  constructor (rawRowIdx, sentence2dArray, charaArray, sentenceIdx, nodeArray) {
+  constructor (rawRowIdx, bun2dArrayFromKNP, charaArray, sentenceIdx, nodeArray) {
 
-    if (sentence2dArray.length === 1) {
+    if (bun2dArrayFromKNP.length === 1) {
       return 0
     }
 
@@ -22,40 +23,37 @@ export default class Sentence {
     // this.csv_raw_array=[]
     this.rowNo = rawRowIdx
     this.bunsetsu_array = []
-    //console.log(sentence2dArray)
+    //console.log(bun2dArrayFromKNP)
 
-    this.bunsetsu_array.length = count_bunsetsu(sentence2dArray)
+    this.bunsetsu_array.length = count_bunsetsu(bun2dArrayFromKNP)
 
-    this.kihonku_array = []
-    this.kihonku_array.length = count_kihonku(sentence2dArray)
-
-    this.surface_form = 'null'
-    // this.basic_form = row_array[2]
+    this.kihonkuArray = []
+    this.kihonkuArray.length = count_kihonku(bun2dArrayFromKNP)
 
     let temp2dArrayForBunsetsu = []
     let temp2dArrayForKihonku = []
 
-    temp2dArrayForBunsetsu.push(sentence2dArray[startingBunsetsuRowIdxInSentence])// 0文節目　開始宣言をプッシュ
+    temp2dArrayForBunsetsu.push(bun2dArrayFromKNP[startingBunsetsuRowIdxInSentence])// 0文節目　開始宣言をプッシュ
 
-    temp2dArrayForBunsetsu.push(sentence2dArray[startingKihonkuRowIdxInSentence])// 0基本句目　開始宣言をプッシュ
-    temp2dArrayForKihonku.push(sentence2dArray[startingKihonkuRowIdxInSentence])// 0基本句目　開始宣言をプッシュ
+    temp2dArrayForBunsetsu.push(bun2dArrayFromKNP[startingKihonkuRowIdxInSentence])// 0基本句目　開始宣言をプッシュ
+    temp2dArrayForKihonku.push(bun2dArrayFromKNP[startingKihonkuRowIdxInSentence])// 0基本句目　開始宣言をプッシュ
 
     let bunsetsuIdxInSentence = 0
     let kihonkuIdxInSentence = 0
 
-    for (let temp_rowNo = firstJapaneseRowIdxInSentence; temp_rowNo < sentence2dArray.length; temp_rowNo++) {
+    for (let temp_rowNo = firstJapaneseRowIdxInSentence; temp_rowNo < bun2dArrayFromKNP.length; temp_rowNo++) {
 
-      let temp_surface_form = sentence2dArray[temp_rowNo][0]
+      let temp_surface_form = bun2dArrayFromKNP[temp_rowNo][0]
 
-      if (temp_surface_form === kihonkuSymbol && sentence2dArray[temp_rowNo - 1][0] !== bunsetsuSymbol) {
+      if (temp_surface_form === kihonkuSymbol && bun2dArrayFromKNP[temp_rowNo - 1][0] !== bunsetsuSymbol) {
 
-        this.kihonku_array[kihonkuIdxInSentence] = new KihonkuInSentence(kihonkuIdxInSentence, temp2dArrayForKihonku)// 文の中の通し番号での基本句array
+        this.kihonkuArray[kihonkuIdxInSentence] = new KihonkuInSentence(kihonkuIdxInSentence, temp2dArrayForKihonku)// 文の中の通し番号での基本句array
         temp2dArrayForKihonku = []
         kihonkuIdxInSentence++
 
       } else if (temp_surface_form === bunsetsuSymbol) {
 
-        this.kihonku_array[kihonkuIdxInSentence] = new KihonkuInSentence(kihonkuIdxInSentence, temp2dArrayForKihonku)// 文の中の通し番号での基本句array
+        this.kihonkuArray[kihonkuIdxInSentence] = new KihonkuInSentence(kihonkuIdxInSentence, temp2dArrayForKihonku)// 文の中の通し番号での基本句array
         temp2dArrayForKihonku = []
         kihonkuIdxInSentence++
         this.bunsetsu_array[bunsetsuIdxInSentence] = new Bunsetsu(bunsetsuIdxInSentence, temp2dArrayForBunsetsu, charaArray)// 文の中の通し番号での文節array
@@ -67,8 +65,8 @@ export default class Sentence {
 
       }
 
-      temp2dArrayForBunsetsu.push(sentence2dArray[temp_rowNo])
-      temp2dArrayForKihonku.push(sentence2dArray[temp_rowNo])
+      temp2dArrayForBunsetsu.push(bun2dArrayFromKNP[temp_rowNo])
+      temp2dArrayForKihonku.push(bun2dArrayFromKNP[temp_rowNo])
     }
 
     this.bunsetsu_array[bunsetsuIdxInSentence] = new Bunsetsu(bunsetsuIdxInSentence, temp2dArrayForBunsetsu, charaArray)
@@ -78,16 +76,19 @@ export default class Sentence {
     if (this.bunsetsu_array[bunsetsuIdxInSentence].isVerb) {
       this.verb_array.push(new verbInSentence(bunsetsuIdxInSentence, temp2dArrayForBunsetsu, sentenceIdx))
     }
-    this.kihonku_array[kihonkuIdxInSentence] = new KihonkuInSentence(kihonkuIdxInSentence, temp2dArrayForKihonku)
+    this.kihonkuArray[kihonkuIdxInSentence] = new KihonkuInSentence(kihonkuIdxInSentence, temp2dArrayForKihonku)
     this.inputEachKakarareruBunsetsuID()
     this.inputEachKakarareruKihonkuID()
-
 
     //objectかsubjectを探す。人間でなくてもいい
     for (let tempVerbNum = 0; tempVerbNum < this.verb_array.length; tempVerbNum++) {
       this.findObjectOfVerb(this.verb_array[tempVerbNum].bunsetsuNum_inSentence, tempVerbNum)
       this.findSubjectOfVerb(this.verb_array[tempVerbNum].bunsetsuNum_inSentence, tempVerbNum)
     }
+
+    this.surfaceForm = ""
+    // this.basic_form = row_array[2]
+    this.storeSurfaceForm(bun2dArrayFromKNP)
   }
 
   inputEachKakarareruBunsetsuID () {
@@ -103,10 +104,10 @@ export default class Sentence {
   }
 
   inputEachKakarareruKihonkuID () {
-    for(const kakaru_kihonku of this.kihonku_array){
-      for (let kakarareru_kihonku_num = 0; kakarareru_kihonku_num < this.kihonku_array.length; kakarareru_kihonku_num++) {
-        if (kakaru_kihonku.kakatu_kihonku_id === this.kihonku_array[kakarareru_kihonku_num].id) {
-          this.kihonku_array[kakarareru_kihonku_num].kakarareru_kihonku_id_array.push(kakaru_kihonku.id)
+    for(const kakaru_kihonku of this.kihonkuArray){
+      for (let kakarareru_kihonku_num = 0; kakarareru_kihonku_num < this.kihonkuArray.length; kakarareru_kihonku_num++) {
+        if (kakaru_kihonku.kakatu_kihonku_id === this.kihonkuArray[kakarareru_kihonku_num].id) {
+          this.kihonkuArray[kakarareru_kihonku_num].kakarareru_kihonku_id_array.push(kakaru_kihonku.id)
           break
         }
       }
@@ -120,6 +121,8 @@ export default class Sentence {
         this.bunsetsu_array[ verbBunsetsuNo ].subject_of_verb = temp_clause.subject
         this.verb_array[tempVerbNum].rewriteSubject(temp_clause.subject)
         break
+      }else{
+        //searchPreviousSentencesForSubject(temp_clause,previousSentences)
       }
     }
   }
@@ -135,6 +138,16 @@ export default class Sentence {
       }
     }
   }
+
+  storeSurfaceForm(bunFromKNP){
+    //やっぱり基本句から取っていく
+    for(const kihonku of this.kihonkuArray){
+      //console.log(kihonku)
+      this.surfaceForm += kihonku.surfaceForm
+    }
+    console.log(this.surfaceForm)
+  }
+
 }
 
 let count_bunsetsu = (input_2d_array) => {

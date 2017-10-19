@@ -26291,7 +26291,7 @@ Tokenizer.prototype.tokenizeForSentence = function (sentence, tokens) {
             } else {
                 features = features_line.split(",");
             }
-            token = this.formatter.formatUnknownEntry(node.name, node.start_pos, node.type, features, node.surface_form);
+            token = this.formatter.formatUnknownEntry(node.name, node.start_pos, node.type, features, node.surfaceForm);
         } else {
             // TODO User dictionary
             token = this.formatter.formatEntry(node.name, node.start_pos, node.type, []);
@@ -27024,7 +27024,7 @@ function TokenInfoDictionary() {
 // left_id right_id word_cost ...
 // ^ this position is token_info_id
 TokenInfoDictionary.prototype.buildDictionary = function (entries) {
-    var dictionary_entries = {};  // using as hashmap, string -> string (word_id -> surface_form) to build dictionary
+    var dictionary_entries = {};  // using as hashmap, string -> string (word_id -> surfaceForm) to build dictionary
 
     for (var i = 0; i < entries.length; i++) {
         var entry = entries[i];
@@ -27861,7 +27861,7 @@ DictionaryBuilder.prototype.buildTokenInfoDictionary = function () {
 
     var token_info_dictionary = new TokenInfoDictionary();
 
-    // using as hashmap, string -> string (word_id -> surface_form) to build dictionary
+    // using as hashmap, string -> string (word_id -> surfaceForm) to build dictionary
     var dictionary_entries = token_info_dictionary.buildDictionary(this.tid_entries);
 
     var trie = this.buildDoubleArray();
@@ -27872,7 +27872,7 @@ DictionaryBuilder.prototype.buildTokenInfoDictionary = function () {
 
         // Assertion
         // if (trie_id < 0) {
-        //     console.log("Not Found:" + surface_form);
+        //     console.log("Not Found:" + surfaceForm);
         // }
 
         token_info_dictionary.addMapping(trie_id, token_info_id);
@@ -27888,7 +27888,7 @@ DictionaryBuilder.prototype.buildUnknownDictionary = function () {
 
     var unk_dictionary = new UnknownDictionary();
 
-    // using as hashmap, string -> string (word_id -> surface_form) to build dictionary
+    // using as hashmap, string -> string (word_id -> surfaceForm) to build dictionary
     var dictionary_entries = unk_dictionary.buildDictionary(this.unk_entries);
 
     var char_def = CharacterDefinition.readCharacterDefinition(this.char_text); // Create CharacterDefinition (factory method)
@@ -27901,7 +27901,7 @@ DictionaryBuilder.prototype.buildUnknownDictionary = function () {
 
         // Assertion
         // if (trie_id < 0) {
-        //     console.log("Not Found:" + surface_form);
+        //     console.log("Not Found:" + surfaceForm);
         // }
 
         unk_dictionary.addMapping(class_id, token_info_id);
@@ -27969,7 +27969,7 @@ IpadicFormatter.prototype.formatEntry = function (word_id, position, type, featu
     token.word_type = type;
     token.word_position = position;
 
-    token.surface_form = features[0];
+    token.surfaceForm = features[0];
     token.pos = features[1];
     token.pos_detail_1 = features[2];
     token.pos_detail_2 = features[3];
@@ -27989,7 +27989,7 @@ IpadicFormatter.prototype.formatUnknownEntry = function (word_id, position, type
     token.word_type = type;
     token.word_position = position;
 
-    token.surface_form = surface_form;
+    token.surfaceForm = surface_form;
     token.pos = features[1];
     token.pos_detail_1 = features[2];
     token.pos_detail_2 = features[3];
@@ -28166,7 +28166,7 @@ ViterbiBuilder.prototype.build = function (sentence_str) {
                 right_id = this.token_info_dictionary.dictionary.getShort(token_info_id + 2);
                 word_cost = this.token_info_dictionary.dictionary.getShort(token_info_id + 4);
 
-                // node_name, cost, start_index, length, type, left_id, right_id, surface_form
+                // node_name, cost, start_index, length, type, left_id, right_id, surfaceForm
                 lattice.append(new ViterbiNode(token_info_id, word_cost, pos + 1, key.length, "KNOWN", left_id, right_id, key));
             }
         }
@@ -28197,7 +28197,7 @@ ViterbiBuilder.prototype.build = function (sentence_str) {
                 right_id = this.unknown_dictionary.dictionary.getShort(unk_id + 2);
                 word_cost = this.unknown_dictionary.dictionary.getShort(unk_id + 4);
 
-                // node_name, cost, start_index, length, type, left_id, right_id, surface_form
+                // node_name, cost, start_index, length, type, left_id, right_id, surfaceForm
                 lattice.append(new ViterbiNode(unk_id, word_cost, pos + 1, key.length, "UNKNOWN", left_id, right_id, key.toString()));
             }
         }
@@ -28314,7 +28314,7 @@ function ViterbiNode(node_name, node_cost, start_pos, length, type, left_id, rig
     this.left_id = left_id;
     this.right_id = right_id;
     this.prev = null;
-    this.surface_form = surface_form;
+    this.surfaceForm = surface_form;
     if (type === "BOS") {
         this.shortest_cost = 0;
     } else {
@@ -38017,13 +38017,13 @@ var ClassifyWithWordDictionary = function ClassifyWithWordDictionary(jsonFileNam
 
           // 以下、1語ごと
 
-          if (path[wordNumberParsedInMorphologicalAnalysis].basic_form == '。' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == '？' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == '?' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == '：' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == ':' || path[wordNumberParsedInMorphologicalAnalysis].word_id == '2613630' || path[wordNumberParsedInMorphologicalAnalysis].surface_form == '･･･？：' || path[wordNumberParsedInMorphologicalAnalysis].surface_form == ')：' || path[wordNumberParsedInMorphologicalAnalysis].surface_form == '…' || path[wordNumberParsedInMorphologicalAnalysis].surface_form == '……' || path[wordNumberParsedInMorphologicalAnalysis].surface_form == '・・・' || path[wordNumberParsedInMorphologicalAnalysis].surface_form == '･･･' || path[wordNumberParsedInMorphologicalAnalysis].surface_form.indexOf('〈') != -1 || path[wordNumberParsedInMorphologicalAnalysis].surface_form.indexOf('〉') != -1) {
+          if (path[wordNumberParsedInMorphologicalAnalysis].basic_form == '。' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == '？' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == '?' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == '：' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == ':' || path[wordNumberParsedInMorphologicalAnalysis].word_id == '2613630' || path[wordNumberParsedInMorphologicalAnalysis].surfaceForm == '･･･？：' || path[wordNumberParsedInMorphologicalAnalysis].surfaceForm == ')：' || path[wordNumberParsedInMorphologicalAnalysis].surfaceForm == '…' || path[wordNumberParsedInMorphologicalAnalysis].surfaceForm == '……' || path[wordNumberParsedInMorphologicalAnalysis].surfaceForm == '・・・' || path[wordNumberParsedInMorphologicalAnalysis].surfaceForm == '･･･' || path[wordNumberParsedInMorphologicalAnalysis].surfaceForm.indexOf('〈') != -1 || path[wordNumberParsedInMorphologicalAnalysis].surfaceForm.indexOf('〉') != -1) {
             break;
           }
-          bun[hatsugenNumber][_sentenceNumberInHatsugen] += path[wordNumberParsedInMorphologicalAnalysis].surface_form;
+          bun[hatsugenNumber][_sentenceNumberInHatsugen] += path[wordNumberParsedInMorphologicalAnalysis].surfaceForm;
           if (hatsugenNumber % 2 == 1) {
             kanjatango++;
-            kanjamoji = kanjamoji + path[wordNumberParsedInMorphologicalAnalysis].surface_form.length;
+            kanjamoji = kanjamoji + path[wordNumberParsedInMorphologicalAnalysis].surfaceForm.length;
 
             var wordLookedNow = path[wordNumberParsedInMorphologicalAnalysis].basic_form;
 
@@ -38078,15 +38078,15 @@ var ClassifyWithWordDictionary = function ClassifyWithWordDictionary(jsonFileNam
             }
           } else if (hatsugenNumber % 2 == 0) {
             serapitango++;
-            serapimoji = serapimoji + path[wordNumberParsedInMorphologicalAnalysis].surface_form.length;
-            if (path[wordNumberParsedInMorphologicalAnalysis].surface_form == 'そう' && path[wordNumberParsedInMorphologicalAnalysis + 1].surface_form == 'です' && path[wordNumberParsedInMorphologicalAnalysis + 2].surface_form == 'か') {
+            serapimoji = serapimoji + path[wordNumberParsedInMorphologicalAnalysis].surfaceForm.length;
+            if (path[wordNumberParsedInMorphologicalAnalysis].surfaceForm == 'そう' && path[wordNumberParsedInMorphologicalAnalysis + 1].surfaceForm == 'です' && path[wordNumberParsedInMorphologicalAnalysis + 2].surfaceForm == 'か') {
               soudesuka++;
             }
-            if (path[wordNumberParsedInMorphologicalAnalysis].surface_form == '何' && path[wordNumberParsedInMorphologicalAnalysis + 1].surface_form == 'か') {} else if (path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'いかが' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'なんで' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'どうして' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'どの' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'どのように' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'いつ' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'どういう' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'どなた' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'どう' || path[wordNumberParsedInMorphologicalAnalysis].surface_form == '何' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == '誰' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'どんな' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'どのような' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'どこ') {
+            if (path[wordNumberParsedInMorphologicalAnalysis].surfaceForm == '何' && path[wordNumberParsedInMorphologicalAnalysis + 1].surfaceForm == 'か') {} else if (path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'いかが' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'なんで' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'どうして' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'どの' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'どのように' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'いつ' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'どういう' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'どなた' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'どう' || path[wordNumberParsedInMorphologicalAnalysis].surfaceForm == '何' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == '誰' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'どんな' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'どのような' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'どこ') {
               RGBlist[hatsugenNumber / 2][3] = 1;
-            } else if (path[wordNumberParsedInMorphologicalAnalysis].surface_form == 'か' && path[wordNumberParsedInMorphologicalAnalysis].pos == '助詞') {
+            } else if (path[wordNumberParsedInMorphologicalAnalysis].surfaceForm == 'か' && path[wordNumberParsedInMorphologicalAnalysis].pos == '助詞') {
               RGBlist[hatsugenNumber / 2][4] = 1;
-            } else if (path[wordNumberParsedInMorphologicalAnalysis].surface_form == 'ね' && path[wordNumberParsedInMorphologicalAnalysis].pos == '助詞') {
+            } else if (path[wordNumberParsedInMorphologicalAnalysis].surfaceForm == 'ね' && path[wordNumberParsedInMorphologicalAnalysis].pos == '助詞') {
               RGBlist[hatsugenNumber / 2][6] = 1;
             }
           }
@@ -38181,7 +38181,7 @@ var ClassifyWithWordDictionary = function ClassifyWithWordDictionary(jsonFileNam
           }
           break;
         }
-        if (path[wordNumberParsedInMorphologicalAnalysis].word_id == '2613630' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == '：' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == ':' || path[wordNumberParsedInMorphologicalAnalysis].surface_form == '･･･？：' || path[wordNumberParsedInMorphologicalAnalysis].surface_form == ')：' || path[wordNumberParsedInMorphologicalAnalysis].surface_form.indexOf('〈') != -1 || path[wordNumberParsedInMorphologicalAnalysis].surface_form.indexOf('〉') != -1) {
+        if (path[wordNumberParsedInMorphologicalAnalysis].word_id == '2613630' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == '：' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == ':' || path[wordNumberParsedInMorphologicalAnalysis].surfaceForm == '･･･？：' || path[wordNumberParsedInMorphologicalAnalysis].surfaceForm == ')：' || path[wordNumberParsedInMorphologicalAnalysis].surfaceForm.indexOf('〈') != -1 || path[wordNumberParsedInMorphologicalAnalysis].surfaceForm.indexOf('〉') != -1) {
           if (hatsugenNumber % 2 == 0) {
             if (_sentenceNumberInHatsugen <= 2 && tangosuu <= 7) {
               RGBlist[hatsugenNumber / 2][5] = 1;
@@ -39246,16 +39246,16 @@ var KNP_Bunsetsu = (function () {
     this.csv_raw_array = input_2d_array;
     this.id = num + 'D';
 
-    this.kihonku_array = [];
-    // this.kihonku_array.length = count_kihonku(input_2d_array)
+    this.kihonkuArray = [];
+    // this.kihonkuArray.length = count_kihonku(input_2d_array)
 
     this.word_array = [];
 
     this.kakaru_bunsetsu_id = input_2d_array[0][1];
     this.kakarareru_bunsetsu_id_array = [];
-    this.surface_form = '';
+    this.surfaceForm = '';
     input_2d_array.forEach(function (row_array) {
-      _this.surface_form += row_array[0];
+      _this.surfaceForm += row_array[0];
       _this.word_array.push(new _defineWordClass2['default'](row_array));
     });
     this.isVerb = false;
@@ -39305,13 +39305,13 @@ var KNP_Bunsetsu = (function () {
           var tempRow = bunsetsuRaw2dArray[rowCnt];
           if (tempRow[0] === _rodata.rodata.kihonkuSymbol) {
             // 文節内 2こ目以降の基本句
-            this.kihonku_array[kihonkuIdxInBunsetsu] = new KNP_kihonku_in_bunsetsu(temp2dArrayForKihonku); // 文の中の通し番号での基本句array
+            this.kihonkuArray[kihonkuIdxInBunsetsu] = new KNP_kihonku_in_bunsetsu(temp2dArrayForKihonku); // 文の中の通し番号での基本句array
             temp2dArrayForKihonku = [];
             kihonkuIdxInBunsetsu++;
           }
           temp2dArrayForKihonku.push(tempRow);
         }
-        this.kihonku_array[kihonkuIdxInBunsetsu] = new KNP_kihonku_in_bunsetsu(temp2dArrayForKihonku); // 文の中の通し番号での基本句array
+        this.kihonkuArray[kihonkuIdxInBunsetsu] = new KNP_kihonku_in_bunsetsu(temp2dArrayForKihonku); // 文の中の通し番号での基本句array
       }
     }
   }, {
@@ -39350,7 +39350,7 @@ var KNP_kihonku_in_bunsetsu = function KNP_kihonku_in_bunsetsu(row_array) {
   this.subject = 'null';
   this.object = 'null';
   this.kakaruNo = 'null';
-  this.surface_form = row_array[0];
+  this.surfaceForm = row_array[0];
 };
 
 module.exports = exports['default'];
@@ -39385,9 +39385,9 @@ var KNP_kihonku_in_sentence = function KNP_kihonku_in_sentence(num, input_2d_arr
 
   this.kakaru_kihonku_id = input_2d_array[0][1];
   this.kakarareru_kihonku_id_array = [];
-  this.surface_form = '';
+  this.surfaceForm = '';
   input_2d_array.forEach(function (row_array) {
-    _this.surface_form += row_array[0];
+    _this.surfaceForm += row_array[0];
   });
 };
 
@@ -39445,10 +39445,10 @@ var KNP_Sentence = (function () {
 
     this.bunsetsu_array.length = count_bunsetsu(sentence2dArray);
 
-    this.kihonku_array = [];
-    this.kihonku_array.length = count_kihonku(sentence2dArray);
+    this.kihonkuArray = [];
+    this.kihonkuArray.length = count_kihonku(sentence2dArray);
 
-    this.surface_form = 'null';
+    this.surfaceForm = 'null';
     // this.basic_form = row_array[2]
 
     var temp2dArrayForBunsetsu = [];
@@ -39468,12 +39468,12 @@ var KNP_Sentence = (function () {
 
       if (temp_surface_form === kihonkuSymbol && sentence2dArray[temp_rowNo - 1][0] !== bunsetsuSymbol) {
 
-        this.kihonku_array[kihonkuIdxInSentence] = new _defineKihonkuClassJs2['default'](kihonkuIdxInSentence, temp2dArrayForKihonku); // 文の中の通し番号での基本句array
+        this.kihonkuArray[kihonkuIdxInSentence] = new _defineKihonkuClassJs2['default'](kihonkuIdxInSentence, temp2dArrayForKihonku); // 文の中の通し番号での基本句array
         temp2dArrayForKihonku = [];
         kihonkuIdxInSentence++;
       } else if (temp_surface_form === bunsetsuSymbol) {
 
-        this.kihonku_array[kihonkuIdxInSentence] = new _defineKihonkuClassJs2['default'](kihonkuIdxInSentence, temp2dArrayForKihonku); // 文の中の通し番号での基本句array
+        this.kihonkuArray[kihonkuIdxInSentence] = new _defineKihonkuClassJs2['default'](kihonkuIdxInSentence, temp2dArrayForKihonku); // 文の中の通し番号での基本句array
         temp2dArrayForKihonku = [];
         kihonkuIdxInSentence++;
         this.bunsetsu_array[bunsetsuIdxInSentence] = new _defineBunsetsuClassJs2['default'](bunsetsuIdxInSentence, temp2dArrayForBunsetsu, characterArray); // 文の中の通し番号での文節array
@@ -39497,7 +39497,7 @@ var KNP_Sentence = (function () {
     if (this.bunsetsu_array[bunsetsuIdxInSentence].isVerb) {
       this.verb_array.push(new _defineClassOfVerbInSentence2['default'](bunsetsuIdxInSentence, temp2dArrayForBunsetsu, sentenceIdx));
     }
-    this.kihonku_array[kihonkuIdxInSentence] = new _defineKihonkuClassJs2['default'](kihonkuIdxInSentence, temp2dArrayForKihonku);
+    this.kihonkuArray[kihonkuIdxInSentence] = new _defineKihonkuClassJs2['default'](kihonkuIdxInSentence, temp2dArrayForKihonku);
     this.inputEachKakarareruBunsetsuID();
     this.inputEachKakarareruKihonkuID();
 
@@ -39549,12 +39549,12 @@ var KNP_Sentence = (function () {
       var _iteratorError2 = undefined;
 
       try {
-        for (var _iterator2 = this.kihonku_array[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+        for (var _iterator2 = this.kihonkuArray[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
           var kakaru_kihonku = _step2.value;
 
-          for (var kakarareru_kihonku_num = 0; kakarareru_kihonku_num < this.kihonku_array.length; kakarareru_kihonku_num++) {
-            if (kakaru_kihonku.kakatu_kihonku_id === this.kihonku_array[kakarareru_kihonku_num].id) {
-              this.kihonku_array[kakarareru_kihonku_num].kakarareru_kihonku_id_array.push(kakaru_kihonku.id);
+          for (var kakarareru_kihonku_num = 0; kakarareru_kihonku_num < this.kihonkuArray.length; kakarareru_kihonku_num++) {
+            if (kakaru_kihonku.kakatu_kihonku_id === this.kihonkuArray[kakarareru_kihonku_num].id) {
+              this.kihonkuArray[kakarareru_kihonku_num].kakarareru_kihonku_id_array.push(kakaru_kihonku.id);
               break;
             }
           }
@@ -40090,7 +40090,7 @@ var initialValueOfSubjectAndObjectInVerb = null;
   constructor (bunsetsuNum_inSentence, bunsetsuRawArray, sentenceNum) {
     this.bunsetsuNum_inSentence = bunsetsuNum_inSentence
     this.sentenceNum = sentenceNum
-    this.surface_form = bunsetsuRawArray[2][0]
+    this.surfaceForm = bunsetsuRawArray[2][0]
     this.subject = initialValueOfSubjectAndObjectInVerb
     this.object = initialValueOfSubjectAndObjectInVerb
   }
@@ -40102,7 +40102,7 @@ var verbInSentence = (function () {
 
     this.bunsetsuNum_inSentence = bunsetsuNum_inSentence;
     this.sentenceNum = sentenceIdx;
-    this.surface_form = bunsetsuRawArray[2][0];
+    this.surfaceForm = bunsetsuRawArray[2][0];
     this.subject = null;
     this.object = null;
   }
@@ -40370,7 +40370,7 @@ var KNP_verb = function KNP_verb(rowNo, row_array, upper_row_array) {
   this.subject = initialValueOfSubjectAndObjectInVerb;
   this.object = initialValueOfSubjectAndObjectInVerb;
   this.kakarareruNo = upper_row_array[1];
-  this.surface_form = row_array[0];
+  this.surfaceForm = row_array[0];
   this.basic_form = row_array[2];
 };
 
@@ -41051,12 +41051,12 @@ var ClassifyWithFirstWordDictionary = function ClassifyWithFirstWordDictionary(n
         while (wordsCntAfterMorphologicalAnalysis < wordsArrayAfterMorphologicalAnalysis.length) {
           wordsQtyInASentence++;
 
-          if (wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '。' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '？' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '?' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '：' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == ':' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].word_id == '2613630' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form == '･･･？：' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form == ')：' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form == '…' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form == '……' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form == '・・・' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form == '･･･' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form.indexOf('〈') != -1 || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form.indexOf('〉') != -1) {
+          if (wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '。' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '？' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '?' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '：' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == ':' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].word_id == '2613630' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surfaceForm == '･･･？：' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surfaceForm == ')：' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surfaceForm == '…' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surfaceForm == '……' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surfaceForm == '・・・' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surfaceForm == '･･･' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surfaceForm.indexOf('〈') != -1 || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surfaceForm.indexOf('〉') != -1) {
             break;
           }
           if (hatsugenCnt % 2 == 1) {
             kanjatango++;
-            kanjamoji = kanjamoji + wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form.length;
+            kanjamoji = kanjamoji + wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surfaceForm.length;
             if (wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '母' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '主人' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '父さん' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'ご主人' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'お父さん' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '姉' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '姉さん' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '母親' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'お姉さん' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '父' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '家族') {
               answerSentenceCategory[hatsugenCnt][sentenceCntInHatsugen][0] = 1;
             }
@@ -41102,19 +41102,19 @@ var ClassifyWithFirstWordDictionary = function ClassifyWithFirstWordDictionary(n
             }
           } else if (hatsugenCnt % 2 == 0) {
             serapitango++;
-            serapimoji = serapimoji + wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form.length;
-            if (wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form == 'そう' && wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis + 1].surface_form == 'です' && wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis + 2].surface_form == 'か') {
+            serapimoji = serapimoji + wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surfaceForm.length;
+            if (wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surfaceForm == 'そう' && wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis + 1].surfaceForm == 'です' && wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis + 2].surfaceForm == 'か') {
               soudesuka++;
             }
-            if (wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form == '何' && wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis + 1].surface_form == 'か') {} else if (wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'いかが' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'なんで' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'どうして' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'どの' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'どのように' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'いつ' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'どういう' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'どなた' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'どう' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form == '何' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '誰' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'どんな' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'どのような' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'どこ') {
+            if (wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surfaceForm == '何' && wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis + 1].surfaceForm == 'か') {} else if (wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'いかが' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'なんで' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'どうして' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'どの' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'どのように' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'いつ' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'どういう' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'どなた' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'どう' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surfaceForm == '何' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '誰' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'どんな' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'どのような' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'どこ') {
               RGBlist[hatsugenCnt / 2][3] = 1;
-            } else if (wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form == 'か' && wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].pos == '助詞') {
+            } else if (wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surfaceForm == 'か' && wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].pos == '助詞') {
               RGBlist[hatsugenCnt / 2][4] = 1;
-            } else if (wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form == 'ね' && wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].pos == '助詞') {
+            } else if (wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surfaceForm == 'ね' && wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].pos == '助詞') {
               RGBlist[hatsugenCnt / 2][6] = 1;
             }
           }
-          contentArrayOfASentence[hatsugenCnt][sentenceCntInHatsugen] += wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form;
+          contentArrayOfASentence[hatsugenCnt][sentenceCntInHatsugen] += wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surfaceForm;
           if (wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].pos_detail_1 == '接尾' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '*' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].pos == '助詞' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '、' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].pos == '記号' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].pos == '助動詞' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].pos == '感動詞' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].pos == '接頭詞' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].pos_detail_1 == '非自立' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'する' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'いる' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'こういう' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'そういう' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'こう' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'する' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'こうした' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'いう' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'する' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'なる' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'その' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'あの' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].pos_detail_1 == '数' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'そう' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '気持ち' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '思い' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '思う' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'ある') {
             wordsCntAfterMorphologicalAnalysis++;
             continue;
@@ -41144,7 +41144,7 @@ var ClassifyWithFirstWordDictionary = function ClassifyWithFirstWordDictionary(n
           }
           break;
         }
-        if (wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].word_id == '2613630' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '：' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == ':' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form == '･･･？：' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form == ')：' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form.indexOf('〈') != -1 || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form.indexOf('〉') != -1) {
+        if (wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].word_id == '2613630' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '：' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == ':' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surfaceForm == '･･･？：' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surfaceForm == ')：' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surfaceForm.indexOf('〈') != -1 || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surfaceForm.indexOf('〉') != -1) {
           if (hatsugenCnt % 2 == 0) {
             if (sentenceCntInHatsugen <= 2 && wordsQtyInASentence <= 7) {
               RGBlist[hatsugenCnt / 2][5] = 1;
@@ -41452,7 +41452,7 @@ var ClassifyWithFirstWordDictionary = function ClassifyWithFirstWordDictionary(n
   // 単語のみ抜き出して処理
   var KNP_word = {
     basic_form: basic_form,
-    surface_form: surface_form
+    surfaceForm: surface_form
     // pathのプロパティに「questionCategory」「AnswerCategory」「hinshi」などを追加すればいい気はする。
     // てかkuromoji.js使わないんだった。。KNPからうまく取得せよ
   };
@@ -41562,12 +41562,12 @@ var ClassifyWithFirstWordDictionary = function ClassifyWithFirstWordDictionary(n
         while (wordsCntAfterMorphologicalAnalysis < wordsArrayAfterMorphologicalAnalysis.length) {
           wordsQtyInASentence++;
 
-          if (wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '。' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '？' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '?' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '：' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == ':' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].word_id == '2613630' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form == '･･･？：' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form == ')：' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form == '…' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form == '……' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form == '・・・' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form == '･･･' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form.indexOf('〈') != -1 || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form.indexOf('〉') != -1) {
+          if (wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '。' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '？' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '?' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '：' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == ':' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].word_id == '2613630' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surfaceForm == '･･･？：' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surfaceForm == ')：' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surfaceForm == '…' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surfaceForm == '……' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surfaceForm == '・・・' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surfaceForm == '･･･' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surfaceForm.indexOf('〈') != -1 || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surfaceForm.indexOf('〉') != -1) {
             break;
           }
           if (hatsugenCnt % 2 == 1) {
             kanjatango++;
-            kanjamoji = kanjamoji + wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form.length;
+            kanjamoji = kanjamoji + wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surfaceForm.length;
             if (wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '母' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '主人' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '父さん' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'ご主人' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'お父さん' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '姉' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '姉さん' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '母親' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'お姉さん' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '父' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '家族') {
               answerSentenceCategory[hatsugenCnt][sentenceCntInHatsugen][0] = 1;
             }
@@ -41613,19 +41613,19 @@ var ClassifyWithFirstWordDictionary = function ClassifyWithFirstWordDictionary(n
             }
           } else if (hatsugenCnt % 2 == 0) {
             serapitango++;
-            serapimoji = serapimoji + wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form.length;
-            if (wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form == 'そう' && wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis + 1].surface_form == 'です' && wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis + 2].surface_form == 'か') {
+            serapimoji = serapimoji + wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surfaceForm.length;
+            if (wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surfaceForm == 'そう' && wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis + 1].surfaceForm == 'です' && wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis + 2].surfaceForm == 'か') {
               soudesuka++;
             }
-            if (wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form == '何' && wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis + 1].surface_form == 'か') {} else if (wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'いかが' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'なんで' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'どうして' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'どの' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'どのように' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'いつ' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'どういう' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'どなた' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'どう' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form == '何' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '誰' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'どんな' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'どのような' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'どこ') {
+            if (wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surfaceForm == '何' && wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis + 1].surfaceForm == 'か') {} else if (wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'いかが' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'なんで' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'どうして' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'どの' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'どのように' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'いつ' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'どういう' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'どなた' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'どう' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surfaceForm == '何' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '誰' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'どんな' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'どのような' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'どこ') {
               RGBlist[hatsugenCnt / 2][3] = 1;
-            } else if (wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form == 'か' && wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].pos == '助詞') {
+            } else if (wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surfaceForm == 'か' && wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].pos == '助詞') {
               RGBlist[hatsugenCnt / 2][4] = 1;
-            } else if (wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form == 'ね' && wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].pos == '助詞') {
+            } else if (wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surfaceForm == 'ね' && wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].pos == '助詞') {
               RGBlist[hatsugenCnt / 2][6] = 1;
             }
           }
-          contentArrayOfASentence[hatsugenCnt][sentenceCntInHatsugen] += wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form;
+          contentArrayOfASentence[hatsugenCnt][sentenceCntInHatsugen] += wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surfaceForm;
           if (wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].pos_detail_1 == '接尾' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '*' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].pos == '助詞' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '、' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].pos == '記号' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].pos == '助動詞' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].pos == '感動詞' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].pos == '接頭詞' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].pos_detail_1 == '非自立' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'する' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'いる' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'こういう' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'そういう' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'こう' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'する' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'こうした' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'いう' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'する' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'なる' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'その' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'あの' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].pos_detail_1 == '数' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'そう' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '気持ち' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '思い' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '思う' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == 'ある') {
             wordsCntAfterMorphologicalAnalysis++;
             continue;
@@ -41655,7 +41655,7 @@ var ClassifyWithFirstWordDictionary = function ClassifyWithFirstWordDictionary(n
           }
           break;
         }
-        if (wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].word_id == '2613630' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '：' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == ':' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form == '･･･？：' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form == ')：' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form.indexOf('〈') != -1 || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surface_form.indexOf('〉') != -1) {
+        if (wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].word_id == '2613630' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == '：' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].basic_form == ':' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surfaceForm == '･･･？：' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surfaceForm == ')：' || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surfaceForm.indexOf('〈') != -1 || wordsArrayAfterMorphologicalAnalysis[wordsCntAfterMorphologicalAnalysis].surfaceForm.indexOf('〉') != -1) {
           if (hatsugenCnt % 2 == 0) {
             if (sentenceCntInHatsugen <= 2 && wordsQtyInASentence <= 7) {
               RGBlist[hatsugenCnt / 2][5] = 1;

@@ -7,7 +7,7 @@ import {getCSV} from '../getCSV.js'
 import {reconstructKNP} from '../reconstructKNP.js'
 import {findCharacter} from './findCharacter.js'
 import {createNodeAndArrowArray} from './nodeAndArray/createArrowArray.js'
-import {manageSlider} from './slider.js'
+import {manageSlider} from './viz/slider.js'
 import {fixNodePoint} from './fixNodePoint'
 
 let charaArray = []

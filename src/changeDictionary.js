@@ -118,14 +118,14 @@ var ClassifyWithWordDictionary = (jsonFileName, event, keitaisokaiseki, chboxlis
 
                     // 以下、1語ごと
 
-          if (path[wordNumberParsedInMorphologicalAnalysis].basic_form == '。' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == '？' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == '?' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == '：' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == ':' || path[wordNumberParsedInMorphologicalAnalysis].word_id == '2613630' || path[wordNumberParsedInMorphologicalAnalysis].surface_form == '･･･？：' || path[wordNumberParsedInMorphologicalAnalysis].surface_form == ')：' ||
-                        path[wordNumberParsedInMorphologicalAnalysis].surface_form == '…' || path[wordNumberParsedInMorphologicalAnalysis].surface_form == '……' || path[wordNumberParsedInMorphologicalAnalysis].surface_form == '・・・' || path[wordNumberParsedInMorphologicalAnalysis].surface_form == '･･･' || path[wordNumberParsedInMorphologicalAnalysis].surface_form.indexOf('〈') != -1 || path[wordNumberParsedInMorphologicalAnalysis].surface_form.indexOf('〉') != -1) {
+          if (path[wordNumberParsedInMorphologicalAnalysis].basic_form == '。' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == '？' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == '?' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == '：' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == ':' || path[wordNumberParsedInMorphologicalAnalysis].word_id == '2613630' || path[wordNumberParsedInMorphologicalAnalysis].surfaceForm == '･･･？：' || path[wordNumberParsedInMorphologicalAnalysis].surfaceForm == ')：' ||
+                        path[wordNumberParsedInMorphologicalAnalysis].surfaceForm == '…' || path[wordNumberParsedInMorphologicalAnalysis].surfaceForm == '……' || path[wordNumberParsedInMorphologicalAnalysis].surfaceForm == '・・・' || path[wordNumberParsedInMorphologicalAnalysis].surfaceForm == '･･･' || path[wordNumberParsedInMorphologicalAnalysis].surfaceForm.indexOf('〈') != -1 || path[wordNumberParsedInMorphologicalAnalysis].surfaceForm.indexOf('〉') != -1) {
             break
           }
-          bun[hatsugenNumber][sentenceNumberInHatsugen] += path[wordNumberParsedInMorphologicalAnalysis].surface_form
+          bun[hatsugenNumber][sentenceNumberInHatsugen] += path[wordNumberParsedInMorphologicalAnalysis].surfaceForm
           if (hatsugenNumber % 2 == 1) {
             kanjatango++
-            kanjamoji = kanjamoji + path[wordNumberParsedInMorphologicalAnalysis].surface_form.length
+            kanjamoji = kanjamoji + path[wordNumberParsedInMorphologicalAnalysis].surfaceForm.length
 
             let wordLookedNow = path[wordNumberParsedInMorphologicalAnalysis].basic_form
 
@@ -180,17 +180,17 @@ var ClassifyWithWordDictionary = (jsonFileName, event, keitaisokaiseki, chboxlis
             }
           } else if (hatsugenNumber % 2 == 0) {
             serapitango++
-            serapimoji = serapimoji + path[wordNumberParsedInMorphologicalAnalysis].surface_form.length
-            if (path[wordNumberParsedInMorphologicalAnalysis].surface_form == 'そう' && path[wordNumberParsedInMorphologicalAnalysis + 1].surface_form == 'です' && path[wordNumberParsedInMorphologicalAnalysis + 2].surface_form == 'か') {
+            serapimoji = serapimoji + path[wordNumberParsedInMorphologicalAnalysis].surfaceForm.length
+            if (path[wordNumberParsedInMorphologicalAnalysis].surfaceForm == 'そう' && path[wordNumberParsedInMorphologicalAnalysis + 1].surfaceForm == 'です' && path[wordNumberParsedInMorphologicalAnalysis + 2].surfaceForm == 'か') {
               soudesuka++
             }
-            if (path[wordNumberParsedInMorphologicalAnalysis].surface_form == '何' && path[wordNumberParsedInMorphologicalAnalysis + 1].surface_form == 'か') {
+            if (path[wordNumberParsedInMorphologicalAnalysis].surfaceForm == '何' && path[wordNumberParsedInMorphologicalAnalysis + 1].surfaceForm == 'か') {
 
-            } else if (path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'いかが' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'なんで' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'どうして' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'どの' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'どのように' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'いつ' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'どういう' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'どなた' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'どう' || path[wordNumberParsedInMorphologicalAnalysis].surface_form == '何' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == '誰' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'どんな' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'どのような' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'どこ') {
+            } else if (path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'いかが' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'なんで' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'どうして' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'どの' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'どのように' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'いつ' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'どういう' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'どなた' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'どう' || path[wordNumberParsedInMorphologicalAnalysis].surfaceForm == '何' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == '誰' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'どんな' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'どのような' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == 'どこ') {
               RGBlist[hatsugenNumber / 2][3] = 1
-            } else if (path[wordNumberParsedInMorphologicalAnalysis].surface_form == 'か' && path[wordNumberParsedInMorphologicalAnalysis].pos == '助詞') {
+            } else if (path[wordNumberParsedInMorphologicalAnalysis].surfaceForm == 'か' && path[wordNumberParsedInMorphologicalAnalysis].pos == '助詞') {
                 RGBlist[hatsugenNumber / 2][4] = 1
-              } else if (path[wordNumberParsedInMorphologicalAnalysis].surface_form == 'ね' && path[wordNumberParsedInMorphologicalAnalysis].pos == '助詞') {
+              } else if (path[wordNumberParsedInMorphologicalAnalysis].surfaceForm == 'ね' && path[wordNumberParsedInMorphologicalAnalysis].pos == '助詞') {
                   RGBlist[hatsugenNumber / 2][6] = 1
                 }
           }
@@ -286,7 +286,7 @@ var ClassifyWithWordDictionary = (jsonFileName, event, keitaisokaiseki, chboxlis
           }
           break
         }
-        if (path[wordNumberParsedInMorphologicalAnalysis].word_id == '2613630' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == '：' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == ':' || path[wordNumberParsedInMorphologicalAnalysis].surface_form == '･･･？：' || path[wordNumberParsedInMorphologicalAnalysis].surface_form == ')：' || path[wordNumberParsedInMorphologicalAnalysis].surface_form.indexOf('〈') != -1 || path[wordNumberParsedInMorphologicalAnalysis].surface_form.indexOf('〉') != -1) {
+        if (path[wordNumberParsedInMorphologicalAnalysis].word_id == '2613630' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == '：' || path[wordNumberParsedInMorphologicalAnalysis].basic_form == ':' || path[wordNumberParsedInMorphologicalAnalysis].surfaceForm == '･･･？：' || path[wordNumberParsedInMorphologicalAnalysis].surfaceForm == ')：' || path[wordNumberParsedInMorphologicalAnalysis].surfaceForm.indexOf('〈') != -1 || path[wordNumberParsedInMorphologicalAnalysis].surfaceForm.indexOf('〉') != -1) {
           if (hatsugenNumber % 2 == 0) {
             if (sentenceNumberInHatsugen <= 2 && tangosuu <= 7) {
               RGBlist[hatsugenNumber / 2][5] = 1

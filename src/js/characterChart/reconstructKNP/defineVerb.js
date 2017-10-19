@@ -19,7 +19,7 @@ class Verb {
     this.subject = initialValueOfSubjectAndObjectInVerb
     this.object = initialValueOfSubjectAndObjectInVerb
     this.kakarareruNo = upperRowArray[1]
-    this.surface_form = rowArray[0]
+    this.surfaceForm = rowArray[0]
     this.basic_form = rowArray[2]
   }
 }

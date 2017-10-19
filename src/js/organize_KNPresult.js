@@ -29,7 +29,7 @@ let Kuromoji_full_text
 class KNP_word{
     constructor(row){
         this.basic_form=row[1];
-        this.surface_form:row[0];
+        this.surfaceForm:row[0];
     }
 
     //pathのプロパティに「questionCategory」「AnswerCategory」「hinshi」などを追加すればいい気はする。

@@ -6,12 +6,12 @@ let count_pairs_of_subject_and_object = (sentenceArray) => {
     let pairArray=[]
     sentenceArray
     if(/*かぶりなし*/){
-        pairArray.push(new Pair_of_subject_and_object(subject,object))
+        pairArray.push(new PairOfSubjectAndObject(subject,object))
     }
     return pairArray
 }
 
-class Pair_of_subject_and_object {
+class PairOfSubjectAndObject {
     constructor(){
         
     }

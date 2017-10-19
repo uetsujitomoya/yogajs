@@ -1,20 +1,22 @@
-import KNP_word from './defineWord'
+import Word from './defineWord'
 
-export default class KNP_kihonku_in_sentence {
-  constructor (num, input_2d_array) {
-    this.csv_raw_array = input_2d_array
-    this.id = num + 'D'
+export default class KihonkuInSentence {
+  constructor (no, input2dArray) {
+    this.csv_raw_array = input2dArray
+    this.id = no + 'D'
 
     this.word_array = []
-    for (let rowNo = 1; rowNo < input_2d_array.length; rowNo++) {
-      this.word_array.push(new KNP_word(input_2d_array[rowNo]))
+    for (let rowNo = 1; rowNo < input2dArray.length; rowNo++) {
+      this.word_array.push(new Word(input2dArray[rowNo]))
     }
 
-    this.kakaru_kihonku_id = input_2d_array[0][1]
+    this.kakaru_kihonku_id = input2dArray[0][1]
     this.kakarareru_kihonku_id_array = []
-    this.surface_form = ''
-    input_2d_array.forEach((row_array) => {
-      this.surface_form += row_array[0]
+    this.surfaceForm = ''
+    input2dArray.forEach((row) => {
+      if(row[0]!=="*"&&row[0]!=="+"){
+        this.surfaceForm += row[0]
+      }
     })
   }
 }

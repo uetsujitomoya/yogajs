@@ -61,13 +61,13 @@ var funcReaderOnload = (name, event, keitaisokaiseki, checkboxlist, chboxlist, c
         while (n < path.length) {
           tangosuu++
 
-          if (path[n].basic_form == '。' || path[n].basic_form == '？' || path[n].basic_form == '?' || path[n].basic_form == '：' || path[n].basic_form == ':' || path[n].word_id == '2613630' || path[n].surface_form == '･･･？：' || path[n].surface_form == ')：' ||
-					path[n].surface_form == '…' || path[n].surface_form == '……' || path[n].surface_form == '・・・' || path[n].surface_form == '･･･') {
+          if (path[n].basic_form == '。' || path[n].basic_form == '？' || path[n].basic_form == '?' || path[n].basic_form == '：' || path[n].basic_form == ':' || path[n].word_id == '2613630' || path[n].surfaceForm == '･･･？：' || path[n].surfaceForm == ')：' ||
+					path[n].surfaceForm == '…' || path[n].surfaceForm == '……' || path[n].surfaceForm == '・・・' || path[n].surfaceForm == '･･･') {
             break
           }
           if (m % 2 == 1) {
             kanjatango++
-            kanjamoji = kanjamoji + path[n].surface_form.length
+            kanjamoji = kanjamoji + path[n].surfaceForm.length
             if (path[n].basic_form == '母' || path[n].basic_form == '主人' || path[n].basic_form == '父さん' || path[n].basic_form == 'ご主人' || path[n].basic_form == 'お父さん' || path[n].basic_form == '姉' || path[n].basic_form == '姉さん' || path[n].basic_form == '母親' ||
 						path[n].basic_form == 'お姉さん' || path[n].basic_form == '父' || path[n].basic_form == '家族') {
               RGB[m][i][0] = 1
@@ -86,21 +86,21 @@ var funcReaderOnload = (name, event, keitaisokaiseki, checkboxlist, chboxlist, c
             }
           } else if (m % 2 == 0) {
             serapitango++
-            serapimoji = serapimoji + path[n].surface_form.length
-            if (path[n].surface_form == 'そう' && path[n + 1].surface_form == 'です' && path[n + 2].surface_form == 'か') {
+            serapimoji = serapimoji + path[n].surfaceForm.length
+            if (path[n].surfaceForm == 'そう' && path[n + 1].surfaceForm == 'です' && path[n + 2].surfaceForm == 'か') {
               soudesuka++
             }
-            if (path[n].surface_form == '何' && path[n + 1].surface_form == 'か') {
+            if (path[n].surfaceForm == '何' && path[n + 1].surfaceForm == 'か') {
 
-            } else if (path[n].basic_form == 'いかが' || path[n].basic_form == 'なんで' || path[n].basic_form == 'どうして' || path[n].basic_form == 'どの' || path[n].basic_form == 'どのように' || path[n].basic_form == 'いつ' || path[n].basic_form == 'どういう' || path[n].basic_form == 'どなた' || path[n].basic_form == 'どう' || path[n].surface_form == '何' || path[n].basic_form == '誰' || path[n].basic_form == 'どんな' || path[n].basic_form == 'どのような' || path[n].basic_form == 'どこ') {
+            } else if (path[n].basic_form == 'いかが' || path[n].basic_form == 'なんで' || path[n].basic_form == 'どうして' || path[n].basic_form == 'どの' || path[n].basic_form == 'どのように' || path[n].basic_form == 'いつ' || path[n].basic_form == 'どういう' || path[n].basic_form == 'どなた' || path[n].basic_form == 'どう' || path[n].surfaceForm == '何' || path[n].basic_form == '誰' || path[n].basic_form == 'どんな' || path[n].basic_form == 'どのような' || path[n].basic_form == 'どこ') {
             RGBlist[m / 2][3] = 1
-          } else if (path[n].surface_form == 'か' && path[n].pos == '助詞') {
+          } else if (path[n].surfaceForm == 'か' && path[n].pos == '助詞') {
             RGBlist[m / 2][4] = 1
-          } else if (path[n].surface_form == 'ね' && path[n].pos == '助詞') {
+          } else if (path[n].surfaceForm == 'ね' && path[n].pos == '助詞') {
           RGBlist[m / 2][6] = 1
         }
           }
-          bun[m][i] += path[n].surface_form
+          bun[m][i] += path[n].surfaceForm
           if (path[n].pos_detail_1 == '接尾' || path[n].basic_form == '*' || path[n].pos == '助詞' || path[n].basic_form == '、' || path[n].pos == '記号' || path[n].pos == '助動詞' || path[n].pos == '感動詞' || path[n].pos == '接頭詞' || path[n].pos_detail_1 == '非自立' ||
 					path[n].basic_form == 'する' || path[n].basic_form == 'いる' || path[n].basic_form == 'こういう' || path[n].basic_form == 'そういう' || path[n].basic_form == 'こう' || path[n].basic_form == 'する' || path[n].basic_form == 'こうした' || path[n].basic_form == 'いう' || path[n].basic_form == 'する' ||
 					path[n].basic_form == 'なる' || path[n].basic_form == 'その' || path[n].basic_form == 'あの' || path[n].pos_detail_1 == '数' || path[n].basic_form == 'そう' || path[n].basic_form == '気持ち' || path[n].basic_form == '思い' || path[n].basic_form == '思う' || path[n].basic_form == 'ある') {
@@ -132,7 +132,7 @@ var funcReaderOnload = (name, event, keitaisokaiseki, checkboxlist, chboxlist, c
           }
           break
         }
-        if (path[n].word_id == '2613630' || path[n].basic_form == '：' || path[n].basic_form == ':' || path[n].surface_form == '･･･？：' || path[n].surface_form == ')：') {
+        if (path[n].word_id == '2613630' || path[n].basic_form == '：' || path[n].basic_form == ':' || path[n].surfaceForm == '･･･？：' || path[n].surfaceForm == ')：') {
           if (m % 2 == 0) {
             if (i <= 2 && tangosuu <= 7) {
               RGBlist[m / 2][5] = 1

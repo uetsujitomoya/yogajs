@@ -1,5 +1,5 @@
-import {searchNodeArrayForCharacterAndPoint} from './searchNodeArrayForCharacterAndPoint'
-import {rodata} from '../../rodata'
+import {searchNodeArrayForCharacterAndPoint} from '../searchNodeArrayForCharacterAndPoint'
+import {rodata} from '../../../rodata'
 
 const firstJapaneseRowIdxInBunsetsu=rodata.firstJapaneseRowIdxInBunsetsu
 
