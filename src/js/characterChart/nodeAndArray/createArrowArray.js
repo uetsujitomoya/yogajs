@@ -17,6 +17,8 @@ const createNodeAndArrowArray = (sentenceArray, nodeArray) => {
   //let nodeArray = []
   console.log(arrowArray.length)
 
+  resetCircleStrokeWidth(nodeArray)
+
   for (let sentenceCnt = 0; sentenceCnt < sentenceArray.length; sentenceCnt++) {
     let sentence = sentenceArray[sentenceCnt]
         // console.log(sentence)
@@ -112,12 +114,10 @@ const existsSubject = (verb) => {
   }
 }
 
-let createNode = () => {
-
-}
-
-let createArrow = () => {
-
+const resetCircleStrokeWidth=(nodeArray)=>{
+  for(let node of nodeArray){
+    node.circleStrokeWidth=0
+  }
 }
 
 export {createNodeAndArrowArray}
