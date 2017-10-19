@@ -4,7 +4,7 @@
 
 const initialValueOfSubjectAndObjectInVerb = null
 
-/*export default class verbInSentence {
+/*export default class BunVerb {
   constructor (bunsetsuNum_inSentence, bunsetsuRawArray, sentenceNum) {
     this.bunsetsuNum_inSentence = bunsetsuNum_inSentence
     this.sentenceNum = sentenceNum
@@ -15,7 +15,7 @@ const initialValueOfSubjectAndObjectInVerb = null
 }*/
 
 
-export default class verbInSentence {
+export default class BunVerb {
   constructor (bunsetsuIdxInSentence, bunsetsuRawArray, sentenceIdx) {
     this.bunsetsuNum_inSentence = bunsetsuIdxInSentence
     this.sentenceNum = sentenceIdx

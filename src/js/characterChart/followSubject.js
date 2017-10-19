@@ -3,7 +3,7 @@
  */
 
 let followSubject=()=>{
-    if(/*subjectがない*/){
+/*    if(/!*subjectがない*!/){
         //今まででsubjectHitした文節を流用
-    }
+    }*/
 }

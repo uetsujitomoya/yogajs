@@ -38576,7 +38576,7 @@ Object.defineProperty(exports, '__esModule', {
 
 var _csv2ArrayJs = require('./csv2Array.js');
 
-var _TransposeMatrixJs = require('./TransposeMatrix.js');
+var _TransposeMatrixJs = require('./transposeMatrix.js');
 
 var convertCSV2Storage = function convertCSV2Storage(jsonName, storage) {
     var storageArrayFromKamata = (0, _csv2ArrayJs.csv2Array)('csv/storage170421fromKamata.csv');
@@ -38720,7 +38720,7 @@ var _jquery2 = _interopRequireDefault(_jquery);
 
 var _jsWordparse2objectJs = require('./js/wordparse2object.js');
 
-// import {CreateSwitchClassificationMethod} from "./SwitchClassificationMethod.js"; //AcceptDictionary
+// import {CreateSwitchClassificationMethod} from "./switchClassificationMethod.js"; //AcceptDictionary
 // var dictionaryFromWord2Vec = csv2Array('HDFaceVertex.csv');
 
 (0, _jsWordparse2objectJs.wordparse2object)();
@@ -40086,7 +40086,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var initialValueOfSubjectAndObjectInVerb = null;
 
-/*export default class verbInSentence {
+/*export default class BunVerb {
   constructor (bunsetsuNum_inSentence, bunsetsuRawArray, sentenceNum) {
     this.bunsetsuNum_inSentence = bunsetsuNum_inSentence
     this.sentenceNum = sentenceNum
@@ -40513,7 +40513,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'd
 
 var _characterChartIsCharacter = require('./characterChart/isCharacter');
 
-// import verbInSentence from "../js/create_verbInSentence_class.js"
+// import BunVerb from "../js/create_verbInSentence_class.js"
 
 var _arrow_nodeJs = require('./arrow_node.js');
 

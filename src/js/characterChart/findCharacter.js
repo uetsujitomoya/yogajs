@@ -76,56 +76,6 @@ const createNewCharacter=(name,characterArray,nodeArray)=>{
   nodeArray.push(new Node(name))
 }
 
-/*class character{
-  constructor(name,arrayLength){
-    this.chalacter_name=characterDefaultName
-    this.isClient=false
-    this.character_node = new Node(character_name,sentence,this.isClient)
-    this.nodeX=null
-    this.nodeY=null
-    this.nodeCircleStrokeWidth=0
-    this.r = r
-    if (this.isSubject) {
-      this.strokeColor = 'red'
-    } else {
-      this.strokeColor = 'gray'
-    }
-    this.nodeCharacter = name
-    this.circleStrokeWidth = 0
-    this.nodeIdx=nodeCnt
-    this.viz=false
-    nodeCnt++
-  }
-  addStrokeWidth () {
-    this.strokeWidth++
-    this.viz=true
-  }
-  fixPoint(nodeListLength){
-    this.radian = (this.nodeIdx/nodeListLength)*2*Math.PI
-    this.y = orbitOPoint + orbitR * Math.sin(this.radian)
-    this.x = orbitOPoint + orbitR * Math.cos(this.radian)
-  }
-}*/
-
-/*
-class Node{
-  constructor(character_name,sentence,isClient){
-    //this.character=character
-    this.node_r=0
-    this.node_x=0
-    this.node_y=0
-    this.node_text=character_name
-    this.bold_qty=1
-    if(isClient){
-      this.node_color=color_of_client
-    }else{
-      this.node_color=color_of_people_around_client
-    }
-
-  }
-}
-*/
-
 let add_bold_of_node = () => {
 
 }
@@ -154,6 +104,7 @@ class Character {
     this.circleStrokeWidth = 0
     this.nodeIdx=nodeCnt
     this.viz=false
+    this.sentenceNoArray=[]
     nodeCnt++
   }
   addStrokeWidth () {

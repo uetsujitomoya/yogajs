@@ -5,9 +5,9 @@
 let count_pairs_of_subject_and_object = (sentenceArray) => {
     let pairArray=[]
     sentenceArray
-    if(/*かぶりなし*/){
+/*    if(/!*かぶりなし*!/){
         pairArray.push(new PairOfSubjectAndObject(subject,object))
-    }
+    }*/
     return pairArray
 }
 

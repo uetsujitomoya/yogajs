@@ -4,7 +4,7 @@
 
 
 import {isCharacter} from './characterChart/reconstructKNP/isCharacter'
-// import verbInSentence from "../js/create_verbInSentence_class.js"
+// import BunVerb from "../js/create_verbInSentence_class.js"
 import {createsvg} from './characterChart/nodeAndArray/arrow_node.js'
 import Sentence from './characterChart/reconstructKNP/defineSentence'
 
