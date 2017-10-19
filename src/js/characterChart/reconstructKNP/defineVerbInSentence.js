@@ -24,11 +24,11 @@ export default class verbInSentence {
     this.object = null
   }
   rewriteSubject (character) {
-    console.log(character)
+    //console.log(character)
     this.subject = character
   }
   rewriteObject (character) {
-    console.log(character)
+    //console.log(character)
     this.object = character
   }
 }

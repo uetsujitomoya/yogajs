@@ -32,6 +32,7 @@ const createNodeAndArrowArray = (sentenceArray, nodeArray) => {
     sentence.verb_array.forEach((verb) => {
 
       if (existsSubject(verb)) {
+        console.log(verb)
         if (existsObject(verb)) {
           let isNewArrow = true
           for (let tmpArrowCnt = 0; tmpArrowCnt < arrowArray.length; tmpArrowCnt++) {
@@ -48,8 +49,12 @@ const createNodeAndArrowArray = (sentenceArray, nodeArray) => {
           //let isNewNode = true
           for (let tmpNodeCnt = 0; tmpNodeCnt < nodeArray.length; tmpNodeCnt++) {
             if (isSameNode(nodeArray[tmpNodeCnt], verb)) {
+              console.log('same node!')
+              //console.log(circleStrokeWidth)
+              console.log(verb)
               nodeArray[tmpNodeCnt].circleStrokeWidth++
-              isNewNode = false
+              console.log(nodeArray[tmpNodeCnt].circleStrokeWidth)
+              //isNewNode = false
               break
             }
           }
@@ -78,9 +83,9 @@ const isSameArrow = (arrow, verb) => {
 }
 
 const isSameNode = (node, verb) => {
-    // console.log(node)
+    //console.log(node)
     // console.log(verb)
-  if (node.subject === verb.subject) {
+  if (node.name === verb.subject.name) {
     return true
   } else {
     return false

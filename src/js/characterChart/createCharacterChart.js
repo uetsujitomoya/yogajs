@@ -6,7 +6,7 @@ import {csv2Array} from '../../csv2Array.js'
 import {getCSV} from '../getCSV.js'
 import {reconstructKNP} from '../reconstructKNP.js'
 import {findCharacter} from './findCharacter.js'
-import {createNodeAndArrowArray} from './nodeAndArray/createNodeAndArrowArray.js'
+import {createNodeAndArrowArray} from './nodeAndArray/createArrowArray.js'
 import {manageSlider} from './slider.js'
 import {fixNodePoint} from './fixNodePoint'
 
@@ -33,7 +33,7 @@ const createCharacterChart = () => {
   manageSlider(reconstructedKNP.sentenceArray,charaArray)
 }
 
-const find_dependency = () => {
+const findDependency = () => {
   find_subject()
   find_object()
 }

@@ -5,7 +5,7 @@
 import d3 from 'd3'
 import $ from 'jquery'
 
-import {createNodeAndArrowArray} from './nodeAndArray/createNodeAndArrowArray.js'
+import {createNodeAndArrowArray} from './nodeAndArray/createArrowArray.js'
 
 import {removeSVG} from './nodeAndArray/vizNode.js'
 

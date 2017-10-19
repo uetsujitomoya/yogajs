@@ -1,7 +1,7 @@
 const searchNodeArrayForCharacterAndPoint=(nodeArray,tmpName)=>{
   for(const node of nodeArray){
     if(tmpName===node.name){
-      console.log(node)
+      //console.log(node)
       return{
         name:node.name,
         isCharacter:true,

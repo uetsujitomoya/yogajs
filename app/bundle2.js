@@ -39804,7 +39804,7 @@ var _jquery = require('jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-var _createNodeAndArrowArrayJs = require('../createNodeAndArrowArray.js');
+var _createNodeAndArrowArrayJs = require('../createArrowArray.js');
 
 var _vizNodeJs = require('../vizNode.js');
 
@@ -40458,7 +40458,7 @@ var _reconstruct_KNPJs = require('./reconstructKNP.js');
 
 var _find_characterJs = require('./findCharacter.js');
 
-var _createNodeAndArrowArrayJs = require('./createNodeAndArrowArray.js');
+var _createNodeAndArrowArrayJs = require('./createArrowArray.js');
 
 var _characterChartSliderJs = require('./characterChart/slider.js');
 

@@ -6,10 +6,11 @@ import d3 from 'd3'
 import $ from 'jquery'
 import {vizArrow} from './vizArrow'
 import {connectNodeAndArray} from './connectNodeAndArray'
-//import {r} from './defineNode'
-import{rodata} from '../../rodata'
 
-const r = rodata.nodeR
+import {r} from './defineNode'
+
+//import{rodata} from '../../rodata'
+//const r = rodata.nodeR
 
 const color_of_client = 'red'
 const color_of_people_around_client = 'gray'
@@ -36,8 +37,8 @@ let vizNodes = (nodeArray,arrowArray) => {
         .attr({
           transform: function (d) {
             //console.log(d)
-            console.log(d.x)
-            console.log(d.y)
+            //console.log(d.x)
+            //console.log(d.y)
             return 'translate(' + d.x + ',' + d.y + ')'
           }
         })
@@ -47,7 +48,7 @@ let vizNodes = (nodeArray,arrowArray) => {
           'r': function (d) { return r },
           'stroke': function (d, i) { if (i === 0) { return color_of_client } else { return color_of_people_around_client } },
           'fill': 'white',
-          'stroke-width': (d) => { return　1 /*d.circleStrokeWidth*/ }
+          'stroke-width': (d) => { return　d.circleStrokeWidth }
         })
 
   nodes.append('text')
@@ -67,7 +68,6 @@ let vizNodes = (nodeArray,arrowArray) => {
     connectNodeAndArray(arrow)
     vizArrow(svg, arrow.pointArray)
   }
-
 }
 
 /*

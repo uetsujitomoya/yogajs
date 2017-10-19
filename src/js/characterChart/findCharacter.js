@@ -10,6 +10,7 @@ const r=rodata.nodeR
 const orbitR=rodata.orbitR
 const orbitOPoint = rodata.orbitOPoint
 let nodeCnt=0
+let aSanCnt=0
 
 const characterKeyword="カテゴリ:人>"
 
@@ -45,7 +46,8 @@ const findCharacter = (knpArray, characterArray, nodeArray) => {
 
       if(row[0] === "さん"){
         const tempCharacter = knpArray[rowIdx-1][0]+row[0]
-        if(isNewCharacter(tempCharacter,characterArray)){
+        //console.log(tempCharacter)
+        if(isNewCharacter(tempCharacter,characterArray)&&aSanCnt===0){
           createNewCharacter(tempCharacter,characterArray,nodeArray)
         }
       }
@@ -57,6 +59,7 @@ const isNewCharacter=(tempCharacterName,characterArray)=> {
   characterArray.forEach((character)=>{
     if(tempCharacterName === character.name){
       //verbを追加
+      //console.log(tempCharacterName)
       return false;
       //太さ加算
       //character.character_node.bold_qty++
@@ -67,6 +70,7 @@ const isNewCharacter=(tempCharacterName,characterArray)=> {
 
 const createNewCharacter=(name,characterArray,nodeArray)=>{
   //Nodeを出現させるとしたらどこまでつくるかも書く
+  if(name==='Aさん'){aSanCnt=1}
   characterArray.push(new Character(name,characterArray.length))
   //Nodeもここで追加する。
   nodeArray.push(new Node(name))
