@@ -9,7 +9,7 @@ import {createNodeAndArrowArray} from './nodeAndArray/createNodeAndArrowArray.js
 
 import {removeSVG} from './nodeAndArray/vizNode.js'
 
-let manageSlider = (sentenceArray) => {
+let manageSlider = (sentenceArray,charaArray) => {
   let el = document.querySelector('#ex2')
   console.log(sentenceArray.length)
   el.dataset.sliderMax = sentenceArray.length + ''
@@ -25,11 +25,11 @@ let manageSlider = (sentenceArray) => {
 
   $('#ex2').on('slide', function (slideEvt) {
     console.log(slideEvt.value)
-    applySlider(slideEvt.value, sentenceArray)
+    applySlider(slideEvt.value, sentenceArray,charaArray)
   })
 }
 
-let applySlider = (selectedAreaArray, sentenceArray) => {
+let applySlider = (selectedAreaArray, sentenceArray,charaArray) => {
     // yaru
     // gyouretukosuuhaaku
     // 「文」の個数把握
@@ -45,10 +45,10 @@ let applySlider = (selectedAreaArray, sentenceArray) => {
     start: selectedAreaArray[0],
     end: selectedAreaArray[1]
   }
-  redrawCharacterChart(sentenceArray, selectedArea)
+  redrawCharacterChart(sentenceArray, selectedArea,charaArray)
 }
 
-let redrawCharacterChart = (sentenceArray, selectedArea) => {
+let redrawCharacterChart = (sentenceArray, selectedArea,charaArray) => {
   let refinedSentenceArray = sentenceArray.concat()
 
     // sentenceArrayの最初と最後数個の要素を排除して、新sentenceArrayとして入力する
@@ -59,7 +59,7 @@ let redrawCharacterChart = (sentenceArray, selectedArea) => {
 
   console.log('sentenceArray.length')
   console.log(sentenceArray.length)
-  createNodeAndArrowArray(refinedSentenceArray)
+  createNodeAndArrowArray(refinedSentenceArray,charaArray)
 }
 
 export {manageSlider}

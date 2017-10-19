@@ -30,7 +30,7 @@ let vizNodes = (nodeArray,arrowArray) => {
           height: 800
         })
 
-  //console.log(nodeArray)
+
   let nodes = svg.selectAll('g')
         .data(nodeArray).enter().append('g')
         .attr({
@@ -61,11 +61,12 @@ let vizNodes = (nodeArray,arrowArray) => {
           return d.nodeCharacter
         })
   console.log(nodes)
+  console.log(arrowArray)
 
-/*  for(let arrow of arrowArray){
+  for(let arrow of arrowArray){
     connectNodeAndArray(arrow)
     vizArrow(svg, arrow.pointArray)
-  }*/
+  }
 
 }
 

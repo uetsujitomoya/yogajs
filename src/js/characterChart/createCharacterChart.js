@@ -30,7 +30,7 @@ const createCharacterChart = () => {
   console.log(reconstructedKNP.sentenceArray)
 
   createNodeAndArrowArray(reconstructedKNP.sentenceArray, charaArray)
-  manageSlider(reconstructedKNP.sentenceArray)
+  manageSlider(reconstructedKNP.sentenceArray,charaArray)
 }
 
 const find_dependency = () => {
