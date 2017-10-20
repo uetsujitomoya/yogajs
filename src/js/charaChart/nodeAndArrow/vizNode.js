@@ -5,7 +5,7 @@
 import d3 from 'd3'
 import $ from 'jquery'
 import {vizArrow} from './vizArrow'
-import {connectNodeAndArray} from './connectNodeAndArray'
+import {connectNodeAndArray} from './connectNodeAndArrow'
 
 import {r} from './defineNode'
 

@@ -6,18 +6,18 @@ import $ from 'jquery'
 import {select} from './select.js'
 import {setForViz} from './svg.js'
 
-let ClassifyWithKNP = (startTime, jsonFileName, event, keitaisokaiseki, chboxlist, chboxlist2, questionClassification, hatsugen, bun, checked, checked2, taiou, taiou2, newLoveDictionary, newWorkDictionary, newFriendDictionary, RGB) => {
+let ClassifyWithKNP = (startTime, jsonFileName, event, keitaisokaiseki, chboxlist, chboxlist2, questionClassification, hatsugen, bun, checked, checked2, taiou, taiou2, newLoveDic, newWorkDic, newFriendDic, RGB) => {
   let isUsingKNP = 1
   let isUsingDictionaryWithWord2Vec = 0
 
   let readingCSVname = 'Book2.csv'
 
-  let knpArray = csv2Array(readingCSVname)
+  let knpArr = csv2Array(readingCSVname)
 
   let storage = localStorage// 初回読み込み
 
   let resultArray = []
-  OrganizeKNP(knpArray, hatsugen, newLoveDictionary, newWorkDictionary, newFriendDictionary, RGB, resultArray)
+  OrganizeKNP(knpArr, hatsugen, newLoveDic, newWorkDic, newFriendDic, RGB, resultArray)
 
   console.log(hatsugen)
 
@@ -28,7 +28,7 @@ let ClassifyWithKNP = (startTime, jsonFileName, event, keitaisokaiseki, chboxlis
   putToScreen(startTime, jsonFileName, keitaisokaiseki, chboxlist, chboxlist2, RGB, hatsugen, bun, checked, checked2, taiou, taiou2, isUsingDictionaryWithWord2Vec, isUsingKNP)
 }
 
-let putToScreen = (startTime, jsonFileName, keitaisokaiseki, chboxlist, chboxlist2, RGB, hatsugen, bun, checked, checked2, taiou, taiou2, isUsingDictionaryWithWord2Vec, isUsingKNP) => {
+const putToScreen = (startTime, jsonFileName, keitaisokaiseki, chboxlist, chboxlist2, RGB, hatsugen, bun, checked, checked2, taiou, taiou2, isUsingDictionaryWithWord2Vec, isUsingKNP) => {
   let storage = localStorage// 初回読み込み
   let checkboxlist = []
   let RGBlist = []

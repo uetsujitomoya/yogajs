@@ -5,9 +5,9 @@
 import d3 from 'd3'
 import $ from 'jquery'
 
-import {createNodeAndArrowArray} from '../nodeAndArray/createArrowArray.js'
+import {createNodeAndArrowArray} from '../nodeAndArrow/createArrowArray.js'
 
-import {removeSVG} from '../nodeAndArray/vizNode.js'
+import {removeSVG} from '../nodeAndArrow/vizNode.js'
 
 let manageSlider = (sentenceArray,charaArray) => {
   let el = document.querySelector('#ex2')

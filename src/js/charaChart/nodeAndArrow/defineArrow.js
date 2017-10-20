@@ -2,7 +2,7 @@
  * Created by uetsujitomoya on 2017/08/29.
  */
 
-import {connectNodeAndArray} from './connectNodeAndArray'
+import {connectNodeAndArray} from './connectNodeAndArrow'
 
 export default class Arrow {
   constructor (verb, arrowNum, svg) {

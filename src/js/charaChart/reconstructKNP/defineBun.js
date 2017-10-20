@@ -2,7 +2,7 @@ import Bunsetsu from './defineBunsetsu.js'
 import BunKihonku from './defineKihonku.js'
 import {rodata} from '../../rodata'
 import BunVerb from './defineBunVerb'
-import {searchMaenoBunForShugo} from './SubjectOrObject/searchMaenoBunForS'
+import {searchMaenoBunForShugo} from './SO/searchMaenoBunForS'
 
 const startingBunsetsuRowIdxInSentence = 1
 const startingKihonkuRowIdxInSentence = 2
@@ -11,21 +11,23 @@ const firstJapaneseRowIdxInSentence = 3
 const bunsetsuSymbol = rodata.bunsetsuSymbol
 const kihonkuSymbol = rodata.kihonkuSymbol
 
-export default class Sentence {
+export default class Bun {
   constructor (rawRowIdx, bun2dArrayFromKNP, charaArray, sentenceIdx, nodeArray) {
 
     if (bun2dArrayFromKNP.length === 1) {
-      return 0
+      return null
     }
+
+    this.nodeArray=[]//forTextView
 
     this.verb_array = []
 
     // this.csv_raw_array=[]
     this.rowNo = rawRowIdx
-    this.bunsetsu_array = []
+    this.bunsetsuArray = []
     //console.log(bun2dArrayFromKNP)
 
-    this.bunsetsu_array.length = countBunsetsu(bun2dArrayFromKNP)
+    this.bunsetsuArray.length = countBunsetsu(bun2dArrayFromKNP)
 
     this.kihonkuArray = []
     this.kihonkuArray.length = countKihonku(bun2dArrayFromKNP)
@@ -56,10 +58,10 @@ export default class Sentence {
         this.kihonkuArray[bunKihonkuIdx] = new BunKihonku(bunKihonkuIdx, kihonkuKNParray)// 文の中の通し番号での基本句array
         kihonkuKNParray = []
         bunKihonkuIdx++
-        this.bunsetsu_array[bunBunsetsuIdx] = new Bunsetsu(bunBunsetsuIdx, bunsetsuKNParray, charaArray)// 文の中の通し番号での文節array
+        this.bunsetsuArray[bunBunsetsuIdx] = new Bunsetsu(bunBunsetsuIdx, bunsetsuKNParray, charaArray,this)// 文の中の通し番号での文節array
 
         // verb_array作成
-        if (this.bunsetsu_array[bunBunsetsuIdx].isVerb) { this.verb_array.push(new BunVerb(bunBunsetsuIdx, bunsetsuKNParray, sentenceIdx)) }
+        if (this.bunsetsuArray[bunBunsetsuIdx].isVerb) { this.verb_array.push(new BunVerb(bunBunsetsuIdx, bunsetsuKNParray, sentenceIdx)) }
         bunsetsuKNParray = []
         bunBunsetsuIdx++
 
@@ -69,11 +71,11 @@ export default class Sentence {
       kihonkuKNParray.push(bun2dArrayFromKNP[tmpRowNo])
     }
 
-    this.bunsetsu_array[bunBunsetsuIdx] = new Bunsetsu(bunBunsetsuIdx, bunsetsuKNParray, charaArray)
+    this.bunsetsuArray[bunBunsetsuIdx] = new Bunsetsu(bunBunsetsuIdx, bunsetsuKNParray, charaArray,this)
 
     // verb_array作成
 
-    if (this.bunsetsu_array[bunBunsetsuIdx].isVerb) {
+    if (this.bunsetsuArray[bunBunsetsuIdx].isVerb) {
       this.verb_array.push(new BunVerb(bunBunsetsuIdx, bunsetsuKNParray, sentenceIdx))
     }
     this.kihonkuArray[bunKihonkuIdx] = new BunKihonku(bunKihonkuIdx, kihonkuKNParray)
@@ -93,10 +95,10 @@ export default class Sentence {
 
   inputEachKakarareruBunsetsuID () {
     // 動詞なら、その動詞にかかるのを探していく
-    for(const kakaruBunsetsu of this.bunsetsu_array){
-      for (let kakarareruBunsetsuCnt = 0; kakarareruBunsetsuCnt < this.bunsetsu_array.length; kakarareruBunsetsuCnt++) {
-        if (kakaruBunsetsu.kakaru_bunsetsu_id === this.bunsetsu_array[kakarareruBunsetsuCnt].id) {
-          this.bunsetsu_array[kakarareruBunsetsuCnt].kakarareru_bunsetsu_id_array.push(kakaruBunsetsu.id)
+    for(const kakaruBunsetsu of this.bunsetsuArray){
+      for (let kakarareruBunsetsuCnt = 0; kakarareruBunsetsuCnt < this.bunsetsuArray.length; kakarareruBunsetsuCnt++) {
+        if (kakaruBunsetsu.kakaru_bunsetsu_id === this.bunsetsuArray[kakarareruBunsetsuCnt].id) {
+          this.bunsetsuArray[kakarareruBunsetsuCnt].kakarareru_bunsetsu_id_array.push(kakaruBunsetsu.id)
           break
         }
       }
@@ -115,10 +117,10 @@ export default class Sentence {
   }
 
   findSubjectOfVerb (verbBunsetsuNo, tempVerbNum) {
-    for (let tmplauseNo = verbBunsetsuNo; tmplauseNo >= 0; tmplauseNo--) {
-      let tmpClause = this.bunsetsu_array[tmplauseNo]
+    for (let clauseCnt = verbBunsetsuNo; clauseCnt >= 0; clauseCnt--) {
+      let tmpClause = this.bunsetsuArray[clauseCnt]
       if (tmpClause.isSubject) {
-        this.bunsetsu_array[ verbBunsetsuNo ].subject_of_verb = tmpClause.subject
+        this.bunsetsuArray[ verbBunsetsuNo ].subject_of_verb = tmpClause.subject
         this.verb_array[tempVerbNum].rewriteSubject(tmpClause.subject)
         break
       }else{
@@ -129,9 +131,9 @@ export default class Sentence {
 
   findObjectOfVerb (verbBunsetsuNo, tmpVerbNo) {
     for (let bunsetsuCnt = verbBunsetsuNo; bunsetsuCnt >= 0; bunsetsuCnt--) {
-      let tmpBunsetsu = this.bunsetsu_array[bunsetsuCnt]
+      let tmpBunsetsu = this.bunsetsuArray[bunsetsuCnt]
       if (tmpBunsetsu.isObject) {
-        this.bunsetsu_array[ verbBunsetsuNo ].object_of_verb = tmpBunsetsu.object
+        this.bunsetsuArray[ verbBunsetsuNo ].object_of_verb = tmpBunsetsu.object
         this.verb_array[tmpVerbNo].object = tmpBunsetsu.object
         this.verb_array[tmpVerbNo].rewriteObject(tmpBunsetsu.object)
         break

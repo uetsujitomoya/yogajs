@@ -2,7 +2,7 @@
 import 'kuromoji'
 import {select} from './select.js'
 import {setForViz} from './svg.js'
-import {makeOnClickS, makeOnClick} from './js/wordparse1608030008.js'
+import {makeOnClickS, makeOnClick} from './wordparse1608030008.js'
 
 var ClassifyWithWordDictionary = (jsonFileName, event, keitaisokaiseki, chboxlist, chboxlist2, hatsugen, bun, checked, checked2, taiou, taiou2, chboxlength, chboxlength2, newLoveDictionary, newWorkDictionary, newFriendDictionary) => {
   console.log('AcceptDictionary')
@@ -241,10 +241,10 @@ var ClassifyWithWordDictionary = (jsonFileName, event, keitaisokaiseki, chboxlis
 
                 // 以下、新規追加のセンテンス判定
 
-        storage.setItem(jsonFileName + 'AnswerWithNewDictionaryHatsugen' + hatsugenNumber + 'Sentence' + sentenceNumberInHatsugen, bun[hatsugenNumber][sentenceNumberInHatsugen])
-        storage.setItem(jsonFileName + 'AnswerWithNewDictionaryHatsugen' + hatsugenNumber + 'Sentence' + sentenceNumberInHatsugen + 'LovePoint', RGB[hatsugenNumber][sentenceNumberInHatsugen][0])
-        storage.setItem(jsonFileName + 'AnswerWithNewDictionaryHatsugen' + hatsugenNumber + 'Sentence' + sentenceNumberInHatsugen + 'WorkPoint', 0)
-        storage.setItem(jsonFileName + 'AnswerWithNewDictionaryHatsugen' + hatsugenNumber + 'Sentence' + sentenceNumberInHatsugen + 'FriendPoint', 0)
+        storage.setItem(jsonFileName + 'AnswerWithNewDictionaryHatsugen' + hatsugenNumber + 'Bun' + sentenceNumberInHatsugen, bun[hatsugenNumber][sentenceNumberInHatsugen])
+        storage.setItem(jsonFileName + 'AnswerWithNewDictionaryHatsugen' + hatsugenNumber + 'Bun' + sentenceNumberInHatsugen + 'LovePoint', RGB[hatsugenNumber][sentenceNumberInHatsugen][0])
+        storage.setItem(jsonFileName + 'AnswerWithNewDictionaryHatsugen' + hatsugenNumber + 'Bun' + sentenceNumberInHatsugen + 'WorkPoint', 0)
+        storage.setItem(jsonFileName + 'AnswerWithNewDictionaryHatsugen' + hatsugenNumber + 'Bun' + sentenceNumberInHatsugen + 'FriendPoint', 0)
 
         if (RGB[hatsugenNumber][sentenceNumberInHatsugen][0] >= RGB[hatsugenNumber][sentenceNumberInHatsugen][1]) {
           RGB[hatsugenNumber][sentenceNumberInHatsugen][1] = 0

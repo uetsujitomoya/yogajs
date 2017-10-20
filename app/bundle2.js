@@ -38136,10 +38136,10 @@ var ClassifyWithWordDictionary = function ClassifyWithWordDictionary(jsonFileNam
 
         // 以下、新規追加のセンテンス判定
 
-        storage.setItem(jsonFileName + 'AnswerWithNewDictionaryHatsugen' + hatsugenNumber + 'Sentence' + _sentenceNumberInHatsugen, bun[hatsugenNumber][_sentenceNumberInHatsugen]);
-        storage.setItem(jsonFileName + 'AnswerWithNewDictionaryHatsugen' + hatsugenNumber + 'Sentence' + _sentenceNumberInHatsugen + 'LovePoint', RGB[hatsugenNumber][_sentenceNumberInHatsugen][0]);
-        storage.setItem(jsonFileName + 'AnswerWithNewDictionaryHatsugen' + hatsugenNumber + 'Sentence' + _sentenceNumberInHatsugen + 'WorkPoint', 0);
-        storage.setItem(jsonFileName + 'AnswerWithNewDictionaryHatsugen' + hatsugenNumber + 'Sentence' + _sentenceNumberInHatsugen + 'FriendPoint', 0);
+        storage.setItem(jsonFileName + 'AnswerWithNewDictionaryHatsugen' + hatsugenNumber + 'Bun' + _sentenceNumberInHatsugen, bun[hatsugenNumber][_sentenceNumberInHatsugen]);
+        storage.setItem(jsonFileName + 'AnswerWithNewDictionaryHatsugen' + hatsugenNumber + 'Bun' + _sentenceNumberInHatsugen + 'LovePoint', RGB[hatsugenNumber][_sentenceNumberInHatsugen][0]);
+        storage.setItem(jsonFileName + 'AnswerWithNewDictionaryHatsugen' + hatsugenNumber + 'Bun' + _sentenceNumberInHatsugen + 'WorkPoint', 0);
+        storage.setItem(jsonFileName + 'AnswerWithNewDictionaryHatsugen' + hatsugenNumber + 'Bun' + _sentenceNumberInHatsugen + 'FriendPoint', 0);
 
         if (RGB[hatsugenNumber][_sentenceNumberInHatsugen][0] >= RGB[hatsugenNumber][_sentenceNumberInHatsugen][1]) {
           RGB[hatsugenNumber][_sentenceNumberInHatsugen][1] = 0;
@@ -39440,10 +39440,10 @@ var KNP_Sentence = (function () {
 
     // this.csv_raw_array=[]
     this.rowNo = rawRowIdx;
-    this.bunsetsu_array = [];
+    this.bunsetsuArray = [];
     //console.log(sentence2dArray)
 
-    this.bunsetsu_array.length = count_bunsetsu(sentence2dArray);
+    this.bunsetsuArray.length = count_bunsetsu(sentence2dArray);
 
     this.kihonkuArray = [];
     this.kihonkuArray.length = count_kihonku(sentence2dArray);
@@ -39476,10 +39476,10 @@ var KNP_Sentence = (function () {
         this.kihonkuArray[kihonkuIdxInSentence] = new _defineKihonkuClassJs2['default'](kihonkuIdxInSentence, temp2dArrayForKihonku); // 文の中の通し番号での基本句array
         temp2dArrayForKihonku = [];
         kihonkuIdxInSentence++;
-        this.bunsetsu_array[bunsetsuIdxInSentence] = new _defineBunsetsuClassJs2['default'](bunsetsuIdxInSentence, temp2dArrayForBunsetsu, characterArray); // 文の中の通し番号での文節array
+        this.bunsetsuArray[bunsetsuIdxInSentence] = new _defineBunsetsuClassJs2['default'](bunsetsuIdxInSentence, temp2dArrayForBunsetsu, characterArray); // 文の中の通し番号での文節array
 
         // verb_array作成
-        if (this.bunsetsu_array[bunsetsuIdxInSentence].isVerb) {
+        if (this.bunsetsuArray[bunsetsuIdxInSentence].isVerb) {
           this.verb_array.push(new _defineClassOfVerbInSentence2['default'](bunsetsuIdxInSentence, temp2dArrayForBunsetsu, sentenceIdx));
         }
         temp2dArrayForBunsetsu = [];
@@ -39490,11 +39490,11 @@ var KNP_Sentence = (function () {
       temp2dArrayForKihonku.push(sentence2dArray[temp_rowNo]);
     }
 
-    this.bunsetsu_array[bunsetsuIdxInSentence] = new _defineBunsetsuClassJs2['default'](bunsetsuIdxInSentence, temp2dArrayForBunsetsu, characterArray);
+    this.bunsetsuArray[bunsetsuIdxInSentence] = new _defineBunsetsuClassJs2['default'](bunsetsuIdxInSentence, temp2dArrayForBunsetsu, characterArray);
 
     // verb_array作成
 
-    if (this.bunsetsu_array[bunsetsuIdxInSentence].isVerb) {
+    if (this.bunsetsuArray[bunsetsuIdxInSentence].isVerb) {
       this.verb_array.push(new _defineClassOfVerbInSentence2['default'](bunsetsuIdxInSentence, temp2dArrayForBunsetsu, sentenceIdx));
     }
     this.kihonkuArray[kihonkuIdxInSentence] = new _defineKihonkuClassJs2['default'](kihonkuIdxInSentence, temp2dArrayForKihonku);
@@ -39516,12 +39516,12 @@ var KNP_Sentence = (function () {
       var _iteratorError = undefined;
 
       try {
-        for (var _iterator = this.bunsetsu_array[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        for (var _iterator = this.bunsetsuArray[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var kakaru_bunsetsu = _step.value;
 
-          for (var kakarareru_bunsetsu_num = 0; kakarareru_bunsetsu_num < this.bunsetsu_array.length; kakarareru_bunsetsu_num++) {
-            if (kakaru_bunsetsu.kakaru_bunsetsu_id === this.bunsetsu_array[kakarareru_bunsetsu_num].id) {
-              this.bunsetsu_array[kakarareru_bunsetsu_num].kakarareru_bunsetsu_id_array.push(kakaru_bunsetsu.id);
+          for (var kakarareru_bunsetsu_num = 0; kakarareru_bunsetsu_num < this.bunsetsuArray.length; kakarareru_bunsetsu_num++) {
+            if (kakaru_bunsetsu.kakaru_bunsetsu_id === this.bunsetsuArray[kakarareru_bunsetsu_num].id) {
+              this.bunsetsuArray[kakarareru_bunsetsu_num].kakarareru_bunsetsu_id_array.push(kakaru_bunsetsu.id);
               break;
             }
           }
@@ -39578,9 +39578,9 @@ var KNP_Sentence = (function () {
     key: 'findSubjectOfVerb',
     value: function search_subject_of_verb(verb_clause_num, tempVerbNum) {
       for (var temp_clause_num = verb_clause_num; temp_clause_num >= 0; temp_clause_num--) {
-        var temp_clause = this.bunsetsu_array[temp_clause_num];
+        var temp_clause = this.bunsetsuArray[temp_clause_num];
         if (temp_clause.isSubject) {
-          this.bunsetsu_array[verb_clause_num].subject_of_verb = temp_clause.subject;
+          this.bunsetsuArray[verb_clause_num].subject_of_verb = temp_clause.subject;
           this.verb_array[tempVerbNum].rewriteSubject(temp_clause.subject);
           break;
         }
@@ -39590,9 +39590,9 @@ var KNP_Sentence = (function () {
     key: 'findObjectOfVerb',
     value: function search_object_of_verb(verb_clause_num, tempVerbNum) {
       for (var temp_clause_num = verb_clause_num; temp_clause_num >= 0; temp_clause_num--) {
-        var temp_clause = this.bunsetsu_array[temp_clause_num];
+        var temp_clause = this.bunsetsuArray[temp_clause_num];
         if (temp_clause.isObject) {
-          this.bunsetsu_array[verb_clause_num].object_of_verb = temp_clause.object;
+          this.bunsetsuArray[verb_clause_num].object_of_verb = temp_clause.object;
           this.verb_array[tempVerbNum].object = temp_clause.object;
           break;
         }
@@ -39920,7 +39920,7 @@ var _jsVizNode = require('../js/vizNode');
 
 var _find_verbJs = require('./defineVerb.js');
 
-var _characterChartConnectNodeAndArray = require('./characterChart/connectNodeAndArray');
+var _characterChartConnectNodeAndArray = require('./charaChart/connectNodeAndArray');
 
 //let initialValueOfSubjectAndObjectInVerb
 
@@ -40199,7 +40199,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var _jsContains_japaneseJs = require("../js/contains_japanese.js");
+var _jsContains_japaneseJs = require("../js/hasJapanese.js");
 
 var _defineNodeClassJs = require('./defineNode.js');
 
@@ -40456,13 +40456,13 @@ var _getCSVJs = require('./getCSV.js');
 
 var _reconstruct_KNPJs = require('./reconstructKNP.js');
 
-var _find_characterJs = require('./findCharacter.js');
+var _find_characterJs = require('./findChara.js');
 
 var _createNodeAndArrowArrayJs = require('./createArrowArray.js');
 
-var _characterChartSliderJs = require('./characterChart/slider.js');
+var _characterChartSliderJs = require('./charaChart/slider.js');
 
-var _characterChartFixNodePoint = require('./characterChart/fixNodePoint');
+var _characterChartFixNodePoint = require('./charaChart/fixNodePoint');
 
 var characterArray = [];
 
@@ -40511,13 +40511,13 @@ Object.defineProperty(exports, '__esModule', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _characterChartIsCharacter = require('./characterChart/isCharacter');
+var _characterChartIsCharacter = require('./charaChart/isCharacter');
 
 // import BunVerb from "../js/create_verbInSentence_class.js"
 
-var _arrow_nodeJs = require('./arrow_node.js');
+var _arrow_nodeJs = require('./arrowNode.js');
 
-var _characterChartDefineSentenceClass = require('./characterChart/defineSentenceClass');
+var _characterChartDefineSentenceClass = require('./charaChart/defineSentenceClass');
 
 var _characterChartDefineSentenceClass2 = _interopRequireDefault(_characterChartDefineSentenceClass);
 
@@ -40729,7 +40729,7 @@ var _jquery2 = _interopRequireDefault(_jquery);
 
 var _vizArrow = require('./vizArrow');
 
-var _characterChartConnectNodeAndArray = require('./characterChart/connectNodeAndArray');
+var _characterChartConnectNodeAndArray = require('./charaChart/connectNodeAndArray');
 
 var _defineNodeClass = require('./defineNodeClass');
 
@@ -41397,7 +41397,7 @@ var _csv2Array = require('../csv2Array');
 
 var _jsViz_relation_chart = require('../js/viz_relation_chart');
 
-var _jsRead_KNPJs = require('../js/createCharacterChart.js');
+var _jsRead_KNPJs = require('../js/createCharaChart.js');
 
 var wordparse2object = function wordparse2object() {
   console.log('wordparse2object');

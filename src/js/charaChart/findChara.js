@@ -2,8 +2,8 @@
  * Created by uetsujitomoya on 2017/08/21.
  */
 
-import {contains_japanese} from "../contains_japanese.js"
-import Node from './nodeAndArray/defineNode.js'
+import {hasJapanese} from "../hasJapanese.js"
+import Node from './nodeAndArrow/defineNode.js'
 import {rodata} from '../rodata'
 
 const r=rodata.nodeR
@@ -12,78 +12,75 @@ const orbitOPoint = rodata.orbitOPoint
 let nodeCnt=0
 let aSanCnt=0
 
-const characterKeyword="カテゴリ:人>"
+const charaKeyword="カテゴリ:人>"
 
-const characterDefaultName=null
+const charaDefaultName=null
 
-const color_of_client='red'
-const color_of_people_around_client='gray'
+const clientColor='red'
+const clientAroundPeopleColor='gray'
 
 //Aさんを追加→1単語とする
 
-const findCharacter = (knpArray, characterArray, nodeArray) => {
-  knpArray.forEach((row,rowIdx)=>{
+const findChara = (knpArr, charaArr, nodeArr) => {
+  knpArr.forEach((row,rowIdx)=>{
     //console.log(row)
-    if(contains_japanese(row[0])){
+    if(hasJapanese(row[0])){
 
-      let temp_japanese = row[0]
+      let tmpJapanese = row[0]
       for(const element of row){
-        if ( element.match(characterKeyword)) {
-          let temp_character_name=row[0];
-          let isNewCharacter = true
+        if ( element.match(charaKeyword)) {
+          let tmpCharaName=row[0];
+          let isNewChara = true
           //被ってなければその登場人物のインスタントをつくる
-          characterArray.forEach((character)=>{
-            if(temp_character_name===character.name){
+          charaArr.forEach((character)=>{
+            if(tmpCharaName===character.name){
               //verbを追加
-              isNewCharacter = false;
+              isNewChara = false;
               //太さ加算
               //character.character_node.bold_qty++
             }
           })
-          if(isNewCharacter === true){ createNewCharacter(temp_character_name,characterArray,nodeArray) }
+          if(isNewChara === true){ createNewChara(tmpCharaName,charaArr,nodeArr) }
         }
       }
 
       if(row[0] === "さん"){
-        const tempCharacter = knpArray[rowIdx-1][0]+row[0]
-        //console.log(tempCharacter)
-        if(isNewCharacter(tempCharacter,characterArray)&&aSanCnt===0){
-          createNewCharacter(tempCharacter,characterArray,nodeArray)
+        const tmpChara = knpArr[rowIdx-1][0]+row[0]
+        //console.log(tmpChara)
+        if(isNewChara(tmpChara,charaArr)&&aSanCnt===0){
+          createNewChara(tmpChara,charaArr,nodeArr)
         }
       }
     }
   })
 }
 
-const isNewCharacter=(tempCharacterName,characterArray)=> {
-  characterArray.forEach((character)=>{
-    if(tempCharacterName === character.name){
+const isNewChara=(tmpCharaName,charaArr)=> {
+  charaArr.forEach((chara)=>{
+    if(tmpCharaName === chara.name){
       //verbを追加
-      //console.log(tempCharacterName)
+      //console.log(tmpCharaName)
       return false;
       //太さ加算
-      //character.character_node.bold_qty++
+      //chara.character_node.bold_qty++
     }
   })
   return true
 }
 
-const createNewCharacter=(name,characterArray,nodeArray)=>{
+const createNewChara=(name,charaArr,nodeArr)=>{
   //Nodeを出現させるとしたらどこまでつくるかも書く
   if(name==='Aさん'){aSanCnt=1}
-  characterArray.push(new Character(name,characterArray.length))
+  charaArr.push(new Chara(name,charaArr.length))
   //Nodeもここで追加する。
-  nodeArray.push(new Node(name))
+  nodeArr.push(new Node(name))
 }
 
-let add_bold_of_node = () => {
+export {findChara}
 
-}
-
-export {findCharacter}
-
-class Character {
+class Chara {
   constructor(name,idx) {
+    this.bunArr=[]//forTextView
     this.name = name
     if(this.name === "私"||this.name==='Aさん'){
       this.client = 1

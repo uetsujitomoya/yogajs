@@ -4,7 +4,7 @@
 
 // checkJa(panese)
 
-function contains_japanese (txt) {
+function hasJapanese (txt) {
   if (typeof txt !== 'string') {
     return false
   }
@@ -22,4 +22,4 @@ function contains_japanese (txt) {
   return false
 }
 
-export {contains_japanese}
+export {hasJapanese}

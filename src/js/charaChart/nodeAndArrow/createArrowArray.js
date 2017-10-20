@@ -6,7 +6,7 @@
 import Arrow from './defineArrow.js'
 import {vizNodes} from './vizNode'
 import {initialValueOfSubjectAndObjectInVerb} from '../reconstructKNP/defineVerb.js'
-import {connectNodeAndArray} from './connectNodeAndArray'
+import {connectNodeAndArray} from './connectNodeAndArrow'
 
 //let initialValueOfSubjectAndObjectInVerb
 

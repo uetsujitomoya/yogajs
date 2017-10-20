@@ -2,11 +2,11 @@
  * Created by uetsujitomoya on 2017/08/08.
  */
 
-import {csv2Array} from '../../csv2Array.js'
+import {csv2Array} from '../csv2Array.js'
 import {getCSV} from '../getCSV.js'
 import {reconstructKNP} from '../reconstructKNP.js'
-import {findCharacter} from './findCharacter.js'
-import {createNodeAndArrowArray} from './nodeAndArray/createArrowArray.js'
+import {findChara} from './findChara.js'
+import {createNodeAndArrowArray} from './nodeAndArrow/createArrowArray.js'
 import {manageSlider} from './viz/slider.js'
 import {fixNodePoint} from './fixNodePoint'
 
@@ -20,7 +20,7 @@ const createCharacterChart = () => {
   console.log(KNP_array)
 
   let nodeArray=[]
-  findCharacter(KNP_array, charaArray, nodeArray)
+  findChara(KNP_array, charaArray, nodeArray)
   console.log(nodeArray)
 
   fixNodePoint(charaArray)

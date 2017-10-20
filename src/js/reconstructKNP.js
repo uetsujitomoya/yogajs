@@ -3,10 +3,10 @@
  */
 
 
-import {isCharacter} from './characterChart/reconstructKNP/isCharacter'
+import {isCharacter} from './charaChart/reconstructKNP/isChara'
 // import BunVerb from "../js/create_verbInSentence_class.js"
-import {createsvg} from './characterChart/nodeAndArray/arrow_node.js'
-import Sentence from './characterChart/reconstructKNP/defineSentence'
+import {createsvg} from './charaChart/nodeAndArrow/arrowNode.js'
+import Sentence from './charaChart/reconstructKNP/defineBun'
 
 //const firstJapaneseRowIdxInBunsetsu = 2
 

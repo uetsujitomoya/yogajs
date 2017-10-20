@@ -26,11 +26,11 @@ let searchBunsetsuWithCharacter= (bunsetsuArray,VerbIncludingbunsetsuNo) => {
 //search verb of subject/object
 
 let searchSubjectOfVerb = (sentence, verbClauseNo) =>{
-    //let verb_clause = sentence.bunsetsu_array[verbClauseNo]
+    //let verb_clause = sentence.bunsetsuArray[verbClauseNo]
   for(let clauseCnt = verbClauseNo; clauseCnt>=0; clauseCnt++){
-      let tempClause=sentence.bunsetsu_array[clauseCnt]
+      let tempClause=sentence.bunsetsuArray[clauseCnt]
       if(tempClause.includesSubject){
-          sentence.bunsetsu_array[ verbClauseNo ].subject_of_verb = tempClause.subject
+          sentence.bunsetsuArray[ verbClauseNo ].subject_of_verb = tempClause.subject
           break;
       }
   }
@@ -38,9 +38,9 @@ let searchSubjectOfVerb = (sentence, verbClauseNo) =>{
 
 let searchObjectOfVerb = (sentence, verbClauseNo) =>{
     for(let clauseCnt = verbClauseNo; clauseCnt>=0; clauseCnt++){
-        let tempClause=sentence.bunsetsu_array[clauseCnt]
+        let tempClause=sentence.bunsetsuArray[clauseCnt]
         if(tempClause.includesObject){
-            sentence.bunsetsu_array[ verbClauseNo ].object_of_verb = tempClause.object
+            sentence.bunsetsuArray[ verbClauseNo ].object_of_verb = tempClause.object
             break;
         }
     }

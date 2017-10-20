@@ -1,36 +1,36 @@
 import {rodata} from '../../rodata'
 import KNP_word from './defineWord'
-import {isCharacter,searchNodeArrayForCharacterAndPoint} from './isCharacter'
+import {isCharacter,searchNodeArrayForCharacterAndPoint} from './isChara'
 import {includesVerb} from './defineVerb'
-import {judgeSO} from './SubjectOrObject/judgeSO'
+import {searchCharaArrayForCharaToSO} from './SO/addSO'
 
 const firstJapaneseRowIdxInBunsetsu=rodata.firstJapaneseRowIdxInBunsetsu
 
 export default class Bunsetsu {
-  constructor (num, input_2d_array, charaArray) {
-    this.csv_raw_array = input_2d_array
+  constructor (num, input2dArray, charaArray,bun) {
+    this.csv_raw_array = input2dArray
     this.id = num + 'D'
 
     this.kihonkuArray = []
-   // this.kihonkuArray.length = count_kihonku(input_2d_array)
+   // this.kihonkuArray.length = count_kihonku(input2dArray)
 
     this.word_array = []
 
-    this.kakaru_bunsetsu_id = input_2d_array[0][1]
+    this.kakaru_bunsetsu_id = input2dArray[0][1]
     this.kakarareru_bunsetsu_id_array = []
     this.surfaceForm = ''
-    input_2d_array.forEach((row_array) => {
+    input2dArray.forEach((row_array) => {
       this.surfaceForm += row_array[0]
       this.word_array.push(new KNP_word(row_array))
     })
     this.isVerb = false
 
-    this.createKihonkuArrayInBunsetsu(input_2d_array)
+    this.createKihonkuArrayInBunsetsu(input2dArray)
 
 
     const tmpCharaName = this.csv_raw_array[firstJapaneseRowIdxInBunsetsu][0]
 
-    judgeSO(charaArray,tmpCharaName,this)
+    searchCharaArrayForCharaToSO(charaArray,tmpCharaName,this,bun)
   }
 
   createKihonkuArrayInBunsetsu (bunsetsuRaw2dArray) {
