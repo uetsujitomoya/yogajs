@@ -4,7 +4,7 @@
 
 import d3 from 'd3'
 import textures from 'textures'
-import {rodata} from './js/rodata'
+import {rodata} from './rodata'
 
 // let love="#ffeeff";
 // let friend="#c0ffc0";
@@ -73,20 +73,6 @@ const categoryOfTextOnRect={
   smallTalk: '世間話'
 }
 
-/*
- if(checked2[c]==3){
- color2[c]="#b0291b";
- }else if(checked2[c]==5){
- color2[c]="#9b59b6";
- }else if(checked2[c]==4){
- color2[c]="#2980b9";
- }else if(checked2[c]==6){
- color2[c]="#f1c40f";
- }else{
- color2[c]="#2c3e50";
- }
- */
-
 let vizPart = (talker, task, orijinalSentence) => {
   let box = (talker, task, orijinalSentence) => {
     // this.viz=;
@@ -95,12 +81,12 @@ let vizPart = (talker, task, orijinalSentence) => {
   let boxArray = []
 }
 
-let originalSentencePart = (talker, task, orijinalSentence) => {
-  let sentenceViz = (talker, task, orijinalSentence) => {
+let originalSentencePart = (talker, task, orijinBun) => {
+  let sentenceViz = (talker, task, orijinBun) => {
     // this.viz=;
   }
 
-  let sentenceVizArray = []
+  let bunVizArr = []
 }
 
 const addTextToSVG = (x, y, text) => {
@@ -125,7 +111,7 @@ const height = 200
 const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, answerCategoryNumArray, keitaisokaiseki, RGBmaxmax, startTime, graphTypeNum, checked, ranshin, width, bunsuu) => {
   const upperName = 'カウンセラー'
   const lowerName = 'クライエント'
-  const counselorInTextView = '<img src = "./picture/counselor2.jpg" width ="20">'
+  const txtViewCounselor = '<img src = "./picture/counselor2.jpg" width ="20">'
   const clientInTextView = '<img src = "./picture/client.jpg" width ="17">'
   const fontSizeInTextView = 2
 
@@ -140,9 +126,9 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
   var margin2 = {top: 10, right: 10, bottom: 50, left: 40}
 
   //var colorBun = ['#c0c0c0', loveColor, friendColor, workColor]
-  const answerTextureChoiceArray = [noCategoryAnswerColor, loveColor, friendColor, workColor, rodata.color.self.t, rodata.color.spiritual.t]
+  const answerTextureChoiceArr = [noCategoryAnswerColor, loveColor, friendColor, workColor, rodata.color.self.t, rodata.color.spiritual.t]
 
-  console.log(answerTextureChoiceArray)
+  console.log(answerTextureChoiceArr)
 
   const axisDescriptionY = 240
 
@@ -152,23 +138,23 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
     let graphShiftX = 58
     let axisShiftX = 68
 
-    var nagasa2 = []// 区分
+    var len2 = []// 区分
     var mazekoze = []// カウンセラーを発言毎に、クライエントを文ごとに収録
-    var isAnswerInFullConversation_array = []// カウンセラーなら0
+    var isFullConversationAnswerArr = []// カウンセラーなら0
 
-    let barChartAllHatsugenColorArray = []
-    let barChartAllHatsugenCategoryArray=[]
+    let barChartAllHatsugenColorArr = []
+    let barChartAllHatsugenCategoryArr=[]
 
-    let mazekozeHatsugenIdxArray = []
+    let mazekozeHatsugenIdxArr = []
     let h = 0
-    let mazekozeRanshinArray = []
+    let mazekozeRanshinArr = []
     // 初手カウンセラー
-    nagasa2[0] = hatsugen[0].length * width / bunsuu
+    len2[0] = hatsugen[0].length * width / bunsuu
     mazekoze[0] = hatsugen[0]
-    isAnswerInFullConversation_array[0] = 0
-    barChartAllHatsugenColorArray[0] = colorArrayInAllQuestionHatsugen[0]
-    barChartAllHatsugenCategoryArray[0] =
-      mazekozeHatsugenIdxArray[0] = 0
+    isFullConversationAnswerArr[0] = 0
+    barChartAllHatsugenColorArr[0] = colorArrayInAllQuestionHatsugen[0]
+    barChartAllHatsugenCategoryArr[0] =
+      mazekozeHatsugenIdxArr[0] = 0
 
     let c = 0
 
@@ -177,11 +163,11 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
       // クライエント
       bun[m].forEach((d) => {
         if (d !== '') {
-          nagasa2[h] = d.length * width / bunsuu
+          len2[h] = d.length * width / bunsuu
           mazekoze[h] = d
-          isAnswerInFullConversation_array[h] = 1
-          barChartAllHatsugenColorArray[h] = answerTextureChoiceArray[checked[c]]
-          mazekozeHatsugenIdxArray[h] = m
+          isFullConversationAnswerArr[h] = 1
+          barChartAllHatsugenColorArr[h] = answerTextureChoiceArr[checked[c]]
+          mazekozeHatsugenIdxArr[h] = m
           h++
           c++
         }
@@ -190,11 +176,11 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
         break
       }
       // カウンセラー
-      nagasa2[h] = hatsugen[m + 1].length * width / bunsuu
+      len2[h] = hatsugen[m + 1].length * width / bunsuu
       mazekoze[h] = hatsugen[m + 1]
-      isAnswerInFullConversation_array[h] = 0
-      barChartAllHatsugenColorArray[h] = colorArrayInAllQuestionHatsugen[(m + 1) / 2]
-      mazekozeHatsugenIdxArray[h] = m + 1
+      isFullConversationAnswerArr[h] = 0
+      barChartAllHatsugenColorArr[h] = colorArrayInAllQuestionHatsugen[(m + 1) / 2]
+      mazekozeHatsugenIdxArr[h] = m + 1
     }
 
     //console.info('ranshin')
@@ -203,33 +189,33 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
     c = 0
     for (let m = 1; m < ranshin.length; m = m + 2) {
       for (let i = 0; i < ranshin[m].length; i++) {
-        mazekozeRanshinArray[c] = ''
+        mazekozeRanshinArr[c] = ''
         if (ranshin[m][i][0] === 1) {
-          mazekozeRanshinArray[c] = '病\n'
+          mazekozeRanshinArr[c] = '病\n'
         }
         if (ranshin[m][i][1] === 1) {
-          mazekozeRanshinArray[c] = '無気\n'
+          mazekozeRanshinArr[c] = '無気\n'
         }
         if (ranshin[m][i][2] === 1) {
-          mazekozeRanshinArray[c] = '疑\n'
+          mazekozeRanshinArr[c] = '疑\n'
         }
         if (ranshin[m][i][3] === 1) {
-          mazekozeRanshinArray[c] = '不注\n'
+          mazekozeRanshinArr[c] = '不注\n'
         }
         if (ranshin[m][i][4] === 1) {
-          mazekozeRanshinArray[c] = '怠\n'
+          mazekozeRanshinArr[c] = '怠\n'
         }
         if (ranshin[m][i][5] === 1) {
-          mazekozeRanshinArray[c] = '渇\n'
+          mazekozeRanshinArr[c] = '渇\n'
         }
         if (ranshin[m][i][6] === 1) {
-          mazekozeRanshinArray[c] = '妄想\n'
+          mazekozeRanshinArr[c] = '妄想\n'
         }
         if (ranshin[m][i][7] === 1) {
-          mazekozeRanshinArray[c] = '新境\n'
+          mazekozeRanshinArr[c] = '新境\n'
         }
         if (ranshin[m][i][8] === 1) {
-          mazekozeRanshinArray[c] = '落着'
+          mazekozeRanshinArr[c] = '落着'
         }
         c++
       }
@@ -240,74 +226,74 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
       // c++;
     }
 
-    console.info('mazekozeRanshin')
-    console.info(mazekozeRanshinArray)
+    //console.info('mazekozeRanshin')
+    //console.info(mazekozeRanshinArr)
 
     // let width = width;
 
     var dataArr = [
-      nagasa2,
-      nagasa2
+      len2,
+      len2
     ]// カウンセラ発言長とクライエント各文長の配列
 
     var xScale = d3.scale.linear()
-      .domain([0, d3.sum(nagasa2) / 10])
+      .domain([0, d3.sum(len2) / 10])
       .range([axisShiftX, width - axisShiftX])
     // .nice();
 
     /// /////////////////////////////////////////////////////////////
 
-    let rectDataObjectArray = []
-    let textOnRectNum
-    let textOnRect = []
-    let checkedNum = 0
+    let rectDataObjectArr = []
+    let rectTxtNo
+    let rextTxt = []
+    let checkedNo = 0
 
-    for (textOnRectNum = 0; textOnRectNum < nagasa2.length; textOnRectNum++) { // 色変えたからか。。
-      if (barChartAllHatsugenColorArray[textOnRectNum] === openColor) {
-        textOnRect[textOnRectNum] = categoryOfTextOnRect.openQuestion
-      } else if (barChartAllHatsugenColorArray[textOnRectNum] === aiduchiColor) {
-        textOnRect[textOnRectNum] = categoryOfTextOnRect.feedback
-      } else if (barChartAllHatsugenColorArray[textOnRectNum] === closeColor) {
-        textOnRect[textOnRectNum] = categoryOfTextOnRect.closedQuestion
-      } else if (barChartAllHatsugenColorArray[textOnRectNum] === kaishakuColor) {
-        textOnRect[textOnRectNum] = categoryOfTextOnRect.interpretation
-      } else　if(barChartAllHatsugenColorArray[textOnRectNum] === sekenColor) {
-        textOnRect[textOnRectNum] = categoryOfTextOnRect.smallTalk
+    for (rectTxtNo = 0; rectTxtNo < len2.length; rectTxtNo++) { // 色変えたからか。。
+      if (barChartAllHatsugenColorArr[rectTxtNo] === openColor) {
+        rextTxt[rectTxtNo] = categoryOfTextOnRect.openQuestion
+      } else if (barChartAllHatsugenColorArr[rectTxtNo] === aiduchiColor) {
+        rextTxt[rectTxtNo] = categoryOfTextOnRect.feedback
+      } else if (barChartAllHatsugenColorArr[rectTxtNo] === closeColor) {
+        rextTxt[rectTxtNo] = categoryOfTextOnRect.closedQuestion
+      } else if (barChartAllHatsugenColorArr[rectTxtNo] === kaishakuColor) {
+        rextTxt[rectTxtNo] = categoryOfTextOnRect.interpretation
+      } else　if(barChartAllHatsugenColorArr[rectTxtNo] === sekenColor) {
+        rextTxt[rectTxtNo] = categoryOfTextOnRect.smallTalk
       }else{
-        //console.log('checked = %d',checkedNum)
-        //console.log('checked[%d]=%d', checkedNum,checked[checkedNum])
+        //console.log('checked = %d',checkedNo)
+        //console.log('checked[%d]=%d', checkedNo,checked[checkedNo])
 
-        if (checked[checkedNum] === 0) {
-          textOnRect[textOnRectNum] = categoryOfTextOnRect.noGroup; checkedNum++
-        } else if (checked[checkedNum] === 1) {
-          textOnRect[textOnRectNum] = categoryOfTextOnRect.love; checkedNum++
-        } else if (checked[checkedNum] === 2) {
-          textOnRect[textOnRectNum] = categoryOfTextOnRect.friendship; checkedNum++
-        } else if (checked[checkedNum] === 3) {
-          textOnRect[textOnRectNum] = categoryOfTextOnRect.work; checkedNum++
-        } else if (checked[checkedNum] === 4) {
-          textOnRect[textOnRectNum] = categoryOfTextOnRect.self; checkedNum++
-        } else if (checked[checkedNum] === 5) {
-          textOnRect[textOnRectNum] = categoryOfTextOnRect.spiritual; checkedNum++
+        if (checked[checkedNo] === 0) {
+          rextTxt[rectTxtNo] = categoryOfTextOnRect.noGroup; checkedNo++
+        } else if (checked[checkedNo] === 1) {
+          rextTxt[rectTxtNo] = categoryOfTextOnRect.love; checkedNo++
+        } else if (checked[checkedNo] === 2) {
+          rextTxt[rectTxtNo] = categoryOfTextOnRect.friendship; checkedNo++
+        } else if (checked[checkedNo] === 3) {
+          rextTxt[rectTxtNo] = categoryOfTextOnRect.work; checkedNo++
+        } else if (checked[checkedNo] === 4) {
+          rextTxt[rectTxtNo] = categoryOfTextOnRect.self; checkedNo++
+        } else if (checked[checkedNo] === 5) {
+          rextTxt[rectTxtNo] = categoryOfTextOnRect.spiritual; checkedNo++
         } else {
           alert('undefined')
         }
       }
     }
 
-    console.log('textOnRect')
-    console.log(textOnRect)
+    console.log('rextTxt')
+    console.log(rextTxt)
 
-    for (textOnRectNum = 0; textOnRectNum < nagasa2.length; textOnRectNum++) {
-      rectDataObjectArray[textOnRectNum] = {x: nagasa2[textOnRectNum], y: 40, color: barChartAllHatsugenColorArray[textOnRectNum], text: textOnRect[textOnRectNum], which: isAnswerInFullConversation_array[textOnRectNum]}
+    for (rectTxtNo = 0; rectTxtNo < len2.length; rectTxtNo++) {
+      rectDataObjectArr[rectTxtNo] = {x: len2[rectTxtNo], y: 40, color: barChartAllHatsugenColorArr[rectTxtNo], text: rextTxt[rectTxtNo], which: isFullConversationAnswerArr[rectTxtNo]}
       // moji[jj]}//F_color2moji(color2[jj])}//, text:a}
     }
 
-    //	console.log(rectDataObjectArray.length);
-    //	console.log(nagasa2.length);
+    //	console.log(rectDataObjectArr.length);
+    //	console.log(len2.length);
     /// ////////////////////////////////////////////////////
     console.log('mazekozeHatsugenNumber')
-    console.log(mazekozeHatsugenIdxArray)
+    console.log(mazekozeHatsugenIdxArr)
 
     svg.call(loveTexture)
     svg.call(workTexture)
@@ -331,23 +317,23 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
       .enter()
       .append('rect')// 四角追加
       .attr('x', function (d, i) {
-        var arr = nagasa2
+        var arr = len2
         // var sum = d3.sum(arr);
         var subSum = d3.sum(i === 0 ? [] : arr.slice(0, i))
         return xScale(subSum) / 10 + 10 + graphShiftX
       })
       .attr('y', 10)
       .attr('width', function (d) {
-        // var sum = d3.sum(nagasa2);
+        // var sum = d3.sum(len2);
         return xScale(d) / 10
       })
       .attr('height', 20)
       .attr('fill', function (d, i) {
-        if ((row === 0 && isAnswerInFullConversation_array[i] === 0) || (row === 1 && isAnswerInFullConversation_array[i] === 1)) {
+        if ((row === 0 && isFullConversationAnswerArr[i] === 0) || (row === 1 && isFullConversationAnswerArr[i] === 1)) {
           if (i + 1 === mazekoze.length) {
             row++
           }
-          //return barChartAllHatsugenColorArray[i] //質問の場合はtextureを使いたい
+          //return barChartAllHatsugenColorArr[i] //質問の場合はtextureを使いたい
           //一個の関数にして振り分けたい（配列やreturnはまずそう）
 
           /*if(/*answer){
@@ -356,7 +342,7 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
             //questionColor
           }*/
 
-          switch (textOnRect[i]){
+          switch (rextTxt[i]){
             case categoryOfTextOnRect.love:
               return loveTexture.url()
               break;
@@ -401,86 +387,59 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
       })
 
       .on('mouseover', function (d, i) {
-        var msg = document.getElementById('msg')
-        let k, l
-        msg.innerHTML = ''
-        if (isAnswerInFullConversation_array[i] === 0) {    // カウンセラーのグラフを触った時
-          for (k = -3; k <= 3; k++) {
-            if (mazekozeHatsugenIdxArray[i] + k < 0 || mazekozeHatsugenIdxArray[i] + k >= hatsugen.length) {
-              continue
-            }
-            if (k === 0) {
-              msg.innerHTML += '<b><u><font size=' + fontSizeInTextView + '>' + (1 + mazekozeHatsugenIdxArray[i]) + '' + counselorInTextView + ' <font color=' + colorArrayInAllQuestionHatsugen[mazekozeHatsugenIdxArray[i] / 2] + '>【</font>' + hatsugen[mazekozeHatsugenIdxArray[i]] + '<font color=' + colorArrayInAllQuestionHatsugen[mazekozeHatsugenIdxArray[i] / 2] + '>】</font></u></b><font size=' + fontSizeInTextView + '><br><br>'
-            } else if (k % 2 === 0) {
-              msg.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + k + mazekozeHatsugenIdxArray[i]) + '' + counselorInTextView + ' <font color=' + colorArrayInAllQuestionHatsugen[k / 2 + mazekozeHatsugenIdxArray[i] / 2] + '><b>【</b></font>' + hatsugen[k + mazekozeHatsugenIdxArray[i]] + '<font color=' + colorArrayInAllQuestionHatsugen[k / 2 + mazekozeHatsugenIdxArray[i] / 2] + '><b>】</b></font><br><br>'
-            } else { // forループを回さないと各文ごとの表示ができない
-              msg.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + k + mazekozeHatsugenIdxArray[i]) + '' + clientInTextView + ' '
-              for (l = 0; l < bun[k + mazekozeHatsugenIdxArray[i]].length; l++) {
-                if (bun[k + mazekozeHatsugenIdxArray[i]][l] === '') { continue }
-                msg.innerHTML += '<font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArray[answerCategoryNumArray[k + mazekozeHatsugenIdxArray[i]][l]] + '><b>【</b></font>' + bun[k + mazekozeHatsugenIdxArray[i]][l] + '<font color=' + answerTextureChoiceArray[answerCategoryNumArray[k + mazekozeHatsugenIdxArray[i]][l]] + '><b>】</b></font>'
-                console.log( bun[k + mazekozeHatsugenIdxArray[i]][l] )
-                console.log( answerCategoryNumArray[k + mazekozeHatsugenIdxArray[i]][l] )
+          var msg = document.getElementById('msg')
+          let k, l
+          msg.innerHTML = ''
+          if (isFullConversationAnswerArr[i] === 0) {    // カウンセラーのグラフを触った時
+            for (k = -3; k <= 3; k++) {
+              if (mazekozeHatsugenIdxArr[i] + k < 0 || mazekozeHatsugenIdxArr[i] + k >= hatsugen.length) {
+                continue
               }
-              msg.innerHTML += '<font size=' + fontSizeInTextView + '><br><br>'
-            }
-          }
-        } else {  // 患者のグラフを触った時
-          for (k = -3; k <= 3; k++) {
-            if (mazekozeHatsugenIdxArray[i] + k < 0 || mazekozeHatsugenIdxArray[i] + k >= hatsugen.length) {
-              continue
-            }
-            if (k === 0) {
-              msg.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + k + mazekozeHatsugenIdxArray[i]) + '' + clientInTextView + ' '
-              for (l = 0; l < bun[k + mazekozeHatsugenIdxArray[i]].length; l++) {
-                if (bun[k + mazekozeHatsugenIdxArray[i]][l] === '') { continue }
-                msg.innerHTML += '<u><font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArray[answerCategoryNumArray[k + mazekozeHatsugenIdxArray[i]][l]] + '><b>【</b></font>' + bun[k + mazekozeHatsugenIdxArray[i]][l] + '<font color=' + answerTextureChoiceArray[answerCategoryNumArray[k + mazekozeHatsugenIdxArray[i]][l]] + '><b>】</b></font></font></u>'
-                console.log( bun[k + mazekozeHatsugenIdxArray[i]][l] )
-                console.log(answerCategoryNumArray[k + mazekozeHatsugenIdxArray[i]][l])
+              if (k === 0) {
+                msg.innerHTML += '<b><u><font size=' + fontSizeInTextView + '>' + (1 + mazekozeHatsugenIdxArr[i]) + '' + txtViewCounselor + ' <font color=' + colorArrayInAllQuestionHatsugen[mazekozeHatsugenIdxArr[i] / 2] + '>【</font>' + hatsugen[mazekozeHatsugenIdxArr[i]] + '<font color=' + colorArrayInAllQuestionHatsugen[mazekozeHatsugenIdxArr[i] / 2] + '>】</font></u></b><font size=' + fontSizeInTextView + '><br><br>'
+              } else if (k % 2 === 0) {
+                msg.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + k + mazekozeHatsugenIdxArr[i]) + '' + txtViewCounselor + ' <font color=' + colorArrayInAllQuestionHatsugen[k / 2 + mazekozeHatsugenIdxArr[i] / 2] + '><b>【</b></font>' + hatsugen[k + mazekozeHatsugenIdxArr[i]] + '<font color=' + colorArrayInAllQuestionHatsugen[k / 2 + mazekozeHatsugenIdxArr[i] / 2] + '><b>】</b></font><br><br>'
+              } else { // forループを回さないと各文ごとの表示ができない
+                msg.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + k + mazekozeHatsugenIdxArr[i]) + '' + clientInTextView + ' '
+                for (l = 0; l < bun[k + mazekozeHatsugenIdxArr[i]].length; l++) {
+                  if (bun[k + mazekozeHatsugenIdxArr[i]][l] === '') { continue }
+                  msg.innerHTML += '<font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArr[answerCategoryNumArray[k + mazekozeHatsugenIdxArr[i]][l]] + '><b>【</b></font>' + bun[k + mazekozeHatsugenIdxArr[i]][l] + '<font color=' + answerTextureChoiceArr[answerCategoryNumArray[k + mazekozeHatsugenIdxArr[i]][l]] + '><b>】</b></font>'
+                  console.log( bun[k + mazekozeHatsugenIdxArr[i]][l] )
+                  console.log( answerCategoryNumArray[k + mazekozeHatsugenIdxArr[i]][l] )
+                }
+                msg.innerHTML += '<font size=' + fontSizeInTextView + '><br><br>'
               }
-              msg.innerHTML += '<font size=' + fontSizeInTextView + '><br><br></font>'
-            } else if (k % 2 === 0) {
-              msg.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + k + mazekozeHatsugenIdxArray[i]) + '' + clientInTextView + ' '
-              for (l = 0; l < bun[k + mazekozeHatsugenIdxArray[i]].length; l++) {
-                if (bun[k + mazekozeHatsugenIdxArray[i]][l] === '') { continue }
-                msg.innerHTML += '<font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArray[answerCategoryNumArray[k + mazekozeHatsugenIdxArray[i]][l]] + '><b>【</b></font>' + bun[k + mazekozeHatsugenIdxArray[i]][l] + '<font color=' + answerTextureChoiceArray[answerCategoryNumArray[k + mazekozeHatsugenIdxArray[i]][l]] + '><b>】</b></font>'
-                console.log(bun[k + mazekozeHatsugenIdxArray[i]][l])
-                console.log(answerCategoryNumArray[k + mazekozeHatsugenIdxArray[i]][l])
+            }
+          } else {  // 患者のグラフを触った時
+            for (k = -3; k <= 3; k++) {
+              if (mazekozeHatsugenIdxArr[i] + k < 0 || mazekozeHatsugenIdxArr[i] + k >= hatsugen.length) {
+                continue
               }
-              msg.innerHTML += '<font size=' + fontSizeInTextView + '><br><br>'
-            } else { // forループを回さないと各文ごとの表示ができない
-              msg.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + k + mazekozeHatsugenIdxArray[i]) + '' + counselorInTextView + ' <font color=' + colorArrayInAllQuestionHatsugen[k / 2 + mazekozeHatsugenIdxArray[i] / 2] + '><b>【</b></font>' + hatsugen[k + mazekozeHatsugenIdxArray[i]] + '<font color=' + colorArrayInAllQuestionHatsugen[k / 2 + mazekozeHatsugenIdxArray[i] / 2] + '><b>】</b></font><br><br>'
+              if (k === 0) {
+                msg.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + k + mazekozeHatsugenIdxArr[i]) + '' + clientInTextView + ' '
+                for (l = 0; l < bun[k + mazekozeHatsugenIdxArr[i]].length; l++) {
+                  if (bun[k + mazekozeHatsugenIdxArr[i]][l] === '') { continue }
+                  msg.innerHTML += '<u><font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArr[answerCategoryNumArray[k + mazekozeHatsugenIdxArr[i]][l]] + '><b>【</b></font>' + bun[k + mazekozeHatsugenIdxArr[i]][l] + '<font color=' + answerTextureChoiceArr[answerCategoryNumArray[k + mazekozeHatsugenIdxArr[i]][l]] + '><b>】</b></font></font></u>'
+                  console.log( bun[k + mazekozeHatsugenIdxArr[i]][l] )
+                  console.log(answerCategoryNumArray[k + mazekozeHatsugenIdxArr[i]][l])
+                }
+                msg.innerHTML += '<font size=' + fontSizeInTextView + '><br><br></font>'
+              } else if (k % 2 === 0) {
+                msg.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + k + mazekozeHatsugenIdxArr[i]) + '' + clientInTextView + ' '
+                for (l = 0; l < bun[k + mazekozeHatsugenIdxArr[i]].length; l++) {
+                  if (bun[k + mazekozeHatsugenIdxArr[i]][l] === '') { continue }
+                  msg.innerHTML += '<font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArr[answerCategoryNumArray[k + mazekozeHatsugenIdxArr[i]][l]] + '><b>【</b></font>' + bun[k + mazekozeHatsugenIdxArr[i]][l] + '<font color=' + answerTextureChoiceArr[answerCategoryNumArray[k + mazekozeHatsugenIdxArr[i]][l]] + '><b>】</b></font>'
+                  console.log(bun[k + mazekozeHatsugenIdxArr[i]][l])
+                  console.log(answerCategoryNumArray[k + mazekozeHatsugenIdxArr[i]][l])
+                }
+                msg.innerHTML += '<font size=' + fontSizeInTextView + '><br><br>'
+              } else { // forループを回さないと各文ごとの表示ができない
+                msg.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + k + mazekozeHatsugenIdxArr[i]) + '' + txtViewCounselor + ' <font color=' + colorArrayInAllQuestionHatsugen[k / 2 + mazekozeHatsugenIdxArr[i] / 2] + '><b>【</b></font>' + hatsugen[k + mazekozeHatsugenIdxArr[i]] + '<font color=' + colorArrayInAllQuestionHatsugen[k / 2 + mazekozeHatsugenIdxArr[i] / 2] + '><b>】</b></font><br><br>'
+              }
             }
           }
         }
-      })
-    /// //////////////////////////////////////////////////////////////////
-
-    /*　9つの乱心　表示
-
-     svg.selectAll("g")
-     .data(mazekozeRanshin)
-     .enter()
-     .append("g")
-     .selectAll('text')
-     .data(mazekozeRanshin)
-     .enter()
-     .append('text')
-     .text((d)=>{
-     return d;
-     })
-     .style("font-size",15)
-
-     .attr("x",function(d,i){
-     var arr = nagasa2;
-     //var sum = d3.sum(arr);
-     var subSum = d3.sum(i==0 ? []:arr.slice(0,i));
-     return xScale(subSum)/11 + graphShiftX;
-     })
-     .attr("y",100);
-
-     */
-
-    // x軸
+      )
 
     var xAxis = d3.svg.axis()
       .scale(xScale)
@@ -511,8 +470,8 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
 
     addTextToSVG(0, axisDescriptionY, axisDescription)
 
-    console.info('rectDataObjectArray')
-    console.info(rectDataObjectArray)
+    console.info('rectDataObjectArr')
+    console.info(rectDataObjectArr)
 
   } else {
 
@@ -574,14 +533,14 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
             continue
           }
           if (k === 0) {
-            e.innerHTML += '<b><u><font size=' + fontSizeInTextView + '>' + (1 + 2 * i) + '' + counselorInTextView + ' <font color=' + colorArrayInAllQuestionHatsugen[i] + '>【</font>' + hatsugen[2 * i] + '<font color=' + colorArrayInAllQuestionHatsugen[i] + '>】</font></font></u></b><font size=' + fontSizeInTextView + '><br><br>'
+            e.innerHTML += '<b><u><font size=' + fontSizeInTextView + '>' + (1 + 2 * i) + '' + txtViewCounselor + ' <font color=' + colorArrayInAllQuestionHatsugen[i] + '>【</font>' + hatsugen[2 * i] + '<font color=' + colorArrayInAllQuestionHatsugen[i] + '>】</font></font></u></b><font size=' + fontSizeInTextView + '><br><br>'
           } else if (k % 2 === 0) {
-            e.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + k + 2 * i) + '' + counselorInTextView + ' <font color=' + colorArrayInAllQuestionHatsugen[k / 2 + i] + '><b>【</b></font>' + hatsugen[k + 2 * i] + '<font color=' + colorArrayInAllQuestionHatsugen[k / 2 + i] + '><b>】</b></font><br><br>'
+            e.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + k + 2 * i) + '' + txtViewCounselor + ' <font color=' + colorArrayInAllQuestionHatsugen[k / 2 + i] + '><b>【</b></font>' + hatsugen[k + 2 * i] + '<font color=' + colorArrayInAllQuestionHatsugen[k / 2 + i] + '><b>】</b></font><br><br>'
           } else { // forループを回さないと各文ごとの表示ができない
             e.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + k + 2 * i) + '' + clientInTextView + ' '
             for (l = 0; l < bun[k + 2 * i].length; l++) {
               if (bun[k + 2 * i][l] === '') { continue }
-              e.innerHTML += '<font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArray[answerCategoryNumArray[k + 2 * i][l]] + '><b>【</b></font>' + bun[k + 2 * i][l] + '<font color=' + answerTextureChoiceArray[answerCategoryNumArray[k + 2 * i][l]] + '><b>】</b></font></font>'
+              e.innerHTML += '<font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArr[answerCategoryNumArray[k + 2 * i][l]] + '><b>【</b></font>' + bun[k + 2 * i][l] + '<font color=' + answerTextureChoiceArr[answerCategoryNumArray[k + 2 * i][l]] + '><b>】</b></font></font>'
             }
             e.innerHTML += '<font size=' + fontSizeInTextView + '><br><br></font>'
           }
@@ -628,14 +587,14 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
             continue
           }
           if (k === 0) {
-            e.innerHTML += '<b><u><font size=' + fontSizeInTextView + '>' + (1 + 2 * i) + '' + counselorInTextView + ' <font color=' + colorArrayInAllQuestionHatsugen[i] + '>【</font>' + hatsugen[2 * i] + '<font color=' + colorArrayInAllQuestionHatsugen[i] + '>】</font></font></u></b><font size=' + fontSizeInTextView + '><br><br>'
+            e.innerHTML += '<b><u><font size=' + fontSizeInTextView + '>' + (1 + 2 * i) + '' + txtViewCounselor + ' <font color=' + colorArrayInAllQuestionHatsugen[i] + '>【</font>' + hatsugen[2 * i] + '<font color=' + colorArrayInAllQuestionHatsugen[i] + '>】</font></font></u></b><font size=' + fontSizeInTextView + '><br><br>'
           } else if (k % 2 === 0) {
-            e.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + k + 2 * i) + '' + counselorInTextView + ' <font color=' + colorArrayInAllQuestionHatsugen[k / 2 + i] + '><b>【</b></font>' + hatsugen[k + 2 * i] + '<font color=' + colorArrayInAllQuestionHatsugen[k / 2 + i] + '><b>】</b></font><br><br>'
+            e.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + k + 2 * i) + '' + txtViewCounselor + ' <font color=' + colorArrayInAllQuestionHatsugen[k / 2 + i] + '><b>【</b></font>' + hatsugen[k + 2 * i] + '<font color=' + colorArrayInAllQuestionHatsugen[k / 2 + i] + '><b>】</b></font><br><br>'
           } else { // forループを回さないと各文ごとの表示ができない
             e.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + k + 2 * i) + '' + clientInTextView + ' '
             for (l = 0; l < bun[k + 2 * i].length; l++) {
               if (bun[k + 2 * i][l] === '') { continue }
-              e.innerHTML += '<font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArray[answerCategoryNumArray[k + 2 * i][l]] + '><b>【</b></font>' + bun[k + 2 * i][l] + '<font color=' + answerTextureChoiceArray[answerCategoryNumArray[k + 2 * i][l]] + '><b>】</b></font></font><br>   '
+              e.innerHTML += '<font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArr[answerCategoryNumArray[k + 2 * i][l]] + '><b>【</b></font>' + bun[k + 2 * i][l] + '<font color=' + answerTextureChoiceArr[answerCategoryNumArray[k + 2 * i][l]] + '><b>】</b></font></font><br>   '
             }
             e.innerHTML += '<font size=' + fontSizeInTextView + '><br><br></font>'
           }
@@ -772,8 +731,8 @@ const setForViz = (name, storage, keitaisokaiseki, chboxlist, chboxlist2, RGBlis
   var svg = d3.select('#svgdiv').append('svg')
     .attr('height', 270)
     .attr('width', width)
-  var colorArrayInAllQuestionHatsugen = []
-  var stackdataArr = []
+  var allQuestionHatsugenColorArray = []
+  var stackDataArr = []
   if (chboxlength >= 1) {
     readAnswerRadio(name, storage, chboxlist, answerRadioResult, taiou, chboxlength, isUsingDictionaryWithWord2Vec)
   }
@@ -789,29 +748,29 @@ const setForViz = (name, storage, keitaisokaiseki, chboxlist, chboxlist2, RGBlis
     RGBlist[n][2] = 0
   }
 
-  let answerCategoryNumArray = []
+  let ansCategoryNumArr = []
   n = 0// m=1;m<keitaisokaiseki.length;m=m+2の外
   for (m = 1; m < keitaisokaiseki.length; m = m + 2) {
-    answerCategoryNumArray[m] = []// svgでの描画ではm→i
+    ansCategoryNumArr[m] = []// svgでの描画ではm→i
     for (i = 0; i < keitaisokaiseki[m].length; i++) {
-      answerCategoryNumArray[m][i] = 0
+      ansCategoryNumArr[m][i] = 0
       for (c = 1; c < chboxlist.length; c++) {
         if (bun[m][i] === chboxlist[c][0]) {
           if (answerRadioResult[c - 1] === 1) {
             RGBlist[n][0] = RGBlist[n][0] + 1
-            answerCategoryNumArray[m][i] = 1
+            ansCategoryNumArr[m][i] = 1
           } else if (answerRadioResult[c - 1] === 2) {
             RGBlist[n][1] = RGBlist[n][1] + 1
-            answerCategoryNumArray[m][i] = 2
+            ansCategoryNumArr[m][i] = 2
           } else if (answerRadioResult[c - 1] === 3) {
             RGBlist[n][2] = RGBlist[n][2] + 1
-            answerCategoryNumArray[m][i] = 3
+            ansCategoryNumArr[m][i] = 3
           } else if (answerRadioResult[c - 1] === 4) {
             RGBlist[n][3] = RGBlist[n][3] + 1
-            answerCategoryNumArray[m][i] = 4
+            ansCategoryNumArr[m][i] = 4
           } else if (answerRadioResult[c - 1] === 5) {
             RGBlist[n][4] = RGBlist[n][4] + 1
-            answerCategoryNumArray[m][i] = 5
+            ansCategoryNumArr[m][i] = 5
           }
         }
       }
@@ -819,18 +778,18 @@ const setForViz = (name, storage, keitaisokaiseki, chboxlist, chboxlist2, RGBlis
     n++
   }
 
-  let categoryArrayInAllQuestionHatsugen=[]
+  let allQuestionHatsugenCategoryArr=[]
   for (c = 0; c < questionRadioResult.length; c++) {
     if (questionRadioResult[c] === 3) {
-      colorArrayInAllQuestionHatsugen[c] = openColor
+      allQuestionHatsugenColorArray[c] = openColor
     } else if (questionRadioResult[c] === 5) {
-      colorArrayInAllQuestionHatsugen[c] = aiduchiColor
+      allQuestionHatsugenColorArray[c] = aiduchiColor
     } else if (questionRadioResult[c] === 4) {
-      colorArrayInAllQuestionHatsugen[c] = closeColor
+      allQuestionHatsugenColorArray[c] = closeColor
     } else if (questionRadioResult[c] === 6) {
-      colorArrayInAllQuestionHatsugen[c] = kaishakuColor
+      allQuestionHatsugenColorArray[c] = kaishakuColor
     } else {
-      colorArrayInAllQuestionHatsugen[c] = sekenColor
+      allQuestionHatsugenColorArray[c] = sekenColor
     }
   }
 
@@ -867,22 +826,22 @@ const setForViz = (name, storage, keitaisokaiseki, chboxlist, chboxlist2, RGBlis
   }
 
   for (h = 0; h < 3; h++) {
-    stackdataArr[h] = []
+    stackDataArr[h] = []
     for (m = 0; m < ((keitaisokaiseki.length - 1) / 2); m++) {
-      stackdataArr[h][3 * m] = new Object()
+      stackDataArr[h][3 * m] = new Object()
       if (graph === 2) {
-        stackdataArr[h][3 * m] = {x: 3 * m + 1, y: 0}
+        stackDataArr[h][3 * m] = {x: 3 * m + 1, y: 0}
       } else {
-        stackdataArr[h][3 * m] = {x: 3 * m + 1, y: (5 * (RGBlist[m][h]) / RGBmaxmax)}
+        stackDataArr[h][3 * m] = {x: 3 * m + 1, y: (5 * (RGBlist[m][h]) / RGBmaxmax)}
       }
 
-      stackdataArr[h][3 * m + 1] = new Object()
-      stackdataArr[h][3 * m + 1] = {x: 3 * m + 2, y: (5 * (RGBlist[m][h]) / RGBmaxmax)}
-      stackdataArr[h][3 * m + 2] = new Object()
-      stackdataArr[h][3 * m + 2] = {x: 3 * m + 3, y: 0}
+      stackDataArr[h][3 * m + 1] = new Object()
+      stackDataArr[h][3 * m + 1] = {x: 3 * m + 2, y: (5 * (RGBlist[m][h]) / RGBmaxmax)}
+      stackDataArr[h][3 * m + 2] = new Object()
+      stackDataArr[h][3 * m + 2] = {x: 3 * m + 3, y: 0}
     }
   }
-  viz(stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, answerCategoryNumArray, keitaisokaiseki, RGBmaxmax, startTime, graph, answerRadioResult, ranshin, width, bunsuu)
+  viz(stackDataArr, allQuestionHatsugenColorArray, bun, hatsugen, svg, ansCategoryNumArr, keitaisokaiseki, RGBmaxmax, startTime, graph, answerRadioResult, ranshin, width, bunsuu)
   // console.log("chboxlength2 in svg.js=%d",chboxlength2);
   return {
     chboxlist: chboxlist,

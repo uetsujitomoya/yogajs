@@ -1,5 +1,5 @@
 import {csv2Array} from './csv2Array.js'
-import {TransposeMatrix} from './TransposeMatrix.js'
+import {TransposeMatrix} from './transposeMatrix.js'
 
 let convertCSV2Storage = (jsonName, storage) => {
   let storageArrayFromKamata = csv2Array('csv/storage170421fromKamata.csv')

@@ -1,11 +1,11 @@
 import {ClassifyWithFirstWordDictionary} from './js/wordparse1608030008.js'
 // import {AcceptKnp} from "./processKnp.js";
-import {ClassifyWithKNP} from './processKnp.js' // processKNP
-import {ClassifyWithWordDictionary} from './changeDictionary.js' // AcceptDictionary
+import {ClassifyWithKNP} from './js/counselorEducation/processKnp.js' // processKNP
+import {ClassifyWithWordDictionary} from './js/counselorEducation/changeDictionary.js' // AcceptDictionary
 import $ from 'jquery'
 
 // import {wordparse2object} from "./js/wordparse2object.js"
-// import {CreateSwitchClassificationMethod} from "./SwitchClassificationMethod.js"; //AcceptDictionary
+// import {CreateSwitchClassificationMethod} from "./switchClassificationMethod.js"; //AcceptDictionary
 // var dictionaryFromWord2Vec = csv2Array('HDFaceVertex.csv')
 // wordparse2object()
 // 以下、今までの(170809)
