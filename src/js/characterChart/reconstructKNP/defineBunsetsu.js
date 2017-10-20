@@ -2,7 +2,7 @@ import {rodata} from '../../rodata'
 import KNP_word from './defineWord'
 import {isCharacter,searchNodeArrayForCharacterAndPoint} from './isCharacter'
 import {includesVerb} from './defineVerb'
-import {judgeAboutAddingSubjectCharaOrObjectChara} from './SubjectOrObject/judgeAboutAddingSubjectCharaOrObjectChara'
+import {judgeSO} from './SubjectOrObject/judgeSO'
 
 const firstJapaneseRowIdxInBunsetsu=rodata.firstJapaneseRowIdxInBunsetsu
 
@@ -30,20 +30,7 @@ export default class Bunsetsu {
 
     const tmpCharaName = this.csv_raw_array[firstJapaneseRowIdxInBunsetsu][0]
 
-    judgeAboutAddingSubjectCharaOrObjectChara(charaArray,tmpCharaName,this)
-  }
-
-  addAboutSubjectOrObject(bunsetsuInfoRow,charaName,node){
-    //文節に主語目的語情報を増やす
-    for (let colIdx = 0; colIdx < bunsetsuInfoRow.length; colIdx++) {
-      if ((bunsetsuInfoRow[colIdx].match('ヲ格') || bunsetsuInfoRow[colIdx].match('ニ格'))) {
-        this.addAboutObject(charaName,node)
-        break
-      } else if (bunsetsuInfoRow[colIdx].match('ガ格')) {
-        this.addAboutSubject(charaName,node)
-        break
-      }
-    }
+    judgeSO(charaArray,tmpCharaName,this)
   }
 
   createKihonkuArrayInBunsetsu (bunsetsuRaw2dArray) {
@@ -64,40 +51,12 @@ export default class Bunsetsu {
     }
   }
 
-  addAboutObject (charaName,node) {
-    this.isObject = true
-    this.object = node
-  }
-
-  addAboutSubject (charaName,node) {
-    this.isSubject = true
-    this.subject = node
-  }
-
   findVerbInBunsetsu () {
     if (includesVerb(this.word_array[firstJapaneseRowIdxInBunsetsu].raw_array)) {
       this.isVerb = true
       this.verb = this.word_array[firstJapaneseRowIdxInBunsetsu].basic_form
     }
   }
-
-/*  judgeAboutAddingSubjectCharaOrObjectChara(charaArray, tmpName){
-    let result=searchNodeArrayForCharacterAndPoint(charaArray,tmpName)
-    if (result.isCharacter) {
-      this.addAboutSubjectOrObject(this.csv_raw_array[0],tmpName)
-    } else if(this.csv_raw_array.length　>　firstJapaneseRowIdxInBunsetsu+1){/!*AさんBさんにも対応*!/
-      const tempCharaNameWithHonorific = this.csv_raw_array[firstJapaneseRowIdxInBunsetsu][0]+this.csv_raw_array[firstJapaneseRowIdxInBunsetsu+1][0]
-      result=searchNodeArrayForCharacterAndPoint(charaArray,tempCharaNameWithHonorific)
-      if (result.isCharacter) {
-        //console.log(tempCharaNameWithHonorific)
-        this.addAboutSubjectOrObject(this.csv_raw_array[0],tempCharaNameWithHonorific)
-      }else{
-        this.findVerbInBunsetsu()
-      }
-    }else{
-      this.findVerbInBunsetsu()
-    }
-  }*/
 
 }
 

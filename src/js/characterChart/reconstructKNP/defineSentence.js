@@ -2,7 +2,7 @@ import Bunsetsu from './defineBunsetsu.js'
 import BunKihonku from './defineKihonku.js'
 import {rodata} from '../../rodata'
 import BunVerb from './defineBunVerb'
-import {searchPreviousSentencesForSubject} from './SubjectOrObject/searchPreviousSentencesForSubject'
+import {searchMaenoBunForShugo} from './SubjectOrObject/searchMaenoBunForS'
 
 const startingBunsetsuRowIdxInSentence = 1
 const startingKihonkuRowIdxInSentence = 2
@@ -122,7 +122,7 @@ export default class Sentence {
         this.verb_array[tempVerbNum].rewriteSubject(tmpClause.subject)
         break
       }else{
-        //searchPreviousSentencesForSubject(tmpClause,previousSentences)
+        //searchMaenoBunForShugo(tmpClause,previousSentences)
       }
     }
   }
