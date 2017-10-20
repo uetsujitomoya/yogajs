@@ -1,4 +1,4 @@
-import {ClassifyWithFirstWordDictionary} from './js/wordparse1608030008.js'
+import {classifyWithFirstWordDictionary} from './js/counselorEducation/wordparse1608030008.js'
 // import {AcceptKnp} from "./processKnp.js";
 import {ClassifyWithKNP} from './js/counselorEducation/processKnp.js' // processKNP
 import {ClassifyWithWordDictionary} from './js/counselorEducation/changeDictionary.js' // AcceptDictionary
@@ -56,7 +56,7 @@ const switchClassificationMethod = () => {
                 // var result = funcReaderOnload(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
         console.log('%center ClassifyWithWordDictionary 48', 'color:red')
                 // let resultWithNewDictionary = ClassifyWithWordDictionary(name,event,keitaisokaiseki,chboxlist,chboxlist2,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,newLoveDictionary,newWorkDictionary,newFriendDictionary);
-        let result = ClassifyWithFirstWordDictionary(name, keitaisokaiseki, checkboxlist, chboxlist, chboxlist2, RGBlist, hatsugen, bun, checked, checked2, taiou, taiou2, chboxlength, chboxlength2)
+        let result = classifyWithFirstWordDictionary(name, keitaisokaiseki, checkboxlist, chboxlist, chboxlist2, RGBlist, hatsugen, bun, checked, checked2, taiou, taiou2, chboxlength, chboxlength2)
       }
       reader.readAsText(file)
     })
@@ -91,8 +91,8 @@ document.getElementById('load-button').addEventListener('click', function () {
   reader.onload = function (event) {
     // let result = funcReaderOnload(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
     let originalText = event.target.result
-    console.log('%center ClassifyWithFirstWordDictionary 85', 'color:red')
-    let resultWithNewDictionary = ClassifyWithFirstWordDictionary(name, keitaisokaiseki, checkboxlist, chboxlist, chboxlist2, RGBlist, hatsugen, bun, checked, checked2, taiou, taiou2, chboxlength, chboxlength2, originalText)
+    console.log('%center classifyWithFirstWordDictionary 85', 'color:red')
+    let resultWithNewDictionary = classifyWithFirstWordDictionary(name, keitaisokaiseki, checkboxlist, chboxlist, chboxlist2, RGBlist, hatsugen, bun, checked, checked2, taiou, taiou2, chboxlength, chboxlength2, originalText)
   }
   reader.readAsText(file)
 })

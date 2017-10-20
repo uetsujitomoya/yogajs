@@ -677,7 +677,7 @@ const readQuestionRadio = (name, storage, chboxlist, chboxlist2, questionRadioRe
   let c
 
   let black = 0
-  for (c = 1; c <= chboxlength2; c++) {
+  for (let c = 1; c <= chboxlength2; c++) {
     const radio = document.getElementById('rs' + c).children
     for (let i = radio.length - 5, l = radio.length; i < l; i++) {
       if (radio[i].control.checked === true) {
@@ -742,7 +742,7 @@ const setForViz = (name, storage, keitaisokaiseki, chboxlist, chboxlist2, RGBlis
 
   let h, i, c, m, n
 
-  for (n = 0; n < RGBlist.length; n++) {
+  for (let n = 0; n < RGBlist.length; n++) {
     RGBlist[n][0] = 0
     RGBlist[n][1] = 0
     RGBlist[n][2] = 0
@@ -750,11 +750,11 @@ const setForViz = (name, storage, keitaisokaiseki, chboxlist, chboxlist2, RGBlis
 
   let ansCategoryNumArr = []
   n = 0// m=1;m<keitaisokaiseki.length;m=m+2の外
-  for (m = 1; m < keitaisokaiseki.length; m = m + 2) {
+  for (let m = 1; m < keitaisokaiseki.length; m = m + 2) {
     ansCategoryNumArr[m] = []// svgでの描画ではm→i
-    for (i = 0; i < keitaisokaiseki[m].length; i++) {
+    for (let i = 0; i < keitaisokaiseki[m].length; i++) {
       ansCategoryNumArr[m][i] = 0
-      for (c = 1; c < chboxlist.length; c++) {
+      for (let c = 1; c < chboxlist.length; c++) {
         if (bun[m][i] === chboxlist[c][0]) {
           if (answerRadioResult[c - 1] === 1) {
             RGBlist[n][0] = RGBlist[n][0] + 1
@@ -779,7 +779,7 @@ const setForViz = (name, storage, keitaisokaiseki, chboxlist, chboxlist2, RGBlis
   }
 
   let allQuestionHatsugenCategoryArr=[]
-  for (c = 0; c < questionRadioResult.length; c++) {
+  for (let c = 0; c < questionRadioResult.length; c++) {
     if (questionRadioResult[c] === 3) {
       allQuestionHatsugenColorArray[c] = openColor
     } else if (questionRadioResult[c] === 5) {
@@ -793,10 +793,10 @@ const setForViz = (name, storage, keitaisokaiseki, chboxlist, chboxlist2, RGBlis
     }
   }
 
-  var RGBmax = []
-  var RGBmaxmax = 1
+  let RGBmax = []
+  let RGBmaxmax = 1
 
-  for (m = 0; m < ((keitaisokaiseki.length - 1) / 2); m++) {
+  for (let m = 0; m < ((keitaisokaiseki.length - 1) / 2); m++) {
     // 2個飛ばしにしたら後が面倒くさい。患者 1→0,3→1,長さ9なら番号は8まで
     RGBmax[m] = 1
     for (h = 0; h < 3; h++) {

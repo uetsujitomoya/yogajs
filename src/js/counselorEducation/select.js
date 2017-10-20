@@ -7,8 +7,8 @@
  }; */
 
 const kaishakuName = '解釈と助言'
-const selfTextColor = "black"
-const spiritualTextColor = "black"
+const selfTxtColor = "black"
+const spiritualTxtColor = "black"
 
 import {convertCSV2Storage} from './convertCSV2Storage.js'
 
@@ -29,19 +29,19 @@ const makeRGB = (RGB, hatsugen) => {
   const friendNumber = 2
   const noClassNumber = 3
 
-  for (let hatsugenNumber = 1; hatsugenNumber < hatsugen.length; hatsugenNumber = hatsugenNumber + 2) {
-    RGB[hatsugenNumber] = []
-    console.log(hatsugen[hatsugenNumber])
-    hatsugen[hatsugenNumber].sentence.forEach((sentenceNumber) => {
-      RGB[hatsugenNumber][sentenceNumber] = [0, 0, 0, 0]
-      if (hatsugen[hatsugenNumber].sentences[sentenceNumber].task === 'love') {
-        RGB[hatsugenNumber][sentenceNumber][loveNumber] = 1
-      } else if (hatsugen[hatsugenNumber].sentences[sentenceNumber].task === 'work') {
-        RGB[hatsugenNumber][sentenceNumber][workNumber] = 1
-      } else if (hatsugen[hatsugenNumber].sentences[sentenceNumber].task === 'friend') {
-        RGB[hatsugenNumber][sentenceNumber][friendNumber] = 1
+  for (let hatsugenNo = 1; hatsugenNo < hatsugen.length; hatsugenNo = hatsugenNo + 2) {
+    RGB[hatsugenNo] = []
+    console.log(hatsugen[hatsugenNo])
+    hatsugen[hatsugenNo].sentence.forEach((sentenceNumber) => {
+      RGB[hatsugenNo][sentenceNumber] = [0, 0, 0, 0]
+      if (hatsugen[hatsugenNo].sentences[sentenceNumber].task === 'love') {
+        RGB[hatsugenNo][sentenceNumber][loveNumber] = 1
+      } else if (hatsugen[hatsugenNo].sentences[sentenceNumber].task === 'work') {
+        RGB[hatsugenNo][sentenceNumber][workNumber] = 1
+      } else if (hatsugen[hatsugenNo].sentences[sentenceNumber].task === 'friend') {
+        RGB[hatsugenNo][sentenceNumber][friendNumber] = 1
       } else {
-        RGB[hatsugenNumber][sentenceNumber][noClassNumber] = 1
+        RGB[hatsugenNo][sentenceNumber][noClassNumber] = 1
       }
     })
   }
@@ -58,7 +58,7 @@ const createAnswerRadioButton = (answerNumber, value, color, answerGroupName, ch
   }
 }
 
-const select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, chboxlist, chboxlist2, answerClassification3dArrayforCreatingSelect, RGBlist, hatsugen, bun, checked, checked2, taiou, taiou2, chboxlength, chboxlength2) => {
+const select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, chboxlist, chboxlist2, answerClassification3dArrayforCreatingSelect, RGBlist, hatsugen, bun, checked, checked2, taiou, taiou2, chBoxLen, chboxlength2) => {
   console.log('entered select.js')
 
   console.log('jsonName')
@@ -72,15 +72,15 @@ const select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, ch
 
   var target = document.getElementById('radio_buttons')// checkboxを出す場所
 
-  var answerNumber = 0
+  var ansCnt = 0
   n = 0
-  chboxlength = 0
+  chBoxLen = 0
   chboxlength2 = 0
-  var questionNumber = 0
+  var questionCnt = 0
 
   createGraphSelectButton()
 
-  for (hatsugenIdx = 0; hatsugenIdx < keitaisokaiseki.length; hatsugenIdx++) {
+  for (let hatsugenIdx = 0; hatsugenIdx < keitaisokaiseki.length; hatsugenIdx++) {
     console.log('RGB[%d]', hatsugenIdx)
     //console.log(answerClassification3dArrayforCreatingSelect[m])
     if (hatsugenIdx % 2 === 1) {
@@ -93,82 +93,82 @@ const select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, ch
         chboxlist[n][0] = bun[hatsugenIdx][bunIdx]
         chboxlist[n][1] = 0
 
-        answerNumber++
-        chboxlength++
+        ansCnt++
+        chBoxLen++
 
-        let stockedAnswerGroupNumber = storage.getItem(jsonName + 'RGB' + answerNumber)
+        let stockedAnsGroupNo = storage.getItem(jsonName + 'RGB' + ansCnt)
 
         const categorizedAnswerCategoryQty=5
 
-        if (stockedAnswerGroupNumber !== null) {
-          console.log('a %s',stockedAnswerGroupNumber)
-          answerClassification3dArrayforCreatingSelect[hatsugenIdx][bunIdx][stockedAnswerGroupNumber] = 1
+        if (stockedAnsGroupNo !== null) {
+          console.log('a %s',stockedAnsGroupNo)
+          answerClassification3dArrayforCreatingSelect[hatsugenIdx][bunIdx][stockedAnsGroupNo] = 1
 
-          for (categoryIdx = 0; categoryIdx < categorizedAnswerCategoryQty; categoryIdx++) {
-            if (categoryIdx != stockedAnswerGroupNumber) {
+          for (let categoryIdx = 0; categoryIdx < categorizedAnswerCategoryQty; categoryIdx++) {
+            if (categoryIdx != stockedAnsGroupNo) {
               answerClassification3dArrayforCreatingSelect[hatsugenIdx][bunIdx][categoryIdx] = 0
             }// 全てゼロなら濃いグレーが出力
           }
 
         }
-        taiou[answerNumber - 1] = n - 1
+        taiou[ansCnt - 1] = n - 1
 
 
         //どれにも属さない
         if (answerClassification3dArrayforCreatingSelect[hatsugenIdx][bunIdx][0] + answerClassification3dArrayforCreatingSelect[hatsugenIdx][bunIdx][1] + answerClassification3dArrayforCreatingSelect[hatsugenIdx][bunIdx][2] >= 2) {
-          target.innerHTML += '<div id="b' + answerNumber + '" style="cursor: pointer"><u>' + (hatsugenIdx + 1) + '(C) ' + bun[hatsugenIdx][bunIdx] + '</u></div><div id="r' + answerNumber + '"><label><input type=radio name="r' + answerNumber + '" value=0>どれにも含まない</label></div><br>'
+          target.innerHTML += '<div id="b' + ansCnt + '" style="cursor: pointer"><u>' + (hatsugenIdx + 1) + '(C) ' + bun[hatsugenIdx][bunIdx] + '</u></div><div id="r' + ansCnt + '"><label><input type=radio name="r' + ansCnt + '" value=0>どれにも含まない</label></div><br>'
         } else {
-          target.innerHTML += '<div id="b' + answerNumber + '" style="cursor: pointer"><font size=2><u>' + (hatsugenIdx + 1) + '(C) ' + bun[hatsugenIdx][bunIdx] + '</u></div><div id="r' + answerNumber + '" class="hide"<label><input type=radio name="r' + answerNumber + '" value=0>どれにも含まない</label></div></font><br>'
+          target.innerHTML += '<div id="b' + ansCnt + '" style="cursor: pointer"><font size=2><u>' + (hatsugenIdx + 1) + '(C) ' + bun[hatsugenIdx][bunIdx] + '</u></div><div id="r' + ansCnt + '" class="hide"<label><input type=radio name="r' + ansCnt + '" value=0>どれにも含まない</label></div></font><br>'
         }
 
         if (answerClassification3dArrayforCreatingSelect[hatsugenIdx][bunIdx][0] !== 0) {
           chboxlist[n][1] = 0
-          document.getElementById('r' + answerNumber).innerHTML += '<label><input type=radio name="r' + answerNumber + '" value=1 checked><font color="#ff7777">【</font>「愛」に含む<font color="#ff7777">】</font></label>'
+          document.getElementById('r' + ansCnt).innerHTML += '<label><input type=radio name="r' + ansCnt + '" value=1 checked><font color="#ff7777">【</font>「愛」に含む<font color="#ff7777">】</font></label>'
         } else {
-          document.getElementById('r' + answerNumber).innerHTML += '<label><input type=radio name="r' + answerNumber + '" value=1><font color="#ff7777">【</font>「愛」に含む<font color="#ff7777">】</font></label>'
+          document.getElementById('r' + ansCnt).innerHTML += '<label><input type=radio name="r' + ansCnt + '" value=1><font color="#ff7777">【</font>「愛」に含む<font color="#ff7777">】</font></label>'
         }
         if (answerClassification3dArrayforCreatingSelect[hatsugenIdx][bunIdx][1] !== 0) {
-          document.getElementById('r' + answerNumber).innerHTML += '<label><input type=radio name="r' + answerNumber + '" value=2 checked><font color="#77ff77">【</font>「交友」に含む<font color="#77ff77">】</font></label>'
+          document.getElementById('r' + ansCnt).innerHTML += '<label><input type=radio name="r' + ansCnt + '" value=2 checked><font color="#77ff77">【</font>「交友」に含む<font color="#77ff77">】</font></label>'
           chboxlist[n][1] = 1
         } else {
-          document.getElementById('r' + answerNumber).innerHTML += '<label><input type=radio name="r' + answerNumber + '" value=2><font color="#77ff77">【</font>「交友」に含む<font color="#77ff77">】</font></label>'
+          document.getElementById('r' + ansCnt).innerHTML += '<label><input type=radio name="r' + ansCnt + '" value=2><font color="#77ff77">【</font>「交友」に含む<font color="#77ff77">】</font></label>'
         }
         if (answerClassification3dArrayforCreatingSelect[hatsugenIdx][bunIdx][2] !== 0) {
-          document.getElementById('r' + answerNumber).innerHTML += '<label><input type=radio name="r' + answerNumber + '" value=3 checked><font color="#7777ff">【</font>「仕事」に含む<font color="#7777ff">】</font></label>'
+          document.getElementById('r' + ansCnt).innerHTML += '<label><input type=radio name="r' + ansCnt + '" value=3 checked><font color="#7777ff">【</font>「仕事」に含む<font color="#7777ff">】</font></label>'
           chboxlist[n][1] = 2
         } else {
-          document.getElementById('r' + answerNumber).innerHTML += '<label><input type=radio name="r' + answerNumber + '" value=3><font color="#7777ff">【</font>「仕事」に含む<font color="#7777ff">】</font></label>'
+          document.getElementById('r' + ansCnt).innerHTML += '<label><input type=radio name="r' + ansCnt + '" value=3><font color="#7777ff">【</font>「仕事」に含む<font color="#7777ff">】</font></label>'
         }
 
         if (answerClassification3dArrayforCreatingSelect[hatsugenIdx][bunIdx][3] !== 0) {
-          createAnswerRadioButton(answerNumber, 4, selfTextColor, '自己', true)
+          createAnswerRadioButton(ansCnt, 4, selfTxtColor, '自己', true)
           chboxlist[n][1] = 3
         } else {
-          createAnswerRadioButton(answerNumber, 4, selfTextColor, '自己', false)
+          createAnswerRadioButton(ansCnt, 4, selfTxtColor, '自己', false)
         }
 
         if (answerClassification3dArrayforCreatingSelect[hatsugenIdx][bunIdx][4] !== 0) {
-          createAnswerRadioButton(answerNumber, 5, spiritualTextColor, 'スピリチュアル', true)
+          createAnswerRadioButton(ansCnt, 5, spiritualTxtColor, 'スピリチュアル', true)
           chboxlist[n][1] = 4
         } else {
-          createAnswerRadioButton(answerNumber, 5, spiritualTextColor, 'スピリチュアル', false)
+          createAnswerRadioButton(ansCnt, 5, spiritualTxtColor, 'スピリチュアル', false)
         }
       }
     } else {
       // console.log("セラピストの質問");
-      questionNumber++
+      questionCnt++
       chboxlength2++
-      chboxlist2[questionNumber] = []
-      chboxlist2[questionNumber][0] = hatsugen[hatsugenIdx]
-      chboxlist2[questionNumber][1] = 4
-      taiou2[questionNumber - 1] = questionNumber - 1
+      chboxlist2[questionCnt] = []
+      chboxlist2[questionCnt][0] = hatsugen[hatsugenIdx]
+      chboxlist2[questionCnt][1] = 4
+      taiou2[questionCnt - 1] = questionCnt - 1
 
-      var stockedQuestionGroupNumber = storage.getItem(jsonName + 'RGBlist' + questionNumber)
+      var stockedQuestionGroupNo = storage.getItem(jsonName + 'RGBlist' + questionCnt)
 
-      if (stockedQuestionGroupNumber !== null) {
-        console.log('q %s',stockedQuestionGroupNumber)
+      if (stockedQuestionGroupNo !== null) {
+        console.log('q %s',stockedQuestionGroupNo)
         for (categoryIdx = 3; categoryIdx <= 7; categoryIdx++) {
-          if (categoryIdx == stockedQuestionGroupNumber) {
+          if (categoryIdx == stockedQuestionGroupNo) {
             RGBlist[hatsugenIdx / 2][categoryIdx] = 1
           } else {
             RGBlist[hatsugenIdx / 2][categoryIdx] = 0
@@ -177,20 +177,20 @@ const select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, ch
       }
 
       if (RGBlist[hatsugenIdx / 2][3] === 1) {
-        target.innerHTML += '<div id="bs' + questionNumber + '" style="cursor: pointer"><font size=2 color=dimgray><u>' + (hatsugenIdx + 1) + '(T) ' + hatsugen[hatsugenIdx] + '</u></font></div><div id="rs' + questionNumber + '" class="hide"><label><input type=radio name="rs' + questionNumber + '" value=3 checked><font color=deeppink>開かれた質問</font></label><label><input type=radio name="rs' + questionNumber + '" value=4><font color=blue>閉じられた質問</font></label><label><input type=radio name="rs' + questionNumber + '" value=5><font color=purple>相づち</font></label><label><input type=radio name="rs' +
-          questionNumber + '" value=6><font color=orangered>解釈と助言</font></label><label><input type=radio name="rs' + questionNumber + '" value=7><font color=black>世間話</font></label></div><br>'
+        target.innerHTML += '<div id="bs' + questionCnt + '" style="cursor: pointer"><font size=2 color=dimgray><u>' + (hatsugenIdx + 1) + '(T) ' + hatsugen[hatsugenIdx] + '</u></font></div><div id="rs' + questionCnt + '" class="hide"><label><input type=radio name="rs' + questionCnt + '" value=3 checked><font color=deeppink>開かれた質問</font></label><label><input type=radio name="rs' + questionCnt + '" value=4><font color=blue>閉じられた質問</font></label><label><input type=radio name="rs' + questionCnt + '" value=5><font color=purple>相づち</font></label><label><input type=radio name="rs' +
+          questionCnt + '" value=6><font color=orangered>解釈と助言</font></label><label><input type=radio name="rs' + questionCnt + '" value=7><font color=black>世間話</font></label></div><br>'
       } else	if (RGBlist[hatsugenIdx / 2][5] === 1) {
-        target.innerHTML += '<div id="bs' + questionNumber + '" style="cursor: pointer"><font size=2 color=dimgray><u>' + (hatsugenIdx + 1) + '(T) ' + hatsugen[hatsugenIdx] + '</u></font></div><div id="rs' + questionNumber + '" class="hide"><label><input type=radio name="rs' + questionNumber + '" value=3><font color=deeppink>開かれた質問</font></label><label><input type=radio name="rs' + questionNumber + '" value=4><font color=blue>閉じられた質問</font></label><label><input type=radio name="rs' + questionNumber + '" value=5 checked><font color=purple>相づち</font></label><label><input type=radio name="rs' +
-          questionNumber + '" value=6><font color=orangered>解釈と助言</font></label><label><input type=radio name="rs' + questionNumber + '" value=7><font color=black>世間話</font></label></div><br>'
+        target.innerHTML += '<div id="bs' + questionCnt + '" style="cursor: pointer"><font size=2 color=dimgray><u>' + (hatsugenIdx + 1) + '(T) ' + hatsugen[hatsugenIdx] + '</u></font></div><div id="rs' + questionCnt + '" class="hide"><label><input type=radio name="rs' + questionCnt + '" value=3><font color=deeppink>開かれた質問</font></label><label><input type=radio name="rs' + questionCnt + '" value=4><font color=blue>閉じられた質問</font></label><label><input type=radio name="rs' + questionCnt + '" value=5 checked><font color=purple>相づち</font></label><label><input type=radio name="rs' +
+          questionCnt + '" value=6><font color=orangered>解釈と助言</font></label><label><input type=radio name="rs' + questionCnt + '" value=7><font color=black>世間話</font></label></div><br>'
       } else	if (RGBlist[hatsugenIdx / 2][4] === 1) {
-        target.innerHTML += '<div id="bs' + questionNumber + '" style="cursor: pointer"><font size=2 color=dimgray><u>' + (hatsugenIdx + 1) + '(T) ' + hatsugen[hatsugenIdx] + '</u></font></div><div id="rs' + questionNumber + '" class="hide"><label><input type=radio name="rs' + questionNumber + '" value=3><font color=deeppink>開かれた質問</font></label><label><input type=radio name="rs' + questionNumber + '" value=4 checked><font color=blue>閉じられた質問</font></label><label><input type=radio name="rs' + questionNumber + '" value=5><font color=purple>相づち</font></label><label><input type=radio name="rs' +
-          questionNumber + '" value=6><font color=orangered>解釈と助言</font></label><label><input type=radio name="rs' + questionNumber + '" value=7><font color=black>世間話</font></label></div><br>'
+        target.innerHTML += '<div id="bs' + questionCnt + '" style="cursor: pointer"><font size=2 color=dimgray><u>' + (hatsugenIdx + 1) + '(T) ' + hatsugen[hatsugenIdx] + '</u></font></div><div id="rs' + questionCnt + '" class="hide"><label><input type=radio name="rs' + questionCnt + '" value=3><font color=deeppink>開かれた質問</font></label><label><input type=radio name="rs' + questionCnt + '" value=4 checked><font color=blue>閉じられた質問</font></label><label><input type=radio name="rs' + questionCnt + '" value=5><font color=purple>相づち</font></label><label><input type=radio name="rs' +
+          questionCnt + '" value=6><font color=orangered>解釈と助言</font></label><label><input type=radio name="rs' + questionCnt + '" value=7><font color=black>世間話</font></label></div><br>'
       } else	if (RGBlist[hatsugenIdx / 2][6] === 1) {
-        target.innerHTML += '<div id="bs' + questionNumber + '" style="cursor: pointer"><u>' + (hatsugenIdx + 1) + '(T) ' + hatsugen[hatsugenIdx] + '</u></div><div id="rs' + questionNumber + '"><label><input type=radio name="rs' + questionNumber + '" value=3><font color=deeppink>開かれた質問</font></label><label><input type=radio name="rs' + questionNumber + '" value=4><font color=blue>閉じられた質問</font></label><label><input type=radio name="rs' + questionNumber + '" value=5><font color=purple>相づち</font></label><label><input type=radio name="rs' + questionNumber +
-          '" value=6 checked><font color=orangered>解釈と助言</font></label><label><input type=radio name="rs' + questionNumber + '" value=7><font color=black>世間話</font></label></div><br>'
+        target.innerHTML += '<div id="bs' + questionCnt + '" style="cursor: pointer"><u>' + (hatsugenIdx + 1) + '(T) ' + hatsugen[hatsugenIdx] + '</u></div><div id="rs' + questionCnt + '"><label><input type=radio name="rs' + questionCnt + '" value=3><font color=deeppink>開かれた質問</font></label><label><input type=radio name="rs' + questionCnt + '" value=4><font color=blue>閉じられた質問</font></label><label><input type=radio name="rs' + questionCnt + '" value=5><font color=purple>相づち</font></label><label><input type=radio name="rs' + questionCnt +
+          '" value=6 checked><font color=orangered>解釈と助言</font></label><label><input type=radio name="rs' + questionCnt + '" value=7><font color=black>世間話</font></label></div><br>'
       } else {
-        target.innerHTML += '<div id="bs' + questionNumber + '" style="cursor: pointer"><u>' + (hatsugenIdx + 1) + '(T) ' + hatsugen[hatsugenIdx] + '</u></div><div id="rs' + questionNumber + '"><label><input type=radio name="rs' + questionNumber + '" value=3><font color=deeppink>開かれた質問</font></label><label><input type=radio name="rs' + questionNumber + '" value=4><font color=blue>閉じられた質問</font></label><label><input type=radio name="rs' + questionNumber + '" value=5><font color=purple>相づち</font></label><label><input type=radio name="rs' + questionNumber +
-          '" value=6><font color=orangered>解釈と助言</font></label><label><input type=radio name="rs' + questionNumber + '" value=7 checked><font color=black>世間話</font></label></div><br>'
+        target.innerHTML += '<div id="bs' + questionCnt + '" style="cursor: pointer"><u>' + (hatsugenIdx + 1) + '(T) ' + hatsugen[hatsugenIdx] + '</u></div><div id="rs' + questionCnt + '"><label><input type=radio name="rs' + questionCnt + '" value=3><font color=deeppink>開かれた質問</font></label><label><input type=radio name="rs' + questionCnt + '" value=4><font color=blue>閉じられた質問</font></label><label><input type=radio name="rs' + questionCnt + '" value=5><font color=purple>相づち</font></label><label><input type=radio name="rs' + questionCnt +
+          '" value=6><font color=orangered>解釈と助言</font></label><label><input type=radio name="rs' + questionCnt + '" value=7 checked><font color=black>世間話</font></label></div><br>'
       }
     }
   }
@@ -212,8 +212,8 @@ const select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, ch
     targetInRow.innerHTML += '<label><input type=radio name="r' + answerNumber + '" value=' + value + '><font color="' + color + '">【</font>「' + answerGroupName + '」に含む<font color="' + color + '">】</font></label>'
   }
 
-  var answerNumbermax = answerNumber
-  var questionNumbermax = questionNumber
+  var ansNoMax = ansCnt
+  var questionNoMax = questionCnt
 
   console.log('%c radio_buttons and grapheselectbutton', 'color:red')
   console.log(document.getElementById('radio_buttons'))
@@ -229,10 +229,10 @@ const select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, ch
     checked2: checked2,
     taiou: taiou,
     taiou2: taiou2,
-    chboxlength: chboxlength,
+    chboxlength: chBoxLen,
     chboxlength2: chboxlength2,
-    answerNumbermax: answerNumbermax,
-    questionNumbermax: questionNumbermax
+    answerNumbermax: ansNoMax,
+    questionNumbermax: questionNoMax
   }
 }
 
