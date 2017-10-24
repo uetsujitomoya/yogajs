@@ -40454,7 +40454,7 @@ var _csv2ArrayJs = require('../csv2Array.js');
 
 var _getCSVJs = require('./getCSV.js');
 
-var _reconstruct_KNPJs = require('./reconstructKNP.js');
+var _reconstruct_KNPJs = require('./createBunArr.js');
 
 var _find_characterJs = require('./findChara.js');
 
@@ -40480,7 +40480,7 @@ var read_KNP = function read_KNP() {
   (0, _characterChartFixNodePoint.fixNodePoint)(nodeArray);
 
   var reconstructedKNP = (0, _reconstruct_KNPJs.reconstruct_KNP)(KNP_array, characterArray, nodeArray);
-  console.log('get out reconstructKNP');
+  console.log('get out createBunArr');
   console.log(reconstructedKNP.sentenceArray);
 
   (0, _createNodeAndArrowArrayJs.createNodeAndArrowArray)(reconstructedKNP, nodeArray);

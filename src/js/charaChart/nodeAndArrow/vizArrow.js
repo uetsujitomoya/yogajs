@@ -2,7 +2,7 @@
  * Created by uetsujitomoya on 2017/09/04.
  */
 
-import{rodata} from '../../rodata'
+import{rodata} from '../rodata'
 
 const markerFillColor = rodata.markerFillColor
 const r = rodata.nodeR

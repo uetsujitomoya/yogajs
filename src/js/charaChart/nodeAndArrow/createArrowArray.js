@@ -5,12 +5,12 @@
 //import Node from './defineNode.js'
 import Arrow from './defineArrow.js'
 import {vizNodes} from './vizNode'
-import {initialValueOfSubjectAndObjectInVerb} from '../reconstructKNP/defineVerb.js'
+import {initialValueOfSubjectAndObjectInVerb} from '../createBunArr/defineVerb.js'
 import {connectNodeAndArray} from './connectNodeAndArrow'
 
 //let initialValueOfSubjectAndObjectInVerb
 
-const createNodeAndArrowArray = (bunArray, nodeArray) => {
+const createNodeAndArrowArr = (bunArray, nodeArray) => {
     // console.log("entered createNodeArrowarray")
     // console.log(bunArray)
   let arrowArray = []
@@ -121,4 +121,4 @@ const resetCircleStrokeWidth=(nodeArray)=>{
   }
 }
 
-export {createNodeAndArrowArray}
+export {createNodeAndArrowArr}

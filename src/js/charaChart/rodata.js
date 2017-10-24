@@ -8,7 +8,9 @@ const rodata={
 
   nodeR : 15,
   orbitR :350,
-  orbitOPoint:400
+  orbitOPoint:400,
+
+  textViewFontSize:2
 }
 
 export {rodata}

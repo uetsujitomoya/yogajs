@@ -2,35 +2,36 @@
  * Created by uetsujitomoya on 2017/08/08.
  */
 
-import {csv2Array} from '../csv2Array.js'
-import {getCSV} from '../getCSV.js'
-import {reconstructKNP} from '../reconstructKNP.js'
+import {csv2Array} from '../counselorEdu/csv2Array.js'
+import {getCSV} from '../counselorEdu/getCSV.js'
+import {createBunArr} from './createBunArr/createBunArr.js'
 import {findChara} from './findChara.js'
-import {createNodeAndArrowArray} from './nodeAndArrow/createArrowArray.js'
+import {createNodeAndArrowArr} from './nodeAndArrow/createArrowArray.js'
 import {manageSlider} from './viz/slider.js'
 import {fixNodePoint} from './fixNodePoint'
+import {searchMaenoBunForShugo} from './createBunArr/SO/searchMaenoBunForS'
 
-let charaArray = []
+let charaArr = []
 
-let verbArray = []
+let verbArr = []
 
-const createCharacterChart = () => {
+const createCharaChart = () => {
 
-  let KNP_array = csv2Array('../csv/1707051018knptab.csv')
-  console.log(KNP_array)
+  let knpArr = csv2Array('../csv/1707051018knptab.csv')
+  console.log(knpArr)
 
-  let nodeArray=[]
-  findChara(KNP_array, charaArray, nodeArray)
-  console.log(nodeArray)
+  let nodeArr=[]
+  findChara(knpArr, charaArr, nodeArr)
+  console.log(nodeArr)
 
-  fixNodePoint(charaArray)
+  fixNodePoint(charaArr)
 
-  let reconstructedKNP = reconstructKNP(KNP_array, charaArray, nodeArray)
-  console.log('get out reconstructKNP')
+  let reconstructedKNP = createBunArr(knpArr, charaArr, nodeArr)
+  console.log('get out createBunArr')
   console.log(reconstructedKNP.sentenceArray)
 
-  createNodeAndArrowArray(reconstructedKNP.sentenceArray, charaArray)
-  manageSlider(reconstructedKNP.sentenceArray,charaArray)
+  createNodeAndArrowArr(reconstructedKNP.sentenceArray, charaArr)
+  manageSlider(reconstructedKNP.sentenceArray,charaArr)
 }
 
 const findDependency = () => {
@@ -46,4 +47,4 @@ let find_object = () => {
 
 }
 
-export {createCharacterChart}
+export {createCharaChart}

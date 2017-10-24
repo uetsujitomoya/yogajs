@@ -1,4 +1,4 @@
-import {rodata} from '../../rodata'
+import {rodata} from '../rodata'
 import KNP_word from './defineWord'
 import {isCharacter,searchNodeArrayForCharacterAndPoint} from './isChara'
 import {includesVerb} from './defineVerb'

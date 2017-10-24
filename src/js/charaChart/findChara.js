@@ -2,9 +2,9 @@
  * Created by uetsujitomoya on 2017/08/21.
  */
 
-import {hasJapanese} from "../hasJapanese.js"
+import {hasJapanese} from "../counselorEdu/hasJapanese.js"
 import Node from './nodeAndArrow/defineNode.js'
-import {rodata} from '../rodata'
+import {rodata} from './rodata'
 
 const r=rodata.nodeR
 const orbitR=rodata.orbitR

@@ -1,4 +1,4 @@
-const searchNodeArrayForCharaAndPoint=(nodeArray, tmpName)=>{
+const searchNodeArrForCharaAndPoint=(nodeArray, tmpName)=>{
   for(const node of nodeArray){
     if(tmpName===node.name){
       //console.log(node)
@@ -14,4 +14,4 @@ const searchNodeArrayForCharaAndPoint=(nodeArray, tmpName)=>{
   return{isCharacter:false}
 }
 
-export{searchNodeArrayForCharaAndPoint}
+export{searchNodeArrForCharaAndPoint}

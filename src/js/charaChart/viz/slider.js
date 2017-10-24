@@ -5,7 +5,7 @@
 import d3 from 'd3'
 import $ from 'jquery'
 
-import {createNodeAndArrowArray} from '../nodeAndArrow/createArrowArray.js'
+import {createNodeAndArrowArr} from '../nodeAndArrow/createArrowArray.js'
 
 import {removeSVG} from '../nodeAndArrow/vizNode.js'
 
@@ -59,7 +59,7 @@ let redrawCharacterChart = (sentenceArray, selectedArea,charaArray) => {
 
   console.log('sentenceArray.length')
   console.log(sentenceArray.length)
-  createNodeAndArrowArray(refinedSentenceArray,charaArray)
+  createNodeAndArrowArr(refinedSentenceArray,charaArray)
 }
 
 export {manageSlider}

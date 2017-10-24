@@ -1,7 +1,9 @@
+import {rodata} from '../rodata'
+
 const viewText=(node,allBunArr)=>{
   //丸や矢印をマウスオーバーした際に、該当文章を表示。d3のmouseoverかclickから呼び出す
   for(bun of node.bunArr){
-   createTextViewArea(bun,allBunArr)
+    createTextViewArea(bun,allBunArr)
   }
 }
 
@@ -19,10 +21,16 @@ const createTextViewArea = (bun,allBunArr)=>{
 
 const createBox=()=>{
   //箱を作る
+
+  var msg = document.getElementById('msg')
+  let k, l
+  msg.innerHTML = ''
+
 }
 
-const addBun=(bun,bold){
+const addBun=(msg,talker,color,bunNo,bunContent,bold)=>{
   //箱に1文を追加。boldはboolean
+  msg.innerHTML += '<font size=' + rodata.textViewFontSize + '>' + bunNo + '' + talker + ' <font color=' + color + '><b>【</b></font>' + bunContent + '<b>】</b></font><br><br>'
 }
 
 export {viewText}

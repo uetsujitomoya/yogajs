@@ -1,10 +1,10 @@
-import {ClassifyWithFirstWordDictionary} from './js/wordparse1608030008.js'
+import {ClassifyWithFirstWordDictionary} from './js/counselorEdu/wordparse1608030008.js'
 // import {AcceptKnp} from "./processKnp.js";
-import {ClassifyWithKNP} from './js/processKnp.js' // processKNP
-import {ClassifyWithWordDictionary} from './js/changeDictionary.js' // AcceptDictionary
+import {ClassifyWithKNP} from './js/counselorEdu/processKnp.js' // processKNP
+import {ClassifyWithWordDictionary} from './js/counselorEdu/changeDictionary.js' // AcceptDictionary
 import $ from 'jquery'
 
-import {wordparse2object} from './js/wordparse2object.js'
+import {wordparse2object} from './js/counselorEdu/wordparse2object.js'
 // import {CreateSwitchClassificationMethod} from "./SwitchClassificationMethod.js"; //AcceptDictionary
 // var dictionaryFromWord2Vec = csv2Array('HDFaceVertex.csv');
 
