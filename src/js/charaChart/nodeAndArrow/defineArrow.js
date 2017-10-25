@@ -2,7 +2,7 @@
  * Created by uetsujitomoya on 2017/08/29.
  */
 
-import {connectNodeAndArray} from './connectNodeAndArrow'
+import {connectNodeAndArrow} from './connectNodeAndArrow'
 
 export default class Arrow {
   constructor (verb, arrowNum, svg) {
@@ -24,7 +24,7 @@ export default class Arrow {
     this.startPointY = 0
     this.endPointX = 0
     this.endPointY = 0
-    connectNodeAndArray(this)
+    connectNodeAndArrow(this)
   }
   addStrokeWidth () {
     this.strokeWidth++

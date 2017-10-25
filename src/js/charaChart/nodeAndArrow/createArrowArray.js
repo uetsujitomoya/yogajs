@@ -6,30 +6,23 @@
 import Arrow from './defineArrow.js'
 import {vizNodes} from './vizNode'
 import {initialValueOfSubjectAndObjectInVerb} from '../createBunArr/defineVerb.js'
-import {connectNodeAndArray} from './connectNodeAndArrow'
+import {connectNodeAndArrow} from './connectNodeAndArrow'
+import {rodata} from '../rodata'
 
-//let initialValueOfSubjectAndObjectInVerb
+import {vizArrow} from './vizArrow'
 
 const createNodeAndArrowArr = (bunArray, nodeArr) => {
-    // console.log("entered createNodeArrowarray")
-    // console.log(bunArray)
   let arrowArr = []
-  //let nodeArr = []
   console.log(arrowArr.length)
 
   resetCircleStrokeWidth(nodeArr)
 
   for (let bunCnt = 0; bunCnt < bunArray.length; bunCnt++) {
     let bun = bunArray[bunCnt]
-        // console.log(bun)
-
     let containsVerbArray = {
       value: 'verb_array' in bun ? bun.verb_array : 'No'
     }
-
     if (containsVerbArray.value === 'No') { continue }
-
-    //console.log(bun.verb_array)
 
     bun.verb_array.forEach((verb) => {
 
@@ -49,7 +42,6 @@ const createNodeAndArrowArr = (bunArray, nodeArr) => {
             arrowArr.push(new Arrow(verb))
           }
         }else{
-          //let isNewNode = true
           for (let tmpNodeCnt = 0; tmpNodeCnt < nodeArr.length; tmpNodeCnt++) {
             if (isSameNode(nodeArr[tmpNodeCnt], verb)) {
               nodeArr[tmpNodeCnt].circleStrokeWidth++
@@ -62,10 +54,21 @@ const createNodeAndArrowArr = (bunArray, nodeArr) => {
     })
   }
 
-  console.log(nodeArr)
-  console.log(arrowArr)
 
-  vizNodes(nodeArr,arrowArr)
+  let svg = d3.select(rodata.characterChartAreaID).append('svg')
+    .attr({
+      width: 1300,
+      height: 800
+    })
+
+  vizNodes(svg,nodeArr,arrowArr)
+
+  for(const arrow of arrowArr){
+    connectNodeAndArrow(arrow)
+    vizArrow(svg, arrow.pointArray,nodeArr[0].r)
+  }
+
+
 }
 
 const isSameArrow = (arrow, verb) => {

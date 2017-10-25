@@ -3,7 +3,7 @@ const rodata={
   kihonkuSymbol:'+',
   firstJapaneseRowIdxInBunsetsu:2,
 
-  yajirushi_refX : 16,
+  yajirushi_refX : 8,
   markerFillColor : 'red',
 
   nodeR : 15,
@@ -12,7 +12,9 @@ const rodata={
 
   textViewFontSize:2,
 
-  csvPath: '../csv/1707051018knptab.csv'
+  csvPath: '../csv/1707051018knptab.csv',
+  characterChartAreaID : '#example'
+
 }
 
 export {rodata}

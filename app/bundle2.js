@@ -39920,7 +39920,7 @@ var _jsVizNode = require('../js/vizNode');
 
 var _find_verbJs = require('./defineVerb.js');
 
-var _characterChartConnectNodeAndArray = require('./charaChart/connectNodeAndArray');
+var _characterChartConnectNodeAndArray = require('./charaChart/connectNodeAndArrow');
 
 //let initialValueOfSubjectAndObjectInVerb
 
@@ -40729,7 +40729,7 @@ var _jquery2 = _interopRequireDefault(_jquery);
 
 var _vizArrow = require('./vizArrow');
 
-var _characterChartConnectNodeAndArray = require('./charaChart/connectNodeAndArray');
+var _characterChartConnectNodeAndArray = require('./charaChart/connectNodeAndArrow');
 
 var _defineNodeClass = require('./defineNodeClass');
 

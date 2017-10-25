@@ -1,10 +1,10 @@
 import {r} from './defineNode'
 
-const connectNodeAndArray = (arrow) => {
+const connectNodeAndArrow = (arrow) => {
   //nodeとarrayを紐付ける
-  arrow.pointArray = [ [ arrow.subject.x , arrow.object.y , r ] , [ arrow.object.x , arrow.object.y , r ] ]
+  arrow.pointArray = [ [ arrow.subject.x , arrow.subject.y , r ] , [ arrow.object.x , arrow.object.y , r ] ]
 
 
 }
 
-export {connectNodeAndArray}
+export {connectNodeAndArrow}
