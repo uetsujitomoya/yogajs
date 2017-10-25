@@ -4,7 +4,7 @@
 
 let nodeCnt = 0
 
-const r = 60
+let r = 40
 const orbitR =150
 const orbitOPoint=200
 
@@ -31,11 +31,11 @@ export default class Node {
     this.strokeWidth++
     this.viz=true
   }
-  fixPoint(nodeListLength){
-    this.radian = (this.nodeIdx/nodeListLength)*2*Math.PI
+  fixPoint(nodeArrLen){
+    this.radian = (this.nodeIdx/nodeArrLen)*2*Math.PI
     this.y = orbitOPoint + orbitR * Math.sin(this.radian)
     this.x = orbitOPoint + orbitR * Math.cos(this.radian)
-    r = 200*orbitR/nodeListLength
+    r = orbitR/(nodeArrLen*200)
   }
 }
 

@@ -5,16 +5,13 @@
 import d3 from 'd3'
 import $ from 'jquery'
 import {rodata} from '../rodata'
+import {r} from './defineNode'
 
 //import{rodata} from '../../rodata'
 //const r = rodata.nodeR
 
 const clientColor = 'red'
 const aroundClientPeopleColor = 'gray'
-
-//const r = 60
-const yajirushi_refX = 16
-
 const markerFillColor = 'red'
 
 let vizNodes = (svg,nodeArr,arrowArr) => {
@@ -29,7 +26,7 @@ let vizNodes = (svg,nodeArr,arrowArr) => {
 
   nodes.append('circle')
         .attr({
-          'r': function (d) { return d.r },
+          'r': function (d) { return r },
           'stroke': function (d, i) { if (i === 0) { return clientColor } else { return aroundClientPeopleColor } },
           'fill': 'white',
           'stroke-width': (d) => { return　d.circleStrokeWidth }

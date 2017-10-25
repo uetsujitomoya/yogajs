@@ -3,7 +3,7 @@ const rodata={
   kihonkuSymbol:'+',
   firstJapaneseRowIdxInBunsetsu:2,
 
-  yajirushi_refX : 8,
+  yajirushi_refX : 12,
   markerFillColor : 'red',
 
   nodeR : 15,
