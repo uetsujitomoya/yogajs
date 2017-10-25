@@ -19,12 +19,11 @@ export default class BunVerb {
   rewriteSubject (character) {
     this.subject = character
     this.hasSubject=true
-    console.log("hasSubject!")
+    //console.log("hasSubject!")
   }
   rewriteObject (character) {
     this.object = character
     this.hasObject = true
-    console.log("hasObject!")
   }
 }
 

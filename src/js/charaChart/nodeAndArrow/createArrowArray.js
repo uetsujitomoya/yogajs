@@ -33,9 +33,10 @@ const createNodeAndArrowArr = (bunArray, nodeArr) => {
 
     bun.verb_array.forEach((verb) => {
 
-      if (existsSubject(verb)) {
+      if (verb.hasSubject) {
         console.log(verb)
-        if (existsObject(verb)) {
+        if (verb.hasObject) {
+          console.log("has both hasSubject & hasObject!")
           let isNewArrow = true
           for (let tmpArrowCnt = 0; tmpArrowCnt < arrowArr.length; tmpArrowCnt++) {
             if (isSameArrow(arrowArr[tmpArrowCnt], verb)) {
@@ -51,18 +52,10 @@ const createNodeAndArrowArr = (bunArray, nodeArr) => {
           //let isNewNode = true
           for (let tmpNodeCnt = 0; tmpNodeCnt < nodeArr.length; tmpNodeCnt++) {
             if (isSameNode(nodeArr[tmpNodeCnt], verb)) {
-              console.log('same node!')
-              //console.log(circleStrokeWidth)
-              console.log(verb)
               nodeArr[tmpNodeCnt].circleStrokeWidth++
-              console.log(nodeArr[tmpNodeCnt].circleStrokeWidth)
-              //isNewNode = false
               break
             }
           }
-          /*if (isNewNode) {
-            nodeArr.push(new Node(verb))
-          }*/
         }
 
       }
