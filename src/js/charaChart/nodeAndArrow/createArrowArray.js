@@ -10,14 +10,14 @@ import {connectNodeAndArray} from './connectNodeAndArrow'
 
 //let initialValueOfSubjectAndObjectInVerb
 
-const createNodeAndArrowArr = (bunArray, nodeArray) => {
+const createNodeAndArrowArr = (bunArray, nodeArr) => {
     // console.log("entered createNodeArrowarray")
     // console.log(bunArray)
-  let arrowArray = []
-  //let nodeArray = []
-  console.log(arrowArray.length)
+  let arrowArr = []
+  //let nodeArr = []
+  console.log(arrowArr.length)
 
-  resetCircleStrokeWidth(nodeArray)
+  resetCircleStrokeWidth(nodeArr)
 
   for (let bunCnt = 0; bunCnt < bunArray.length; bunCnt++) {
     let bun = bunArray[bunCnt]
@@ -37,31 +37,31 @@ const createNodeAndArrowArr = (bunArray, nodeArray) => {
         console.log(verb)
         if (existsObject(verb)) {
           let isNewArrow = true
-          for (let tmpArrowCnt = 0; tmpArrowCnt < arrowArray.length; tmpArrowCnt++) {
-            if (isSameArrow(arrowArray[tmpArrowCnt], verb)) {
-              arrowArray[tmpArrowCnt].arrowStrokeWidth++
+          for (let tmpArrowCnt = 0; tmpArrowCnt < arrowArr.length; tmpArrowCnt++) {
+            if (isSameArrow(arrowArr[tmpArrowCnt], verb)) {
+              arrowArr[tmpArrowCnt].arrowStrokeWidth++
               isNewArrow = false
               break
             }
           }
           if (isNewArrow) {
-            arrowArray.push(new Arrow(verb))
+            arrowArr.push(new Arrow(verb))
           }
         }else{
           //let isNewNode = true
-          for (let tmpNodeCnt = 0; tmpNodeCnt < nodeArray.length; tmpNodeCnt++) {
-            if (isSameNode(nodeArray[tmpNodeCnt], verb)) {
+          for (let tmpNodeCnt = 0; tmpNodeCnt < nodeArr.length; tmpNodeCnt++) {
+            if (isSameNode(nodeArr[tmpNodeCnt], verb)) {
               console.log('same node!')
               //console.log(circleStrokeWidth)
               console.log(verb)
-              nodeArray[tmpNodeCnt].circleStrokeWidth++
-              console.log(nodeArray[tmpNodeCnt].circleStrokeWidth)
+              nodeArr[tmpNodeCnt].circleStrokeWidth++
+              console.log(nodeArr[tmpNodeCnt].circleStrokeWidth)
               //isNewNode = false
               break
             }
           }
           /*if (isNewNode) {
-            nodeArray.push(new Node(verb))
+            nodeArr.push(new Node(verb))
           }*/
         }
 
@@ -69,10 +69,10 @@ const createNodeAndArrowArr = (bunArray, nodeArray) => {
     })
   }
 
-  console.log(nodeArray)
-  //console.log(arrowArray)
+  console.log(nodeArr)
+  console.log(arrowArr)
 
-  vizNodes(nodeArray,arrowArray)
+  vizNodes(nodeArr,arrowArr)
 }
 
 const isSameArrow = (arrow, verb) => {

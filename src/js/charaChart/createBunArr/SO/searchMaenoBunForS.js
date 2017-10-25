@@ -1,19 +1,26 @@
-const searchMaenoBunForShugo = (bunArray, bunNo, verbNo)=>{
+const searchMaenoBunForShugo = (bunArr, bunNo, verbNo,bun)=>{
+  console.log("verbNo=%d",verbNo)
+
   //まずその分から探す
-  for(let verbCnt=verbNo;verbCnt=0;verbCnt--){
-    const maenodoushi = bunArray[bunNo].verb_array[verbCnt]
+  for(let verbCnt = verbNo - 1 ; verbCnt === 0 ; verbCnt-- ){
+    console.log(verbCnt)
+    const maenodoushi = bun.verb_array[verbCnt]
+    console.log(maenodoushi)
     if(maenodoushi.hasSubject){
-      bunArray[bunNo].verb_array[verbNo].subject=maenodoushi.subject
+      bun.verb_array[verbNo].subject=maenodoushi.subject
+      console.log(bun.surfaceForm)
       return
     }
   }
 
   //次にそれより前の文から探す
-  for(let bunCnt=bunNo-1;bunCnt=0;bunCnt--){
-    for(let verbCnt=bunArray[bunCnt].verb_array.length; verbCnt=0; verbCnt--){
-      const maenodoushi = bunArray[bunCnt].verb_array[verbCnt]
+  for(let bunCnt = bunNo - 1 ; bunCnt === 0 ; bunCnt-- ){
+    for(let verbCnt=bunArr[bunCnt].verb_array.length - 1; verbCnt=0; verbCnt--){
+      console.log(maenodoushi)
+      const maenodoushi = bunArr[bunCnt].verb_array[verbCnt]
       if(maenodoushi.hasSubject){
-        bunArray[bunNo].verb_array[verbNo].subject=maenodoushi.subject
+        bun.verb_array[verbNo].subject=maenodoushi.subject
+        console.log(bun.surfaceForm)
         return
       }
     }

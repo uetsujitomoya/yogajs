@@ -28,7 +28,7 @@ let findVerbFromCSV = (rowNo, knpArray,verbArray) => {
   if (hasJapanese(knpArray[rowNo])) {
     let tmpJapanese = knpArray[rowNo][0]
         // console.log(knpArray[rowNo][3])
-    if (includesVerb(knpArray[rowNo])) {
+    if (hasVerb(knpArray[rowNo])) {
       let tmpCharaName = knpArray[rowNo][0]
             // 上の行も引数にしないといけない
       verbArray.push(new Verb(rowNo, knpArray[rowNo], knpArray[rowNo - 1]))
@@ -36,7 +36,7 @@ let findVerbFromCSV = (rowNo, knpArray,verbArray) => {
   }
 }
 
-let includesVerb = (wordRow) => {
+let hasVerb = (wordRow) => {
     // console.log(wordRow)
   if (wordRow[3] === '動詞') {
     return true
@@ -44,4 +44,4 @@ let includesVerb = (wordRow) => {
   return false
 }
 
-export {findVerbFromCSV, findVerbs, includesVerb}
+export {findVerbFromCSV, findVerbs, hasVerb}

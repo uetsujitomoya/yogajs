@@ -5,18 +5,8 @@ import {searchMaenoBunForShugo} from './SO/searchMaenoBunForS'
 
 const initialValueOfSubjectAndObjectInVerb = null
 
-/*export default class BunVerb {
-  constructor (bunsetsuNum_inSentence, bunsetsuRawArray, sentenceNum) {
-    this.bunsetsuNum_inSentence = bunsetsuNum_inSentence
-    this.sentenceNum = sentenceNum
-    this.surfaceForm = bunsetsuRawArray[2][0]
-    this.subject = initialValueOfSubjectAndObjectInVerb
-    this.object = initialValueOfSubjectAndObjectInVerb
-  }
-}*/
-
-
 export default class BunVerb {
+  //クラスBun中のverb_arrayにpushされる
   constructor (bunsetsuIdxInSentence, bunsetsuRawArray, bunNo,verbNo) {
     this.bunsetsuNum_inSentence = bunsetsuIdxInSentence
     this.sentenceNum = bunNo
@@ -27,16 +17,15 @@ export default class BunVerb {
     this.hasObject=false
   }
   rewriteSubject (character) {
-    //console.log(character)
     this.subject = character
     this.hasSubject=true
+    console.log("hasSubject!")
   }
   rewriteObject (character) {
-    //console.log(character)
     this.object = character
-    this.hasObject=true
+    this.hasObject = true
+    console.log("hasObject!")
   }
-
 }
 
 export{initialValueOfSubjectAndObjectInVerb}

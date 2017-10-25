@@ -10,6 +10,7 @@ import {createNodeAndArrowArr} from './nodeAndArrow/createArrowArray.js'
 import {manageSlider} from './viz/slider.js'
 import {fixNodePoint} from './fixNodePoint'
 import {searchMaenoBunForShugo} from './createBunArr/SO/searchMaenoBunForS'
+import{rodata} from './rodata'
 
 let charaArr = []
 
@@ -17,7 +18,7 @@ let verbArr = []
 
 const createCharaChart = () => {
 
-  let knpArr = csv2Array('../csv/1707051018knptab.csv')
+  let knpArr = csv2Array(rodata.csvPath)
   console.log(knpArr)
 
   let nodeArr=[]

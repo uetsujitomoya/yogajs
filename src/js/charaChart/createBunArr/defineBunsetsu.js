@@ -1,15 +1,15 @@
 import {rodata} from '../rodata'
-import KNP_word from './defineWord'
+import Word from './defineWord'
 import {isCharacter,searchNodeArrayForCharacterAndPoint} from './isChara'
-import {includesVerb} from './defineVerb'
+import {hasVerb} from './defineVerb'
 import {searchCharaArrayForCharaToSO} from './SO/addSO'
 
-const firstJapaneseRowIdxInBunsetsu=rodata.firstJapaneseRowIdxInBunsetsu
+const bunsetsu1stJpRIdx=rodata.firstJapaneseRowIdxInBunsetsu
 
 export default class Bunsetsu {
-  constructor (num, input2dArray, charaArray,bun) {
+  constructor (no, input2dArray, charaArray,bun) {
     this.csv_raw_array = input2dArray
-    this.id = num + 'D'
+    this.id = no + 'D'
 
     this.kihonkuArray = []
    // this.kihonkuArray.length = count_kihonku(input2dArray)
@@ -19,56 +19,56 @@ export default class Bunsetsu {
     this.kakaru_bunsetsu_id = input2dArray[0][1]
     this.kakarareru_bunsetsu_id_array = []
     this.surfaceForm = ''
-    input2dArray.forEach((row_array) => {
-      this.surfaceForm += row_array[0]
-      this.word_array.push(new KNP_word(row_array))
+    input2dArray.forEach((r) => {
+      this.surfaceForm += r[0]
+      this.word_array.push(new Word(r))
     })
     this.isVerb = false
 
     this.createKihonkuArrayInBunsetsu(input2dArray)
 
 
-    const tmpCharaName = this.csv_raw_array[firstJapaneseRowIdxInBunsetsu][0]
+    const tmpCharaName = this.csv_raw_array[bunsetsu1stJpRIdx][0]
 
     searchCharaArrayForCharaToSO(charaArray,tmpCharaName,this,bun)
   }
 
   createKihonkuArrayInBunsetsu (bunsetsuRaw2dArray) {
     let kihonkuIdxInBunsetsu = 0
-    let temp2dArrayForKihonku = []
+    let tmp2dArrForKihonku = []
     if (bunsetsuRaw2dArray.length >= 1) {
       let japaneseStartingNum = 2
       for (let rowCnt = japaneseStartingNum; rowCnt < bunsetsuRaw2dArray.length; rowCnt++) {
-        let tempRow = bunsetsuRaw2dArray[rowCnt]
-        if (tempRow[0] === rodata.kihonkuSymbol) { // 文節内 2こ目以降の基本句
-          this.kihonkuArray[kihonkuIdxInBunsetsu] = new KihonkuInBunsetsu(temp2dArrayForKihonku)// 文の中の通し番号での基本句array
-          temp2dArrayForKihonku = []
+        let tmpRow = bunsetsuRaw2dArray[rowCnt]
+        if (tmpRow[0] === rodata.kihonkuSymbol) { // 文節内 2こ目以降の基本句
+          this.kihonkuArray[kihonkuIdxInBunsetsu] = new KihonkuInBunsetsu(tmp2dArrForKihonku)// 文の中の通し番号での基本句array
+          tmp2dArrForKihonku = []
           kihonkuIdxInBunsetsu++
         }
-        temp2dArrayForKihonku.push(tempRow)
+        tmp2dArrForKihonku.push(tmpRow)
       }
-      this.kihonkuArray[kihonkuIdxInBunsetsu] = new KihonkuInBunsetsu(temp2dArrayForKihonku)// 文の中の通し番号での基本句array
+      this.kihonkuArray[kihonkuIdxInBunsetsu] = new KihonkuInBunsetsu(tmp2dArrForKihonku)// 文の中の通し番号での基本句array
     }
   }
 
   findVerbInBunsetsu () {
-    if (includesVerb(this.word_array[firstJapaneseRowIdxInBunsetsu].raw_array)) {
+    if (hasVerb(this.word_array[bunsetsu1stJpRIdx].raw_array)) {
       this.isVerb = true
-      this.verb = this.word_array[firstJapaneseRowIdxInBunsetsu].basic_form
+      this.verb = this.word_array[bunsetsu1stJpRIdx].basic_form
     }
   }
 
 }
 
 class KihonkuInBunsetsu {
-  constructor (row_array) {
+  constructor (r) {
     this.csv_raw_array = []
     this.word_array = []
-    for (let rowNo = 1; rowNo < row_array.length; rowNo++) {
+    for (let rCnt = 1; rCnt < r.length; rCnt++) {
     }
     this.subject = 'null'
     this.object = 'null'
     this.kakaruNo = 'null'
-    this.surfaceForm = row_array[0]
+    this.surfaceForm = r[0]
   }
 }

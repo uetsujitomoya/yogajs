@@ -10,7 +10,9 @@ const rodata={
   orbitR :350,
   orbitOPoint:400,
 
-  textViewFontSize:2
+  textViewFontSize:2,
+
+  csvPath: '../csv/1707051018knptab.csv'
 }
 
 export {rodata}

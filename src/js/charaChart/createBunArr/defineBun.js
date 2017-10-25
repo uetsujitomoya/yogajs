@@ -4,15 +4,15 @@ import {rodata} from '../rodata'
 import BunVerb from './defineBunVerb'
 import {searchMaenoBunForShugo} from './SO/searchMaenoBunForS'
 
-const startingBunsetsuRowIdxInSentence = 1
-const startingKihonkuRowIdxInSentence = 2
-const firstJapaneseRowIdxInSentence = 3
+const bun1stBunsetsuRId = 1
+const bun1stKihonkuRId = 2
+const bun1stJapaneseRId = 3
 
 const bunsetsuSymbol = rodata.bunsetsuSymbol
 const kihonkuSymbol = rodata.kihonkuSymbol
 
 export default class Bun {
-  constructor (rawRowIdx, bun2dArrFromKNP, charaArray, bunNo, nodeArray,bunArr) {
+  constructor (rawRId, bun2dArrFromKNP, charaArr, bunNo, nodeArr,bunArr) {
 
     let verbNo
 
@@ -25,7 +25,7 @@ export default class Bun {
     this.verb_array = []
 
     // this.csv_raw_array=[]
-    this.rowNo = rawRowIdx
+    this.rowNo = rawRId
     this.bunsetsuArray = []
     //console.log(bun2dArrFromKNP)
 
@@ -37,15 +37,15 @@ export default class Bun {
     let bunsetsuKNParr = []
     let kihonkuKNParr = []
 
-    bunsetsuKNParr.push(bun2dArrFromKNP[startingBunsetsuRowIdxInSentence])// 0文節目　開始宣言をプッシュ
+    bunsetsuKNParr.push(bun2dArrFromKNP[bun1stBunsetsuRId])// 0文節目　開始宣言をプッシュ
 
-    bunsetsuKNParr.push(bun2dArrFromKNP[startingKihonkuRowIdxInSentence])// 0基本句目　開始宣言をプッシュ
-    kihonkuKNParr.push(bun2dArrFromKNP[startingKihonkuRowIdxInSentence])// 0基本句目　開始宣言をプッシュ
+    bunsetsuKNParr.push(bun2dArrFromKNP[bun1stKihonkuRId])// 0基本句目　開始宣言をプッシュ
+    kihonkuKNParr.push(bun2dArrFromKNP[bun1stKihonkuRId])// 0基本句目　開始宣言をプッシュ
 
     let bunBunsetsuNo = 0
     let bunKihonkuNo = 0
 
-    for (let tmpRowNo = firstJapaneseRowIdxInSentence; tmpRowNo < bun2dArrFromKNP.length; tmpRowNo++) {
+    for (let tmpRowNo = bun1stJapaneseRId; tmpRowNo < bun2dArrFromKNP.length; tmpRowNo++) {
 
       let tmpSurfaceForm = bun2dArrFromKNP[tmpRowNo][0]
 
@@ -60,7 +60,7 @@ export default class Bun {
         this.kihonkuArray[bunKihonkuNo] = new BunKihonku(bunKihonkuNo, kihonkuKNParr)// 文の中の通し番号での基本句array
         kihonkuKNParr = []
         bunKihonkuNo++
-        this.bunsetsuArray[bunBunsetsuNo] = new Bunsetsu(bunBunsetsuNo, bunsetsuKNParr, charaArray,this)// 文の中の通し番号での文節array
+        this.bunsetsuArray[bunBunsetsuNo] = new Bunsetsu(bunBunsetsuNo, bunsetsuKNParr, charaArr,this)// 文の中の通し番号での文節array
 
         // verb_array作成
 
@@ -77,7 +77,7 @@ export default class Bun {
       kihonkuKNParr.push(bun2dArrFromKNP[tmpRowNo])
     }
 
-    this.bunsetsuArray[bunBunsetsuNo] = new Bunsetsu(bunBunsetsuNo, bunsetsuKNParr, charaArray,this)
+    this.bunsetsuArray[bunBunsetsuNo] = new Bunsetsu(bunBunsetsuNo, bunsetsuKNParr, charaArr,this)
 
     // verb_array作成
 
@@ -89,18 +89,18 @@ export default class Bun {
     this.inputEachKakarareruBunsetsuID()
     this.inputEachKakarareruKihonkuID()
 
-    //objectかsubjectを探す。人間でなくてもいい
+    this.surfaceForm = ""
+    // this.basic_form = row_array[2]
+    this.storeSurfaceForm(bun2dArrFromKNP)
+
+    //objectかsubjectを探す。人間でなくてもいいことはないはず
     for (let tmpVerbNo = 0; tmpVerbNo < this.verb_array.length; tmpVerbNo++) {
       this.findObjectOfVerb(this.verb_array[tmpVerbNo].bunsetsuNum_inSentence, tmpVerbNo)
       this.findSubjectOfVerb(this.verb_array[tmpVerbNo].bunsetsuNum_inSentence, tmpVerbNo)
       if((this.verb_array[tmpVerbNo].hasObject)&&(!this.verb_array[tmpVerbNo].hasSubject)){
-        searchMaenoBunForShugo(bunArr,bunNo,tmpVerbNo)
+        searchMaenoBunForShugo(bunArr,bunNo,tmpVerbNo,this)
       }
     }
-
-    this.surfaceForm = ""
-    // this.basic_form = row_array[2]
-    this.storeSurfaceForm(bun2dArrFromKNP)
   }
 
   inputEachKakarareruBunsetsuID () {
@@ -157,7 +157,6 @@ export default class Bun {
       //console.log(kihonku)
       this.surfaceForm += kihonku.surfaceForm
     }
-    console.log(this.surfaceForm)
   }
 
 }
