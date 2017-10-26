@@ -2,9 +2,12 @@ import {rodata} from '../rodata'
 import Word from './defineWord'
 import {isCharacter,searchNodeArrayForCharacterAndPoint} from './isChara'
 import {hasVerb} from './defineVerb'
-import {addSVO2Bunsetsu} from './SO/addSVO2bunsetsu'
+import {addSVO2Bunsetsu
 
-const bunsetsu1stJpRIdx=rodata.firstJapaneseRowIdxInBunsetsu
+
+} from './SO/addSVO2bunsetsu'
+
+const bunsetsu1stJpRIdx=rodata.bunsetsu1stJpRowNo
 
 export default class Bunsetsu {
   constructor (no, input2dArray, charaArray,bun) {

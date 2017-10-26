@@ -26,11 +26,13 @@ const createNodeAndArrowArr = (bunArr, nodeArr) => {
     bun.verb_array.forEach((verb) => {
 
       if (verb.hasSubject) {
-        if (verb.hasObject) {
+
+        if ( (verb.hasObject) && ( verb.subject.name!==verb.object.name ) ) {
+
           let isNewArrow = true
           for (let tmpArrowCnt = 0; tmpArrowCnt < arrowArr.length; tmpArrowCnt++) {
             if (isSameArrow(arrowArr[tmpArrowCnt], verb)) {
-              arrowArr[tmpArrowCnt].arrowStrokeWidth++
+              arrowArr[tmpArrowCnt].addStrokeWidth()
               isNewArrow = false
               break
             }
@@ -52,7 +54,7 @@ const createNodeAndArrowArr = (bunArr, nodeArr) => {
   }
 
 
-  let svg = d3.select(rodata.characterChartAreaID).append('svg')
+  let svg = d3.select(rodata.charaChartAreaID).append('svg')
     .attr({
       width: 1300,
       height: 800
@@ -64,15 +66,16 @@ const createNodeAndArrowArr = (bunArr, nodeArr) => {
 
   for(let arrow of arrowArr){
     connectNodeAndArrow(arrow)
-    vizArrow(svg, arrow.pointArray)
+
+    vizArrow(svg, arrow)
+
   }
 
 
 }
 
 const isSameArrow = (arrow, verb) => {
-    // console.log(arrow)
-  if ((arrow.subject === verb.subject) && (arrow.object === verb.object)) {
+  if ((arrow.subject.name === verb.subject.name) && (arrow.object.name === verb.object.name)) {
     return true
   } else {
     return false
@@ -80,8 +83,6 @@ const isSameArrow = (arrow, verb) => {
 }
 
 const isSameNode = (node, verb) => {
-    //console.log(node)
-    // console.log(verb)
   if (node.name === verb.subject.name) {
     return true
   } else {
@@ -90,7 +91,6 @@ const isSameNode = (node, verb) => {
 }
 
 const existsObject = (verb) => {
-    // console.log(verb)
   if (verb.object === initialValueOfSubjectAndObjectInVerb) {
     return false
   } else {
@@ -99,12 +99,9 @@ const existsObject = (verb) => {
 }
 
 const existsSubject = (verb) => {
-    // console.log("enter existsSubject")
-    // console.log(verb.subject)
   if (verb.subject === initialValueOfSubjectAndObjectInVerb) {
     return false
   } else {
-        // alert("exist Node!")
     return true
   }
 }

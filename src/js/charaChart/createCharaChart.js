@@ -29,7 +29,9 @@ const createCharaChart = () => {
   console.log(nodeArr)
   console.log(nodeArr)
 
+
   let reconstructedKNP = createBunArr(knpArr, nodeArr)
+
 
   createNodeAndArrowArr(reconstructedKNP.sentenceArray, nodeArr)
   manageSlider(reconstructedKNP.sentenceArray,nodeArr)

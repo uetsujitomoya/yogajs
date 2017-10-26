@@ -39235,7 +39235,7 @@ var _find_verb = require('../find_verb');
 
 //import KihonkuInBunsetsu from './defineKihonkuClass'
 
-var firstJapaneseRowIdxInBunsetsu = _rodata.rodata.firstJapaneseRowIdxInBunsetsu;
+var firstJapaneseRowIdxInBunsetsu = _rodata.rodata.bunsetsu1stJpRowNo;
 
 var KNP_Bunsetsu = (function () {
   function KNP_Bunsetsu(num, input_2d_array, KNP_character_array) {
@@ -40521,7 +40521,7 @@ var _characterChartDefineSentenceClass = require('./charaChart/defineSentenceCla
 
 var _characterChartDefineSentenceClass2 = _interopRequireDefault(_characterChartDefineSentenceClass);
 
-//const firstJapaneseRowIdxInBunsetsu = 2
+//const bunsetsu1stJpRowNo = 2
 
 var reconstruct_KNP = function reconstruct_KNP(raw_2d_array, KNP_character_array, nodeArray) {
   //係り受けを調べる
@@ -40601,7 +40601,7 @@ Object.defineProperty(exports, '__esModule', {
 var rodata = {
   bunsetsuSymbol: '*',
   kihonkuSymbol: '+',
-  firstJapaneseRowIdxInBunsetsu: 2
+  bunsetsu1stJpRowNo: 2
 };
 
 exports.rodata = rodata;

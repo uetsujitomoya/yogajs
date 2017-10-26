@@ -9,10 +9,12 @@ import {createNodeAndArrowArr} from '../nodeAndArrow/createArrowArr.js'
 
 import {removeSVG} from '../nodeAndArrow/vizNode.js'
 
+
 let manageSlider = (bunArr, charaArr) => {
   let el = document.querySelector('#ex2')
   el.dataset.sliderMax = bunArr.length + ''
   el.dataset.sliderValue = '[0,' + bunArr.length + ']'
+
 
   $('#ex2').slider({
     formatter: function (value) {
@@ -21,19 +23,21 @@ let manageSlider = (bunArr, charaArr) => {
   })
 
   $('#ex2').on('slide', function (slideEvt) {
+
     applySlider(slideEvt.value, bunArr,charaArr)
+
   })
 }
 
-let applySlider = (selectedAreaArray, sentenceArray,charaArray) => {
-    // yaru
-    // gyouretukosuuhaaku
-    // 「文」の個数把握
+const applySlider = (selectedAreaArray, sentenceArray,charaArray) => {
+  // yaru
+  // gyouretukosuuhaaku
+  // 「文」の個数把握
 
-    // その指定した範囲だけの表示
+  // その指定した範囲だけの表示
 
-    // どの動詞が何文目か情報
-    // re-viz
+  // どの動詞が何文目か情報
+  // re-viz
 
   removeSVG()
 
@@ -44,17 +48,12 @@ let applySlider = (selectedAreaArray, sentenceArray,charaArray) => {
   redrawCharacterChart(sentenceArray, selectedArea,charaArray)
 }
 
-let redrawCharacterChart = (sentenceArray, selectedArea,charaArray) => {
+const redrawCharacterChart = (sentenceArray, selectedArea,charaArray) => {
   let refinedSentenceArray = sentenceArray.concat()
-
-    // sentenceArrayの最初と最後数個の要素を排除して、新sentenceArrayとして入力する
-
-    // まず末尾から
+  // sentenceArrayの最初と最後数個の要素を排除して、新sentenceArrayとして入力する
+  // まず末尾から
   refinedSentenceArray.splice(selectedArea.end, sentenceArray.length - selectedArea.end)
   refinedSentenceArray.splice(0, selectedArea.start)
-
-  console.log('sentenceArray.length')
-  console.log(sentenceArray.length)
   createNodeAndArrowArr(refinedSentenceArray,charaArray)
 }
 

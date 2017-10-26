@@ -26,15 +26,17 @@ let vizNodes = (svg,nodeArr,arrowArr,allBunArr) => {
     })
 
   nodes.append('circle')
+
     .attr({
       'r': function (d) { return r },
       'stroke': function (d, i) { if (i === 0) { return clientColor } else { return aroundClientPeopleColor } },
-      'fill': 'white',
+      'fill': rodata.circleFill,
       'stroke-width': (d) => { return　d.circleStrokeWidth }
     })
     .on('click', (d, i)=>{
       viewText(d, allBunArr)
     })
+
 
   nodes.append('text')
     .attr({
@@ -49,7 +51,7 @@ let vizNodes = (svg,nodeArr,arrowArr,allBunArr) => {
 }
 
 let removeSVG = () => {
-  d3.select(rodata.characterChartAreaID).select('svg').remove()
+  d3.select(rodata.charaChartAreaID).select('svg').remove()
 }
 
 export {vizNodes, removeSVG}

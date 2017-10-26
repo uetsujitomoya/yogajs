@@ -1,10 +1,10 @@
 const rodata={
   bunsetsuSymbol:'*',
   kihonkuSymbol:'+',
-  firstJapaneseRowIdxInBunsetsu:2,
+  bunsetsu1stJpRowNo:2,
 
   yajirushi_refX : 12,
-  markerFillColor : 'red',
+  markerFillColor : '#ff0000',
 
   nodeR : 15,
   orbitR :350,
@@ -13,8 +13,8 @@ const rodata={
   textViewFontSize:2,
 
   csvPath: '../csv/1707051018knptab.csv',
-  characterChartAreaID : '#example'
-
+  charaChartAreaID : '#example',
+  circleFill: "#f8f8f8"
 }
 
 export {rodata}

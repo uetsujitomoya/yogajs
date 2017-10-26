@@ -8,12 +8,14 @@ import {r} from './defineNode'
 const markerFillColor = rodata.markerFillColor
 const yajirushi_refX = rodata.yajirushi_refX
 
-const vizArrow = (svg, arrowPointArr) => {
+
+const vizArrow = (svg, arrow) => {
   //let circle_data_array = [[nodeArray[0].x, nodeArray[0].y, r], [nodeArray[1].x, nodeArray[1].y, r]]
 
   //出発点の取得失敗？
 
   var marker = svg.append('defs').append('marker')
+
     .attr({
       'id': 'arrowhead',
       // 矢印の位置を一番後ろから手前に少しずらす
@@ -29,23 +31,27 @@ const vizArrow = (svg, arrowPointArr) => {
       fill: markerFillColor
     })
 
+
   let line = d3.svg.line()
+
     .interpolate('basis')
     .x(function (d) { return d[0] })
     .y(function (d) { return d[1] })
 
+
   let path = svg.append('path')
+
     .attr({
-      'd': line(arrowPointArr),
+      'd': line(arrow.pointArr),
       'stroke': 'red',
-      'stroke-width': 5,
+      'stroke-width': arrow.strokeWidth,
       'fill': 'none',
       'marker-end': 'url(#arrowhead)'
     })
 
   // pathの長さを調べて、丸の半径２個分＋矢印を後ろに下げる分の長さを引きます。
-  const totalLength = path.node().getTotalLength()
-  const t = totalLength - (r + r + yajirushi_refX)
+  const totalLen = path.node().getTotalLength()
+  const t = totalLen - (r + r + yajirushi_refX)
   path.attr({
     // 破線の指定を行います。
     'stroke-dasharray': '0 ' + r + ' ' + t + ' ' + r,
