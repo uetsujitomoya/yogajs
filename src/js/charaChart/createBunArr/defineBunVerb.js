@@ -18,7 +18,7 @@ export default class BunVerb {
   }
   rewriteSubjectAndAddBun2Node (realNode, bun) {
     this.subject = realNode
-    realNode.bunArr += bun
+    realNode.bunArr.push(bun)
     this.hasSubject=true
     //console.log("hasSubject!")
   }
