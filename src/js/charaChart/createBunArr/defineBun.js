@@ -12,7 +12,7 @@ const bunsetsuSymbol = rodata.bunsetsuSymbol
 const kihonkuSymbol = rodata.kihonkuSymbol
 
 export default class Bun {
-  constructor (rawRId, bun2dArrFromKNP, charaArr, bunNo, nodeArr,bunArr) {
+  constructor (rawRId, bun2dArrFromKNP, nodeArr, bunNo, bunArr) {
 
     let verbNo
 
@@ -20,14 +20,11 @@ export default class Bun {
       return null
     }
 
-    this.nodeArray=[]//forTextView
+    //this.nodeArray=[]//forTextView
 
     this.verb_array = []
-
-    // this.csv_raw_array=[]
     this.rowNo = rawRId
     this.bunsetsuArray = []
-    //console.log(bun2dArrFromKNP)
 
     this.bunsetsuArray.length = countBunsetsu(bun2dArrFromKNP)
 
@@ -60,7 +57,7 @@ export default class Bun {
         this.kihonkuArray[bunKihonkuNo] = new BunKihonku(bunKihonkuNo, kihonkuKNParr)// 文の中の通し番号での基本句array
         kihonkuKNParr = []
         bunKihonkuNo++
-        this.bunsetsuArray[bunBunsetsuNo] = new Bunsetsu(bunBunsetsuNo, bunsetsuKNParr, charaArr,this)// 文の中の通し番号での文節array
+        this.bunsetsuArray[bunBunsetsuNo] = new Bunsetsu(bunBunsetsuNo, bunsetsuKNParr, nodeArr,this)// 文の中の通し番号での文節array
 
         // verb_array作成
 
@@ -77,7 +74,7 @@ export default class Bun {
       kihonkuKNParr.push(bun2dArrFromKNP[tmpRowNo])
     }
 
-    this.bunsetsuArray[bunBunsetsuNo] = new Bunsetsu(bunBunsetsuNo, bunsetsuKNParr, charaArr,this)
+    this.bunsetsuArray[bunBunsetsuNo] = new Bunsetsu(bunBunsetsuNo, bunsetsuKNParr, nodeArr,this)
 
     // verb_array作成
 
@@ -96,9 +93,9 @@ export default class Bun {
     //objectかsubjectを探す。人間でなくてもいいことはないはず
     for (let tmpVerbNo = 0; tmpVerbNo < this.verb_array.length; tmpVerbNo++) {
       this.findObjectOfVerb(this.verb_array[tmpVerbNo].bunsetsuNum_inSentence, tmpVerbNo)
-      this.findSubjectOfVerb(this.verb_array[tmpVerbNo].bunsetsuNum_inSentence, tmpVerbNo)
+      this.findSubjectOfVerb(this.verb_array[tmpVerbNo].bunsetsuNum_inSentence, tmpVerbNo,nodeArr)
       if((this.verb_array[tmpVerbNo].hasObject)&&(!this.verb_array[tmpVerbNo].hasSubject)){
-        searchMaenoBunForShugo(bunArr,bunNo,tmpVerbNo,this)
+        searchMaenoBunForShugo(bunArr,bunNo,tmpVerbNo,this,nodeArr)
       }
     }
   }
@@ -126,12 +123,13 @@ export default class Bun {
     }
   }
 
-  findSubjectOfVerb (verbBunsetsuNo, tempVerbNum) {
+  findSubjectOfVerb (verbBunsetsuNo, tempVerbNum,nodeArr) {
     for (let clauseCnt = verbBunsetsuNo; clauseCnt >= 0; clauseCnt--) {
       let tmpClause = this.bunsetsuArray[clauseCnt]
       if (tmpClause.isSubject) {
         this.bunsetsuArray[ verbBunsetsuNo ].subject_of_verb = tmpClause.subject
-        this.verb_array[tempVerbNum].rewriteSubject(tmpClause.subject)
+        //モノホンのnodeもってこないといけない。
+        this.verb_array[tempVerbNum].rewriteSubjectAndAddBun2Node(nodeArr[tmpClause.subject.nodeIdx], this)
         break
       }else{
         //searchMaenoBunForShugo(tmpClause,previousSentences)

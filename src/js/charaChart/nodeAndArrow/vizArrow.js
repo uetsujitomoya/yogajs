@@ -2,14 +2,16 @@
  * Created by uetsujitomoya on 2017/09/04.
  */
 
-import{rodata} from '../rodata'
-import{r} from './defineNode'
+import {rodata} from '../rodata'
+import {r} from './defineNode'
 
 const markerFillColor = rodata.markerFillColor
 const yajirushi_refX = rodata.yajirushi_refX
 
+
 const vizArrow = (svg, arrow) => {
   const marker = svg.append('defs').append('marker')
+
     .attr({
       'id': 'arrowhead',
       // 矢印の位置を一番後ろから手前に少しずらす
@@ -25,12 +27,16 @@ const vizArrow = (svg, arrow) => {
       fill: markerFillColor
     })
 
-  const line = d3.svg.line()
+
+  let line = d3.svg.line()
+
     .interpolate('basis')
     .x(function (d) { return d[0] })
     .y(function (d) { return d[1] })
 
-  const path = svg.append('path')
+
+  let path = svg.append('path')
+
     .attr({
       'd': line(arrow.pointArr),
       'stroke': 'red',

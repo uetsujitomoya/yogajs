@@ -39581,7 +39581,7 @@ var KNP_Sentence = (function () {
         var temp_clause = this.bunsetsuArray[temp_clause_num];
         if (temp_clause.isSubject) {
           this.bunsetsuArray[verb_clause_num].subject_of_verb = temp_clause.subject;
-          this.verb_array[tempVerbNum].rewriteSubject(temp_clause.subject);
+          this.verb_array[tempVerbNum].rewriteSubjectAndAddBun2Node(temp_clause.subject);
           break;
         }
       }
@@ -39804,7 +39804,7 @@ var _jquery = require('jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-var _createNodeAndArrowArrayJs = require('../createArrowArray.js');
+var _createNodeAndArrowArrayJs = require('../createArrowArr.js');
 
 var _vizNodeJs = require('../vizNode.js');
 
@@ -40108,7 +40108,7 @@ var verbInSentence = (function () {
   }
 
   _createClass(verbInSentence, [{
-    key: "rewriteSubject",
+    key: "rewriteSubjectAndAddBun2Node",
     value: function rewriteSubject(character) {
       this.subject = character;
     }
@@ -40458,7 +40458,7 @@ var _reconstruct_KNPJs = require('./createBunArr.js');
 
 var _find_characterJs = require('./findChara.js');
 
-var _createNodeAndArrowArrayJs = require('./createArrowArray.js');
+var _createNodeAndArrowArrayJs = require('./createArrowArr.js');
 
 var _characterChartSliderJs = require('./charaChart/slider.js');
 

@@ -5,14 +5,16 @@
 import d3 from 'd3'
 import $ from 'jquery'
 
-import {createNodeAndArrowArr} from '../nodeAndArrow/createArrowArray.js'
+import {createNodeAndArrowArr} from '../nodeAndArrow/createArrowArr.js'
 
 import {removeSVG} from '../nodeAndArrow/vizNode.js'
 
-const manageSlider = (sentenceArray,charaArray) => {
+
+let manageSlider = (bunArr, charaArr) => {
   let el = document.querySelector('#ex2')
-  el.dataset.sliderMax = sentenceArray.length + ''
-  el.dataset.sliderValue = '[0,' + sentenceArray.length + ']'
+  el.dataset.sliderMax = bunArr.length + ''
+  el.dataset.sliderValue = '[0,' + bunArr.length + ']'
+
 
   $('#ex2').slider({
     formatter: function (value) {
@@ -21,7 +23,9 @@ const manageSlider = (sentenceArray,charaArray) => {
   })
 
   $('#ex2').on('slide', function (slideEvt) {
-    applySlider(slideEvt.value, sentenceArray,charaArray)
+
+    applySlider(slideEvt.value, bunArr,charaArr)
+
   })
 }
 

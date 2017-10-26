@@ -1,4 +1,6 @@
-const searchNodeArr=(nodeArr, tmpName)=>{
+
+const searchNodeArrForCharaAndPointForBunsetsuSO=(nodeArr, tmpName)=>{
+
   for(const node of nodeArr){
     if(tmpName===node.name){
       //console.log(node)
@@ -14,4 +16,6 @@ const searchNodeArr=(nodeArr, tmpName)=>{
   return{isCharacter:false}
 }
 
-export{searchNodeArr}
+
+export{searchNodeArrForCharaAndPointForBunsetsuSO}
+

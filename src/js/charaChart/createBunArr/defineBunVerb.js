@@ -16,13 +16,14 @@ export default class BunVerb {
     this.hasSubject=false
     this.hasObject=false
   }
-  rewriteSubject (character) {
-    this.subject = character
+  rewriteSubjectAndAddBun2Node (realNode, bun) {
+    this.subject = realNode
+    realNode.bunArr.push(bun)
     this.hasSubject=true
     //console.log("hasSubject!")
   }
-  rewriteObject (character) {
-    this.object = character
+  rewriteObject (chara) {
+    this.object = chara
     this.hasObject = true
   }
 }

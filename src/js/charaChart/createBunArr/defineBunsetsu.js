@@ -2,7 +2,7 @@ import {rodata} from '../rodata'
 import Word from './defineWord'
 import {isCharacter,searchNodeArrayForCharacterAndPoint} from './isChara'
 import {hasVerb} from './defineVerb'
-import {searchCharaArrayForCharaToSO} from './SO/addSO'
+import {addSVO2Bunsetsu} from './SO/addSVO2bunsetsu'
 
 const bunsetsu1stJpRIdx=rodata.bunsetsu1stJpRowNo
 
@@ -30,7 +30,7 @@ export default class Bunsetsu {
 
     const tmpCharaName = this.csv_raw_array[bunsetsu1stJpRIdx][0]
 
-    searchCharaArrayForCharaToSO(charaArray,tmpCharaName,this,bun)
+    addSVO2Bunsetsu(charaArray,tmpCharaName,this,bun)
   }
 
   createKihonkuArrayInBunsetsu (bunsetsuRaw2dArray) {

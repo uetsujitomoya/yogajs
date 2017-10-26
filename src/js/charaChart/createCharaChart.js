@@ -2,35 +2,39 @@
  * Created by uetsujitomoya on 2017/08/08.
  */
 
-import {csv2Array} from '../counselorEdu/csv2Array.js'
+import {csv2Array} from '../csv2Array.js'
 import {getCSV} from '../counselorEdu/getCSV.js'
 import {createBunArr} from './createBunArr/createBunArr.js'
 import {findChara} from './findChara.js'
-import {createNodeAndArrowArr} from './nodeAndArrow/createArrowArray.js'
+import {createNodeAndArrowArr} from './nodeAndArrow/createArrowArr.js'
 import {manageSlider} from './viz/slider.js'
 import {fixNodePoint} from './fixNodePoint'
 import {searchMaenoBunForShugo} from './createBunArr/SO/searchMaenoBunForS'
 import{rodata} from './rodata'
 
-let charaArr = []
+let nodeArr = []
 
 let verbArr = []
 
 const createCharaChart = () => {
 
   let knpArr = csv2Array(rodata.csvPath)
-  console.log(knpArr)
 
   let nodeArr=[]
-  findChara(knpArr, charaArr, nodeArr)
+  findChara(knpArr, nodeArr)
+
+  fixNodePoint(nodeArr)
+  fixNodePoint(nodeArr)
+
+  console.log(nodeArr)
   console.log(nodeArr)
 
-  fixNodePoint(charaArr)
 
-  let reconstructedKNP = createBunArr(knpArr, charaArr, nodeArr)
+  let reconstructedKNP = createBunArr(knpArr, nodeArr)
 
-  createNodeAndArrowArr(reconstructedKNP.sentenceArray, charaArr)
-  manageSlider(reconstructedKNP.sentenceArray,charaArr)
+
+  createNodeAndArrowArr(reconstructedKNP.sentenceArray, nodeArr)
+  manageSlider(reconstructedKNP.sentenceArray,nodeArr)
 }
 
 const findDependency = () => {

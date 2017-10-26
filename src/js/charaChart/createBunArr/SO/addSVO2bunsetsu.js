@@ -1,27 +1,33 @@
-import {searchNodeArr} from '../searchNodeArrForCharaAndPoint'
+
+import {searchNodeArrForCharaAndPointForBunsetsuSO} from './searchNodeArrForCharaAndPointForBunsetsuSO'
+
 import {rodata} from '../../rodata'
 
 const bunsetsu1stJpRowNo=rodata.bunsetsu1stJpRowNo
 
-const searchCharaArrayForCharaToSO=(charaArr, tmpName, bunsetsu,bun)=> {
+
+const addSVO2Bunsetsu=(charaArr, tmpName, bunsetsu, bun)=> {
   //文中で登場人物を見つける。
-  let resultNode = searchNodeArr(charaArr, tmpName)
+  let resultNode = searchNodeArrForCharaAndPointForBunsetsuSO(charaArr, tmpName)
   if (resultNode.isCharacter) {
-    addSO(tmpName,resultNode,bunsetsu,bun)
+    addSO2Bunsetsu(tmpName,resultNode,bunsetsu,bun)
   } else if (bunsetsu.csv_raw_array.length > bunsetsu1stJpRowNo + 1) {/*AさんBさんにも対応*/
     const tmpCharaNameWithHonorific = bunsetsu.csv_raw_array[bunsetsu1stJpRowNo][0] + bunsetsu.csv_raw_array[bunsetsu1stJpRowNo + 1][0]
-    resultNode = searchNodeArr(charaArr, tmpCharaNameWithHonorific)
+    resultNode = searchNodeArrForCharaAndPointForBunsetsuSO(charaArr, tmpCharaNameWithHonorific)
+
     if (resultNode.isCharacter) {
-      addSO(tmpCharaNameWithHonorific,resultNode,bunsetsu,bun)
+      addSO2Bunsetsu(tmpCharaNameWithHonorific,resultNode,bunsetsu,bun)
     } else {
+      //登場人物ではなく動詞を見つける
       bunsetsu.findVerbInBunsetsu()
     }
   } else {
+    //登場人物ではなく動詞を見つける
     bunsetsu.findVerbInBunsetsu()
   }
 }
 
-const addSO=(charaName,node,bunsetsu,bun)=>{
+const addSO2Bunsetsu=(charaName,node,bunsetsu,bun)=>{
   //文節に主語目的語情報を増やす
   const bunsetsuInfoRow = bunsetsu.csv_raw_array[0]
   for (let colIdx = 0; colIdx < bunsetsuInfoRow.length; colIdx++) {
@@ -49,5 +55,5 @@ const addSubject= (charaName,node,bunsetsu,bun)=> {
   node.bunArr+=bun
 }
 
-export {searchCharaArrayForCharaToSO}
+export {addSVO2Bunsetsu}
 

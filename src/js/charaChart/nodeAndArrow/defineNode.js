@@ -2,18 +2,26 @@
  * Created by uetsujitomoya on 2017/08/29.
  */
 
-let nodeCnt = 0
+import {rodata } from '../rodata'
 
+let r
+const orbitR=rodata.orbitR
+const orbitOPoint = rodata.orbitOPoint
+
+let nodeCnt = 0
+/*
 let r = 40
 const orbitR =150
-const orbitOPoint=200
+const orbitOPoint=200*/
 
 const enshuBunkatsuNum = 3
 
 export default class Node {
-  constructor (name) {
+  constructor (name,idx) {
+    this.name=name
     this.subject = name
     this.isSubject = false
+    this.bunArr=[]
 
     this.r = r
     if (this.isSubject) {
@@ -28,7 +36,7 @@ export default class Node {
     nodeCnt++
   }
   addStrokeWidth () {
-    this.strokeWidth++
+    this.circleStrokeWidth++
     this.viz=true
   }
   fixPoint(nodeArrLen){

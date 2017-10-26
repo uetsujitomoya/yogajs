@@ -2,7 +2,8 @@ import {rodata} from '../rodata'
 
 const viewText=(node,allBunArr)=>{
   //丸や矢印をマウスオーバーした際に、該当文章を表示。d3のmouseoverかclickから呼び出す
-  for(bun of node.bunArr){
+  console.log(node)
+  for(const bun of node.bunArr){
     createTextViewArea(bun,allBunArr)
   }
 }
