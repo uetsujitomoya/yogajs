@@ -60,12 +60,14 @@ const createNodeAndArrowArr = (bunArr, nodeArr) => {
       height: 800
     })
 
-  vizNodes(svg,nodeArr,bunArr)
+  const r = (rodata.orbitR * rodata.circleRadiusCoefficient) / nodeArr.length
+
+  vizNodes(svg,nodeArr,bunArr,r)
 
   for(let arrow of arrowArr){
     connectNodeAndArrow(arrow)
 
-    vizArrow(svg, arrow)
+    vizArrow(svg, arrow, r)
 
   }
 

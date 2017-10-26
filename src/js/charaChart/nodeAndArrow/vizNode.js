@@ -11,11 +11,13 @@ import {viewText} from '../viz/viewText'
 //import{rodata} from '../../rodata'
 //const r = rodata.nodeR
 
+
+
 const clientColor = 'red'
 const aroundClientPeopleColor = 'gray'
 const markerFillColor = 'red'
 
-let vizNodes = (svg,nodeArr,allBunArr) => {
+const vizNodes = (svg,nodeArr,allBunArr,r) => {
 
   let nodes = svg.selectAll('g')
     .data(nodeArr).enter().append('g')
@@ -25,18 +27,15 @@ let vizNodes = (svg,nodeArr,allBunArr) => {
       }
     })
 
-  nodes.append('circle')
-    .attr({
+  nodes.append('circle').attr({
       'r': function (d) { return r },
       'stroke': function (d, i) { if (i === 0) { return clientColor } else { return aroundClientPeopleColor } },
       'fill': rodata.circleFill,
       'stroke-width': (d) => { return　d.circleStrokeWidth }
-    })
-    .on('click', (d, i)=>{
+    }).on('click', (d, i)=>{
       alert("You clicked circle!")
       viewText(d, allBunArr)
     })
-
 
   nodes.append('text')
     .attr({
