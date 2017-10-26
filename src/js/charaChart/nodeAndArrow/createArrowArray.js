@@ -11,14 +11,14 @@ import {rodata} from '../rodata'
 
 import {vizArrow} from './vizArrow'
 
-const createNodeAndArrowArr = (bunArray, nodeArr) => {
+const createNodeAndArrowArr = (bunArr, nodeArr) => {
   let arrowArr = []
   console.log(arrowArr.length)
 
   resetCircleStrokeWidth(nodeArr)
 
-  for (let bunCnt = 0; bunCnt < bunArray.length; bunCnt++) {
-    let bun = bunArray[bunCnt]
+  for (let bunCnt = 0; bunCnt < bunArr.length; bunCnt++) {
+    let bun = bunArr[bunCnt]
     let containsVerbArray = {
       value: 'verb_array' in bun ? bun.verb_array : 'No'
     }
@@ -61,11 +61,11 @@ const createNodeAndArrowArr = (bunArray, nodeArr) => {
       height: 800
     })
 
-  vizNodes(svg,nodeArr,arrowArr)
+  vizNodes(svg,nodeArr,arrowArr,bunArr)
 
-  for(const arrow of arrowArr){
+  for(let arrow of arrowArr){
     connectNodeAndArrow(arrow)
-    vizArrow(svg, arrow.pointArray,nodeArr[0].r)
+    vizArrow(svg, arrow.pointArray)
   }
 
 

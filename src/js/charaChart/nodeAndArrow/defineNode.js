@@ -14,6 +14,7 @@ export default class Node {
   constructor (name) {
     this.subject = name
     this.isSubject = false
+    this.bunArr=[]
 
     this.r = r
     if (this.isSubject) {

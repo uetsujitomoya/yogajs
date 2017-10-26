@@ -4,7 +4,7 @@ const connectOriginalTextToNode = (bunArr, nodeArr) => {
     for(const verb of bun.verb_array){
       for(const node of nodeArr){
         if(verb.subject===node.subject){}
-        //verbとnodeとのヒモ付の時が狙い目じゃね？
+        //verbとnodeとのヒモ付の時が狙い目じゃね？=>defineBunVerb
       }
     }
   }

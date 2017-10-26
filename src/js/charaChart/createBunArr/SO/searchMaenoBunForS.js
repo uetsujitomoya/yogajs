@@ -1,4 +1,4 @@
-const searchMaenoBunForShugo = (bunArr, bunNo, verbNo,bun)=>{
+const searchMaenoBunForShugo = (bunArr, bunNo, verbNo,bun,nodeArr)=>{
   //console.log("verbNo=%d",verbNo)
 
   //まずその分から探す
@@ -7,7 +7,7 @@ const searchMaenoBunForShugo = (bunArr, bunNo, verbNo,bun)=>{
     const maenodoushi = bun.verb_array[verbCnt]
     //console.log(maenodoushi)
     if(maenodoushi.hasSubject){
-      bun.verb_array[verbNo].rewriteSubject(maenodoushi.subject)
+      bun.verb_array[verbNo].rewriteSubjectAndAddBun2Node(nodeArr[maenodoushi.subject.nodeIdx], bun)
       console.log(bun.verb_array[verbNo])
       console.log("has both S & O!")
       return
@@ -20,7 +20,7 @@ const searchMaenoBunForShugo = (bunArr, bunNo, verbNo,bun)=>{
       for(let verbCnt=bunArr[bunCnt].verb_array.length - 1; verbCnt >= 0 ; verbCnt--){
         const maenodoushi = bunArr[bunCnt].verb_array[verbCnt]
         if(maenodoushi.hasSubject){
-          bun.verb_array[verbNo].rewriteSubject(maenodoushi.subject)
+          bun.verb_array[verbNo].rewriteSubjectAndAddBun2Node(nodeArr[maenodoushi.subject.nodeIdx], bun)
           console.log(bun.verb_array[verbNo])
           console.log("has both S & O!")
           return

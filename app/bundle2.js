@@ -39581,7 +39581,7 @@ var KNP_Sentence = (function () {
         var temp_clause = this.bunsetsuArray[temp_clause_num];
         if (temp_clause.isSubject) {
           this.bunsetsuArray[verb_clause_num].subject_of_verb = temp_clause.subject;
-          this.verb_array[tempVerbNum].rewriteSubject(temp_clause.subject);
+          this.verb_array[tempVerbNum].rewriteSubjectAndAddBun2Node(temp_clause.subject);
           break;
         }
       }
@@ -40108,7 +40108,7 @@ var verbInSentence = (function () {
   }
 
   _createClass(verbInSentence, [{
-    key: "rewriteSubject",
+    key: "rewriteSubjectAndAddBun2Node",
     value: function rewriteSubject(character) {
       this.subject = character;
     }

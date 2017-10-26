@@ -2,8 +2,8 @@
  * Created by uetsujitomoya on 2017/09/04.
  */
 
-import{rodata} from '../rodata'
-import{r} from './defineNode'
+import {rodata} from '../rodata'
+import {r} from './defineNode'
 
 const markerFillColor = rodata.markerFillColor
 const yajirushi_refX = rodata.yajirushi_refX
@@ -28,12 +28,12 @@ const vizArrow = (svg, arrowPointArr) => {
       fill: markerFillColor
     })
 
-  var line = d3.svg.line()
+  let line = d3.svg.line()
     .interpolate('basis')
     .x(function (d) { return d[0] })
     .y(function (d) { return d[1] })
 
-  var path = svg.append('path')
+  let path = svg.append('path')
     .attr({
       'd': line(arrowPointArr),
       'stroke': 'red',
@@ -43,8 +43,8 @@ const vizArrow = (svg, arrowPointArr) => {
     })
 
   // pathの長さを調べて、丸の半径２個分＋矢印を後ろに下げる分の長さを引きます。
-  var totalLength = path.node().getTotalLength()
-  var t = totalLength - (r + r + yajirushi_refX)
+  const totalLength = path.node().getTotalLength()
+  const t = totalLength - (r + r + yajirushi_refX)
   path.attr({
     // 破線の指定を行います。
     'stroke-dasharray': '0 ' + r + ' ' + t + ' ' + r,
