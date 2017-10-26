@@ -6,23 +6,23 @@ import $ from 'jquery'
 
 import {wordparse2object} from './js/counselorEdu/wordparse2object.js'
 // import {CreateSwitchClassificationMethod} from "./SwitchClassificationMethod.js"; //AcceptDictionary
-// var dictionaryFromWord2Vec = csv2Array('HDFaceVertex.csv');
+// var dictionaryFromWord2Vec = csv2Arr('HDFaceVertex.csv');
 
 wordparse2object()
 
 // 以下、今までの(170809)
 
-let storageArrayFromKamata = csv2Array('csv/storage170421fromKamata.csv')
+let storageArrayFromKamata = csv2Arr('csv/storage170421fromKamata.csv')
 
 //var startTime = new Date()
 
-let newLoveDictionary = csv2Array('../oldLoveDic.csv')
+let newLoveDictionary = csv2Arr('../oldLoveDic.csv')
 newLoveDictionary = TransposeMatrix(newLoveDictionary)
 
-let newWorkDictionary = csv2Array('workUtf8.csv')
+let newWorkDictionary = csv2Arr('workUtf8.csv')
 newWorkDictionary = TransposeMatrix(newWorkDictionary)
 
-let newFriendDictionary = csv2Array('friendUtf8.csv')
+let newFriendDictionary = csv2Arr('friendUtf8.csv')
 newFriendDictionary = TransposeMatrix(newFriendDictionary)
 
 var keitaisokaiseki = [] // このlengthは段落数
@@ -132,7 +132,7 @@ document.getElementById('storageSave-button').addEventListener('click', () => {
 
 // http://qiita.com/kenchan0130/items/11c3abab109405379ffb
 
-function csv2Array (filePath) { // csvﾌｧｲﾙﾉ相対ﾊﾟｽor絶対ﾊﾟｽ
+function csv2Arr (filePath) { // csvﾌｧｲﾙﾉ相対ﾊﾟｽor絶対ﾊﾟｽ
   var csvData = []
   var data = new XMLHttpRequest()
   data.open('GET', filePath, false) // true:非同期,false:同期
@@ -238,4 +238,4 @@ let storage2csv = () => {
   return csv_array
 }
 
-export {csv2Array, TransposeMatrix, downloadAsCSV}
+export {csv2Arr, TransposeMatrix, downloadAsCSV}

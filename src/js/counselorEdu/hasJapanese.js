@@ -4,7 +4,7 @@
 
 // checkJa(panese)
 
-function hasJapanese (txt) {
+function hasJp (txt) {
   if (typeof txt !== 'string') {
     return false
   }
@@ -22,4 +22,4 @@ function hasJapanese (txt) {
   return false
 }
 
-export {hasJapanese}
+export {hasJp}

@@ -1,4 +1,4 @@
-function csv2Array (filePath) { // csvﾌｧｲﾙﾉ相対ﾊﾟｽor絶対ﾊﾟｽ
+function csv2Arr (filePath) { // csvﾌｧｲﾙﾉ相対ﾊﾟｽor絶対ﾊﾟｽ
   let csvData = []
   let data = new XMLHttpRequest()
   data.open('GET', filePath, false) // true:非同期,false:同期
@@ -14,4 +14,4 @@ function csv2Array (filePath) { // csvﾌｧｲﾙﾉ相対ﾊﾟｽor絶対ﾊ�
   return csvData
 }
 
-export {csv2Array}
+export {csv2Arr}

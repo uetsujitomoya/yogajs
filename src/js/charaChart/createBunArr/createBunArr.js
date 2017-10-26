@@ -29,7 +29,7 @@ const createBunArr = (raw2dArr, nodeArr) =>
     }
     tmpRowNo++
   }
-  return {KNP_sentence_array:bunArr,sentenceArray:bunArr}
+  return bunArr
 }
 
 const existsSubject = (bunsetsu, nodeArr) => {

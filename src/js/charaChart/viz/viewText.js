@@ -25,7 +25,7 @@ const createBox=()=>{
 
   let msg = document.getElementById('msg')
   let k, l
-  msg.innerHTML = ''
+  msg.innerHTML += '--'
 
   return msg
 }

@@ -25,7 +25,7 @@ class Verb {
 }
 
 let findVerbFromCSV = (rowNo, knpArray,verbArray) => {
-  if (hasJapanese(knpArray[rowNo])) {
+  if (hasJp(knpArray[rowNo])) {
     let tmpJapanese = knpArray[rowNo][0]
         // console.log(knpArray[rowNo][3])
     if (hasVerb(knpArray[rowNo])) {

@@ -2,7 +2,7 @@
  * Created by uetsujitomoya on 2017/08/21.
  */
 
-import {hasJapanese} from "../counselorEdu/hasJapanese.js"
+import {hasJp} from "../counselorEdu/hasJapanese.js"
 import Node from './nodeAndArrow/defineNode.js'
 import {rodata} from './rodata'
 
@@ -21,14 +21,13 @@ const clientAroundPeopleColor='gray'
 
 //Aさんを追加→1単語とする
 
-
 const findChara = (knpArr, nodeArr) => {
   knpArr.forEach((row,rowIdx)=>{
 
     //console.log(row)
-    if(hasJapanese(row[0])){
+    if(hasJp(row[0])){
 
-      let tmpJapanese = row[0]
+      let tmpJp = row[0]
       for(const element of row){
         if ( element.match(charaKeyword)) {
           let tmpCharaName=row[0];
@@ -78,41 +77,3 @@ const createNewChara=(name,nodeArr)=>{
 }
 
 export {findChara}
-
-/*
-class Chara {
-  constructor(name,idx) {
-    this.bunArr=[]//forTextView
-    this.name = name
-    if(this.name === "私"||this.name==='Aさん'){
-      this.client = 1
-    }else{
-      this.client = 0
-    }
-    this.nodeIdx=idx
-    this.nodeX=null
-    this.nodeY=null
-    this.nodeCircleStrokeWidth=0
-    this.r = r
-    if (this.isSubject) {
-      this.strokeColor = 'red'
-    } else {
-      this.strokeColor = 'gray'
-    }
-    this.nodeCharacter = name
-    this.circleStrokeWidth = 0
-    this.nodeIdx=nodeCnt
-    this.viz=false
-    this.sentenceNoArray=[]
-    nodeCnt++
-  }
-  addStrokeWidth () {
-    this.circleStrokeWidth++
-    this.viz=true
-  }
-  fixPoint(nodeListLength){
-    this.radian = (this.nodeIdx/nodeListLength)*2*Math.PI
-    this.y = orbitOPoint + orbitR * Math.sin(this.radian)
-    this.x = orbitOPoint + orbitR * Math.cos(this.radian)
-  }
-}*/

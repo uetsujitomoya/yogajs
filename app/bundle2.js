@@ -38574,7 +38574,7 @@ Object.defineProperty(exports, '__esModule', {
     value: true
 });
 
-var _csv2ArrayJs = require('./csv2Array.js');
+var _csv2ArrayJs = require('./csv2Arr.js');
 
 var _TransposeMatrixJs = require('./transposeMatrix.js');
 
@@ -38721,7 +38721,7 @@ var _jquery2 = _interopRequireDefault(_jquery);
 var _jsWordparse2objectJs = require('./js/wordparse2object.js');
 
 // import {CreateSwitchClassificationMethod} from "./switchClassificationMethod.js"; //AcceptDictionary
-// var dictionaryFromWord2Vec = csv2Array('HDFaceVertex.csv');
+// var dictionaryFromWord2Vec = csv2Arr('HDFaceVertex.csv');
 
 (0, _jsWordparse2objectJs.wordparse2object)();
 
@@ -40199,7 +40199,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var _jsContains_japaneseJs = require("../js/hasJapanese.js");
+var _jsContains_japaneseJs = require("../js/hasJp.js");
 
 var _defineNodeClassJs = require('./defineNode.js');
 
@@ -40450,7 +40450,7 @@ Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
-var _csv2ArrayJs = require('../csv2Array.js');
+var _csv2ArrayJs = require('../csv2Arr.js');
 
 var _getCSVJs = require('./getCSV.js');
 
@@ -41393,7 +41393,7 @@ var _selectJs = require('../select.js');
 
 var _svgJs = require('../svg.js');
 
-var _csv2Array = require('../csv2Array');
+var _csv2Array = require('../csv2Arr');
 
 var _jsViz_relation_chart = require('../js/viz_relation_chart');
 
