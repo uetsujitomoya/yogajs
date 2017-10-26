@@ -105,7 +105,7 @@ class Chara {
     nodeCnt++
   }
   addStrokeWidth () {
-    this.strokeWidth++
+    this.circleStrokeWidth++
     this.viz=true
   }
   fixPoint(nodeListLength){
