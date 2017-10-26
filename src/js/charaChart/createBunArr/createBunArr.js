@@ -10,7 +10,7 @@ import Bun from './defineBun'
 
 //const firstJapaneseRowIdxInBunsetsu = 2
 
-const createBunArr = (raw2dArr, charaArr, nodeArr) =>
+const createBunArr = (raw2dArr, nodeArr) =>
 {//係り受けを調べる
   let bunNo = 0
   let bunArr = []
@@ -22,7 +22,7 @@ const createBunArr = (raw2dArr, charaArr, nodeArr) =>
     } else {
       //console.log(bunNo)
      bunArr.push(
-       new Bun(tmpRowNo, tmpBun2dArr, charaArr, bunNo, nodeArr,bunArr)
+       new Bun(tmpRowNo, tmpBun2dArr, nodeArr, bunNo, bunArr)
      )
       bunNo++
       tmpBun2dArr = []
@@ -32,11 +32,11 @@ const createBunArr = (raw2dArr, charaArr, nodeArr) =>
   return {KNP_sentence_array:bunArr,sentenceArray:bunArr}
 }
 
-const existsSubject = (bunsetsu, charaArr) => {
+const existsSubject = (bunsetsu, nodeArr) => {
   const bunsetsuInfoRow = bunsetsu.csv_raw_array[0]
   const tmpCharaName = bunsetsu.csv_raw_array[1][0]
   for (var colCnt = 0; colCnt < bunsetsuInfoRow.length; colCnt++) {
-    if (bunsetsuInfoRow[colCnt].match('ガ格') && isCharacter(charaArr, tmpCharaName)) {
+    if (bunsetsuInfoRow[colCnt].match('ガ格') && isCharacter(nodeArr, tmpCharaName)) {
       bunsetsu.isSubject = true
       bunsetsu.subject = tmpCharaName
       break
@@ -44,11 +44,11 @@ const existsSubject = (bunsetsu, charaArr) => {
   }
 }
 
-const existsObject = (bunsetsu, characterArray) => {
+const existsObject = (bunsetsu, nodeArr) => {
   const bunsetsuInfoRow = bunsetsu.csv_raw_array[0]
   const tmpCharaName = bunsetsu.csv_raw_array[1][0]
   for (let colCnt = 0; colCnt < bunsetsuInfoRow.length; colCnt++) {
-    if ((bunsetsuInfoRow[colCnt].match('ヲ格') || bunsetsuInfoRow[colCnt].match('ニ格')) && isCharacter(characterArray, tmpCharaName)) {
+    if ((bunsetsuInfoRow[colCnt].match('ヲ格') || bunsetsuInfoRow[colCnt].match('ニ格')) && isCharacter(nodeArr, tmpCharaName)) {
       bunsetsu.isObject = true
       bunsetsu.object = tmpCharaName
       break

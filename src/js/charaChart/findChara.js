@@ -21,7 +21,7 @@ const clientAroundPeopleColor='gray'
 
 //Aさんを追加→1単語とする
 
-const findChara = (knpArr, charaArr, nodeArr) => {
+const findChara = (knpArr, nodeArr) => {
   knpArr.forEach((row,rowIdx)=>{
     //console.log(row)
     if(hasJapanese(row[0])){
@@ -32,52 +32,53 @@ const findChara = (knpArr, charaArr, nodeArr) => {
           let tmpCharaName=row[0];
           let isNewChara = true
           //被ってなければその登場人物のインスタントをつくる
-          charaArr.forEach((character)=>{
-            if(tmpCharaName===character.name){
+          nodeArr.forEach((node)=>{
+            if(tmpCharaName===node.name){
               //verbを追加
               isNewChara = false;
               //太さ加算
-              //character.character_node.bold_qty++
+              //node.character_node.bold_qty++
             }
           })
-          if(isNewChara === true){ createNewChara(tmpCharaName,charaArr,nodeArr) }
+          if(isNewChara === true){ createNewChara(tmpCharaName,nodeArr) }
         }
       }
 
       if(row[0] === "さん"){
         const tmpChara = knpArr[rowIdx-1][0]+row[0]
         //console.log(tmpChara)
-        if(isNewChara(tmpChara,charaArr)&&aSanCnt===0){
-          createNewChara(tmpChara,charaArr,nodeArr)
+        if(isNewChara(tmpChara,nodeArr)&&aSanCnt===0){
+          createNewChara(tmpChara,nodeArr,nodeArr)
         }
       }
     }
   })
 }
 
-const isNewChara=(tmpCharaName,charaArr)=> {
-  charaArr.forEach((chara)=>{
-    if(tmpCharaName === chara.name){
+const isNewChara=(tmpCharaName,nodeArr)=> {
+  nodeArr.forEach((node)=>{
+    if(tmpCharaName === node.name){
       //verbを追加
-      //console.log(tmpCharaName)
+      console.log(tmpCharaName)
+      console.log("isExistedChara")
       return false;
       //太さ加算
-      //chara.character_node.bold_qty++
     }
   })
   return true
 }
 
-const createNewChara=(name,charaArr,nodeArr)=>{
+const createNewChara=(name,nodeArr)=>{
   //Nodeを出現させるとしたらどこまでつくるかも書く
   if(name==='Aさん'){aSanCnt=1}
-  charaArr.push(new Chara(name,charaArr.length))
+  //nodeArr.push(new Chara(name,nodeArr.length))
   //Nodeもここで追加する。
-  nodeArr.push(new Node(name))
+  nodeArr.push(new Node(name,nodeArr.length))
 }
 
 export {findChara}
 
+/*
 class Chara {
   constructor(name,idx) {
     this.bunArr=[]//forTextView
@@ -113,4 +114,4 @@ class Chara {
     this.y = orbitOPoint + orbitR * Math.sin(this.radian)
     this.x = orbitOPoint + orbitR * Math.cos(this.radian)
   }
-}
+}*/

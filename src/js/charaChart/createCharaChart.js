@@ -12,7 +12,7 @@ import {fixNodePoint} from './fixNodePoint'
 import {searchMaenoBunForShugo} from './createBunArr/SO/searchMaenoBunForS'
 import{rodata} from './rodata'
 
-let charaArr = []
+let nodeArr = []
 
 let verbArr = []
 
@@ -21,18 +21,18 @@ const createCharaChart = () => {
   let knpArr = csv2Array(rodata.csvPath)
 
   let nodeArr=[]
-  findChara(knpArr, charaArr, nodeArr)
+  findChara(knpArr, nodeArr)
 
-  fixNodePoint(charaArr)
+  fixNodePoint(nodeArr)
   fixNodePoint(nodeArr)
 
-  console.log(charaArr)
+  console.log(nodeArr)
   console.log(nodeArr)
 
-  let reconstructedKNP = createBunArr(knpArr, charaArr, nodeArr)
+  let reconstructedKNP = createBunArr(knpArr, nodeArr)
 
-  createNodeAndArrowArr(reconstructedKNP.sentenceArray, charaArr)
-  manageSlider(reconstructedKNP.sentenceArray,charaArr)
+  createNodeAndArrowArr(reconstructedKNP.sentenceArray, nodeArr)
+  manageSlider(reconstructedKNP.sentenceArray,nodeArr)
 }
 
 const findDependency = () => {

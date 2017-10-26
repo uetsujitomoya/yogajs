@@ -17,7 +17,8 @@ const orbitOPoint=200*/
 const enshuBunkatsuNum = 3
 
 export default class Node {
-  constructor (name) {
+  constructor (name,idx) {
+    this.name=name
     this.subject = name
     this.isSubject = false
     this.bunArr=[]
