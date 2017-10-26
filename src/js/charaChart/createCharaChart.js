@@ -28,8 +28,6 @@ const createCharaChart = () => {
   fixNodePoint(charaArr)
 
   let reconstructedKNP = createBunArr(knpArr, charaArr, nodeArr)
-  console.log('get out createBunArr')
-  console.log(reconstructedKNP.sentenceArray)
 
   createNodeAndArrowArr(reconstructedKNP.sentenceArray, charaArr)
   manageSlider(reconstructedKNP.sentenceArray,charaArr)
