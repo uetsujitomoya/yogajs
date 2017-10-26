@@ -14,6 +14,8 @@ const kihonkuSymbol = rodata.kihonkuSymbol
 export default class Bun {
   constructor (rawRId, bun2dArrFromKNP, nodeArr, bunNo, bunArr) {
 
+    this.bunNo=bunNo
+
     let verbNo
 
     if (bun2dArrFromKNP.length === 1) {
