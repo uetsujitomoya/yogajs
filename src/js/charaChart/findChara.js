@@ -112,6 +112,5 @@ class Chara {
     this.radian = (this.nodeIdx/nodeListLength)*2*Math.PI
     this.y = orbitOPoint + orbitR * Math.sin(this.radian)
     this.x = orbitOPoint + orbitR * Math.cos(this.radian)
-
   }
 }

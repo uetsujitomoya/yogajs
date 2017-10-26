@@ -20,14 +20,11 @@ export default class Bun {
       return null
     }
 
-    this.nodeArray=[]//forTextView
+    //this.nodeArray=[]//forTextView
 
     this.verb_array = []
-
-    // this.csv_raw_array=[]
     this.rowNo = rawRId
     this.bunsetsuArray = []
-    //console.log(bun2dArrFromKNP)
 
     this.bunsetsuArray.length = countBunsetsu(bun2dArrFromKNP)
 

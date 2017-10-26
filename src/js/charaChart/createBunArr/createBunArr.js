@@ -16,7 +16,6 @@ const createBunArr = (raw2dArr, charaArr, nodeArr) =>
   let bunArr = []
   let tmpBun2dArr = []
   let tmpRowNo = 0
-  console.log(raw2dArr)
   for(const row of raw2dArr){
     if (row[0] !== 'EOS') {
       tmpBun2dArr.push(row)

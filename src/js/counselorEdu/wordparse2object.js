@@ -2,12 +2,11 @@ import 'kuromoji'
 import $ from 'jquery'
 import {select} from './select.js'
 import {setForViz} from './svg.js'
-import {csv2array} from './csv2Array'
+import {csv2array} from '../csv2Array'
 import {viz_relation_chart} from './vizRelationChart'
 import {createCharaChart} from '../charaChart/createCharaChart.js'
 
 let wordparse2object = () => {
-  console.log('wordparse2object')
   createCharaChart()
   wordparse()
   make_object()

@@ -5,27 +5,23 @@
 import d3 from 'd3'
 import $ from 'jquery'
 
-import {createNodeAndArrowArr} from '../nodeAndArrow/createArrowArray.js'
+import {createNodeAndArrowArr} from '../nodeAndArrow/createArrowArr.js'
 
 import {removeSVG} from '../nodeAndArrow/vizNode.js'
 
-let manageSlider = (sentenceArray,charaArray) => {
+let manageSlider = (bunArr, charaArr) => {
   let el = document.querySelector('#ex2')
-  console.log(sentenceArray.length)
-  el.dataset.sliderMax = sentenceArray.length + ''
-  console.log(document.querySelector('#ex2').dataSliderMax)
-  el.dataset.sliderValue = '[0,' + sentenceArray.length + ']'
+  el.dataset.sliderMax = bunArr.length + ''
+  el.dataset.sliderValue = '[0,' + bunArr.length + ']'
 
   $('#ex2').slider({
     formatter: function (value) {
       return 'この範囲を見ています…… ' + value
     }
   })
-    // console.log(document.getElementById("#ex2"))
 
   $('#ex2').on('slide', function (slideEvt) {
-    console.log(slideEvt.value)
-    applySlider(slideEvt.value, sentenceArray,charaArray)
+    applySlider(slideEvt.value, bunArr,charaArr)
   })
 }
 

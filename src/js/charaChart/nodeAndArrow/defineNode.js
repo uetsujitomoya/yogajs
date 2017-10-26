@@ -2,11 +2,17 @@
  * Created by uetsujitomoya on 2017/08/29.
  */
 
-let nodeCnt = 0
+import {rodata } from '../rodata'
 
+let r
+const orbitR=rodata.orbitR
+const orbitOPoint = rodata.orbitOPoint
+
+let nodeCnt = 0
+/*
 let r = 40
 const orbitR =150
-const orbitOPoint=200
+const orbitOPoint=200*/
 
 const enshuBunkatsuNum = 3
 

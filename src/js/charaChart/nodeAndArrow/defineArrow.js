@@ -6,7 +6,6 @@ import {connectNodeAndArrow} from './connectNodeAndArrow'
 
 export default class Arrow {
   constructor (verb, arrowNum, svg) {
-    console.log(verb)
     //arrowにnodeデータ入れるには、verbにnodeデータ入れる必要がある。
     this.subject = {
       name:verb.subject,

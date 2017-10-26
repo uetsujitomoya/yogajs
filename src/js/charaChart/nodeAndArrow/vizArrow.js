@@ -11,6 +11,7 @@ const yajirushi_refX = rodata.yajirushi_refX
 const vizArrow = (svg, arrowPointArr) => {
   //let circle_data_array = [[nodeArray[0].x, nodeArray[0].y, r], [nodeArray[1].x, nodeArray[1].y, r]]
 
+  //出発点の取得失敗？
 
   var marker = svg.append('defs').append('marker')
     .attr({

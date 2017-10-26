@@ -13,7 +13,6 @@ import {vizArrow} from './vizArrow'
 
 const createNodeAndArrowArr = (bunArr, nodeArr) => {
   let arrowArr = []
-  console.log(arrowArr.length)
 
   resetCircleStrokeWidth(nodeArr)
 
@@ -27,9 +26,7 @@ const createNodeAndArrowArr = (bunArr, nodeArr) => {
     bun.verb_array.forEach((verb) => {
 
       if (verb.hasSubject) {
-        console.log(verb)
         if (verb.hasObject) {
-          console.log("has both hasSubject & hasObject!")
           let isNewArrow = true
           for (let tmpArrowCnt = 0; tmpArrowCnt < arrowArr.length; tmpArrowCnt++) {
             if (isSameArrow(arrowArr[tmpArrowCnt], verb)) {
@@ -62,6 +59,8 @@ const createNodeAndArrowArr = (bunArr, nodeArr) => {
     })
 
   vizNodes(svg,nodeArr,arrowArr,bunArr)
+
+  console.log(arrowArr)
 
   for(let arrow of arrowArr){
     connectNodeAndArrow(arrow)
