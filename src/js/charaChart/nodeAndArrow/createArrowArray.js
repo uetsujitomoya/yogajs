@@ -30,7 +30,7 @@ const createNodeAndArrowArr = (bunArray, nodeArr) => {
           let isNewArrow = true
           for (let tmpArrowCnt = 0; tmpArrowCnt < arrowArr.length; tmpArrowCnt++) {
             if (isSameArrow(arrowArr[tmpArrowCnt], verb)) {
-              arrowArr[tmpArrowCnt].arrowStrokeWidth++
+              arrowArr[tmpArrowCnt].addStrokeWidth()
               isNewArrow = false
               break
             }
@@ -69,7 +69,7 @@ const createNodeAndArrowArr = (bunArray, nodeArr) => {
 }
 
 const isSameArrow = (arrow, verb) => {
-  if ((arrow.subject === verb.subject) && (arrow.object === verb.object)) {
+  if ((arrow.subject.name === verb.subject.name) && (arrow.object.name === verb.object.name)) {
     return true
   } else {
     return false

@@ -34,7 +34,7 @@ const vizArrow = (svg, arrow) => {
     .attr({
       'd': line(arrow.pointArr),
       'stroke': 'red',
-      'stroke-width': 5,
+      'stroke-width': arrow.strokeWidth,
       'fill': 'none',
       'marker-end': 'url(#arrowhead)'
     })

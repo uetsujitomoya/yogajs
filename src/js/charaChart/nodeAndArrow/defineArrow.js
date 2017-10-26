@@ -21,7 +21,7 @@ export default class Arrow {
     }
 
     this.strokeColor = 'gray'
-    this.strokeWidth = 1
+    this.strokeWidth = 5
     this.startPointX = 0
     this.startPointY = 0
     this.endPointX = 0
@@ -30,6 +30,6 @@ export default class Arrow {
     console.log(this)
   }
   addStrokeWidth () {
-    this.strokeWidth++
+    this.strokeWidth = this.strokeWidth + 5
   }
 }
