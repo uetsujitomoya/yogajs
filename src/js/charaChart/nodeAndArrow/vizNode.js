@@ -15,7 +15,7 @@ const clientColor = 'red'
 const aroundClientPeopleColor = 'gray'
 const markerFillColor = 'red'
 
-let vizNodes = (svg,nodeArr,arrowArr,allBunArr) => {
+let vizNodes = (svg,nodeArr,allBunArr) => {
 
   let nodes = svg.selectAll('g')
     .data(nodeArr).enter().append('g')
@@ -26,7 +26,6 @@ let vizNodes = (svg,nodeArr,arrowArr,allBunArr) => {
     })
 
   nodes.append('circle')
-
     .attr({
       'r': function (d) { return r },
       'stroke': function (d, i) { if (i === 0) { return clientColor } else { return aroundClientPeopleColor } },

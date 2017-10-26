@@ -60,9 +60,7 @@ const createNodeAndArrowArr = (bunArr, nodeArr) => {
       height: 800
     })
 
-  vizNodes(svg,nodeArr,arrowArr,bunArr)
-
-  console.log(arrowArr)
+  vizNodes(svg,nodeArr,bunArr)
 
   for(let arrow of arrowArr){
     connectNodeAndArrow(arrow)
