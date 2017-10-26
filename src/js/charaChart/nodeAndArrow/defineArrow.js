@@ -5,8 +5,7 @@
 import {connectNodeAndArrow} from './connectNodeAndArrow'
 
 export default class Arrow {
-  constructor (verb, arrowNum, svg) {
-    console.log(verb)
+  constructor (verb, arrowNo, svg) {
     //arrowにnodeデータ入れるには、verbにnodeデータ入れる必要がある。
     this.subject = {
       name:verb.subject,
@@ -16,10 +15,11 @@ export default class Arrow {
     }
     this.object={name:verb.object,nodeIdx:verb.object.nodeIdx,
       x:verb.object.x,
-      y:verb.object.y}
+      y:verb.object.y
+    }
 
     this.strokeColor = 'gray'
-    this.arrowStrokeWidth = 1
+    this.strokeWidth = 1
     this.startPointX = 0
     this.startPointY = 0
     this.endPointX = 0

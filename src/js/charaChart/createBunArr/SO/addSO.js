@@ -1,16 +1,16 @@
-import {searchNodeArrForCharaAndPoint} from '../searchNodeArrForCharaAndPoint'
+import {searchNodeArr} from '../searchNodeArrForCharaAndPoint'
 import {rodata} from '../../rodata'
 
-const firstJapaneseRowIdxInBunsetsu=rodata.firstJapaneseRowIdxInBunsetsu
+const bunsetsu1stJpRowNo=rodata.bunsetsu1stJpRowNo
 
-const searchCharaArrayForCharaToSO=(charaArray, tmpName, bunsetsu,bun)=> {
+const searchCharaArrayForCharaToSO=(charaArr, tmpName, bunsetsu,bun)=> {
   //文中で登場人物を見つける。
-  let resultNode = searchNodeArrForCharaAndPoint(charaArray, tmpName)
+  let resultNode = searchNodeArr(charaArr, tmpName)
   if (resultNode.isCharacter) {
     addSO(tmpName,resultNode,bunsetsu,bun)
-  } else if (bunsetsu.csv_raw_array.length > firstJapaneseRowIdxInBunsetsu + 1) {/*AさんBさんにも対応*/
-    const tmpCharaNameWithHonorific = bunsetsu.csv_raw_array[firstJapaneseRowIdxInBunsetsu][0] + bunsetsu.csv_raw_array[firstJapaneseRowIdxInBunsetsu + 1][0]
-    resultNode = searchNodeArrForCharaAndPoint(charaArray, tmpCharaNameWithHonorific)
+  } else if (bunsetsu.csv_raw_array.length > bunsetsu1stJpRowNo + 1) {/*AさんBさんにも対応*/
+    const tmpCharaNameWithHonorific = bunsetsu.csv_raw_array[bunsetsu1stJpRowNo][0] + bunsetsu.csv_raw_array[bunsetsu1stJpRowNo + 1][0]
+    resultNode = searchNodeArr(charaArr, tmpCharaNameWithHonorific)
     if (resultNode.isCharacter) {
       addSO(tmpCharaNameWithHonorific,resultNode,bunsetsu,bun)
     } else {

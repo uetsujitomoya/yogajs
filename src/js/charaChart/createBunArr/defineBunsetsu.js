@@ -4,7 +4,7 @@ import {isCharacter,searchNodeArrayForCharacterAndPoint} from './isChara'
 import {hasVerb} from './defineVerb'
 import {searchCharaArrayForCharaToSO} from './SO/addSO'
 
-const bunsetsu1stJpRIdx=rodata.firstJapaneseRowIdxInBunsetsu
+const bunsetsu1stJpRIdx=rodata.bunsetsu1stJpRowNo
 
 export default class Bunsetsu {
   constructor (no, input2dArray, charaArray,bun) {

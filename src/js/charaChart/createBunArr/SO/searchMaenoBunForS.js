@@ -1,15 +1,10 @@
 const searchMaenoBunForShugo = (bunArr, bunNo, verbNo,bun)=>{
-  //console.log("verbNo=%d",verbNo)
-
   //まずその分から探す
   for(let verbCnt = verbNo - 1 ; verbCnt >= 0 ; verbCnt-- ){
-    //console.log(verbCnt)
     const maenodoushi = bun.verb_array[verbCnt]
-    //console.log(maenodoushi)
     if(maenodoushi.hasSubject){
       bun.verb_array[verbNo].rewriteSubject(maenodoushi.subject)
       console.log(bun.verb_array[verbNo])
-      console.log("has both S & O!")
       return
     }
   }

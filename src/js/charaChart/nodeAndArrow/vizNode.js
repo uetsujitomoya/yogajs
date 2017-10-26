@@ -45,7 +45,7 @@ let vizNodes = (svg,nodeArr,arrowArr) => {
 }
 
 let removeSVG = () => {
-  d3.select(rodata.characterChartAreaID).select('svg').remove()
+  d3.select(rodata.charaChartAreaID).select('svg').remove()
 }
 
 export {vizNodes, removeSVG}

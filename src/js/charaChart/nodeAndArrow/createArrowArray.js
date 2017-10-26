@@ -13,7 +13,6 @@ import {vizArrow} from './vizArrow'
 
 const createNodeAndArrowArr = (bunArray, nodeArr) => {
   let arrowArr = []
-  console.log(arrowArr.length)
 
   resetCircleStrokeWidth(nodeArr)
 
@@ -27,9 +26,7 @@ const createNodeAndArrowArr = (bunArray, nodeArr) => {
     bun.verb_array.forEach((verb) => {
 
       if (verb.hasSubject) {
-        console.log(verb)
         if (verb.hasObject) {
-          console.log("has both hasSubject & hasObject!")
           let isNewArrow = true
           for (let tmpArrowCnt = 0; tmpArrowCnt < arrowArr.length; tmpArrowCnt++) {
             if (isSameArrow(arrowArr[tmpArrowCnt], verb)) {
@@ -55,7 +52,7 @@ const createNodeAndArrowArr = (bunArray, nodeArr) => {
   }
 
 
-  let svg = d3.select(rodata.characterChartAreaID).append('svg')
+  let svg = d3.select(rodata.charaChartAreaID).append('svg')
     .attr({
       width: 1300,
       height: 800
@@ -65,14 +62,13 @@ const createNodeAndArrowArr = (bunArray, nodeArr) => {
 
   for(const arrow of arrowArr){
     connectNodeAndArrow(arrow)
-    vizArrow(svg, arrow.pointArray,nodeArr[0].r)
+    vizArrow(svg, arrow)
   }
 
 
 }
 
 const isSameArrow = (arrow, verb) => {
-    // console.log(arrow)
   if ((arrow.subject === verb.subject) && (arrow.object === verb.object)) {
     return true
   } else {
@@ -81,8 +77,6 @@ const isSameArrow = (arrow, verb) => {
 }
 
 const isSameNode = (node, verb) => {
-    //console.log(node)
-    // console.log(verb)
   if (node.name === verb.subject.name) {
     return true
   } else {
@@ -91,7 +85,6 @@ const isSameNode = (node, verb) => {
 }
 
 const existsObject = (verb) => {
-    // console.log(verb)
   if (verb.object === initialValueOfSubjectAndObjectInVerb) {
     return false
   } else {
@@ -100,12 +93,9 @@ const existsObject = (verb) => {
 }
 
 const existsSubject = (verb) => {
-    // console.log("enter existsSubject")
-    // console.log(verb.subject)
   if (verb.subject === initialValueOfSubjectAndObjectInVerb) {
     return false
   } else {
-        // alert("exist Node!")
     return true
   }
 }
