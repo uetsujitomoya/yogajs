@@ -26,7 +26,7 @@ const createNodeAndArrowArr = (bunArray, nodeArr) => {
     bun.verb_array.forEach((verb) => {
 
       if (verb.hasSubject) {
-        if (verb.hasObject) {
+        if ( (verb.hasObject) && ( verb.subject.name!==verb.object.name ) ) {
           let isNewArrow = true
           for (let tmpArrowCnt = 0; tmpArrowCnt < arrowArr.length; tmpArrowCnt++) {
             if (isSameArrow(arrowArr[tmpArrowCnt], verb)) {

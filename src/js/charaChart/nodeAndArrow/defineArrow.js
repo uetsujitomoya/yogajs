@@ -13,7 +13,9 @@ export default class Arrow {
       x:verb.subject.x,
       y:verb.subject.y
     }
-    this.object={name:verb.object,nodeIdx:verb.object.nodeIdx,
+    this.object={
+      name:verb.object,
+      nodeIdx:verb.object.nodeIdx,
       x:verb.object.x,
       y:verb.object.y
     }
@@ -24,7 +26,8 @@ export default class Arrow {
     this.startPointY = 0
     this.endPointX = 0
     this.endPointY = 0
-    connectNodeAndArrow(this)
+    connectNodeAndArrow(this)//2回やってる？？
+    console.log(this)
   }
   addStrokeWidth () {
     this.strokeWidth++
