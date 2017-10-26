@@ -35,7 +35,7 @@ export default class Node {
     this.radian = (this.nodeIdx/nodeArrLen)*2*Math.PI
     this.y = orbitOPoint + orbitR * Math.sin(this.radian)
     this.x = orbitOPoint + orbitR * Math.cos(this.radian)
-    r = orbitR/(nodeArrLen*200)
+    r = orbitR / (nodeArrLen * 200)
   }
 }
 

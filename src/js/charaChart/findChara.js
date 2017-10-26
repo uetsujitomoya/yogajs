@@ -22,7 +22,7 @@ const clientAroundPeopleColor='gray'
 //Aさんを追加→1単語とする
 
 const findChara = (knpArr, charaArr, nodeArr) => {
-  knpArr.forEach((row,rowIdx)=>{
+  knpArr.forEach((row,rowId)=>{
     //console.log(row)
     if(hasJapanese(row[0])){
 
@@ -45,7 +45,7 @@ const findChara = (knpArr, charaArr, nodeArr) => {
       }
 
       if(row[0] === "さん"){
-        const tmpChara = knpArr[rowIdx-1][0]+row[0]
+        const tmpChara = knpArr[rowId-1][0]+row[0]
         //console.log(tmpChara)
         if(isNewChara(tmpChara,charaArr)&&aSanCnt===0){
           createNewChara(tmpChara,charaArr,nodeArr)
@@ -59,10 +59,8 @@ const isNewChara=(tmpCharaName,charaArr)=> {
   charaArr.forEach((chara)=>{
     if(tmpCharaName === chara.name){
       //verbを追加
-      //console.log(tmpCharaName)
       return false;
       //太さ加算
-      //chara.character_node.bold_qty++
     }
   })
   return true

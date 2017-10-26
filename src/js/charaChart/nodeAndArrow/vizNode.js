@@ -28,7 +28,7 @@ let vizNodes = (svg,nodeArr,arrowArr) => {
         .attr({
           'r': function (d) { return r },
           'stroke': function (d, i) { if (i === 0) { return clientColor } else { return aroundClientPeopleColor } },
-          'fill': 'white',
+          'fill': rodata.circleFill,
           'stroke-width': (d) => { return　d.circleStrokeWidth }
         })
 
