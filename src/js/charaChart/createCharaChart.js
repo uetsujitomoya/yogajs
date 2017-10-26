@@ -26,6 +26,7 @@ const createCharaChart = () => {
   console.log(nodeArr)
 
   fixNodePoint(charaArr)
+  fixNodePoint(nodeArr)
 
   let reconstructedKNP = createBunArr(knpArr, charaArr, nodeArr)
   console.log('get out createBunArr')
