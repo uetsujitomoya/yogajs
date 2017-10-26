@@ -33,6 +33,7 @@ let vizNodes = (svg,nodeArr,allBunArr) => {
       'stroke-width': (d) => { return　d.circleStrokeWidth }
     })
     .on('click', (d, i)=>{
+      alert("You clicked circle!")
       viewText(d, allBunArr)
     })
 
