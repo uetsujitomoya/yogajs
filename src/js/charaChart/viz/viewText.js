@@ -2,36 +2,33 @@ import {rodata} from '../rodata'
 
 const viewText=(node,allBunArr)=>{
   //丸や矢印をマウスオーバーした際に、該当文章を表示。d3のmouseoverかclickから呼び出す
-  for(const bun of node.bunArr){
-    createTextViewArea(bun,allBunArr)
-  }
+  node.bunArr.forEach((bun,i)=>{
+    createTextViewArea(bun,allBunArr,i)
+  })
 }
 
-const createTextViewArea = (bun,allBunArr)=>{
-  console.log(bun)
+const createTextViewArea = (bun,allBunArr,i)=>{
   //1つ1つのTextViewAreaをつくる
-  let msg = createBox()
+  createBox(i)
   if(bun.bunNo!==0){
-    addBun(msg, allBunArr[bun.bunNo - 1], false)
+    addBun('msg'+i, allBunArr[bun.bunNo - 1], false)
   }
-  addBun(msg,allBunArr[bun.bunNo],true)
+  addBun('msg'+i,allBunArr[bun.bunNo],true)
   if(bun.bunNo+1!==allBunArr.length){
-    addBun(msg,allBunArr[bun.bunNo + 1], false)
+    addBun('msg'+i , allBunArr[bun.bunNo + 1], false)
   }
 }
 
-const createBox=()=>{
+const createBox=(i)=>{
   //箱を作る
 
-  let msg = document.getElementById('msg')
-  let k, l
-  msg.innerHTML += '--'
-
-  return msg
+  let msg = document.getElementById('box')
+  msg.innerHTML += '<div id="msg' + i +'" style="border-style: solid; border-width: 1px; border-color:#2c3e50; height:300px; width:600px; overflow-y:scroll floet:left;">'
 }
 
-const addBun=(msg,bun,bold)=>{
+const addBun=(id,bun,bold)=>{
   //箱に1文を追加。boldはboolean
+  let msg = document.getElementById(id)
   const talker=""
   const color="#000000"
   console.log(bun)

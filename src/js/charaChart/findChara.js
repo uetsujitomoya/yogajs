@@ -22,9 +22,7 @@ const clientAroundPeopleColor='gray'
 //Aさんを追加→1単語とする
 
 const findChara = (knpArr, nodeArr) => {
-  knpArr.forEach((row,rowIdx)=>{
-
-    //console.log(row)
+  knpArr.forEach((row,rowNo)=>{
     if(hasJp(row[0])){
 
       let tmpJp = row[0]
@@ -46,7 +44,7 @@ const findChara = (knpArr, nodeArr) => {
       }
 
       if(row[0] === "さん"){
-        const tmpChara = knpArr[rowIdx-1][0]+row[0]
+        const tmpChara = knpArr[rowNo-1][0]+row[0]
         //console.log(tmpChara)
         if(isNewChara(tmpChara,nodeArr)&&aSanCnt===0){
           createNewChara(tmpChara,nodeArr,nodeArr)
