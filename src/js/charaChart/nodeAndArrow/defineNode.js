@@ -41,8 +41,8 @@ export default class Node {
   }
   fixPoint(nodeArrLen){
     this.radian = (this.nodeIdx/nodeArrLen)*2*Math.PI
-    this.y = orbitOPoint + orbitR * Math.sin(this.radian)
-    this.x = orbitOPoint + orbitR * Math.cos(this.radian)
+    this.x = orbitOPoint + orbitR * Math.sin(this.radian)
+    this.y = orbitOPoint - orbitR * Math.cos(this.radian)
     r = orbitR / (nodeArrLen * 200)
   }
 }

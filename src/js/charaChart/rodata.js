@@ -7,8 +7,8 @@ const rodata={
   markerFillColor : '#ff0000',
 
   nodeR : 15,
-  orbitR :350,
-  orbitOPoint:400,
+  orbitR :250,
+  orbitOPoint:300,
 
   textViewFontSize:2,
 
