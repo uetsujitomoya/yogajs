@@ -5,10 +5,10 @@
 import {csv2Arr} from '../csv2Arr.js'
 import {getCSV} from '../counselorEdu/getCSV.js'
 import {createBunArr} from './createBunArr/createBunArr.js'
-import {findChara} from './findChara.js'
+import {findChara} from './chara/findChara.js'
 import {createNodeAndArrowArr} from './nodeAndArrow/createArrowArr.js'
 import {manageSlider} from './viz/slider.js'
-import {fixNodePoint} from './fixNodePoint'
+import {fixNodePoint} from './chara/fixNodePoint'
 import {searchMaenoBunForShugo} from './createBunArr/SO/searchMaenoBunForS'
 import{rodata} from './rodata'
 

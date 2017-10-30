@@ -2,9 +2,9 @@
  * Created by uetsujitomoya on 2017/08/21.
  */
 
-import {hasJp} from "../counselorEdu/hasJapanese.js"
-import Node from './nodeAndArrow/defineNode.js'
-import {rodata} from './rodata'
+import {hasJp} from "../../counselorEdu/hasJapanese.js"
+import Node from '../nodeAndArrow/defineNode.js'
+import {rodata} from '../rodata'
 
 const r=rodata.nodeR
 const orbitR=rodata.orbitR
@@ -43,13 +43,13 @@ const findChara = (knpArr, nodeArr) => {
         }
       }
 
-      if(row[0] === "さん"){
-        const tmpChara = knpArr[rowNo-1][0]+row[0]
-        //console.log(tmpChara)
+      if(row[0] == "A" || row[0] == "B" ){
+        const tmpChara = row[0]
         if(isNewChara(tmpChara,nodeArr)&&aSanCnt===0){
           createNewChara(tmpChara,nodeArr,nodeArr)
         }
       }
+      findSan(knpArr,rowNo,row,nodeArr,aSanCnt)
     }
   })
 }
@@ -72,6 +72,16 @@ const createNewChara=(name,nodeArr)=>{
   //nodeArr.push(new Chara(name,nodeArr.length))
   //Nodeもここで追加する。
   nodeArr.push(new Node(name,nodeArr.length))
+}
+
+const findSan=(knpArr,rowNo,row,nodeArr,aSanCnt)=>{
+  if(row[0] === "さん"){
+    const tmpChara = knpArr[rowNo-1][0]+row[0]
+    //console.log(tmpChara)
+    if(isNewChara(tmpChara,nodeArr)&&aSanCnt===0){
+      createNewChara(tmpChara,nodeArr,nodeArr)
+    }
+  }
 }
 
 export {findChara}
