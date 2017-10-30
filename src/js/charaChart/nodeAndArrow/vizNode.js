@@ -33,7 +33,6 @@ const vizNodes = (svg,nodeArr,allBunArr,r) => {
       'fill': rodata.circleFill,
       'stroke-width': (d) => { return　d.circleStrokeWidth }
     }).on('click', (d, i)=>{
-      alert("You clicked circle!")
       viewText(d, allBunArr)
     })
 

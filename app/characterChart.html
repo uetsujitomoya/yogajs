@@ -3,6 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+
+        body{
+            margin-left:30px;
+            margin-top:20px;
+        }
+
+        .node {
+            stroke-width: 3px;
+        }
+        .link {
+            stroke: #999;
+            stroke-opacity: .9;
+        }
+        .hide {
+            display: none;
+        }
+        svg {
+            font: 10px sans-serif;
+        }
+        .area {
+            fill: steelblue;
+            clip-path: url(#clip);
+        }
+        .axis path,
+        .axis line {
+            fill: none;
+            stroke: #000;
+            shape-rendering: crispEdges;
+        }
+        .brush .extent {
+            stroke: #fff;
+            fill-opacity: .125;
+            shape-rendering: crispEdges;
+        }
+        .box {
+            float: left;
+        }
+
+        .boxContainer {
+            overflow: hidden;
+        }
+
+        /* clearfix */
+        .boxContainer:before,
+        .boxContainer:after {
+            content: "";
+            display: table;
+        }
+
+        .boxContainer:after {
+            clear: both;
+        }
+
+        /* For IE 6/7 (trigger hasLayout) */
+        .boxContainer {
+            zoom: 1;
+        }
+        .B {
+            display: inline;
+        }
+    </style>
 </head>
 
 <link rel="stylesheet" href="css/bootstrap.min.css" />
@@ -21,12 +83,14 @@
 <!--人間関係図ー-->
 <div id='example' style="floet:left;"></div>
 
-<!--原文表示機能-->
-<div id="box" style="floet:left;"></div></div>
-
 <!--スライダー-->
 0文目　<input id="ex2" type="text" class="span2" value="" data-slider-min="0" data-slider-max="160" data-slider-step="1" data-slider-value="[0,160]"/>
 <script language="javascript" src="bundle.js"></script>　160文目
+
+<!--原文表示機能-->
+<div id="box" style="floet:left;"></div></div>
+
+
 
 </body>
 </html>
