@@ -5,7 +5,6 @@ import {rodata} from '../../rodata'
 
 const bunsetsu1stJpRowNo=rodata.bunsetsu1stJpRowNo
 
-
 const addSVO2Bunsetsu=(charaArr, tmpName, bunsetsu,bun)=> {
   //文中で登場人物を見つける。
   let resultNode = searchNodeArr(charaArr, tmpName)
@@ -56,4 +55,3 @@ const addSubject= (charaName,node,bunsetsu,bun)=> {
 }
 
 export {addSVO2Bunsetsu}
-

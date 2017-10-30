@@ -25,6 +25,7 @@ export default class BunVerb {
       }
     )
     this.hasSubject=true
+    bun.charaNameArr.push(realNode.name)
     //console.log("hasSubject!")
   }
   rewriteObject (chara) {

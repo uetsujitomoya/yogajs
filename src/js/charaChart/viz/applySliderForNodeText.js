@@ -5,7 +5,7 @@ const applySliderForNodeText=(sliderBunArr,nodeArr)=>{
       if(bun.charaNameArr.indexOf(node.name) >= 0){
         node.bunArr.push(
           {
-            idx: bun.idx,
+            bunNo: bun.bunNo,
             surfaceForm: bun.surfaceForm
           }
         )

@@ -4,6 +4,7 @@
 
 import d3 from 'd3'
 import $ from 'jquery'
+import {applySliderForNodeText} from './applySliderForNodeText'
 
 import {createNodeAndArrowArr} from '../nodeAndArrow/createArrowArr.js'
 
@@ -29,7 +30,7 @@ let manageSlider = (bunArr, charaArr) => {
   })
 }
 
-const applySlider = (selectedAreaArray, sentenceArray,charaArray) => {
+const applySlider = (selectedAreaArray, bunArr,charaArr) => {
   // yaru
   // gyouretukosuuhaaku
   // 「文」の個数把握
@@ -45,16 +46,19 @@ const applySlider = (selectedAreaArray, sentenceArray,charaArray) => {
     start: selectedAreaArray[0],
     end: selectedAreaArray[1]
   }
-  redrawCharacterChart(sentenceArray, selectedArea,charaArray)
+  redrawCharaChart(bunArr, selectedArea, charaArr)
 }
 
-const redrawCharacterChart = (sentenceArray, selectedArea,charaArray) => {
-  let refinedSentenceArray = sentenceArray.concat()
+const redrawCharaChart = (bunArr, selectedArea, charaArr) => {
+  let selectedBunArr = bunArr.concat()
   // sentenceArrayの最初と最後数個の要素を排除して、新sentenceArrayとして入力する
   // まず末尾から
-  refinedSentenceArray.splice(selectedArea.end, sentenceArray.length - selectedArea.end)
-  refinedSentenceArray.splice(0, selectedArea.start)
-  createNodeAndArrowArr(refinedSentenceArray,charaArray)
+  selectedBunArr.splice(selectedArea.end, bunArr.length - selectedArea.end)
+  selectedBunArr.splice(0, selectedArea.start)
+
+  applySliderForNodeText(selectedBunArr, charaArr)
+
+  createNodeAndArrowArr(selectedBunArr,charaArr)
 }
 
 export {manageSlider}
