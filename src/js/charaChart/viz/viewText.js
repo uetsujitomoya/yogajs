@@ -12,6 +12,7 @@ const viewText=(node,allBunArr)=>{
 const createTextViewArea = (bun,allBunArr,i)=>{
   //1つ1つのTextViewAreaをつくる
   createBox(i)
+  console.log(bun)
   if(bun.bunNo!==0){
     if(bun.bunNo!==1){
       if(bun.bunNo!==2){
@@ -42,10 +43,10 @@ const createBox=(i)=>{
 
 const addBun=(id,bun,bold)=>{
   //箱に1文を追加。boldはboolean
+
   let msg = document.getElementById(id)
   const talker=""
   const color="#000000"
-  console.log(bun)
   const bunNo = bun.bunNo
   const bunContent=bun.surfaceForm
   if(bold){msg.innerHTML+="<b>"}

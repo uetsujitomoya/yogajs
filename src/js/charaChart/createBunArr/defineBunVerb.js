@@ -20,7 +20,7 @@ export default class BunVerb {
     this.subject = realNode
     realNode.bunArr.push(
       {
-        bunNo: bun.idx,
+        bunNo: bun.bunNo,
         surfaceForm: bun.surfaceForm
       }
     )
