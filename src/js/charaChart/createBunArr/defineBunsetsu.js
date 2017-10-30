@@ -6,34 +6,35 @@ import {addSVO2Bunsetsu
 
 
 } from './SO/addSVO2bunsetsu'
+import { unifyNotaion } from '../chara/unifyNotation'
 
 const bunsetsu1stJpRIdx=rodata.bunsetsu1stJpRowNo
 
 export default class Bunsetsu {
-  constructor (no, input2dArray, charaArray,bun) {
-    this.csv_raw_array = input2dArray
+  constructor (no, input2dArr, charaArr, bun) {
+    this.csv_raw_array = input2dArr
     this.id = no + 'D'
 
     this.kihonkuArray = []
-   // this.kihonkuArray.length = count_kihonku(input2dArray)
+   // this.kihonkuArray.length = count_kihonku(input2dArr)
 
     this.word_array = []
 
-    this.kakaru_bunsetsu_id = input2dArray[0][1]
+    this.kakaru_bunsetsu_id = input2dArr[0][1]
     this.kakarareru_bunsetsu_id_array = []
     this.surfaceForm = ''
-    input2dArray.forEach((r) => {
+    input2dArr.forEach((r) => {
       this.surfaceForm += r[0]
       this.word_array.push(new Word(r))
     })
     this.isVerb = false
 
-    this.createKihonkuArrayInBunsetsu(input2dArray)
+    this.createKihonkuArrayInBunsetsu(input2dArr)
 
 
-    const tmpCharaName = this.csv_raw_array[bunsetsu1stJpRIdx][0]
+    const tmpCharaName = unifyNotaion( this.csv_raw_array[ bunsetsu1stJpRIdx ][ 0 ] )
 
-    addSVO2Bunsetsu(charaArray,tmpCharaName,this,bun)
+    addSVO2Bunsetsu(charaArr,tmpCharaName,this,bun)
   }
 
   createKihonkuArrayInBunsetsu (bunsetsuRaw2dArray) {

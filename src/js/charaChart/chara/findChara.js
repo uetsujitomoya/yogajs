@@ -5,6 +5,7 @@
 import {hasJp} from "../../counselorEdu/hasJapanese.js"
 import Node from '../nodeAndArrow/defineNode.js'
 import {rodata} from '../rodata'
+import {unifyNotaion} from './unifyNotation'
 
 const r=rodata.nodeR
 const orbitR=rodata.orbitR
@@ -28,7 +29,7 @@ const findChara = (knpArr, nodeArr) => {
       let tmpJp = row[0]
       for(const element of row){
         if ( element.match(charaKeyword)) {
-          let tmpCharaName=row[0];
+          const tmpCharaName=unifyNotaion(row[0])
           let isNewChara = true
           //被ってなければその登場人物のインスタントをつくる
           nodeArr.forEach((node)=>{
