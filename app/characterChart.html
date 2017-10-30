@@ -64,6 +64,9 @@
         .B {
             display: inline;
         }
+        .CCAndSlider {
+            float: left;
+        }
     </style>
 </head>
 
@@ -80,15 +83,19 @@
 
 <body>
 
-<!--人間関係図ー-->
-<div id='example' style="floet:left;"></div>
+<div class="CCAndSlider">
+    <!--人間関係図ー-->
+    <div id='example' style="floet:left;"></div>
 
-<!--スライダー-->
-0文目　<input id="ex2" type="text" class="span2" value="" data-slider-min="0" data-slider-max="160" data-slider-step="1" data-slider-value="[0,160]"/>
-<script language="javascript" src="bundle.js"></script>　160文目
+    <!--スライダー-->
+    0文目　<input id="ex2" type="text" class="span2" value="" data-slider-min="0" data-slider-max="160" data-slider-step="1" data-slider-value="[0,160]"/>
+    <script language="javascript" src="bundle.js"></script>　160文目
+</div>
+
+
 
 <!--原文表示機能-->
-<div id="box" style="floet:left;"></div></div>
+<div id="box" style="height:800px; width:610px; overflow-y:scroll; border-color:#f5f5f5; border-style:solid;"></div></div>
 
 
 

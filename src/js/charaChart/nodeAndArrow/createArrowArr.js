@@ -18,10 +18,10 @@ const createNodeAndArrowArr = (bunArr, nodeArr) => {
 
   for (let bunCnt = 0; bunCnt < bunArr.length; bunCnt++) {
     let bun = bunArr[bunCnt]
-    let containsVerbArray = {
+    let hasVerbArr = {
       value: 'verb_array' in bun ? bun.verb_array : 'No'
     }
-    if (containsVerbArray.value === 'No') { continue }
+    if (hasVerbArr.value === 'No') { continue }
 
     bun.verb_array.forEach((verb) => {
 
@@ -53,7 +53,6 @@ const createNodeAndArrowArr = (bunArr, nodeArr) => {
     })
   }
 
-
   let svg = d3.select(rodata.charaChartAreaID).append('svg')
     .attr({
       width: 2 * rodata.orbitOPoint + 50,
@@ -68,10 +67,7 @@ const createNodeAndArrowArr = (bunArr, nodeArr) => {
     connectNodeAndArrow(arrow)
 
     vizArrow(svg, arrow, r)
-
   }
-
-
 }
 
 const isSameArrow = (arrow, verb) => {

@@ -13,11 +13,23 @@ const createTextViewArea = (bun,allBunArr,i)=>{
   //1つ1つのTextViewAreaをつくる
   createBox(i)
   if(bun.bunNo!==0){
+    if(bun.bunNo!==1){
+      if(bun.bunNo!==2){
+        addBun('msg'+i, allBunArr[bun.bunNo - 3], false)
+      }
+      addBun('msg'+i, allBunArr[bun.bunNo - 2], false)
+    }
     addBun('msg'+i, allBunArr[bun.bunNo - 1], false)
   }
   addBun('msg'+i,allBunArr[bun.bunNo],true)
-  if(bun.bunNo+1!==allBunArr.length){
+  if( bun.bunNo + 1 !== allBunArr.length ){
     addBun('msg'+i , allBunArr[bun.bunNo + 1], false)
+    if( bun.bunNo + 2 !== allBunArr.length ){
+      addBun('msg'+i , allBunArr[bun.bunNo + 2], false)
+      if( bun.bunNo + 3 !== allBunArr.length ){
+        addBun('msg'+i , allBunArr[bun.bunNo + 3], false)
+      }
+    }
   }
 }
 
@@ -25,7 +37,8 @@ const createBox=(i)=>{
   //箱を作る
 
   let msg = document.getElementById('box')
-  msg.innerHTML += '<div id="msg' + i +'" style="border-style: solid; border-width: 1px; border-color:#2c3e50; height:300px; width:600px; overflow-y:scroll floet:left;">'
+  msg.innerHTML += '<div id="msg' + i +'" style="border-style: solid; border-width: 1px; border-color:' + rodata.boxBorderColor + '; height:300px; width:600px; overflow-y:scroll; margin-bottom: 5px; padding-bottom: 5px; padding-top: 5px;">'
+
 }
 
 const addBun=(id,bun,bold)=>{
@@ -34,9 +47,11 @@ const addBun=(id,bun,bold)=>{
   const talker=""
   const color="#000000"
   console.log(bun)
-  const bunNo=bun.bunNo
+  const bunNo = bun.bunNo
   const bunContent=bun.surfaceForm
-  msg.innerHTML += '<font size=' + rodata.textViewFontSize + '>' + bunNo + '' + talker + ' <font color=' + color + '><b>【</b></font>' + bunContent + '<b>】</b></font><br><br>'
+  if(bold){msg.innerHTML+="<b>"}
+  msg.innerHTML += '<font size=' + rodata.textViewFontSize + '>' + bunNo + '' + talker + ' <font color=' + color + '>【</font>' + bunContent + '】</font><br><br>'
+  if(bold){msg.innerHTML+="</b>"}
 }
 
 export {viewText}

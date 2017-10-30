@@ -27,9 +27,6 @@ const createCharaChart = () => {
 
   const bunArr = createBunArr(knpArr, nodeArr)
 
-  //let bunArrJson = JSON.stringify(bunArr)
-  //saveBunArrJson(bunArrJson)
-
   createNodeAndArrowArr(bunArr, nodeArr)
   manageSlider(bunArr,nodeArr)
 }
