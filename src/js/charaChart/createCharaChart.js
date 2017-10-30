@@ -10,7 +10,12 @@ import {createNodeAndArrowArr} from './nodeAndArrow/createArrowArr.js'
 import {manageSlider} from './viz/slider.js'
 import {fixNodePoint} from './chara/fixNodePoint'
 import {searchMaenoBunForShugo} from './createBunArr/SO/searchMaenoBunForS'
-import{rodata} from './rodata'
+import {saveBunArrJson} from './saveBunArrJson'
+
+import { downloadJson } from './downloadJson'
+
+import {rodata} from './rodata'
+import {downloadTask} from './downloadTask'
 
 let nodeArr = []
 
@@ -26,6 +31,11 @@ const createCharaChart = () => {
   fixNodePoint(nodeArr)
 
   const bunArr = createBunArr(knpArr, nodeArr)
+
+  //const bunArrJson=JSON.stringify(bunArr)
+  //saveBunArrJson(bunArrJson)
+  //downloadJson(bunArr)
+  downloadTask(bunArr)
 
   createNodeAndArrowArr(bunArr, nodeArr)
   manageSlider(bunArr,nodeArr)

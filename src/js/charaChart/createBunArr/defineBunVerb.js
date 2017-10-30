@@ -18,7 +18,12 @@ export default class BunVerb {
   }
   rewriteSubjectAndAddBun2Node (realNode, bun) {
     this.subject = realNode
-    realNode.bunArr.push(bun)
+    realNode.bunArr.push(
+      {
+        bunNo: bun.idx,
+        surfaceForm: bun.surfaceForm
+      }
+    )
     this.hasSubject=true
     //console.log("hasSubject!")
   }

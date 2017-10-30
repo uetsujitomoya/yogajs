@@ -3,10 +3,12 @@ const applySliderForNodeText=(sliderBunArr,nodeArr)=>{
     node.bunArr=[]
     for(const bun of sliderBunArr){
       if(bun.charaNameArr.indexOf(node.name) >= 0){
-        node.bunArr+={
-          idx: bun.idx,
-          surfaceForm: bun.surfaceForm
-        }
+        node.bunArr.push(
+          {
+            idx: bun.idx,
+            surfaceForm: bun.surfaceForm
+          }
+        )
       }
     }
   }

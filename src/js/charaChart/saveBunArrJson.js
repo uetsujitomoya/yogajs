@@ -1,4 +1,4 @@
-saveBunArrJson = (json) => {
+const saveBunArrJson = (json) => {
   //手始めはファイルを作って、開いて、そこに文字を書き込むという一連の作業をしてみます。これが出来れば色々な中間データの生成に役立ちます。
   //JavaScript内でWSHを使ってファイルを扱うには「Scripting.FileSystemObject」というオブジェクトを作ります：
 
@@ -16,3 +16,5 @@ saveBunArrJson = (json) => {
   file.Close();
   //基本はこれだけ。異常に簡単です。
 }
+
+export {saveBunArrJson}
