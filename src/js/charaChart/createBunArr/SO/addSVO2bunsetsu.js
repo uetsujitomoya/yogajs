@@ -7,12 +7,12 @@ const bunsetsu1stJpRowNo=rodata.bunsetsu1stJpRowNo
 
 const addSVO2Bunsetsu=(charaArr, tmpName, bunsetsu,bun)=> {
   //文中で登場人物を見つける。
-  let resultNode = searchNodeArr(charaArr, tmpName)
+  let resultNode = searchNodeArr(charaArr, tmpName,bun)
   if (resultNode.isCharacter) {
     addSO2Bunsetsu(tmpName,resultNode,bunsetsu,bun)
   } else if (bunsetsu.csv_raw_array.length > bunsetsu1stJpRowNo + 1) {/*AさんBさんにも対応*/
     const tmpCharaNameWithHonorific = bunsetsu.csv_raw_array[bunsetsu1stJpRowNo][0] + bunsetsu.csv_raw_array[bunsetsu1stJpRowNo + 1][0]
-    resultNode = searchNodeArr(charaArr, tmpCharaNameWithHonorific)
+    resultNode = searchNodeArr(charaArr, tmpCharaNameWithHonorific,bun)
 
     if (resultNode.isCharacter) {
       addSO2Bunsetsu(tmpCharaNameWithHonorific,resultNode,bunsetsu,bun)

@@ -1,9 +1,11 @@
 
-const searchNodeArr=(nodeArr, tmpName)=>{
+const searchNodeArr=(nodeArr, tmpName,bun)=>{
 
   for(const node of nodeArr){
     if(tmpName===node.name){
       //console.log(node)
+      bun.charaNameArr.push(node.name)
+      
       return{
         name:node.name,
         isCharacter:true,
