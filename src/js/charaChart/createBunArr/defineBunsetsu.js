@@ -22,10 +22,10 @@ export default class Bunsetsu {
 
     this.kakaru_bunsetsu_id = input2dArr[0][1]
     this.kakarareru_bunsetsu_id_array = []
-    this.surfaceForm = ''
+    //this.surfaceForm = ''
     input2dArr.forEach((r) => {
-      this.surfaceForm += r[0]
-      this.word_array.push(new Word(r))
+      //this.surfaceForm += r[0]
+      this.word_array.push(new Word(r))//forHinshi
     })
     this.isVerb = false
 

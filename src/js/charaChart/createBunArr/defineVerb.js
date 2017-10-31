@@ -24,14 +24,14 @@ class Verb {
   }
 }
 
-const findVerbFromCSV = (rowNo, knpArray,verbArray) => {
-  if (hasJp(knpArray[rowNo])) {
-    let tmpJapanese = knpArray[rowNo][0]
-        // console.log(knpArray[rowNo][3])
-    if (hasVerb(knpArray[rowNo][3])) {
-      let tmpCharaName = knpArray[rowNo][0]
+const findVerbFromCSV = (rowNo, knp,verbArr) => {
+  if (hasJp(knp[rowNo])) {
+    let tmpJapanese = knp[rowNo][0]
+        // console.log(knp[rowNo][3])
+    if (hasVerb(knp[rowNo][3])) {
+      let tmpCharaName = knp[rowNo][0]
             // 上の行も引数にしないといけない
-      verbArray.push(new Verb(rowNo, knpArray[rowNo], knpArray[rowNo - 1]))
+      verbArr.push(new Verb(rowNo, knp[rowNo], knp[rowNo - 1]))
     }
   }
 }

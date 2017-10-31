@@ -12,11 +12,11 @@ export default class KihonkuInSentence {
 
     this.kakaru_kihonku_id = input2dArray[0][1]
     this.kakarareru_kihonku_id_array = []
-/*    this.surfaceForm = ''
+    this.surfaceForm = ''
     input2dArray.forEach((row) => {
       if(row[0]!=="*"&&row[0]!=="+"){
         this.surfaceForm += row[0]
       }
-    })*/
+    })
   }
 }

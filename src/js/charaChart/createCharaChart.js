@@ -32,9 +32,6 @@ const createCharaChart = () => {
 
   const bunArr = createBunArr(knpArr, nodeArr)
 
-  //const bunArrJson=JSON.stringify(bunArr)
-  //saveBunArrJson(bunArrJson)
-  //downloadJson(bunArr)
   downloadTask(bunArr)
 
   createNodeAndArrowArr(bunArr, nodeArr)
