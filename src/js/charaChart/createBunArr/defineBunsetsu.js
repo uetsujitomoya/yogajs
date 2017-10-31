@@ -1,7 +1,7 @@
 import {rodata} from '../rodata'
 import Word from './defineWord'
 import {isCharacter,searchNodeArrayForCharacterAndPoint} from './isChara'
-import {hasVerb} from './defineVerb'
+import {hasVerb} from './hasVerb'
 import {addSVO2Bunsetsu
 
 
@@ -42,8 +42,8 @@ export default class Bunsetsu {
     let kihonkuIdxInBunsetsu = 0
     let tmp2dArrForKihonku = []
     if (bunsetsuRaw2dArray.length >= 1) {
-      let japaneseStartingNum = 2
-      for (let rowCnt = japaneseStartingNum; rowCnt < bunsetsuRaw2dArray.length; rowCnt++) {
+      const jp1stNo = 2
+      for (let rowCnt = jp1stNo; rowCnt < bunsetsuRaw2dArray.length; rowCnt++) {
         let tmpRow = bunsetsuRaw2dArray[rowCnt]
         if (tmpRow[0] === rodata.kihonkuSymbol) { // 文節内 2こ目以降の基本句
           this.kihonkuArray[kihonkuIdxInBunsetsu] = new KihonkuInBunsetsu(tmp2dArrForKihonku)// 文の中の通し番号での基本句array

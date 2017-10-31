@@ -2,7 +2,7 @@
  * Created by uetsujitomoya on 2017/08/21.
  */
 
-export const initialValueOfSubjectAndObjectInVerb =null
+/*export const initialValueOfSubjectAndObjectInVerb =null
 
 const findVerbs = (knparray) => {
     // if 動詞 exist -> find_dependency
@@ -34,7 +34,7 @@ const findVerbFromCSV = (rowNo, knp,verbArr) => {
       verbArr.push(new Verb(rowNo, knp[rowNo], knp[rowNo - 1]))
     }
   }
-}
+}*/
 
 const hasVerb = (hinshi) => {
     // console.log(wordRow)
@@ -44,4 +44,4 @@ const hasVerb = (hinshi) => {
   return false
 }
 
-export {findVerbFromCSV, findVerbs, hasVerb}
+export {hasVerb}
