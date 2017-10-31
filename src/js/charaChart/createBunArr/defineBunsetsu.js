@@ -29,12 +29,13 @@ export default class Bunsetsu {
     })
     this.isVerb = false
 
-    this.createKihonkuArrayInBunsetsu(input2dArr)
+    //this.createKihonkuArrayInBunsetsu(input2dArr)
 
 
     const tmpCharaName = unifyNotaion( this.csv_raw_array[ bunsetsu1stJpRIdx ][ 0 ] )
 
     addSVO2Bunsetsu(charaArr,tmpCharaName,this,bun)
+    delete　this.csv_raw_array
   }
 
   createKihonkuArrayInBunsetsu (bunsetsuRaw2dArray) {
@@ -56,7 +57,7 @@ export default class Bunsetsu {
   }
 
   findVerbInBunsetsu () {
-    if (hasVerb(this.word_array[bunsetsu1stJpRIdx].raw_array)) {
+    if (hasVerb(this.word_array[bunsetsu1stJpRIdx].hinshi)) {
       this.isVerb = true
       this.verb = this.word_array[bunsetsu1stJpRIdx].basic_form
     }

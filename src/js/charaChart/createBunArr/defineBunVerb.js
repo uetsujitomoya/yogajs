@@ -10,7 +10,7 @@ export default class BunVerb {
   constructor (bunsetsuIdxInSentence, bunsetsuRawArray, bunNo,verbNo) {
     this.bunsetsuNum_inSentence = bunsetsuIdxInSentence
     this.sentenceNum = bunNo
-    this.surfaceForm = bunsetsuRawArray[2][0]
+    //this.surfaceForm = bunsetsuRawArray[2][0]
     this.subject = null
     this.object = null
     this.hasSubject=false
