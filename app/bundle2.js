@@ -39918,7 +39918,7 @@ var _jsDefineArrowClassJs2 = _interopRequireDefault(_jsDefineArrowClassJs);
 
 var _jsVizNode = require('../js/vizNode');
 
-var _find_verbJs = require('./defineVerb.js');
+var _find_verbJs = require('./hasVerb.js');
 
 var _characterChartConnectNodeAndArray = require('./charaChart/connectNodeAndArrow');
 
