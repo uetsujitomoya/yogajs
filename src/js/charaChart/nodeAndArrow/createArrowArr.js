@@ -32,6 +32,7 @@ const createNodeAndArrowArr = (bunArr, nodeArr) => {
           let isNewArrow = true
           for (let tmpArrowCnt = 0; tmpArrowCnt < arrowArr.length; tmpArrowCnt++) {
             if (isSameArrow(arrowArr[tmpArrowCnt], verb)) {
+              console.log("sameArrow")
               arrowArr[tmpArrowCnt].addStrokeWidth()
               isNewArrow = false
               break
@@ -48,7 +49,6 @@ const createNodeAndArrowArr = (bunArr, nodeArr) => {
             }
           }
         }
-
       }
     })
   }
@@ -63,11 +63,11 @@ const createNodeAndArrowArr = (bunArr, nodeArr) => {
 
   vizNodes(svg,nodeArr,bunArr,r)
 
-  for(let arrow of arrowArr){
+  arrowArr.forEach((arrow,arrowId)=>{
     connectNodeAndArrow(arrow)
 
-    vizArrow(svg, arrow, r)
-  }
+    vizArrow(svg, arrow, r,arrowId)
+  })
 }
 
 const isSameArrow = (arrow, verb) => {

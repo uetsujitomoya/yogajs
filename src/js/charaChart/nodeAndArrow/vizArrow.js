@@ -8,7 +8,7 @@ const markerFillColor = rodata.markerFillColor
 const yajirushi_refX = rodata.yajirushi_refX
 
 
-const vizArrow = (svg, arrow, r) => {
+const vizArrow = (svg, arrow, r, arrowId) => {
   //let circle_data_array = [[nodeArray[0].x, nodeArray[0].y, r], [nodeArray[1].x, nodeArray[1].y, r]]
 
   //出発点の取得失敗？
@@ -21,10 +21,9 @@ const vizArrow = (svg, arrow, r) => {
     color= rodata.aroundClientPeopleArrowColor
   }
 
-  var marker = svg.append('defs').append('marker')
-
+  let marker = svg.append('defs').append('marker')
     .attr({
-      'id': 'arrowhead',
+      'id': 'arrowhead'+arrowId,
       // 矢印の位置を一番後ろから手前に少しずらす
       //'refX': rodata.yajirushi_refX,
       'refX': 3*Math.sqrt(r),
@@ -33,6 +32,7 @@ const vizArrow = (svg, arrow, r) => {
       'markerHeight': 4,
       'orient': 'auto'
     })
+
   marker.append('path')
     .attr({
       "d": 'M 0,0 V 4 L4,2 Z',
@@ -54,7 +54,7 @@ const vizArrow = (svg, arrow, r) => {
       'stroke': color,
       'stroke-width': arrow.strokeWidth,
       'fill': 'none',
-      'marker-end': 'url(#arrowhead)'
+      'marker-end': 'url(#arrowhead'+arrowId+')'
     })
 
   // pathの長さを調べて、丸の半径２個分＋矢印を後ろに下げる分の長さを引きます。

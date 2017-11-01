@@ -37,7 +37,7 @@ const vizNodes = (svg,nodeArr,allBunArr,r) => {
   nodes.append('text')
     .attr({
       'text-anchor': 'middle',
-      'dy': '.35em',
+      'dy': '.40em',
       'fill': rodata.charaNameColor
     })
     .text(function (d) {

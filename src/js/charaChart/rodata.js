@@ -7,11 +7,11 @@ const rodata={
   markerFillColor : '#ff0000',
 
   clientNodeColor:"#ff7f7f",
-  aroundClientPeopleNodeColor:"#000000",
-  charaNameColor:"#808080",
+  aroundClientPeopleNodeColor:"#393939",
+  charaNameColor:"#007fff",
 
   clientArrowColor:"#ff4242",
-  aroundClientPeopleArrowColor:"#393939",
+  aroundClientPeopleArrowColor:"#a9a9a9",
 
   nodeR : 15,
   orbitR :250,
