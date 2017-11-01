@@ -5,7 +5,6 @@
 export const initialValueOfSubjectAndObjectInVerb =null
 
 const hasVerb = (hinshi) => {
-  console.log(hinshi)
   if (hinshi === '動詞') {
     return true
   }

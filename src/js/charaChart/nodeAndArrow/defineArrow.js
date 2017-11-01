@@ -23,13 +23,12 @@ export default class Arrow {
     }
 
     this.strokeColor = 'gray'
-    this.strokeWidth = 5
+    this.strokeWidth = 3
     this.startPointX = 0
     this.startPointY = 0
     this.endPointX = 0
     this.endPointY = 0
     connectNodeAndArrow(this)//2回やってる？？
-    console.log(this)
   }
   addStrokeWidth () {
     this.strokeWidth = this.strokeWidth + 5

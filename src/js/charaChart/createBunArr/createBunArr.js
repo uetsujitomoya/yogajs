@@ -3,7 +3,7 @@
  */
 
 
-import {isCharacter} from './isChara'
+import {isCharacter} from '../chara/isChara'
 // import BunVerb from "../js/create_verbInSentence_class.js"
 import {createsvg} from '../nodeAndArrow/arrowNode.js'
 import Bun from './defineBun'

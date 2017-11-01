@@ -22,8 +22,8 @@ const clientAroundPeopleColor='gray'
 
 //Aさんを追加→1単語とする
 
-const findChara = (knpArr, nodeArr) => {
-  knpArr.forEach((row,rowNo)=>{
+const findChara = (knp, nodeArr) => {
+  knp.forEach((row,rowNo)=>{
     if(hasJp(row[0])){
 
       let tmpJp = row[0]
@@ -35,12 +35,16 @@ const findChara = (knpArr, nodeArr) => {
           nodeArr.forEach((node)=>{
             if(tmpCharaName===node.name){
               //verbを追加
+
               isNewChara = false;
               //太さ加算
               //node.character_node.bold_qty++
             }
           })
-          if(isNewChara === true){ createNewChara(tmpCharaName,nodeArr) }
+          if(isNewChara === true){
+            console.log(tmpCharaName)
+            createNewChara(tmpCharaName,nodeArr)
+          }
         }
       }
 
@@ -50,26 +54,38 @@ const findChara = (knpArr, nodeArr) => {
           createNewChara(tmpChara,nodeArr,nodeArr)
         }
       }
-      findSan(knpArr,rowNo,row,nodeArr,aSanCnt)
+      findSan(knp,rowNo,row,nodeArr,aSanCnt)
     }
   })
 }
 
 const isNewChara=(tmpCharaName,nodeArr)=> {
+  let flag = true
   nodeArr.forEach((node)=>{
-    if(tmpCharaName === node.name){
-      //verbを追加
 
-      return false;
+    const nodeName=node.name
+    if(tmpCharaName == nodeName){
+      //verbを追加
+      if ( tmpCharaName.indexOf('さん') != -1) {
+        //strにhogeを含む場合の処理
+        //console.log(tmpCharaName)
+        //console.log(node.name)
+      }
+      flag=false
+
+      return false
       //太さ加算
     }
   })
-  return true
+  if(flag===true){
+    return true
+  }
+
 }
 
 const createNewChara=(name,nodeArr)=>{
   //Nodeを出現させるとしたらどこまでつくるかも書く
-  if(name==='Aさん'){aSanCnt=1}
+  if(name=='Aさん'){aSanCnt=1}
   //nodeArr.push(new Chara(name,nodeArr.length))
   //Nodeもここで追加する。
   nodeArr.push(new Node(name,nodeArr.length))
@@ -79,8 +95,9 @@ const findSan=(knpArr,rowNo,row,nodeArr,aSanCnt)=>{
   if(row[0] === "さん"){
     const tmpChara = knpArr[rowNo-1][0]+row[0]
     //console.log(tmpChara)
-    if(isNewChara(tmpChara,nodeArr)&&aSanCnt===0){
-      createNewChara(tmpChara,nodeArr,nodeArr)
+    if(isNewChara(tmpChara,nodeArr)){
+      //console.log(tmpChara)
+      createNewChara(tmpChara,nodeArr)
     }
   }
 }

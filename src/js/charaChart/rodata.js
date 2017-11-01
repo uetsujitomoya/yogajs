@@ -12,12 +12,12 @@ const rodata={
 
   textViewFontSize:2,
 
-  csvPath: '../csv/171024dummy.csv',
+  csvPath: '../csv/1707051018knptab.csv',
   charaChartAreaID : '#example',
-  circleFill: "#f8f8f8",
   circleRadiusCoefficient: 1.5,
 
-  boxBorderColor: "#d3d3d3"
+  boxBorderColor: "#d3d3d3",
+  circleFill: "#d3d3d3"
 }
 
 export {rodata}

@@ -15,7 +15,6 @@ export default class BunVerb {
     this.object = null
     this.hasSubject=false
     this.hasObject=false
-    console.log(bunsetsuRawArr[2][0])
   }
   rewriteSubjectAndAddBun2Node (realNode, bun) {
     this.subject = realNode
