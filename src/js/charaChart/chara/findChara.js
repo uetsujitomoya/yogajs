@@ -56,15 +56,16 @@ const findChara = (knpArr, nodeArr) => {
 }
 
 const isNewChara=(tmpCharaName,nodeArr)=> {
+  let flag=true
   nodeArr.forEach((node)=>{
     if(tmpCharaName === node.name){
       //verbを追加
 
-      return false;
+      flag=false;
       //太さ加算
     }
   })
-  return true
+  return flag
 }
 
 const createNewChara=(name,nodeArr)=>{
