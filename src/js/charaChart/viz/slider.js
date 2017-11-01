@@ -16,6 +16,7 @@ let manageSlider = (bunArr, charaArr) => {
   el.dataset.sliderMax = bunArr.length + ''
   el.dataset.sliderValue = '[0,' + bunArr.length + ']'
 
+  el.innerHTML+=""+bunArr.length+"文目"
 
   $('#ex2').slider({
     formatter: function (value) {

@@ -6,7 +6,7 @@ import d3 from 'd3'
 import $ from 'jquery'
 import {rodata} from '../rodata'
 import {r} from './defineNode'
-import {viewText} from '../viz/viewText'
+import {viewText} from '../viz/viewTextOfNode'
 
 //import{rodata} from '../../rodata'
 //const r = rodata.nodeR
@@ -29,7 +29,7 @@ const vizNodes = (svg,nodeArr,allBunArr,r) => {
 
   nodes.append('circle').attr({
       'r': function (d) { return r },
-      'stroke': function (d, i) { if (i === 0) { return clientColor } else { return aroundClientPeopleColor } },
+      'stroke': function (d) { if (d.subject.isClient) { return rodata.clientColor } else { return rodata.aroundClientPeopleColor } },
       'fill': rodata.circleFill,
       'stroke-width': (d) => { return　d.circleStrokeWidth }
     }).on('click', (d, i)=>{
@@ -40,7 +40,7 @@ const vizNodes = (svg,nodeArr,allBunArr,r) => {
     .attr({
       'text-anchor': 'middle',
       'dy': '.35em',
-      'fill': 'black'
+      'fill': rodata.charaNameColor
     })
     .text(function (d) {
       //if(d.nodeCharacter==="Aさん"){alert("Aさん")}

@@ -20,7 +20,11 @@ export default class Node {
   constructor (name,idx) {
     this.name=name
     this.subject = name
-    this.isSubject = false
+    if(name==="私"||name==="Aさん"||name==="自分"){
+      this.isClient=true
+    }else{
+      this.isClient=false
+    }
     this.bunArr=[]
 
     this.r = r
@@ -44,6 +48,9 @@ export default class Node {
     this.x = orbitOPoint + orbitR * Math.sin(this.radian)
     this.y = orbitOPoint - orbitR * Math.cos(this.radian)
     r = orbitR / (nodeArrLen * 200)
+  }
+  pushToBunArr(bun){
+
   }
 }
 

@@ -13,7 +13,8 @@ export default class Arrow {
       name:verb.subject,
       nodeIdx:verb.subject.nodeIdx,
       x:verb.subject.x,
-      y:verb.subject.y
+      y:verb.subject.y,
+      isClient:verb.subject.isClient
     }
     this.object={
       name:verb.object,

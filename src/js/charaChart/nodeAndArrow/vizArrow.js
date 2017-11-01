@@ -13,13 +13,23 @@ const vizArrow = (svg, arrow, r) => {
 
   //出発点の取得失敗？
 
+  let color=null
+
+  console.log(arrow.subject)
+
+  if (arrow.subject.isClient) {
+    color= "#dc143c"
+  } else {
+    color= "#696969"
+  }
+
   var marker = svg.append('defs').append('marker')
 
     .attr({
       'id': 'arrowhead',
       // 矢印の位置を一番後ろから手前に少しずらす
       //'refX': rodata.yajirushi_refX,
-      'refX': r/2,
+      'refX': r/1.5,
       'refY': 2,
       'markerWidth': 4,
       'markerHeight': 4,
@@ -28,7 +38,7 @@ const vizArrow = (svg, arrow, r) => {
   marker.append('path')
     .attr({
       d: 'M 0,0 V 4 L4,2 Z',
-      fill: markerFillColor
+      fill: color
     })
 
 
@@ -43,7 +53,7 @@ const vizArrow = (svg, arrow, r) => {
 
     .attr({
       'd': line(arrow.pointArr),
-      'stroke': 'red',
+      'stroke': color,
       'stroke-width': arrow.strokeWidth,
       'fill': 'none',
       'marker-end': 'url(#arrowhead)'
