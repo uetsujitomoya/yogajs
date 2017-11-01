@@ -11,8 +11,6 @@ import {viewText} from '../viz/viewTextOfNode'
 //import{rodata} from '../../rodata'
 //const r = rodata.nodeR
 
-
-
 const clientColor = '#ff0000'
 const aroundClientPeopleColor = '#000000'
 const markerFillColor = '#ff0000'
@@ -29,7 +27,7 @@ const vizNodes = (svg,nodeArr,allBunArr,r) => {
 
   nodes.append('circle').attr({
       'r': function (d) { return r },
-      'stroke': function (d) { if (d.subject.isClient) { return rodata.clientColor } else { return rodata.aroundClientPeopleColor } },
+      'stroke': function (d) { if (d.isClient) { return rodata.clientColor } else { return rodata.aroundClientPeopleColor } },
       'fill': rodata.circleFill,
       'stroke-width': (d) => { return　d.circleStrokeWidth }
     }).on('click', (d, i)=>{

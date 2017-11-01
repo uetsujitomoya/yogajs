@@ -6,7 +6,7 @@ const rodata={
   yajirushi_refX : 12,
   markerFillColor : '#ff0000',
 
-  clientColor:"#ff0000",
+  clientColor:"#ff4500",
   aroundClientPeopleColor:"#000000",
   charaNameColor:"#808080",
 

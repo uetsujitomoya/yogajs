@@ -15,8 +15,6 @@ const vizArrow = (svg, arrow, r) => {
 
   let color=null
 
-  console.log(arrow.subject)
-
   if (arrow.subject.isClient) {
     color= "#dc143c"
   } else {
