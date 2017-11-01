@@ -7,6 +7,12 @@ const unifyNotaion=(inputChara)=>{
   if(inputChara==="父さん"){
     outputChara="父"
   }
+  if(inputChara==="神"){
+    outputChara="神さま"
+  }
+  if(inputChara==="姉さん"){
+    outputChara="姉"
+  }
 
 
   return outputChara

@@ -60,7 +60,9 @@ const findChara = (knp, nodeArr) => {
 }
 
 const isNewChara=(tmpCharaName,nodeArr)=> {
+
   let flag = true
+
   nodeArr.forEach((node)=>{
 
     const nodeName=node.name
@@ -73,14 +75,11 @@ const isNewChara=(tmpCharaName,nodeArr)=> {
       }
       flag=false
 
-      return false
+      flag=false;
       //太さ加算
     }
   })
-  if(flag===true){
-    return true
-  }
-
+  return flag
 }
 
 const createNewChara=(name,nodeArr)=>{
