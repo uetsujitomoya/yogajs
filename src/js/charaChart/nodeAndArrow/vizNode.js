@@ -13,9 +13,9 @@ import {viewText} from '../viz/viewText'
 
 
 
-const clientColor = 'red'
-const aroundClientPeopleColor = 'gray'
-const markerFillColor = 'red'
+const clientColor = '#ff0000'
+const aroundClientPeopleColor = '#000000'
+const markerFillColor = '#ff0000'
 
 const vizNodes = (svg,nodeArr,allBunArr,r) => {
 

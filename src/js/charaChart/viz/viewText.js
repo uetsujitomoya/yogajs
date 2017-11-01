@@ -1,32 +1,32 @@
 import {rodata} from '../rodata'
 
+let preBunNo = null
+
 const viewText=(node,allBunArr)=>{
   //丸や矢印をマウスオーバーした際に、該当文章を表示。d3のmouseoverかclickから呼び出す
   let msg = document.getElementById('box')
   msg.innerHTML=''
-  node.bunArr.forEach((bun,i)=>{
-    createTextViewArea(bun,allBunArr,i)
+  console.log(node.bunArr)
+  node.bunArr.forEach((bun,nodeBunArrIdx)=>{
+    if(preBunNo!==bun.bunNo){
+      createTextViewArea(bun,allBunArr,nodeBunArrIdx)
+    }
+    preBunNo=bun.bunNo
   })
 }
 
 const createTextViewArea = (bun,allBunArr,i)=>{
   //1つ1つのTextViewAreaをつくる
-  console.log(bun)
   createBox(i)
   if(bun.bunNo!==0&&allBunArr[ bun.bunNo - 1]!==void 0){
     if(bun.bunNo!==1&&allBunArr[ bun.bunNo - 2]!==void 0){
       if(bun.bunNo!==2&&allBunArr[ bun.bunNo - 3]!==void 0){
-
-        console.log(allBunArr[ bun.bunNo - 3])
         addBun('msg'+i, allBunArr[ bun.bunNo - 3], false)
       }
-      console.log(allBunArr[ bun.bunNo - 2])
       addBun('msg'+i, allBunArr[ bun.bunNo - 2], false)
     }
-    console.log(allBunArr[ bun.bunNo - 1])
     addBun('msg'+i, allBunArr[ bun.bunNo - 1], false)
   }
-  console.log(allBunArr[bun.bunNo])
   addBun('msg'+i,allBunArr[bun.bunNo], true)
   if( bun.bunNo + 1 !== allBunArr.length &&allBunArr[ bun.bunNo +1]!==void 0){
     addBun('msg'+i , allBunArr[bun.bunNo + 1], false)
@@ -48,7 +48,6 @@ const createBox=(i)=>{
 
 const addBun=(id,bun,bold)=>{
   //箱に1文を追加。boldはboolean
-  console.log(bun)
   let msg = document.getElementById(id)
   const talker=""
   const color="#000000"

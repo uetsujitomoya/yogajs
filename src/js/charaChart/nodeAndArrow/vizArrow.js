@@ -18,7 +18,8 @@ const vizArrow = (svg, arrow, r) => {
     .attr({
       'id': 'arrowhead',
       // 矢印の位置を一番後ろから手前に少しずらす
-      'refX': rodata.yajirushi_refX,
+      //'refX': rodata.yajirushi_refX,
+      'refX': r/2,
       'refY': 2,
       'markerWidth': 4,
       'markerHeight': 4,

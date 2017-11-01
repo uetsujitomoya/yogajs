@@ -5,12 +5,13 @@ const searchNodeArr=(nodeArr, tmpName,bun)=>{
     if(tmpName===node.name){
       //console.log(node)
       bun.charaNameArr.push(node.name)
-      node.bunArr.push(
+
+/*      node.bunArr.push(
         {
           bunNo: bun.bunNo,
           surfaceForm: bun.surfaceForm
         }
-      )
+      )*/
       return{
         name:node.name,
         isCharacter:true,
