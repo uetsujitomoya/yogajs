@@ -16,9 +16,9 @@ const vizArrow = (svg, arrow, r) => {
   let color=null
 
   if (arrow.subject.isClient) {
-    color= "#dc143c"
+    color= rodata.clientArrowColor
   } else {
-    color= "#696969"
+    color= rodata.aroundClientPeopleArrowColor
   }
 
   var marker = svg.append('defs').append('marker')

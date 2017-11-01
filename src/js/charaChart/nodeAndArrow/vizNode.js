@@ -27,7 +27,7 @@ const vizNodes = (svg,nodeArr,allBunArr,r) => {
 
   nodes.append('circle').attr({
       'r': function (d) { return r },
-      'stroke': function (d) { if (d.isClient) { return rodata.clientColor } else { return rodata.aroundClientPeopleColor } },
+      'stroke': function (d) { if (d.isClient) { return rodata.clientNodeColor } else { return rodata.aroundClientPeopleNodeColor } },
       'fill': rodata.circleFill,
       'stroke-width': (d) => { return　d.circleStrokeWidth }
     }).on('click', (d, i)=>{
