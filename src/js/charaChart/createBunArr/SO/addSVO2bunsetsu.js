@@ -33,7 +33,7 @@ const addSO2Bunsetsu=(charaName,node,bunsetsu,bun)=>{
     if (bunsetsuInfoRow[colIdx].match('ガ格')) {
       addSubject(charaName,node,bunsetsu,bun)
     }
-    if ((bunsetsuInfoRow[colIdx].match('ヲ格') || bunsetsuInfoRow[colIdx].match('ニ格'))) {
+    if ((bunsetsuInfoRow[colIdx].match('ヲ格') || bunsetsuInfoRow[colIdx].match('ニ格') || bunsetsuInfoRow[colIdx].match('ト格'))) {
       addObject(charaName,node,bunsetsu,bun)
       break
     }

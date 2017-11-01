@@ -7,14 +7,15 @@ const initialValueOfSubjectAndObjectInVerb = null
 
 export default class BunVerb {
   //クラスBun中のverb_arrayにpushされる
-  constructor (bunsetsuIdxInSentence, bunsetsuRawArray, bunNo,verbNo) {
-    this.bunsetsuNum_inSentence = bunsetsuIdxInSentence
+  constructor (bunBunsetsuId, bunsetsuRawArr, bunNo,verbNo) {
+    this.bunsetsuNum_inSentence = bunBunsetsuId
     this.sentenceNum = bunNo
-    //this.surfaceForm = bunsetsuRawArray[2][0]
+    //this.surfaceForm = bunsetsuRawArr[2][0]
     this.subject = null
     this.object = null
     this.hasSubject=false
     this.hasObject=false
+    console.log(bunsetsuRawArr[2][0])
   }
   rewriteSubjectAndAddBun2Node (realNode, bun) {
     this.subject = realNode

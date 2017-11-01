@@ -57,9 +57,12 @@ export default class Bunsetsu {
   }
 
   findVerbInBunsetsu () {
-    if (hasVerb(this.word_array[bunsetsu1stJpRIdx].hinshi)) {
-      this.isVerb = true
-      this.verb = this.word_array[bunsetsu1stJpRIdx].basic_form
+    for(let i=bunsetsu1stJpRIdx;i<this.word_array.length;i++){
+      if (hasVerb(this.word_array[i].hinshi)) {
+        this.isVerb = true
+        this.verb = this.word_array[i].basic_form
+        break
+      }
     }
   }
 
