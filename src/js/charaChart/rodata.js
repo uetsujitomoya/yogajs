@@ -12,7 +12,7 @@ const rodata={
 
   textViewFontSize:2,
 
-  csvPath: '../csv/1707051018knptab.csv',
+  csvPath: '../csv/171101allForCC.csv',
   charaChartAreaID : '#example',
   circleFill: "#f8f8f8",
   circleRadiusCoefficient: 1.5,

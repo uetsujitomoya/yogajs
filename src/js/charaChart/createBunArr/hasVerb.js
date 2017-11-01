@@ -2,6 +2,8 @@
  * Created by uetsujitomoya on 2017/08/21.
  */
 
+export const initialValueOfSubjectAndObjectInVerb =null
+
 const hasVerb = (hinshi) => {
     // console.log(wordRow)
   if (hinshi === '動詞') {

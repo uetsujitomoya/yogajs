@@ -3,7 +3,7 @@
 
 import codecs
 
-f = open('../../txt/170628_1002.txt','r')
+f = open('../../txt/171101fotCC.txt','r')
 #f = codecs.open('../1030noRap.txt','r','utf-8')
 Allf = f.read()
 
@@ -14,7 +14,7 @@ textKaigyo = Allf.replace('。', '。\r\n')
 
 textDeleted1 = textKaigyo.replace('。', '。\r\n')
 
-txtForWrite = open('../../txt/170628convertedForKNP_170628_1002.txt','w')
+txtForWrite = open('../../txt/1701011convertedForKNP_171101fotCC.txt','w')
 txtForWrite.write(textKaigyo)
 
 #txtForWrite = codecs.open('../1030Rap.txt','w','shift_jis')

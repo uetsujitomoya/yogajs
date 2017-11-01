@@ -23,14 +23,16 @@ let verbArr = []
 
 const createCharaChart = () => {
 
-  let knpArr = csv2Arr(rodata.csvPath)
+  const knp = csv2Arr(rodata.csvPath)
+
+  console.log(knp)
 
   let nodeArr=[]
-  findChara(knpArr, nodeArr)
+  findChara(knp, nodeArr)
 
   fixNodePoint(nodeArr)
 
-  const bunArr = createBunArr(knpArr, nodeArr)
+  const bunArr = createBunArr(knp, nodeArr)
 
   downloadTask(bunArr)
 
