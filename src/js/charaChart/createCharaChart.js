@@ -28,8 +28,6 @@ const createCharaChart = () => {
   let nodeArr=[]
   findChara(knp, nodeArr)
 
-  console.log(nodeArr)
-
   fixNodePoint(nodeArr)
 
   const bunArr = createBunArr(knp, nodeArr)

@@ -7,17 +7,20 @@ const viewText=(node,allBunArr)=>{
   let msg = document.getElementById('box')
   msg.innerHTML=''
   console.log(node.bunArr)
-  node.bunArr.forEach((bun,nodeBunArrIdx)=>{
+  node.bunArr.forEach((bun,nodeBunArrId)=>{
     if(preBunNo!==bun.bunNo){
-      createTextViewArea(bun,allBunArr,nodeBunArrIdx)
+      createTextViewArea(bun,allBunArr,nodeBunArrId)
     }
     preBunNo=bun.bunNo
   })
 }
-
+//allBunArrのidxと中身のbunNoは一致しないゾ
 const createTextViewArea = (bun,allBunArr,i)=>{
   //1つ1つのTextViewAreaをつくる
   createBox(i)
+  for(let i=bun.bunNo-3;i<=bun.bunNo+3;i++){
+    console.log(allBunArr[i])
+  }
   if(bun.bunNo!==0&&allBunArr[ bun.bunNo - 1]!==void 0){
     if(bun.bunNo!==1&&allBunArr[ bun.bunNo - 2]!==void 0){
       if(bun.bunNo!==2&&allBunArr[ bun.bunNo - 3]!==void 0){

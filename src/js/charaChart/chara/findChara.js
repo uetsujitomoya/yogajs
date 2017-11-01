@@ -42,7 +42,6 @@ const findChara = (knp, nodeArr) => {
             }
           })
           if(isNewChara === true){
-            console.log(tmpCharaName)
             createNewChara(tmpCharaName,nodeArr)
           }
         }
