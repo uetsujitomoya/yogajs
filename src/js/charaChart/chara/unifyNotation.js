@@ -13,10 +13,9 @@ const unifyNotaion=(inputChara)=>{
   if(inputChara==="姉さん"){
     outputChara="姉"
   }
-  if(inputChara==="Ａさん"){
+  if(inputChara==="Ａさん"||inputChara==="自分"||inputChara==="私"){
     outputChara="Aさん"
   }
-
 
   return outputChara
 }
