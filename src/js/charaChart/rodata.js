@@ -7,8 +7,8 @@ const rodata={
   markerFillColor : '#ff0000',
 
   clientNodeColor:"#ff7f7f",
-  aroundClientPeopleNodeColor:"#393939",
-  charaNameColor:"#007fff",
+  aroundClientPeopleNodeColor:"#696969",
+  charaNameColor:"#0000cd",
 
   clientArrowColor:"#ff4242",
   aroundClientPeopleArrowColor:"#a9a9a9",
@@ -23,7 +23,7 @@ const rodata={
   charaChartAreaID : '#example',
   circleRadiusCoefficient: 1.5,
 
-  boxBorderColor: "#d3d3d3",
+  boxBorderColor: "#696969",
   circleFill: "#e6e6e6"
 }
 

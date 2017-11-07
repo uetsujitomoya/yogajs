@@ -6,17 +6,17 @@ import d3 from 'd3'
 import $ from 'jquery'
 import {applySliderForNodeText} from './applySliderForNodeText'
 
-import {createNodeAndArrowArr} from '../nodeAndArrow/createArrowArr.js'
+import {createArrowArr} from '../nodeAndArrow/createArrowArr.js'
 
 import {removeSVG} from '../nodeAndArrow/vizNode.js'
 
 
-let manageSlider = (bunArr, charaArr) => {
+let manageSlider = (allBunArr, charaArr) => {
   let el = document.querySelector('#ex2')
-  el.dataset.sliderMax = bunArr.length + ''
-  el.dataset.sliderValue = '[0,' + bunArr.length + ']'
+  el.dataset.sliderMax = allBunArr.length + ''
+  el.dataset.sliderValue = '[0,' + allBunArr.length + ']'
 
-  el.innerHTML+=""+bunArr.length+"文目"
+  el.innerHTML+=""+allBunArr.length+"文目"
 
   $('#ex2').slider({
     formatter: function (value) {
@@ -26,12 +26,17 @@ let manageSlider = (bunArr, charaArr) => {
 
   $('#ex2').on('slide', function (slideEvt) {
 
-    applySlider(slideEvt.value, bunArr,charaArr)
+    const selectedArea = {
+      start: slideEvt.value[0],
+      end: slideEvt.value[1]
+    }
+
+    applySlider(selectedArea, allBunArr,charaArr)
 
   })
 }
 
-const applySlider = (selectedAreaArray, bunArr,charaArr) => {
+const applySlider = (selectedArea, allBunArr,nodeArr) => {
   // yaru
   // gyouretukosuuhaaku
   // 「文」の個数把握
@@ -43,23 +48,23 @@ const applySlider = (selectedAreaArray, bunArr,charaArr) => {
 
   removeSVG()
 
-  let selectedArea = {
+/*  let selectedArea = {
     start: selectedAreaArray[0],
     end: selectedAreaArray[1]
-  }
-  redrawCharaChart(bunArr, selectedArea, charaArr)
+  }*/
+  redrawCharaChart(allBunArr, selectedArea, nodeArr)
 }
 
-const redrawCharaChart = (bunArr, selectedArea, charaArr) => {
-  let selectedBunArr = bunArr.concat()
+const redrawCharaChart = (allBunArr, selectedArea, charaArr) => {
+  let selectedBunArr = allBunArr.concat()
   // sentenceArrayの最初と最後数個の要素を排除して、新sentenceArrayとして入力する
   // まず末尾から
-  selectedBunArr.splice(selectedArea.end, bunArr.length - selectedArea.end)
+  selectedBunArr.splice(selectedArea.end, allBunArr.length - selectedArea.end)
   selectedBunArr.splice(0, selectedArea.start)
 
   applySliderForNodeText(selectedBunArr, charaArr)
 
-  createNodeAndArrowArr(selectedBunArr,charaArr)
+  createArrowArr(selectedBunArr,charaArr,allBunArr)
 }
 
 export {manageSlider}

@@ -6,7 +6,7 @@ import {csv2Arr} from '../csv2Arr.js'
 import {getCSV} from '../counselorEdu/getCSV.js'
 import {createBunArr} from './createBunArr/createBunArr.js'
 import {findChara} from './chara/findChara.js'
-import {createNodeAndArrowArr} from './nodeAndArrow/createArrowArr.js'
+import {createArrowArr} from './nodeAndArrow/createArrowArr.js'
 import {manageSlider} from './viz/slider.js'
 import {fixNodePoint} from './chara/fixNodePoint'
 import {searchMaenoBunForShugo} from './createBunArr/SO/searchMaenoBunForS'
@@ -34,7 +34,7 @@ const createCharaChart = () => {
 
   downloadTask(bunArr)
 
-  createNodeAndArrowArr(bunArr, nodeArr)
+  createArrowArr(bunArr, nodeArr,bunArr)
   manageSlider(bunArr,nodeArr)
 }
 

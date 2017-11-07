@@ -15,7 +15,7 @@ const clientColor = '#ff0000'
 const aroundClientPeopleColor = '#000000'
 const markerFillColor = '#ff0000'
 
-const vizNodes = (svg,nodeArr,allBunArr,r) => {
+const vizNodes = (svg,nodeArr,sliderBunArr,r,allBunArr) => {
 
   let nodes = svg.selectAll('g')
     .data(nodeArr).enter().append('g')
@@ -37,7 +37,7 @@ const vizNodes = (svg,nodeArr,allBunArr,r) => {
   nodes.append('text')
     .attr({
       'text-anchor': 'middle',
-      'dy': '.40em',
+      'dy': '.100em',
       'fill': rodata.charaNameColor
     })
     .text(function (d) {

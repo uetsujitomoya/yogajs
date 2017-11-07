@@ -26,16 +26,16 @@ const vizArrow = (svg, arrow, r, arrowId) => {
       'id': 'arrowhead'+arrowId,
       // 矢印の位置を一番後ろから手前に少しずらす
       //'refX': rodata.yajirushi_refX,
-      'refX': 3*Math.sqrt(r),
-      'refY': 2,
-      'markerWidth': 4,
-      'markerHeight': 4,
+      'refX': 4.5*Math.sqrt(r),
+      'refY': 4,
+      'markerWidth': 8,
+      'markerHeight': 8,
       'orient': 'auto'
     })
 
   marker.append('path')
     .attr({
-      "d": 'M 0,0 V 4 L4,2 Z',
+      "d": 'M 0,0 V 8 L8,4 Z',
       "fill": color
     })
 

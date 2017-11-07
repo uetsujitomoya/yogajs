@@ -11,13 +11,13 @@ import {rodata} from '../rodata'
 
 import {vizArrow} from './vizArrow'
 
-const createNodeAndArrowArr = (bunArr, nodeArr) => {
+const createArrowArr = (sliderBunArr, nodeArr, allBunArr) => {
   let arrowArr = []
 
   resetCircleStrokeWidth(nodeArr)
 
-  for (let bunCnt = 0; bunCnt < bunArr.length; bunCnt++) {
-    let bun = bunArr[bunCnt]
+  for (let bunCnt = 0; bunCnt < sliderBunArr.length; bunCnt++) {
+    let bun = sliderBunArr[bunCnt]
     let hasVerbArr = {
       value: 'verb_array' in bun ? bun.verb_array : 'No'
     }
@@ -61,7 +61,7 @@ const createNodeAndArrowArr = (bunArr, nodeArr) => {
 
   const r = (rodata.orbitR * rodata.circleRadiusCoefficient) / nodeArr.length
 
-  vizNodes(svg,nodeArr,bunArr,r)
+  vizNodes(svg,nodeArr,sliderBunArr,r,allBunArr)
 
   arrowArr.forEach((arrow,arrowId)=>{
     connectNodeAndArrow(arrow)
@@ -109,4 +109,4 @@ const resetCircleStrokeWidth=(nodeArray)=>{
   }
 }
 
-export {createNodeAndArrowArr}
+export {createArrowArr}
