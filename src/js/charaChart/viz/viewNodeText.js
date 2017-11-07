@@ -2,7 +2,7 @@ import {rodata} from '../rodata'
 
 let preBunNo = null
 
-const viewText=(node,allBunArr)=>{//slider適用後に"allBunArr"に"selectedBunArr"が入らないように。
+const viewNodeText=(node, allBunArr)=>{//slider適用後に"allBunArr"に"selectedBunArr"が入らないように。
   //丸や矢印をマウスオーバーした際に、該当文章を表示。d3のmouseoverかclickから呼び出す
   let msg = document.getElementById('box')
   msg.innerHTML=''
@@ -18,9 +18,9 @@ const viewText=(node,allBunArr)=>{//slider適用後に"allBunArr"に"selectedBun
 const createTextViewArea = (bun,allBunArr,i)=>{
   //1つ1つのTextViewAreaをつくる
   createBox(i)
-  for(let i=bun.bunNo-3;i<=bun.bunNo+3;i++){
+/*  for(let i=bun.bunNo-3;i<=bun.bunNo+3;i++){
     console.log(allBunArr[i])
-  }
+  }*/
   if(bun.bunNo!==0&&allBunArr[ bun.bunNo - 1]!==void 0){
     if(bun.bunNo!==1&&allBunArr[ bun.bunNo - 2]!==void 0){
       if(bun.bunNo!==2&&allBunArr[ bun.bunNo - 3]!==void 0){
@@ -61,4 +61,4 @@ const addBun=(id,bun,bold)=>{
   if(bold){msg.innerHTML+="</b>"}
 }
 
-export {viewText}
+export {viewNodeText,createTextViewArea}

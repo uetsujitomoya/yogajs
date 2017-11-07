@@ -3,12 +3,13 @@
  */
 
 import {rodata} from '../rodata'
+import {viewArrowText} from '../viz/viewArrowText'
 
 const markerFillColor = rodata.markerFillColor
 const yajirushi_refX = rodata.yajirushi_refX
 
 
-const vizArrow = (svg, arrow, r, arrowId) => {
+const vizArrow = (svg, arrow, r, arrowId,allBunArr) => {
   //let circle_data_array = [[nodeArray[0].x, nodeArray[0].y, r], [nodeArray[1].x, nodeArray[1].y, r]]
 
   //出発点の取得失敗？
@@ -38,6 +39,9 @@ const vizArrow = (svg, arrow, r, arrowId) => {
       "d": 'M 0,0 V 8 L8,4 Z',
       "fill": color
     })
+    .on('click', ()=>{
+      viewArrowText(arrow, allBunArr)
+    })
 
 
   let line = d3.svg.line()
@@ -55,6 +59,9 @@ const vizArrow = (svg, arrow, r, arrowId) => {
       'stroke-width': arrow.strokeWidth,
       'fill': 'none',
       'marker-end': 'url(#arrowhead'+arrowId+')'
+    })
+    .on('click', ()=>{
+      viewArrowText(arrow, allBunArr)
     })
 
   // pathの長さを調べて、丸の半径２個分＋矢印を後ろに下げる分の長さを引きます。

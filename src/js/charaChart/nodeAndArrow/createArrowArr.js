@@ -17,8 +17,8 @@ const createArrowArr = (sliderBunArr, nodeArr, allBunArr) => {
   resetCircleStrokeWidth(nodeArr)
 
   for (let bunCnt = 0; bunCnt < sliderBunArr.length; bunCnt++) {
-    let bun = sliderBunArr[bunCnt]
-    let hasVerbArr = {
+    const bun = sliderBunArr[bunCnt]
+    const hasVerbArr = {
       value: 'verb_array' in bun ? bun.verb_array : 'No'
     }
     if (hasVerbArr.value === 'No') { continue }
@@ -39,7 +39,7 @@ const createArrowArr = (sliderBunArr, nodeArr, allBunArr) => {
             }
           }
           if (isNewArrow) {
-            arrowArr.push(new Arrow(verb))
+            arrowArr.push(new Arrow(verb,bun))
           }
         }else{
           for (let tmpNodeCnt = 0; tmpNodeCnt < nodeArr.length; tmpNodeCnt++) {
@@ -66,7 +66,7 @@ const createArrowArr = (sliderBunArr, nodeArr, allBunArr) => {
   arrowArr.forEach((arrow,arrowId)=>{
     connectNodeAndArrow(arrow)
 
-    vizArrow(svg, arrow, r,arrowId)
+    vizArrow(svg, arrow, r,arrowId,allBunArr)
   })
 }
 

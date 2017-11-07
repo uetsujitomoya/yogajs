@@ -6,7 +6,7 @@ import {connectNodeAndArrow} from './connectNodeAndArrow'
 
 export default class Arrow {
 
-  constructor (verb, arrowNum, svg) {
+  constructor (verb, bun) {
 
     //arrowにnodeデータ入れるには、verbにnodeデータ入れる必要がある。
     this.subject = {
@@ -29,9 +29,21 @@ export default class Arrow {
     this.startPointY = 0
     this.endPointX = 0
     this.endPointY = 0
+
+    this.bunArr=[]
     connectNodeAndArrow(this)//2回やってる？？
+    this.pushBunToArr(bun)
   }
-  addStrokeWidth () {
+  addStrokeWidth (bun) {
     this.strokeWidth = this.strokeWidth + 2
+    this.pushBunToArr(bun)
+  }
+  pushBunToArr(bun){
+    this.bunArr.push(
+      {
+        surfaceForm:bun.surfaceForm,
+        bunNo:bun.bunNo
+      }
+    )
   }
 }
