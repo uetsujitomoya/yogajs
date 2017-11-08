@@ -24,7 +24,7 @@ export default class Arrow {
     this.pushBunToArr(bun)
   }
   addStrokeWidth (bun) {
-    this.strokeWidth = this.strokeWidth + 1
+    this.strokeWidth = this.strokeWidth + 0.5
     this.pushBunToArr(bun)
   }
   pushBunToArr(bun){

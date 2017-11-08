@@ -40,7 +40,7 @@ export default class Node {
     nodeCnt++
   }
   addStrokeWidth () {
-    this.circleStrokeWidth++
+    this.circleStrokeWidth = this.circleStrokeWidth + 0.5
     this.viz=true
   }
   fixPoint(nodeArrLen){

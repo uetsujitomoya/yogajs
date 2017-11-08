@@ -6,7 +6,7 @@ import {rodata} from '../rodata'
 import {viewArrowText} from '../viz/viewArrowText'
 
 const markerFillColor = rodata.markerFillColor
-const yajirushi_refX = rodata.yajirushi_refX
+const yajirushi_refX = 7/*rodata.yajirushi_refX*/
 
 const refY=2
 
@@ -30,7 +30,7 @@ const vizArrow = (svg, arrow, r, arrowId,　allBunArr) => {
       // 矢印の位置を一番後ろから手前に少しずらす
       //'refX': rodata.yajirushi_refX,
       //'refX': 4.5*Math.sqrt(r),
-      "refX":5.5,
+      "refX":yajirushi_refX,
       'refY': refY,
       'markerWidth': 8,
       'markerHeight': 8,
