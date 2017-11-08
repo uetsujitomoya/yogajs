@@ -8,8 +8,10 @@ import {viewArrowText} from '../viz/viewArrowText'
 const markerFillColor = rodata.markerFillColor
 const yajirushi_refX = rodata.yajirushi_refX
 
+const refY=2
 
-const vizArrow = (svg, arrow, r, arrowId,allBunArr) => {
+
+const vizArrow = (svg, arrow, r, arrowId,　allBunArr) => {
   //let circle_data_array = [[nodeArray[0].x, nodeArray[0].y, r], [nodeArray[1].x, nodeArray[1].y, r]]
 
   //出発点の取得失敗？
@@ -27,16 +29,18 @@ const vizArrow = (svg, arrow, r, arrowId,allBunArr) => {
       'id': 'arrowhead'+arrowId,
       // 矢印の位置を一番後ろから手前に少しずらす
       //'refX': rodata.yajirushi_refX,
-      'refX': 4.5*Math.sqrt(r),
-      'refY': 4,
+      //'refX': 4.5*Math.sqrt(r),
+      "refX":5.5,
+      'refY': refY,
       'markerWidth': 8,
       'markerHeight': 8,
       'orient': 'auto'
+      //"markerUnits":"userSpaceOnUse"
     })
 
   marker.append('path')
     .attr({
-      "d": 'M 0,0 V 8 L8,4 Z',
+      "d": 'M 0,0 V 4 L4,'+refY+' Z',
       "fill": color
     })
     .on('click', ()=>{
@@ -52,7 +56,6 @@ const vizArrow = (svg, arrow, r, arrowId,allBunArr) => {
 
 
   let path = svg.append('path')
-
     .attr({
       'd': line(arrow.pointArr),
       'stroke': color,

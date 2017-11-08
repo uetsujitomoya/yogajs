@@ -30,7 +30,8 @@ const vizNodes = (svg,nodeArr,sliderBunArr,r,allBunArr) => {
       'stroke': function (d) { if (d.isClient) { return rodata.clientNodeColor } else { return rodata.aroundClientPeopleNodeColor } },
       'fill': rodata.circleFill,
       'stroke-width': (d) => { return　d.circleStrokeWidth }
-    }).on('click', (d, i)=>{
+    })
+    .on('click', (d, i)=>{
       viewNodeText(d, allBunArr)
     })
 
@@ -43,6 +44,9 @@ const vizNodes = (svg,nodeArr,sliderBunArr,r,allBunArr) => {
     .text(function (d) {
       //if(d.nodeCharacter==="Aさん"){alert("Aさん")}
       return d.nodeCharacter
+    })
+    .on('click', (d, i)=>{
+      viewNodeText(d, allBunArr)
     })
 }
 

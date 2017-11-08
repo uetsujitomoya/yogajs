@@ -9,19 +9,8 @@ export default class Arrow {
   constructor (verb, bun) {
 
     //arrowにnodeデータ入れるには、verbにnodeデータ入れる必要がある。
-    this.subject = {
-      name:verb.subject,
-      nodeIdx:verb.subject.nodeIdx,
-      x:verb.subject.x,
-      y:verb.subject.y,
-      isClient:verb.subject.isClient
-    }
-    this.object={
-      name:verb.object,
-      nodeIdx:verb.object.nodeIdx,
-      x:verb.object.x,
-      y:verb.object.y
-    }
+    this.subject = verb.subject
+    this.object=verb.object
 
     this.strokeColor = 'gray'
     this.strokeWidth = 2
@@ -35,10 +24,11 @@ export default class Arrow {
     this.pushBunToArr(bun)
   }
   addStrokeWidth (bun) {
-    this.strokeWidth = this.strokeWidth + 2
+    this.strokeWidth = this.strokeWidth + 1
     this.pushBunToArr(bun)
   }
   pushBunToArr(bun){
+    console.log(bun)
     this.bunArr.push(
       {
         surfaceForm:bun.surfaceForm,
