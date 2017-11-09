@@ -32,7 +32,7 @@ const createArrowArr = (sliderBunArr, nodeArr, allBunArr) => {
           let isNewArrow = true
           for (let tmpArrowCnt = 0; tmpArrowCnt < arrowArr.length; tmpArrowCnt++) {
             if (isSameArrow(arrowArr[tmpArrowCnt], verb)) {
-              console.log("sameArrow")
+              //console.log("sameArrow")
               arrowArr[tmpArrowCnt].addStrokeWidth(bun)
               isNewArrow = false
               break
@@ -71,8 +71,8 @@ const createArrowArr = (sliderBunArr, nodeArr, allBunArr) => {
 }
 
 const isSameArrow = (arrow, verb) => {
-  console.log(arrow)
-  console.log(verb)
+  //console.log(arrow)
+  //console.log(verb)
   if ((arrow.subject.name === verb.subject.name) && (arrow.object.name === verb.object.name)) {
     return true
   } else {

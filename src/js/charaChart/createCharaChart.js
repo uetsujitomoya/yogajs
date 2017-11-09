@@ -25,7 +25,7 @@ const createCharaChart = () => {
 
   const knp = csv2Arr(rodata.csvPath)
 
-  console.log(knp)
+  //console.log(knp)
 
   let nodeArr=[]
   findChara(knp, nodeArr)

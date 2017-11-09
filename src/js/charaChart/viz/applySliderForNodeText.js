@@ -6,7 +6,7 @@ const applySliderForNodeText=(sliderBunArr,nodeArr)=>{
       //console.log(node.name)
       if(bun.charaNameArr.indexOf(node.name) >= 0){
         //console.log("push")
-        console.log(bun)
+        //console.log(bun)
         node.bunArr.push(
           {
 

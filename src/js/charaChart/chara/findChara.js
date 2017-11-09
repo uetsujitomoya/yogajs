@@ -47,7 +47,7 @@ const findChara = (knp, nodeArr) => {
         }
       }
 
-      if(row[0] == "A" || row[0] == "B" ){
+      if(row[0] === "A" || row[0] === "B" ){
         const tmpChara = row[0]
         if(isNewChara(tmpChara,nodeArr)&&aSanCnt===0){
           createNewChara(tmpChara,nodeArr,nodeArr)
@@ -91,7 +91,8 @@ const createNewChara=(name,nodeArr)=>{
 
 const findSan=(knpArr,rowNo,row,nodeArr,aSanCnt)=>{
   if(row[0] === "さん"){
-    const tmpChara = knpArr[rowNo-1][0]+row[0]
+    const tmpChara = unifyNotaion(knpArr[rowNo-1][0]+row[0])
+
     //console.log(tmpChara)
     if(isNewChara(tmpChara,nodeArr)){
       //console.log(tmpChara)

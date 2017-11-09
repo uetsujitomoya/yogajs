@@ -16,8 +16,45 @@ const unifyNotaion=(inputChara)=>{
   if(inputChara==="Ａさん"||inputChara==="自分"||inputChara==="私"){
     outputChara="Aさん"
   }
+  if(inputChara==="店長さん"){
+    outputChara="店長"
+  }
 
   return outputChara
 }
 
-export{unifyNotaion}
+const passNotation=(inputChara)=>{
+
+  const noNeedArr=[
+    "男性",
+    "人",
+    "客さん",
+    "相手",
+    "本人",
+    "自身",
+    "誰",
+    "あなた",
+    "人間",
+    "相手さん",
+    "ふ",
+    "お前",
+    "あんた",
+    "者",
+    "僕",
+    "長",
+    "プロ",
+    "個人",
+    "人物",
+    "ミス",
+    "小学生"
+  ]
+
+  if( noNeedArr.lastIndexOf(inputChara) >= 0 ){
+    return false
+  }else{
+    return true
+  }
+
+}
+
+export{unifyNotaion,passNotation}

@@ -28,7 +28,7 @@ export default class Arrow {
     this.pushBunToArr(bun)
   }
   pushBunToArr(bun){
-    console.log(bun)
+    //console.log(bun)
     this.bunArr.push(
       {
         surfaceForm:bun.surfaceForm,
