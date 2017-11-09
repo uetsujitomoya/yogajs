@@ -69,7 +69,7 @@ const vizArrow = (svg, arrow, r, arrowId,　allBunArr) => {
 
   // pathの長さを調べて、丸の半径２個分＋矢印を後ろに下げる分の長さを引きます。
   const totalLen = path.node().getTotalLength()
-  const t = totalLen - (r + r + yajirushi_refX)
+  const t = totalLen - (r + r /*+ yajirushi_refX*/ + arrow.strokeWidth)
   path.attr({
     // 破線の指定を行います。
     'stroke-dasharray': '0 ' + r + ' ' + t + ' ' + r,
