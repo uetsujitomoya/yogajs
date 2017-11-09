@@ -6,6 +6,7 @@ import {hasJp} from "../../counselorEdu/hasJapanese.js"
 import Node from '../nodeAndArrow/defineNode.js'
 import {rodata} from '../rodata'
 import {unifyNotaion} from './unifyNotation'
+import {passNotation} from './unifyNotation'
 
 const r=rodata.nodeR
 const orbitR=rodata.orbitR
@@ -86,7 +87,9 @@ const createNewChara=(name,nodeArr)=>{
   if(name=='Aさん'){aSanCnt=1}
   //nodeArr.push(new Chara(name,nodeArr.length))
   //Nodeもここで追加する。
-  nodeArr.push(new Node(name,nodeArr.length))
+  if(passNotation(name)){
+    nodeArr.push(new Node(name,nodeArr.length))
+  }
 }
 
 const findSan=(knpArr,rowNo,row,nodeArr,aSanCnt)=>{
