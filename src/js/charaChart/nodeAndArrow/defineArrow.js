@@ -3,12 +3,14 @@
  */
 
 import {connectNodeAndArrow} from './connectNodeAndArrow'
+import {rodata} from '../rodata'
 
 export default class Arrow {
 
-  constructor (verb, bun) {
+  constructor (verb, bun,arrowNo) {
 
     //arrowにnodeデータ入れるには、verbにnodeデータ入れる必要がある。
+    this.arrowNo=arrowNo
     this.subject = verb.subject
     this.object=verb.object
 
@@ -35,5 +37,15 @@ export default class Arrow {
         bunNo:bun.bunNo
       }
     )
+  }
+  colorBlue(){
+    this.strokeColor="#0000ff"
+    localStorage.setItem("矢印"+this.arrowNo,"文句批難愚痴")
+
+  }
+  colorRed(){
+    this.strokeColor="#ff0000"
+    localStorage.setItem(rodata.csvPath+"矢印"+this.arrowNo,"感謝貢献")
+
   }
 }

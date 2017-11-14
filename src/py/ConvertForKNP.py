@@ -3,18 +3,18 @@
 
 import codecs
 
-f = open('../../txt/171101fotCC.txt','r')
+f = open('../../txt/xPlus1_0318.txt','r')
 #f = codecs.open('../1030noRap.txt','r','utf-8')
 Allf = f.read()
 
-
+        
 textKaigyo = Allf.replace('。', '。\r\n')
 #text = Allf.replace(u'。',u'。\r\n')
 #print text,
 
 textDeleted1 = textKaigyo.replace('。', '。\r\n')
 
-txtForWrite = open('../../txt/1701011convertedForKNP_171101fotCC.txt','w')
+txtForWrite = open('../../txt/xPlus1_0318c.txt','w')
 txtForWrite.write(textKaigyo)
 
 #txtForWrite = codecs.open('../1030Rap.txt','w','shift_jis')

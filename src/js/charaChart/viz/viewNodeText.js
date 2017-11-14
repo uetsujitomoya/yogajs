@@ -61,4 +61,8 @@ const addBun=(id,bun,bold)=>{
   if(bold){msg.innerHTML+="</b>"}
 }
 
+const addButton=()=>{
+
+}
+
 export {viewNodeText,createTextViewArea}
