@@ -10,7 +10,7 @@ const kaishakuName = '解釈と助言'
 const selfTxtColor = "black"
 const spiritualTxtColor = "black"
 
-import {convertCSV2Storage} from './convertCSV2Storage.js'
+import {convertCSV2Storage} from './sub/convertCsv2Storage.js'
 
 const createGraphSelectButton = () => {
   let GraphSelectButtonPlaceID = 'GraphSelectButton'

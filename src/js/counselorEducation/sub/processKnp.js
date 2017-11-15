@@ -3,8 +3,8 @@
 // （０から数えて）３列目に人称
 import $ from 'jquery'
 // import {downloadAsCSV} from "./index.js";
-import {select} from './select.js'
-import {setForViz} from './svg.js'
+import {select} from '../select.js'
+import {setForViz} from '../svg.js'
 
 let ClassifyWithKNP = (startTime, jsonFileName, event, keitaisokaiseki, chboxlist, chboxlist2, questionClassification, hatsugen, bun, checked, checked2, taiou, taiou2, newLoveDictionary, newWorkDictionary, newFriendDictionary, RGB) => {
   let isUsingKNP = 1

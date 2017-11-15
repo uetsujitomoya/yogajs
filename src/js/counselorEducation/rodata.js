@@ -1,4 +1,6 @@
 const rodata={
+  storageCsv:'csv/storage170421fromKamata.csv',
+
   color:{
     love:{
       t:'#ffaaff',

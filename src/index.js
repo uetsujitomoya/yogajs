@@ -1,7 +1,7 @@
 import {classifyWithFirstWordDictionary} from './js/counselorEducation/wordparse1608030008.js'
 // import {AcceptKnp} from "./processKnp.js";
-import {ClassifyWithKNP} from './js/counselorEducation/processKnp.js' // processKNP
-import {ClassifyWithWordDictionary} from './js/counselorEducation/changeDictionary.js' // AcceptDictionary
+import {ClassifyWithKNP} from './js/counselorEducation/sub/processKnp.js' // processKNP
+import {ClassifyWithWordDictionary} from './js/counselorEducation/sub/changeDictionary.js' // AcceptDictionary
 import $ from 'jquery'
 
 // import {wordparse2object} from "./js/wordparse2object.js"
