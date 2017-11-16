@@ -128,8 +128,6 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
   //var colorBun = ['#c0c0c0', loveColor, friendColor, workColor]
   const answerTextureChoiceArr = [noCategoryAnswerColor, loveColor, friendColor, workColor, rodata.color.self.t, rodata.color.spiritual.t]
 
-  console.log(answerTextureChoiceArr)
-
   const axisDescriptionY = 240
 
   if (graphTypeNum !== 1) {
@@ -183,9 +181,6 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
       mazekozeHatsugenIdxArr[h] = m + 1
     }
 
-    //console.info('ranshin')
-    //console.info(ranshin)
-
     c = 0
     for (let m = 1; m < ranshin.length; m = m + 2) {
       for (let i = 0; i < ranshin[m].length; i++) {
@@ -225,12 +220,7 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
       // mazekozeRanshin[c]="";
       // c++;
     }
-
-    //console.info('mazekozeRanshin')
-    //console.info(mazekozeRanshinArr)
-
     // let width = width;
-
     var dataArr = [
       len2,
       len2
@@ -240,8 +230,6 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
       .domain([0, d3.sum(len2) / 10])
       .range([axisShiftX, width - axisShiftX])
     // .nice();
-
-    /// /////////////////////////////////////////////////////////////
 
     let rectDataObjectArr = []
     let rectTxtNo
@@ -260,8 +248,6 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
       } else　if(barChartAllHatsugenColorArr[rectTxtNo] === sekenColor) {
         rextTxt[rectTxtNo] = categoryOfTextOnRect.smallTalk
       }else{
-        //console.log('checked = %d',checkedNo)
-        //console.log('checked[%d]=%d', checkedNo,checked[checkedNo])
 
         if (checked[checkedNo] === 0) {
           rextTxt[rectTxtNo] = categoryOfTextOnRect.noGroup; checkedNo++
@@ -276,24 +262,14 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
         } else if (checked[checkedNo] === 5) {
           rextTxt[rectTxtNo] = categoryOfTextOnRect.spiritual; checkedNo++
         } else {
-          alert('undefined')
         }
       }
     }
-
-    console.log('rextTxt')
-    console.log(rextTxt)
 
     for (rectTxtNo = 0; rectTxtNo < len2.length; rectTxtNo++) {
       rectDataObjectArr[rectTxtNo] = {x: len2[rectTxtNo], y: 40, color: barChartAllHatsugenColorArr[rectTxtNo], text: rextTxt[rectTxtNo], which: isFullConversationAnswerArr[rectTxtNo]}
       // moji[jj]}//F_color2moji(color2[jj])}//, text:a}
     }
-
-    //	console.log(rectDataObjectArr.length);
-    //	console.log(len2.length);
-    /// ////////////////////////////////////////////////////
-    console.log('mazekozeHatsugenNumber')
-    console.log(mazekozeHatsugenIdxArr)
 
     svg.call(loveTexture)
     svg.call(workTexture)
@@ -404,8 +380,6 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
                 for (l = 0; l < bun[k + mazekozeHatsugenIdxArr[i]].length; l++) {
                   if (bun[k + mazekozeHatsugenIdxArr[i]][l] === '') { continue }
                   msg.innerHTML += '<font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArr[answerCategoryNumArray[k + mazekozeHatsugenIdxArr[i]][l]] + '><b>【</b></font>' + bun[k + mazekozeHatsugenIdxArr[i]][l] + '<font color=' + answerTextureChoiceArr[answerCategoryNumArray[k + mazekozeHatsugenIdxArr[i]][l]] + '><b>】</b></font>'
-                  console.log( bun[k + mazekozeHatsugenIdxArr[i]][l] )
-                  console.log( answerCategoryNumArray[k + mazekozeHatsugenIdxArr[i]][l] )
                 }
                 msg.innerHTML += '<font size=' + fontSizeInTextView + '><br><br>'
               }
@@ -420,8 +394,6 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
                 for (l = 0; l < bun[k + mazekozeHatsugenIdxArr[i]].length; l++) {
                   if (bun[k + mazekozeHatsugenIdxArr[i]][l] === '') { continue }
                   msg.innerHTML += '<u><font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArr[answerCategoryNumArray[k + mazekozeHatsugenIdxArr[i]][l]] + '><b>【</b></font>' + bun[k + mazekozeHatsugenIdxArr[i]][l] + '<font color=' + answerTextureChoiceArr[answerCategoryNumArray[k + mazekozeHatsugenIdxArr[i]][l]] + '><b>】</b></font></font></u>'
-                  console.log( bun[k + mazekozeHatsugenIdxArr[i]][l] )
-                  console.log(answerCategoryNumArray[k + mazekozeHatsugenIdxArr[i]][l])
                 }
                 msg.innerHTML += '<font size=' + fontSizeInTextView + '><br><br></font>'
               } else if (k % 2 === 0) {
@@ -429,8 +401,6 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
                 for (l = 0; l < bun[k + mazekozeHatsugenIdxArr[i]].length; l++) {
                   if (bun[k + mazekozeHatsugenIdxArr[i]][l] === '') { continue }
                   msg.innerHTML += '<font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArr[answerCategoryNumArray[k + mazekozeHatsugenIdxArr[i]][l]] + '><b>【</b></font>' + bun[k + mazekozeHatsugenIdxArr[i]][l] + '<font color=' + answerTextureChoiceArr[answerCategoryNumArray[k + mazekozeHatsugenIdxArr[i]][l]] + '><b>】</b></font>'
-                  console.log(bun[k + mazekozeHatsugenIdxArr[i]][l])
-                  console.log(answerCategoryNumArray[k + mazekozeHatsugenIdxArr[i]][l])
                 }
                 msg.innerHTML += '<font size=' + fontSizeInTextView + '><br><br>'
               } else { // forループを回さないと各文ごとの表示ができない
@@ -469,9 +439,6 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
       .text(lowerName)
 
     addTextToSVG(0, axisDescriptionY, axisDescription)
-
-    console.info('rectDataObjectArr')
-    console.info(rectDataObjectArr)
 
   } else {
 
@@ -638,10 +605,7 @@ const readAnswerRadio = (jsonFileName, storage, chboxlist, answerRadioResult, ta
 
     const answerRadio = document.getElementById('r' + c).children
     for (let i = answerRadio.length - answerRadioFullLength, l = answerRadio.length; i < l; i++) {
-      // console.log("i=%d",i);
-      // console.log(radio[i]);
       if (answerRadio[i].control.checked === true) {
-        console.log(answerRadio[i].control.value)
         if (answerRadio[i].control.value === '1') {
           answerRadioResult[taiou[c - 1]] = 1
           storage.setItem(changedAnswerClassificationSaveTarget, 0)
@@ -657,12 +621,10 @@ const readAnswerRadio = (jsonFileName, storage, chboxlist, answerRadioResult, ta
         }else if (answerRadio[i].control.value === '4') {
           answerRadioResult[taiou[c - 1]] = 4
           storage.setItem(changedAnswerClassificationSaveTarget, 3)
-          console.log('set self')
           break
         }else if (answerRadio[i].control.value === '5') {
           answerRadioResult[taiou[c - 1]] = 5
           storage.setItem(changedAnswerClassificationSaveTarget, 4)
-          console.log('set spiritual')
           break
         }
       } else {
@@ -720,10 +682,7 @@ const setForViz = (name, storage, keitaisokaiseki, chboxlist, chboxlist2, RGBlis
   for (let m = 1; m < hatsugen.length; m = m + 2) { // 患者の発言で間隔を作る
     bunsuu = bunsuu + hatsugen[m].length
   }
-  console.info(zoom_value)
   var width = zoom_value * bunsuu
-
-  console.log('%centerred setForViz', 'color:red')
 
   let graphNumber = 2
 
@@ -808,11 +767,7 @@ const setForViz = (name, storage, keitaisokaiseki, chboxlist, chboxlist2, RGBlis
   }
 
   const radio = document.getElementById('graph').children
-  console.log('radio')
-  console.log(radio)
   for (let i = 0; i <= graphNumber - 1; i++) {
-    console.log('i=%d', i)
-    console.log(radio[i])
     if (radio[i].control.checked === true) {
       // storage.getItem(name+"RGBlist"+m)=
       /* if(radio[i].control.value=="12"){
@@ -842,7 +797,6 @@ const setForViz = (name, storage, keitaisokaiseki, chboxlist, chboxlist2, RGBlis
     }
   }
   viz(stackDataArr, allQuestionHatsugenColorArray, bun, hatsugen, svg, ansCategoryNumArr, keitaisokaiseki, RGBmaxmax, startTime, graph, answerRadioResult, ranshin, width, bunsuu)
-  // console.log("chboxlength2 in svg.js=%d",chboxlength2);
   return {
     chboxlist: chboxlist,
     chboxlist2: chboxlist2,

@@ -1,5 +1,5 @@
 const rodata={
-  storageCsv:'csv/storage2016-4-2.csv',
+  storageCsv:'csv/storage20171115.csv',
 
   color:{
     love:{

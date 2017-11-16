@@ -31,7 +31,6 @@ const makeRGB = (RGB, hatsugen) => {
 
   for (let hatsugenNo = 1; hatsugenNo < hatsugen.length; hatsugenNo = hatsugenNo + 2) {
     RGB[hatsugenNo] = []
-    console.log(hatsugen[hatsugenNo])
     hatsugen[hatsugenNo].sentence.forEach((sentenceNumber) => {
       RGB[hatsugenNo][sentenceNumber] = [0, 0, 0, 0]
       if (hatsugen[hatsugenNo].sentences[sentenceNumber].task === 'love') {
@@ -59,10 +58,6 @@ const createAnswerRadioButton = (answerNumber, value, color, answerGroupName, ch
 }
 
 const select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, chboxlist, chboxlist2, answerClassification3dArrayforCreatingSelect, RGBlist, hatsugen, bun, checked, checked2, taiou, taiou2, chBoxLen, chboxlength2) => {
-  console.log('entered select.js')
-
-  console.log('jsonName')
-  console.log(jsonName)
 
   convertCSV2Storage(jsonName, storage)
 
@@ -81,8 +76,6 @@ const select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, ch
   createGraphSelectButton()
 
   for (let hatsugenIdx = 0; hatsugenIdx < keitaisokaiseki.length; hatsugenIdx++) {
-    console.log('RGB[%d]', hatsugenIdx)
-    //console.log(answerClassification3dArrayforCreatingSelect[m])
     if (hatsugenIdx % 2 === 1) {
       for (bunIdx = 0; bunIdx < keitaisokaiseki[hatsugenIdx].length; ++bunIdx) {
         if (bun[hatsugenIdx][bunIdx] === 'Ａ' || bun[hatsugenIdx][bunIdx] === 'Ｂ' || bun[hatsugenIdx][bunIdx] === 'Ｔ' || bun[hatsugenIdx][bunIdx] === 'A' || bun[hatsugenIdx][bunIdx] === 'B' || bun[hatsugenIdx][bunIdx] === 'T' || bun[hatsugenIdx][bunIdx] === '') {
@@ -101,7 +94,6 @@ const select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, ch
         const categorizedAnswerCategoryQty=5
 
         if (stockedAnsGroupNo !== null) {
-          console.log('a %s',stockedAnsGroupNo)
           answerClassification3dArrayforCreatingSelect[hatsugenIdx][bunIdx][stockedAnsGroupNo] = 1
 
           for (let categoryIdx = 0; categoryIdx < categorizedAnswerCategoryQty; categoryIdx++) {
@@ -155,7 +147,6 @@ const select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, ch
         }
       }
     } else {
-      // console.log("セラピストの質問");
       questionCnt++
       chboxlength2++
       chboxlist2[questionCnt] = []
@@ -166,7 +157,6 @@ const select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, ch
       var stockedQuestionGroupNo = storage.getItem(jsonName + 'RGBlist' + questionCnt)
 
       if (stockedQuestionGroupNo !== null) {
-        console.log('q %s',stockedQuestionGroupNo)
         for (categoryIdx = 3; categoryIdx <= 7; categoryIdx++) {
           if (categoryIdx == stockedQuestionGroupNo) {
             RGBlist[hatsugenIdx / 2][categoryIdx] = 1
@@ -214,10 +204,6 @@ const select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, ch
 
   var ansNoMax = ansCnt
   var questionNoMax = questionCnt
-
-  console.log('%c radio_buttons and grapheselectbutton', 'color:red')
-  console.log(document.getElementById('radio_buttons'))
-  console.log(document.getElementById('GraphSelectButton'))
 
   return {
     checkboxlist: checkboxlist,
