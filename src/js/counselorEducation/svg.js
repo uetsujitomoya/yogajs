@@ -99,11 +99,11 @@ const addTextToSVG = (x, y, text) => {
     .text(text)
 }
 
-const openColor = '#b0291b'
-const closeColor = '#2980b9'
-const aiduchiColor = '#9b59b6'
+const openColor = rodata.color.open
+const closeColor = rodata.color.close
+const aiduchiColor = rodata.color.aiduchiColor
 const sekenColor = '#2c3e50'
-const kaishakuColor = '#f1c40f'
+const kaishakuColor = '#f1c400'
 
 const height0 = 200
 const height = 200

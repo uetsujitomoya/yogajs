@@ -28,6 +28,7 @@ const rodata={
     interpretation:'#d2691e',
     feedback:'#4a9026',
     idle:'#4e454a',
+    aiduchiColor : "#9400d3",
     barChartBG: '#f9f9f9',
     blue:'#264586',
     green:'#4a9026',
