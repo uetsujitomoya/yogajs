@@ -766,19 +766,7 @@ const setForViz = (name, storage, keitaisokaiseki, chboxlist, chboxlist2, RGBlis
     }
   }
 
-  const radio = document.getElementById('graph').children
-  for (let i = 0; i <= graphNumber - 1; i++) {
-    if (radio[i].control.checked === true) {
-      // storage.getItem(name+"RGBlist"+m)=
-      /* if(radio[i].control.value=="12"){
-       graph=2;
-       }else */if (radio[i].control.value === '13') {
-        graph = 3
-      } else {
-        graph = 1
-      }
-    }
-  }
+  //graph = loadChartSelect()
 
   for (h = 0; h < 3; h++) {
     stackDataArr[h] = []
@@ -820,6 +808,19 @@ const createCircleWithTexture = () => { // example
 
   svg.append('circle')
     .style('fill', t.url())
+}
+
+const loadChartSelect=()=>{
+  const radio = document.getElementById('graph').children
+  for (let i = 0; i <= graphNumber - 1; i++) {
+    if (radio[i].control.checked === true) {
+      if (radio[i].control.value === '13') {
+        return 3
+      } else {
+        return 1
+      }
+    }
+  }
 }
 
 export {setForViz}

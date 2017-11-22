@@ -19,7 +19,7 @@ const createGraphSelectButton = () => {
   let target = document.getElementById(GraphSelectButtonPlaceID)// checkboxを出す場所
   target.innerHTML += '<div id="graph" style="cursor: pointer"></div><br>'
   document.getElementById('graph').innerHTML += '<label><input type=radio name="graph" value=11>' + stackedChartName + '</label>'
-  // document.getElementById("graph").innerHTML += "<label><input type=radio name=\"graph\" value=12>graph2</label>";
+  document.getElementById("graph").innerHTML += "<label><input type=radio name=\"graph\" value=12>graph2</label>";
   document.getElementById('graph').innerHTML += '<label><input type=radio name="graph" value=13>' + barChartName + '</label>'
 }
 
@@ -73,7 +73,7 @@ const select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, ch
   chboxlength2 = 0
   var questionCnt = 0
 
-  createGraphSelectButton()
+  //createGraphSelectButton()
 
   for (let hatsugenIdx = 0; hatsugenIdx < keitaisokaiseki.length; hatsugenIdx++) {
     if (hatsugenIdx % 2 === 1) {

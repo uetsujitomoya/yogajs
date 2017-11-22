@@ -97,42 +97,13 @@ document.getElementById('load-button').addEventListener('click', function () {
   reader.readAsText(file)
 })
 
-  /* 170410knpLoadButton
 
-document.getElementById('knpLoadButton').addEventListener('click',function () {
-
-    var file = document.getElementById('knpLoadButton').files[0];//csv読み込めない
-    var name = file.name;
-    var reader = new FileReader();
-    reader.onload = function(event) {
-        //var result = funcReaderOnload(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
-        //let resultWithNewDictionary = AcceptDictionary(name,event,keitaisokaiseki,chboxlist,chboxlist2,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,newLoveDictionary,newWorkDictionary,newFriendDictionary);
-        //let resultWithKNP = processKnp(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2)
-    };
-    reader.readAsText(file);
-
-});
-
-  */
-
-// document.getElementById('buttonToInputDictionary').addEventListener('click',AcceptDictionary(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2));
-
-// storage出力
-
-/* storageSave-button */
-
-document.getElementById('storageSave-button').addEventListener('click', () => {
+/*document.getElementById('storageSave-button').addEventListener('click', () => {
   let csv_array = storage2csv()
     // KNPもCSVで読み込ませる
   downloadAsCSV('storage', csv_array)
-})
+})*/
 
-// let file_name="storage"+Date()+".csv";
-// let filenameWithExtension="storage.csv";
-
-// let csv_string=convertTocsv(ary);
-
-// http://qiita.com/kenchan0130/items/11c3abab109405379ffb
 
 function csv2Array (filePath) { // csvﾌｧｲﾙﾉ相対ﾊﾟｽor絶対ﾊﾟｽ
   var csvData = []
