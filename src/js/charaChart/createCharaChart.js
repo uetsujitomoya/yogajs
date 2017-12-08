@@ -2,8 +2,8 @@
  * Created by uetsujitomoya on 2017/08/08.
  */
 
-import {csv2Arr} from '../csv2Arr.js'
-import {getCSV} from '../counselorEdu/getCSV.js'
+import {csv2Arr} from '../manageCsv/csv2Arr.js'
+import {getCSV} from '../manageCsv/getCSV.js'
 import {createBunArr} from './createBunArr/createBunArr.js'
 import {findChara} from './chara/findChara.js'
 import {createArrowArr} from './nodeAndArrow/createArrowArr.js'
@@ -15,7 +15,8 @@ import {saveBunArrJson} from './saveBunArrJson'
 import { downloadJson } from './downloadJson'
 
 import {rodata} from './rodata'
-import {downloadTask} from './downloadTask'
+import {downloadAsTask} from './downloadAsTask'
+import { outputCsv } from './csv/outputCsv'
 
 let nodeArr = []
 
@@ -34,7 +35,8 @@ const createCharaChart = () => {
 
   const bunArr = createBunArr(knp, nodeArr)
 
-  downloadTask(bunArr)
+  //downloadAsTask(bunArr)
+  outputCsv(bunArr)
 
   createArrowArr(bunArr, nodeArr,bunArr)
   manageSlider(bunArr,nodeArr)

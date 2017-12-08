@@ -41,11 +41,9 @@ export default class Arrow {
   colorBlue(){
     this.strokeColor="#0000ff"
     localStorage.setItem("矢印"+this.arrowNo,"文句批難愚痴")
-
   }
   colorRed(){
     this.strokeColor="#ff0000"
     localStorage.setItem(rodata.csvPath+"矢印"+this.arrowNo,"感謝貢献")
-
   }
 }

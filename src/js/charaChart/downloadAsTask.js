@@ -1,4 +1,4 @@
-const downloadTask = (arr) => {
+const downloadAsTask = (arr) => {
   var data = JSON.stringify(arr);
   var a = document.createElement('a');
   a.textContent = 'Download sentences array json';
@@ -10,4 +10,4 @@ const downloadTask = (arr) => {
   exportLink.appendChild(a);
 }
 
-export {downloadTask}
+export {downloadAsTask}

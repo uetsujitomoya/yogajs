@@ -3,7 +3,8 @@ const rodata={
   kihonkuSymbol:'+',
   bunsetsu1stJpRowNo:2,
 
-  yajirushi_refX : 12,
+  yajirushi_refX : 8,
+  refY:2,
   markerFillColor : '#ff0000',
 
   clientNodeColor:"#ff7f7f",
@@ -19,7 +20,7 @@ const rodata={
 
   textViewFontSize:2,
 
-  csvPath: '../csv/171101allForCC.csv',
+  csvPath: '../csv/171114allKnp.csv',
   charaChartAreaID : '#example',
   circleRadiusCoefficient: 1.5,
 

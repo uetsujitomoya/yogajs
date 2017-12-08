@@ -55,7 +55,7 @@ const createArrowArr = (sliderBunArr, nodeArr, allBunArr) => {
 
   let svg = d3.select(rodata.charaChartAreaID).append('svg')
     .attr({
-      width: 2 * rodata.orbitOPoint + 50,
+      width: 2 * rodata.orbitOPoint + 150,
       height: 2 * rodata.orbitOPoint + 50
     })
 

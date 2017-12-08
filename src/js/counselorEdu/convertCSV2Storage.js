@@ -1,4 +1,4 @@
-import {csv2Arr} from '../csv2Arr.js'
+import {csv2Arr} from '../manageCsv/csv2Arr.js'
 import {TransposeMatrix} from './transposeMatrix.js'
 
 let convertCSV2Storage = (jsonName, storage) => {

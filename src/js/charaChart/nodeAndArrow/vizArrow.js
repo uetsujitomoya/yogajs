@@ -6,9 +6,9 @@ import {rodata} from '../rodata'
 import {viewArrowText} from '../viz/viewArrowText'
 
 const markerFillColor = rodata.markerFillColor
-const yajirushi_refX = 7/*rodata.yajirushi_refX*/
+const yajirushi_refX = rodata.yajirushi_refX
 
-const refY=2
+const refY=rodata.refY
 
 
 const vizArrow = (svg, arrow, r, arrowId,　allBunArr) => {

@@ -2,7 +2,7 @@ import 'kuromoji'
 import $ from 'jquery'
 import {select} from './select.js'
 import {setForViz} from './svg.js'
-import {csv2array} from '../csv2Arr'
+import {csv2array} from '../manageCsv/csv2Arr'
 import {viz_relation_chart} from './vizRelationChart'
 import {createCharaChart} from '../charaChart/createCharaChart.js'
 
