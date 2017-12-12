@@ -1,4 +1,4 @@
-import { EscapeSJIS } from '../../ecl'
+import { EscapeSJIS, UnescapeSJIS } from '../../ecl'
 
 const bunArr2CsvArr=(bunArr)=>{
 
@@ -9,16 +9,19 @@ const bunArr2CsvArr=(bunArr)=>{
   //kanshaKoken
 
   let csvArr=[]
-  csvArr.push(['文','動詞','主語','目的語','「悪いアイツかわいそうな私」なら1'])
+  csvArr.push([UnescapeSJIS(encodeURI('文')),'動詞','主語','目的語','「悪いアイツかわいそうな私」なら1'])
   for(const bun of bunArr){
-    //console.log(bun)
+
     if(typeof bun.verb_array !== 'undefined'){
       for(const verb of bun.verb_array){
+        //console.log(verb.subject)
+
+        //subject不在。object不在の場合の処理
         csvArr.push([
           EscapeSJIS(bun.surfaceForm),
           EscapeSJIS(verb.surfaceForm),
-          EscapeSJIS(verb.subject),
-          EscapeSJIS(verb.object),
+          EscapeSJIS(verb.subject.name),
+          EscapeSJIS(verb.object.name),
           0
         ])
       }

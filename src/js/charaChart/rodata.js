@@ -13,6 +13,7 @@ const rodata={
 
   clientArrowColor:"#ff4242",
   aroundClientPeopleArrowColor:"#a9a9a9",
+  kawaisounaClientArrowColor:"#4242ff",
 
   nodeR : 15,
   orbitR :250,
@@ -20,7 +21,7 @@ const rodata={
 
   textViewFontSize:2,
 
-  csvPath: '../csv/171114allKnp.csv',
+  csvPath: '../csv/171211dummyForCC.csv',
   charaChartAreaID : '#example',
   circleRadiusCoefficient: 1.5,
 

@@ -5,12 +5,14 @@
 //
 
 const EscapeSJIS=(str)=>{
-  console.log(str)
-  if(typeof str !== undefined)
-  return str.replace(/[^*+.-9A-Z_a-z-]/g,function(s){
-    var c=s.charCodeAt(0),m;
-    return c<128?(c<16?"%0":"%")+c.toString(16).toUpperCase():65376<c&&c<65440?"%"+(c-65216).toString(16).toUpperCase():(c=JCT11280.indexOf(s))<0?"%81E":"%"+((m=((c<8272?c:(c=JCT11280.lastIndexOf(s)))-(c%=188))/188)<31?m+129:m+193).toString(16).toUpperCase()+(64<(c+=c<63?64:65)&&c<91||95==c||96<c&&c<123?String.fromCharCode(c):"%"+c.toString(16).toUpperCase())
-  })
+  if(typeof str === "string"){
+    return str.replace(/[^*+.-9A-Z_a-z-]/g,function(s){
+      var c=s.charCodeAt(0),m;
+      return c<128?(c<16?"%0":"%")+c.toString(16).toUpperCase():65376<c&&c<65440?"%"+(c-65216).toString(16).toUpperCase():(c=JCT11280.indexOf(s))<0?"%81E":"%"+((m=((c<8272?c:(c=JCT11280.lastIndexOf(s)))-(c%=188))/188)<31?m+129:m+193).toString(16).toUpperCase()+(64<(c+=c<63?64:65)&&c<91||95==c||96<c&&c<123?String.fromCharCode(c):"%"+c.toString(16).toUpperCase())
+    })
+  }else{
+   return "undefined"
+  }
 };
 
 const UnescapeSJIS=(str)=>{

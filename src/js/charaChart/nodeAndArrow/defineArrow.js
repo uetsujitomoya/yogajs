@@ -24,6 +24,7 @@ export default class Arrow {
     this.bunArr=[]
     connectNodeAndArrow(this)//2回やってる？？
     this.pushBunToArr(bun)
+
   }
   addStrokeWidth (bun) {
     this.strokeWidth = this.strokeWidth + 0.5

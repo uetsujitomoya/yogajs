@@ -19,7 +19,13 @@ const vizArrow = (svg, arrow, r, arrowId,　allBunArr) => {
   let color=null
 
   if (arrow.subject.isClient) {
-    color= rodata.clientArrowColor
+    if(arrow.isBlue=1){
+      color= rodata.kawaisounaClientArrowColor
+
+    }else{
+      color= rodata.clientArrowColor
+    }
+
   } else {
     color= rodata.aroundClientPeopleArrowColor
   }
