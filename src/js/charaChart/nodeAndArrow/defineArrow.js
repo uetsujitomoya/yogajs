@@ -21,14 +21,37 @@ export default class Arrow {
     this.endPointX = 0
     this.endPointY = 0
 
+    this.redPoint=0
+    this.bluePoint=0
+
     this.bunArr=[]
     connectNodeAndArrow(this)//2回やってる？？
     this.pushBunToArr(bun)
+    this.updateColor(verb.isBlueArrowColor)
 
   }
-  addStrokeWidth (bun) {
+
+  updateColor(isBlueArrowColor){
+    if(isBlueArrowColor===1){
+      //this.isBlue=true
+      this.bluePoint++
+    }else{
+      //this.isBlue=false
+      this.redPoint++
+    }
+
+    if(this.bluePoint>this.redPoint){
+      this.isBlue=true
+    }else{
+      this.isBlue=false
+    }
+
+  }
+
+  addStrokeWidth (bun,verb) {
     this.strokeWidth = this.strokeWidth + 0.5
     this.pushBunToArr(bun)
+    this.updateColor(verb.isBlueArrowColor)
   }
   pushBunToArr(bun){
     //console.log(bun)

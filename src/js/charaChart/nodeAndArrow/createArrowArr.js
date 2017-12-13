@@ -33,7 +33,7 @@ const createArrowArr = (sliderBunArr, nodeArr, allBunArr) => {
           for (let tmpArrowCnt = 0; tmpArrowCnt < arrowArr.length; tmpArrowCnt++) {
             if (isSameArrow(arrowArr[tmpArrowCnt], verb)) {
               //console.log("sameArrow")
-              arrowArr[tmpArrowCnt].addStrokeWidth(bun)
+              arrowArr[tmpArrowCnt].addStrokeWidth(bun,verb)
               isNewArrow = false
               break
             }

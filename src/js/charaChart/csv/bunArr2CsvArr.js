@@ -31,11 +31,12 @@ const bunArr2CsvArr=(bunArr)=>{
   csvArr.push(['文','動詞','主語','目的語','「悪いアイツかわいそうな私」なら1'])
   for(const bun of bunArr){
 
-    if(typeof bun.verb_array !== 'undefined'){
+    if(isNeededBunToSearch(bun)){
       for(const verb of bun.verb_array){
-        if(verb.subject!==null && verb.object!==null){
-          console.log(verb)
-          csvArr.push([bun.surfaceForm,verb.surfaceForm,verb.subject.name,verb.object.name,0])
+        if(isNeededVerbForCsv(verb)){
+
+            csvArr.push([bun.surfaceForm,verb.surfaceForm,verb.subject.name,verb.object.name,0])
+
         }
         //console.log(verb.subject)
 
@@ -48,7 +49,27 @@ const bunArr2CsvArr=(bunArr)=>{
   return csvArr
 }
 
-export {bunArr2CsvArr}
+const isNeededBunToSearch=(bun)=>{
+  if(typeof bun.verb_array !== 'undefined'){
+    return true
+  }else{
+    return false
+  }
+}
+
+const isNeededVerbForCsv=(verb)=>{
+  if(verb.subject!==null && verb.object!==null){
+    if(verb.subject.name==="Aさん" && verb.object.name!=="Aさん"){
+      return true
+    }else{
+      return false
+    }
+  }else{
+    return false
+  }
+}
+
+export {bunArr2CsvArr,isNeededBunToSearch,isNeededVerbForCsv}
 
 class csvRow {
   constructor (){

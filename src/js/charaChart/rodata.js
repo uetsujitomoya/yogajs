@@ -22,6 +22,10 @@ const rodata={
   textViewFontSize:2,
 
   csvPath: '../csv/171211dummyForCC.csv',
+  knpCsvFolder:"",
+  knpCsvName:"",
+  bunArrCsvFolder:"../csv/inputToCCBunArr/",
+  bunArrCsvName:"bunArr201712131111.csv",
   charaChartAreaID : '#example',
   circleRadiusCoefficient: 1.5,
 

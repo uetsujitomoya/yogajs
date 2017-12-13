@@ -17,6 +17,7 @@ import { downloadJson } from './downloadJson'
 import {rodata} from './rodata'
 import {downloadAsTask} from './downloadAsTask'
 import { outputCsv } from './csv/outputCsv'
+import { inputCsv } from './csv/inputCsv'
 
 let nodeArr = []
 
@@ -35,8 +36,9 @@ const createCharaChart = () => {
 
   const bunArr = createBunArr(knp, nodeArr)
 
-  //downloadAsTask(bunArr)
-  outputCsv(bunArr)
+
+  //outputCsv(bunArr)
+  inputCsv(bunArr)
 
   createArrowArr(bunArr, nodeArr,bunArr)
   manageSlider(bunArr,nodeArr)

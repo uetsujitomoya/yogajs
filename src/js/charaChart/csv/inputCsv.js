@@ -1,34 +1,37 @@
 import { EscapeSJIS, UnescapeSJIS } from '../../ecl'
+import { csv2Arr } from '../../manageCsv/csv2Arr'
+import { rodata } from '../rodata'
+import { isNeededBunToSearch, isNeededVerbForCsv } from './bunArr2CsvArr'
 
-const inputCsv=(csvArr)=>{
+const inputCsv=(bunArr)=>{
   //bunArrの中身を書き換える
   //makeCsvの逆をやればいい
 
+  const csvArr=csv2Arr(rodata.bunArrCsvFolder+rodata.bunArrCsvName)
 
-  csvArr.splice(0, 1)
+
+  //csvArr.splice(0, 1)
 
   let bunCnt=0
   let verbCnt=0
-  let csvArrRowNo=0
+  let csvArrRowNo=1
 
   for(const bun of bunArr){
 
-    if(typeof bun.verb_array !== 'undefined'){
+    if(isNeededBunToSearch(bun)){
       for(const verb of bun.verb_array){
+        if(isNeededVerbForCsv(verb)){
+          const col = csvArr[csvArrRowNo]
+          //bun.surfaceForm=col[0]
+          //verb.surfaceForm=col[1]
+          //verb.subject.name=col[2]
+          //verb.object.name=col[3]
+          verb.isBlueArrowColor=col[4]
 
-        const col = csvArr[csvArrRowNo]
-        bun.surfaceForm=col[0]
-        verb.surfaceForm=col[1]
-        verb.subject.name=col[2]
-        verb.object.name=col[3]
-        verb.isBlueArrowColor=col[4]
-
-        csvArrRowNo++
-
+          csvArrRowNo++
+        }
         //console.log(verb.subject)
-
         //subject不在。object不在の場合の処理
-
       }
     }
   }
