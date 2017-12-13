@@ -32,7 +32,7 @@ export default class Arrow {
   }
 
   updateColor(isBlueArrowColor){
-    if(isBlueArrowColor===1){
+    if(isBlueArrowColor==1){//==
       //this.isBlue=true
       this.bluePoint++
     }else{
