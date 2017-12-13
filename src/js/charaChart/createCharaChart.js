@@ -36,7 +36,7 @@ const createCharaChart = () => {
   const bunArr = createBunArr(knp, nodeArr)
 
   //downloadAsTask(bunArr)
-  //outputCsv(bunArr)
+  outputCsv(bunArr)
 
   createArrowArr(bunArr, nodeArr,bunArr)
   manageSlider(bunArr,nodeArr)

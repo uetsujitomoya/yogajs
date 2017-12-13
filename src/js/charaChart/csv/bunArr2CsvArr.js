@@ -9,7 +9,7 @@ const bunArr2CsvArr=(bunArr)=>{
   //kanshaKoken
 
   let csvArr=[]
-  csvArr.push([UnescapeSJIS(encodeURI('文')),'動詞','主語','目的語','「悪いアイツかわいそうな私」なら1'])
+/*  csvArr.push([UnescapeSJIS(encodeURI('文')),'動詞','主語','目的語','「悪いアイツかわいそうな私」なら1'])
   for(const bun of bunArr){
 
     if(typeof bun.verb_array !== 'undefined'){
@@ -26,7 +26,25 @@ const bunArr2CsvArr=(bunArr)=>{
         ])
       }
     }
+  }*/
+
+  csvArr.push(['文','動詞','主語','目的語','「悪いアイツかわいそうな私」なら1'])
+  for(const bun of bunArr){
+
+    if(typeof bun.verb_array !== 'undefined'){
+      for(const verb of bun.verb_array){
+        if(verb.subject!==null && verb.object!==null){
+          console.log(verb)
+          csvArr.push([bun.surfaceForm,verb.surfaceForm,verb.subject.name,verb.object.name,0])
+        }
+        //console.log(verb.subject)
+
+        //subject不在。object不在の場合の処理
+
+      }
+    }
   }
+
   return csvArr
 }
 
