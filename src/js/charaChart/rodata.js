@@ -21,11 +21,13 @@ const rodata={
 
   textViewFontSize:2,
 
-  csvPath: '../csv/171211dummyForCC.csv',
-  knpCsvFolder:"",
-  knpCsvName:"",
+
+  knpCsvFolder:"../csv/knp/",
+  knpCsvName:"x0801cKnp",
+  csvPath: this.knpCsvFolder+this.knpCsvName+".csv",
   bunArrCsvFolder:"../csv/inputToCCBunArr/",
-  bunArrCsvName:"bunArr201712131111.csv",
+  bunArrCsvName:"171214bunArrx0801cKnp201712141152.csv",
+
   charaChartAreaID : '#example',
   circleRadiusCoefficient: 1.5,
 

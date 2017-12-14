@@ -24,6 +24,9 @@ let manageSlider = (allBunArr, charaArr) => {
     }
   })
 
+  console.log($('#bunqty'))
+  $('#bunqty')[0].innerHTML += ""+allBunArr.length+""
+
   $('#ex2').on('slide', function (slideEvt) {
 
     const selectedArea = {

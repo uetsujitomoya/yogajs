@@ -25,7 +25,8 @@ let verbArr = []
 
 const createCharaChart = () => {
 
-  const knp = csv2Arr(rodata.csvPath)
+
+  const knp = csv2Arr(rodata.knpCsvFolder+rodata.knpCsvName+".csv")
 
   //console.log(knp)
 
