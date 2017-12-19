@@ -23,10 +23,10 @@ const rodata={
 
 
   knpCsvFolder:"../csv/knp/",
-  knpCsvName:"x0801cKnp",
+  knpCsvName:"171114allKnp",
   csvPath: this.knpCsvFolder+this.knpCsvName+".csv",
   bunArrCsvFolder:"../csv/inputToCCBunArr/",
-  bunArrCsvName:"171214bunArrx0801cKnp201712141152.csv",
+  bunArrCsvName:"bunArr_171114allKnp_201712141221.csv",
 
   charaChartAreaID : '#example',
   circleRadiusCoefficient: 1.5,

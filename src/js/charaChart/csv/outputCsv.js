@@ -12,7 +12,7 @@ const outputCsv = (bunArr)=>{
   //kanshaKoken
 
   const csvArr = bunArr2CsvArr(bunArr)
-  downloadAsCSV( "bunArr_" + rodata.knpCsvName + now , csvArr )
+  downloadAsCSV( "bunArr_" + rodata.knpCsvName +"_"+ now , csvArr )
 
 }
 
