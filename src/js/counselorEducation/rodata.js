@@ -36,7 +36,9 @@ const rodata={
     purple:'#a43f70',
     yellow:'#e8a72b',
     lightBlue:'#368ab2'
-  }
+  },
+
+  textViewFontSize:3
 
 }
 

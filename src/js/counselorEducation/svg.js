@@ -73,6 +73,8 @@ const categoryOfTextOnRect={
   smallTalk: '世間話'
 }
 
+const fontSizeInTextView = rodata.textViewFontSize
+
 let vizPart = (talker, task, orijinalSentence) => {
   let box = (talker, task, orijinalSentence) => {
     // this.viz=;
@@ -112,7 +114,7 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
   const lowerName = 'クライエント'
   const txtViewCounselor = '<img src = "./picture/counselor2.jpg" width ="20">'
   const clientInTextView = '<img src = "./picture/client.jpg" width ="17">'
-  const fontSizeInTextView = 2
+
 
   let m
 
