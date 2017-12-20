@@ -85,7 +85,6 @@ let originalSentencePart = (talker, task, orijinBun) => {
   let sentenceViz = (talker, task, orijinBun) => {
     // this.viz=;
   }
-
   let bunVizArr = []
 }
 
@@ -276,8 +275,6 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
     svg.call(friendTexture)
     svg.call(selfTexture)
     svg.call(spiritualTexture)
-
-
 
     let row = 0// graph3の行番号
     // 階層構造をとるため，g要素を生成する部分とrect要素を生成している部分が連続している．

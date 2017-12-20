@@ -105,7 +105,6 @@ const select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, ch
         }
         taiou[ansCnt - 1] = n - 1
 
-
         //どれにも属さない
         if (answerClassification3dArrayforCreatingSelect[hatsugenIdx][bunIdx][0] + answerClassification3dArrayforCreatingSelect[hatsugenIdx][bunIdx][1] + answerClassification3dArrayforCreatingSelect[hatsugenIdx][bunIdx][2] >= 2) {
           target.innerHTML += '<div id="b' + ansCnt + '" style="cursor: pointer"><u>' + (hatsugenIdx + 1) + '(C) ' + bun[hatsugenIdx][bunIdx] + '</u></div><div id="r' + ansCnt + '"><label><input type=radio name="r' + ansCnt + '" value=0>どれにも含まない</label></div><br>'
@@ -154,7 +153,7 @@ const select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, ch
       chboxlist2[questionCnt][1] = 4
       taiou2[questionCnt - 1] = questionCnt - 1
 
-      var stockedQuestionGroupNo = storage.getItem(jsonName + 'RGBlist' + questionCnt)
+      let stockedQuestionGroupNo = storage.getItem(jsonName + 'RGBlist' + questionCnt)
 
       if (stockedQuestionGroupNo !== null) {
         for (categoryIdx = 3; categoryIdx <= 7; categoryIdx++) {
@@ -184,8 +183,6 @@ const select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, ch
       }
     }
   }
-
-
 
   const createAnswerRadioButtonRow = (answerNumber, value, color, answerGroupName) => {
     const targetInRow = document.getElementById('r' + answerNumber)
