@@ -6,7 +6,7 @@
 import Arrow from './defineArrow.js'
 import {vizNodes} from './vizNode'
 import {initialValueOfSubjectAndObjectInVerb} from '../createBunArr/hasVerb.js'
-import {connectNodeAndArrow} from './connectNodeAndArrow'
+import {definePointArr} from './connectNodeAndArrow'
 import {rodata} from '../rodata'
 
 import {vizArrow} from './vizArrow'
@@ -64,7 +64,7 @@ const createArrowArr = (sliderBunArr, nodeArr, allBunArr) => {
   vizNodes(svg,nodeArr,sliderBunArr,r,allBunArr)
 
   arrowArr.forEach((arrow,arrowId)=>{
-    connectNodeAndArrow(arrow)
+    definePointArr(arrow)
 
     vizArrow(svg, arrow, r,arrowId,allBunArr)
   })
