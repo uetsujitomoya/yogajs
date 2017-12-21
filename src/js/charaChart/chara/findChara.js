@@ -2,7 +2,7 @@
  * Created by uetsujitomoya on 2017/08/21.
  */
 
-import {hasJp} from "../../counselorEdu/hasJapanese.js"
+import {hasJp} from "../../hasJapanese.js"
 import Node from '../nodeAndArrow/defineNode.js'
 import {rodata} from '../rodata'
 import {unifyNotaion} from './unifyNotation'
