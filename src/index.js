@@ -1,18 +1,18 @@
-import {ClassifyWithFirstWordDictionary} from './js/counselorEdu/wordparse1608030008.js'
+//import {ClassifyWithFirstWordDictionary} from './js/counselorEdu/wordparse1608030008.js'
 // import {AcceptKnp} from "./processKnp.js";
-import {ClassifyWithKNP} from './js/counselorEdu/processKnp.js' // processKNP
-import {ClassifyWithWordDictionary} from './js/counselorEdu/changeDictionary.js' // AcceptDictionary
-import $ from 'jquery'
-
-import {wordparse2object} from './js/counselorEdu/wordparse2object.js'
+//import {ClassifyWithKNP} from './js/counselorEdu/processKnp.js' // processKNP
+//import {ClassifyWithWordDictionary} from './js/counselorEdu/changeDictionary.js' // AcceptDictionary
+//import $ from 'jquery'
+//import {wordparse2object} from './js/counselorEdu/wordparse2object.js'
+import { createCharaChart } from './js/charaChart/createCharaChart'
 // import {CreateSwitchClassificationMethod} from "./SwitchClassificationMethod.js"; //AcceptDictionary
 // var dictionaryFromWord2Vec = csv2Arr('HDFaceVertex.csv');
 
-wordparse2object()
+createCharaChart()
 
 // 以下、今までの(170809)
 
-let storageArrayFromKamata = csv2Arr('csv/storage170421fromKamata.csv')
+/*let storageArrayFromKamata = csv2Arr('csv/storage170421fromKamata.csv')
 
 //var startTime = new Date()
 
@@ -39,9 +39,9 @@ var chboxlength, chboxlength2
 let RGB = []
 var test2
 let RGBlist = []
-let checkboxlist = []
+let checkboxlist = []*/
 
-let switchClassificationMethod = () => {
+/*let switchClassificationMethod = () => {
   const SwitchClassificationMethodRadio = document.getElementById('SwitchClassificationMethod').children
   if (SwitchClassificationMethodRadio[0].control.checked === true) {
         // 単純な単語辞書を用いた分類
@@ -67,7 +67,7 @@ let switchClassificationMethod = () => {
     console.log('%center ClassifyWithSVM 60', 'color:red')
     ClassifyWithSVM()
   }
-}
+}*/
 
 /* 上部分
 
@@ -132,7 +132,7 @@ document.getElementById('storageSave-button').addEventListener('click', () => {
 
 // http://qiita.com/kenchan0130/items/11c3abab109405379ffb
 
-function csv2Arr (filePath) { // csvﾌｧｲﾙﾉ相対ﾊﾟｽor絶対ﾊﾟｽ
+/*function csv2Arr (filePath) { // csvﾌｧｲﾙﾉ相対ﾊﾟｽor絶対ﾊﾟｽ
   var csvData = []
   var data = new XMLHttpRequest()
   data.open('GET', filePath, false) // true:非同期,false:同期
@@ -159,7 +159,7 @@ function B (a, b, c) {
 
 function TransposeMatrix (ary) {
   return ary.reduce(B, [])
-}
+}*/
 
 /* storageSave-button
 document.getElementById('storageSave-button').addEventListener('click', function () {

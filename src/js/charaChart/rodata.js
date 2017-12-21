@@ -24,7 +24,7 @@ const rodata={
   knpCsvFolder:"../csv/knp/",
   knpCsvName:"171114allKnp",
   //csvPath: this.knpCsvFolder+this.knpCsvName+".csv",
-  bunArrCsvFolder:"../csv/inputToCCBunArr/",
+  bunArrCsvFolder:"../csv/bunArr/",
   bunArrCsvName:"bunArr_171114allKnp_201712141221.csv",
 
   charaChartAreaID : '#example',
