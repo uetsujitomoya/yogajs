@@ -6,7 +6,7 @@ import d3 from 'd3'
 import $ from 'jquery'
 import {rodata} from '../rodata'
 import {r} from './defineNode'
-import {viewNodeText} from '../viz/viewNodeText'
+import {viewNodeText} from '../viewText/viewNodeText'
 
 //import{rodata} from '../../rodata'
 //const r = rodata.nodeR

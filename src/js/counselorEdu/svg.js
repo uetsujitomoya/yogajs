@@ -54,7 +54,7 @@ const textureFunctions = {
 
 let vizPart = (talker, task, orijinalSentence) => {
   let box = (talker, task, orijinalSentence) => {
-    // this.viz=;
+    // this.viewText=;
   }
 
   let boxArray = []
@@ -62,7 +62,7 @@ let vizPart = (talker, task, orijinalSentence) => {
 
 let originalSentencePart = (talker, task, orijinalSentence) => {
   let sentenceViz = (talker, task, orijinalSentence) => {
-    // this.viz=;
+    // this.viewText=;
   }
 
   let sentenceVizArray = []

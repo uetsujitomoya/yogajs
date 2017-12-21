@@ -8,7 +8,7 @@ import {vizNodes} from './vizNode'
 import {initialValueOfSubjectAndObjectInVerb} from '../createBunArr/hasVerb.js'
 import {definePointArr} from './connectNodeAndArrow'
 import {rodata} from '../rodata'
-
+import * as d3 from 'd3'
 import {vizArrow} from './vizArrow'
 
 const createArrowArr = (sliderBunArr, nodeArr, allBunArr) => {

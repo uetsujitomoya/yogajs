@@ -21,10 +21,9 @@ const rodata={
 
   textViewFontSize:2,
 
-
   knpCsvFolder:"../csv/knp/",
   knpCsvName:"171114allKnp",
-  csvPath: this.knpCsvFolder+this.knpCsvName+".csv",
+  //csvPath: this.knpCsvFolder+this.knpCsvName+".csv",
   bunArrCsvFolder:"../csv/inputToCCBunArr/",
   bunArrCsvName:"bunArr_171114allKnp_201712141221.csv",
 

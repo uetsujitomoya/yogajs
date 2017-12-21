@@ -7,7 +7,7 @@ import {getCSV} from '../manageCsv/getCSV.js'
 import {createBunArr} from './createBunArr/createBunArr.js'
 import {findChara} from './chara/findChara.js'
 import {createArrowArr} from './nodeAndArrow/createArrowArr.js'
-import {manageSlider} from './viz/slider.js'
+import {manageSlider} from './slider.js'
 import {fixNodePoint} from './chara/fixNodePoint'
 import {searchMaenoBunForShugo} from './createBunArr/SO/searchMaenoBunForS'
 import {saveBunArrJson} from './saveBunArrJson'
@@ -25,7 +25,6 @@ let verbArr = []
 
 const createCharaChart = () => {
 
-
   const knp = csv2Arr(rodata.knpCsvFolder+rodata.knpCsvName+".csv")
 
   //console.log(knp)
@@ -36,7 +35,6 @@ const createCharaChart = () => {
   fixNodePoint(nodeArr)
 
   const bunArr = createBunArr(knp, nodeArr)
-
 
   //outputCsv(bunArr)
   inputCsv(bunArr)

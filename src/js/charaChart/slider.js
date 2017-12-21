@@ -4,11 +4,11 @@
 
 import d3 from 'd3'
 import $ from 'jquery'
-import {applySliderForNodeText} from './applySliderForNodeText'
+import {applySliderForNodeText} from './viewText/applySliderForNodeText'
 
-import {createArrowArr} from '../nodeAndArrow/createArrowArr.js'
+import {createArrowArr} from './nodeAndArrow/createArrowArr.js'
 
-import {removeSVG} from '../nodeAndArrow/vizNode.js'
+import {removeSVG} from './nodeAndArrow/vizNode.js'
 
 
 let manageSlider = (allBunArr, charaArr) => {
@@ -47,7 +47,7 @@ const applySlider = (selectedArea, allBunArr,nodeArr) => {
   // その指定した範囲だけの表示
 
   // どの動詞が何文目か情報
-  // re-viz
+  // re-viewText
 
   removeSVG()
 

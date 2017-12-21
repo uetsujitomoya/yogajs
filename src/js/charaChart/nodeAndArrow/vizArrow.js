@@ -3,8 +3,8 @@
  */
 
 import {rodata} from '../rodata'
-import {viewArrowText} from '../viz/viewArrowText'
-
+import {viewArrowText} from '../viewText/viewArrowText'
+import * as d3 from 'd3'
 const markerFillColor = rodata.markerFillColor
 const yajirushi_refX = rodata.yajirushi_refX
 
