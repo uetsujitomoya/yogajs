@@ -167,4 +167,4 @@ document.getElementById('storageSave-button').addEventListener('click', function
 });
  */
 
-export {csv2Arr, TransposeMatrix, downloadAsCSV}
+//export {csv2Arr, TransposeMatrix, downloadAsCSV}
