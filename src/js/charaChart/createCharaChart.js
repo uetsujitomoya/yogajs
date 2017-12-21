@@ -11,34 +11,23 @@ import {manageSlider} from './slider.js'
 import {fixNodePoint} from './chara/fixNodePoint'
 import {searchMaenoBunForShugo} from './createBunArr/SO/searchMaenoBunForS'
 import {saveBunArrJson} from './saveBunArrJson'
-
 import { downloadJson } from './downloadJson'
-
 import {rodata} from './rodata'
 import {downloadAsTask} from './downloadAsTask'
 import { outputCsv } from './csv/outputCsv'
 import { inputCsv } from './csv/inputCsv'
-
 let nodeArr = []
-
 let verbArr = []
 
 const createCharaChart = () => {
-
   const knp = csv2Arr(rodata.knpCsvFolder+rodata.knpCsvName+".csv")
-
   //console.log(knp)
-
   let nodeArr=[]
   findChara(knp, nodeArr)
-
   fixNodePoint(nodeArr)
-
   const bunArr = createBunArr(knp, nodeArr)
-
   //outputCsv(bunArr)
   inputCsv(bunArr)
-
   createArrowArr(bunArr, nodeArr,bunArr)
   manageSlider(bunArr,nodeArr)
 }

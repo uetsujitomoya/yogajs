@@ -14,6 +14,7 @@ const rodata={
   clientArrowColor:"#ff4242",
   aroundClientPeopleArrowColor:"#a9a9a9",
   kawaisounaClientArrowColor:"#4242ff",
+  situationDependencyPeopleColor:"#42ff42",
 
   nodeR : 15,
   orbitR :250,
@@ -24,8 +25,10 @@ const rodata={
   knpCsvFolder:"../csv/knp/",
   knpCsvName:"171114allKnp",
   //csvPath: this.knpCsvFolder+this.knpCsvName+".csv",
+
   bunArrCsvFolder:"../csv/bunArr/",
-  bunArrCsvName:"bunArr_171114allKnp_201712141221.csv",
+  bunArrCsvName:"201712211623_171114allKnp_withPeople_edited.csv",
+  withPeople:true,
 
   charaChartAreaID : '#example',
   circleRadiusCoefficient: 1.5,

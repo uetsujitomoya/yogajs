@@ -1,4 +1,5 @@
 import { EscapeSJIS, UnescapeSJIS } from '../../ecl'
+import { rodata } from '../rodata'
 
 const bunArr2CsvArr=(bunArr)=>{
 
@@ -39,9 +40,7 @@ const bunArr2CsvArr=(bunArr)=>{
 
         }
         //console.log(verb.subject)
-
         //subject不在。object不在の場合の処理
-
       }
     }
   }
@@ -59,10 +58,14 @@ const isNeededBunToSearch=(bun)=>{
 
 const isNeededVerbForCsv=(verb)=>{
   if(verb.subject!==null && verb.object!==null){
-    if(verb.subject.name==="Aさん" && verb.object.name!=="Aさん"){
+    if(rodata.withPeople){
       return true
     }else{
-      return false
+      if(verb.subject.name==="Aさん" && verb.object.name!=="Aさん"){
+        return true
+      }else{
+        return false
+      }
     }
   }else{
     return false

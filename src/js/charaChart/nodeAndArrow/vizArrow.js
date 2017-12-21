@@ -7,29 +7,25 @@ import {viewArrowText} from '../viewText/viewArrowText'
 import * as d3 from 'd3'
 const markerFillColor = rodata.markerFillColor
 const yajirushi_refX = rodata.yajirushi_refX
-
 const refY=rodata.refY
-
-
 const vizArrow = (svg, arrow, r, arrowId,　allBunArr) => {
   //let circle_data_array = [[nodeArray[0].x, nodeArray[0].y, r], [nodeArray[1].x, nodeArray[1].y, r]]
-
   //出発点の取得失敗？
-
   let color=null
-
   if (arrow.subject.isClient) {
     if(arrow.isBlue){
       color= rodata.kawaisounaClientArrowColor
-
     }else{
       color= rodata.clientArrowColor
     }
-
   } else {
-    color= rodata.aroundClientPeopleArrowColor
-  }
+    if(arrow.isBlue){
+      color= rodata.situationDependencyPeopleColor
+    }else{
+      color= rodata.aroundClientPeopleArrowColor
+    }
 
+  }
   let marker = svg.append('defs').append('marker')
     .attr({
       'id': 'arrowhead'+arrowId,
@@ -43,7 +39,6 @@ const vizArrow = (svg, arrow, r, arrowId,　allBunArr) => {
       'orient': 'auto'
       //"markerUnits":"userSpaceOnUse"
     })
-
   marker.append('path')
     .attr({
       "d": 'M 0,0 V 4 L4,'+refY+' Z',
@@ -52,15 +47,10 @@ const vizArrow = (svg, arrow, r, arrowId,　allBunArr) => {
     .on('click', ()=>{
       viewArrowText(arrow, allBunArr)
     })
-
-
   let line = d3.svg.line()
-
     .interpolate('basis')
     .x(function (d) { return d[0] })
     .y(function (d) { return d[1] })
-
-
   let path = svg.append('path')
     .attr({
       'd': line(arrow.pointArr),
@@ -72,7 +62,6 @@ const vizArrow = (svg, arrow, r, arrowId,　allBunArr) => {
     .on('click', ()=>{
       viewArrowText(arrow, allBunArr)
     })
-
   // pathの長さを調べて、丸の半径２個分＋矢印を後ろに下げる分の長さを引きます。
   const totalLen = path.node().getTotalLength()
   const t = totalLen - (r + r /*+ yajirushi_refX*/ + arrow.strokeWidth)
