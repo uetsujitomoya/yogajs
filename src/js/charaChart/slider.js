@@ -3,7 +3,9 @@
  */
 
 import d3 from 'd3'
+import 'jquery'
 import $ from 'jquery'
+import 'bootstrap-slider'
 import {applySliderForNodeText} from './viewText/applySliderForNodeText'
 
 import {createArrowArr} from './nodeAndArrow/createArrowArr.js'
