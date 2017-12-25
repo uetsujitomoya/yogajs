@@ -1,6 +1,9 @@
 import {rodata} from '../rodata'
+import {addBun} from './addBun'
 
 let preBunNo = null
+
+
 
 const viewNodeText=(node, allBunArr)=>{//slider適用後に"allBunArr"に"selectedBunArr"が入らないように。
   //丸や矢印をマウスオーバーした際に、該当文章を表示。d3のmouseoverかclickから呼び出す
@@ -42,27 +45,10 @@ const createTextViewArea = (bun,allBunArr,i)=>{
   }
 }
 
-const createBox=(i)=>{
-  //箱を作る
 
-  let msg = document.getElementById('box')
-  msg.innerHTML += '<div id="msg' + i +'" style="border-width: 1px; background-color:#ffffff; width:600px; overflow-y:scroll; margin-bottom: 5px; margin-left: 5px; margin-top: 10px; padding-bottom: 5px; padding-top: 5px;">'
-}
 
-const addBun=(id,bun,bold)=>{
-  //箱に1文を追加。boldはboolean
-  let msg = document.getElementById(id)
-  const talker=""
-  const color="#000000"
-  const bunNo = bun.bunNo
-  const bunContent=bun.surfaceForm
-  if(bold){msg.innerHTML+="<b>"}
-  msg.innerHTML += '<font size=' + rodata.textViewFontSize + '>' + bunNo + '' + talker + ' <font color=' + color + '>【</font>' + bunContent + '】</font><br><br>'
-  if(bold){msg.innerHTML+="</b>"}
-}
+/*const addButton=()=>{
 
-const addButton=()=>{
-
-}
+}*/
 
 export {viewNodeText,createTextViewArea}
