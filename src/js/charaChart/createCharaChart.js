@@ -16,6 +16,7 @@ import {rodata} from './rodata'
 import {downloadAsTask} from './downloadAsTask'
 import { outputCsv } from './csv/outputCsv'
 import { inputCsv } from './csv/inputCsv'
+import { viewOnlyTxt } from './viewText/viewOnlyText'
 let nodeArr = []
 let verbArr = []
 
@@ -26,10 +27,13 @@ const createCharaChart = () => {
   findChara(knp, nodeArr)
   fixNodePoint(nodeArr)
   const bunArr = createBunArr(knp, nodeArr)
-  //outputCsv(bunArr)
-  inputCsv(bunArr)
-  createArrowArr(bunArr, nodeArr,bunArr)
-  manageSlider(bunArr,nodeArr)
+  if(rodata.viewOnlyTxt){
+    viewOnlyTxt(bunArr)
+  }else {
+    if (rodata.outputCsv) {outputCsv(bunArr)} else {inputCsv(bunArr)}
+    createArrowArr(bunArr, nodeArr, bunArr)
+    manageSlider(bunArr, nodeArr)
+  }
 }
 
 const findDependency = () => {

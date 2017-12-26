@@ -1,11 +1,13 @@
 import {createBox} from './createBox'
 import { addBun } from './addBun'
 
-const viewOnlyText = (bunArr) => {
-  createBox(ViewOnlyText)
+const boxId="viewonlytxt"
+
+const viewOnlyTxt = (bunArr) => {
+  createBox(boxId)
   bunArr.forEach((d,i)=>{
-    addBun(d,"msgViewOnlyText",false)
+    addBun("msg"+boxId,d,false)
   })
 }
 
-export {viewOnlyText}
+export {viewOnlyTxt}
