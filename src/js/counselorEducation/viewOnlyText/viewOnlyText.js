@@ -1,0 +1,5 @@
+const viewOnlyText = () => {
+
+}
+
+export {viewOnlyText}
