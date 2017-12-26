@@ -1,5 +1,0 @@
-const viewOnlyText = () => {
-
-}
-
-export {viewOnlyText}

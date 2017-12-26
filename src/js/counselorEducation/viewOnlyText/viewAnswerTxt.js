@@ -4,6 +4,7 @@ const txtViewFontSize
 const txtViewClientName
 
 const viewAnswerTxt = (m,txtViewHatsugenNo,allHatsugenIdxArr,hatsugenNo,bun,ansTextureChoiceArr,ansCategoryNoArr) =>{
+  //txtViewHatsugenNo onlyTxtViewのときは0を入力してこよう
   m.innerHTML += '<font size=' + txtViewFontSize + '>' + (1 + txtViewHatsugenNo + allHatsugenIdxArr[hatsugenNo]) + '' + txtViewClientName + ' '
   for (let bunNo = 0; bunNo < bun[txtViewHatsugenNo + allHatsugenIdxArr[hatsugenNo]].length; bunNo++) {
     if (bun[txtViewHatsugenNo + allHatsugenIdxArr[hatsugenNo]][bunNo] === '') { continue }
@@ -13,3 +14,5 @@ const viewAnswerTxt = (m,txtViewHatsugenNo,allHatsugenIdxArr,hatsugenNo,bun,ansT
   }
   m.innerHTML += '<font size=' + txtViewFontSize + '><br><br></font>'
 }
+
+export{viewAnswerTxt}
