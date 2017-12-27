@@ -38,7 +38,15 @@ const rodata={
     lightBlue:'#368ab2'
   },
 
-  textViewFontSize:3
+  textViewFontSize:3,
+
+  isOnlyTxt:true,
+
+  txtView:{
+    fontSize:4,
+    counselor : '<img src = "./picture/counselor2.jpg" width ="20">',
+    client : '<img src = "./picture/client.jpg" width ="17">'
+  }
 
 }
 

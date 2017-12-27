@@ -1,7 +1,7 @@
 import 'kuromoji'
 import $ from 'jquery'
 import {select} from './select.js'
-import {setForViz} from './svg.js'
+import {setForViz} from './view/viz.js'
 
 let insertStr = (str, index, insert) => {
   return str.slice(0, index) + insert + str.slice(index, str.length)
