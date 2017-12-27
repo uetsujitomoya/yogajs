@@ -144,7 +144,7 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
     let barChartAllHatsugenColorArr = []
     let barChartAllHatsugenCategoryArr=[]
 
-    let mazekozeHatsugenIdxArr = []
+    let rectHatsugenNoArr = []
     let h = 0
     let mazekozeRanshinArr = []
     // 初手カウンセラー
@@ -153,7 +153,7 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
     isFullConversationAnswerArr[0] = 0
     barChartAllHatsugenColorArr[0] = colorArrayInAllQuestionHatsugen[0]
     barChartAllHatsugenCategoryArr[0] =
-      mazekozeHatsugenIdxArr[0] = 0
+      rectHatsugenNoArr[0] = 0
 
     let c = 0
 
@@ -166,7 +166,7 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
           mazekoze[h] = d
           isFullConversationAnswerArr[h] = 1
           barChartAllHatsugenColorArr[h] = answerTextureChoiceArr[checked[c]]
-          mazekozeHatsugenIdxArr[h] = m
+          rectHatsugenNoArr[h] = m
           h++
           c++
         }
@@ -179,7 +179,7 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
       mazekoze[h] = hatsugen[m + 1]
       isFullConversationAnswerArr[h] = 0
       barChartAllHatsugenColorArr[h] = colorArrayInAllQuestionHatsugen[(m + 1) / 2]
-      mazekozeHatsugenIdxArr[h] = m + 1
+      rectHatsugenNoArr[h] = m + 1
     }
 
     c = 0
@@ -361,49 +361,49 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
         }
       })
 
-      .on('mouseover', function (d, i) {
+      .on('mouseover', function (d, rectNo) {
           var msg = document.getElementById('msg')
-          let k, l
+          let txtViewHatsugenNo, l
           msg.innerHTML = ''
-          if (isFullConversationAnswerArr[i] === 0) {    // カウンセラーのグラフを触った時
-            for (k = -3; k <= 3; k++) {
-              if (mazekozeHatsugenIdxArr[i] + k < 0 || mazekozeHatsugenIdxArr[i] + k >= hatsugen.length) {
+          if (isFullConversationAnswerArr[rectNo] === 0) {    // カウンセラーのグラフを触った時
+            for (txtViewHatsugenNo = -3; txtViewHatsugenNo <= 3; txtViewHatsugenNo++) {
+              if (rectHatsugenNoArr[rectNo] + txtViewHatsugenNo < 0 || rectHatsugenNoArr[rectNo] + txtViewHatsugenNo >= hatsugen.length) {
                 continue
               }
-              if (k === 0) {
-                msg.innerHTML += '<b><u><font size=' + fontSizeInTextView + '>' + (1 + mazekozeHatsugenIdxArr[i]) + '' + txtViewCounselor + ' <font color=' + colorArrayInAllQuestionHatsugen[mazekozeHatsugenIdxArr[i] / 2] + '>【</font>' + hatsugen[mazekozeHatsugenIdxArr[i]] + '<font color=' + colorArrayInAllQuestionHatsugen[mazekozeHatsugenIdxArr[i] / 2] + '>】</font></u></b><font size=' + fontSizeInTextView + '><br><br>'
-              } else if (k % 2 === 0) {
-                msg.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + k + mazekozeHatsugenIdxArr[i]) + '' + txtViewCounselor + ' <font color=' + colorArrayInAllQuestionHatsugen[k / 2 + mazekozeHatsugenIdxArr[i] / 2] + '><b>【</b></font>' + hatsugen[k + mazekozeHatsugenIdxArr[i]] + '<font color=' + colorArrayInAllQuestionHatsugen[k / 2 + mazekozeHatsugenIdxArr[i] / 2] + '><b>】</b></font><br><br>'
+              if (txtViewHatsugenNo === 0) {
+                msg.innerHTML += '<b><u><font size=' + fontSizeInTextView + '>' + (1 + rectHatsugenNoArr[rectNo]) + '' + txtViewCounselor + ' <font color=' + colorArrayInAllQuestionHatsugen[rectHatsugenNoArr[rectNo] / 2] + '>【</font>' + hatsugen[rectHatsugenNoArr[rectNo]] + '<font color=' + colorArrayInAllQuestionHatsugen[rectHatsugenNoArr[rectNo] / 2] + '>】</font></u></b><font size=' + fontSizeInTextView + '><br><br>'
+              } else if (txtViewHatsugenNo % 2 === 0) {
+                msg.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + txtViewHatsugenNo + rectHatsugenNoArr[rectNo]) + '' + txtViewCounselor + ' <font color=' + colorArrayInAllQuestionHatsugen[txtViewHatsugenNo / 2 + rectHatsugenNoArr[rectNo] / 2] + '><b>【</b></font>' + hatsugen[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]] + '<font color=' + colorArrayInAllQuestionHatsugen[txtViewHatsugenNo / 2 + rectHatsugenNoArr[rectNo] / 2] + '><b>】</b></font><br><br>'
               } else { // forループを回さないと各文ごとの表示ができない
-                msg.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + k + mazekozeHatsugenIdxArr[i]) + '' + clientInTextView + ' '
-                for (l = 0; l < bun[k + mazekozeHatsugenIdxArr[i]].length; l++) {
-                  if (bun[k + mazekozeHatsugenIdxArr[i]][l] === '') { continue }
-                  msg.innerHTML += '<font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArr[answerCategoryNumArray[k + mazekozeHatsugenIdxArr[i]][l]] + '><b>【</b></font>' + bun[k + mazekozeHatsugenIdxArr[i]][l] + '<font color=' + answerTextureChoiceArr[answerCategoryNumArray[k + mazekozeHatsugenIdxArr[i]][l]] + '><b>】</b></font>'
+                msg.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + txtViewHatsugenNo + rectHatsugenNoArr[rectNo]) + '' + clientInTextView + ' '
+                for (l = 0; l < bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]].length; l++) {
+                  if (bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][l] === '') { continue }
+                  msg.innerHTML += '<font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArr[answerCategoryNumArray[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][l]] + '><b>【</b></font>' + bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][l] + '<font color=' + answerTextureChoiceArr[answerCategoryNumArray[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][l]] + '><b>】</b></font>'
                 }
                 msg.innerHTML += '<font size=' + fontSizeInTextView + '><br><br>'
               }
             }
           } else {  // 患者のグラフを触った時
-            for (k = -3; k <= 3; k++) {
-              if (mazekozeHatsugenIdxArr[i] + k < 0 || mazekozeHatsugenIdxArr[i] + k >= hatsugen.length) {
+            for (txtViewHatsugenNo = -3; txtViewHatsugenNo <= 3; txtViewHatsugenNo++) {
+              if (rectHatsugenNoArr[rectNo] + txtViewHatsugenNo < 0 || rectHatsugenNoArr[rectNo] + txtViewHatsugenNo >= hatsugen.length) {
                 continue
               }
-              if (k === 0) {
-                msg.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + k + mazekozeHatsugenIdxArr[i]) + '' + clientInTextView + ' '
-                for (l = 0; l < bun[k + mazekozeHatsugenIdxArr[i]].length; l++) {
-                  if (bun[k + mazekozeHatsugenIdxArr[i]][l] === '') { continue }
-                  msg.innerHTML += '<u><font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArr[answerCategoryNumArray[k + mazekozeHatsugenIdxArr[i]][l]] + '><b>【</b></font>' + bun[k + mazekozeHatsugenIdxArr[i]][l] + '<font color=' + answerTextureChoiceArr[answerCategoryNumArray[k + mazekozeHatsugenIdxArr[i]][l]] + '><b>】</b></font></font></u>'
+              if (txtViewHatsugenNo === 0) {
+                msg.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + txtViewHatsugenNo + rectHatsugenNoArr[rectNo]) + '' + clientInTextView + ' '
+                for (l = 0; l < bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]].length; l++) {
+                  if (bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][l] === '') { continue }
+                  msg.innerHTML += '<u><font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArr[answerCategoryNumArray[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][l]] + '><b>【</b></font>' + bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][l] + '<font color=' + answerTextureChoiceArr[answerCategoryNumArray[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][l]] + '><b>】</b></font></font></u>'
                 }
                 msg.innerHTML += '<font size=' + fontSizeInTextView + '><br><br></font>'
-              } else if (k % 2 === 0) {
-                msg.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + k + mazekozeHatsugenIdxArr[i]) + '' + clientInTextView + ' '
-                for (l = 0; l < bun[k + mazekozeHatsugenIdxArr[i]].length; l++) {
-                  if (bun[k + mazekozeHatsugenIdxArr[i]][l] === '') { continue }
-                  msg.innerHTML += '<font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArr[answerCategoryNumArray[k + mazekozeHatsugenIdxArr[i]][l]] + '><b>【</b></font>' + bun[k + mazekozeHatsugenIdxArr[i]][l] + '<font color=' + answerTextureChoiceArr[answerCategoryNumArray[k + mazekozeHatsugenIdxArr[i]][l]] + '><b>】</b></font>'
+              } else if (txtViewHatsugenNo % 2 === 0) {
+                msg.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + txtViewHatsugenNo + rectHatsugenNoArr[rectNo]) + '' + clientInTextView + ' '
+                for (l = 0; l < bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]].length; l++) {
+                  if (bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][l] === '') { continue }
+                  msg.innerHTML += '<font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArr[answerCategoryNumArray[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][l]] + '><b>【</b></font>' + bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][l] + '<font color=' + answerTextureChoiceArr[answerCategoryNumArray[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][l]] + '><b>】</b></font>'
                 }
                 msg.innerHTML += '<font size=' + fontSizeInTextView + '><br><br>'
               } else { // forループを回さないと各文ごとの表示ができない
-                msg.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + k + mazekozeHatsugenIdxArr[i]) + '' + txtViewCounselor + ' <font color=' + colorArrayInAllQuestionHatsugen[k / 2 + mazekozeHatsugenIdxArr[i] / 2] + '><b>【</b></font>' + hatsugen[k + mazekozeHatsugenIdxArr[i]] + '<font color=' + colorArrayInAllQuestionHatsugen[k / 2 + mazekozeHatsugenIdxArr[i] / 2] + '><b>】</b></font><br><br>'
+                msg.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + txtViewHatsugenNo + rectHatsugenNoArr[rectNo]) + '' + txtViewCounselor + ' <font color=' + colorArrayInAllQuestionHatsugen[txtViewHatsugenNo / 2 + rectHatsugenNoArr[rectNo] / 2] + '><b>【</b></font>' + hatsugen[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]] + '<font color=' + colorArrayInAllQuestionHatsugen[txtViewHatsugenNo / 2 + rectHatsugenNoArr[rectNo] / 2] + '><b>】</b></font><br><br>'
               }
             }
           }
