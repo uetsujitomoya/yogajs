@@ -21,16 +21,11 @@ const viewAnswerTxt = (input) =>{
   m.innerHTML += '<font size=' + txtViewFontSize + '>' + (1 + hatsugenNo) + '' + txtViewClient + ' '
   for (let bunNo = 0; bunNo < bun[hatsugenNo].length; bunNo++) {
     if (bun[hatsugenNo][bunNo] === '') { continue }
-
-
-
-    //console.log(txtViewHatsugenNo + allHatsugenIdxArr[hatsugenNo])
-    //console.log(ansCategoryNoArr[txtViewHatsugenNo + allHatsugenIdxArr[hatsugenNo]])
-    //console.log(ansTextureChoiceArr[ansCategoryNoArr[txtViewHatsugenNo + allHatsugenIdxArr[hatsugenNo]]])
-    //console.log(bun[txtViewHatsugenNo + allHatsugenIdxArr[hatsugenNo]][bunNo])
-    //console.log(ansTextureChoiceArr[ansCategoryNoArr[txtViewHatsugenNo + allHatsugenIdxArr[hatsugenNo]][bunNo]])
-    m.innerHTML += '<u><font size=' + txtViewFontSize + '><font color=' + ansTextureChoiceArr[ansCategoryNoArr[hatsugenNo][bunNo]] + '><b>【</b></font>' + bun[hatsugenNo][bunNo] + '<font color=' + ansTextureChoiceArr[ansCategoryNoArr[hatsugenNo][bunNo]] + '><b>】</b></font></font></u>'
-
+    if(input.isToViewOnlyTxt){
+      m.innerHTML += '<u><font size=' + txtViewFontSize + '><font color="gray"><b>【</b></font>' + bun[hatsugenNo][bunNo] + '<font color="gray"><b>】</b></font></font></u>'
+    }else{
+      m.innerHTML += '<u><font size=' + txtViewFontSize + '><font color=' + ansTextureChoiceArr[ansCategoryNoArr[hatsugenNo][bunNo]] + '><b>【</b></font>' + bun[hatsugenNo][bunNo] + '<font color=' + ansTextureChoiceArr[ansCategoryNoArr[hatsugenNo][bunNo]] + '><b>】</b></font></font></u>'
+    }
   }
   m.innerHTML += '<font size=' + txtViewFontSize + '><br><br></font>'
 }
