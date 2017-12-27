@@ -6,6 +6,8 @@ const txtViewClient=rodata.txtView.client
 const viewAnswerTxt = (input) =>{
   //txtViewHatsugenNo onlyTxtViewのときは0を入力してこよう
 
+  //hatsugenNoが実際には繰り返されている
+
   let m = input.m;
   const txtViewHatsugenNo = input.txtViewHatsugenNo
   const allHatsugenIdxArr = input.allHatsugenIdxArr
@@ -13,6 +15,8 @@ const viewAnswerTxt = (input) =>{
   const bun = input.bun
   const ansTextureChoiceArr = input.ansTextureChoiceArr
   const ansCategoryNoArr = input.ansCategoryNoArr
+
+  console.log(txtViewHatsugenNo + allHatsugenIdxArr[hatsugenNo])
 
   m.innerHTML += '<font size=' + txtViewFontSize + '>' + (1 + txtViewHatsugenNo + allHatsugenIdxArr[hatsugenNo]) + '' + txtViewClient + ' '
   for (let bunNo = 0; bunNo < bun[txtViewHatsugenNo + allHatsugenIdxArr[hatsugenNo]].length; bunNo++) {
