@@ -57,7 +57,13 @@ const vizArrow = (svg, arrow, r, arrowId,　allBunArr) => {
       'stroke': color,
       'stroke-width': arrow.strokeWidth,
       'fill': 'none',
-      'marker-end': 'url(#arrowhead'+arrowId+')'
+      'marker-end': ()=>{
+        if(rodata.viewArrow){
+          return 'url(#arrowhead'+arrowId+')'
+        }else{
+          return null
+        }
+      }
     })
     .on('click', ()=>{
       viewArrowText(arrow, allBunArr)
