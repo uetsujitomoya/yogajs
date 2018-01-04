@@ -38,7 +38,7 @@ const rodata={
     lightBlue:'#368ab2'
   },
 
-  textViewFontSize:3
+  textViewFontSize:4
 
 }
 
