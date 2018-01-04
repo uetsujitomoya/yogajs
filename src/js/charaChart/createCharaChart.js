@@ -27,7 +27,7 @@ const createCharaChart = () => {
   findChara(knp, nodeArr)
   fixNodePoint(nodeArr)
   const bunArr = createBunArr(knp, nodeArr)
-  if(rodata.viewOnlyTxt){
+  if(rodata.isToViewOnlyTxt){
     viewOnlyTxt(bunArr)
   }else {
     if (rodata.outputCsv) {outputCsv(bunArr)} else {inputCsv(bunArr)}

@@ -58,7 +58,7 @@ const vizArrow = (svg, arrow, r, arrowId,　allBunArr) => {
       'stroke-width': arrow.strokeWidth,
       'fill': 'none',
       'marker-end': ()=>{
-        if(rodata.viewArrow){
+        if(rodata.isToViewArrow){
           return 'url(#arrowhead'+arrowId+')'
         }else{
           return null

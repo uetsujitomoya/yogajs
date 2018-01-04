@@ -1,5 +1,6 @@
 import {rodata} from '../rodata'
 import {addBun} from './addBun'
+import {createBox} from './createBox'
 
 let preBunNo = null
 
