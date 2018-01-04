@@ -46,7 +46,13 @@ const passNotation=(inputChara)=>{
     "個人",
     "人物",
     "ミス",
-    "小学生"
+    "小学生",
+    "神さま",
+    "西郷さん",
+    "女性",
+    "友人",
+    "客",
+    "皆さん"
   ]
 
   if( noNeedArr.lastIndexOf(inputChara) >= 0 ){
