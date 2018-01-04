@@ -34,7 +34,9 @@ const rodata={
   circleRadiusCoefficient: 1.5,
 
   boxBorderColor: "#696969",
-  circleFill: "#e6e6e6"
+  circleFill: "#e6e6e6",
+
+  viewArrow:false
 }
 
 export {rodata}
