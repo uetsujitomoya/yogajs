@@ -36,7 +36,7 @@ const rodata={
   boxBorderColor: "#696969",
   circleFill: "#e6e6e6",
 
-  viewArrow:true,
+  viewMarkEnd:false,
   isOnlyViz:true
 }
 
