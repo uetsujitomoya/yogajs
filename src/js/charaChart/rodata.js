@@ -22,11 +22,11 @@ const rodata={
 
   textViewFontSize:2,
 
-  knpCsvFolder:"../csv/knp/",
+  knpCsvFolder:"./csv/knp/",
   knpCsvName:"171114allKnp",
   //csvPath: this.knpCsvFolder+this.knpCsvName+".csv",
 
-  bunArrCsvFolder:"../csv/bunArr/",
+  bunArrCsvFolder:"./csv/bunArr/",
   bunArrCsvName:"201712211623_171114allKnp_withPeople_edited.csv",
   withPeople:true,
 
@@ -37,7 +37,9 @@ const rodata={
   circleFill: "#e6e6e6",
 
   viewOnlyTxt:true,
-  outputCsv:false
+  outputCsv:false,
+  viewMarkEnd:true,
+  isOnlyViz:true
 }
 
 export {rodata}
