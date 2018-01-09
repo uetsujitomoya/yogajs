@@ -39,7 +39,7 @@ const rodata={
 
   viewMarkEnd:true,
 
-  isOnlyViz:true
+  isOnlyViz:false
 }
 
 export {rodata}
