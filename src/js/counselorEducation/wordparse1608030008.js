@@ -64,7 +64,7 @@ const selectGraphShape = function (name, storage, keitaisokaiseki, chboxlist, ch
   }// graphの形状を切り替えた際もここで再描画される
 }
 
-const classifyWithFirstWordDictionary = (name, aBunWordArr, checkboxlist, chboxlist, chboxlist2, RGBlist, hatsugenArray, aBunContentArr, checked, checked2, taiou, taiou2, chboxlength, chboxlength2, originalText) => {
+const classifyWithFirstWordDictionary = (name, aBunWordArr, checkboxlist, chboxlist, chboxlist2, RGBlist, hatsugenArray, aBunContentArr, ansRadioResult, checked2, taiou, taiou2, chboxlength, chboxlength2, originalText) => {
   let jsonName = '160803dummy'
   var startTime = new Date()
   console.log(startTime)
@@ -329,14 +329,14 @@ const classifyWithFirstWordDictionary = (name, aBunWordArr, checkboxlist, chboxl
 
     var graph
 
-    var sResult = select(name, storage, checkboxlist, aBunWordArr, miserables, chboxlist, chboxlist2, ansBunCategory, RGBlist, hatsugenArray, aBunContentArr, checked, checked2, taiou, taiou2, chboxlength, chboxlength2)
+    var sResult = select(name, storage, checkboxlist, aBunWordArr, miserables, chboxlist, chboxlist2, ansBunCategory, RGBlist, hatsugenArray, aBunContentArr, ansRadioResult, checked2, taiou, taiou2, chboxlength, chboxlength2)
 
     checkboxlist = sResult.checkboxlist
     chboxlist = sResult.chboxlist
     chboxlist2 = sResult.chboxlist2
     ansBunCategory = sResult.RGB
     RGBlist = sResult.RGBlist
-    checked = sResult.checked
+    ansRadioResult = sResult.checked
     checked2 = sResult.checked2
     taiou = sResult.taiou
     taiou2 = sResult.taiou2
@@ -357,7 +357,7 @@ const classifyWithFirstWordDictionary = (name, aBunWordArr, checkboxlist, chboxl
       RGBlist: RGBlist,
       hatsugenArray: hatsugenArray,
       contentArrayOfASentence: aBunContentArr,
-      checked: checked,
+      checked: ansRadioResult,
       checked2: checked2,
       taiou: taiou,
       taiou2: taiou2,
@@ -369,7 +369,7 @@ const classifyWithFirstWordDictionary = (name, aBunWordArr, checkboxlist, chboxl
       zoom_value: zoomVal
     }
 
-    setForViz(name, storage, aBunWordArr, chboxlist, chboxlist2, RGBlist, hatsugenArray, aBunContentArr, checked, checked2, taiou, taiou2, chboxlength, chboxlength2, startTime, graph, ranshin, zoomVal)
+    setForViz(name, storage, aBunWordArr, chboxlist, chboxlist2, RGBlist, hatsugenArray, aBunContentArr, ansRadioResult, checked2, taiou, taiou2, chboxlength, chboxlength2, startTime, graph, ranshin, zoomVal)
 
     // 以下は後ろじゃなきゃアカン
     for (let c = 1; c <= chboxlength; c++) {
@@ -379,12 +379,12 @@ const classifyWithFirstWordDictionary = (name, aBunWordArr, checkboxlist, chboxl
       makeOnClickS(c)
     }
 
-    //selectGraphShape(name, storage, aBunWordArr, chboxlist, chboxlist2, RGBlist, hatsugenArray, aBunContentArr, checked, checked2, taiou, taiou2, chboxlength, chboxlength2, startTime, graph, ranshin, visResult, setForVizInput)
+    //selectGraphShape(name, storage, aBunWordArr, chboxlist, chboxlist2, RGBlist, hatsugenArray, aBunContentArr, ansRadioResult, checked2, taiou, taiou2, chboxlength, chboxlength2, startTime, graph, ranshin, visResult, setForVizInput)
 
     // graphの形状を切り替えた際もここで再描画される
 
     document.getElementById('radio_buttons').onchange = () => {
-      setForViz(name, storage, aBunWordArr, chboxlist, chboxlist2, RGBlist, hatsugenArray, aBunContentArr, checked, checked2, taiou, taiou2, chboxlength, chboxlength2, startTime, graph, ranshin, zoomVal)
+      setForViz(name, storage, aBunWordArr, chboxlist, chboxlist2, RGBlist, hatsugenArray, aBunContentArr, ansRadioResult, checked2, taiou, taiou2, chboxlength, chboxlength2, startTime, graph, ranshin, zoomVal)
     }
 
     // スライダー
@@ -392,11 +392,11 @@ const classifyWithFirstWordDictionary = (name, aBunWordArr, checkboxlist, chboxl
     $('#slider1').on('slide', function (slideEvt) {
       $('#SliderVal').text(slideEvt.value)
       zoomVal = slideEvt.value
-      setForViz(name, storage, aBunWordArr, chboxlist, chboxlist2, RGBlist, hatsugenArray, aBunContentArr, checked, checked2, taiou, taiou2, chboxlength, chboxlength2, startTime, graph, ranshin, zoomVal)
+      setForViz(name, storage, aBunWordArr, chboxlist, chboxlist2, RGBlist, hatsugenArray, aBunContentArr, ansRadioResult, checked2, taiou, taiou2, chboxlength, chboxlength2, startTime, graph, ranshin, zoomVal)
     })
 
     return {
-      name: name, RGBlist: RGBlist, keitaisokaiseki: aBunWordArr, hatsugen: hatsugenArray, bun: aBunContentArr, chboxlist: chboxlist, chboxlist2: chboxlist2, checked: checked, checked2: checked2, taiou: taiou, taiou2: taiou2, chboxlength: chboxlength, chboxlength2: chboxlength2
+      name: name, RGBlist: RGBlist, keitaisokaiseki: aBunWordArr, hatsugen: hatsugenArray, bun: aBunContentArr, chboxlist: chboxlist, chboxlist2: chboxlist2, checked: ansRadioResult, checked2: checked2, taiou: taiou, taiou2: taiou2, chboxlength: chboxlength, chboxlength2: chboxlength2
     }
   })
 }
