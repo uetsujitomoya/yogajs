@@ -393,7 +393,7 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
                 msg.innerHTML += '<b><font size=' + fontSizeInTextView + '>' + (1 + txtViewHatsugenNo + rectHatsugenNoArr[rectNo]) + '' + clientInTextView + ' '
                 for (l = 0; l < bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]].length; l++) {
                   if (bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][l] === '') { continue }
-                  msg.innerHTML += '<u><font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArr[answerCategoryNumArray[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][l]] + '>【</font>' + bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][l] + '<font color=' + answerTextureChoiceArr[answerCategoryNumArray[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][l]] + '>】</b></font></font></u>'
+                  msg.innerHTML += '<u><b><font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArr[answerCategoryNumArray[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][l]] + '>【</font>' + bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][l] + '<font color=' + answerTextureChoiceArr[answerCategoryNumArray[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][l]] + '>】</b></font></font></u>'
                 }
                 msg.innerHTML += '<font size=' + fontSizeInTextView + '><br><br></font>'
 
