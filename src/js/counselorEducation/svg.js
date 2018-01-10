@@ -111,7 +111,7 @@ const kaishakuColor = '#f1c400'
 const height0 = 200
 const height = 200
 
-const setForViz = (name, storage, keitaisokaiseki, ansBunAnd1stCateArr, chboxlist2, RGBlist, hatsugen, bun, ansRadioResult, questionRadioResult, taiou, taiou2, chboxlength, chboxlength2, startTime, graph, ranshin, zoom_value) => {
+const setForViz = (name, storage, keitaisokaiseki, ansBunAnd1stCateArr, chboxlist2, RGBlist, hatsugen, bun, ansRadioResult, questionRadioResult, taiou, taiou2, ansChBoxLen, queChBoxLen, startTime, graph, ranshin, zoom_value) => {
   let isUsingDictionaryWithWord2Vec = 0
 
   var bunsuu = 2// 前後の余白
@@ -128,11 +128,11 @@ const setForViz = (name, storage, keitaisokaiseki, ansBunAnd1stCateArr, chboxlis
     .attr('width', width)
   var allQueHatsugenColorArr = []
   var stackDataArr = []
-  if (chboxlength >= 1) {
-    readAnsRadio(name, storage, ansBunAnd1stCateArr, ansRadioResult, taiou, chboxlength, isUsingDictionaryWithWord2Vec)
+  if (ansChBoxLen >= 1) {
+    readAnsRadio(name, storage, ansBunAnd1stCateArr, ansRadioResult, taiou, ansChBoxLen, isUsingDictionaryWithWord2Vec)
   }
-  if (chboxlength2 >= 1) {
-    readQuestionRadio(name, storage, ansBunAnd1stCateArr, chboxlist2, questionRadioResult, taiou, taiou2, chboxlength, chboxlength2)
+  if (queChBoxLen >= 1) {
+    readQuestionRadio(name, storage, ansBunAnd1stCateArr, chboxlist2, questionRadioResult, taiou, taiou2, ansChBoxLen, queChBoxLen)
   }
 
   let h, i, c, m, n
@@ -204,8 +204,8 @@ const setForViz = (name, storage, keitaisokaiseki, ansBunAnd1stCateArr, chboxlis
     RGBlist: RGBlist,
     checked: ansRadioResult,
     checked2: questionRadioResult,
-    chboxlength: chboxlength,
-    chboxlength2: chboxlength2,
+    chboxlength: ansChBoxLen,
+    chboxlength2: queChBoxLen,
     ranshin: ranshin
   }
 }

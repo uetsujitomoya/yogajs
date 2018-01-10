@@ -16,7 +16,7 @@ const readAnsRadio = (jsonFileName, storage, ansBunAnd1stCateArr, answerRadioRes
 
     const answerRadio = document.getElementById('r' + c).children
     for (let i = answerRadio.length - rodata.ansRadioFullLen, l = answerRadio.length; i < l; i++) {
-      if (answerRadio[i].control.checked === true) {
+      if (answerRadio[i].control.checked) {
         if (answerRadio[i].control.value === '1') {
           answerRadioResult[taiou[c - 1]] = 1
           storage.setItem(changedAnswerClassificationSaveTarget, 0)
