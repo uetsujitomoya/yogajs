@@ -5,6 +5,8 @@
 import d3 from 'd3'
 import textures from 'textures'
 import {rodata} from './rodata'
+import { fromAnsRadioResultToAnsCateNum } from './setForViz/fromAnsRadioResultToAnsCateNum'
+import { readAnsRadio } from './setForViz/readAnsRadio'
 
 // let love="#ffeeff";
 // let friend="#c0ffc0";
@@ -109,7 +111,7 @@ const kaishakuColor = '#f1c400'
 const height0 = 200
 const height = 200
 
-const setForViz = (name, storage, keitaisokaiseki, chboxlist, chboxlist2, RGBlist, hatsugen, bun, answerRadioResult, questionRadioResult, taiou, taiou2, chboxlength, chboxlength2, startTime, graph, ranshin, zoom_value) => {
+const setForViz = (name, storage, keitaisokaiseki, ansBunAnd1stCateArr, chboxlist2, RGBlist, hatsugen, bun, ansRadioResult, questionRadioResult, taiou, taiou2, chboxlength, chboxlength2, startTime, graph, ranshin, zoom_value) => {
   let isUsingDictionaryWithWord2Vec = 0
 
   var bunsuu = 2// 前後の余白
@@ -124,13 +126,13 @@ const setForViz = (name, storage, keitaisokaiseki, chboxlist, chboxlist2, RGBlis
   var svg = d3.select('#svgdiv').append('svg')
     .attr('height', 270)
     .attr('width', width)
-  var allQuestionHatsugenColorArray = []
+  var allQueHatsugenColorArr = []
   var stackDataArr = []
   if (chboxlength >= 1) {
-    readAnswerRadio(name, storage, chboxlist, answerRadioResult, taiou, chboxlength, isUsingDictionaryWithWord2Vec)
+    readAnsRadio(name, storage, ansBunAnd1stCateArr, ansRadioResult, taiou, chboxlength, isUsingDictionaryWithWord2Vec)
   }
   if (chboxlength2 >= 1) {
-    readQuestionRadio(name, storage, chboxlist, chboxlist2, questionRadioResult, taiou, taiou2, chboxlength, chboxlength2)
+    readQuestionRadio(name, storage, ansBunAnd1stCateArr, chboxlist2, questionRadioResult, taiou, taiou2, chboxlength, chboxlength2)
   }
 
   let h, i, c, m, n
@@ -141,50 +143,25 @@ const setForViz = (name, storage, keitaisokaiseki, chboxlist, chboxlist2, RGBlis
     RGBlist[n][2] = 0
   }
 
-  let ansCategoryNumArr = []
-  n = 0// allHatsugenNo=1;allHatsugenNo<keitaisokaiseki.length;allHatsugenNo=allHatsugenNo+2の外
-  for (let allHatsugenNo = 1; allHatsugenNo < keitaisokaiseki.length; allHatsugenNo = allHatsugenNo + 2) {
-    ansCategoryNumArr[allHatsugenNo] = []// svgでの描画ではm→hatsugenBunNo
-    for (let hatsugenBunNo = 0; hatsugenBunNo < keitaisokaiseki[allHatsugenNo].length; hatsugenBunNo++) {
-      ansCategoryNumArr[allHatsugenNo][hatsugenBunNo] = 0
-      for (let c = 1; c < chboxlist.length; c++) {
-        if (bun[allHatsugenNo][hatsugenBunNo] === chboxlist[c][0]) {
-          if (answerRadioResult[c - 1] === 1) {
-            RGBlist[n][0] = RGBlist[n][0] + 1
-            ansCategoryNumArr[allHatsugenNo][hatsugenBunNo] = 1
-          } else if (answerRadioResult[c - 1] === 2) {
-            RGBlist[n][1] = RGBlist[n][1] + 1
-            ansCategoryNumArr[allHatsugenNo][hatsugenBunNo] = 2
-          } else if (answerRadioResult[c - 1] === 3) {
-            RGBlist[n][2] = RGBlist[n][2] + 1
-            ansCategoryNumArr[allHatsugenNo][hatsugenBunNo] = 3
-          } else if (answerRadioResult[c - 1] === 4) {
-            RGBlist[n][3] = RGBlist[n][3] + 1
-            ansCategoryNumArr[allHatsugenNo][hatsugenBunNo] = 4
-          } else if (answerRadioResult[c - 1] === 5) {
-            RGBlist[n][4] = RGBlist[n][4] + 1
-            ansCategoryNumArr[allHatsugenNo][hatsugenBunNo] = 5
-          }
-        }
-      }
-    }
-    n++
-  }
 
-  console.log(ansCategoryNumArr)
+  console.log(ansRadioResult)
 
-  let allQuestionHatsugenCategoryArr=[]
-  for (let c = 0; c < questionRadioResult.length; c++) {
-    if (questionRadioResult[c] === 3) {
-      allQuestionHatsugenColorArray[c] = openColor
-    } else if (questionRadioResult[c] === 5) {
-      allQuestionHatsugenColorArray[c] = aiduchiColor
-    } else if (questionRadioResult[c] === 4) {
-      allQuestionHatsugenColorArray[c] = closeColor
-    } else if (questionRadioResult[c] === 6) {
-      allQuestionHatsugenColorArray[c] = kaishakuColor
+  let ansCateNumArr = []
+  fromAnsRadioResultToAnsCateNum(ansCateNumArr,ansRadioResult,keitaisokaiseki,ansBunAnd1stCateArr,RGBlist,bun)
+
+  console.log(ansCateNumArr)
+
+  for (let queHatsugenNo = 0; queHatsugenNo < questionRadioResult.length; queHatsugenNo++) {
+    if (questionRadioResult[queHatsugenNo] === 3) {
+      allQueHatsugenColorArr[queHatsugenNo] = openColor
+    } else if (questionRadioResult[queHatsugenNo] === 5) {
+      allQueHatsugenColorArr[queHatsugenNo] = aiduchiColor
+    } else if (questionRadioResult[queHatsugenNo] === 4) {
+      allQueHatsugenColorArr[queHatsugenNo] = closeColor
+    } else if (questionRadioResult[queHatsugenNo] === 6) {
+      allQueHatsugenColorArr[queHatsugenNo] = kaishakuColor
     } else {
-      allQuestionHatsugenColorArray[c] = sekenColor
+      allQueHatsugenColorArr[queHatsugenNo] = sekenColor
     }
   }
 
@@ -220,12 +197,12 @@ const setForViz = (name, storage, keitaisokaiseki, chboxlist, chboxlist2, RGBlis
       stackDataArr[h][3 * m + 2] = {x: 3 * m + 3, y: 0}
     }
   }
-  viz(stackDataArr, allQuestionHatsugenColorArray, bun, hatsugen, svg, ansCategoryNumArr, keitaisokaiseki, RGBmaxmax, startTime, graph, answerRadioResult, ranshin, width, bunsuu)
+  viz(stackDataArr, allQueHatsugenColorArr, bun, hatsugen, svg, ansCateNumArr, keitaisokaiseki, RGBmaxmax, startTime, graph, ansRadioResult, ranshin, width, bunsuu)
   return {
-    chboxlist: chboxlist,
+    chboxlist: ansBunAnd1stCateArr,
     chboxlist2: chboxlist2,
     RGBlist: RGBlist,
-    checked: answerRadioResult,
+    checked: ansRadioResult,
     checked2: questionRadioResult,
     chboxlength: chboxlength,
     chboxlength2: chboxlength2,
@@ -721,53 +698,7 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
   }
 }
 
-const answerRadioFullLength=5
-
-const readAnswerRadio = (jsonFileName, storage, chboxlist, answerRadioResult, taiou, chboxlength, isUsingDictionaryWithWord2Vec) => {
-  let graphNumber = 2
-
-  var c
-  for (c = 1; c <= chboxlength; c++) {
-    let changedAnswerClassificationSaveTarget
-
-    if (isUsingDictionaryWithWord2Vec === 1) {
-      changedAnswerClassificationSaveTarget = jsonFileName + 'AnswerWithNewDictionary' + c
-      // 今後辞書名に対応
-    } else {
-      changedAnswerClassificationSaveTarget = jsonFileName + 'RGB' + c
-    }
-
-    const answerRadio = document.getElementById('r' + c).children
-    for (let i = answerRadio.length - answerRadioFullLength, l = answerRadio.length; i < l; i++) {
-      if (answerRadio[i].control.checked === true) {
-        if (answerRadio[i].control.value === '1') {
-          answerRadioResult[taiou[c - 1]] = 1
-          storage.setItem(changedAnswerClassificationSaveTarget, 0)
-          break
-        } else if (answerRadio[i].control.value === '2') {
-          answerRadioResult[taiou[c - 1]] = 2
-          storage.setItem(changedAnswerClassificationSaveTarget, 1)
-          break
-        } else if (answerRadio[i].control.value === '3') {
-          answerRadioResult[taiou[c - 1]] = 3
-          storage.setItem(changedAnswerClassificationSaveTarget, 2)
-          break
-        } else if (answerRadio[i].control.value === '4') {
-          answerRadioResult[taiou[c - 1]] = 4
-          storage.setItem(changedAnswerClassificationSaveTarget, 3)
-          break
-        } else if (answerRadio[i].control.value === '5') {
-          answerRadioResult[taiou[c - 1]] = 5
-          storage.setItem(changedAnswerClassificationSaveTarget, 4)
-          break
-        }
-      } else {
-        answerRadioResult[taiou[c - 1]] = 0
-        storage.setItem(changedAnswerClassificationSaveTarget, 9)// 未分類
-      }
-    }
-  }
-}
+const ansRadioFullLen=rodata.ansRadioFullLen
 
 const readQuestionRadio = (name, storage, chboxlist, chboxlist2, questionRadioResult, taiou, taiou2, chboxlength, chboxlength2) => {
   let c

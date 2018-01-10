@@ -85,8 +85,8 @@ const classifyWithFirstWordDictionary = (name, aBunWordArr, checkboxlist, chboxl
     let zoomVal = 3
 
     let visResult
-    console.log('%c entered kuromoji 95', 'color:red')
-    console.log(originalText)
+    //console.log('%c entered kuromoji 95', 'color:red')
+    //console.log(originalText)
     const wordsArrayAfterMorphologicalAnalysis = tokenizer.tokenize(originalText)
 
     afterMorphologicalAnalysisWordsCnt = 0

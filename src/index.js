@@ -11,6 +11,8 @@ import { clearStorage } from './js/counselorEducation/sub/clearStorage'
 // wordparse2object()
 // 以下、今までの(170809)
 
+clearStorage()
+
 let storageArrayFromKamata = csv2Array('csv/storage170421fromKamata.csv')
 console.log('storageFromKamata')
 console.log(storageArrayFromKamata)
@@ -98,7 +100,7 @@ document.getElementById('load-button').addEventListener('click', function () {
   reader.readAsText(file)
 })
 
-document.getElementById('storageClear-button').addEventListener('click', clearStorage())
+
 
 
 /*document.getElementById('storageSave-button').addEventListener('click', () => {
