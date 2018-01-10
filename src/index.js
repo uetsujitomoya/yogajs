@@ -3,6 +3,7 @@ import {classifyWithFirstWordDictionary} from './js/counselorEducation/wordparse
 import {ClassifyWithKNP} from './js/counselorEducation/sub/processKnp.js' // processKNP
 import {ClassifyWithWordDictionary} from './js/counselorEducation/sub/changeDictionary.js' // AcceptDictionary
 import $ from 'jquery'
+import { clearStorage } from './js/counselorEducation/sub/clearStorage'
 
 // import {wordparse2object} from "./js/wordparse2object.js"
 // import {CreateSwitchClassificationMethod} from "./switchClassificationMethod.js"; //AcceptDictionary
@@ -96,6 +97,8 @@ document.getElementById('load-button').addEventListener('click', function () {
   }
   reader.readAsText(file)
 })
+
+document.getElementById('storageClear-button').addEventListener('click', clearStorage())
 
 
 /*document.getElementById('storageSave-button').addEventListener('click', () => {

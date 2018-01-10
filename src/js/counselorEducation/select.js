@@ -114,21 +114,21 @@ const select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, ch
 
         if (answerClassification3dArrayforCreatingSelect[hatsugenIdx][bunIdx][0] !== 0) {
           chboxlist[n][1] = 0
-          document.getElementById('r' + ansCnt).innerHTML += '<label><input type=radio name="r' + ansCnt + '" value=1 ansRadioResult><font color="#ff7777">【</font>「愛」に含む<font color="#ff7777">】</font></label>'
+          createAnswerRadioButton(ansCnt, 1, selfTxtColor, '愛', true)
         } else {
-          document.getElementById('r' + ansCnt).innerHTML += '<label><input type=radio name="r' + ansCnt + '" value=1><font color="#ff7777">【</font>「愛」に含む<font color="#ff7777">】</font></label>'
+          createAnswerRadioButton(ansCnt, 1, selfTxtColor, '愛', false)
         }
         if (answerClassification3dArrayforCreatingSelect[hatsugenIdx][bunIdx][1] !== 0) {
-          document.getElementById('r' + ansCnt).innerHTML += '<label><input type=radio name="r' + ansCnt + '" value=2 ansRadioResult><font color="#77ff77">【</font>「交友」に含む<font color="#77ff77">】</font></label>'
+          createAnswerRadioButton(ansCnt, 2, selfTxtColor, '交友', true)
           chboxlist[n][1] = 1
         } else {
-          document.getElementById('r' + ansCnt).innerHTML += '<label><input type=radio name="r' + ansCnt + '" value=2><font color="#77ff77">【</font>「交友」に含む<font color="#77ff77">】</font></label>'
+          createAnswerRadioButton(ansCnt, 2, selfTxtColor, '交友', false)
         }
         if (answerClassification3dArrayforCreatingSelect[hatsugenIdx][bunIdx][2] !== 0) {
-          document.getElementById('r' + ansCnt).innerHTML += '<label><input type=radio name="r' + ansCnt + '" value=3 ansRadioResult><font color="#7777ff">【</font>「仕事」に含む<font color="#7777ff">】</font></label>'
+          createAnswerRadioButton(ansCnt, 3, selfTxtColor, '仕事', true)
           chboxlist[n][1] = 2
         } else {
-          document.getElementById('r' + ansCnt).innerHTML += '<label><input type=radio name="r' + ansCnt + '" value=3><font color="#7777ff">【</font>「仕事」に含む<font color="#7777ff">】</font></label>'
+          createAnswerRadioButton(ansCnt, 3, selfTxtColor, '仕事', false)
         }
 
         if (answerClassification3dArrayforCreatingSelect[hatsugenIdx][bunIdx][3] !== 0) {

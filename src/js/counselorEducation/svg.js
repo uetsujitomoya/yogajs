@@ -171,6 +171,8 @@ const setForViz = (name, storage, keitaisokaiseki, chboxlist, chboxlist2, RGBlis
     n++
   }
 
+  console.log(ansCategoryNumArr)
+
   let allQuestionHatsugenCategoryArr=[]
   for (let c = 0; c < questionRadioResult.length; c++) {
     if (questionRadioResult[c] === 3) {
@@ -513,19 +515,18 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
               if (txtViewHatsugenNo === 0) {
                 msg.innerHTML += '<b><font size=' + fontSizeInTextView + '>' + (1 + txtViewHatsugenNo + rectHatsugenNoArr[rectNo]) + '' + clientInTextView + ' '
                 console.log("start for loop")
-                for (let HatsugenBunNo = 0; HatsugenBunNo < bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]].length; HatsugenBunNo++) {
-                  if (bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][HatsugenBunNo] === '') { continue }
+                for (let hatsugenBunNo = 0; hatsugenBunNo < bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]].length; hatsugenBunNo++) {
+                  if (bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][hatsugenBunNo] === '') { continue }
                   console.log("console.log")
 
-                  console.log(rectNo)
-                  console.log(rextTxt[rectNo])
+                  console.log("rectNo %d",rectNo)
+                  console.log("rectTxt %s",rextTxt[rectNo])
 
-                  console.log(txtViewHatsugenNo + rectHatsugenNoArr[rectNo])
-                  console.log(HatsugenBunNo)
-                  console.log(ansCategoryNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][HatsugenBunNo])
-                  console.log(answerTextureChoiceArr[ansCategoryNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][HatsugenBunNo]])
+                  console.log(txtViewHatsugenNo + rectHatsugenNoArr[rectNo]) //txtViewHatsugenNoは0なので、発言Noになる
+                  console.log("ansCate %d",ansCategoryNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][hatsugenBunNo])
+                  console.log(answerTextureChoiceArr[ansCategoryNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][hatsugenBunNo]])
 
-                  msg.innerHTML += '<u><b><font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArr[ansCategoryNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][HatsugenBunNo]] + '>【</font>' + bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][HatsugenBunNo] + '<font color=' + answerTextureChoiceArr[ansCategoryNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][HatsugenBunNo]] + '>】</b></font></font></u>'
+                  msg.innerHTML += '<u><b><font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArr[ansCategoryNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][hatsugenBunNo]] + '>【</font>' + bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][hatsugenBunNo] + '<font color=' + answerTextureChoiceArr[ansCategoryNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][hatsugenBunNo]] + '>】</b></font></font></u>'
                 }
                 msg.innerHTML += '<font size=' + fontSizeInTextView + '><br><br></font>'
 
