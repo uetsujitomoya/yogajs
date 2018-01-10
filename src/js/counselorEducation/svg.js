@@ -233,41 +233,41 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
 
     let rectDataObjectArr = []
     let rectTxtNo
-    let rextTxt = []
+    let rectTxt = []
     let checkedNo = 0
 
     for (rectTxtNo = 0; rectTxtNo < len2.length; rectTxtNo++) { // 色変えたからか。。
       if (barChartAllHatsugenColorArr[rectTxtNo] === openColor) {
-        rextTxt[rectTxtNo] = categoryOfTextOnRect.openQuestion
+        rectTxt[rectTxtNo] = categoryOfTextOnRect.openQuestion
       } else if (barChartAllHatsugenColorArr[rectTxtNo] === aiduchiColor) {
-        rextTxt[rectTxtNo] = categoryOfTextOnRect.feedback
+        rectTxt[rectTxtNo] = categoryOfTextOnRect.feedback
       } else if (barChartAllHatsugenColorArr[rectTxtNo] === closeColor) {
-        rextTxt[rectTxtNo] = categoryOfTextOnRect.closedQuestion
+        rectTxt[rectTxtNo] = categoryOfTextOnRect.closedQuestion
       } else if (barChartAllHatsugenColorArr[rectTxtNo] === kaishakuColor) {
-        rextTxt[rectTxtNo] = categoryOfTextOnRect.interpretation
+        rectTxt[rectTxtNo] = categoryOfTextOnRect.interpretation
       } else　if(barChartAllHatsugenColorArr[rectTxtNo] === sekenColor) {
-        rextTxt[rectTxtNo] = categoryOfTextOnRect.smallTalk
+        rectTxt[rectTxtNo] = categoryOfTextOnRect.smallTalk
       }else{
 
         if (checked[checkedNo] === 0) {
-          rextTxt[rectTxtNo] = categoryOfTextOnRect.noGroup; checkedNo++
+          rectTxt[rectTxtNo] = categoryOfTextOnRect.noGroup; checkedNo++
         } else if (checked[checkedNo] === 1) {
-          rextTxt[rectTxtNo] = categoryOfTextOnRect.love; checkedNo++
+          rectTxt[rectTxtNo] = categoryOfTextOnRect.love; checkedNo++
         } else if (checked[checkedNo] === 2) {
-          rextTxt[rectTxtNo] = categoryOfTextOnRect.friendship; checkedNo++
+          rectTxt[rectTxtNo] = categoryOfTextOnRect.friendship; checkedNo++
         } else if (checked[checkedNo] === 3) {
-          rextTxt[rectTxtNo] = categoryOfTextOnRect.work; checkedNo++
+          rectTxt[rectTxtNo] = categoryOfTextOnRect.work; checkedNo++
         } else if (checked[checkedNo] === 4) {
-          rextTxt[rectTxtNo] = categoryOfTextOnRect.self; checkedNo++
+          rectTxt[rectTxtNo] = categoryOfTextOnRect.self; checkedNo++
         } else if (checked[checkedNo] === 5) {
-          rextTxt[rectTxtNo] = categoryOfTextOnRect.spiritual; checkedNo++
+          rectTxt[rectTxtNo] = categoryOfTextOnRect.spiritual; checkedNo++
         } else {
         }
       }
     }
 
     for (rectTxtNo = 0; rectTxtNo < len2.length; rectTxtNo++) {
-      rectDataObjectArr[rectTxtNo] = {x: len2[rectTxtNo], y: 40, color: barChartAllHatsugenColorArr[rectTxtNo], text: rextTxt[rectTxtNo], which: isFullConversationAnswerArr[rectTxtNo]}
+      rectDataObjectArr[rectTxtNo] = {x: len2[rectTxtNo], y: 40, color: barChartAllHatsugenColorArr[rectTxtNo], text: rectTxt[rectTxtNo], which: isFullConversationAnswerArr[rectTxtNo]}
       // moji[jj]}//F_color2moji(color2[jj])}//, text:a}
     }
 
@@ -318,7 +318,7 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
             //questionColor
           }*/
 
-          switch (rextTxt[i]){
+          switch (rectTxt[i]){
             case categoryOfTextOnRect.love:
               return loveTexture.url()
               break;
@@ -390,8 +390,21 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
                 continue
               }
               if (k === 0) {
+
+
+
                 msg.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + k + mazekozeHatsugenIdxArr[i]) + '' + clientInTextView + ' '
-                for (l = 0; l < bun[k + mazekozeHatsugenIdxArr[i]].length; l++) {
+                for (let l = 0; l < bun[k + mazekozeHatsugenIdxArr[i]].length; l++) {
+
+                  console.log("l=%d",l)
+                  console.log(answerTextureChoiceArr[answerCategoryNumArray[k + mazekozeHatsugenIdxArr[i]][l]])
+                  console.log(answerCategoryNumArray[k + mazekozeHatsugenIdxArr[i]][l])
+                  console.log(k + mazekozeHatsugenIdxArr[i])
+                  console.log(mazekozeHatsugenIdxArr[i])
+                  console.log(i)
+                  console.log(rectTxt[i])
+                  //rectTxt[i]は正常なので、それに応じて変えてしまえばいい？
+
                   if (bun[k + mazekozeHatsugenIdxArr[i]][l] === '') { continue }
                   msg.innerHTML += '<u><font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArr[answerCategoryNumArray[k + mazekozeHatsugenIdxArr[i]][l]] + '><b>【</b></font>' + bun[k + mazekozeHatsugenIdxArr[i]][l] + '<font color=' + answerTextureChoiceArr[answerCategoryNumArray[k + mazekozeHatsugenIdxArr[i]][l]] + '><b>】</b></font></font></u>'
                 }
