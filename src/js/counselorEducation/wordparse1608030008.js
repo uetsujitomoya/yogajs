@@ -1,8 +1,8 @@
 import 'kuromoji'
 import $ from 'jquery'
 import {select} from './select.js'
-import {setForViz} from './svg.js'
-import slider from 'bootstrap-slider'
+import {setForViz} from './setForViz'
+import {slider} from 'bootstrap-slider'
 
 let zoomVal = 3
 

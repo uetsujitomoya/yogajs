@@ -7,6 +7,7 @@ import textures from 'textures'
 import {rodata} from './rodata'
 import { fromAnsRadioResultToAnsCateNum } from './setForViz/fromAnsRadioResultToAnsCateNum'
 import { readAnsRadio } from './setForViz/readAnsRadio'
+import { vizStackChart } from './viz/vizStackChart'
 
 // let love="#ffeeff";
 // let friend="#c0ffc0";
@@ -29,7 +30,6 @@ const answerBGColor={
   self:'#f0e68c',
   spiritual:'#ba79b1'
 }
-
 
 const loveTexture=textures.paths()
   .d('waves')
@@ -59,7 +59,6 @@ const spiritualTexture = textures.paths()
   .thicker()
   .background(answerBGColor.spiritual)
 const noCategoryAnswerColor= '#c0c0c0'
-
 
 const categoryOfTextOnRect={
   openQuestion: '開 質問',
@@ -104,118 +103,18 @@ const addTextToSVG = (x, y, text) => {
 
 const openColor = rodata.color.open
 const closeColor = rodata.color.close
-const aiduchiColor = rodata.color.aiduchiColor
-const sekenColor = '#2c3e50'
-const kaishakuColor = '#f1c400'
+const aiduchiColor = rodata.color.aiduchi
+const sekenColor = rodata.color.seken
+const kaishakuColor = rodata.color.kaishaku
 
 const height0 = 200
 const height = 200
-
-const setForViz = (name, storage, keitaisokaiseki, ansBunAnd1stCateArr, chboxlist2, RGBlist, hatsugen, bun, ansRadioResult, questionRadioResult, taiou, taiou2, ansChBoxLen, queChBoxLen, startTime, graph, ranshin, zoom_value) => {
-  let isUsingDictionaryWithWord2Vec = 0
-
-  var bunsuu = 2// 前後の余白
-  for (let m = 1; m < hatsugen.length; m = m + 2) { // 患者の発言で間隔を作る
-    bunsuu = bunsuu + hatsugen[m].length
-  }
-  var width = zoom_value * bunsuu
-
-  let graphNumber = 2
-
-  d3.select('#svgdiv').select('svg').remove()
-  var svg = d3.select('#svgdiv').append('svg')
-    .attr('height', 270)
-    .attr('width', width)
-  var allQueHatsugenColorArr = []
-  var stackDataArr = []
-  if (ansChBoxLen >= 1) {
-    readAnsRadio(name, storage, ansBunAnd1stCateArr, ansRadioResult, taiou, ansChBoxLen, isUsingDictionaryWithWord2Vec)
-  }
-  if (queChBoxLen >= 1) {
-    readQuestionRadio(name, storage, ansBunAnd1stCateArr, chboxlist2, questionRadioResult, taiou, taiou2, ansChBoxLen, queChBoxLen)
-  }
-
-  let h, i, c, m, n
-
-  for (let n = 0; n < RGBlist.length; n++) {
-    RGBlist[n][0] = 0
-    RGBlist[n][1] = 0
-    RGBlist[n][2] = 0
-  }
-
-
-  console.log(ansRadioResult)
-
-  let ansCateNumArr = []
-  fromAnsRadioResultToAnsCateNum(ansCateNumArr,ansRadioResult,keitaisokaiseki,ansBunAnd1stCateArr,RGBlist,bun)
-
-  console.log(ansCateNumArr)
-
-  for (let queHatsugenNo = 0; queHatsugenNo < questionRadioResult.length; queHatsugenNo++) {
-    if (questionRadioResult[queHatsugenNo] === 3) {
-      allQueHatsugenColorArr[queHatsugenNo] = openColor
-    } else if (questionRadioResult[queHatsugenNo] === 5) {
-      allQueHatsugenColorArr[queHatsugenNo] = aiduchiColor
-    } else if (questionRadioResult[queHatsugenNo] === 4) {
-      allQueHatsugenColorArr[queHatsugenNo] = closeColor
-    } else if (questionRadioResult[queHatsugenNo] === 6) {
-      allQueHatsugenColorArr[queHatsugenNo] = kaishakuColor
-    } else {
-      allQueHatsugenColorArr[queHatsugenNo] = sekenColor
-    }
-  }
-
-  let RGBmax = []
-  let RGBmaxmax = 1
-
-  for (let m = 0; m < ((keitaisokaiseki.length - 1) / 2); m++) {
-    // 2個飛ばしにしたら後が面倒くさい。患者 1→0,3→1,長さ9なら番号は8まで
-    RGBmax[m] = 1
-    for (h = 0; h < 3; h++) {
-      RGBmax[m] = RGBmax[m] + RGBlist[m][h]
-    }
-    if (RGBmaxmax < RGBmax[m]) {
-      RGBmaxmax = RGBmax[m]
-    }
-  }
-
-  //graph = loadChartSelect()
-
-  for (h = 0; h < 3; h++) {
-    stackDataArr[h] = []
-    for (m = 0; m < ((keitaisokaiseki.length - 1) / 2); m++) {
-      stackDataArr[h][3 * m] = new Object()
-      if (graph === 2) {
-        stackDataArr[h][3 * m] = {x: 3 * m + 1, y: 0}
-      } else {
-        stackDataArr[h][3 * m] = {x: 3 * m + 1, y: (5 * (RGBlist[m][h]) / RGBmaxmax)}
-      }
-
-      stackDataArr[h][3 * m + 1] = new Object()
-      stackDataArr[h][3 * m + 1] = {x: 3 * m + 2, y: (5 * (RGBlist[m][h]) / RGBmaxmax)}
-      stackDataArr[h][3 * m + 2] = new Object()
-      stackDataArr[h][3 * m + 2] = {x: 3 * m + 3, y: 0}
-    }
-  }
-  viz(stackDataArr, allQueHatsugenColorArr, bun, hatsugen, svg, ansCateNumArr, keitaisokaiseki, RGBmaxmax, startTime, graph, ansRadioResult, ranshin, width, bunsuu)
-  return {
-    chboxlist: ansBunAnd1stCateArr,
-    chboxlist2: chboxlist2,
-    RGBlist: RGBlist,
-    checked: ansRadioResult,
-    checked2: questionRadioResult,
-    chboxlength: ansChBoxLen,
-    chboxlength2: queChBoxLen,
-    ranshin: ranshin
-  }
-}
 
 const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, ansCategoryNumArr, keitaisokaiseki, RGBmaxmax, startTime, graphTypeNum, checked, ranshin, width, bunsuu) => {
   const upperName = 'カウンセラー'
   const lowerName = 'クライエント'
   const txtViewCounselor = '<img src = "./picture/counselor2.jpg" width ="20">'
   const clientInTextView = '<img src = "./picture/client.jpg" width ="17">'
-
 
   let m
 
@@ -552,193 +451,13 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
     addTextToSVG(0, axisDescriptionY, axisDescription)
 
   } else {
+    //積み重ね
+    vizStackChart()
 
-    // 積み重ね折れ線
-
-    const axisDescription = '縦軸の単位：文の数、 横軸の単位：患者の全ての発言の全ての文字数'
-
-    // stack
-    var context = svg.append('g') // 全体グラフグループ作成
-      .attr('class', 'context')
-      .attr('transform', 'translate(' + margin2.left + ',' + margin2.top + ')')
-
-    var scaleY = d3.scale.linear().domain([0, 6]).range([0, height0])
-    var colors = [workColor, friendColor, loveColor]
-
-    var stack = d3.layout.stack()
-      .x(function () { return 1 })
-      .y(function (d) { return d.y })
-      .values(function (d) { return d })
-    var stackdata = stack(stackdataArr)
-
-    var area0 = d3.svg.area()
-      .x(function (d, i) {
-        if (i % 3 === 0) { return nagasa[i / 3] } else if (i % 3 === 1) { return nagasa[(i - 1) / 3 + 1] - 3 } else { return nagasa[(i - 2) / 3 + 1] - 2 }
-      })
-      .y0(function () { return height0 })
-      .y1(function (d) { return height0 - scaleY(d.y + d.y0) })
-
-    context.selectAll('path')
-      .data(stackdata.reverse())
-      .enter()
-      .append('path')
-      .attr('d', area0)
-      .attr('fill', function (d, i) { return colors[i] })
-    // 以上、stack
-
-    // 棒
-    const range = d3.range((width) - (width / (colorArrayInAllQuestionHatsugen.length * 2)), colorArrayInAllQuestionHatsugen.length - 1, -width / (colorArrayInAllQuestionHatsugen.length))
-    context.selectAll('line.v')
-      .data(range).enter().append('line')
-      .attr('x1', function (d, i) {
-        return nagasa[i]
-      }).attr('y1', 0)
-      .attr('x2', function (d, i) { return nagasa[i] }).attr('y2', height0)
-
-    context.selectAll('line')
-      .attr('stroke', function (d, i) {
-        return colorArrayInAllQuestionHatsugen[i]
-      })
-      .attr('stroke-width', function (d, i) {
-        return (Math.sqrt(keitaisokaiseki[2 * i].length))
-      })
-      .on('mouseover', function (d, i) {
-        var e = document.getElementById('msg')
-        var k, l
-        e.innerHTML = ''
-        for (k = -3; k <= 3; k++) {
-          if (2 * (i) + k < 0 || 2 * (i) + k >= hatsugen.length) {
-            continue
-          }
-          if (k === 0) {
-            e.innerHTML += '<b><u><font size=' + fontSizeInTextView + '>' + (1 + 2 * i) + '' + txtViewCounselor + ' <font color=' + colorArrayInAllQuestionHatsugen[i] + '>【</font>' + hatsugen[2 * i] + '<font color=' + colorArrayInAllQuestionHatsugen[i] + '>】</font></font></u></b><font size=' + fontSizeInTextView + '><br><br>'
-          } else if (k % 2 === 0) {
-            e.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + k + 2 * i) + '' + txtViewCounselor + ' <font color=' + colorArrayInAllQuestionHatsugen[k / 2 + i] + '><b>【</b></font>' + hatsugen[k + 2 * i] + '<font color=' + colorArrayInAllQuestionHatsugen[k / 2 + i] + '><b>】</b></font><br><br>'
-          } else { // forループを回さないと各文ごとの表示ができない
-            e.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + k + 2 * i) + '' + clientInTextView + ' '
-            for (l = 0; l < bun[k + 2 * i].length; l++) {
-              if (bun[k + 2 * i][l] === '') { continue }
-              e.innerHTML += '<font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArr[ansCategoryNumArr[k + 2 * i][l]] + '><b>【</b></font>' + bun[k + 2 * i][l] + '<font color=' + answerTextureChoiceArr[ansCategoryNumArr[k + 2 * i][l]] + '><b>】</b></font></font>'
-            }
-            e.innerHTML += '<font size=' + fontSizeInTextView + '><br><br></font>'
-          }
-        }
-      })
-
-    let datae3 = []
-    let jj3
-    let mojia1 = []
-
-    for (jj3 = 0; jj3 < nagasa.length; jj3++) {
-      if (colorArrayInAllQuestionHatsugen[jj3] === openColor) {
-        mojia1[jj3] = '開 質問'
-      } else if (colorArrayInAllQuestionHatsugen[jj3] === aiduchiColor) {
-        mojia1[jj3] = '相槌'
-      } else if (colorArrayInAllQuestionHatsugen[jj3] === closeColor) {
-        mojia1[jj3] = '閉 質問'
-      } else if (colorArrayInAllQuestionHatsugen[jj3] === kaishakuColor) {
-        mojia1[jj3] = '解釈'
-      } else {
-        mojia1[jj3] = '世間話'
-      }
-    }
-
-    for (jj3 = 0; jj3 < nagasa.length; jj3++) {
-      datae3[jj3] = {x: nagasa[jj3], y: 10, color: colorArrayInAllQuestionHatsugen[jj3], text: mojia1[jj3]}
-    }
-    context.selectAll('circle')
-      .data(datae3)
-      .enter()
-      .append('circle')
-      .attr({
-        cx: (d) => d.x,
-        cy: (d) => d.y,
-        r: 13
-      })
-      .style('fill', (d) => d.color)
-      .on('mouseover', function (d, i) {
-        var e = document.getElementById('msg')
-        var k, l
-        e.innerHTML = ''
-        for (k = -3; k <= 3; k++) {
-          if (2 * (i) + k < 0 || 2 * (i) + k >= hatsugen.length) {
-            continue
-          }
-          if (k === 0) {
-            e.innerHTML += '<b><u><font size=' + fontSizeInTextView + '>' + (1 + 2 * i) + '' + txtViewCounselor + ' <font color=' + colorArrayInAllQuestionHatsugen[i] + '>【</font>' + hatsugen[2 * i] + '<font color=' + colorArrayInAllQuestionHatsugen[i] + '>】</font></font></u></b><font size=' + fontSizeInTextView + '><br><br>'
-          } else if (k % 2 === 0) {
-            e.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + k + 2 * i) + '' + txtViewCounselor + ' <font color=' + colorArrayInAllQuestionHatsugen[k / 2 + i] + '><b>【</b></font>' + hatsugen[k + 2 * i] + '<font color=' + colorArrayInAllQuestionHatsugen[k / 2 + i] + '><b>】</b></font><br><br>'
-          } else { // forループを回さないと各文ごとの表示ができない
-            e.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + k + 2 * i) + '' + clientInTextView + ' '
-            for (l = 0; l < bun[k + 2 * i].length; l++) {
-              if (bun[k + 2 * i][l] === '') { continue }
-              e.innerHTML += '<font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArr[ansCategoryNumArr[k + 2 * i][l]] + '><b>【</b></font>' + bun[k + 2 * i][l] + '<font color=' + answerTextureChoiceArr[ansCategoryNumArr[k + 2 * i][l]] + '><b>】</b></font></font><br>   '
-            }
-            e.innerHTML += '<font size=' + fontSizeInTextView + '><br><br></font>'
-          }
-        }
-      })
-
-    const scaleX2 = d3.scale.linear().domain([0, bunsuu]).range([0, width])
-    const scaleY2 = d3.scale.linear().domain([0, RGBmaxmax]).range([height, 0])
-    const yAxisC = d3.svg.axis().scale(scaleY2).orient('left')// focus
-
-    const xAxisC = d3.svg.axis().scale(scaleX2).orient('bottom')// context
-
-    context.append('g') // focusのy目盛軸
-      .attr('class', 'y axis')
-      .call(yAxisC)
-
-    context.append('g') // 全体x目盛軸
-      .attr('class', 'x axis')
-      .attr('transform', 'translate(0,' + height0 + ')')
-      .call(xAxisC)
-
-    addTextToSVG(0, axisDescriptionY, axisDescription)
   }
 }
 
 const ansRadioFullLen=rodata.ansRadioFullLen
-
-const readQuestionRadio = (name, storage, chboxlist, chboxlist2, questionRadioResult, taiou, taiou2, chboxlength, chboxlength2) => {
-  let c
-
-  let black = 0
-  for (let c = 1; c <= chboxlength2; c++) {
-    const radio = document.getElementById('rs' + c).children
-    for (let i = radio.length - 5, l = radio.length; i < l; i++) {
-      if (radio[i].control.checked === true) {
-        // storage.getItem(name+"RGBlist"+m)=
-        if (radio[i].control.value === '3') {
-          questionRadioResult[taiou[c - 1]] = 3
-          storage.setItem(name + 'RGBlist' + c, 3)
-          break
-        }
-        if (radio[i].control.value === '4') {
-          questionRadioResult[c - 1] = 4
-          storage.setItem(name + 'RGBlist' + c, 4)
-          break
-        }
-        if (radio[i].control.value === '5') {
-          questionRadioResult[c - 1] = 5
-          storage.setItem(name + 'RGBlist' + c, 5)
-          break
-        }
-        if (radio[i].control.value === '6') {
-          questionRadioResult[c - 1] = 6
-          storage.setItem(name + 'RGBlist' + c, 6)
-          break
-        }
-      } else {
-        questionRadioResult[c - 1] = 7
-        storage.setItem(name + 'RGBlist' + c, 7)
-      }
-    }
-    if (questionRadioResult[c - 1] === 7) {
-      black++
-    }
-  }
-}
 
 const createCircleWithTexture = () => { // example
   var svg = d3.select('#example')
@@ -766,4 +485,4 @@ const loadChartSelect=()=>{
   }
 }
 
-export {setForViz}
+export {viz}
