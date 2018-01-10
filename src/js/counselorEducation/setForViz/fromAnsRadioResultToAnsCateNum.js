@@ -6,21 +6,33 @@ const fromAnsRadioResultToAnsCateNum = (ansCateNumArr, ansRadioResult, keitaisok
   console.log(ansBunAnd1stCateArr) //合ってる
   console.log(RGBlist)
 
+
+
   //下記、総当りで検索してたのか。。→同じ文に対して同じ分類が当てはまる。。それはあかんわ。。→単純にansRadioResultCntを足す方式に変更。
   let ansRadioResultCnt = 1
 
   let RGBlistCnt = 0// allHatsugenNo=1;allHatsugenNo<keitaisokaiseki.length;allHatsugenNo=allHatsugenNo+2の外
   for (let allHatsugenNo = 1; allHatsugenNo < keitaisokaiseki.length; allHatsugenNo = allHatsugenNo + 2) {//何故か各発言内1文多い
     ansCateNumArr[allHatsugenNo] = []// svgでの描画ではm→hatsugenBunNo
+    console.log("--")
+    console.log(keitaisokaiseki[allHatsugenNo])
     for (let hatsugenBunNo = 0; hatsugenBunNo < keitaisokaiseki[allHatsugenNo].length - rodata.keitaisokaisekiHatugenBunQtyGap; hatsugenBunNo++) {
       ansCateNumArr[allHatsugenNo][hatsugenBunNo] = 0
       //for (let ansRadioResultCnt = 1; ansRadioResultCnt < ansBunAnd1stCateArr.length; ansRadioResultCnt++) {
       //if (bun[allHatsugenNo][hatsugenBunNo] === ansBunAnd1stCateArr[ansRadioResultCnt][0]) {
-      console.log("%d発言目内 %d文目",allHatsugenNo,hatsugenBunNo)
-      console.log("ansRadioResultCnt %d",ansRadioResultCnt)
+
+
 
       const tmpAnsRadioResult = ansRadioResult[ansRadioResultCnt - 1] //1-5
-      console.log("tmpAnsRadioResult",tmpAnsRadioResult)
+
+      if(allHatsugenNo>=0){
+        console.log("-")
+        console.log("%d発言目内 %d文目",allHatsugenNo,hatsugenBunNo)
+        console.log("ansRadioResultCnt %d",ansRadioResultCnt)
+        console.log("tmpAnsRadioResult",tmpAnsRadioResult)
+        console.log(ansBunAnd1stCateArr[ansRadioResultCnt][0])
+        console.log(ansRadioResult[ansRadioResultCnt - 1])
+      }
 
       RGBlist[RGBlistCnt][tmpAnsRadioResult-1] = RGBlist[RGBlistCnt][tmpAnsRadioResult] + 1 //ここ意味わからん
       ansCateNumArr[allHatsugenNo][hatsugenBunNo] = tmpAnsRadioResult
@@ -50,6 +62,8 @@ const fromAnsRadioResultToAnsCateNum = (ansCateNumArr, ansRadioResult, keitaisok
     }
     RGBlistCnt++
   }
+
+  console.log(ansCateNumArr)
 }
 
 //const

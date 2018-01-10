@@ -1,4 +1,8 @@
 const readQueRadio = (name, storage, chboxlist, chboxlist2, queRadioResult, taiou, taiou2, chboxlength, queChBoxLen) => {
+
+  console.log("readQueRadio")
+  console.log(queChBoxLen)
+
   let c
 
   let black = 0
@@ -6,6 +10,7 @@ const readQueRadio = (name, storage, chboxlist, chboxlist2, queRadioResult, taio
     const radio = document.getElementById('rs' + chBoxNo).children
     for (let i = radio.length - 5, l = radio.length; i < l; i++) {
       if (radio[i].control.checked === true) {
+        console.log("radio[i].control.value %s",radio[i].control.value)
         // storage.getItem(name+"RGBlist"+m)=
         if (radio[i].control.value === '3') {
           queRadioResult[taiou[chBoxNo - 1]] = 3

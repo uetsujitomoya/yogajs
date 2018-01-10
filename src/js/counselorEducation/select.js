@@ -57,7 +57,7 @@ const createAnswerRadioButton = (answerNumber, value, color, answerGroupName, ch
   }
 }
 
-const select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, chboxlist, chboxlist2, answerClassification3dArrayforCreatingSelect, RGBlist, hatsugen, bun, ansRadioResult, checked2, taiou, taiou2, chBoxLen, chboxlength2) => {
+const select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, chboxlist, chboxlist2, answerClassification3dArrayforCreatingSelect, RGBlist, hatsugen, bun, ansRadioResult, checked2, taiou, taiou2, chBoxLen, queChBoxLen) => {
 
   convertCSV2Storage(jsonName, storage)
 
@@ -70,7 +70,7 @@ const select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, ch
   var ansCnt = 0
   n = 0
   chBoxLen = 0
-  chboxlength2 = 0
+  queChBoxLen = 0
   var questionCnt = 0
 
   //createGraphSelectButton()
@@ -147,7 +147,7 @@ const select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, ch
       }
     } else {
       questionCnt++
-      chboxlength2++
+      queChBoxLen++
       chboxlist2[questionCnt] = []
       chboxlist2[questionCnt][0] = hatsugen[hatsugenIdx]
       chboxlist2[questionCnt][1] = 4
@@ -213,7 +213,7 @@ const select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, ch
     taiou: taiou,
     taiou2: taiou2,
     chboxlength: chBoxLen,
-    chboxlength2: chboxlength2,
+    chboxlength2: queChBoxLen,
     answerNumbermax: ansNoMax,
     questionNumbermax: questionNoMax
   }

@@ -22,12 +22,12 @@ const setForViz = (name, storage, keitaisokaiseki, ansBunAnd1stCateArr, queBunAn
     .attr('width', width)
   var allQueHatsugenColorArr = []
   var stackDataArr = []
-  if (ansChBoxLen >= 1) {
+  //if (ansChBoxLen >= 1) {
     readAnsRadio(name, storage, ansBunAnd1stCateArr, ansRadioResult, taiou, ansChBoxLen, isUsingDictionaryWithWord2Vec)
-  }
-  if (queChBoxLen >= 1) {
+  //}
+  //if (queChBoxLen >= 1) {
     readQueRadio(name, storage, ansBunAnd1stCateArr, queBunAnd1stCateArr, queRadioResult, taiou, taiou2, ansChBoxLen, queChBoxLen)
-  }
+  //}
 
   let h, i, c, m, n
 
@@ -45,6 +45,7 @@ const setForViz = (name, storage, keitaisokaiseki, ansBunAnd1stCateArr, queBunAn
   console.log(ansCateNumArr)
 
   for (let queHatsugenNo = 0; queHatsugenNo < queRadioResult.length; queHatsugenNo++) {
+    console.log(queRadioResult[queHatsugenNo])
     if (queRadioResult[queHatsugenNo] === 3) {
       allQueHatsugenColorArr[queHatsugenNo] = rodata.color.open
     } else if (queRadioResult[queHatsugenNo] === 5) {

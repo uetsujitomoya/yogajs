@@ -329,6 +329,8 @@ const classifyWithFirstWordDictionary = (name, aBunWordArr, checkboxlist, chboxl
 
     var graph
 
+    console.log(aBunContentArr)
+
     var sResult = select(name, storage, checkboxlist, aBunWordArr, miserables, chboxlist, chboxlist2, ansBunCategory, RGBlist, hatsugenArray, aBunContentArr, ansRadioResult, checked2, taiou, taiou2, chboxlength, chboxlength2)
 
     checkboxlist = sResult.checkboxlist
@@ -342,6 +344,7 @@ const classifyWithFirstWordDictionary = (name, aBunWordArr, checkboxlist, chboxl
     taiou2 = sResult.taiou2
     chboxlength = sResult.chboxlength
     chboxlength2 = sResult.chboxlength2
+    console.log(chboxlength2)
     var answerNumbermax = sResult.answerNumbermax
     var questionNumbermax = sResult.questionNumbermax
 
