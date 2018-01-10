@@ -231,7 +231,7 @@ const setForViz = (name, storage, keitaisokaiseki, chboxlist, chboxlist2, RGBlis
   }
 }
 
-const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, answerCategoryNumArr, keitaisokaiseki, RGBmaxmax, startTime, graphTypeNum, checked, ranshin, width, bunsuu) => {
+const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, ansCategoryNumArr, keitaisokaiseki, RGBmaxmax, startTime, graphTypeNum, checked, ranshin, width, bunsuu) => {
   const upperName = 'カウンセラー'
   const lowerName = 'クライエント'
   const txtViewCounselor = '<img src = "./picture/counselor2.jpg" width ="20">'
@@ -499,7 +499,7 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
                 msg.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + txtViewHatsugenNo + rectHatsugenNoArr[rectNo]) + '' + clientInTextView + ' '
                 for (l = 0; l < bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]].length; l++) {
                   if (bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][l] === '') { continue }
-                  msg.innerHTML += '<font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArr[answerCategoryNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][l]] + '><b>【</b></font>' + bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][l] + '<font color=' + answerTextureChoiceArr[answerCategoryNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][l]] + '><b>】</b></font>'
+                  msg.innerHTML += '<font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArr[ansCategoryNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][l]] + '><b>【</b></font>' + bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][l] + '<font color=' + answerTextureChoiceArr[ansCategoryNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][l]] + '><b>】</b></font>'
                 }
                 msg.innerHTML += '<font size=' + fontSizeInTextView + '><br><br>'
               }
@@ -517,15 +517,15 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
                   if (bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][HatsugenBunNo] === '') { continue }
                   console.log("console.log")
 
-                  //console.log(rectNo)
+                  console.log(rectNo)
                   console.log(rextTxt[rectNo])
 
-                  //console.log(txtViewHatsugenNo + rectHatsugenNoArr[rectNo])
-                  //console.log(HatsugenBunNo)
-                  console.log(answerCategoryNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][HatsugenBunNo])
-                  //console.log(answerTextureChoiceArr[answerCategoryNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][HatsugenBunNo]])
+                  console.log(txtViewHatsugenNo + rectHatsugenNoArr[rectNo])
+                  console.log(HatsugenBunNo)
+                  console.log(ansCategoryNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][HatsugenBunNo])
+                  console.log(answerTextureChoiceArr[ansCategoryNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][HatsugenBunNo]])
 
-                  msg.innerHTML += '<u><b><font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArr[answerCategoryNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][HatsugenBunNo]] + '>【</font>' + bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][HatsugenBunNo] + '<font color=' + answerTextureChoiceArr[answerCategoryNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][HatsugenBunNo]] + '>】</b></font></font></u>'
+                  msg.innerHTML += '<u><b><font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArr[ansCategoryNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][HatsugenBunNo]] + '>【</font>' + bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][HatsugenBunNo] + '<font color=' + answerTextureChoiceArr[ansCategoryNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][HatsugenBunNo]] + '>】</b></font></font></u>'
                 }
                 msg.innerHTML += '<font size=' + fontSizeInTextView + '><br><br></font>'
 
@@ -533,7 +533,7 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
                 msg.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + txtViewHatsugenNo + rectHatsugenNoArr[rectNo]) + '' + clientInTextView + ' '
                 for (l = 0; l < bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]].length; l++) {
                   if (bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][l] === '') { continue }
-                  msg.innerHTML += '<font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArr[answerCategoryNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][l]] + '><b>【</b></font>' + bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][l] + '<font color=' + answerTextureChoiceArr[answerCategoryNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][l]] + '><b>】</b></font>'
+                  msg.innerHTML += '<font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArr[ansCategoryNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][l]] + '><b>【</b></font>' + bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][l] + '<font color=' + answerTextureChoiceArr[ansCategoryNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][l]] + '><b>】</b></font>'
                 }
                 msg.innerHTML += '<font size=' + fontSizeInTextView + '><br><br>'
               } else { // forループを回さないと各文ごとの表示ができない
@@ -640,7 +640,7 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
             e.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + k + 2 * i) + '' + clientInTextView + ' '
             for (l = 0; l < bun[k + 2 * i].length; l++) {
               if (bun[k + 2 * i][l] === '') { continue }
-              e.innerHTML += '<font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArr[answerCategoryNumArr[k + 2 * i][l]] + '><b>【</b></font>' + bun[k + 2 * i][l] + '<font color=' + answerTextureChoiceArr[answerCategoryNumArr[k + 2 * i][l]] + '><b>】</b></font></font>'
+              e.innerHTML += '<font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArr[ansCategoryNumArr[k + 2 * i][l]] + '><b>【</b></font>' + bun[k + 2 * i][l] + '<font color=' + answerTextureChoiceArr[ansCategoryNumArr[k + 2 * i][l]] + '><b>】</b></font></font>'
             }
             e.innerHTML += '<font size=' + fontSizeInTextView + '><br><br></font>'
           }
@@ -694,7 +694,7 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
             e.innerHTML += '<font size=' + fontSizeInTextView + '>' + (1 + k + 2 * i) + '' + clientInTextView + ' '
             for (l = 0; l < bun[k + 2 * i].length; l++) {
               if (bun[k + 2 * i][l] === '') { continue }
-              e.innerHTML += '<font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArr[answerCategoryNumArr[k + 2 * i][l]] + '><b>【</b></font>' + bun[k + 2 * i][l] + '<font color=' + answerTextureChoiceArr[answerCategoryNumArr[k + 2 * i][l]] + '><b>】</b></font></font><br>   '
+              e.innerHTML += '<font size=' + fontSizeInTextView + '><font color=' + answerTextureChoiceArr[ansCategoryNumArr[k + 2 * i][l]] + '><b>【</b></font>' + bun[k + 2 * i][l] + '<font color=' + answerTextureChoiceArr[ansCategoryNumArr[k + 2 * i][l]] + '><b>】</b></font></font><br>   '
             }
             e.innerHTML += '<font size=' + fontSizeInTextView + '><br><br></font>'
           }
