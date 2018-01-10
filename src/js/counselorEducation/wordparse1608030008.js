@@ -86,7 +86,7 @@ const classifyWithFirstWordDictionary = (name, aBunWordArr, checkboxlist, chboxl
 
     let visResult
     console.log('%c entered kuromoji 95', 'color:red')
-    console.log(originalText)
+    //console.log(originalText)
     const wordsArrayAfterMorphologicalAnalysis = tokenizer.tokenize(originalText)
 
     afterMorphologicalAnalysisWordsCnt = 0
@@ -347,6 +347,8 @@ const classifyWithFirstWordDictionary = (name, aBunWordArr, checkboxlist, chboxl
 
     // graph = sResult.graph;
     // console.log("chboxlength2=%d",chboxlength2)
+
+    //console.log(checked)
 
     let setForVizInput = {
       name: name,
