@@ -45,7 +45,7 @@ const rodata={
 
   ansRadioFullLen:5,
 
-  keitaisokaisekiHatugenBunQtyGap:1
+  keitaisokaisekiHatugenBunQtyGap:0
 
 }
 

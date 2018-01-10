@@ -4,7 +4,9 @@ const fromAnsRadioResultToAnsCateNum = (ansCateNumArr, ansRadioResult, keitaisok
 
   console.log(ansRadioResult) //合ってる
   console.log(ansBunAnd1stCateArr) //合ってる
+  console.log(bun)
   console.log(RGBlist)
+
 
 
 
@@ -12,11 +14,11 @@ const fromAnsRadioResultToAnsCateNum = (ansCateNumArr, ansRadioResult, keitaisok
   let ansRadioResultCnt = 1
 
   let RGBlistCnt = 0// allHatsugenNo=1;allHatsugenNo<keitaisokaiseki.length;allHatsugenNo=allHatsugenNo+2の外
-  for (let allHatsugenNo = 1; allHatsugenNo < keitaisokaiseki.length; allHatsugenNo = allHatsugenNo + 2) {//何故か各発言内1文多い
+  for (let allHatsugenNo = 1; allHatsugenNo < bun.length; allHatsugenNo = allHatsugenNo + 2) {//何故か各発言内1文多い
     ansCateNumArr[allHatsugenNo] = []// svgでの描画ではm→hatsugenBunNo
     console.log("--")
-    console.log(keitaisokaiseki[allHatsugenNo])
-    for (let hatsugenBunNo = 0; hatsugenBunNo < keitaisokaiseki[allHatsugenNo].length - rodata.keitaisokaisekiHatugenBunQtyGap; hatsugenBunNo++) {
+    //console.log(keitaisokaiseki[allHatsugenNo])
+    for (let hatsugenBunNo = 0; hatsugenBunNo < bun[allHatsugenNo].length - rodata.keitaisokaisekiHatugenBunQtyGap; hatsugenBunNo++) {
       ansCateNumArr[allHatsugenNo][hatsugenBunNo] = 0
       //for (let ansRadioResultCnt = 1; ansRadioResultCnt < ansBunAnd1stCateArr.length; ansRadioResultCnt++) {
       //if (bun[allHatsugenNo][hatsugenBunNo] === ansBunAnd1stCateArr[ansRadioResultCnt][0]) {
@@ -31,6 +33,7 @@ const fromAnsRadioResultToAnsCateNum = (ansCateNumArr, ansRadioResult, keitaisok
         console.log("ansRadioResultCnt %d",ansRadioResultCnt)
         console.log("tmpAnsRadioResult",tmpAnsRadioResult)
         console.log(ansBunAnd1stCateArr[ansRadioResultCnt][0])
+        console.log(bun[allHatsugenNo][hatsugenBunNo])
         console.log(ansRadioResult[ansRadioResultCnt - 1])
       }
 

@@ -3,6 +3,7 @@ import $ from 'jquery'
 import {select} from './select.js'
 import {setForViz} from './setForViz'
 import {slider} from 'bootstrap-slider'
+import { isEOHatsugen } from './wordparse/isEOHatsugen'
 
 let zoomVal = 3
 
@@ -64,7 +65,7 @@ const selectGraphShape = function (name, storage, keitaisokaiseki, chboxlist, ch
   }// graphの形状を切り替えた際もここで再描画される
 }
 
-const classifyWithFirstWordDictionary = (name, aBunWordArr, checkboxlist, chboxlist, chboxlist2, RGBlist, hatsugenArray, aBunContentArr, ansRadioResult, checked2, taiou, taiou2, chboxlength, chboxlength2, originalText) => {
+const classifyWithFirstWordDictionary = (name, aBunWordArr, checkboxlist, chboxlist, chboxlist2, RGBlist, hatsugenArr, aBunContentArr, ansRadioResult, checked2, taiou, taiou2, chboxlength, chboxlength2, originalText) => {
   let jsonName = '160803dummy'
   var startTime = new Date()
   console.log(startTime)
@@ -87,7 +88,7 @@ const classifyWithFirstWordDictionary = (name, aBunWordArr, checkboxlist, chboxl
     let visResult
     //console.log('%c entered kuromoji 95', 'color:red')
     //console.log(originalText)
-    const wordsArrayAfterMorphologicalAnalysis = tokenizer.tokenize(originalText)
+    const morphologicalAnalysisWordsArr = tokenizer.tokenize(originalText)
 
     afterMorphologicalAnalysisWordsCnt = 0
 
@@ -100,10 +101,10 @@ const classifyWithFirstWordDictionary = (name, aBunWordArr, checkboxlist, chboxl
     var serapitango = 0
     var serapibun = 0
     var soudesuka = 0
-    while (afterMorphologicalAnalysisWordsCnt < wordsArrayAfterMorphologicalAnalysis.length) {
+    while (afterMorphologicalAnalysisWordsCnt < morphologicalAnalysisWordsArr.length) {
       aBunWordArr[hatsugenCnt] = []
-      aBunContentArr[hatsugenCnt] = []
-      hatsugenArray[hatsugenCnt] = ''
+      aBunContentArr[hatsugenCnt] = []//安易に足していいのか？
+      hatsugenArr[hatsugenCnt] = ''
       hinshi[hatsugenCnt] = []
       ansBunCategory[hatsugenCnt] = []
       ranshin[hatsugenCnt] = []
@@ -112,92 +113,91 @@ const classifyWithFirstWordDictionary = (name, aBunWordArr, checkboxlist, chboxl
       }
       hatsugenBunCnt = 0
       aBunWordsQty = 0
-      while (afterMorphologicalAnalysisWordsCnt < wordsArrayAfterMorphologicalAnalysis.length) {
+      while (afterMorphologicalAnalysisWordsCnt < morphologicalAnalysisWordsArr.length) {
         aBunWordArr[hatsugenCnt][hatsugenBunCnt] = []
-        aBunContentArr[hatsugenCnt][hatsugenBunCnt] = ''
+        aBunContentArr[hatsugenCnt][hatsugenBunCnt] = ''//安易に足していいのか？
         hinshi[hatsugenCnt][hatsugenBunCnt] = []
         aBunWordArr[hatsugenCnt][hatsugenBunCnt].length = 0
         ansBunCategory[hatsugenCnt][hatsugenBunCnt] = [0, 0, 0]
         ranshin[hatsugenCnt][hatsugenBunCnt] = [0, 0, 0, 0, 0, 0, 0, 0, 0]
         aBunWordCnt = 0
-        while (afterMorphologicalAnalysisWordsCnt < wordsArrayAfterMorphologicalAnalysis.length) {
+        while (afterMorphologicalAnalysisWordsCnt < morphologicalAnalysisWordsArr.length) {
           aBunWordsQty++
 
-          if (wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '。' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '？' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '?' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '：' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === ':' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].word_id === '2613630' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].surface_form === '･･･？：' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].surface_form === ')：' ||
-            wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].surface_form === '…' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].surface_form === '……' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].surface_form === '・・・' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].surface_form === '･･･' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].surface_form.indexOf('〈') !== -1 || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].surface_form.indexOf('〉') !== -1) {
+          if (isEOHatsugen(morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt])) {
             break
           }
           if (hatsugenCnt % 2 === 1) {
             kanjatango++
-            kanjamoji = kanjamoji + wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].surface_form.length
-            if (wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '母' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '主人' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '父さん' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === 'ご主人' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === 'お父さん' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '姉' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '姉さん' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '母親' ||
-              wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === 'お姉さん' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '父' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '家族') {
+            kanjamoji = kanjamoji + morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].surface_form.length
+            if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '母' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '主人' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '父さん' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'ご主人' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'お父さん' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '姉' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '姉さん' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '母親' ||
+              morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'お姉さん' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '父' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '家族') {
               ansBunCategory[hatsugenCnt][hatsugenBunCnt][0] = 1
             }
-            if (wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '兄' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '子' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '子ども' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '妹' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '弟') {
+            if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '兄' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '子' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '子ども' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '妹' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '弟') {
               ansBunCategory[hatsugenCnt][hatsugenBunCnt][0] = 1
             }
-            if (wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '両親' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === 'お母様' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === 'お父様') {
+            if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '両親' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'お母様' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'お父様') {
               ansBunCategory[hatsugenCnt][hatsugenBunCnt][0] = 1
             }
-            if (wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '仕事' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '休み' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === 'アルバイト' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '働く' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '同僚' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '職場' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '上司' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '部下') {
+            if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '仕事' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '休み' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'アルバイト' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '働く' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '同僚' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '職場' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '上司' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '部下') {
               ansBunCategory[hatsugenCnt][hatsugenBunCnt][2] = 1
             }
-            if (wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '友人' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '親友' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '友達' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '友' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '交友' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '友好') {
+            if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '友人' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '親友' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '友達' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '友' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '交友' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '友好') {
               ansBunCategory[hatsugenCnt][hatsugenBunCnt][1] = 1
             }
 
-            if (wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '病' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '病気' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === 'ストレス' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '不調' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '過食' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '嘔吐' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '過食嘔吐') {
+            if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '病' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '病気' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'ストレス' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '不調' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '過食' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '嘔吐' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '過食嘔吐') {
               ranshin[hatsugenCnt][hatsugenBunCnt][0] = 1
             }
-            if (wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '無気力' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '気力' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === 'やる気') {
+            if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '無気力' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '気力' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'やる気') {
               ranshin[hatsugenCnt][hatsugenBunCnt][1] = 1
             }
-            if (wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '疑い' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '疑う' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '疑心暗鬼' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '疑心') {
+            if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '疑い' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '疑う' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '疑心暗鬼' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '疑心') {
               ranshin[hatsugenCnt][hatsugenBunCnt][2] = 1
             }
-            if (wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '注意' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '不注意' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '注意散漫' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '無自覚' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '自覚') {
+            if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '注意' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '不注意' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '注意散漫' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '無自覚' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '自覚') {
               ranshin[hatsugenCnt][hatsugenBunCnt][3] = 1
             }
-            if (wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '引き延ばし' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '引き延ばす' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '怠慢' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '怠惰') {
+            if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '引き延ばし' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '引き延ばす' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '怠慢' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '怠惰') {
               ranshin[hatsugenCnt][hatsugenBunCnt][4] = 1
             }
-            if (wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '渇望' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '切望' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '欲しい') {
+            if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '渇望' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '切望' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '欲しい') {
               ranshin[hatsugenCnt][hatsugenBunCnt][5] = 1
             }
-            if (wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '妄想' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '空想' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '想い' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === 'ふける') {
+            if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '妄想' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '空想' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '想い' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'ふける') {
               ranshin[hatsugenCnt][hatsugenBunCnt][6] = 1
             }
-            if (wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '抜け出す' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '打破' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '勝つ' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '戦う') {
+            if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '抜け出す' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '打破' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '勝つ' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '戦う') {
               ranshin[hatsugenCnt][hatsugenBunCnt][7] = 1
             }
-            if (wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '不安定' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '安定' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '落ち着く') {
+            if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '不安定' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '安定' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '落ち着く') {
               ranshin[hatsugenCnt][hatsugenBunCnt][8] = 1
             }
           } else if (hatsugenCnt % 2 === 0) {
             serapitango++
-            serapimoji = serapimoji + wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].surface_form.length
-            if (wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].surface_form === 'そう' && wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt + 1].surface_form === 'です' && wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt + 2].surface_form === 'か') {
+            serapimoji = serapimoji + morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].surface_form.length
+            if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].surface_form === 'そう' && morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt + 1].surface_form === 'です' && morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt + 2].surface_form === 'か') {
               soudesuka++
             }
-            if (wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].surface_form === '何' && wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt + 1].surface_form === 'か') {
+            if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].surface_form === '何' && morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt + 1].surface_form === 'か') {
 
-            } else if (wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === 'いかが' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === 'なんで' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === 'どうして' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === 'どの' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === 'どのように' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === 'いつ' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === 'どういう' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === 'どなた' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === 'どう' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].surface_form === '何' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '誰' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === 'どんな' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === 'どのような' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === 'どこ') {
+            } else if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'いかが' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'なんで' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'どうして' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'どの' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'どのように' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'いつ' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'どういう' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'どなた' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'どう' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].surface_form === '何' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '誰' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'どんな' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'どのような' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'どこ') {
               RGBlist[hatsugenCnt / 2][3] = 1
-            } else if (wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].surface_form === 'か' && wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].pos === '助詞') {
+            } else if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].surface_form === 'か' && morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].pos === '助詞') {
               RGBlist[hatsugenCnt / 2][4] = 1
-            } else if (wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].surface_form === 'ね' && wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].pos === '助詞') {
+            } else if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].surface_form === 'ね' && morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].pos === '助詞') {
               RGBlist[hatsugenCnt / 2][6] = 1
             }
           }
-          aBunContentArr[hatsugenCnt][hatsugenBunCnt] += wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].surface_form
-          if (wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].pos_detail_1 === '接尾' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '*' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].pos === '助詞' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '、' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].pos === '記号' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].pos === '助動詞' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].pos === '感動詞' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].pos === '接頭詞' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].pos_detail_1 === '非自立' ||
-            wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === 'する' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === 'いる' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === 'こういう' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === 'そういう' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === 'こう' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === 'する' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === 'こうした' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === 'いう' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === 'する' ||
-            wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === 'なる' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === 'その' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === 'あの' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].pos_detail_1 === '数' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === 'そう' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '気持ち' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '思い' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '思う' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === 'ある') {
+          aBunContentArr[hatsugenCnt][hatsugenBunCnt] += morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].surface_form
+          if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].pos_detail_1 === '接尾' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '*' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].pos === '助詞' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '、' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].pos === '記号' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].pos === '助動詞' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].pos === '感動詞' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].pos === '接頭詞' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].pos_detail_1 === '非自立' ||
+            morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'する' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'いる' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'こういう' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'そういう' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'こう' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'する' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'こうした' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'いう' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'する' ||
+            morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'なる' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'その' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'あの' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].pos_detail_1 === '数' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'そう' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '気持ち' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '思い' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '思う' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'ある') {
             afterMorphologicalAnalysisWordsCnt++
             continue
           }
-          aBunWordArr[hatsugenCnt][hatsugenBunCnt][aBunWordCnt] = wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form
+          aBunWordArr[hatsugenCnt][hatsugenBunCnt][aBunWordCnt] = morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form
           afterMorphologicalAnalysisWordsCnt++
           aBunWordCnt++
         }
@@ -211,18 +211,19 @@ const classifyWithFirstWordDictionary = (name, aBunWordArr, checkboxlist, chboxl
           continue
         }
         if (aBunContentArr[hatsugenCnt][hatsugenBunCnt] !== 'Ａ' && aBunContentArr[hatsugenCnt][hatsugenBunCnt] !== 'Ｂ' && aBunContentArr[hatsugenCnt][hatsugenBunCnt] !== 'Ｔ' && aBunContentArr[hatsugenCnt][hatsugenBunCnt] !== 'A' && aBunContentArr[hatsugenCnt][hatsugenBunCnt] !== 'B' && aBunContentArr[hatsugenCnt][hatsugenBunCnt] !== 'T' && aBunContentArr[hatsugenCnt][hatsugenBunCnt] !== '') {
-          hatsugenArray[hatsugenCnt] += aBunContentArr[hatsugenCnt][hatsugenBunCnt]
-          hatsugenArray[hatsugenCnt] += '。'
+          hatsugenArr[hatsugenCnt] += aBunContentArr[hatsugenCnt][hatsugenBunCnt]
+          hatsugenArr[hatsugenCnt] += '。'
         }
-        if (afterMorphologicalAnalysisWordsCnt === wordsArrayAfterMorphologicalAnalysis.length) {
+        if (afterMorphologicalAnalysisWordsCnt === morphologicalAnalysisWordsArr.length) {
           if (hatsugenCnt % 2 === 0) {
             if (hatsugenBunCnt <= 2 && aBunWordsQty <= 7) {
               RGBlist[hatsugenCnt / 2][5] = 1
             }
           }
+          deleteEmptyString(aBunContentArr[hatsugenCnt],hatsugenBunCnt)
           break
         }
-        if (wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].word_id === '2613630' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === '：' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].basic_form === ':' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].surface_form === '･･･？：' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].surface_form === ')：' || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].surface_form.indexOf('〈') !== -1 || wordsArrayAfterMorphologicalAnalysis[afterMorphologicalAnalysisWordsCnt].surface_form.indexOf('〉') !== -1) {
+        if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].word_id === '2613630' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '：' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === ':' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].surface_form === '･･･？：' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].surface_form === ')：' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].surface_form.indexOf('〈') !== -1 || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].surface_form.indexOf('〉') !== -1) {
           if (hatsugenCnt % 2 === 0) {
             if (hatsugenBunCnt <= 2 && aBunWordsQty <= 7) {
               RGBlist[hatsugenCnt / 2][5] = 1
@@ -231,12 +232,25 @@ const classifyWithFirstWordDictionary = (name, aBunWordArr, checkboxlist, chboxl
           afterMorphologicalAnalysisWordsCnt++
 
           // n++;
+          deleteEmptyString(aBunContentArr[hatsugenCnt],hatsugenBunCnt)
 
           break
         }
         afterMorphologicalAnalysisWordsCnt++
-        hatsugenBunCnt++
+
+        //空白文字列を防ぐ
+
+        if(aBunContentArr[hatsugenCnt][hatsugenBunCnt]===""){
+          aBunContentArr[hatsugenCnt].pop()
+        }else{
+          hatsugenBunCnt++
+        }
+
       }
+/*      //最初の空白を防ぐ
+      if(aBunContentArr[hatsugenCnt][0]===""){
+        aBunContentArr[hatsugenCnt].shift()
+      }*/
       hatsugenCnt++
     }
     // console.log("%d 来談者文 %d 単語 %d 文字 %d 治療者文 %d 単語 %d 文字 %d",m,kanjabun,kanjatango,kanjamoji,serapibun,serapitango,serapimoji);
@@ -331,7 +345,7 @@ const classifyWithFirstWordDictionary = (name, aBunWordArr, checkboxlist, chboxl
 
     console.log(aBunContentArr)
 
-    var sResult = select(name, storage, checkboxlist, aBunWordArr, miserables, chboxlist, chboxlist2, ansBunCategory, RGBlist, hatsugenArray, aBunContentArr, ansRadioResult, checked2, taiou, taiou2, chboxlength, chboxlength2)
+    var sResult = select(name, storage, checkboxlist, aBunWordArr, miserables, chboxlist, chboxlist2, ansBunCategory, RGBlist, hatsugenArr, aBunContentArr, ansRadioResult, checked2, taiou, taiou2, chboxlength, chboxlength2)
 
     checkboxlist = sResult.checkboxlist
     chboxlist = sResult.chboxlist
@@ -358,7 +372,7 @@ const classifyWithFirstWordDictionary = (name, aBunWordArr, checkboxlist, chboxl
       chboxlist: chboxlist,
       chboxlist2: chboxlist2,
       RGBlist: RGBlist,
-      hatsugenArray: hatsugenArray,
+      hatsugenArray: hatsugenArr,
       contentArrayOfASentence: aBunContentArr,
       checked: ansRadioResult,
       checked2: checked2,
@@ -372,7 +386,7 @@ const classifyWithFirstWordDictionary = (name, aBunWordArr, checkboxlist, chboxl
       zoom_value: zoomVal
     }
 
-    setForViz(name, storage, aBunWordArr, chboxlist, chboxlist2, RGBlist, hatsugenArray, aBunContentArr, ansRadioResult, checked2, taiou, taiou2, chboxlength, chboxlength2, startTime, graph, ranshin, zoomVal)
+    setForViz(name, storage, aBunWordArr, chboxlist, chboxlist2, RGBlist, hatsugenArr, aBunContentArr, ansRadioResult, checked2, taiou, taiou2, chboxlength, chboxlength2, startTime, graph, ranshin, zoomVal)
 
     // 以下は後ろじゃなきゃアカン
     for (let c = 1; c <= chboxlength; c++) {
@@ -382,12 +396,12 @@ const classifyWithFirstWordDictionary = (name, aBunWordArr, checkboxlist, chboxl
       makeOnClickS(c)
     }
 
-    //selectGraphShape(name, storage, aBunWordArr, chboxlist, chboxlist2, RGBlist, hatsugenArray, aBunContentArr, ansRadioResult, checked2, taiou, taiou2, chboxlength, chboxlength2, startTime, graph, ranshin, visResult, setForVizInput)
+    //selectGraphShape(name, storage, aBunWordArr, chboxlist, chboxlist2, RGBlist, hatsugenArr, aBunContentArr, ansRadioResult, checked2, taiou, taiou2, chboxlength, chboxlength2, startTime, graph, ranshin, visResult, setForVizInput)
 
     // graphの形状を切り替えた際もここで再描画される
 
     document.getElementById('radio_buttons').onchange = () => {
-      setForViz(name, storage, aBunWordArr, chboxlist, chboxlist2, RGBlist, hatsugenArray, aBunContentArr, ansRadioResult, checked2, taiou, taiou2, chboxlength, chboxlength2, startTime, graph, ranshin, zoomVal)
+      setForViz(name, storage, aBunWordArr, chboxlist, chboxlist2, RGBlist, hatsugenArr, aBunContentArr, ansRadioResult, checked2, taiou, taiou2, chboxlength, chboxlength2, startTime, graph, ranshin, zoomVal)
     }
 
     // スライダー
@@ -395,11 +409,11 @@ const classifyWithFirstWordDictionary = (name, aBunWordArr, checkboxlist, chboxl
     $('#slider1').on('slide', function (slideEvt) {
       $('#SliderVal').text(slideEvt.value)
       zoomVal = slideEvt.value
-      setForViz(name, storage, aBunWordArr, chboxlist, chboxlist2, RGBlist, hatsugenArray, aBunContentArr, ansRadioResult, checked2, taiou, taiou2, chboxlength, chboxlength2, startTime, graph, ranshin, zoomVal)
+      setForViz(name, storage, aBunWordArr, chboxlist, chboxlist2, RGBlist, hatsugenArr, aBunContentArr, ansRadioResult, checked2, taiou, taiou2, chboxlength, chboxlength2, startTime, graph, ranshin, zoomVal)
     })
 
     return {
-      name: name, RGBlist: RGBlist, keitaisokaiseki: aBunWordArr, hatsugen: hatsugenArray, bun: aBunContentArr, chboxlist: chboxlist, chboxlist2: chboxlist2, checked: ansRadioResult, checked2: checked2, taiou: taiou, taiou2: taiou2, chboxlength: chboxlength, chboxlength2: chboxlength2
+      name: name, RGBlist: RGBlist, keitaisokaiseki: aBunWordArr, hatsugen: hatsugenArr, bun: aBunContentArr, chboxlist: chboxlist, chboxlist2: chboxlist2, checked: ansRadioResult, checked2: checked2, taiou: taiou, taiou2: taiou2, chboxlength: chboxlength, chboxlength2: chboxlength2
     }
   })
 }
@@ -409,6 +423,12 @@ const isLoveWord = (query) => {
     return true
   }
   return false
+}
+
+const deleteEmptyString = (hatsugen,hatsugenBunCnt) => {
+  if(hatsugen[hatsugenBunCnt]===""){
+    hatsugen.pop()
+  }
 }
 
 export {classifyWithFirstWordDictionary}

@@ -5,7 +5,7 @@ import { readQueRadio } from './setForViz/readQueRadio'
 import {rodata} from './rodata'
 import {viz} from './viz'
 
-const setForViz = (name, storage, keitaisokaiseki, ansBunAnd1stCateArr, queBunAnd1stCateArr, RGBlist, hatsugen, bun, ansRadioResult, queRadioResult, taiou, taiou2, ansChBoxLen, queChBoxLen, startTime, graph, ranshin, zoomVal) => {
+const setForViz = (name, storage, keitaisokaiseki, ansBunAnd1stCateArr, queBunAnd1stCateArr, RGBlist, hatsugen, hatsugenBunContentArr, ansRadioResult, queRadioResult, taiou, taiou2, ansChBoxLen, queChBoxLen, startTime, graph, ranshin, zoomVal) => {
   let isUsingDictionaryWithWord2Vec = 0
 
   var bunsuu = 2// 前後の余白
@@ -40,7 +40,7 @@ const setForViz = (name, storage, keitaisokaiseki, ansBunAnd1stCateArr, queBunAn
   console.log(ansRadioResult)
 
   let ansCateNumArr = []
-  fromAnsRadioResultToAnsCateNum(ansCateNumArr,ansRadioResult,keitaisokaiseki,ansBunAnd1stCateArr,RGBlist,bun)
+  fromAnsRadioResultToAnsCateNum(ansCateNumArr,ansRadioResult,keitaisokaiseki,ansBunAnd1stCateArr,RGBlist,hatsugenBunContentArr)
 
   console.log(ansCateNumArr)
 
@@ -91,7 +91,7 @@ const setForViz = (name, storage, keitaisokaiseki, ansBunAnd1stCateArr, queBunAn
       stackDataArr[h][3 * m + 2] = {x: 3 * m + 3, y: 0}
     }
   }
-  viz(stackDataArr, allQueHatsugenColorArr, bun, hatsugen, svg, ansCateNumArr, keitaisokaiseki, RGBmaxmax, startTime, graph, ansRadioResult, ranshin, width, bunsuu)
+  viz(stackDataArr, allQueHatsugenColorArr, hatsugenBunContentArr, hatsugen, svg, ansCateNumArr, keitaisokaiseki, RGBmaxmax, startTime, graph, ansRadioResult, ranshin, width, bunsuu)
   return {
     chboxlist: ansBunAnd1stCateArr,
     chboxlist2: queBunAnd1stCateArr,
