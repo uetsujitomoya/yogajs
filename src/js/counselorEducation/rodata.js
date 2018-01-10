@@ -43,7 +43,9 @@ const rodata={
 
   textViewFontSize:4,
 
-  ansRadioFullLen:5
+  ansRadioFullLen:5,
+
+  keitaisokaisekiHatugenBunQtyGap:1
 
 }
 
