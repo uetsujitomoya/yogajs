@@ -110,7 +110,9 @@ const kaishakuColor = rodata.color.kaishaku
 const height0 = 200
 const height = 200
 
-const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, ansCategoryNumArr, keitaisokaiseki, RGBmaxmax, startTime, graphTypeNum, checked, ranshin, width, bunsuu) => {
+const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, ansCategoryNumArr, keitaisokaiseki, RGBmaxmax, startTime, graphTypeNum, ansRadioResult, ranshin, width, bunsuu) => {
+
+  //console.log(ansRadioResult)
   const upperName = 'カウンセラー'
   const lowerName = 'クライエント'
   const txtViewCounselor = '<img src = "./picture/counselor2.jpg" width ="20">'
@@ -165,7 +167,7 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
           len2[h] = d.length * width / bunsuu
           mazekoze[h] = d
           isFullConversationAnswerArr[h] = 1
-          barChartAllHatsugenColorArr[h] = answerTextureChoiceArr[checked[c]]
+          barChartAllHatsugenColorArr[h] = answerTextureChoiceArr[ansRadioResult[c]]
           rectHatsugenNoArr[h] = m
           h++
           c++
@@ -250,17 +252,17 @@ const viz = (stackdataArr, colorArrayInAllQuestionHatsugen, bun, hatsugen, svg, 
         rextTxt[rectTxtNo] = categoryOfTextOnRect.smallTalk
       }else{
 
-        if (checked[checkedNo] === 0) {
+        if (ansRadioResult[checkedNo] === 0) {
           rextTxt[rectTxtNo] = categoryOfTextOnRect.noGroup; checkedNo++
-        } else if (checked[checkedNo] === 1) {
+        } else if (ansRadioResult[checkedNo] === 1) {
           rextTxt[rectTxtNo] = categoryOfTextOnRect.love; checkedNo++
-        } else if (checked[checkedNo] === 2) {
+        } else if (ansRadioResult[checkedNo] === 2) {
           rextTxt[rectTxtNo] = categoryOfTextOnRect.friendship; checkedNo++
-        } else if (checked[checkedNo] === 3) {
+        } else if (ansRadioResult[checkedNo] === 3) {
           rextTxt[rectTxtNo] = categoryOfTextOnRect.work; checkedNo++
-        } else if (checked[checkedNo] === 4) {
+        } else if (ansRadioResult[checkedNo] === 4) {
           rextTxt[rectTxtNo] = categoryOfTextOnRect.self; checkedNo++
-        } else if (checked[checkedNo] === 5) {
+        } else if (ansRadioResult[checkedNo] === 5) {
           rextTxt[rectTxtNo] = categoryOfTextOnRect.spiritual; checkedNo++
         } else {
         }

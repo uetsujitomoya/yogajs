@@ -5,7 +5,7 @@ import { readQueRadio } from './setForViz/readQueRadio'
 import {rodata} from './rodata'
 import {viz} from './viz'
 
-const setForViz = (name, storage, keitaisokaiseki, ansBunAnd1stCateArr, chboxlist2, RGBlist, hatsugen, bun, ansRadioResult, questionRadioResult, taiou, taiou2, ansChBoxLen, queChBoxLen, startTime, graph, ranshin, zoomVal) => {
+const setForViz = (name, storage, keitaisokaiseki, ansBunAnd1stCateArr, queBunAnd1stCateArr, RGBlist, hatsugen, bun, ansRadioResult, queRadioResult, taiou, taiou2, ansChBoxLen, queChBoxLen, startTime, graph, ranshin, zoomVal) => {
   let isUsingDictionaryWithWord2Vec = 0
 
   var bunsuu = 2// 前後の余白
@@ -26,7 +26,7 @@ const setForViz = (name, storage, keitaisokaiseki, ansBunAnd1stCateArr, chboxlis
     readAnsRadio(name, storage, ansBunAnd1stCateArr, ansRadioResult, taiou, ansChBoxLen, isUsingDictionaryWithWord2Vec)
   }
   if (queChBoxLen >= 1) {
-    readQueRadio(name, storage, ansBunAnd1stCateArr, chboxlist2, questionRadioResult, taiou, taiou2, ansChBoxLen, queChBoxLen)
+    readQueRadio(name, storage, ansBunAnd1stCateArr, queBunAnd1stCateArr, queRadioResult, taiou, taiou2, ansChBoxLen, queChBoxLen)
   }
 
   let h, i, c, m, n
@@ -44,14 +44,14 @@ const setForViz = (name, storage, keitaisokaiseki, ansBunAnd1stCateArr, chboxlis
 
   console.log(ansCateNumArr)
 
-  for (let queHatsugenNo = 0; queHatsugenNo < questionRadioResult.length; queHatsugenNo++) {
-    if (questionRadioResult[queHatsugenNo] === 3) {
+  for (let queHatsugenNo = 0; queHatsugenNo < queRadioResult.length; queHatsugenNo++) {
+    if (queRadioResult[queHatsugenNo] === 3) {
       allQueHatsugenColorArr[queHatsugenNo] = rodata.color.open
-    } else if (questionRadioResult[queHatsugenNo] === 5) {
+    } else if (queRadioResult[queHatsugenNo] === 5) {
       allQueHatsugenColorArr[queHatsugenNo] = rodata.color.aiduchi
-    } else if (questionRadioResult[queHatsugenNo] === 4) {
+    } else if (queRadioResult[queHatsugenNo] === 4) {
       allQueHatsugenColorArr[queHatsugenNo] = rodata.color.close
-    } else if (questionRadioResult[queHatsugenNo] === 6) {
+    } else if (queRadioResult[queHatsugenNo] === 6) {
       allQueHatsugenColorArr[queHatsugenNo] = rodata.color.kaishaku
     } else {
       allQueHatsugenColorArr[queHatsugenNo] = rodata.color.seken
@@ -93,10 +93,10 @@ const setForViz = (name, storage, keitaisokaiseki, ansBunAnd1stCateArr, chboxlis
   viz(stackDataArr, allQueHatsugenColorArr, bun, hatsugen, svg, ansCateNumArr, keitaisokaiseki, RGBmaxmax, startTime, graph, ansRadioResult, ranshin, width, bunsuu)
   return {
     chboxlist: ansBunAnd1stCateArr,
-    chboxlist2: chboxlist2,
+    chboxlist2: queBunAnd1stCateArr,
     RGBlist: RGBlist,
     checked: ansRadioResult,
-    checked2: questionRadioResult,
+    checked2: queRadioResult,
     chboxlength: ansChBoxLen,
     chboxlength2: queChBoxLen,
     ranshin: ranshin
