@@ -7,7 +7,10 @@ const isKihonkuIncludingTheVerb = (kihonku,verb) => {
   //やっぱり基本句から取っていく
 
  // if(kihonku.)
-  if(kihonku.knpArr[rodata.kihonku1stJpRowNo][rodata.knpSurfaceFormColNo]===verb.surface_form){
+
+ // console.log(kihonku.knpArr)
+  console.log(verb.surfaceForm)
+  if(kihonku.knpArr[rodata.kihonku1stJpRowNo][rodata.knpSurfaceFormColNo]===verb.surfaceForm){
     return true
   }else{
     return false
