@@ -2,7 +2,7 @@ import { rodata } from '../rodata'
 
 const createTxtViewArea = (bun, allBunArr, i,verbBunHtml,isArrow)=>{
 
-  console.log(verbBunHtml)
+  //console.log(verbBunHtml)
   //1つ1つのTextViewAreaをつくる
   createBox(i)
   /*  for(let i=bun.bunNo-3;i<=bun.bunNo+3;i++){
@@ -48,15 +48,21 @@ const addBun=(id,bun,bold,verbBunHtml,isArrow)=>{
   const color="#000000"
   const bunNo = bun.bunNo
   const bunContent=bun.surfaceForm
-  if(bold){msg.innerHTML+="<b>"}
+  //if(bold){msg.innerHTML+="<b>"}
   msg.innerHTML += '<font size=' + rodata.textViewFontSize + '>' + bunNo + '' + talker + ' <font color=' + color + '>【</font>'
   if(isArrow){
     msg.innerHTML +=  verbBunHtml
   }else{
-    msg.innerHTML +=  bunContent
+    if(bold){
+      //console.log("bold")
+      msg.innerHTML += "<u>" + bunContent +"</u>"
+
+    }else{
+      msg.innerHTML +=  bunContent
+    }
   }
   msg.innerHTML += '】</font><br><br>'
-  if(bold){msg.innerHTML+="</b>"}
+  //if(bold){msg.innerHTML+="</b>"}
 }
 
 const addWatchingBun = (i,bun,isBold,verbBunHtml,isArrow) => {
