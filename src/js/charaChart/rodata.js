@@ -2,6 +2,11 @@ const rodata={
   bunsetsuSymbol:'*',
   kihonkuSymbol:'+',
   bunsetsu1stJpRowNo:2,
+  kihonku1stJpRowNo:1,
+
+  knpSurfaceFormColNo:0,
+  knpBasicFormColNo:2,
+  knpPOSFormColNo:3,
 
   yajirushi_refX : 8,
   refY:2,

@@ -5,7 +5,7 @@
 //import Node from './defineNode.js'
 import Arrow from './defineArrow.js'
 import {vizNodes} from './vizNode'
-import {initialValueOfSubjectAndObjectInVerb} from '../createBunArr/hasVerb.js'
+import {initialValueOfSubjectAndObjectInVerb} from '../createBunArr/isVerb.js'
 import {definePointArr} from './connectNodeAndArrow'
 import {rodata} from '../rodata'
 import * as d3 from 'd3'

@@ -1,7 +1,7 @@
 import {rodata} from '../rodata'
 import Word from './defineWord'
 import {isCharacter,searchNodeArrayForCharacterAndPoint} from '../chara/isChara'
-import {hasVerb} from './hasVerb'
+import {isVerb} from './isVerb'
 import {addSVO2Bunsetsu
 
 
@@ -58,7 +58,7 @@ export default class Bunsetsu {
 
   findVerbInBunsetsu () {
     for(let i=bunsetsu1stJpRIdx;i<this.word_array.length;i++){
-      if (hasVerb(this.word_array[i].hinshi)) {
+      if (isVerb(this.word_array[i].hinshi)) {
         this.isVerb = true
         this.verb = this.word_array[i].basic_form
         break

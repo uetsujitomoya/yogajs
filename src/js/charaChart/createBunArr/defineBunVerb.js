@@ -2,6 +2,8 @@
  * Created by uetsujitomoya on 2017/08/28.
  */
 import {searchMaenoBunForShugo} from './SO/searchMaenoBunForS'
+import { isVerb } from './isVerb'
+import { isKihonkuIncludingTheVerb } from './isKihonkuIncludingTheVerb'
 
 const initialValueOfSubjectAndObjectInVerb = null
 let i=0
@@ -25,6 +27,7 @@ export default class BunVerb {
     this.object = null
     this.hasSubject=false
     this.hasObject=false
+    this.bunHtml="" //原文表示用
   }
   rewriteSubjectAndAddBun2Node (realNode, bun) {
     this.subject = realNode
@@ -41,6 +44,20 @@ export default class BunVerb {
   rewriteObject (chara) {
     this.object = chara
     this.hasObject = true
+  }
+  createBunHtml(){
+    //やっぱり基本句から取っていく
+    for(const kihonku of bun.kihonkuArray){
+      //console.log(kihonku)
+      if(isKihonkuIncludingTheVerb(bun.kihonkuArray)){
+        this.bunHtml += "<u><b>"
+      }
+      this.bunHtml += kihonku.surfaceForm
+
+      if(isKihonkuIncludingTheVerb(bun.kihonkuArray)){
+        this.bunHtml += "</b></u>"
+      }
+    }
   }
 }
 

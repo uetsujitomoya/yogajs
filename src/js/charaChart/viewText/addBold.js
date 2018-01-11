@@ -1,0 +1,5 @@
+const addBold = () => {
+
+}
+
+export {addBold}
