@@ -25,8 +25,9 @@ export default class Arrow {
     this.bluePoint=0
 
     this.bunArr=[]
+    this.verbBunHtmlArr=[]
     definePointArr(this)//2回やってる？？
-    this.pushBunToArr(bun)
+    this.pushBunToArr(bun,verb)
     this.updateColor(verb.isBlueArrowColor)
 
   }
@@ -50,14 +51,15 @@ export default class Arrow {
 
   addStrokeWidth (bun,verb) {
     this.strokeWidth = this.strokeWidth + 0.5
-    this.pushBunToArr(bun)
+    this.pushBunToArr(bun,verb)
     this.updateColor(verb.isBlueArrowColor)
   }
-  pushBunToArr(bun){
+  pushBunToArr(bun,verb){
     //console.log(bun)
     this.bunArr.push(
       {
-        surfaceForm:bun.surfaceForm,
+        //surfaceForm:bun.surfaceForm,
+        surfaceForm:verb.bunHtml,
         bunNo:bun.bunNo
       }
     )

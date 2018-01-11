@@ -3,7 +3,7 @@
  */
 
 import {rodata} from '../rodata'
-import {viewArrowText} from '../viewText/viewArrowText'
+import {viewArrowTxt} from '../viewText/viewArrowTxt'
 import * as d3 from 'd3'
 const markerFillColor = rodata.markerFillColor
 const yajirushi_refX = rodata.yajirushi_refX
@@ -45,7 +45,7 @@ const vizArrow = (svg, arrow, r, arrowId,　allBunArr) => {
       "fill": color
     })
     .on('click', ()=>{
-      viewArrowText(arrow, allBunArr)
+      viewArrowTxt(arrow, allBunArr)
     })
   let line = d3.svg.line()
     .interpolate('basis')
@@ -67,7 +67,7 @@ const vizArrow = (svg, arrow, r, arrowId,　allBunArr) => {
 
     })
     .on('click', ()=>{
-      viewArrowText(arrow, allBunArr)
+      viewArrowTxt(arrow, allBunArr)
     })
   // pathの長さを調べて、丸の半径２個分＋矢印を後ろに下げる分の長さを引きます。
   const totalLen = path.node().getTotalLength()
