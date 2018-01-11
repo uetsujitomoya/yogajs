@@ -5,10 +5,10 @@ const searchMaenoBunForShugo = (bunArr, bunNo, verbNo,bun,nodeArr)=>{
 
   //まずその分から探す
   for(let verbCnt = verbNo - 1 ; verbCnt >= 0 ; verbCnt-- ){
-    const maenodoushi = bun.verb_array[verbCnt]
+    const maenodoushi = bun.verbArr[verbCnt]
     if(maenodoushi.hasSubject){
 
-      bun.verb_array[verbNo].rewriteSubjectAndAddBun2Node(nodeArr[maenodoushi.subject.nodeIdx], bun)
+      bun.verbArr[verbNo].rewriteSubjectAndAddBun2Node(nodeArr[maenodoushi.subject.nodeIdx], bun)
 
       return
     }
@@ -16,11 +16,11 @@ const searchMaenoBunForShugo = (bunArr, bunNo, verbNo,bun,nodeArr)=>{
 
   //次にそれより前の文から探す
   for(let bunCnt = bunNo - 1 ; bunCnt >= 0 ; bunCnt-- ){
-    if(Object.keys(bunArr[bunCnt]).length!==0 && bunArr[bunCnt].verb_array!==void 0){
-      for(let verbCnt=bunArr[bunCnt].verb_array.length - 1; verbCnt >= 0 ; verbCnt--){
-        const maenodoushi = bunArr[bunCnt].verb_array[verbCnt]
+    if(Object.keys(bunArr[bunCnt]).length!==0 && bunArr[bunCnt].verbArr!==void 0){
+      for(let verbCnt=bunArr[bunCnt].verbArr.length - 1; verbCnt >= 0 ; verbCnt--){
+        const maenodoushi = bunArr[bunCnt].verbArr[verbCnt]
         if(maenodoushi.hasSubject){
-          bun.verb_array[verbNo].rewriteSubjectAndAddBun2Node(nodeArr[maenodoushi.subject.nodeIdx], bun)
+          bun.verbArr[verbNo].rewriteSubjectAndAddBun2Node(nodeArr[maenodoushi.subject.nodeIdx], bun)
           return
         }
       }

@@ -19,11 +19,11 @@ const createArrowArr = (sliderBunArr, nodeArr, allBunArr) => {
   for (let bunCnt = 0; bunCnt < sliderBunArr.length; bunCnt++) {
     const bun = sliderBunArr[bunCnt]
     const hasVerbArr = {
-      value: 'verb_array' in bun ? bun.verb_array : 'No'
+      value: 'verbArr' in bun ? bun.verbArr : 'No'
     }
     if (hasVerbArr.value === 'No') { continue }
 
-    bun.verb_array.forEach((verb) => {
+    bun.verbArr.forEach((verb) => {
 
       if (verb.hasSubject) {
 

@@ -26,14 +26,14 @@ export default class Bun {
 
     //this.nodeArray=[]//forTextView
 
-    this.verb_array = []
+    this.verbArr = []
     this.rowNo = rawRId
     this.bunsetsuArray = []
 
     this.bunsetsuArray.length = countBunsetsu(bun2dArrFromKNP)
 
-    this.kihonkuArray = []
-    this.kihonkuArray.length = countKihonku(bun2dArrFromKNP)
+    this.kihonkuArr = []
+    this.kihonkuArr.length = countKihonku(bun2dArrFromKNP)
 
     let bunsetsuKNParr = []
     let kihonkuKNParr = []
@@ -52,13 +52,13 @@ export default class Bun {
 
       if (tmpSurfaceForm === kihonkuSymbol && bun2dArrFromKNP[tmpRowNo - 1][0] !== bunsetsuSymbol) {
 
-        this.kihonkuArray[bunKihonkuNo] = new BunKihonku(bunKihonkuNo, kihonkuKNParr)// 文の中の通し番号での基本句array
+        this.kihonkuArr[bunKihonkuNo] = new BunKihonku(bunKihonkuNo, kihonkuKNParr)// 文の中の通し番号での基本句array
         kihonkuKNParr = []
         bunKihonkuNo++
 
       } else if (tmpSurfaceForm === bunsetsuSymbol) {
 
-        this.kihonkuArray[bunKihonkuNo] = new BunKihonku(bunKihonkuNo, kihonkuKNParr)// 文の中の通し番号での基本句array
+        this.kihonkuArr[bunKihonkuNo] = new BunKihonku(bunKihonkuNo, kihonkuKNParr)// 文の中の通し番号での基本句array
         kihonkuKNParr = []
         bunKihonkuNo++
         this.bunsetsuArray[bunBunsetsuNo] = new Bunsetsu(bunBunsetsuNo, bunsetsuKNParr, nodeArr,this)// 文の中の通し番号での文節array
@@ -66,8 +66,8 @@ export default class Bun {
         // verb_array作成
 
         if (this.bunsetsuArray[bunBunsetsuNo].isVerb) {
-          verbNo=this.verb_array.length
-          this.verb_array.push(new BunVerb(bunBunsetsuNo, bunsetsuKNParr, bunNo,verbNo))
+          verbNo=this.verbArr.length
+          this.verbArr.push(new BunVerb(bunBunsetsuNo, bunsetsuKNParr, bunNo,verbNo))
         }
         bunsetsuKNParr = []
         bunBunsetsuNo++
@@ -83,10 +83,10 @@ export default class Bun {
     // verb_array作成
 
     if (this.bunsetsuArray[bunBunsetsuNo].isVerb) {
-      verbNo=this.verb_array.length
-      this.verb_array.push(new BunVerb(bunBunsetsuNo, bunsetsuKNParr, bunNo,verbNo))
+      verbNo=this.verbArr.length
+      this.verbArr.push(new BunVerb(bunBunsetsuNo, bunsetsuKNParr, bunNo,verbNo))
     }
-    this.kihonkuArray[bunKihonkuNo] = new BunKihonku(bunKihonkuNo, kihonkuKNParr)
+    this.kihonkuArr[bunKihonkuNo] = new BunKihonku(bunKihonkuNo, kihonkuKNParr)
     this.inputEachKakarareruBunsetsuID()
     this.inputEachKakarareruKihonkuID()
 
@@ -94,14 +94,19 @@ export default class Bun {
     // this.basic_form = row_array[2]
     this.storeSurfaceForm(bun2dArrFromKNP)
 
+
     //objectかsubjectを探す。人間でなくてもいいことはないはず
-    for (let tmpVerbNo = 0; tmpVerbNo < this.verb_array.length; tmpVerbNo++) {
-      this.findObjectOfVerb(this.verb_array[tmpVerbNo].bunsetsuNum_inSentence, tmpVerbNo)
-      this.findSubjectOfVerb(this.verb_array[tmpVerbNo].bunsetsuNum_inSentence, tmpVerbNo,nodeArr)
-      if((this.verb_array[tmpVerbNo].hasObject)&&(!this.verb_array[tmpVerbNo].hasSubject)){
+    for (let tmpVerbNo = 0; tmpVerbNo < this.verbArr.length; tmpVerbNo++) {
+      this.findObjectOfVerb(this.verbArr[tmpVerbNo].bunsetsuNum_inSentence, tmpVerbNo)
+      this.findSubjectOfVerb(this.verbArr[tmpVerbNo].bunsetsuNum_inSentence, tmpVerbNo,nodeArr)
+      if((this.verbArr[tmpVerbNo].hasObject)&&(!this.verbArr[tmpVerbNo].hasSubject)){
         searchMaenoBunForShugo(bunArr,bunNo,tmpVerbNo,this,nodeArr)
       }
     }
+
+    this.verbArr.forEach((verb)=>{
+      verb.createBunHtml(this)
+    })
   }
 
   inputEachKakarareruBunsetsuID () {
@@ -117,10 +122,10 @@ export default class Bun {
   }
 
   inputEachKakarareruKihonkuID () {
-    for(const kakaruKihonku of this.kihonkuArray){
-      for (let kakarareruKihonkuCnt = 0; kakarareruKihonkuCnt < this.kihonkuArray.length; kakarareruKihonkuCnt++) {
-        if (kakaruKihonku.kakatu_kihonku_id === this.kihonkuArray[kakarareruKihonkuCnt].id) {
-          this.kihonkuArray[kakarareruKihonkuCnt].kakarareru_kihonku_id_array.push(kakaruKihonku.id)
+    for(const kakaruKihonku of this.kihonkuArr){
+      for (let kakarareruKihonkuCnt = 0; kakarareruKihonkuCnt < this.kihonkuArr.length; kakarareruKihonkuCnt++) {
+        if (kakaruKihonku.kakatu_kihonku_id === this.kihonkuArr[kakarareruKihonkuCnt].id) {
+          this.kihonkuArr[kakarareruKihonkuCnt].kakarareru_kihonku_id_array.push(kakaruKihonku.id)
           break
         }
       }
@@ -133,7 +138,7 @@ export default class Bun {
       if (tmpClause.isSubject) {
         this.bunsetsuArray[ verbBunsetsuNo ].subject_of_verb = tmpClause.subject
         //モノホンのnodeもってこないといけない。
-        this.verb_array[tempVerbNum].rewriteSubjectAndAddBun2Node(nodeArr[tmpClause.subject.nodeIdx], this)
+        this.verbArr[tempVerbNum].rewriteSubjectAndAddBun2Node(nodeArr[tmpClause.subject.nodeIdx], this)
         break
       }else{
         //searchMaenoBunForShugo(tmpClause,previousSentences)
@@ -146,8 +151,8 @@ export default class Bun {
       let tmpBunsetsu = this.bunsetsuArray[bunsetsuCnt]
       if (tmpBunsetsu.isObject) {
         this.bunsetsuArray[ verbBunsetsuNo ].object_of_verb = tmpBunsetsu.object
-        this.verb_array[tmpVerbNo].object = tmpBunsetsu.object
-        this.verb_array[tmpVerbNo].rewriteObject(tmpBunsetsu.object)
+        this.verbArr[tmpVerbNo].object = tmpBunsetsu.object
+        this.verbArr[tmpVerbNo].rewriteObject(tmpBunsetsu.object)
         break
       }
     }
@@ -155,7 +160,7 @@ export default class Bun {
 
   storeSurfaceForm(bunFromKNP){
     //やっぱり基本句から取っていく
-    for(const kihonku of this.kihonkuArray){
+    for(const kihonku of this.kihonkuArr){
       //console.log(kihonku)
       this.surfaceForm += kihonku.surfaceForm
       delete kihonku.surfaceForm

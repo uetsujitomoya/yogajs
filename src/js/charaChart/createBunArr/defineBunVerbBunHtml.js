@@ -2,11 +2,12 @@ import { isKihonkuIncludingTheVerb } from './isKihonkuIncludingTheVerb'
 
 const defineBunVerbBunHtml = (bun)=> {
   //原文表示に用いる
+  console.log("defineBunVerbBunHtml.js")
 
-  bun.verb_array.forEach((verb)=>{
+  bun.verbArr.forEach((verb)=>{
 
     //やっぱり基本句から取っていく
-    bun.kihonkuArray.forEach((kihonku)=>{
+    bun.kihonkuArr.forEach((kihonku)=>{
       //console.log(kihonku)
       if(isKihonkuIncludingTheVerb(kihonku,verb)){ //基本句のknpArrからsearch
         this.bunHtml += "<u><b>"

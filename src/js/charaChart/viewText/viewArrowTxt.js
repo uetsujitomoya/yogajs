@@ -11,7 +11,7 @@ const viewArrowTxt = (arrow, allBunArr) => {//slider適用後に"allBunArr"に"s
     console.log(arrow)
     arrow.bunArr.forEach((bun,arrowBunArrId)=>{
       if(preBunNo!==bun.bunNo){
-        createTxtViewArea(bun,allBunArr,arrowBunArrId,verbBunHtml,true)
+        createTxtViewArea(bun,allBunArr,arrowBunArrId,bun.surfaceForm,true)
       }
       preBunNo=bun.bunNo
     })

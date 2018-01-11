@@ -45,16 +45,18 @@ export default class BunVerb {
     this.object = chara
     this.hasObject = true
   }
-  createBunHtml(){
+  createBunHtml(bun){
+    //bunが出来てから、Bun自体のbunSurfaceFromとともに作る
+    console.log("BunVerb.createBunHtml")
     //やっぱり基本句から取っていく
-    for(const kihonku of bun.kihonkuArray){
+    for(const kihonku of bun.kihonkuArr){
       //console.log(kihonku)
-      if(isKihonkuIncludingTheVerb(bun.kihonkuArray)){
+      if(isKihonkuIncludingTheVerb(kihonku,this)){
         this.bunHtml += "<u><b>"
       }
       this.bunHtml += kihonku.surfaceForm
 
-      if(isKihonkuIncludingTheVerb(bun.kihonkuArray)){
+      if(isKihonkuIncludingTheVerb(kihonku,this)){
         this.bunHtml += "</b></u>"
       }
     }

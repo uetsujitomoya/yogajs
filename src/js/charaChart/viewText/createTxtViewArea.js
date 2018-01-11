@@ -1,6 +1,8 @@
 import { rodata } from '../rodata'
 
 const createTxtViewArea = (bun, allBunArr, i,verbBunHtml,isArrow)=>{
+
+  console.log(verbBunHtml)
   //1つ1つのTextViewAreaをつくる
   createBox(i)
   /*  for(let i=bun.bunNo-3;i<=bun.bunNo+3;i++){
@@ -58,6 +60,7 @@ const addBun=(id,bun,bold,verbBunHtml,isArrow)=>{
 }
 
 const addWatchingBun = (i,bun,isBold,verbBunHtml,isArrow) => {
+
   if(isArrow){
     addBun('msg'+i,bun, true,verbBunHtml,true)
   }else{
