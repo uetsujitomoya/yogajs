@@ -27,7 +27,7 @@ const fromAnsRadioResultToAnsCateNum = (ansCateNumArr, ansRadioResult, keitaisok
 
       const tmpAnsRadioResult = ansRadioResult[ansRadioResultCnt - 1] //1-5
 
-      if(allHatsugenNo>=0){
+  /*    if(allHatsugenNo>=0){
         console.log("-")
         console.log("%d発言目内 %d文目",allHatsugenNo,hatsugenBunNo)
         console.log("ansRadioResultCnt %d",ansRadioResultCnt)
@@ -36,7 +36,7 @@ const fromAnsRadioResultToAnsCateNum = (ansCateNumArr, ansRadioResult, keitaisok
         console.log(bun[allHatsugenNo][hatsugenBunNo])
         console.log(ansRadioResult[ansRadioResultCnt - 1])
       }
-
+*/
       RGBlist[RGBlistCnt][tmpAnsRadioResult-1] = RGBlist[RGBlistCnt][tmpAnsRadioResult] + 1 //ここ意味わからん
       ansCateNumArr[allHatsugenNo][hatsugenBunNo] = tmpAnsRadioResult
 

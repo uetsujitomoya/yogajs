@@ -1,4 +1,4 @@
-import {csv2Array} from './csv2Array.js'
+import {csv2Array} from './csv2Arr.js'
 import {TransposeMatrix} from './transposeMatrix.js'
 import {rodata} from '../rodata'
 

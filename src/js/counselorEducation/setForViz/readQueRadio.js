@@ -8,6 +8,7 @@ const readQueRadio = (name, storage, chboxlist, chboxlist2, queRadioResult, taio
   let black = 0
   for (let chBoxNo = 1; chBoxNo <= queChBoxLen; chBoxNo++) {
     const radio = document.getElementById('rs' + chBoxNo).children
+    console.log(radio)
     for (let i = radio.length - 5, l = radio.length; i < l; i++) {
       if (radio[i].control.checked === true) {
         console.log("radio[i].control.value %s",radio[i].control.value)

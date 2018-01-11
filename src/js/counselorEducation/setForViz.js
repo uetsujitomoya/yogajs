@@ -29,6 +29,9 @@ const setForViz = (name, storage, keitaisokaiseki, ansBunAnd1stCateArr, queBunAn
     readQueRadio(name, storage, ansBunAnd1stCateArr, queBunAnd1stCateArr, queRadioResult, taiou, taiou2, ansChBoxLen, queChBoxLen)
   //}
 
+  console.log("queRadioResult")
+  console.log(queRadioResult)
+
   let h, i, c, m, n
 
   for (let n = 0; n < RGBlist.length; n++) {
