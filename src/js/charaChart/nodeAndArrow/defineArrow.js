@@ -58,8 +58,8 @@ export default class Arrow {
     //console.log(verb)
     this.bunArr.push(
       {
-        surfaceForm:bun.surfaceForm,
-        //surfaceForm:verb.bunHtml,
+        //surfaceForm:bun.surfaceForm,
+        surfaceForm:verb.bunHtml,
         bunNo:bun.bunNo
       }
     )

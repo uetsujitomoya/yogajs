@@ -8,13 +8,26 @@ const isKihonkuIncludingTheVerb = (kihonku,verb) => {
 
  // if(kihonku.)
 
- // console.log(kihonku.knpArr)
-  console.log(verb.surfaceForm)
-  if(kihonku.knpArr[rodata.kihonku1stJpRowNo][rodata.knpSurfaceFormColNo]===verb.surfaceForm){
-    return true
-  }else{
-    return false
+ //console.log(kihonku.knpArr[rodata.kihonku1stJpRowNo][rodata.knpSurfaceFormColNo])
+/*  if(kihonku.knpArr[rodata.kihonku1stJpRowNo][rodata.knpSurfaceFormColNo]==="+"){
+    console.log(kihonku.knpArr)
+  }*/
+  //console.log(verb.surfaceForm)
+
+  for(const row of kihonku.knpArr){
+    if(row[0]!=="*"&&row[0]!=="+"){
+      if(row[0]===verb.surfaceForm){
+        //console.log(verb.surfaceForm)
+        return true
+        break
+      }else{
+        return false
+        break
+      }
+    }
   }
+
+
 
 }
 

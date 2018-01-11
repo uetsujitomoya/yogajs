@@ -52,7 +52,9 @@ export default class BunVerb {
     for(const kihonku of bun.kihonkuArr){
       //console.log(kihonku)
       if(isKihonkuIncludingTheVerb(kihonku,this)){
+        //console.log(this)
         this.bunHtml += "<u><b>"
+        //console.log(this.bunHtml)
       }
       this.bunHtml += kihonku.surfaceForm
 
