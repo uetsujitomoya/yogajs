@@ -163,7 +163,7 @@ export default class Bun {
     for(const kihonku of this.kihonkuArr){
       //console.log(kihonku)
       this.surfaceForm += kihonku.surfaceForm
-      delete kihonku.surfaceForm
+      //delete kihonku.surfaceForm
     }
   }
 

@@ -55,11 +55,10 @@ export default class Arrow {
     this.updateColor(verb.isBlueArrowColor)
   }
   pushBunToArr(bun,verb){
-    console.log(verb.bunHtml)
+    //console.log(verb)
     this.bunArr.push(
       {
-
-        //surfaceForm:bun.surfaceForm,
+        surfaceForm:bun.surfaceForm,
         //surfaceForm:verb.bunHtml,
         bunNo:bun.bunNo
       }

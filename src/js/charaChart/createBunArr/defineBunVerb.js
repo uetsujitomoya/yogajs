@@ -47,7 +47,7 @@ export default class BunVerb {
   }
   createBunHtml(bun){
     //bunが出来てから、Bun自体のbunSurfaceFromとともに作る
-    console.log("BunVerb.createBunHtml")
+    //console.log(bun.kihonkuArr)
     //やっぱり基本句から取っていく
     for(const kihonku of bun.kihonkuArr){
       //console.log(kihonku)
