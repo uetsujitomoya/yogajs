@@ -5,6 +5,7 @@ const readAnsRadio = (jsonFileName, storage, ansBunAnd1stCateArr, answerRadioRes
 
 
   for (let chBoxNo = 1; chBoxNo <= ansChBoxLen; chBoxNo++) {
+
     let changedAnswerClassificationSaveTarget
 
     if (isUsingDictionaryWithWord2Vec === 1) {
@@ -14,9 +15,13 @@ const readAnsRadio = (jsonFileName, storage, ansBunAnd1stCateArr, answerRadioRes
       changedAnswerClassificationSaveTarget = jsonFileName + 'RGB' + chBoxNo
     }
 
+    //console.log(changedAnswerClassificationSaveTarget) //json縮小時の差分を見る
+
     const answerRadio = document.getElementById('r' + chBoxNo).children
     for (let buttonNo = answerRadio.length - rodata.ansRadioFullLen, l = answerRadio.length; buttonNo < l; buttonNo++) {
       if (answerRadio[buttonNo].control.checked) {
+        //console.log("answerRadio[buttonNo].control.value")
+        //console.log(answerRadio[buttonNo].control.value)
         if (answerRadio[buttonNo].control.value === '1') {
           answerRadioResult[taiou[chBoxNo - 1]] = 1
           storage.setItem(changedAnswerClassificationSaveTarget, 0)

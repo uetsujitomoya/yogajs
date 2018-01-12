@@ -363,6 +363,7 @@ const viz = (stackdataArr, allQueHatsugenCArr, bun, hatsugen, svg, ansCateNumArr
       })
 
       .on('mouseover', function (d, rectNo) {
+          console.log(allQueHatsugenCArr)
           var msg = document.getElementById('msg')
           let txtViewHatsugenNo, l
           msg.innerHTML = ''
@@ -375,6 +376,7 @@ const viz = (stackdataArr, allQueHatsugenCArr, bun, hatsugen, svg, ansCateNumArr
                 console.log("allQueHatsugenCArr[rectHatsugenNoArr[rectNo] / 2] %s",allQueHatsugenCArr[rectHatsugenNoArr[rectNo] / 2])
                 console.log("rectHatsugenNoArr[rectNo] / 2 %d",rectHatsugenNoArr[rectNo] / 2)
                 msg.innerHTML += '<b><u><font size=' + txtViewFontSize + '>' + (1 + rectHatsugenNoArr[rectNo]) + '' + txtViewCounselor + ' <font color=' + allQueHatsugenCArr[rectHatsugenNoArr[rectNo] / 2] + '>【</font>' + hatsugen[rectHatsugenNoArr[rectNo]] + '<font color=' + allQueHatsugenCArr[rectHatsugenNoArr[rectNo] / 2] + '>】</font></u></b><font size=' + txtViewFontSize + '><br><br>'
+
               } else if (txtViewHatsugenNo % 2 === 0) {
                 msg.innerHTML += '<font size=' + txtViewFontSize + '>' + (1 + txtViewHatsugenNo + rectHatsugenNoArr[rectNo]) + '' + txtViewCounselor + ' <font color=' + allQueHatsugenCArr[txtViewHatsugenNo / 2 + rectHatsugenNoArr[rectNo] / 2] + '><b>【</b></font>' + hatsugen[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]] + '<font color=' + allQueHatsugenCArr[txtViewHatsugenNo / 2 + rectHatsugenNoArr[rectNo] / 2] + '><b>】</b></font><br><br>'
               } else { // forループを回さないと各文ごとの表示ができない

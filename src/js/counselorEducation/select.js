@@ -75,9 +75,12 @@ const select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, ch
 
   //createGraphSelectButton()
 
-  for (let hatsugenIdx = 0; hatsugenIdx < keitaisokaiseki.length; hatsugenIdx++) {
+  //console.log("bun")
+  //console.log(bun )
+
+  for (let hatsugenIdx = 0; hatsugenIdx < bun.length; hatsugenIdx++) {
     if (hatsugenIdx % 2 === 1) {
-      for (bunIdx = 0; bunIdx < keitaisokaiseki[hatsugenIdx].length; ++bunIdx) {
+      for (bunIdx = 0; bunIdx < bun[hatsugenIdx].length; bunIdx++) {
         if (bun[hatsugenIdx][bunIdx] === 'Ａ' || bun[hatsugenIdx][bunIdx] === 'Ｂ' || bun[hatsugenIdx][bunIdx] === 'Ｔ' || bun[hatsugenIdx][bunIdx] === 'A' || bun[hatsugenIdx][bunIdx] === 'B' || bun[hatsugenIdx][bunIdx] === 'T' || bun[hatsugenIdx][bunIdx] === '') {
           continue
         }
@@ -88,6 +91,11 @@ const select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, ch
 
         ansCnt++
         chBoxLen++
+
+        console.log("%d発言目内 %d文目",hatsugenIdx,bunIdx)
+        console.log(bun[hatsugenIdx][bunIdx])
+        //console.log("ansCnt %d",ansCnt)
+
 
         let stockedAnsGroupNo = storage.getItem(jsonName + 'RGB' + ansCnt)
 
@@ -104,6 +112,10 @@ const select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, ch
 
         }
         taiou[ansCnt - 1] = n - 1
+
+
+        //console.log(hatsugenIdx + 1)
+
 
         //どれにも属さない
         if (answerClassification3dArrayforCreatingSelect[hatsugenIdx][bunIdx][0] + answerClassification3dArrayforCreatingSelect[hatsugenIdx][bunIdx][1] + answerClassification3dArrayforCreatingSelect[hatsugenIdx][bunIdx][2] >= 2) {
@@ -200,6 +212,7 @@ const select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, ch
   }
 
   var ansNoMax = ansCnt
+  console.log("ansNoMax %d",ansNoMax)
   var questionNoMax = questionCnt
 
   return {

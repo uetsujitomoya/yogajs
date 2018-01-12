@@ -221,6 +221,7 @@ const classifyWithFirstWordDictionary = (name, aBunWordArr, checkboxlist, chboxl
             }
           }
           deleteEmptyString(aBunContentArr[hatsugenCnt],hatsugenBunCnt)
+          console.log(aBunContentArr[hatsugenCnt])
           break
         }
         if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].word_id === '2613630' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '：' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === ':' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].surface_form === '･･･？：' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].surface_form === ')：' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].surface_form.indexOf('〈') !== -1 || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].surface_form.indexOf('〉') !== -1) {
@@ -233,6 +234,7 @@ const classifyWithFirstWordDictionary = (name, aBunWordArr, checkboxlist, chboxl
 
           // n++;
           deleteEmptyString(aBunContentArr[hatsugenCnt],hatsugenBunCnt)
+          console.log(aBunContentArr[hatsugenCnt])
 
           break
         }
@@ -343,6 +345,7 @@ const classifyWithFirstWordDictionary = (name, aBunWordArr, checkboxlist, chboxl
 
     var graph
 
+    console.log("bun")
     console.log(aBunContentArr)
 
     var sResult = select(name, storage, checkboxlist, aBunWordArr, miserables, chboxlist, chboxlist2, ansBunCategory, RGBlist, hatsugenArr, aBunContentArr, ansRadioResult, checked2, taiou, taiou2, chboxlength, chboxlength2)
@@ -425,9 +428,12 @@ const isLoveWord = (query) => {
   return false
 }
 
-const deleteEmptyString = (hatsugen,hatsugenBunCnt) => {
-  if(hatsugen[hatsugenBunCnt]===""){
-    hatsugen.pop()
+const deleteEmptyString = (arr,hatsugenBunCnt) => {
+/*  if(arr[hatsugenBunCnt]===""){
+    arr.pop()
+  }*/
+  if(arr[arr.length-1]===""){
+    arr.pop()
   }
 }
 
