@@ -28,11 +28,11 @@ const rodata={
   textViewFontSize:2,
 
   knpCsvFolder:"./csv/knp/",
-  knpCsvName:"171114allKnp",
+  knpCsvName:"171101allForCC",//bunArrをbunArrCsvに任せる場合でも、登場人物はknpCsvから取得
   //csvPath: this.knpCsvFolder+this.knpCsvName+".csv",
 
   bunArrCsvFolder:"./csv/bunArr/",
-  bunArrCsvName:"201712211623_171114allKnp_withPeople_edited.csv",
+  bunArrCsvName:"2018116195_171101allForCC_withPeople_edited.csv",
   withPeople:true,
 
   charaChartAreaID : '#example',
