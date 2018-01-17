@@ -6,13 +6,13 @@ import {rodata } from '../rodata'
 
 let r
 const orbitR=rodata.orbitR
-//onst orbitOPoint = rodata.orbitOY
+const orbitOPoint = rodata.orbitOPoint
 
 let nodeCnt = 0
 /*
 let r = 40
 const orbitR =150
-const orbitOY=200*/
+const orbitOPoint=200*/
 
 const enshuBunkatsuNum = 3
 
@@ -45,8 +45,8 @@ export default class Node {
   }
   fixPoint(nodeArrLen){
     this.radian = (this.nodeIdx/nodeArrLen)*2*Math.PI
-    this.x = rodata.orbitOX + orbitR * Math.cos(this.radian)
-    this.y = rodata.orbitOY - orbitR * Math.sin(this.radian)
+    this.x = orbitOPoint + orbitR * Math.cos(this.radian)
+    this.y = orbitOPoint - orbitR * Math.sin(this.radian)
     r = orbitR / (nodeArrLen * 200)
   }
   pushToBunArr(bun){
