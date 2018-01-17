@@ -18,7 +18,10 @@ const rodata={
 
   nodeR : 15,
   orbitR :250,
-  orbitOPoint:300,
+  orbitOY:400,
+  orbitOX:300,
+  svgWidth:600,
+  svgHeight:700,
 
   textViewFontSize:2,
 
