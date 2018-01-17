@@ -10,7 +10,7 @@ import {passNotation} from './unifyNotation'
 
 const r=rodata.nodeR
 const orbitR=rodata.orbitR
-const orbitOPoint = rodata.orbitOPoint
+const orbitOPoint = rodata.orbitOY
 let nodeCnt=0
 let aSanCnt=0
 
