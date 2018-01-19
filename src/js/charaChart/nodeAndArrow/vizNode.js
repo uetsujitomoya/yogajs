@@ -6,7 +6,7 @@ import d3 from 'd3'
 import $ from 'jquery'
 import {rodata} from '../rodata'
 import {r} from './defineNode'
-import {viewNodeText} from '../viewText/viewNodeTxt'
+import {viewNodeTxt} from '../viewText/viewNodeTxt'
 
 //import{rodata} from '../../rodata'
 //const r = rodata.nodeR
@@ -32,7 +32,7 @@ const vizNodes = (svg,nodeArr,sliderBunArr,r,allBunArr) => {
       'stroke-width': (d) => { return　d.circleStrokeWidth }
     })
     .on('click', (d, i)=>{
-      viewNodeText(d, allBunArr)
+      viewNodeTxt(d, allBunArr)
     })
 
   nodes.append('text')
@@ -46,7 +46,7 @@ const vizNodes = (svg,nodeArr,sliderBunArr,r,allBunArr) => {
       return d.nodeCharacter
     })
     .on('click', (d, i)=>{
-      viewNodeText(d, allBunArr)
+      viewNodeTxt(d, allBunArr)
     })
 }
 

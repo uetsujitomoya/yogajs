@@ -11,6 +11,9 @@ import {applySliderForNodeText} from './viewText/applySliderForNodeTxt'
 import {createArrowArr} from './nodeAndArrow/createArrowArr.js'
 
 import {removeSVG} from './nodeAndArrow/vizNode.js'
+import { nowWatchingArrowOrNode } from './nowWatchingArrowOrNode'
+import { viewArrowTxt } from './viewText/viewArrowTxt'
+import { viewNodeTxt } from './viewText/viewNodeTxt'
 
 
 let manageSlider = (allBunArr, charaArr) => {
@@ -70,6 +73,12 @@ const redrawCharaChart = (allBunArr, selectedArea, charaArr) => {
   applySliderForNodeText(selectedBunArr, charaArr)
 
   createArrowArr(selectedBunArr,charaArr,allBunArr)
+
+  if(nowWatchingArrowOrNode.arrow!==null){
+    viewArrowTxt(nowWatchingArrowOrNode.arrow,allBunArr)
+  }else if(nowWatchingArrowOrNode.node!==null){
+    viewNodeTxt(nowWatchingArrowOrNode.node,allBunArr)
+  }
 }
 
 export {manageSlider}
