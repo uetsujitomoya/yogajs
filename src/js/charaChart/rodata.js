@@ -16,10 +16,14 @@ const rodata={
   aroundClientPeopleNodeColor:"#696969",
   charaNameColor:"#0000cd",
 
-  clientArrowColor:"#ff4242",
+  clientArrowColor:"#a9a9a9",
   aroundClientPeopleArrowColor:"#a9a9a9",
-  kawaisounaClientArrowColor:"#4242ff",
-  situationDependencyPeopleColor:"#42ff42",
+  kawaisounaClientArrowColor:"#a9a9a9",
+  situationDependencyPeopleColor:"#a9a9a9",
+  //clientArrowColor:"#ff4242",
+  //aroundClientPeopleArrowColor:"#a9a9a9",
+  //kawaisounaClientArrowColor:"#4242ff",
+  //situationDependencyPeopleColor:"#42ff42",
 
   nodeR : 15,
   orbitR :250,
