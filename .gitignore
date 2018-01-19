@@ -12,3 +12,4 @@ app/.csv
 json/
 knp/
 *.log
+*.numbers
