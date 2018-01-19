@@ -13,7 +13,8 @@ const viewNodeTxt=(node, allBunArr)=>{//slider適用後に"allBunArr"に"selecte
   if(!rodata.isOnlyViz){
     let msg = document.getElementById('box')
     msg.innerHTML=''
-    console.log(node.bunArr)
+    //console.log(node.bunArr)
+    //console.log(allBunArr)
     node.bunArr.forEach((bun,nodeBunArrId)=>{
       if(preBunNo!==bun.bunNo){
         createTxtViewArea(bun,allBunArr,nodeBunArrId)

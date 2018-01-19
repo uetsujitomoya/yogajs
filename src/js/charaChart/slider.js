@@ -74,9 +74,9 @@ const redrawCharaChart = (allBunArr, selectedArea, charaArr) => {
 
   createArrowArr(selectedBunArr,charaArr,allBunArr)
 
-  if(nowWatchingArrowOrNode.arrow!==null){
+/*  if(nowWatchingArrowOrNode.arrow!==null){
     viewArrowTxt(nowWatchingArrowOrNode.arrow,allBunArr)
-  }else if(nowWatchingArrowOrNode.node!==null){
+  }else */if(nowWatchingArrowOrNode.node!==null){
     viewNodeTxt(nowWatchingArrowOrNode.node,allBunArr)
   }
 }

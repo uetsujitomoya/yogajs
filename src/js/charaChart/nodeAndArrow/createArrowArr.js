@@ -10,6 +10,8 @@ import {definePointArr} from './connectNodeAndArrow'
 import {rodata} from '../rodata'
 import * as d3 from 'd3'
 import {vizArrow} from './vizArrow'
+import {nowWatchingArrowOrNode} from '../nowWatchingArrowOrNode'
+import { viewArrowTxt } from '../viewText/viewArrowTxt'
 
 const createArrowArr = (sliderBunArr, nodeArr, allBunArr) => {
   let arrowArr = []
@@ -52,6 +54,18 @@ const createArrowArr = (sliderBunArr, nodeArr, allBunArr) => {
       }
     })
   }
+
+
+  if(nowWatchingArrowOrNode.arrow!==null){
+    for(const arrow of arrowArr){
+      if(arrow.subject.name===nowWatchingArrowOrNode.arrow.subject && arrow.object.name===nowWatchingArrowOrNode.arrow.object){
+        viewArrowTxt(arrow,allBunArr)
+        break
+      }
+    }
+  }
+
+
 
   let svg = d3.select(rodata.charaChartAreaID).append('svg')
     .attr({
