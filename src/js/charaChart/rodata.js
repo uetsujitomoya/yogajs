@@ -49,7 +49,7 @@ const rodata={
   circleFill: "#e6e6e6",
 
 
-  viewMarkEnd:true,
+  viewMarkEnd:false,
 
   isOnlyViz:false,
   isSingleSlider:true,

@@ -65,7 +65,6 @@ const createArrowArr = (sliderBunArr, nodeArr, allBunArr) => {
 
   arrowArr.forEach((arrow,arrowId)=>{
     definePointArr(arrow)
-
     vizArrow(svg, arrow, r,arrowId,allBunArr)
   })
 }
