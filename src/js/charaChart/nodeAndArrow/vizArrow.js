@@ -34,14 +34,14 @@ const vizArrow = (svg, arrow, r, arrowId,　allBunArr) => {
       //'refX': 4.5*Math.sqrt(r),
       "refX":yajirushi_refX,
       'refY': refY,
-      'markerWidth': 8,
-      'markerHeight': 8,
-      'orient': 'auto'
-      //"markerUnits":"userSpaceOnUse"
+      'markerWidth': rodata.markerWitdh,
+      'markerHeight': rodata.markerHeight,
+      'orient': 'auto',
+      "markerUnits":"userSpaceOnUse"
     })
   marker.append('path')
     .attr({
-      "d": 'M 0,0 V 4 L4,'+refY+' Z',
+      "d": rodata.markerPath,
       "fill": color
     })
     .on('click', ()=>{

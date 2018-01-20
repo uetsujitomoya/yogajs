@@ -8,8 +8,12 @@ const rodata={
   knpBasicFormColNo:2,
   knpPOSFormColNo:3,
 
-  yajirushi_refX : 8,
-  refY:2,
+  yajirushi_refX : 48,
+  refY:12,
+  markerWitdh:48,
+  markerHeight:48,
+  markerPath:'M 0,0 V 24 L24,12 Z',
+
   markerFillColor : '#ff0000',
 
   clientNodeColor:"#ff7f7f",
