@@ -21,7 +21,6 @@ let verbArr = []
 
 const createCharaChart = () => {
   const knp = csv2Arr(rodata.knpCsvFolder+rodata.knpCsvName+".csv")
-  //console.log(knp)
   let nodeArr=[]
   findChara(knp, nodeArr)
   fixNodePoint(nodeArr)

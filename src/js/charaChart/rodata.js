@@ -16,9 +16,9 @@ const rodata={
   aroundClientPeopleNodeColor:"#696969",
   charaNameColor:"#0000cd",
 
-  clientArrowColor:"#a9a9a9",
+  clientArrowColor:'#ff0000',
   aroundClientPeopleArrowColor:"#a9a9a9",
-  kawaisounaClientArrowColor:"#a9a9a9",
+  kawaisounaClientArrowColor:'#ff0000',
   situationDependencyPeopleColor:"#a9a9a9",
   //clientArrowColor:"#ff4242",
   //aroundClientPeopleArrowColor:"#a9a9a9",
@@ -32,11 +32,10 @@ const rodata={
   svgWidth:600,
   svgHeight:700,
 
-  textViewFontSize:2,
+  txtViewFontSize:2,
 
   knpCsvFolder:"./csv/knp/",
   knpCsvName:"171101allForCC",//bunArrをbunArrCsvに任せる場合でも、登場人物はknpCsvから取得
-  //csvPath: this.knpCsvFolder+this.knpCsvName+".csv",
 
   bunArrCsvFolder:"./csv/bunArr/",
   bunArrCsvName:"2018116195_171101allForCC_withPeople_edited.csv",
@@ -47,10 +46,12 @@ const rodata={
 
   boxBorderColor: "#696969",
   circleFill: "#e6e6e6",
-
-
   viewMarkEnd:true,
-
+  slider:{
+    single:{
+      checkBoxCommentOut:true
+    }
+  },
   isOnlyViz:false
 }
 
