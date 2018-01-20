@@ -113,4 +113,4 @@ const redrawCharaChart = (allBunArr, selectedArea, charaArr) => {
   }
 }
 
-export {manageSlider}
+export {manageSlider,applySlider}

@@ -16,6 +16,8 @@ import {rodata} from './rodata'
 import {downloadAsTask} from './downloadAsTask'
 import { outputCsv } from './csv/outputCsv'
 import { inputCsv } from './csv/inputCsv'
+import {applySlider} from './slider'
+
 let nodeArr = []
 let verbArr = []
 
@@ -28,7 +30,17 @@ const createCharaChart = () => {
   const bunArr = createBunArr(knp, nodeArr)
   //outputCsv(bunArr)
   inputCsv(bunArr)
-  createArrowArr(bunArr, nodeArr,bunArr)
+  if(rodata.isSingleSlider&&rodata.checkBoxCommentOut){
+    const selectedArea = {
+      start: 0,
+      end: 0+rodata.singleSliderSelectLen
+    }
+    applySlider(selectedArea, bunArr,nodeArr)
+  }else{
+    createArrowArr(bunArr, nodeArr,bunArr)
+  }
+
+
   manageSlider(bunArr,nodeArr)
 }
 
