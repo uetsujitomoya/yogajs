@@ -50,7 +50,7 @@ export default class Arrow {
   }
 
   addStrokeWidth (bun,verb) {
-    this.strokeWidth = this.strokeWidth + 0.5
+    this.strokeWidth = this.strokeWidth + 1
     this.pushBunToArr(bun,verb)
     this.updateColor(verb.isBlueArrowColor)
   }

@@ -8,7 +8,7 @@ const rodata={
   knpBasicFormColNo:2,
   knpPOSFormColNo:3,
 
-  yajirushi_refX : 48,
+  yajirushi_refX : 55,
   refY:12,
   markerWitdh:48,
   markerHeight:48,
