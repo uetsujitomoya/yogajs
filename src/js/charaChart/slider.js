@@ -14,9 +14,25 @@ import {removeSVG} from './nodeAndArrow/vizNode.js'
 import { nowWatchingArrowOrNode } from './nowWatchingArrowOrNode'
 import { viewArrowTxt } from './viewText/viewArrowTxt'
 import { viewNodeTxt } from './viewText/viewNodeTxt'
+import { rodata } from './rodata'
 
+const createSingleSlider=(allBunArr,charaArr)=>{
+  $("#ex18a").slider({
+    min: 0,
+    max: allBunArr.length-100,
+    value: 0,
+    labelledby: 'ex18-label-1'
+  });
+  $('#ex18a').on('slide', function (slideEvt) {
+    const selectedArea = {
+      start: slideEvt.value,
+      end: slideEvt.value+100
+    }
+    applySlider(selectedArea, allBunArr,charaArr)
+  })
+}
 
-let manageSlider = (allBunArr, charaArr) => {
+const manageDoubleSlider=(allBunArr,charaArr)=>{
   let el = document.querySelector('#ex2')
   el.dataset.sliderMax = allBunArr.length + ''
   el.dataset.sliderValue = '[0,' + allBunArr.length + ']'
@@ -26,8 +42,7 @@ let manageSlider = (allBunArr, charaArr) => {
       return 'この範囲を見ています…… ' + value
     }
   })
-  console.log($('#bunqty'))
-  $('#bunqty')[0].innerHTML += ""+allBunArr.length+""
+
   $('#ex2').on('slide', function (slideEvt) {
     const selectedArea = {
       start: slideEvt.value[0],
@@ -35,6 +50,18 @@ let manageSlider = (allBunArr, charaArr) => {
     }
     applySlider(selectedArea, allBunArr,charaArr)
   })
+}
+
+let manageSlider = (allBunArr, charaArr) => {
+
+  console.log($('#bunqty'))
+  $('#bunqty')[0].innerHTML += ""+allBunArr.length+""
+
+  if(rodata.isSingleSlider){
+    createSingleSlider(allBunArr,charaArr)
+  }else{
+    manageDoubleSlider(allBunArr,charaArr)
+  }
 }
 
 const applySlider = (selectedArea, allBunArr,nodeArr) => {

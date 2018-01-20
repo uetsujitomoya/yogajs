@@ -51,7 +51,8 @@ const rodata={
 
   viewMarkEnd:true,
 
-  isOnlyViz:false
+  isOnlyViz:false,
+  isSingleSlider:true
 }
 
 export {rodata}
