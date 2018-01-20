@@ -27,8 +27,7 @@ const applySingleSliderVal=(allBunArr,charaArr)=>{
   })
 }
 
-const createSingleSlider=(allBunArr,charaArr)=>{
-
+const manageCheckBox=(allBunArr,charaArr)=>{
   $("#ex7-enabled").click(function() {
     if(this.checked) {
       // With JQuery
@@ -45,6 +44,13 @@ const createSingleSlider=(allBunArr,charaArr)=>{
       applySlider(selectedArea, allBunArr,charaArr)
     }
   });
+}
+
+const createSingleSlider=(allBunArr,charaArr)=>{
+
+  if(!rodata.checkBoxCommentOut){
+    manageCheckBox(allBunArr,charaArr)
+  }
 
   $("#ex18a").slider({
     min: 0,

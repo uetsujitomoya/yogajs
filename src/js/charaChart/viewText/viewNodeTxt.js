@@ -1,6 +1,7 @@
 import {rodata} from '../rodata'
 import { createTxtViewArea } from './createTxtViewArea'
 import { nowWatchingArrowOrNode } from '../nowWatchingArrowOrNode'
+import { viewWhatIsClicked } from './viewWhatIsClicked'
 
 let preBunNo = null
 
@@ -10,6 +11,9 @@ const viewNodeTxt=(node, allBunArr)=>{
   if(!rodata.isOnlyViz){
     let msg = document.getElementById('box')
     msg.innerHTML=''
+
+    viewWhatIsClicked(msg,nowWatchingArrowOrNode.arrow,null)
+
     node.bunArr.forEach((bun,nodeBunArrId)=>{
       if(preBunNo!==bun.bunNo){
         createTxtViewArea(bun,allBunArr,nodeBunArrId)

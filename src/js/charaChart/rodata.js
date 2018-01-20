@@ -53,7 +53,9 @@ const rodata={
 
   isOnlyViz:false,
   isSingleSlider:true,
-  singleSliderSelectLen:200
+  singleSliderSelectLen:200,
+
+  checkBoxCommentOut:true
 }
 
 export {rodata}
