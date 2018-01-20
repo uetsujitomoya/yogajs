@@ -15,26 +15,19 @@ import { viewArrowTxt } from '../viewText/viewArrowTxt'
 
 const createArrowArr = (sliderBunArr, nodeArr, allBunArr) => {
   let arrowArr = []
-
   resetCircleStrokeWidth(nodeArr)
-
   for (let bunCnt = 0; bunCnt < sliderBunArr.length; bunCnt++) {
     const bun = sliderBunArr[bunCnt]
     const hasVerbArr = {
       value: 'verbArr' in bun ? bun.verbArr : 'No'
     }
     if (hasVerbArr.value === 'No') { continue }
-
     bun.verbArr.forEach((verb) => {
-
       if (verb.hasSubject) {
-
         if ( (verb.hasObject) && ( verb.subject.name!==verb.object.name ) ) {
-
           let isNewArrow = true
           for (let tmpArrowCnt = 0; tmpArrowCnt < arrowArr.length; tmpArrowCnt++) {
             if (isSameArrow(arrowArr[tmpArrowCnt], verb)) {
-              //console.log("sameArrow")
               arrowArr[tmpArrowCnt].addStrokeWidth(bun,verb)
               isNewArrow = false
               break
@@ -54,8 +47,6 @@ const createArrowArr = (sliderBunArr, nodeArr, allBunArr) => {
       }
     })
   }
-
-
   if(nowWatchingArrowOrNode.arrow!==null){
     for(const arrow of arrowArr){
       if(arrow.subject.name===nowWatchingArrowOrNode.arrow.subject && arrow.object.name===nowWatchingArrowOrNode.arrow.object){
@@ -64,17 +55,12 @@ const createArrowArr = (sliderBunArr, nodeArr, allBunArr) => {
       }
     }
   }
-
-
-
   let svg = d3.select(rodata.charaChartAreaID).append('svg')
     .attr({
       width: rodata.svgWidth,
       height: rodata.svgHeight
     })
-
   const r = (rodata.orbitR * rodata.circleRadiusCoefficient) / nodeArr.length
-
   vizNodes(svg,nodeArr,sliderBunArr,r,allBunArr)
 
   arrowArr.forEach((arrow,arrowId)=>{
@@ -85,8 +71,6 @@ const createArrowArr = (sliderBunArr, nodeArr, allBunArr) => {
 }
 
 const isSameArrow = (arrow, verb) => {
-  //console.log(arrow)
-  //console.log(verb)
   if ((arrow.subject.name === verb.subject.name) && (arrow.object.name === verb.object.name)) {
     return true
   } else {
@@ -119,7 +103,6 @@ const existsSubject = (verb) => {
 }
 
 const resetCircleStrokeWidth=(nodeArray)=>{
-  //slider用
   for(let node of nodeArray){
     node.circleStrokeWidth=0
   }
