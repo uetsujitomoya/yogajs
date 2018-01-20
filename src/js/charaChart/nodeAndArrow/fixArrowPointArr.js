@@ -25,6 +25,7 @@ const fixArrowPointArr = (arrow) => {
 
   arrow.pointArr = [ [ subjectX , subjectY , r ] , [ objectX , objectY , r ] ]
 
+  console.log(arrow.pointArr)
 }
 
 export {fixArrowPointArr}

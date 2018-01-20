@@ -26,27 +26,35 @@ const vizArrow = (svg, arrow, r, arrowId,　allBunArr) => {
     }
 
   }
-  let marker = svg.append('defs').append('marker')
-    .attr({
-      'id': 'arrowhead'+arrowId,
-      // 矢印の位置を一番後ろから手前に少しずらす
-      //'refX': rodata.yajirushi_refX,
-      //'refX': 4.5*Math.sqrt(r),
-      "refX":yajirushi_refX,
-      'refY': refY,
-      'markerWidth': 8,
-      'markerHeight': 8,
-      'orient': 'auto'
-      //"markerUnits":"userSpaceOnUse"
-    })
-  marker.append('path')
-    .attr({
-      "d": 'M 0,0 V 4 L4,'+refY+' Z',
-      "fill": color
-    })
-    .on('click', ()=>{
-      viewArrowTxt(arrow, allBunArr)
-    })
+
+  if(rodata.viewMarkEnd){
+    let marker = svg.append('defs').append('marker')
+      .attr({
+        'id': 'arrowhead'+arrowId,
+        // 矢印の位置を一番後ろから手前に少しずらす
+        //'refX': rodata.yajirushi_refX,
+        //'refX': 4.5*Math.sqrt(r),
+        "refX":yajirushi_refX,
+        'refY': refY,
+        'markerWidth': 8,
+        'markerHeight': 8,
+        'orient': 'auto',
+        "markerUnits":"userSpaceOnUse"
+
+      })
+    marker.append('path')
+      .attr({
+        "d": 'M 0,0 V 4 L4,'+refY+' Z',
+        "fill": color
+      })
+      .on('click', ()=>{
+        viewArrowTxt(arrow, allBunArr)
+      })
+  }
+
+
+
+
   let line = d3.svg.line()
     .interpolate('basis')
     .x(function (d) { return d[0] })
@@ -56,14 +64,14 @@ const vizArrow = (svg, arrow, r, arrowId,　allBunArr) => {
       'd': line(arrow.pointArr),
       'stroke': color,
       'stroke-width': arrow.strokeWidth,
-      'fill': 'none',
+      'fill': 'none'/*,
       'marker-end': ()=>{
         if(rodata.viewMarkEnd){
           return 'url(#arrowhead'+arrowId+')'
         }else{
           return null
         }
-      }
+      }*/
 
     })
     .on('click', ()=>{
