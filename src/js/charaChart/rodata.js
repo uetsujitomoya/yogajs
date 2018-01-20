@@ -52,7 +52,8 @@ const rodata={
   viewMarkEnd:true,
 
   isOnlyViz:false,
-  isSingleSlider:true
+  isSingleSlider:true,
+  singleSliderSelectLen:200
 }
 
 export {rodata}

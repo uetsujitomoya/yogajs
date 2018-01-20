@@ -16,20 +16,47 @@ import { viewArrowTxt } from './viewText/viewArrowTxt'
 import { viewNodeTxt } from './viewText/viewNodeTxt'
 import { rodata } from './rodata'
 
-const createSingleSlider=(allBunArr,charaArr)=>{
-  $("#ex18a").slider({
-    min: 0,
-    max: allBunArr.length-100,
-    value: 0,
-    labelledby: 'ex18-label-1'
-  });
+
+const applySingleSliderVal=(allBunArr,charaArr)=>{
   $('#ex18a').on('slide', function (slideEvt) {
     const selectedArea = {
       start: slideEvt.value,
-      end: slideEvt.value+100
+      end: slideEvt.value+rodata.singleSliderSelectLen
     }
     applySlider(selectedArea, allBunArr,charaArr)
   })
+}
+
+const createSingleSlider=(allBunArr,charaArr)=>{
+
+  $("#ex7-enabled").click(function() {
+    if(this.checked) {
+      // With JQuery
+      $("#ex18a").slider("enable");
+      applySingleSliderVal(allBunArr,charaArr)
+    }
+    else {
+      // With JQuery
+      $("#ex18a").slider("disable");
+      const selectedArea = {
+        start: 0,
+        end: allBunArr.length
+      }
+      applySlider(selectedArea, allBunArr,charaArr)
+    }
+  });
+
+  $("#ex18a").slider({
+    min: 0,
+    max: allBunArr.length-rodata.singleSliderSelectLen,
+    value: 0,
+    labelledby: 'ex18-label-1',
+    formatter: function (value) {
+      return '' + value + "文目から" + (value+rodata.singleSliderSelectLen)+"文目"
+    }
+  });
+
+  applySingleSliderVal(allBunArr,charaArr)
 }
 
 const manageDoubleSlider=(allBunArr,charaArr)=>{
