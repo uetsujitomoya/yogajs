@@ -2,7 +2,7 @@
  * Created by uetsujitomoya on 2017/08/29.
  */
 
-import {definePointArr} from './connectNodeAndArrow'
+import {fixArrowPointArr} from './fixArrowPointArr'
 import {rodata} from '../rodata'
 
 export default class Arrow {
@@ -26,7 +26,7 @@ export default class Arrow {
 
     this.bunArr=[]
     this.verbBunHtmlArr=[]
-    definePointArr(this)//2回やってる？？
+    fixArrowPointArr(this)//2回やってる？？
     this.pushBunToArr(bun,verb)
     this.updateColor(verb.isBlueArrowColor)
 

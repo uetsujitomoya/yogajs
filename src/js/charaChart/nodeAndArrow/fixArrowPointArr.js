@@ -1,7 +1,7 @@
 import {r} from './defineNode'
 import { rodata } from '../rodata'
 
-const definePointArr = (arrow) => {
+const fixArrowPointArr = (arrow) => {
   //nodeとarrayを紐付ける
 
   let subjectX,subjectY,objectX,objectY
@@ -27,4 +27,4 @@ const definePointArr = (arrow) => {
 
 }
 
-export {definePointArr}
+export {fixArrowPointArr}

@@ -6,7 +6,7 @@
 import Arrow from './defineArrow.js'
 import {vizNodes} from './vizNode'
 import {initialValueOfSubjectAndObjectInVerb} from '../createBunArr/isVerb.js'
-import {definePointArr} from './connectNodeAndArrow'
+import {fixArrowPointArr} from './fixArrowPointArr'
 import {rodata} from '../rodata'
 import * as d3 from 'd3'
 import {vizArrow} from './vizArrow'
@@ -64,7 +64,7 @@ const createArrowArr = (sliderBunArr, nodeArr, allBunArr) => {
   vizNodes(svg,nodeArr,sliderBunArr,r,allBunArr)
 
   arrowArr.forEach((arrow,arrowId)=>{
-    definePointArr(arrow)
+    fixArrowPointArr(arrow)
     vizArrow(svg, arrow, r,arrowId,allBunArr)
   })
 }

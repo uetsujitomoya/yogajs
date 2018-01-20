@@ -55,7 +55,10 @@ const rodata={
   isSingleSlider:true,
   singleSliderSelectLen:200,
 
-  checkBoxCommentOut:true
+  checkBoxCommentOut:true,
+  arrow:{
+    gap:10
+  }
 }
 
 export {rodata}
