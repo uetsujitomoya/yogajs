@@ -28,6 +28,7 @@ const rodata={
   //aroundClientPeopleArrowColor:"#a9a9a9",
   //kawaisounaClientArrowColor:"#4242ff",
   //situationDependencyPeopleColor:"#42ff42",
+  circleFontSize:"15px",
 
   nodeR : 15,
   orbitR :250,
