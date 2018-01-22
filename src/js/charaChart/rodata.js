@@ -20,10 +20,10 @@ const rodata={
   aroundClientPeopleNodeColor:"#696969",
   charaNameColor:"#0000cd",
 
-  clientArrowColor:"#ff0000",
+  clientArrowColor:"darkgray",
   aroundClientPeopleArrowColor:"darkgray",
-  kawaisounaClientArrowColor:"navy",
-  situationDependencyPeopleColor:"darkgreen",
+  kawaisounaClientArrowColor:"darkgray",
+  situationDependencyPeopleColor:"darkgray",
   //clientArrowColor:"#ff4242",
   //aroundClientPeopleArrowColor:"#a9a9a9",
   //kawaisounaClientArrowColor:"#4242ff",
