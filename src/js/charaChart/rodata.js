@@ -8,6 +8,11 @@ const color={
   },
   bright:{
     green:"#29a7a3"
+  },
+  light:{
+    pink:"#f7aaa0",
+    emerald:"#82c4b8",
+    blue:"#6bb7d1"
   }
 }
 
@@ -29,9 +34,9 @@ const rodata={
 
   markerFillColor : '#ff0000',
 
-  clientNodeColor:"#ff7f7f",
-  aroundClientPeopleNodeColor:"#cccccc",
-  charaNameColor:color.bright.green,
+  clientNodeColor:color.light.pink,
+  aroundClientPeopleNodeColor:color.light.blue,
+  charaNameColor:"#000000",
 
   clientArrowColor:color.vivid.red,
   aroundClientPeopleArrowColor:"#000000",
