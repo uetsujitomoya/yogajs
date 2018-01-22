@@ -1,3 +1,16 @@
+const color={
+  vivid:{
+    green:"#019352",
+    red:"#e8003e",
+    blue:"#01509d",
+    orange:"#fc9907",
+    purple:"#473b85"
+  },
+  bright:{
+    green:"#29a7a3"
+  }
+}
+
 const rodata={
   bunsetsuSymbol:'*',
   kihonkuSymbol:'+',
@@ -18,12 +31,12 @@ const rodata={
 
   clientNodeColor:"#ff7f7f",
   aroundClientPeopleNodeColor:"#696969",
-  charaNameColor:"#0000cd",
+  charaNameColor:color.bright.green,
 
-  clientArrowColor:"#ff0000",
-  aroundClientPeopleArrowColor:"darkgray",
-  kawaisounaClientArrowColor:"navy",
-  situationDependencyPeopleColor:"darkgreen",
+  clientArrowColor:color.vivid.red,
+  aroundClientPeopleArrowColor:"#000000",
+  kawaisounaClientArrowColor:color.vivid.blue,
+  situationDependencyPeopleColor:color.vivid.green,
   //clientArrowColor:"#ff4242",
   //aroundClientPeopleArrowColor:"#a9a9a9",
   //kawaisounaClientArrowColor:"#4242ff",
