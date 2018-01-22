@@ -30,7 +30,7 @@ const rodata={
   markerFillColor : '#ff0000',
 
   clientNodeColor:"#ff7f7f",
-  aroundClientPeopleNodeColor:"#696969",
+  aroundClientPeopleNodeColor:"#cccccc",
   charaNameColor:color.bright.green,
 
   clientArrowColor:"darkgray",
