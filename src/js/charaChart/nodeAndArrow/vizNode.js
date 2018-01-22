@@ -41,7 +41,8 @@ const vizNodes = (svg,nodeArr,sliderBunArr,r,allBunArr) => {
     .attr({
       'text-anchor': 'middle',
       'dy': '.100em',
-      'fill': rodata.charaNameColor
+      'fill': rodata.charaNameColor,
+      "font-size":rodata.circleFontSize
     })
     .text(function (d) {
       //if(d.nodeCharacter==="Aさん"){alert("Aさん")}
