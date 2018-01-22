@@ -1,3 +1,16 @@
+const color={
+  vivid:{
+    green:"#019352",
+    red:"#e8003e",
+    blue:"#01509d",
+    orange:"#fc9907",
+    purple:"#473b85"
+  },
+  bright:{
+    green:"#29a7a3"
+  }
+}
+
 const rodata={
   bunsetsuSymbol:'*',
   kihonkuSymbol:'+',
@@ -18,7 +31,7 @@ const rodata={
 
   clientNodeColor:"#ff7f7f",
   aroundClientPeopleNodeColor:"#696969",
-  charaNameColor:"#0000cd",
+  charaNameColor:color.bright.green,
 
   clientArrowColor:"darkgray",
   aroundClientPeopleArrowColor:"darkgray",
