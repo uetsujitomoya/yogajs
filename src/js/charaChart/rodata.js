@@ -2,6 +2,7 @@ const color={
   vivid:{
     green:"#019352",
     red:"#e8003e",
+    garnet:"#b40059",
     blue:"#01509d",
     orange:"#fc9907",
     purple:"#473b85"
@@ -38,8 +39,8 @@ const rodata={
   aroundClientPeopleNodeColor:color.light.blue,
   charaNameColor:"#000000",
 
-  clientArrowColor:color.vivid.red,
-  aroundClientPeopleArrowColor:"#000000",
+  clientArrowColor:color.vivid.garnet,
+  aroundClientPeopleArrowColor:color.vivid.orange,
   kawaisounaClientArrowColor:color.vivid.blue,
   situationDependencyPeopleColor:color.vivid.green,
   //clientArrowColor:"#ff4242",
@@ -58,11 +59,11 @@ const rodata={
   textViewFontSize:2,
 
   knpCsvFolder:"./csv/knp/",
-  knpCsvName:"171101allForCC",//bunArrをbunArrCsvに任せる場合でも、登場人物はknpCsvから取得
+  knpCsvName:"171114allKnp",//bunArrをbunArrCsvに任せる場合でも、登場人物はknpCsvから取得
   //csvPath: this.knpCsvFolder+this.knpCsvName+".csv",
 
   bunArrCsvFolder:"./csv/bunArr/",
-  bunArrCsvName:"2018116195_171101allForCC_withPeople_edited.csv",
+  bunArrCsvName:"201712211623_171114allKnp_withPeople_edited.csv",
   withPeople:true,
 
   charaChartAreaID : '#example',
