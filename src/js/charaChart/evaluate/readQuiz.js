@@ -1,5 +1,0 @@
-const readQuiz=()=>{
-
-}
-
-export {readQuiz}

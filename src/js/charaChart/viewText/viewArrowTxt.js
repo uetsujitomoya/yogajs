@@ -1,4 +1,4 @@
-import {createTxtViewArea} from './createTxtViewArea'
+import {createTxtViewArea} from './createTxtViewsArea'
 import { rodata } from '../rodata'
 import { nowWatchingArrowOrNode } from '../nowWatchingArrowOrNode'
 import { viewWhatIsClicked } from './viewWhatIsClicked'

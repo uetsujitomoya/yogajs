@@ -1,3 +1,5 @@
 const stampTime=()=>{
 
 }
+
+export {stampTime}

@@ -1,10 +1,11 @@
 import { rodata } from '../rodata'
+import { createTxtBoxInBox} from './createTxtBoxInBox'
 
 const createTxtViewArea = (bun, allBunArr, i,verbBunHtml,isArrow)=>{
 
   //console.log(verbBunHtml)
   //1つ1つのTextViewAreaをつくる
-  createBox(i)
+  createTxtBoxInBox(i)
   /*  for(let i=bun.bunNo-3;i<=bun.bunNo+3;i++){
       console.log(allBunArr[i])
     }*/
@@ -34,12 +35,7 @@ const createTxtViewArea = (bun, allBunArr, i,verbBunHtml,isArrow)=>{
   }
 }
 
-const createBox=(i)=>{
-  //箱を作る
 
-  let msg = document.getElementById('box')
-  msg.innerHTML += '<div id="msg' + i +'" style="border-width: 1px; background-color:#ffffff; width:600px; overflow-y:scroll; margin-bottom: 5px; margin-left: 5px; margin-top: 10px; padding-bottom: 5px; padding-top: 5px;">'
-}
 
 const addBun=(id,bun,bold,verbBunHtml,isArrow)=>{
   //箱に1文を追加。boldはboolean
