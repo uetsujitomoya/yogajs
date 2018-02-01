@@ -9,19 +9,21 @@ const outputQuizResultCsv=(input)=>{
 
   let quizResultCsvArr=[]
 
-  quizResultCsvArr.push([,input.answerer.name,input.answerer.age,input.answerer.sex])
-  quizResultCsvArr.push(["quizNo","answer","time"])
+//   quizResultCsvArr.push([,input.answerer.name,input.answerer.age,input.answerer.sex])
+//   quizResultCsvArr.push(["quizNo","answer","time"])
+//
+//
+// /*  for(const quiz of input.quizResultArr){
+//     quizResultCsvArr.add()
+//   }*/
+//
+//   input.quizResultArr.forEach((quizResult,idx)=>{
+//     quizResultCsvArr.push([idx,quizResult.answer,quizResult.time])
+//   })
 
+  quizResultCsvArr=input
 
-/*  for(const quiz of input.quizResultArr){
-    quizResultCsvArr.add()
-  }*/
-
-  input.quizResultArr.forEach((quizResult,idx)=>{
-    quizResultCsvArr.push([idx,quizResult.answer,quizResult.time])
-  })
-
-  downloadAsCSV(input.answerer.name+"_" +now,quizResultCsvArr)
+  downloadAsCSV("output"+"_" +now,quizResultCsvArr)
 
 }
 

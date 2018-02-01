@@ -53,7 +53,7 @@ const readQuiz=(quizNo)=>{
     quizNo++
     console.log(quizNo)
     console.log(quizArr.length)
-    if(quizNo<=5){
+    if(quizNo<5){
       setting.nodeCnt=0
       readQuiz(quizNo)
     }else{
@@ -65,7 +65,8 @@ const readQuiz=(quizNo)=>{
         },
         quizResultArr:quizResultArr
       }
-      outputQuizResultCsv(inputForOutput)
+      //outputQuizResultCsv(inputForOutput)
+      outputQuizResultCsv(quizResultArr)
     }
   }
 
