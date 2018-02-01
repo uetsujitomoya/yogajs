@@ -1,5 +1,7 @@
 import { csv2Arr } from '../../manageCsv/csv2Arr'
 import { roColorSet, setting } from '../setting'
+import { createCharaChart } from '../mainCharaChart'
+import { removeSVG } from '../nodeAndArrow/vizNode'
 
 const reloadGraph=(quizRow)=>{
   if(quizRow[setting.quiz.isFixedCol]==="true"){
@@ -15,7 +17,18 @@ const reloadGraph=(quizRow)=>{
     setting.aroundClientPeopleArrowColor=roColorSet.vivid.orange
     setting.kawaisounaClientArrowColor=roColorSet.vivid.blue
     setting.situationDependencyPeopleColor=roColorSet.vivid.green
+  }else{
+    setting.clientArrowColor=roColorSet.boxBorderColor
+    setting.aroundClientPeopleArrowColor=roColorSet.boxBorderColor
+    setting.kawaisounaClientArrowColor=roColorSet.boxBorderColor
+    setting.situationDependencyPeopleColor=roColorSet.boxBorderColor
   }
+
+  removeSVG()
+
+  createCharaChart(quizRow[setting.quiz.knpCsvCol],quizRow[setting.quiz.bunArrCsvCol])
+
+
 
 }
 

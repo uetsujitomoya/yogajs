@@ -14,7 +14,8 @@ const roColorSet={
     pink:"#f7aaa0",
     emerald:"#82c4b8",
     blue:"#6bb7d1"
-  }
+  },
+  boxBorderColor:"#696969"
 }
 
 const setting={

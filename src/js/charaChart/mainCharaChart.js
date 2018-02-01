@@ -17,19 +17,21 @@ import {downloadAsTask} from './downloadAsTask'
 import { outputCsv } from './csv/outputCsv'
 import { inputCsv } from './csv/inputCsv'
 import {applySlider} from './slider'
+import { readKnp } from './csv/readKnp'
 
 let nodeArr = []
 let verbArr = []
 
-const createCharaChart = () => {
-  const knp = csv2Arr(setting.knpCsvFolder+setting.knpCsvName+".csv")
+const createCharaChart = (knpCsvName,bunArrCsvName) => {
+  let knp
+  readKnp(knpCsvName,knp)
   //console.log(knp)
   let nodeArr=[]
   findChara(knp, nodeArr)
   fixNodePoint(nodeArr)
   const bunArr = createBunArr(knp, nodeArr)
   //outputCsv(bunArr)
-  inputCsv(bunArr)
+  inputCsv(bunArr,bunArrCsvName)
   if(setting.isSingleSlider&&setting.isCheckBoxCommentOut){
     const selectedArea = {
       start: 0,

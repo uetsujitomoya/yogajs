@@ -3,11 +3,11 @@ import { csv2Arr } from '../../manageCsv/csv2Arr'
 import { setting } from '../setting'
 import { isNeededBunToSearch, isNeededVerbForCsv } from './bunArr2CsvArr'
 
-const inputCsv=(bunArr)=>{
+const inputCsv=(bunArr,bunArrCsvName)=>{
   //bunArrの中身を書き換える
   //makeCsvの逆をやればいい
 
-  const csvArr=csv2Arr(setting.bunArrCsvFolder+setting.bunArrCsvName)
+  const csvArr=csv2Arr(setting.bunArrCsvFolder+bunArrCsvName)
 
 
   //csvArr.splice(0, 1)
