@@ -3,12 +3,20 @@ import { csv2Arr } from '../../manageCsv/csv2Arr'
 import { rodata } from '../rodata'
 import { reloadGraph } from './reloadGraph'
 import { outputQuizResultCsv } from './outputQuizResultCsv'
+import { storeQuizResult } from './storeQuizResult'
 
 const quizArr=csv2Arr(rodata.quiz.path)
 let quizNo=1
+
+const choiceStartCol=6
 const readQuiz=(quizNo)=>{
 
-
+  //No
+  //knpCsv
+  //bunArrCsv
+  //fix
+  //color
+  //question
 
   let nowQuizArr=[]
 
@@ -26,6 +34,7 @@ const readQuiz=(quizNo)=>{
 
   quizNo++
   document.getElementById('msg0').onchange = () => {
+    storeQuizResult
     if(quizNo<=quizArr){
       readQuiz(quizNo)
     }else{
@@ -51,7 +60,7 @@ const writeQuestion=(quizNo)=>{
   document.getElementById('msg0').innerHTML+=quizArr[quizNo][1]
   target.innerHTML += '<div id="b' + ansCnt + '" style="cursor: pointer"><u>' + (hatsugenIdx + 1) + '(C) ' + bun[hatsugenIdx][bunIdx] + '</u></div><div id="r' + ansCnt + '"><label><input type=radio name="r' + ansCnt + '" value=0>どれにも含まない</label></div><br>'
 
-  for(let col=2;col<quizRow.length;col++){
+  for(let col=choiceStartCol;col<quizRow.length;col++){
 
     targetInRow.innerHTML += '<label><input type=radio name="r' + answerNumber + '" value=' + value + '><font color="' + color + '">【</font>「' + answerGroupName + '」に含む<font color="' + color + '">】</font></label>'
 
