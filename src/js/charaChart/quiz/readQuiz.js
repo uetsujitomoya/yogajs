@@ -8,7 +8,7 @@ import { nodeCnt } from '../nodeAndArrow/defineNode'
 
 const quizArr=csv2Arr(setting.quiz.path)
 const questionQty=5
-let quizNo=1
+//let quizNo=1
 
 const quizNoCol=0
 const knpCsvCol=1
@@ -74,8 +74,7 @@ const readQuiz=(quizNo)=>{
 
 }
 
-const writeQuiz=()=>{
-
+const writeQuiz=(quizNo)=>{
 
   //createTxtBoxInBox(0)
   writeQuestion(quizNo)
@@ -88,11 +87,11 @@ const writeQuestion=(quizNo)=>{
 
   document.getElementById('msg0').innerHTML+=quizArr[quizNo][1]
   let target = document.getElementById('msg0')
-  target.innerHTML += '<div id="b' + quizNo + '" style="cursor: pointer"><u>' +  queBun + '</u></div><div id="r' + quizNo + '"><label></label></div><br>'
+  target.innerHTML += '<div id="b' + quizNo + '" style="cursor: pointer"><u>' +  queBun + '</u></div><div id="r1"><label></label></div><br>'
 
   for(let colCnt=choiceStartCol;colCnt<quizRow.length;colCnt++){
     const chBun=quizRow[colCnt]
-    const targetInRow = document.getElementById('r' + quizNo)
+    const targetInRow = document.getElementById('r1')
     targetInRow.innerHTML += '<label><input type=radio name="r' + colCnt + '" value=' + colCnt + '>'+chBun+'</label>'
 
   }
