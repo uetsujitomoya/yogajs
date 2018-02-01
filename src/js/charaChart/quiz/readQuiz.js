@@ -51,7 +51,7 @@ const readQuiz=(quizNo)=>{
     storeQuizResult(quizResultArr,quizNo,time)
     quizNo++
     if(quizNo<=quizArr.length){
-      nodeCnt=0
+      setting.nodeCnt=0
       readQuiz(quizNo)
     }else{
       const inputForOutput={

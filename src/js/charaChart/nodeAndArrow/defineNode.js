@@ -35,9 +35,9 @@ export default class Node {
     }
     this.nodeCharacter = name
     this.circleStrokeWidth = 1
-    this.nodeIdx=nodeCnt
+    this.nodeIdx=setting.nodeCnt
     this.viz=false
-    nodeCnt++
+    setting.nodeCnt++
   }
   addStrokeWidth () {
     this.circleStrokeWidth = this.circleStrokeWidth + 0.5

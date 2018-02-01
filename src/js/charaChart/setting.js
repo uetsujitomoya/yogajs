@@ -95,7 +95,8 @@ const setting={
     queBunCol:5,
     choiceStartCol:6,
     csvTrue:"TRUE"
-  }
+  },
+  nodeCnt:0
 }
 
 export {setting,roColorSet}
