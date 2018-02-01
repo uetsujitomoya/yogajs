@@ -81,7 +81,7 @@ const writeQuestion=(quizNo)=>{
 
   document.getElementById('msg0').innerHTML+=quizArr[quizNo][1]
   let target = document.getElementById('msg0')
-  target.innerHTML += '<div id="b' + ansCnt + '" style="cursor: pointer"><u>' + (hatsugenIdx + 1) + '(C) ' + queBun + '</u></div><div id="r' + quizNo + '"><label></label></div><br>'
+  target.innerHTML += '<div id="b' + quizNo + '" style="cursor: pointer"><u>' +  queBun + '</u></div><div id="r' + quizNo + '"><label></label></div><br>'
 
   for(let colCnt=choiceStartCol;colCnt<quizRow.length;colCnt++){
     const chBun=quizRow[colCnt]
