@@ -81,7 +81,11 @@ const rodata={
   checkBoxCommentOut:true,
 
   isFixedArrowWidth:true,
-  fixedArrowWidth:5
+  fixedArrowWidth:5,
+
+  quiz:{
+    path:null
+  }
 }
 
 export {rodata}
