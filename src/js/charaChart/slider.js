@@ -88,7 +88,7 @@ const manageDoubleSlider=(allBunArr,charaArr)=>{
 let manageSlider = (allBunArr, charaArr) => {
 
   console.log($('#bunqty'))
-  $('#bunqty')[0].innerHTML += ""+allBunArr.length+""
+  $('#bunqty')[0].innerHTML = ""+allBunArr.length+""
 
   if(setting.isSingleSlider){
     createSingleSlider(allBunArr,charaArr)
