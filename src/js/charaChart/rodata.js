@@ -49,12 +49,13 @@ const rodata={
   //situationDependencyPeopleColor:"#42ff42",
   circleFontSize:"15px",
 
-  nodeR : 15,
+  nodeR : 30,
   orbitR :250,
   orbitOY:400,
   orbitOX:300,
   svgWidth:600,
   svgHeight:700,
+  isFixedCircleR:true,
 
   txtViewFontSize:2,
 

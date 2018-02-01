@@ -6,6 +6,7 @@ import { storeQuizResult } from './storeQuizResult'
 
 const quizMain=()=>{
 
+  //　入れ子でいいんじゃね？
   const quizArr=csv2Arr(rodata.quiz.path)
   for(let quizNo=1; quizNo<=quizArr.length;quizNo++){
 

@@ -31,7 +31,14 @@ const vizNodes = (svg,nodeArr,sliderBunArr,r,allBunArr) => {
           'fill': rodata.circleFill,
           'stroke-width': (d) => { return　d.circleStrokeWidth }*/
     'fill':  function (d) { if (d.isClient) { return rodata.clientNodeColor } else { return rodata.aroundClientPeopleNodeColor } },
-    'r':  (d) => { return　d.circleStrokeWidth }
+    'r':  (d) => {
+      if(rodata.isFixedArrowWidth){
+        return rodata.nodeR
+      }else{
+        return　d.circleStrokeWidth
+      }
+
+    }
   })
     .on('click', (d, i)=>{
       viewNodeTxt(d, allBunArr)
