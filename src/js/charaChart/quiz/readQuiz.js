@@ -15,6 +15,9 @@ const isFixedCol=3
 const isColoredCol=4
 const queBunCol=5
 const choiceStartCol=6
+
+let quizResultArr=[]
+
 const readQuiz=(quizNo)=>{
 
   //No
@@ -26,25 +29,37 @@ const readQuiz=(quizNo)=>{
 
   let nowQuizArr=[]
 
-  reloadGraph
+  reloadGraph(quizArr[quizNo])
 
-  nowQuizArr.forEach((quiz,idx)=>{
-    createTxtBoxInBox(idx)
-    writeQuiz()
-  })
+  //nowQuizArr.forEach((quiz,idx)=>{
+  let msg = document.getElementById('box')
+  msg.innerHTML=''
+  createTxtBoxInBox(0)
+
+  writeQuiz(quizNo)
+  //})
   var start_ms = new Date().getTime();
   /*
   計測したい処理
   */
-  var elapsed_ms = new Date().getTime() - start_ms;
+
 
   quizNo++
   document.getElementById('msg0').onchange = () => {
-    storeQuizResult
+    var elapsed_ms = new Date().getTime() - start_ms;
+    storeQuizResult(quizResultArr,quizNo,time)
     if(quizNo<=quizArr){
       readQuiz(quizNo)
     }else{
-      outputQuizResultCsv(input)
+      const inputForOutput={
+        answerer:{
+          name:null,
+          age:null,
+          sex:null,
+        },
+        quizResultArr:quizResultArr
+      }
+      outputQuizResultCsv(inputForOutput)
     }
   }
 
@@ -55,9 +70,9 @@ const readQuiz=(quizNo)=>{
 const writeQuiz=()=>{
 
 
-  createTxtBoxInBox(0)
-  writeQuestion()
-  writeChoice
+  //createTxtBoxInBox(0)
+  writeQuestion(quizNo)
+  //writeChoice
 }
 
 const writeQuestion=(quizNo)=>{
@@ -66,11 +81,12 @@ const writeQuestion=(quizNo)=>{
 
   document.getElementById('msg0').innerHTML+=quizArr[quizNo][1]
   let target = document.getElementById('msg0')
-  target.innerHTML += '<div id="b' + ansCnt + '" style="cursor: pointer"><u>' + (hatsugenIdx + 1) + '(C) ' + bun[hatsugenIdx][bunIdx] + '</u></div><div id="r' + ansCnt + '"><label><input type=radio name="r' + ansCnt + '" value=0>どれにも含まない</label></div><br>'
+  target.innerHTML += '<div id="b' + ansCnt + '" style="cursor: pointer"><u>' + (hatsugenIdx + 1) + '(C) ' + queBun + '</u></div><div id="r' + quizNo + '"><label></label></div><br>'
 
-  for(let col=choiceStartCol;col<quizRow.length;col++){
-
-    targetInRow.innerHTML += '<label><input type=radio name="r' + col + '" value=' + col + '>'+queBun+'</label>'
+  for(let colCnt=choiceStartCol;colCnt<quizRow.length;colCnt++){
+    const chBun=quizRow[colCnt]
+    const targetInRow = document.getElementById('r' + quizNo)
+    targetInRow.innerHTML += '<label><input type=radio name="r' + colCnt + '" value=' + colCnt + '>'+chBun+'</label>'
 
   }
 
