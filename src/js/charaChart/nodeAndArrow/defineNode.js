@@ -54,4 +54,4 @@ export default class Node {
   }
 }
 
-export {r}
+export {r,nodeCnt}

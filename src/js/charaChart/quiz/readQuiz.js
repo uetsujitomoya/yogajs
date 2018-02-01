@@ -4,6 +4,7 @@ import { setting } from '../setting'
 import { reloadGraph } from './reloadGraph'
 import { outputQuizResultCsv } from './outputQuizResultCsv'
 import { storeQuizResult } from './storeQuizResult'
+import { nodeCnt } from '../nodeAndArrow/defineNode'
 
 const quizArr=csv2Arr(setting.quiz.path)
 let quizNo=1
@@ -44,11 +45,13 @@ const readQuiz=(quizNo)=>{
   */
 
 
-  quizNo++
+
   document.getElementById('msg0').onchange = () => {
-    var elapsed_ms = new Date().getTime() - start_ms;
+    var time = new Date().getTime() - start_ms;
     storeQuizResult(quizResultArr,quizNo,time)
-    if(quizNo<=quizArr){
+    quizNo++
+    if(quizNo<=quizArr.length){
+      nodeCnt=0
       readQuiz(quizNo)
     }else{
       const inputForOutput={
@@ -95,7 +98,7 @@ const writeQuestion=(quizNo)=>{
 
 const createAnswerRadioButtonRow = (answerNumber, value, color, answerGroupName) => {
   const targetInRow = document.getElementById('r' + answerNumber)
-  targetInRow.innerHTML += '<label><input type=radio name="r' + answerNumber + '" value=' + value + '><font color="' + color + '">【</font>「' + answerGroupName + '」に含む<font color="' + color + '">】</font></label>'
+  targetInRow.innerHTML += '<label><input type=radio name="r' + answerNumber + '" value=' + value + '><font color="' + color + '">【</font>「' + answerGroupName + '」に含む<font color="' + color + '">】</font></label>　'
 }
 
 

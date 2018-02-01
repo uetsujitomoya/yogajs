@@ -98,6 +98,7 @@ export default class Bun {
     //objectかsubjectを探す。人間でなくてもいいことはないはず
     for (let tmpVerbNo = 0; tmpVerbNo < this.verbArr.length; tmpVerbNo++) {
       this.findObjectOfVerb(this.verbArr[tmpVerbNo].bunsetsuNum_inSentence, tmpVerbNo)
+      console.log(this.verbArr[tmpVerbNo].bunsetsuNum_inSentence)
       this.findSubjectOfVerb(this.verbArr[tmpVerbNo].bunsetsuNum_inSentence, tmpVerbNo,nodeArr)
       if((this.verbArr[tmpVerbNo].hasObject)&&(!this.verbArr[tmpVerbNo].hasSubject)){
         searchMaenoBunForShugo(bunArr,bunNo,tmpVerbNo,this,nodeArr)
@@ -134,10 +135,14 @@ export default class Bun {
 
   findSubjectOfVerb (verbBunsetsuNo, tempVerbNum,nodeArr) {
     for (let clauseCnt = verbBunsetsuNo; clauseCnt >= 0; clauseCnt--) {
+      //console.log(clauseCnt)
       let tmpClause = this.bunsetsuArray[clauseCnt]
       if (tmpClause.isSubject) {
         this.bunsetsuArray[ verbBunsetsuNo ].subject_of_verb = tmpClause.subject
         //モノホンのnodeもってこないといけない。
+        console.log(tmpClause.subject)
+        console.log(tmpClause.subject.nodeIdx)
+        //console.log(nodeArr)
         this.verbArr[tempVerbNum].rewriteSubjectAndAddBun2Node(nodeArr[tmpClause.subject.nodeIdx], this)
         break
       }else{

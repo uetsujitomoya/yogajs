@@ -19,14 +19,15 @@ import { inputCsv } from './csv/inputCsv'
 import {applySlider} from './slider'
 import { readKnp } from './csv/readKnp'
 
-let nodeArr = []
-let verbArr = []
+
 
 const createCharaChart = (knpCsvName,bunArrCsvName) => {
+  let nodeArr = []
+  let verbArr = []
   let knp=csv2Arr(setting.knpCsvFolder+knpCsvName+".csv")
   //readKnp(knpCsvName,knp)
   console.log(knp)
-  let nodeArr=[]
+
   findChara(knp, nodeArr)
   fixNodePoint(nodeArr)
   const bunArr = createBunArr(knp, nodeArr)

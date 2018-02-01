@@ -1,19 +1,24 @@
 const radioFullLen=5
+const radio1stNo=1
 
 const storeQuizResult=(quizResultArr,quizNo,time)=>{
 
-  const answerRadio = document.getElementById('r' + chBoxNo).children
+  console.log('r' + quizNo)
+  const answerRadio = document.getElementById('r' + quizNo).children
 
+  console.log(answerRadio)
   let ans
 
-  for (let buttonNo = answerRadio.length - radioFullLen, l = answerRadio.length; buttonNo < l; buttonNo++) {
+  for (let buttonNo = radio1stNo; buttonNo < answerRadio.length; buttonNo++) {
     if (answerRadio[buttonNo].control.checked) {
       ans = answerRadio[buttonNo].control.value
       break
     }
   }
 
-  quizResultArr.add([quizNo,ans,time])
+  console.log(quizResultArr)
+
+  quizResultArr.push([quizNo,ans,time])
 }
 
 export {storeQuizResult}

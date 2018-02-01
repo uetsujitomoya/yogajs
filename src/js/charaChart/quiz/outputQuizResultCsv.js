@@ -9,8 +9,8 @@ const outputQuizResultCsv=(input)=>{
 
   let quizResultCsvArr=[]
 
-  quizResultCsvArr.add([,input.answerer.name,input.answerer.age,input.answerer.sex])
-  quizResultCsvArr.add(["quizNo","answer","time"])
+  quizResultCsvArr.push([,input.answerer.name,input.answerer.age,input.answerer.sex])
+  quizResultCsvArr.push(["quizNo","answer","time"])
 
 
 /*  for(const quiz of input.quizResultArr){
@@ -18,7 +18,7 @@ const outputQuizResultCsv=(input)=>{
   }*/
 
   input.quizResultArr.forEach((quizResult,idx)=>{
-    quizResultCsvArr.add([idx,quizResult.answer,quizResult.time])
+    quizResultCsvArr.push([idx,quizResult.answer,quizResult.time])
   })
 
   downloadAsCSV(input.answerer.name+"_" +now,quizResultCsvArr)
