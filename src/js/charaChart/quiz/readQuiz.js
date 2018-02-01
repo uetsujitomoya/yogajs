@@ -2,6 +2,7 @@ import { createTxtBoxInBox } from '../viewText/createTxtBoxInBox'
 import { csv2Arr } from '../../manageCsv/csv2Arr'
 import { rodata } from '../rodata'
 import { reloadGraph } from './reloadGraph'
+import { outputQuizResultCsv } from './outputQuizResultCsv'
 
 const readQuiz=()=>{
 
@@ -20,6 +21,14 @@ const readQuiz=()=>{
   計測したい処理
   */
   var elapsed_ms = new Date().getTime() - start_ms;
+
+  quizNo++
+  if(quizNo<=quizArr){
+    readQuiz()
+  }else{
+    outputQuizResultCsv(input)
+  }
+
 }
 
 const writeQuiz=()=>{

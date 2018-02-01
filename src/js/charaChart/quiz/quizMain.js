@@ -20,7 +20,7 @@ const quizMain=()=>{
     //何文目〜何文目において，誰から誰へのpositive/negativeな言動が最も多いか？
     selectViz()
     readQuiz
-    storeQuizResult
+    //storeQuizResult
     //1問1問更新シたほうがよくね？
   }
   outputQuizResultCsv
