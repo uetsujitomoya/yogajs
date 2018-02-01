@@ -30,7 +30,7 @@ const createCharaChart = () => {
   const bunArr = createBunArr(knp, nodeArr)
   //outputCsv(bunArr)
   inputCsv(bunArr)
-  if(rodata.isSingleSlider&&rodata.checkBoxCommentOut){
+  if(rodata.isSingleSlider&&rodata.isCheckBoxCommentOut){
     const selectedArea = {
       start: 0,
       end: 0+rodata.singleSliderSelectLen

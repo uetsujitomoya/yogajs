@@ -73,19 +73,26 @@ const rodata={
   boxBorderColor: "#696969",
   circleFill: "#e6e6e6",
 
-  viewMarkEnd:true,
+  isViewedMarkEnd:true,
 
   isOnlyViz:true,
   isSingleSlider:true,
   singleSliderSelectLen:200,
 
-  checkBoxCommentOut:true,
+  isCheckBoxCommentOut:true,
 
   isFixedArrowWidth:true,
   fixedArrowWidth:5,
 
   quiz:{
-    path:null
+    path:null,
+    quizNoCol:0,
+    knpCsvCol:1,
+    bunArrCsvCol:2,
+    isFixedCol:3,
+    isColoredCol:4,
+    queBunCol:5,
+    choiceStartCol:6,
   }
 }
 

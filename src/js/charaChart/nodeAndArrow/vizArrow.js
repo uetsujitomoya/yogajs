@@ -64,7 +64,7 @@ const vizArrow = (svg, arrow, r, arrowId,　allBunArr) => {
       },
       'fill': 'none',
       'marker-end': ()=>{
-        if(rodata.viewMarkEnd){
+        if(rodata.isViewedMarkEnd){
           return 'url(#arrowhead'+arrowId+')'
         }else{
           return null

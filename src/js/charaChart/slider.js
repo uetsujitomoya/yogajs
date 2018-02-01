@@ -48,7 +48,7 @@ const manageCheckBox=(allBunArr,charaArr)=>{
 
 const createSingleSlider=(allBunArr,charaArr)=>{
 
-  if(!rodata.checkBoxCommentOut){
+  if(!rodata.isCheckBoxCommentOut){
     manageCheckBox(allBunArr,charaArr)
   }
 
