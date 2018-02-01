@@ -12,6 +12,17 @@ const readQuiz=()=>{
 
 const writeQuiz=()=>{
 
+  writeQuestion()
+  writeChoice
+}
+
+const writeQuestion=()=>{
+
+}
+
+
+const writeChoice=()=>{
+
 }
 
 export {readQuiz}
