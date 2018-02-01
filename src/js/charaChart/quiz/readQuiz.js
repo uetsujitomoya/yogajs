@@ -7,6 +7,7 @@ import { storeQuizResult } from './storeQuizResult'
 import { nodeCnt } from '../nodeAndArrow/defineNode'
 
 const quizArr=csv2Arr(setting.quiz.path)
+const questionQty=5
 let quizNo=1
 
 const quizNoCol=0
@@ -50,7 +51,9 @@ const readQuiz=(quizNo)=>{
     var time = new Date().getTime() - start_ms;
     storeQuizResult(quizResultArr,quizNo,time)
     quizNo++
-    if(quizNo<=quizArr.length){
+    console.log(quizNo)
+    console.log(quizArr.length)
+    if(quizNo<=5){
       setting.nodeCnt=0
       readQuiz(quizNo)
     }else{
