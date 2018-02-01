@@ -74,7 +74,7 @@ const rodata={
 
   viewMarkEnd:true,
 
-  isOnlyViz:false,
+  isOnlyViz:true,
   isSingleSlider:true,
   singleSliderSelectLen:200,
 
