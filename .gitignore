@@ -6,6 +6,7 @@ app/dict/
 *.knp
 *.csv
 *.xlsx
+*.numbers
 .idea/
 app/.csv
 json/
