@@ -4,7 +4,9 @@ import { rodata } from '../rodata'
 import { reloadGraph } from './reloadGraph'
 import { outputQuizResultCsv } from './outputQuizResultCsv'
 
-const readQuiz=()=>{
+const quizArr=csv2Arr(rodata.quiz.path)
+let quizNo=1
+const readQuiz=(quizNo)=>{
 
 
 
@@ -23,11 +25,15 @@ const readQuiz=()=>{
   var elapsed_ms = new Date().getTime() - start_ms;
 
   quizNo++
-  if(quizNo<=quizArr){
-    readQuiz()
-  }else{
-    outputQuizResultCsv(input)
+  document.getElementById('radio_buttons').onchange = () => {
+    if(quizNo<=quizArr){
+      readQuiz(quizNo)
+    }else{
+      outputQuizResultCsv(input)
+    }
   }
+
+
 
 }
 
