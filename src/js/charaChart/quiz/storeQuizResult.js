@@ -4,7 +4,7 @@ const radio1stNo=1
 const storeQuizResult=(quizResultArr,quizNo,time)=>{
 
   console.log('r' + quizNo)
-  const answerRadio = document.getElementById('r' + quizNo).children
+  const answerRadio = document.getElementById('r1').children
 
   console.log(answerRadio)
   let ans
