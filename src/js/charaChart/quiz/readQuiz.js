@@ -1,11 +1,11 @@
 import { createTxtBoxInBox } from '../viewText/createTxtBoxInBox'
 import { csv2Arr } from '../../manageCsv/csv2Arr'
-import { rodata } from '../rodata'
+import { setting } from '../setting'
 import { reloadGraph } from './reloadGraph'
 import { outputQuizResultCsv } from './outputQuizResultCsv'
 import { storeQuizResult } from './storeQuizResult'
 
-const quizArr=csv2Arr(rodata.quiz.path)
+const quizArr=csv2Arr(setting.quiz.path)
 let quizNo=1
 
 const quizNoCol=0

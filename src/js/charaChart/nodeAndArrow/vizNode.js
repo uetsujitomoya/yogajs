@@ -4,12 +4,12 @@
 
 import d3 from 'd3'
 import $ from 'jquery'
-import {rodata} from '../rodata'
+import {setting} from '../setting'
 import {r} from './defineNode'
 import {viewNodeTxt} from '../viewText/viewNodeTxt'
 
-//import{rodata} from '../../rodata'
-//const r = rodata.nodeR
+//import{setting} from '../../setting'
+//const r = setting.nodeR
 
 const clientColor = '#ff0000'
 const aroundClientPeopleColor = '#000000'
@@ -27,13 +27,13 @@ const vizNodes = (svg,nodeArr,sliderBunArr,r,allBunArr) => {
 
   nodes.append('circle').attr({
     /*      'r': function (d) { return r },
-          'stroke': function (d) { if (d.isClient) { return rodata.clientNodeColor } else { return rodata.aroundClientPeopleNodeColor } },
-          'fill': rodata.circleFill,
+          'stroke': function (d) { if (d.isClient) { return setting.clientNodeColor } else { return setting.aroundClientPeopleNodeColor } },
+          'fill': setting.circleFill,
           'stroke-width': (d) => { return　d.circleStrokeWidth }*/
-    'fill':  function (d) { if (d.isClient) { return rodata.clientNodeColor } else { return rodata.aroundClientPeopleNodeColor } },
+    'fill':  function (d) { if (d.isClient) { return setting.clientNodeColor } else { return setting.aroundClientPeopleNodeColor } },
     'r':  (d) => {
-      if(rodata.isFixedArrowWidth){
-        return rodata.nodeR
+      if(setting.isFixedArrowWidth){
+        return setting.nodeR
       }else{
         return　d.circleStrokeWidth
       }
@@ -48,8 +48,8 @@ const vizNodes = (svg,nodeArr,sliderBunArr,r,allBunArr) => {
     .attr({
       'text-anchor': 'middle',
       'dy': '.100em',
-      'fill': rodata.charaNameColor,
-      "font-size":rodata.circleFontSize
+      'fill': setting.charaNameColor,
+      "font-size":setting.circleFontSize
     })
     .text(function (d) {
       //if(d.nodeCharacter==="Aさん"){alert("Aさん")}
@@ -61,7 +61,7 @@ const vizNodes = (svg,nodeArr,sliderBunArr,r,allBunArr) => {
 }
 
 let removeSVG = () => {
-  d3.select(rodata.charaChartAreaID).select('svg').remove()
+  d3.select(setting.charaChartAreaID).select('svg').remove()
 }
 
 export {vizNodes, removeSVG}

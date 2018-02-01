@@ -14,14 +14,14 @@ import {removeSVG} from './nodeAndArrow/vizNode.js'
 import { nowWatchingArrowOrNode } from './nowWatchingArrowOrNode'
 import { viewArrowTxt } from './viewText/viewArrowTxt'
 import { viewNodeTxt } from './viewText/viewNodeTxt'
-import { rodata } from './rodata'
+import { setting } from './setting'
 
 
 const applySingleSliderVal=(allBunArr,charaArr)=>{
   $('#ex18a').on('slide', function (slideEvt) {
     const selectedArea = {
       start: slideEvt.value,
-      end: slideEvt.value+rodata.singleSliderSelectLen
+      end: slideEvt.value+setting.singleSliderSelectLen
     }
     applySlider(selectedArea, allBunArr,charaArr)
   })
@@ -48,17 +48,17 @@ const manageCheckBox=(allBunArr,charaArr)=>{
 
 const createSingleSlider=(allBunArr,charaArr)=>{
 
-  if(!rodata.isCheckBoxCommentOut){
+  if(!setting.isCheckBoxCommentOut){
     manageCheckBox(allBunArr,charaArr)
   }
 
   $("#ex18a").slider({
     min: 0,
-    max: allBunArr.length-rodata.singleSliderSelectLen,
+    max: allBunArr.length-setting.singleSliderSelectLen,
     value: 0,
     labelledby: 'ex18-label-1',
     formatter: function (value) {
-      return '' + value + "文目から" + (value+rodata.singleSliderSelectLen)+"文目"
+      return '' + value + "文目から" + (value+setting.singleSliderSelectLen)+"文目"
     }
   });
 
@@ -90,7 +90,7 @@ let manageSlider = (allBunArr, charaArr) => {
   console.log($('#bunqty'))
   $('#bunqty')[0].innerHTML += ""+allBunArr.length+""
 
-  if(rodata.isSingleSlider){
+  if(setting.isSingleSlider){
     createSingleSlider(allBunArr,charaArr)
   }else{
     manageDoubleSlider(allBunArr,charaArr)

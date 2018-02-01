@@ -1,13 +1,13 @@
 import { EscapeSJIS, UnescapeSJIS } from '../../ecl'
 import { csv2Arr } from '../../manageCsv/csv2Arr'
-import { rodata } from '../rodata'
+import { setting } from '../setting'
 import { isNeededBunToSearch, isNeededVerbForCsv } from './bunArr2CsvArr'
 
 const inputCsv=(bunArr)=>{
   //bunArrの中身を書き換える
   //makeCsvの逆をやればいい
 
-  const csvArr=csv2Arr(rodata.bunArrCsvFolder+rodata.bunArrCsvName)
+  const csvArr=csv2Arr(setting.bunArrCsvFolder+setting.bunArrCsvName)
 
 
   //csvArr.splice(0, 1)

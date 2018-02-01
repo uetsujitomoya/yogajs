@@ -1,4 +1,4 @@
-const color={
+const roColorSet={
   vivid:{
     green:"#019352",
     red:"#e8003e",
@@ -17,7 +17,7 @@ const color={
   }
 }
 
-const rodata={
+const setting={
   bunsetsuSymbol:'*',
   kihonkuSymbol:'+',
   bunsetsu1stJpRowNo:2,
@@ -35,14 +35,14 @@ const rodata={
 
   markerFillColor : '#ff0000',
 
-  clientNodeColor:color.light.pink,
-  aroundClientPeopleNodeColor:color.light.blue,
+  clientNodeColor:roColorSet.light.pink,
+  aroundClientPeopleNodeColor:roColorSet.light.blue,
   charaNameColor:"#000000",
 
-  clientArrowColor:color.vivid.garnet,
-  aroundClientPeopleArrowColor:color.vivid.orange,
-  kawaisounaClientArrowColor:color.vivid.blue,
-  situationDependencyPeopleColor:color.vivid.green,
+  clientArrowColor:roColorSet.vivid.garnet,
+  aroundClientPeopleArrowColor:roColorSet.vivid.orange,
+  kawaisounaClientArrowColor:roColorSet.vivid.blue,
+  situationDependencyPeopleColor:roColorSet.vivid.green,
   //clientArrowColor:"#ff4242",
   //aroundClientPeopleArrowColor:"#a9a9a9",
   //kawaisounaClientArrowColor:"#4242ff",
@@ -96,4 +96,4 @@ const rodata={
   }
 }
 
-export {rodata}
+export {setting,roColorSet}

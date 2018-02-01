@@ -1,4 +1,4 @@
-import {rodata} from '../rodata'
+import {setting} from '../setting'
 import { createTxtViewArea } from './createTxtViewsArea'
 import { nowWatchingArrowOrNode } from '../nowWatchingArrowOrNode'
 import { viewWhatIsClicked } from './viewWhatIsClicked'
@@ -8,7 +8,7 @@ let preBunNo = null
 const viewNodeTxt=(node, allBunArr)=>{
   nowWatchingArrowOrNode.node=node
   nowWatchingArrowOrNode.arrow=null
-  if(!rodata.isOnlyViz){
+  if(!setting.isOnlyViz){
     let msg = document.getElementById('box')
     msg.innerHTML=''
 
