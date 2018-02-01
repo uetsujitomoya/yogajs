@@ -56,10 +56,10 @@ const rodata={
   svgWidth:600,
   svgHeight:700,
 
-  textViewFontSize:2,
+  txtViewFontSize:2,
 
   knpCsvFolder:"./csv/knp/",
-  knpCsvName:"171114allKnp",//bunArrをbunArrCsvに任せる場合でも、登場人物はknpCsvから取得
+  knpCsvName:"171211dummyForCC",//bunArrをbunArrCsvに任せる場合でも、登場人物はknpCsvから取得
   //csvPath: this.knpCsvFolder+this.knpCsvName+".csv",
 
   bunArrCsvFolder:"./csv/bunArr/",
@@ -72,14 +72,15 @@ const rodata={
   boxBorderColor: "#696969",
   circleFill: "#e6e6e6",
 
-
   viewMarkEnd:true,
 
   isOnlyViz:false,
   isSingleSlider:true,
   singleSliderSelectLen:200,
 
-  checkBoxCommentOut:true
+  checkBoxCommentOut:true,
+
+  isFizedArrowWigth:true
 }
 
 export {rodata}

@@ -49,7 +49,7 @@ const addBun=(id,bun,bold,verbBunHtml,isArrow)=>{
   const bunNo = bun.bunNo
   const bunContent=bun.surfaceForm
   //if(bold){msg.innerHTML+="<b>"}
-  msg.innerHTML += '<font size=' + rodata.textViewFontSize + '>' + bunNo + '' + talker + ' <font color=' + color + '>【</font>'
+  msg.innerHTML += '<font size=' + rodata.txtViewFontSize + '>' + bunNo + '' + talker + ' <font color=' + color + '>【</font>'
   if(isArrow){
     msg.innerHTML +=  verbBunHtml
   }else{
