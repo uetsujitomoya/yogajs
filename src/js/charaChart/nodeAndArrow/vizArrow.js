@@ -55,7 +55,13 @@ const vizArrow = (svg, arrow, r, arrowId,　allBunArr) => {
     .attr({
       'd': line(arrow.pointArr),
       'stroke': color,
-      'stroke-width': arrow.strokeWidth,
+      'stroke-width': ()=>{
+        if(rodata.isFixedArrowWidth){
+          return rodata.fixedArrowWidth
+        }else {
+          return arrow.strokeWidth
+        }
+      },
       'fill': 'none',
       'marker-end': ()=>{
         if(rodata.viewMarkEnd){
