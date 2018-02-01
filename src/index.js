@@ -5,10 +5,12 @@
 //import $ from 'jquery'
 //import {wordparse2object} from './js/counselorEdu/wordparse2object.js'
 import { createCharaChart } from './js/charaChart/mainCharaChart'
+import { readQuiz } from './js/charaChart/quiz/readQuiz'
 // import {CreateSwitchClassificationMethod} from "./SwitchClassificationMethod.js"; //AcceptDictionary
 // var dictionaryFromWord2Vec = csv2Arr('HDFaceVertex.csv');
 
-createCharaChart()
+//createCharaChart()
+readQuiz(1)
 
 // 以下、今までの(170809)
 

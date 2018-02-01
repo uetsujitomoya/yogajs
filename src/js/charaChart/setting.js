@@ -86,7 +86,7 @@ const setting={
   fixedArrowWidth:5,
 
   quiz:{
-    path:null,
+    path:"./csv/quiz/lavEvaDummy.csv",
     quizNoCol:0,
     knpCsvCol:1,
     bunArrCsvCol:2,
@@ -94,6 +94,7 @@ const setting={
     isColoredCol:4,
     queBunCol:5,
     choiceStartCol:6,
+    csvTrue:"TRUE"
   }
 }
 

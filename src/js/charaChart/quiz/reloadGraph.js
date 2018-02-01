@@ -4,7 +4,7 @@ import { createCharaChart } from '../mainCharaChart'
 import { removeSVG } from '../nodeAndArrow/vizNode'
 
 const reloadGraph=(quizRow)=>{
-  if(quizRow[setting.quiz.isFixedCol]==="true"){
+  if(quizRow[setting.quiz.isFixedCol]===setting.quiz.csvTrue){
     setting.isFixedArrowWidth=true
     setting.isFixedCircleR=true
   }else{
@@ -12,7 +12,7 @@ const reloadGraph=(quizRow)=>{
     setting.isFixedCircleR=false
   }
 
-  if(quizRow[setting.quiz.isColoredCol]==="true"){
+  if(quizRow[setting.quiz.isColoredCol]===setting.quiz.csvTrue){
     setting.clientArrowColor=roColorSet.vivid.garnet
     setting.aroundClientPeopleArrowColor=roColorSet.vivid.orange
     setting.kawaisounaClientArrowColor=roColorSet.vivid.blue
