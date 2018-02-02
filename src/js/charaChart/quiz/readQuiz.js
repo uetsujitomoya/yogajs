@@ -7,7 +7,7 @@ import { storeQuizResult } from './storeQuizResult'
 import { nodeCnt } from '../nodeAndArrow/defineNode'
 
 const quizArr=csv2Arr(setting.quiz.path)
-const questionQty=5
+const questionQty=27
 //let quizNo=1
 
 const quizNoCol = setting.quiz.quizNoCol
@@ -56,7 +56,7 @@ const readQuiz=(quizNo)=>{
     quizNo++
     console.log(quizNo)
     console.log(quizArr.length)
-    if(quizNo<5){
+    if(quizNo<questionQty){
       setting.nodeCnt=0
       readQuiz(quizNo)
     }else{
@@ -87,7 +87,7 @@ const writeQuestion=(quizNo)=>{
 
   document.getElementById('msgQ').innerHTML+="Q"+quizArr[quizNo][setting.quiz.quizNoCol]
   let target = document.getElementById('msgQ')
-  target.innerHTML += '<div id="b' + quizNo + '" style="cursor: pointer"><u>' +  queBun + '</u></div><div id="r1"><label></label></div><br>'
+  target.innerHTML += '<div id="b' + quizNo + '" style="cursor: pointer">ある登場人物から別の登場人物への言動について，<b><u>' +  queBun + '</u></b>文目の中で最も多いのは誰から誰への言動ですか？</div><div id="r1"><label></label></div><br>'
 
   for(let colCnt=choiceStartCol;colCnt<quizRow.length;colCnt++){
     const chBun=quizRow[colCnt]

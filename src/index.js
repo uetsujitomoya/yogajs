@@ -10,7 +10,7 @@ import { readQuiz } from './js/charaChart/quiz/readQuiz'
 // var dictionaryFromWord2Vec = csv2Arr('HDFaceVertex.csv');
 
 //createCharaChart()
-readQuiz(1)
+readQuiz(0)
 
 // 以下、今までの(170809)
 
