@@ -10,13 +10,13 @@ const quizArr=csv2Arr(setting.quiz.path)
 const questionQty=5
 //let quizNo=1
 
-const quizNoCol=0
-const knpCsvCol=1
-const bunArrCsvCol=2
-const isFixedCol=3
-const isColoredCol=4
-const queBunCol=5
-const choiceStartCol=6
+const quizNoCol = setting.quiz.quizNoCol
+const knpCsvCol = setting.quiz.knpCsvCol
+const bunArrCsvCol = setting.quiz.bunArrCsvCol
+const isFixedCol = setting.quiz.isFixedCol
+const isColoredCol = setting.quiz.isColoredCol
+const queBunCol = setting.quiz.queBunCol
+const choiceStartCol = setting.quiz.choiceStartCol
 
 let quizResultArr=[]
 
@@ -34,9 +34,12 @@ const readQuiz=(quizNo)=>{
   reloadGraph(quizArr[quizNo])
 
   //nowQuizArr.forEach((quiz,idx)=>{
+
   let msg = document.getElementById('box')
   msg.innerHTML=''
-  createTxtBoxInBox(0)
+  let quizBigBox = document.getElementById('quiz')
+  quizBigBox.innerHTML=''
+  createTxtBoxInBox("Q","quiz")
 
   writeQuiz(quizNo)
   //})
@@ -47,7 +50,7 @@ const readQuiz=(quizNo)=>{
 
 
 
-  document.getElementById('msg0').onchange = () => {
+  document.getElementById('msgQ').onchange = () => {
     var time = new Date().getTime() - start_ms;
     storeQuizResult(quizResultArr,quizNo,time)
     quizNo++
@@ -69,9 +72,6 @@ const readQuiz=(quizNo)=>{
       outputQuizResultCsv(quizResultArr)
     }
   }
-
-
-
 }
 
 const writeQuiz=(quizNo)=>{
@@ -85,18 +85,15 @@ const writeQuestion=(quizNo)=>{
   const quizRow=quizArr[quizNo]
   const queBun=quizRow[queBunCol]
 
-  document.getElementById('msg0').innerHTML+=quizArr[quizNo][1]
-  let target = document.getElementById('msg0')
+  document.getElementById('msgQ').innerHTML+=quizArr[quizNo][1]
+  let target = document.getElementById('msgQ')
   target.innerHTML += '<div id="b' + quizNo + '" style="cursor: pointer"><u>' +  queBun + '</u></div><div id="r1"><label></label></div><br>'
 
   for(let colCnt=choiceStartCol;colCnt<quizRow.length;colCnt++){
     const chBun=quizRow[colCnt]
     const targetInRow = document.getElementById('r1')
     targetInRow.innerHTML += '<label><input type=radio name="r' + colCnt + '" value=' + colCnt + '>'+chBun+'</label>'
-
   }
-
-
 }
 
 const createAnswerRadioButtonRow = (answerNumber, value, color, answerGroupName) => {

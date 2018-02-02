@@ -76,7 +76,7 @@ const setting={
 
   isViewedMarkEnd:true,
 
-  isOnlyViz:true,
+  isOnlyViz:false,
   isSingleSlider:true,
   singleSliderSelectLen:200,
 
@@ -92,8 +92,9 @@ const setting={
     bunArrCsvCol:2,
     isFixedCol:3,
     isColoredCol:4,
-    queBunCol:5,
-    choiceStartCol:6,
+    isArrowCol:5,
+    queBunCol:6,
+    choiceStartCol:7,
     csvTrue:"TRUE"
   },
   nodeCnt:0

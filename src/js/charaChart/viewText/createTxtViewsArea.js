@@ -5,7 +5,7 @@ const createTxtViewArea = (bun, allBunArr, i,verbBunHtml,isArrow)=>{
 
   //console.log(verbBunHtml)
   //1つ1つのTextViewAreaをつくる
-  createTxtBoxInBox(i)
+  createTxtBoxInBox(i,"box")
   /*  for(let i=bun.bunNo-3;i<=bun.bunNo+3;i++){
       console.log(allBunArr[i])
     }*/
