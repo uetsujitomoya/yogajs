@@ -86,7 +86,7 @@ const setting={
   fixedArrowWidth:5,
 
   quiz:{
-    path:"./csv/quiz/lavEvaDummy3.csv",
+    path:"./csv/quiz/180202250lavEva.csv",
     quizNoCol:0,
     knpCsvCol:1,
     bunArrCsvCol:2,
