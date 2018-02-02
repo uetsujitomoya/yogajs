@@ -85,7 +85,7 @@ const writeQuestion=(quizNo)=>{
   const quizRow=quizArr[quizNo]
   const queBun=quizRow[queBunCol]
 
-  document.getElementById('msgQ').innerHTML+=quizArr[quizNo][1]
+  document.getElementById('msgQ').innerHTML+="Q"+quizArr[quizNo][setting.quiz.quizNoCol]
   let target = document.getElementById('msgQ')
   target.innerHTML += '<div id="b' + quizNo + '" style="cursor: pointer"><u>' +  queBun + '</u></div><div id="r1"><label></label></div><br>'
 

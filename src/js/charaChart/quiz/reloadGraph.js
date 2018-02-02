@@ -14,9 +14,9 @@ const reloadGraph=(quizRow)=>{
 
   if(quizRow[setting.quiz.isColoredCol]===setting.quiz.csvTrue){
     setting.clientArrowColor=roColorSet.vivid.garnet
-    setting.aroundClientPeopleArrowColor=roColorSet.vivid.orange
-    setting.kawaisounaClientArrowColor=roColorSet.vivid.blue
-    setting.situationDependencyPeopleColor=roColorSet.vivid.green
+    setting.aroundClientPeopleArrowColor=roColorSet.vivid.blue
+    setting.kawaisounaClientArrowColor=roColorSet.vivid.garnet
+    setting.situationDependencyPeopleColor=roColorSet.vivid.blue
   }else{
     setting.clientArrowColor=roColorSet.boxBorderColor
     setting.aroundClientPeopleArrowColor=roColorSet.boxBorderColor
@@ -24,11 +24,15 @@ const reloadGraph=(quizRow)=>{
     setting.situationDependencyPeopleColor=roColorSet.boxBorderColor
   }
 
+  if(quizRow[setting.quiz.isArrowCol]===setting.quiz.csvTrue){
+    setting.isViewedMarkEnd=true
+  }else{
+    setting.isViewedMarkEnd=false
+  }
+
   removeSVG()
 
   createCharaChart(quizRow[setting.quiz.knpCsvCol],quizRow[setting.quiz.bunArrCsvCol])
-
-
 
 }
 
