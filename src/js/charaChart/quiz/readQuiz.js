@@ -89,7 +89,7 @@ const writeQuestion=(quizNo)=>{
   document.getElementById('msgQ').innerHTML+="<font size='5'><b>Q"+quizArr[quizNo][setting.quiz.quizNoCol]+"</b></font>"
 
   let target = document.getElementById('msgQ')
-  target.innerHTML += '<div id="b' + quizNo + '" style="cursor: pointer">ある登場人物から別の登場人物への言動について，<b><u>' +  queStartBunNo + '〜'+(queStartBunNo+setting.singleSliderSelectLen)+'</u></b>文目の中で最も多いのは誰から誰への言動ですか？</div><div id="r1"><label></label></div><br>'
+  target.innerHTML += '<div id="b' + quizNo + '" style="cursor: pointer">ある登場人物から別の登場人物への言動について，最も多いのは誰から誰への言動ですか？</div><div id="r1"><label></label></div><br>'
 
   for(let colCnt=choiceStartCol;colCnt<quizRow.length;colCnt++){
     const chBun=quizRow[colCnt]
