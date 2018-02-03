@@ -15,7 +15,7 @@ const knpCsvCol = setting.quiz.knpCsvCol
 const bunArrCsvCol = setting.quiz.bunArrCsvCol
 const isFixedCol = setting.quiz.isFixedCol
 const isColoredCol = setting.quiz.isColoredCol
-const queBunCol = setting.quiz.queBunCol
+const queBunCol = setting.quiz.queStartBunNoCol
 const choiceStartCol = setting.quiz.choiceStartCol
 
 let quizResultArr=[]
@@ -83,13 +83,13 @@ const writeQuiz=(quizNo)=>{
 
 const writeQuestion=(quizNo)=>{
   const quizRow=quizArr[quizNo]
-  const queBun=quizRow[queBunCol]
+  const queStartBunNo=parseInt(quizRow[queBunCol])
 
   //問題番号
   document.getElementById('msgQ').innerHTML+="<font size='5'><b>Q"+quizArr[quizNo][setting.quiz.quizNoCol]+"</b></font>"
 
   let target = document.getElementById('msgQ')
-  target.innerHTML += '<div id="b' + quizNo + '" style="cursor: pointer">ある登場人物から別の登場人物への言動について，<b><u>' +  queBun + '</u></b>文目の中で最も多いのは誰から誰への言動ですか？</div><div id="r1"><label></label></div><br>'
+  target.innerHTML += '<div id="b' + quizNo + '" style="cursor: pointer">ある登場人物から別の登場人物への言動について，<b><u>' +  queStartBunNo + '〜'+(queStartBunNo+setting.singleSliderSelectLen)+'</u></b>文目の中で最も多いのは誰から誰への言動ですか？</div><div id="r1"><label></label></div><br>'
 
   for(let colCnt=choiceStartCol;colCnt<quizRow.length;colCnt++){
     const chBun=quizRow[colCnt]
@@ -98,14 +98,14 @@ const writeQuestion=(quizNo)=>{
   }
 }
 
-const createAnswerRadioButtonRow = (answerNumber, value, color, answerGroupName) => {
-  const targetInRow = document.getElementById('r' + answerNumber)
-  targetInRow.innerHTML += '<label><input type=radio name="r' + answerNumber + '" value=' + value + '><font color="' + color + '">【</font>「' + answerGroupName + '」に含む<font color="' + color + '">】</font></label>　'
-}
-
-
-const writeChoice=()=>{
-
-}
+// const createAnswerRadioButtonRow = (answerNumber, value, color, answerGroupName) => {
+//   const targetInRow = document.getElementById('r' + answerNumber)
+//   targetInRow.innerHTML += '<label><input type=radio name="r' + answerNumber + '" value=' + value + '><font color="' + color + '">【</font>「' + answerGroupName + '」に含む<font color="' + color + '">】</font></label>　'
+// }
+//
+//
+// const writeChoice=()=>{
+//
+// }
 
 export {readQuiz}

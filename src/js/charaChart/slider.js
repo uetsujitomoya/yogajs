@@ -15,7 +15,7 @@ import { nowWatchingArrowOrNode } from './nowWatchingArrowOrNode'
 import { viewArrowTxt } from './viewText/viewArrowTxt'
 import { viewNodeTxt } from './viewText/viewNodeTxt'
 import { setting } from './setting'
-
+import {redrawCharaChart} from './redrawCharaChart'
 
 const applySingleSliderVal=(allBunArr,charaArr)=>{
   $('#ex18a').on('slide', function (slideEvt) {
@@ -100,15 +100,6 @@ const applySlider = (selectedArea, allBunArr,nodeArr) => {
   redrawCharaChart(allBunArr, selectedArea, nodeArr)
 }
 
-const redrawCharaChart = (allBunArr, selectedArea, charaArr) => {
-  let selectedBunArr = allBunArr.concat()
-  selectedBunArr.splice(selectedArea.end, allBunArr.length - selectedArea.end)
-  selectedBunArr.splice(0, selectedArea.start)
-  applySliderForNodeText(selectedBunArr, charaArr)
-  createArrowArr(selectedBunArr,charaArr,allBunArr)
-  if(nowWatchingArrowOrNode.node!==null){
-    viewNodeTxt(nowWatchingArrowOrNode.node,allBunArr)
-  }
-}
+
 
 export {manageSlider,applySlider}

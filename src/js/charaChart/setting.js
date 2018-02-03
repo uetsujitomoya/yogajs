@@ -86,14 +86,16 @@ const setting={
   fixedArrowWidth:5,
 
   quiz:{
-    path:"./csv/quiz/180202250lavEva.csv",
+
+    path:"./csv/quiz/180202250lavEvaOnlyNo.csv",
+
     quizNoCol:0,
     knpCsvCol:1,
     bunArrCsvCol:2,
     isFixedCol:3,
     isColoredCol:4,
     isArrowCol:5,
-    queBunCol:6,
+    queStartBunNoCol:6,
     choiceStartCol:7,
     csvTrue:"TRUE"
   },
