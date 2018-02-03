@@ -56,7 +56,7 @@ const readQuiz=(quizNo)=>{
     quizNo++
     console.log(quizNo)
     console.log(quizArr.length)
-    if(quizNo<questionQty){
+    if(quizNo<quizArr.length){
       setting.nodeCnt=0
       readQuiz(quizNo)
     }else{
