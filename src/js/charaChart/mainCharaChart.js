@@ -43,11 +43,15 @@ const createCharaChart = (knpCsvName,bunArrCsvName) => {
     createArrowArr(bunArr, nodeArr,bunArr)
   }
 
-
   manageSlider(bunArr,nodeArr)
+
+  return {
+    bunArr:bunArr,
+    nodeArr:nodeArr
+  }
 }
 
-const findDependency = () => {
+/*const findDependency = () => {
   find_subject()
   find_object()
 }
@@ -58,6 +62,6 @@ let find_subject = () => {
 
 let find_object = () => {
 
-}
+}*/
 
 export {createCharaChart}

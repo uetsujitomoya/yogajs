@@ -2,6 +2,7 @@ import { csv2Arr } from '../../manageCsv/csv2Arr'
 import { roColorSet, setting } from '../setting'
 import { createCharaChart } from '../mainCharaChart'
 import { removeSVG } from '../nodeAndArrow/vizNode'
+import { redrawCharaChart } from '../redrawCharaChart'
 
 const reloadGraph=(quizRow)=>{
   if(quizRow[setting.quiz.isFixedCol]===setting.quiz.csvTrue){
@@ -32,7 +33,18 @@ const reloadGraph=(quizRow)=>{
 
   removeSVG()
 
-  createCharaChart(quizRow[setting.quiz.knpCsvCol],quizRow[setting.quiz.bunArrCsvCol])
+  let bunAndNodeArrObj=createCharaChart(quizRow[setting.quiz.knpCsvCol],quizRow[setting.quiz.bunArrCsvCol])
+
+  removeSVG()
+
+  redrawCharaChart(
+    bunAndNodeArrObj.bunArr,
+    {
+      start : parseInt( quizRow[ setting.quiz.queStartBunNoCol ] ),
+      end : parseInt( quizRow[ setting.quiz.queStartBunNoCol ] ) + setting.singleSliderSelectLen
+    },
+    bunAndNodeArrObj.nodeArr
+  )
 
 }
 
