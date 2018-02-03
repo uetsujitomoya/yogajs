@@ -99,7 +99,10 @@ const setting={
     choiceStartCol:7,
     csvTrue:"TRUE"
   },
-  nodeCnt:0
+  nodeCnt:0,
+
+  boxInBoxWidth:"240px"
+
 }
 
 export {setting,roColorSet}
