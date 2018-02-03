@@ -85,14 +85,16 @@ const writeQuestion=(quizNo)=>{
   const quizRow=quizArr[quizNo]
   const queBun=quizRow[queBunCol]
 
-  document.getElementById('msgQ').innerHTML+="Q"+quizArr[quizNo][setting.quiz.quizNoCol]
+  //問題番号
+  document.getElementById('msgQ').innerHTML+="<font size='5'><b>Q"+quizArr[quizNo][setting.quiz.quizNoCol]+"</b></font>"
+
   let target = document.getElementById('msgQ')
   target.innerHTML += '<div id="b' + quizNo + '" style="cursor: pointer">ある登場人物から別の登場人物への言動について，<b><u>' +  queBun + '</u></b>文目の中で最も多いのは誰から誰への言動ですか？</div><div id="r1"><label></label></div><br>'
 
   for(let colCnt=choiceStartCol;colCnt<quizRow.length;colCnt++){
     const chBun=quizRow[colCnt]
     const targetInRow = document.getElementById('r1')
-    targetInRow.innerHTML += '<label><input type=radio name="r' + colCnt + '" value=' + colCnt + '>'+chBun+'</label>'
+    targetInRow.innerHTML += '<label><input type=radio name="r' + colCnt + '" value=' + colCnt + '>'+chBun+'</label><br>'
   }
 }
 
