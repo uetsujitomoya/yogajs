@@ -87,7 +87,7 @@ const setting={
 
   quiz:{
 
-    path:"./csv/quiz/180202250lavEvaOnlyNo.csv",
+    path:"./csv/quiz/180203lavEvaOnlyNo.csv",
 
     quizNoCol:0,
     knpCsvCol:1,
