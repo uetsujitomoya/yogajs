@@ -46,7 +46,7 @@ const vizNodes = (svg,nodeArr,sliderBunArr,r,allBunArr) => {
     })
     .text(function (d) {
       //if(d.nodeCharacter==="Aさん"){alert("Aさん")}
-      return d.nodeCharacter +"\r\n　\r\n　"
+      return "　　　　"+d.nodeCharacter
     })
     .on('click', (d, i)=>{
       viewNodeTxt(d, allBunArr)
