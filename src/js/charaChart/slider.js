@@ -16,12 +16,29 @@ import { viewArrowTxt } from './viewText/viewArrowTxt'
 import { viewNodeTxt } from './viewText/viewNodeTxt'
 import { rodata } from './rodata'
 
+const manageSlider = (allBunArr, charaArr) => {
+
+  var form = document.forms.mainForm;
+  // text
+  form._text.value = 200;
+  console.log('text:', form._text.value);
+
+  console.log($('#bunqty'))
+  $('#bunqty')[0].innerHTML += ""+allBunArr.length+""
+
+  if(rodata.isSingleSlider){
+    createSingleSlider(allBunArr,charaArr)
+  }else{
+    manageDoubleSlider(allBunArr,charaArr)
+  }
+}
 
 const applySingleSliderVal=(allBunArr,charaArr)=>{
   $('#ex18a').on('slide', function (slideEvt) {
     const selectedArea = {
       start: slideEvt.value,
-      end: slideEvt.value+rodata.singleSliderSelectLen
+      //end: slideEvt.value+rodata.singleSliderSelectLen
+      end: slideEvt.value+ parseInt(document.forms.mainForm._text.value)
     }
     applySlider(selectedArea, allBunArr,charaArr)
   })
@@ -58,7 +75,7 @@ const createSingleSlider=(allBunArr,charaArr)=>{
     value: 0,
     labelledby: 'ex18-label-1',
     formatter: function (value) {
-      return '' + value + "文目から" + (value+rodata.singleSliderSelectLen)+"文目"
+      return '' + value + "文目から" + (value+parseInt(document.forms.mainForm._text.value))+"文目"
     }
   });
 
@@ -73,7 +90,8 @@ const manageDoubleSlider=(allBunArr,charaArr)=>{
   $('#ex2').slider({
     formatter: function (value) {
       return 'この範囲を見ています…… ' + value
-    }
+    },
+
   })
 
   $('#ex2').on('slide', function (slideEvt) {
@@ -85,17 +103,7 @@ const manageDoubleSlider=(allBunArr,charaArr)=>{
   })
 }
 
-let manageSlider = (allBunArr, charaArr) => {
 
-  console.log($('#bunqty'))
-  $('#bunqty')[0].innerHTML += ""+allBunArr.length+""
-
-  if(rodata.isSingleSlider){
-    createSingleSlider(allBunArr,charaArr)
-  }else{
-    manageDoubleSlider(allBunArr,charaArr)
-  }
-}
 
 const applySlider = (selectedArea, allBunArr,nodeArr) => {
   removeSVG()
