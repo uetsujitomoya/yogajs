@@ -13,8 +13,8 @@ const bunArr2CsvArr=(bunArr)=>{
 /*  csvArr.push([UnescapeSJIS(encodeURI('文')),'動詞','主語','目的語','「悪いアイツかわいそうな私」なら1'])
   for(const bun of bunArr){
 
-    if(typeof bun.verb_array !== 'undefined'){
-      for(const verb of bun.verb_array){
+    if(typeof bun.verbArr !== 'undefined'){
+      for(const verb of bun.verbArr){
         //console.log(verb.subject)
 
         //subject不在。object不在の場合の処理
@@ -33,7 +33,7 @@ const bunArr2CsvArr=(bunArr)=>{
   for(const bun of bunArr){
 
     if(isNeededBunToSearch(bun)){
-      for(const verb of bun.verb_array){
+      for(const verb of bun.verbArr){
         if(isNeededVerbForCsv(verb)){
 
             csvArr.push([bun.surfaceForm,verb.surfaceForm,verb.subject.name,verb.object.name,0])
@@ -49,7 +49,7 @@ const bunArr2CsvArr=(bunArr)=>{
 }
 
 const isNeededBunToSearch=(bun)=>{
-  if(typeof bun.verb_array !== 'undefined'){
+  if(typeof bun.verbArr !== 'undefined'){
     return true
   }else{
     return false

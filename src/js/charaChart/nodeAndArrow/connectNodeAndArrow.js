@@ -6,19 +6,19 @@ const definePointArr = (arrow) => {
   let subjectX,subjectY,objectX,objectY
 
   if(arrow.subject.x>arrow.object.x){
-    subjectX=arrow.subject.x
-    objectX=arrow.object.x
+    subjectX=arrow.subject.x+5
+    objectX=arrow.object.x+5
   }else{
-    subjectX = arrow.subject.x - 10
-    objectX = arrow.object.x - 10
+    subjectX = arrow.subject.x - 5
+    objectX = arrow.object.x - 5
   }
 
   if(arrow.subject.y>arrow.object.y){
-    subjectY=arrow.subject.y
-    objectY=arrow.object.y
+    subjectY=arrow.subject.y-5
+    objectY=arrow.object.y-5
   }else{
-    subjectY = arrow.subject.y + 10
-    objectY = arrow.object.y + 10
+    subjectY = arrow.subject.y + 5
+    objectY = arrow.object.y + 5
   }
 
   arrow.pointArr = [ [ subjectX , subjectY , r ] , [ objectX , objectY , r ] ]

@@ -1,7 +1,7 @@
 import {rodata} from '../rodata'
 import Word from './defineWord'
 import {isCharacter,searchNodeArrayForCharacterAndPoint} from '../chara/isChara'
-import {hasVerb} from './hasVerb'
+import {isVerb} from './isVerb'
 import {addSVO2Bunsetsu
 
 
@@ -15,8 +15,8 @@ export default class Bunsetsu {
     this.csv_raw_array = input2dArr
     this.id = no + 'D'
 
-    this.kihonkuArray = []
-   // this.kihonkuArray.length = count_kihonku(input2dArr)
+    this.kihonkuArr = []
+   // this.kihonkuArr.length = count_kihonku(input2dArr)
 
     this.word_array = []
 
@@ -46,19 +46,19 @@ export default class Bunsetsu {
       for (let rowCnt = jp1stNo; rowCnt < bunsetsuRaw2dArray.length; rowCnt++) {
         let tmpRow = bunsetsuRaw2dArray[rowCnt]
         if (tmpRow[0] === rodata.kihonkuSymbol) { // 文節内 2こ目以降の基本句
-          this.kihonkuArray[kihonkuIdxInBunsetsu] = new KihonkuInBunsetsu(tmp2dArrForKihonku)// 文の中の通し番号での基本句array
+          this.kihonkuArr[kihonkuIdxInBunsetsu] = new KihonkuInBunsetsu(tmp2dArrForKihonku)// 文の中の通し番号での基本句array
           tmp2dArrForKihonku = []
           kihonkuIdxInBunsetsu++
         }
         tmp2dArrForKihonku.push(tmpRow)
       }
-      this.kihonkuArray[kihonkuIdxInBunsetsu] = new KihonkuInBunsetsu(tmp2dArrForKihonku)// 文の中の通し番号での基本句array
+      this.kihonkuArr[kihonkuIdxInBunsetsu] = new KihonkuInBunsetsu(tmp2dArrForKihonku)// 文の中の通し番号での基本句array
     }
   }
 
   findVerbInBunsetsu () {
     for(let i=bunsetsu1stJpRIdx;i<this.word_array.length;i++){
-      if (hasVerb(this.word_array[i].hinshi)) {
+      if (isVerb(this.word_array[i].hinshi)) {
         this.isVerb = true
         this.verb = this.word_array[i].basic_form
         break

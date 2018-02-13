@@ -4,11 +4,11 @@
 
 export const initialValueOfSubjectAndObjectInVerb =null
 
-const hasVerb = (hinshi) => {
+const isVerb = (hinshi) => {
   if (hinshi === '動詞') {
     return true
   }
   return false
 }
 
-export {hasVerb}
+export {isVerb}

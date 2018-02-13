@@ -6,7 +6,7 @@ import d3 from 'd3'
 import $ from 'jquery'
 import {rodata} from '../rodata'
 import {r} from './defineNode'
-import {viewNodeText} from '../viewText/viewNodeText'
+import {viewNodeTxt} from '../viewText/viewNodeTxt'
 
 //import{rodata} from '../../rodata'
 //const r = rodata.nodeR
@@ -26,27 +26,30 @@ const vizNodes = (svg,nodeArr,sliderBunArr,r,allBunArr) => {
     })
 
   nodes.append('circle').attr({
-      'r': function (d) { return r },
-      'stroke': function (d) { if (d.isClient) { return rodata.clientNodeColor } else { return rodata.aroundClientPeopleNodeColor } },
-      'fill': rodata.circleFill,
-      'stroke-width': (d) => { return　d.circleStrokeWidth }
-    })
+    /*      'r': function (d) { return r },
+          'stroke': function (d) { if (d.isClient) { return rodata.clientNodeColor } else { return rodata.aroundClientPeopleNodeColor } },
+          'fill': rodata.circleFill,
+          'stroke-width': (d) => { return　d.circleStrokeWidth }*/
+    'fill':  function (d) { if (d.isClient) { return rodata.clientNodeColor } else { return rodata.aroundClientPeopleNodeColor } },
+    'r':  (d) => { return　d.circleStrokeWidth }
+  })
     .on('click', (d, i)=>{
-      viewNodeText(d, allBunArr)
+      viewNodeTxt(d, allBunArr)
     })
 
   nodes.append('text')
     .attr({
       'text-anchor': 'middle',
       'dy': '.100em',
-      'fill': rodata.charaNameColor
+      'fill': rodata.charaNameColor,
+      "font-size":rodata.circleFontSize
     })
     .text(function (d) {
       //if(d.nodeCharacter==="Aさん"){alert("Aさん")}
-      return d.nodeCharacter
+      return "　　　　"+d.nodeCharacter
     })
     .on('click', (d, i)=>{
-      viewNodeText(d, allBunArr)
+      viewNodeTxt(d, allBunArr)
     })
 }
 

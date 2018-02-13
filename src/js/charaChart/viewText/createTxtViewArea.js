@@ -1,26 +1,13 @@
-import {rodata} from '../rodata'
+import { rodata } from '../rodata'
 
-let preBunNo = null
+const createTxtViewArea = (bun, allBunArr, i,verbBunHtml,isArrow)=>{
 
-const viewNodeText=(node, allBunArr)=>{//slider適用後に"allBunArr"に"selectedBunArr"が入らないように。
-  //丸や矢印をマウスオーバーした際に、該当文章を表示。d3のmouseoverかclickから呼び出す
-  let msg = document.getElementById('box')
-  msg.innerHTML=''
-  console.log(node.bunArr)
-  node.bunArr.forEach((bun,nodeBunArrId)=>{
-    if(preBunNo!==bun.bunNo){
-      createTextViewArea(bun,allBunArr,nodeBunArrId)
-    }
-    preBunNo=bun.bunNo
-  })
-}
-//allBunArrのidxと中身のbunNoは一致しないゾ
-const createTextViewArea = (bun,allBunArr,i)=>{
+  //console.log(verbBunHtml)
   //1つ1つのTextViewAreaをつくる
   createBox(i)
-/*  for(let i=bun.bunNo-3;i<=bun.bunNo+3;i++){
-    console.log(allBunArr[i])
-  }*/
+  /*  for(let i=bun.bunNo-3;i<=bun.bunNo+3;i++){
+      console.log(allBunArr[i])
+    }*/
   if(bun.bunNo!==0&&allBunArr[ bun.bunNo - 1]!==void 0){
     if(bun.bunNo!==1&&allBunArr[ bun.bunNo - 2]!==void 0){
       if(bun.bunNo!==2&&allBunArr[ bun.bunNo - 3]!==void 0){
@@ -30,7 +17,12 @@ const createTextViewArea = (bun,allBunArr,i)=>{
     }
     addBun('msg'+i, allBunArr[ bun.bunNo - 1], false)
   }
-  addBun('msg'+i,allBunArr[bun.bunNo], true)
+
+
+  //addBun('msg'+i,allBunArr[bun.bunNo], true)
+  addWatchingBun(i,bun,true,verbBunHtml,isArrow)
+
+
   if( bun.bunNo + 1 !== allBunArr.length &&allBunArr[ bun.bunNo +1]!==void 0){
     addBun('msg'+i , allBunArr[bun.bunNo + 1], false)
     if( bun.bunNo + 2 !== allBunArr.length &&allBunArr[ bun.bunNo +2]!==void 0){
@@ -49,20 +41,37 @@ const createBox=(i)=>{
   msg.innerHTML += '<div id="msg' + i +'" style="border-width: 1px; background-color:#ffffff; width:600px; overflow-y:scroll; margin-bottom: 5px; margin-left: 5px; margin-top: 10px; padding-bottom: 5px; padding-top: 5px;">'
 }
 
-const addBun=(id,bun,bold)=>{
+const addBun=(id,bun,bold,verbBunHtml,isArrow)=>{
   //箱に1文を追加。boldはboolean
   let msg = document.getElementById(id)
   const talker=""
   const color="#000000"
   const bunNo = bun.bunNo
   const bunContent=bun.surfaceForm
-  if(bold){msg.innerHTML+="<b>"}
-  msg.innerHTML += '<font size=' + rodata.textViewFontSize + '>' + bunNo + '' + talker + ' <font color=' + color + '>【</font>' + bunContent + '】</font><br><br>'
-  if(bold){msg.innerHTML+="</b>"}
+  //if(bold){msg.innerHTML+="<b>"}
+  msg.innerHTML += '<font size=' + rodata.txtViewFontSize + '>' + bunNo + '' + talker + ' <font color=' + color + '>【</font>'
+  if(isArrow){
+    msg.innerHTML +=  verbBunHtml
+  }else{
+    if(bold){
+      //console.log("bold")
+      msg.innerHTML += "<u>" + bunContent +"</u>"
+
+    }else{
+      msg.innerHTML +=  bunContent
+    }
+  }
+  msg.innerHTML += '】</font><br><br>'
+  //if(bold){msg.innerHTML+="</b>"}
 }
 
-const addButton=()=>{
+const addWatchingBun = (i,bun,isBold,verbBunHtml,isArrow) => {
 
+  if(isArrow){
+    addBun('msg'+i,bun, true,verbBunHtml,true)
+  }else{
+    addBun('msg'+i,bun, true,null,false)
+  }
 }
 
-export {viewNodeText,createTextViewArea}
+export{createTxtViewArea}
