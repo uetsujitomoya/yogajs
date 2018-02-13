@@ -1,0 +1,5 @@
+const mainOfPieChart=()=>{
+
+}
+
+export {mainOfPieChart}
