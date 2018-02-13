@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //import {ClassifyWithFirstWordDictionary} from './js/counselorEdu/wordparse1608030008.js'
 // import {AcceptKnp} from "./processKnp.js";
 //import {ClassifyWithKNP} from './js/counselorEdu/processKnp.js' // processKNP
@@ -23,6 +24,38 @@ let newWorkDictionary = csv2Arr('workUtf8.csv')
 newWorkDictionary = TransposeMatrix(newWorkDictionary)
 
 let newFriendDictionary = csv2Arr('friendUtf8.csv')
+=======
+import {classifyWithFirstWordDictionary} from './js/counselorEducation/wordparse1608030008.js'
+// import {AcceptKnp} from "./processKnp.js";
+import {ClassifyWithKNP} from './js/counselorEducation/sub/processKnp.js' // processKNP
+import {ClassifyWithWordDictionary} from './js/counselorEducation/sub/changeDictionary.js' // AcceptDictionary
+import $ from 'jquery'
+import { clearStorage } from './js/counselorEducation/sub/clearStorage'
+
+// import {wordparse2object} from "./js/wordparse2object.js"
+// import {CreateSwitchClassificationMethod} from "./switchClassificationMethod.js"; //AcceptDictionary
+// var dictionaryFromWord2Vec = csv2Array('HDFaceVertex.csv')
+// wordparse2object()
+// 以下、今までの(170809)
+
+clearStorage()
+
+let storageArrayFromKamata = csv2Array('csv/storage170421fromKamata.csv')
+console.log('storageFromKamata')
+console.log(storageArrayFromKamata)
+
+var startTime = new Date()
+
+let newLoveDictionary = csv2Array('../oldLoveDic.csv')
+newLoveDictionary = TransposeMatrix(newLoveDictionary)
+
+let newWorkDictionary = csv2Array('workUtf8.csv')
+newWorkDictionary = TransposeMatrix(newWorkDictionary)
+console.log('newWorkADictionary')
+console.log(newWorkDictionary)
+
+let newFriendDictionary = csv2Array('friendUtf8.csv')
+>>>>>>> counselorEducationForEvaluation
 newFriendDictionary = TransposeMatrix(newFriendDictionary)
 
 var keitaisokaiseki = [] // このlengthは段落数
@@ -39,9 +72,15 @@ var chboxlength, chboxlength2
 let RGB = []
 var test2
 let RGBlist = []
+<<<<<<< HEAD
 let checkboxlist = []*/
 
 /*let switchClassificationMethod = () => {
+=======
+let checkboxlist = []
+
+const switchClassificationMethod = () => {
+>>>>>>> counselorEducationForEvaluation
   const SwitchClassificationMethodRadio = document.getElementById('SwitchClassificationMethod').children
   if (SwitchClassificationMethodRadio[0].control.checked === true) {
         // 単純な単語辞書を用いた分類
@@ -54,7 +93,11 @@ let checkboxlist = []*/
                 // var result = funcReaderOnload(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
         console.log('%center ClassifyWithWordDictionary 48', 'color:red')
                 // let resultWithNewDictionary = ClassifyWithWordDictionary(name,event,keitaisokaiseki,chboxlist,chboxlist2,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,newLoveDictionary,newWorkDictionary,newFriendDictionary);
+<<<<<<< HEAD
         let result = ClassifyWithFirstWordDictionary(name, keitaisokaiseki, checkboxlist, chboxlist, chboxlist2, RGBlist, hatsugen, bun, checked, checked2, taiou, taiou2, chboxlength, chboxlength2)
+=======
+        let result = classifyWithFirstWordDictionary(name, keitaisokaiseki, checkboxlist, chboxlist, chboxlist2, RGBlist, hatsugen, bun, checked, checked2, taiou, taiou2, chboxlength, chboxlength2)
+>>>>>>> counselorEducationForEvaluation
       }
       reader.readAsText(file)
     })
@@ -67,7 +110,11 @@ let checkboxlist = []*/
     console.log('%center ClassifyWithSVM 60', 'color:red')
     ClassifyWithSVM()
   }
+<<<<<<< HEAD
 }*/
+=======
+}
+>>>>>>> counselorEducationForEvaluation
 
 /* 上部分
 
@@ -77,8 +124,15 @@ switchClassificationMethod();
 */
 
 // console.log("Before processKNP");
+<<<<<<< HEAD
 
 // let resultWithKNP = processKnp(startTime,name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,newLoveDictionary,newWorkDictionary,newFriendDictionary,RGB);
+=======
+
+// let resultWithKNP = processKnp(startTime,name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,newLoveDictionary,newWorkDictionary,newFriendDictionary,RGB);
+
+// console.log("After resultWithKNP");
+>>>>>>> counselorEducationForEvaluation
 
 // console.log("After resultWithKNP");
 /*
@@ -89,6 +143,7 @@ document.getElementById('load-button').addEventListener('click', function () {
   reader.onload = function (event) {
     // let result = funcReaderOnload(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
     let originalText = event.target.result
+<<<<<<< HEAD
     console.log('%center ClassifyWithFirstWordDictionary 85', 'color:red')
     let resultWithNewDictionary = ClassifyWithFirstWordDictionary(name, keitaisokaiseki, checkboxlist, chboxlist, chboxlist2, RGBlist, hatsugen, bun, checked, checked2, taiou, taiou2, chboxlength, chboxlength2, originalText)
   }
@@ -133,6 +188,25 @@ document.getElementById('storageSave-button').addEventListener('click', () => {
 // http://qiita.com/kenchan0130/items/11c3abab109405379ffb
 
 /*function csv2Arr (filePath) { // csvﾌｧｲﾙﾉ相対ﾊﾟｽor絶対ﾊﾟｽ
+=======
+    console.log('%center classifyWithFirstWordDictionary 85', 'color:red')
+    let resultWithNewDictionary = classifyWithFirstWordDictionary(name, keitaisokaiseki, checkboxlist, chboxlist, chboxlist2, RGBlist, hatsugen, bun, checked, checked2, taiou, taiou2, chboxlength, chboxlength2, originalText)
+  }
+  reader.readAsText(file)
+})
+
+
+
+
+/*document.getElementById('storageSave-button').addEventListener('click', () => {
+  let csv_array = storage2csv()
+    // KNPもCSVで読み込ませる
+  downloadAsCSV('storage', csv_array)
+})*/
+
+
+function csv2Array (filePath) { // csvﾌｧｲﾙﾉ相対ﾊﾟｽor絶対ﾊﾟｽ
+>>>>>>> counselorEducationForEvaluation
   var csvData = []
   var data = new XMLHttpRequest()
   data.open('GET', filePath, false) // true:非同期,false:同期
@@ -159,7 +233,11 @@ function B (a, b, c) {
 
 function TransposeMatrix (ary) {
   return ary.reduce(B, [])
+<<<<<<< HEAD
 }*/
+=======
+}
+>>>>>>> counselorEducationForEvaluation
 
 /* storageSave-button
 document.getElementById('storageSave-button').addEventListener('click', function () {
@@ -167,4 +245,79 @@ document.getElementById('storageSave-button').addEventListener('click', function
 });
  */
 
+<<<<<<< HEAD
 //export {csv2Arr, TransposeMatrix, downloadAsCSV}
+=======
+// この関数を実行するとCSVのDL画面に鳴る
+function downloadAsCSV (filename, csv_array) {
+  let filenameWithExtension = filename + '.csv'
+
+    // 配列をTAB区切り文字列に変換
+  var csv_string = ''
+  for (let i = 0; i < csv_array.length; i++) {
+    csv_string += csv_array[i].join(',')
+    csv_string += '\n'
+  }
+
+    // ファイル作成
+  let blob = new Blob([csv_string], {
+    type: 'text/csv'
+  })
+
+    // ダウンロード実行...(2)
+  if (window.navigator.msSaveOrOpenBlob) {
+        // IEの場合
+    navigator.msSaveBlob(blob, filenameWithExtension)
+  } else {
+        // IE以外(Chrome, Firefox)
+    var downloadLink = $('<a></a>')
+    downloadLink.attr('href', window.URL.createObjectURL(blob))
+    downloadLink.attr('download', filenameWithExtension)
+    downloadLink.attr('target', '_blank')
+
+    $('body').append(downloadLink)
+    downloadLink[0].click()
+    downloadLink.remove()
+  }
+}
+
+let storage2csv = () => {
+    // var storage = localStorage; //http://hakuhin.jp/js/storage.html#STORAGE_00
+
+    // ウェブストレージに対応している http://hakuhin.jp/js/storage.html#STORAGE_GET_KEYS
+    // if(window.localStorage){
+
+    // ------------------------------------------------------------
+    // キーの総数を取得する
+    // ------------------------------------------------------------
+  var num = window.localStorage.length
+
+    // ------------------------------------------------------------
+    // ストレージからすべてのキーを取得する
+    // ------------------------------------------------------------
+  var i
+  let csv_array = []
+  for (i = 0; i < num; i++) {
+    csv_array[i] = []
+
+        // 位置を指定して、ストレージからキーを取得する
+    csv_array[i][0] = window.localStorage.key(i)
+
+        // ストレージからデータを取得する
+
+    csv_array[i][1] = window.localStorage.getItem(csv_array[i][0])
+
+        // 出力テスト
+    console.log('name:' + csv_array[i][0] + ' value:' + csv_array[i][1])
+  }
+  console.log('csv_array')
+  console.log(csv_array)
+
+    // }
+
+    // CSVに記載するデータ配列
+  return csv_array
+}
+
+export {csv2Array, TransposeMatrix, downloadAsCSV}
+>>>>>>> counselorEducationForEvaluation

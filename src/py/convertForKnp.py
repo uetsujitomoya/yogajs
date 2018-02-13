@@ -3,7 +3,11 @@
 
 import codecs
 
+<<<<<<< HEAD:src/py/ConvertForKNP.py
 f = open('../../txt/xPlus1_0318.txt','r')
+=======
+f = open('../../txt/ningen_shikkaku_seiri.txt','r')
+>>>>>>> counselorEducationForEvaluation:src/py/convertForKnp.py
 #f = codecs.open('../1030noRap.txt','r','utf-8')
 Allf = f.read()
 
@@ -14,7 +18,11 @@ textKaigyo = Allf.replace('。', '。\r\n')
 
 textDeleted1 = textKaigyo.replace('。', '。\r\n')
 
+<<<<<<< HEAD:src/py/ConvertForKNP.py
 txtForWrite = open('../../txt/xPlus1_0318c.txt','w')
+=======
+txtForWrite = open('../../txt/ningen_shikkakuC.txt','w')
+>>>>>>> counselorEducationForEvaluation:src/py/convertForKnp.py
 txtForWrite.write(textKaigyo)
 
 #txtForWrite = codecs.open('../1030Rap.txt','w','shift_jis')
