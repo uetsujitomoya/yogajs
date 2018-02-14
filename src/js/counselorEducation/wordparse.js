@@ -1,38 +1,99 @@
 import 'kuromoji'
+import $ from 'jquery'
 import {select} from './select.js'
-import {setForViz} from './viz.js'
-export const makeOnClick = (c) => {
+import {setForViz} from './setForViz'
+import {slider} from 'bootstrap-slider'
+import { isEOHatsugen } from './wordparse/isEOHatsugen'
+
+let zoomVal = 3
+
+const insertStr = (str, idx, insert) => {
+  return str.slice(0, idx) + insert + str.slice(idx, str.length)
+}
+
+const readJson = (originalText, event, jsonName) => {
+  let signal = 'blue'
+
+  switch (signal) {
+    case 'red':
+      readJsonAutomatically(jsonName, originalText)
+      break
+    /*
+     case "green":
+     case "blue":
+     console.log("go!");
+     break;
+     case "yellow":
+     console.log("slow down!");
+     break; */
+    default:
+      readJsonManually(originalText, event)
+      break
+  }
+}
+
+const readJsonAutomatically = (jsonName, originalText) => {
+  $.getJSON('./json/' + jsonName + '.json', function (data) {
+    originalText = data[0].a
+  })
+}
+
+const readJsonManually = (originalTxt, e) => {
+  console.log(e)
+  originalTxt = JSON.parse(e.target.result)
+}
+
+const makeOnClick = (c) => {
   document.getElementById('b' + c).onclick = () => {
     const id = 'r' + c
     document.getElementById(id).classList.toggle('hide')
   }
 }
-export const makeOnClickS = (c) => {
+const makeOnClickS = (c) => {
   document.getElementById('bs' + c).onclick = () => {
     const id = 'rs' + c
     document.getElementById(id).classList.toggle('hide')
   }
 }
-export const funcReaderOnload = (name, event, keitaisokaiseki, checkboxlist, chboxlist, chboxlist2, RGBlist, hatsugen, bun, checked, checked2, taiou, taiou2, chboxlength, chboxlength2) => {
+
+const selectGraphShape = function (name, storage, keitaisokaiseki, chboxlist, chboxlist2, RGBlist, hatsugen, bun, checked, checked2, taiou, taiou2, chBoxLen, chBoxLen2, startTime, graph, ranshin, vResult, setForVizInputObj) {
+  console.log('%centerred selectGraphShape', 'color:red')
+
+  document.getElementById('GraphSelectButton').onclick = () => {
+    console.log('GraphSelectButton_onchange')
+    setForViz(name, storage, setForVizInputObj.wordArrayInASentence, chboxlist, chboxlist2, RGBlist, setForVizInputObj.hatsugenArray, setForVizInputObj.contentArrayOfASentence, checked, checked2, taiou, taiou2, chBoxLen, chBoxLen2, startTime, graph, ranshin, setForVizInputObj.zoom_value)
+  }// graphの形状を切り替えた際もここで再描画される
+}
+
+const classifyWithFirstWordDictionary = (name, aBunWordArr, checkboxlist, chboxlist, chboxlist2, RGBlist, hatsugenArr, aBunContentArr, ansRadioResult, checked2, taiou, taiou2, chboxlength, chboxlength2, originalText) => {
+  let jsonName = '160803dummy'
   var startTime = new Date()
   console.log(startTime)
 
-  var h, i, j, k, m, n, c, x, y, z
+  var h, hatsugenBunCnt, aBunWordCnt, k, hatsugenCnt, afterMorphologicalAnalysisWordsCnt, c, x, y, z
   var hinshi = []
-  var RGB = []
-  var tangoset = new Set()
-  var tangosett = []
+  var ansBunCategory = []
+  let ranshin = []
+  var wordSet = new Set()
+  var wordSet2 = []
   var miserables = {'nodes': [], 'links': []}
 
   checkboxlist = []
-  bun = []
+  aBunContentArr = []
 
-  var data = JSON.parse(event.target.result)
+  console.log('%c enter kuromoji 91', 'color:red')
   return kuromoji.builder({dicPath: 'dict/'}).build((err, tokenizer) => {
-    const path = tokenizer.tokenize(data[0].a)
-    n = 0
-    var tangosuu = 0
-    m = 0
+    let zoomVal = 3
+
+    let visResult
+    //console.log('%c entered kuromoji 95', 'color:red')
+    //console.log(originalText)
+    const morphologicalAnalysisWordsArr = tokenizer.tokenize(originalText)
+
+    afterMorphologicalAnalysisWordsCnt = 0
+
+    var aBunWordsQty = 0
+    hatsugenCnt = 0
     var kanjamoji = 0
     var kanjatango = 0
     var kanjabun = 0
@@ -40,173 +101,221 @@ export const funcReaderOnload = (name, event, keitaisokaiseki, checkboxlist, chb
     var serapitango = 0
     var serapibun = 0
     var soudesuka = 0
-    while (n < path.length) {
-      keitaisokaiseki[m] = []
-      bun[m] = []
-      hatsugen[m] = ''
-      hinshi[m] = []
-      RGB[m] = []
-      if (m % 2 == 0) {
-        RGBlist[m / 2] = [0, 0, 0, 0, 0, 0, 0, 0]
+    while (afterMorphologicalAnalysisWordsCnt < morphologicalAnalysisWordsArr.length) {
+      aBunWordArr[hatsugenCnt] = []
+      aBunContentArr[hatsugenCnt] = []//安易に足していいのか？
+      hatsugenArr[hatsugenCnt] = ''
+      hinshi[hatsugenCnt] = []
+      ansBunCategory[hatsugenCnt] = []
+      ranshin[hatsugenCnt] = []
+      if (hatsugenCnt % 2 === 0) {
+        RGBlist[hatsugenCnt / 2] = [0, 0, 0, 0, 0, 0, 0, 0]
       }
-      i = 0
-      tangosuu = 0
-      while (n < path.length) {
-        keitaisokaiseki[m][i] = []
-        bun[m][i] = ''
-        hinshi[m][i] = []
-        keitaisokaiseki[m][i].length = 0
-        RGB[m][i] = [0, 0, 0]
-        j = 0
-        while (n < path.length) {
-          tangosuu++
+      hatsugenBunCnt = 0
+      aBunWordsQty = 0
+      while (afterMorphologicalAnalysisWordsCnt < morphologicalAnalysisWordsArr.length) {
+        aBunWordArr[hatsugenCnt][hatsugenBunCnt] = []
+        aBunContentArr[hatsugenCnt][hatsugenBunCnt] = ''//安易に足していいのか？
+        hinshi[hatsugenCnt][hatsugenBunCnt] = []
+        aBunWordArr[hatsugenCnt][hatsugenBunCnt].length = 0
+        ansBunCategory[hatsugenCnt][hatsugenBunCnt] = [0, 0, 0]
+        ranshin[hatsugenCnt][hatsugenBunCnt] = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+        aBunWordCnt = 0
+        while (afterMorphologicalAnalysisWordsCnt < morphologicalAnalysisWordsArr.length) {
+          aBunWordsQty++
 
-          if (path[n].basic_form == '。' || path[n].basic_form == '？' || path[n].basic_form == '?' || path[n].basic_form == '：' || path[n].basic_form == ':' || path[n].word_id == '2613630' || path[n].surface_form == '･･･？：' || path[n].surface_form == ')：' ||
-					path[n].surface_form == '…' || path[n].surface_form == '……' || path[n].surface_form == '・・・' || path[n].surface_form == '･･･') {
+          if (isEOHatsugen(morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt])) {
             break
           }
-          if (m % 2 == 1) {
+          if (hatsugenCnt % 2 === 1) {
             kanjatango++
-            kanjamoji = kanjamoji + path[n].surface_form.length
-            if (path[n].basic_form == '母' || path[n].basic_form == '主人' || path[n].basic_form == '父さん' || path[n].basic_form == 'ご主人' || path[n].basic_form == 'お父さん' || path[n].basic_form == '姉' || path[n].basic_form == '姉さん' || path[n].basic_form == '母親' ||
-						path[n].basic_form == 'お姉さん' || path[n].basic_form == '父' || path[n].basic_form == '家族') {
-              RGB[m][i][0] = 1
+            kanjamoji = kanjamoji + morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].surface_form.length
+            if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '母' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '主人' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '父さん' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'ご主人' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'お父さん' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '姉' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '姉さん' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '母親' ||
+              morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'お姉さん' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '父' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '家族') {
+              ansBunCategory[hatsugenCnt][hatsugenBunCnt][0] = 1
             }
-            if (path[n].basic_form == '兄' || path[n].basic_form == '子' || path[n].basic_form == '子ども' || path[n].basic_form == '妹' || path[n].basic_form == '弟') {
-              RGB[m][i][0] = 1
+            if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '兄' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '子' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '子ども' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '妹' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '弟') {
+              ansBunCategory[hatsugenCnt][hatsugenBunCnt][0] = 1
             }
-            if (path[n].basic_form == '両親' || path[n].basic_form == 'お母様' || path[n].basic_form == 'お父様') {
-              RGB[m][i][0] = 1
+            if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '両親' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'お母様' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'お父様') {
+              ansBunCategory[hatsugenCnt][hatsugenBunCnt][0] = 1
             }
-            if (path[n].basic_form == '仕事' || path[n].basic_form == '休み' || path[n].basic_form == 'アルバイト' || path[n].basic_form == '働く' || path[n].basic_form == '同僚' || path[n].basic_form == '職場' || path[n].basic_form == '上司' || path[n].basic_form == '部下') {
-              RGB[m][i][2] = 1
+            if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '仕事' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '休み' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'アルバイト' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '働く' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '同僚' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '職場' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '上司' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '部下') {
+              ansBunCategory[hatsugenCnt][hatsugenBunCnt][2] = 1
             }
-            if (path[n].basic_form == '友人' || path[n].basic_form == '親友' || path[n].basic_form == '友達' || path[n].basic_form == '友' || path[n].basic_form == '交友' || path[n].basic_form == '友好') {
-              RGB[m][i][1] = 1
+            if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '友人' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '親友' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '友達' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '友' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '交友' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '友好') {
+              ansBunCategory[hatsugenCnt][hatsugenBunCnt][1] = 1
             }
-          } else if (m % 2 == 0) {
+
+            if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '病' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '病気' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'ストレス' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '不調' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '過食' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '嘔吐' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '過食嘔吐') {
+              ranshin[hatsugenCnt][hatsugenBunCnt][0] = 1
+            }
+            if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '無気力' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '気力' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'やる気') {
+              ranshin[hatsugenCnt][hatsugenBunCnt][1] = 1
+            }
+            if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '疑い' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '疑う' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '疑心暗鬼' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '疑心') {
+              ranshin[hatsugenCnt][hatsugenBunCnt][2] = 1
+            }
+            if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '注意' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '不注意' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '注意散漫' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '無自覚' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '自覚') {
+              ranshin[hatsugenCnt][hatsugenBunCnt][3] = 1
+            }
+            if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '引き延ばし' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '引き延ばす' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '怠慢' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '怠惰') {
+              ranshin[hatsugenCnt][hatsugenBunCnt][4] = 1
+            }
+            if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '渇望' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '切望' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '欲しい') {
+              ranshin[hatsugenCnt][hatsugenBunCnt][5] = 1
+            }
+            if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '妄想' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '空想' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '想い' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'ふける') {
+              ranshin[hatsugenCnt][hatsugenBunCnt][6] = 1
+            }
+            if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '抜け出す' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '打破' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '勝つ' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '戦う') {
+              ranshin[hatsugenCnt][hatsugenBunCnt][7] = 1
+            }
+            if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '不安定' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '安定' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '落ち着く') {
+              ranshin[hatsugenCnt][hatsugenBunCnt][8] = 1
+            }
+          } else if (hatsugenCnt % 2 === 0) {
             serapitango++
-            serapimoji = serapimoji + path[n].surface_form.length
-            if (path[n].surface_form == 'そう' && path[n + 1].surface_form == 'です' && path[n + 2].surface_form == 'か') {
+            serapimoji = serapimoji + morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].surface_form.length
+            if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].surface_form === 'そう' && morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt + 1].surface_form === 'です' && morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt + 2].surface_form === 'か') {
               soudesuka++
             }
-            if (path[n].surface_form == '何' && path[n + 1].surface_form == 'か') {
+            if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].surface_form === '何' && morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt + 1].surface_form === 'か') {
 
-            } else if (path[n].basic_form == 'いかが' || path[n].basic_form == 'なんで' || path[n].basic_form == 'どうして' || path[n].basic_form == 'どの' || path[n].basic_form == 'どのように' || path[n].basic_form == 'いつ' || path[n].basic_form == 'どういう' || path[n].basic_form == 'どなた' || path[n].basic_form == 'どう' || path[n].surface_form == '何' || path[n].basic_form == '誰' || path[n].basic_form == 'どんな' || path[n].basic_form == 'どのような' || path[n].basic_form == 'どこ') {
-              RGBlist[m / 2][3] = 1
-            } else if (path[n].surface_form == 'か' && path[n].pos == '助詞') {
-              RGBlist[m / 2][4] = 1
-            } else if (path[n].surface_form == 'ね' && path[n].pos == '助詞') {
-              RGBlist[m / 2][6] = 1
+            } else if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'いかが' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'なんで' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'どうして' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'どの' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'どのように' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'いつ' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'どういう' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'どなた' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'どう' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].surface_form === '何' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '誰' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'どんな' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'どのような' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'どこ') {
+              RGBlist[hatsugenCnt / 2][3] = 1
+            } else if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].surface_form === 'か' && morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].pos === '助詞') {
+              RGBlist[hatsugenCnt / 2][4] = 1
+            } else if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].surface_form === 'ね' && morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].pos === '助詞') {
+              RGBlist[hatsugenCnt / 2][6] = 1
             }
           }
-          bun[m][i] += path[n].surface_form
-          if (path[n].pos_detail_1 == '接尾' || path[n].basic_form == '*' || path[n].pos == '助詞' || path[n].basic_form == '、' || path[n].pos == '記号' || path[n].pos == '助動詞' || path[n].pos == '感動詞' || path[n].pos == '接頭詞' || path[n].pos_detail_1 == '非自立' ||
-					path[n].basic_form == 'する' || path[n].basic_form == 'いる' || path[n].basic_form == 'こういう' || path[n].basic_form == 'そういう' || path[n].basic_form == 'こう' || path[n].basic_form == 'する' || path[n].basic_form == 'こうした' || path[n].basic_form == 'いう' || path[n].basic_form == 'する' ||
-					path[n].basic_form == 'なる' || path[n].basic_form == 'その' || path[n].basic_form == 'あの' || path[n].pos_detail_1 == '数' || path[n].basic_form == 'そう' || path[n].basic_form == '気持ち' || path[n].basic_form == '思い' || path[n].basic_form == '思う' || path[n].basic_form == 'ある') {
-            n++
+          aBunContentArr[hatsugenCnt][hatsugenBunCnt] += morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].surface_form
+          if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].pos_detail_1 === '接尾' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '*' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].pos === '助詞' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '、' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].pos === '記号' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].pos === '助動詞' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].pos === '感動詞' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].pos === '接頭詞' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].pos_detail_1 === '非自立' ||
+            morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'する' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'いる' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'こういう' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'そういう' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'こう' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'する' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'こうした' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'いう' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'する' ||
+            morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'なる' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'その' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'あの' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].pos_detail_1 === '数' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'そう' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '気持ち' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '思い' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '思う' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'ある') {
+            afterMorphologicalAnalysisWordsCnt++
             continue
           }
-          keitaisokaiseki[m][i][j] = path[n].basic_form
-          n++
-          j++
+          aBunWordArr[hatsugenCnt][hatsugenBunCnt][aBunWordCnt] = morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form
+          afterMorphologicalAnalysisWordsCnt++
+          aBunWordCnt++
         }
-        if (m % 2 == 1) {
+        if (hatsugenCnt % 2 === 1) {
           kanjabun++
         } else {
           serapibun++
         }
-        if (bun[m][i] == 'Ａ' || bun[m][i] == 'Ｂ' || bun[m][i] == 'Ｔ' || bun[m][i] == 'A' || bun[m][i] == 'B' || bun[m][i] == 'T') {
-          bun[m][i] = ''
+        if (aBunContentArr[hatsugenCnt][hatsugenBunCnt] === 'Ａ' || aBunContentArr[hatsugenCnt][hatsugenBunCnt] === 'Ｂ' || aBunContentArr[hatsugenCnt][hatsugenBunCnt] === 'Ｔ' || aBunContentArr[hatsugenCnt][hatsugenBunCnt] === 'A' || aBunContentArr[hatsugenCnt][hatsugenBunCnt] === 'B' || aBunContentArr[hatsugenCnt][hatsugenBunCnt] === 'T') {
+          aBunContentArr[hatsugenCnt][hatsugenBunCnt] = ''
           continue
         }
-        if (bun[m][i] != 'Ａ' && bun[m][i] != 'Ｂ' && bun[m][i] != 'Ｔ' && bun[m][i] != 'A' && bun[m][i] != 'B' && bun[m][i] != 'T' && bun[m][i] != '') {
-          hatsugen[m] += bun[m][i]
-          hatsugen[m] += '。'
+        if (aBunContentArr[hatsugenCnt][hatsugenBunCnt] !== 'Ａ' && aBunContentArr[hatsugenCnt][hatsugenBunCnt] !== 'Ｂ' && aBunContentArr[hatsugenCnt][hatsugenBunCnt] !== 'Ｔ' && aBunContentArr[hatsugenCnt][hatsugenBunCnt] !== 'A' && aBunContentArr[hatsugenCnt][hatsugenBunCnt] !== 'B' && aBunContentArr[hatsugenCnt][hatsugenBunCnt] !== 'T' && aBunContentArr[hatsugenCnt][hatsugenBunCnt] !== '') {
+          hatsugenArr[hatsugenCnt] += aBunContentArr[hatsugenCnt][hatsugenBunCnt]
+          hatsugenArr[hatsugenCnt] += '。'
         }
-        if (n == path.length) {
-          if (m % 2 == 0) {
-            if (i <= 2 && tangosuu <= 7) {
-              RGBlist[m / 2][5] = 1
+        if (afterMorphologicalAnalysisWordsCnt === morphologicalAnalysisWordsArr.length) {
+          if (hatsugenCnt % 2 === 0) {
+            if (hatsugenBunCnt <= 2 && aBunWordsQty <= 7) {
+              RGBlist[hatsugenCnt / 2][5] = 1
             }
           }
+          deleteEmptyString(aBunContentArr[hatsugenCnt],hatsugenBunCnt)
+          console.log(aBunContentArr[hatsugenCnt])
           break
         }
-        if (path[n].word_id == '2613630' || path[n].basic_form == '：' || path[n].basic_form == ':' || path[n].surface_form == '･･･？：' || path[n].surface_form == ')：') {
-          if (m % 2 == 0) {
-            if (i <= 2 && tangosuu <= 7) {
-              RGBlist[m / 2][5] = 1
+        if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].word_id === '2613630' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '：' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === ':' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].surface_form === '･･･？：' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].surface_form === ')：' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].surface_form.indexOf('〈') !== -1 || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].surface_form.indexOf('〉') !== -1) {
+          if (hatsugenCnt % 2 === 0) {
+            if (hatsugenBunCnt <= 2 && aBunWordsQty <= 7) {
+              RGBlist[hatsugenCnt / 2][5] = 1
             }
           }
-          n++
+          afterMorphologicalAnalysisWordsCnt++
+
+          // n++;
+          deleteEmptyString(aBunContentArr[hatsugenCnt],hatsugenBunCnt)
+          console.log(aBunContentArr[hatsugenCnt])
+
           break
         }
-        n++
-        i++
+        afterMorphologicalAnalysisWordsCnt++
+
+        //空白文字列を防ぐ
+
+        if(aBunContentArr[hatsugenCnt][hatsugenBunCnt]===""){
+          aBunContentArr[hatsugenCnt].pop()
+        }else{
+          hatsugenBunCnt++
+        }
+
       }
-      m++
+/*      //最初の空白を防ぐ
+      if(aBunContentArr[hatsugenCnt][0]===""){
+        aBunContentArr[hatsugenCnt].shift()
+      }*/
+      hatsugenCnt++
     }
-		// console.log("%d 来談者文 %d 単語 %d 文字 %d 治療者文 %d 単語 %d 文字 %d",m,kanjabun,kanjatango,kanjamoji,serapibun,serapitango,serapimoji);
-		// console.log("そうですか %d",soudesuka);
-		// var uetsuji="うえつじともや";
-		// console.log(uetsuji.length);
+    // console.log("%d 来談者文 %d 単語 %d 文字 %d 治療者文 %d 単語 %d 文字 %d",m,kanjabun,kanjatango,kanjamoji,serapibun,serapitango,serapimoji);
+    // console.log("そうですか %d",soudesuka);
+    // var uetsuji="うえつじともや";
+    // console.log(uetsuji.length);
 
     var tango = []
     x = 0
-    for (m = 0; m < keitaisokaiseki.length; ++m) {
-      for (i = 0; i < keitaisokaiseki[m].length; ++i) {
-        for (j = 0; j < keitaisokaiseki[m][i].length; ++j) {
-          tango[x] = keitaisokaiseki[m][i][j]
+    for (let hatsugenCnt = 0; hatsugenCnt < aBunWordArr.length; ++hatsugenCnt) {
+      for (let hatsugenBunCnt = 0; hatsugenBunCnt < aBunWordArr[hatsugenCnt].length; ++hatsugenBunCnt) {
+        for (let aBunWordCnt = 0; aBunWordCnt < aBunWordArr[hatsugenCnt][hatsugenBunCnt].length; ++aBunWordCnt) {
+          tango[x] = aBunWordArr[hatsugenCnt][hatsugenBunCnt][aBunWordCnt]
           x++
         }
       }
     }
     x = 0
-    for (m = 0; m < keitaisokaiseki.length; ++m) {
-      for (i = 0; i < keitaisokaiseki[m].length; ++i) {
-        for (j = 0; j < keitaisokaiseki[m][i].length; ++j) {
+    for (let hatsugenCnt = 0; hatsugenCnt < aBunWordArr.length; ++hatsugenCnt) {
+      for (let hatsugenBunCnt = 0; hatsugenBunCnt < aBunWordArr[hatsugenCnt].length; ++hatsugenBunCnt) {
+        for (let aBunWordCnt = 0; aBunWordCnt < aBunWordArr[hatsugenCnt][hatsugenBunCnt].length; ++aBunWordCnt) {
           y = 0
           if (x > 0) {
             for (z = 0; z < x; z++) {
-              if (tango[z] == keitaisokaiseki[m][i][j]) {
+              if (tango[z] === aBunWordArr[hatsugenCnt][hatsugenBunCnt][aBunWordCnt]) {
                 y = 1
                 break
               }
             }
           }
           x++
-          if (y == 1) {
+          if (y === 1) {
             continue// 次のjへ
           }
-          tangoset.add(keitaisokaiseki[m][i][j])// tangoset終了
+          wordSet.add(aBunWordArr[hatsugenCnt][hatsugenBunCnt][aBunWordCnt])// tangoset終了
         }
       }
     }
-    tangosett = Array.from(tangoset).map(function (t) { return {t} })
+    wordSet2 = Array.from(wordSet).map(function (t) { return {t} })
 
-    for (i = 0; i < tangosett.length; i++) {
-      miserables.nodes[i] = tangosett[i].t
+    for (hatsugenBunCnt = 0; hatsugenBunCnt < wordSet2.length; hatsugenBunCnt++) {
+      miserables.nodes[hatsugenBunCnt] = wordSet2[hatsugenBunCnt].t
     }
     var RGBk = []
     for (h = 0; h <= 2; h++) {
       RGBk[h] = []
       for (k = 0; k < miserables.nodes.length; k++) {
         RGBk[h][k] = 0
-        for (m = 1; m < keitaisokaiseki.length; m = m + 2) {
-          for (i = 0; i < keitaisokaiseki[m].length; i++) {
-            if (RGB[m][i][h] == 1) {
-              for (j = 0; j < keitaisokaiseki[m][i].length; j++) {
-                if (miserables.nodes[k] == keitaisokaiseki[m][i][j]) {
+        for (hatsugenCnt = 1; hatsugenCnt < aBunWordArr.length; hatsugenCnt = hatsugenCnt + 2) {
+          for (hatsugenBunCnt = 0; hatsugenBunCnt < aBunWordArr[hatsugenCnt].length; hatsugenBunCnt++) {
+            if (ansBunCategory[hatsugenCnt][hatsugenBunCnt][h] === 1) {
+              for (aBunWordCnt = 0; aBunWordCnt < aBunWordArr[hatsugenCnt][hatsugenBunCnt].length; aBunWordCnt++) {
+                if (miserables.nodes[k] === aBunWordArr[hatsugenCnt][hatsugenBunCnt][aBunWordCnt]) {
                   RGBk[h][k] = 1
                   break
                 }
               }
             }
-            if (RGBk[h][k] == 1) {
+            if (RGBk[h][k] === 1) {
               break
             }
           }
-          if (RGBk[h][k] == 1) {
+          if (RGBk[h][k] === 1) {
             break
           }
         }
@@ -215,13 +324,13 @@ export const funcReaderOnload = (name, event, keitaisokaiseki, checkboxlist, chb
 
     for (h = 0; h <= 2; h++) {
       for (k = 0; k < miserables.nodes.length; k++) {
-        if (RGBk[h][k] == 1) {
-          for (m = 1; m < keitaisokaiseki.length; m = m + 2) {
-            for (i = 0; i < keitaisokaiseki[m].length; i++) {
-              if (RGB[m][i][h] == 0) {
-                for (j = 0; j < keitaisokaiseki[m][i].length; j++) {
-                  if (miserables.nodes[k] == keitaisokaiseki[m][i][j]) {
-                    RGB[m][i][h] = 1
+        if (RGBk[h][k] === 1) {
+          for (hatsugenCnt = 1; hatsugenCnt < aBunWordArr.length; hatsugenCnt = hatsugenCnt + 2) {
+            for (hatsugenBunCnt = 0; hatsugenBunCnt < aBunWordArr[hatsugenCnt].length; hatsugenBunCnt++) {
+              if (ansBunCategory[hatsugenCnt][hatsugenBunCnt][h] === 0) {
+                for (aBunWordCnt = 0; aBunWordCnt < aBunWordArr[hatsugenCnt][hatsugenBunCnt].length; aBunWordCnt++) {
+                  if (miserables.nodes[k] === aBunWordArr[hatsugenCnt][hatsugenBunCnt][aBunWordCnt]) {
+                    ansBunCategory[hatsugenCnt][hatsugenBunCnt][h] = 1
                     break
                   }
                 }
@@ -236,48 +345,96 @@ export const funcReaderOnload = (name, event, keitaisokaiseki, checkboxlist, chb
 
     var graph
 
-    var sResult = select(name, storage, checkboxlist, keitaisokaiseki, miserables, chboxlist, chboxlist2, RGB, RGBlist, hatsugen, bun, checked, checked2, taiou, taiou2, chboxlength, chboxlength2)
+    console.log("bun")
+    console.log(aBunContentArr)
+
+    var sResult = select(name, storage, checkboxlist, aBunWordArr, miserables, chboxlist, chboxlist2, ansBunCategory, RGBlist, hatsugenArr, aBunContentArr, ansRadioResult, checked2, taiou, taiou2, chboxlength, chboxlength2)
 
     checkboxlist = sResult.checkboxlist
     chboxlist = sResult.chboxlist
     chboxlist2 = sResult.chboxlist2
-    RGB = sResult.RGB
+    ansBunCategory = sResult.RGB
     RGBlist = sResult.RGBlist
-    checked = sResult.checked
+    ansRadioResult = sResult.checked
     checked2 = sResult.checked2
     taiou = sResult.taiou
     taiou2 = sResult.taiou2
     chboxlength = sResult.chboxlength
     chboxlength2 = sResult.chboxlength2
-		// graph = sResult.graph;
-		// console.log("chboxlength2=%d",chboxlength2)
+    console.log(chboxlength2)
+    var answerNumbermax = sResult.answerNumbermax
+    var questionNumbermax = sResult.questionNumbermax
 
-    var vResult = setForViz(name, storage, keitaisokaiseki, chboxlist, chboxlist2, RGBlist, hatsugen, bun, checked, checked2, taiou, taiou2, chboxlength, chboxlength2, startTime, graph)// 形態素解析後に1度目の描画
-    chboxlist = vResult.chboxlist
-    chboxlist2 = vResult.chboxlist2
-    RGBlist = vResult.RGBlist
-    checked = vResult.checked
-    checked2 = vResult.checked2
-    chboxlength = vResult.chboxlength
-    chboxlength2 = vResult.chboxlength2
+    // graph = sResult.graph;
+    // console.log("chboxlength2=%d",chboxlength2)
 
-		// 以下は後ろじゃなきゃアカン
-    for (c = 1; c <= chboxlength; c++) {
+    let setForVizInput = {
+      name: name,
+      storage: storage,
+      wordArrayInASentence: aBunWordArr,
+      chboxlist: chboxlist,
+      chboxlist2: chboxlist2,
+      RGBlist: RGBlist,
+      hatsugenArray: hatsugenArr,
+      contentArrayOfASentence: aBunContentArr,
+      checked: ansRadioResult,
+      checked2: checked2,
+      taiou: taiou,
+      taiou2: taiou2,
+      chboxlength: chboxlength,
+      chboxlength2: chboxlength2,
+      startTime: startTime,
+      graph: graph,
+      ranshin: ranshin,
+      zoom_value: zoomVal
+    }
+
+    setForViz(name, storage, aBunWordArr, chboxlist, chboxlist2, RGBlist, hatsugenArr, aBunContentArr, ansRadioResult, checked2, taiou, taiou2, chboxlength, chboxlength2, startTime, graph, ranshin, zoomVal)
+
+    // 以下は後ろじゃなきゃアカン
+    for (let c = 1; c <= chboxlength; c++) {
       makeOnClick(c)
     }
-    console.log('chboxlength2=%d', chboxlength2)
-    for (c = 1; c <= chboxlength2; c++) {
+    for (let c = 1; c <= chboxlength2; c++) {
       makeOnClickS(c)
     }
 
-    document.getElementById('radio_buttons').onchange = () => {
-      setForViz(name, storage, keitaisokaiseki, chboxlist, chboxlist2, RGBlist, hatsugen, bun, checked, checked2, taiou, taiou2, chboxlength, chboxlength2, startTime, graph)
-    }// graphの形状を切り替えた際もここで再描画される
+    //selectGraphShape(name, storage, aBunWordArr, chboxlist, chboxlist2, RGBlist, hatsugenArr, aBunContentArr, ansRadioResult, checked2, taiou, taiou2, chboxlength, chboxlength2, startTime, graph, ranshin, visResult, setForVizInput)
 
-		// graphのラジオボタン変わったらまた描画
+    // graphの形状を切り替えた際もここで再描画される
+
+    document.getElementById('radio_buttons').onchange = () => {
+      setForViz(name, storage, aBunWordArr, chboxlist, chboxlist2, RGBlist, hatsugenArr, aBunContentArr, ansRadioResult, checked2, taiou, taiou2, chboxlength, chboxlength2, startTime, graph, ranshin, zoomVal)
+    }
+
+    // スライダー
+    $('#slider1').slider()
+    $('#slider1').on('slide', function (slideEvt) {
+      $('#SliderVal').text(slideEvt.value)
+      zoomVal = slideEvt.value
+      setForViz(name, storage, aBunWordArr, chboxlist, chboxlist2, RGBlist, hatsugenArr, aBunContentArr, ansRadioResult, checked2, taiou, taiou2, chboxlength, chboxlength2, startTime, graph, ranshin, zoomVal)
+    })
 
     return {
-      name: name, RGBlist: RGBlist, keitaisokaiseki: keitaisokaiseki, hatsugen: hatsugen, bun: bun, chboxlist: chboxlist, chboxlist2: chboxlist2, checked: checked, checked2: checked2, taiou: taiou, taiou2: taiou2, chboxlength: chboxlength, chboxlength2: chboxlength2
+      name: name, RGBlist: RGBlist, keitaisokaiseki: aBunWordArr, hatsugen: hatsugenArr, bun: aBunContentArr, chboxlist: chboxlist, chboxlist2: chboxlist2, checked: ansRadioResult, checked2: checked2, taiou: taiou, taiou2: taiou2, chboxlength: chboxlength, chboxlength2: chboxlength2
     }
   })
 }
+
+const isLoveWord = (query) => {
+  if (loveDictionaryArray.indexOf(query)) {
+    return true
+  }
+  return false
+}
+
+const deleteEmptyString = (arr,hatsugenBunCnt) => {
+/*  if(arr[hatsugenBunCnt]===""){
+    arr.pop()
+  }*/
+  if(arr[arr.length-1]===""){
+    arr.pop()
+  }
+}
+
+export {classifyWithFirstWordDictionary}

@@ -1,5 +1,5 @@
 
-//import {ClassifyWithFirstWordDictionary} from './js/counselorEdu/wordparse1608030008.js'
+import {classifyWithFirstWordDictionary} from './js/counselorEducation/wordparse'
 // import {AcceptKnp} from "./processKnp.js";
 //import {ClassifyWithKNP} from './js/counselorEdu/processKnp.js' // processKNP
 //import {ClassifyWithWordDictionary} from './js/counselorEdu/changeDictionary.js' // AcceptDictionary
@@ -13,22 +13,22 @@ createCharaChart()
 
 // 以下、今までの(170809)
 
-/*let storageArrayFromKamata = csv2Arr('csv/storage170421fromKamata.csv')
+//let storageArrayFromKamata = csv2Arr('csv/storage170421fromKamata.csv')
 
 //var startTime = new Date()
-
+/*
 let newLoveDictionary = csv2Arr('../oldLoveDic.csv')
 newLoveDictionary = TransposeMatrix(newLoveDictionary)
 
 let newWorkDictionary = csv2Arr('workUtf8.csv')
 newWorkDictionary = TransposeMatrix(newWorkDictionary)
 
-let newFriendDictionary = csv2Arr('friendUtf8.csv')
-=======
-import {classifyWithFirstWordDictionary} from './js/counselorEducation/wordparse1608030008.js'
+let newFriendDictionary = csv2Arr('friendUtf8.csv')*/
+
+import {classifyWithFirstWordDictionary} from './js/counselorEducation/wordparse.js'
 // import {AcceptKnp} from "./processKnp.js";
-import {ClassifyWithKNP} from './js/counselorEducation/sub/processKnp.js' // processKNP
-import {ClassifyWithWordDictionary} from './js/counselorEducation/sub/changeDictionary.js' // AcceptDictionary
+/*import {ClassifyWithKNP} from './js/counselorEducation/sub/processKnp.js' // processKNP
+import {ClassifyWithWordDictionary} from './js/counselorEducation/sub/changeDictionary.js' // AcceptDictionary*/
 import $ from 'jquery'
 import { clearStorage } from './js/counselorEducation/sub/clearStorage'
 
@@ -55,7 +55,7 @@ console.log('newWorkADictionary')
 console.log(newWorkDictionary)
 
 let newFriendDictionary = csv2Array('friendUtf8.csv')
->>>>>>> counselorEducationForEvaluation
+
 newFriendDictionary = TransposeMatrix(newFriendDictionary)
 
 var keitaisokaiseki = [] // このlengthは段落数
@@ -72,15 +72,15 @@ var chboxlength, chboxlength2
 let RGB = []
 var test2
 let RGBlist = []
-<<<<<<< HEAD
-let checkboxlist = []*/
+
+let checkboxlist = []
 
 /*let switchClassificationMethod = () => {
-=======
+
 let checkboxlist = []
 
 const switchClassificationMethod = () => {
->>>>>>> counselorEducationForEvaluation
+
   const SwitchClassificationMethodRadio = document.getElementById('SwitchClassificationMethod').children
   if (SwitchClassificationMethodRadio[0].control.checked === true) {
         // 単純な単語辞書を用いた分類
@@ -93,11 +93,9 @@ const switchClassificationMethod = () => {
                 // var result = funcReaderOnload(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
         console.log('%center ClassifyWithWordDictionary 48', 'color:red')
                 // let resultWithNewDictionary = ClassifyWithWordDictionary(name,event,keitaisokaiseki,chboxlist,chboxlist2,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,newLoveDictionary,newWorkDictionary,newFriendDictionary);
-<<<<<<< HEAD
+
         let result = ClassifyWithFirstWordDictionary(name, keitaisokaiseki, checkboxlist, chboxlist, chboxlist2, RGBlist, hatsugen, bun, checked, checked2, taiou, taiou2, chboxlength, chboxlength2)
-=======
-        let result = classifyWithFirstWordDictionary(name, keitaisokaiseki, checkboxlist, chboxlist, chboxlist2, RGBlist, hatsugen, bun, checked, checked2, taiou, taiou2, chboxlength, chboxlength2)
->>>>>>> counselorEducationForEvaluation
+
       }
       reader.readAsText(file)
     })
@@ -110,7 +108,7 @@ const switchClassificationMethod = () => {
     console.log('%center ClassifyWithSVM 60', 'color:red')
     ClassifyWithSVM()
   }
-<<<<<<< HEAD
+
 }*/
 
 
@@ -132,7 +130,7 @@ switchClassificationMethod();
 
 
 // console.log("After resultWithKNP");
-/*
+
 document.getElementById('load-button').addEventListener('click', function () {
   var file = document.getElementById('file-input').files[0]
   var name = file.name
@@ -140,12 +138,12 @@ document.getElementById('load-button').addEventListener('click', function () {
   reader.onload = function (event) {
     // let result = funcReaderOnload(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
     let originalText = event.target.result
-<<<<<<< HEAD
+
     console.log('%center ClassifyWithFirstWordDictionary 85', 'color:red')
-    let resultWithNewDictionary = ClassifyWithFirstWordDictionary(name, keitaisokaiseki, checkboxlist, chboxlist, chboxlist2, RGBlist, hatsugen, bun, checked, checked2, taiou, taiou2, chboxlength, chboxlength2, originalText)
+    let resultWithNewDictionary = classifyWithFirstWordDictionary(name, keitaisokaiseki, checkboxlist, chboxlist, chboxlist2, RGBlist, hatsugen, bun, checked, checked2, taiou, taiou2, chboxlength, chboxlength2, originalText)
   }
   reader.readAsText(file)
-})*/
+})
 
   /* 170410knpLoadButton
 
@@ -185,7 +183,7 @@ document.getElementById('storageSave-button').addEventListener('click', () => {
 // http://qiita.com/kenchan0130/items/11c3abab109405379ffb
 
 /*function csv2Arr (filePath) { // csvﾌｧｲﾙﾉ相対ﾊﾟｽor絶対ﾊﾟｽ
-=======
+
     console.log('%center classifyWithFirstWordDictionary 85', 'color:red')
     let resultWithNewDictionary = classifyWithFirstWordDictionary(name, keitaisokaiseki, checkboxlist, chboxlist, chboxlist2, RGBlist, hatsugen, bun, checked, checked2, taiou, taiou2, chboxlength, chboxlength2, originalText)
   }
