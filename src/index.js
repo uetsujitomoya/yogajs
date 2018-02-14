@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 //import {ClassifyWithFirstWordDictionary} from './js/counselorEdu/wordparse1608030008.js'
 // import {AcceptKnp} from "./processKnp.js";
 //import {ClassifyWithKNP} from './js/counselorEdu/processKnp.js' // processKNP
@@ -112,9 +112,9 @@ const switchClassificationMethod = () => {
   }
 <<<<<<< HEAD
 }*/
-=======
-}
->>>>>>> counselorEducationForEvaluation
+
+
+
 
 /* 上部分
 
@@ -124,15 +124,12 @@ switchClassificationMethod();
 */
 
 // console.log("Before processKNP");
-<<<<<<< HEAD
 
-// let resultWithKNP = processKnp(startTime,name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,newLoveDictionary,newWorkDictionary,newFriendDictionary,RGB);
-=======
 
 // let resultWithKNP = processKnp(startTime,name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,newLoveDictionary,newWorkDictionary,newFriendDictionary,RGB);
 
 // console.log("After resultWithKNP");
->>>>>>> counselorEducationForEvaluation
+
 
 // console.log("After resultWithKNP");
 /*
@@ -206,7 +203,7 @@ document.getElementById('storageSave-button').addEventListener('click', () => {
 
 
 function csv2Array (filePath) { // csvﾌｧｲﾙﾉ相対ﾊﾟｽor絶対ﾊﾟｽ
->>>>>>> counselorEducationForEvaluation
+
   var csvData = []
   var data = new XMLHttpRequest()
   data.open('GET', filePath, false) // true:非同期,false:同期
@@ -231,13 +228,9 @@ function B (a, b, c) {
   return b.reduce(C, a)
 }
 
-function TransposeMatrix (ary) {
-  return ary.reduce(B, [])
-<<<<<<< HEAD
-}*/
-=======
-}
->>>>>>> counselorEducationForEvaluation
+function TransposeMatrix (ary) {return ary.reduce(B, [])}
+
+
 
 /* storageSave-button
 document.getElementById('storageSave-button').addEventListener('click', function () {
@@ -245,9 +238,9 @@ document.getElementById('storageSave-button').addEventListener('click', function
 });
  */
 
-<<<<<<< HEAD
+
 //export {csv2Arr, TransposeMatrix, downloadAsCSV}
-=======
+
 // この関数を実行するとCSVのDL画面に鳴る
 function downloadAsCSV (filename, csv_array) {
   let filenameWithExtension = filename + '.csv'
@@ -320,4 +313,4 @@ let storage2csv = () => {
 }
 
 export {csv2Array, TransposeMatrix, downloadAsCSV}
->>>>>>> counselorEducationForEvaluation
+
