@@ -5,7 +5,7 @@
 //import {ClassifyWithWordDictionary} from './js/counselorEdu/changeDictionary.js' // AcceptDictionary
 //import $ from 'jquery'
 //import {wordparse2object} from './js/counselorEdu/wordparse2object.js'
-import { createCharaChart } from './js/charaChart/createCharaChart'
+import { createCharaChart } from './js/charaChart/main'
 // import {CreateSwitchClassificationMethod} from "./SwitchClassificationMethod.js"; //AcceptDictionary
 // var dictionaryFromWord2Vec = csv2Arr('HDFaceVertex.csv');
 

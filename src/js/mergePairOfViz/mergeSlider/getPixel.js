@@ -1,0 +1,5 @@
+const getPixel=()=>{
+
+}
+
+export {getPixel}
