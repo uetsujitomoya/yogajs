@@ -21,7 +21,7 @@ import {applySlider} from './slider'
 let nodeArr = []
 let verbArr = []
 
-const createCharaChart = () => {
+const mainOfCharaChart = () => {
   const knp = csv2Arr(rodata.knpCsvFolder+rodata.knpCsvName+".csv")
   //console.log(knp)
   let nodeArr=[]
@@ -44,17 +44,5 @@ const createCharaChart = () => {
   manageSlider(bunArr,nodeArr)
 }
 
-const findDependency = () => {
-  find_subject()
-  find_object()
-}
 
-let find_subject = () => {
-
-}
-
-let find_object = () => {
-
-}
-
-export {createCharaChart}
+export {mainOfCharaChart}

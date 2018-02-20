@@ -10,24 +10,24 @@ const bunArr2CsvArr=(bunArr)=>{
   //kanshaKoken
 
   let csvArr=[]
-/*  csvArr.push([UnescapeSJIS(encodeURI('文')),'動詞','主語','目的語','「悪いアイツかわいそうな私」なら1'])
-  for(const bun of bunArr){
+  /*  csvArr.push([UnescapeSJIS(encodeURI('文')),'動詞','主語','目的語','「悪いアイツかわいそうな私」なら1'])
+    for(const bun of bunArr){
 
-    if(typeof bun.verbArr !== 'undefined'){
-      for(const verb of bun.verbArr){
-        //console.log(verb.subject)
+      if(typeof bun.verbArr !== 'undefined'){
+        for(const verb of bun.verbArr){
+          //console.log(verb.subject)
 
-        //subject不在。object不在の場合の処理
-        csvArr.push([
-          EscapeSJIS(bun.surfaceForm),
-          EscapeSJIS(verb.surfaceForm),
-          EscapeSJIS(verb.subject.name),
-          EscapeSJIS(verb.object.name),
-          0
-        ])
+          //subject不在。object不在の場合の処理
+          csvArr.push([
+            EscapeSJIS(bun.surfaceForm),
+            EscapeSJIS(verb.surfaceForm),
+            EscapeSJIS(verb.subject.name),
+            EscapeSJIS(verb.object.name),
+            0
+          ])
+        }
       }
-    }
-  }*/
+    }*/
 
   csvArr.push(['文','動詞','主語','目的語','「悪いアイツかわいそうな私」なら1'])
   for(const bun of bunArr){
@@ -35,9 +35,11 @@ const bunArr2CsvArr=(bunArr)=>{
     if(isNeededBunToSearch(bun)){
       for(const verb of bun.verbArr){
         if(isNeededVerbForCsv(verb)){
-
+          if(verb.object===null){
+            csvArr.push([bun.surfaceForm,verb.surfaceForm,verb.subject.name,"（なし）",0])
+          }else{
             csvArr.push([bun.surfaceForm,verb.surfaceForm,verb.subject.name,verb.object.name,0])
-
+          }
         }
         //console.log(verb.subject)
         //subject不在。object不在の場合の処理
@@ -57,7 +59,12 @@ const isNeededBunToSearch=(bun)=>{
 }
 
 const isNeededVerbForCsv=(verb)=>{
-  if(verb.subject!==null && verb.object!==null){
+  if(verb.subject!==null){
+    return true
+  }else{
+    return false
+  }
+/*  if(verb.subject!==null && verb.object!==null){
     if(rodata.withPeople){
       return true
     }else{
@@ -69,7 +76,7 @@ const isNeededVerbForCsv=(verb)=>{
     }
   }else{
     return false
-  }
+  }*/
 }
 
 export {bunArr2CsvArr,isNeededBunToSearch,isNeededVerbForCsv}
