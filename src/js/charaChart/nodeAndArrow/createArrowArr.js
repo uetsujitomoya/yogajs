@@ -39,7 +39,8 @@ const createArrowArr = (sliderBunArr, nodeArr, allBunArr) => {
         }else{
           for (let tmpNodeCnt = 0; tmpNodeCnt < nodeArr.length; tmpNodeCnt++) {
             if (isSameNode(nodeArr[tmpNodeCnt], verb)) {
-              nodeArr[tmpNodeCnt].circleStrokeWidth++
+              //nodeArr[tmpNodeCnt].circleStrokeWidth++
+              nodeArr[tmpNodeCnt].updatePropaties(verb.isBlueCircleColor)
               break
             }
           }

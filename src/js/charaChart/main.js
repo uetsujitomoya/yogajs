@@ -14,22 +14,24 @@ import {saveBunArrJson} from './saveBunArrJson'
 import { downloadJson } from './downloadJson'
 import {rodata} from './rodata'
 import {downloadAsTask} from './downloadAsTask'
-import { outputCsv } from './csv/outputCsv'
-import { inputCsv } from './csv/inputCsv'
+import { outputBunArrCsv } from './csv/outputBunArrCsv'
+import { inputBunArrCsv } from './csv/inputBunArrCsv'
 import {applySlider} from './slider'
+import { fromCsvTxt2Arr } from './csv/getCSVFile'
 
 let nodeArr = []
 let verbArr = []
 
-const createCharaChart = () => {
-  const knp = csv2Arr(rodata.knpCsvFolder+rodata.knpCsvName+".csv")
-  //console.log(knp)
+const mainOfCharaChart = (knpCsv,bunArrCsv) => {
+  //const knpArr = csv2Arr(rodata.knpCsvFolder+rodata.knpCsvName+".csv")
+  const knpArr = fromCsvTxt2Arr(knpCsv)
+  //console.log(knpArr)
   let nodeArr=[]
-  findChara(knp, nodeArr)
+  findChara(knpArr, nodeArr)
   fixNodePoint(nodeArr)
-  const bunArr = createBunArr(knp, nodeArr)
-  //outputCsv(bunArr)
-  inputCsv(bunArr)
+  const bunArr = createBunArr(knpArr, nodeArr)
+  //outputBunArrCsv(bunArr)
+  inputBunArrCsv(bunArr,bunArrCsv)
   if(rodata.isSingleSlider&&rodata.checkBoxCommentOut){
     const selectedArea = {
       start: 0,
@@ -44,17 +46,5 @@ const createCharaChart = () => {
   manageSlider(bunArr,nodeArr)
 }
 
-const findDependency = () => {
-  find_subject()
-  find_object()
-}
 
-let find_subject = () => {
-
-}
-
-let find_object = () => {
-
-}
-
-export {createCharaChart}
+export {mainOfCharaChart}

@@ -5,11 +5,89 @@ import {classifyWithFirstWordDictionary} from './js/counselorEducation/wordparse
 //import {ClassifyWithWordDictionary} from './js/counselorEdu/changeDictionary.js' // AcceptDictionary
 //import $ from 'jquery'
 //import {wordparse2object} from './js/counselorEdu/wordparse2object.js'
-import { createCharaChart } from './js/charaChart/main'
+
+import { mainOfCharaChart } from './js/charaChart/main'
+
 // import {CreateSwitchClassificationMethod} from "./SwitchClassificationMethod.js"; //AcceptDictionary
 // var dictionaryFromWord2Vec = csv2Arr('HDFaceVertex.csv');
 
-createCharaChart()
+/*document.getElementById('loadstartbutton').addEventListener('click', function () {
+  const knpCsv = document.getElementById('knp').files[0]
+  const bunArrCsv = document.getElementById('bunarr').files[0]
+  //console.log(file)
+  //const name = file.name
+  const knpReader = new FileReader()
+  knpReader.readAsText(file)
+  knpReader.onload = function (event) {
+    // let result = funcReaderOnload(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
+    const originalText = event.target.result
+
+    console.log('%center ClassifyWithFirstWordDictionary 85', 'color:red')
+    const resultWithNewDictionary = mainOfCharaChart()
+  }
+  const knpReader = new FileReader()
+  knpReader.readAsText(file)
+  knpReader.onload = function (event) {
+    // let result = funcReaderOnload(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
+    const originalText = event.target.result
+
+    console.log('%center ClassifyWithFirstWordDictionary 85', 'color:red')
+    const resultWithNewDictionary = mainOfCharaChart()
+  }
+
+})*/
+
+//http://www.pori2.net/html5/File/020.html
+
+//inputモードとoutputモードを分けるときは，チェック入れた後にif文
+/*if(checked){
+  knpFormのみ
+}else{
+  bunArrFormも
+}*/
+
+
+const knpForm = document.getElementById("knp");
+
+//ダイアログでファイルが選択された時
+knpForm.addEventListener("change",function(knpChangeEvt){
+
+  var knpCsv = knpChangeEvt.target.files[0];
+
+  //FileReaderの作成
+  var knpReader = new FileReader();
+  //テキスト形式で読み込む
+  knpReader.readAsText(knpCsv);
+
+  //読込終了後の処理
+  knpReader.onload = function(knpOnloadEv){
+    //テキストエリアに表示する
+    //document.test.txt.value = knpReader.result;
+
+    //2個目のCSVを読む
+    var bunArrForm = document.getElementById("bunarr");
+
+//ダイアログでファイルが選択された時
+    bunArrForm.addEventListener("change",function(bunArrChangeEvt){
+
+      var bunArrCsv = bunArrChangeEvt.target.files[0];
+
+      //FileReaderの作成
+      var bunArrReader = new FileReader();
+      //テキスト形式で読み込む
+      bunArrReader.readAsText(bunArrCsv);
+
+      //読込終了後の処理
+      bunArrReader.onload = function(bunArrOnloadEv){
+        //テキストエリアに表示する
+        //document.test.txt.value = bunArrReader.result;
+        const charaChartResult = mainOfCharaChart(knpReader.result,bunArrReader.result)
+      }
+    },false);
+  }
+},false);
+
+
 
 // 以下、今までの(170809)
 
@@ -145,23 +223,23 @@ document.getElementById('load-button').addEventListener('click', function () {
   reader.readAsText(file)
 })
 
-  /* 170410knpLoadButton
+/* 170410knpLoadButton
 
 document.getElementById('knpLoadButton').addEventListener('click',function () {
 
-    var file = document.getElementById('knpLoadButton').files[0];//csv読み込めない
-    var name = file.name;
-    var reader = new FileReader();
-    reader.onload = function(event) {
-        //var result = funcReaderOnload(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
-        //let resultWithNewDictionary = AcceptDictionary(name,event,keitaisokaiseki,chboxlist,chboxlist2,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,newLoveDictionary,newWorkDictionary,newFriendDictionary);
-        //let resultWithKNP = processKnp(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2)
-    };
-    reader.readAsText(file);
+  var file = document.getElementById('knpLoadButton').files[0];//csv読み込めない
+  var name = file.name;
+  var reader = new FileReader();
+  reader.onload = function(event) {
+      //var result = funcReaderOnload(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
+      //let resultWithNewDictionary = AcceptDictionary(name,event,keitaisokaiseki,chboxlist,chboxlist2,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,newLoveDictionary,newWorkDictionary,newFriendDictionary);
+      //let resultWithKNP = processKnp(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2)
+  };
+  reader.readAsText(file);
 
 });
 
-  */
+*/
 
 // document.getElementById('buttonToInputDictionary').addEventListener('click',AcceptDictionary(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2));
 

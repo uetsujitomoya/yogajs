@@ -30,7 +30,14 @@ const vizNodes = (svg,nodeArr,sliderBunArr,r,allBunArr) => {
           'stroke': function (d) { if (d.isClient) { return rodata.clientNodeColor } else { return rodata.aroundClientPeopleNodeColor } },
           'fill': rodata.circleFill,
           'stroke-width': (d) => { return　d.circleStrokeWidth }*/
-    'fill':  function (d) { if (d.isClient) { return rodata.clientNodeColor } else { return rodata.aroundClientPeopleNodeColor } },
+    //'fill':  function (d) { if (d.isClient) { return rodata.clientNodeColor } else { return rodata.aroundClientPeopleNodeColor } },
+
+    'fill':  function (node) {
+      console.log(node)
+      if (node.isBlue) {
+        return rodata.aroundClientPeopleNodeColor
+      } else { return rodata.clientNodeColor } },
+
     'r':  (d) => { return　d.circleStrokeWidth }
   })
     .on('click', (d, i)=>{

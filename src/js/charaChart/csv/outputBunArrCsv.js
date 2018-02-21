@@ -3,7 +3,7 @@ import { downloadAsCSV } from '../../manageCsv/downloadAsCsv'
 import { now, today, year } from '../../getDate'
 import { rodata } from '../rodata'
 
-const outputCsv = (bunArr)=>{
+const outputBunArrCsv = (bunArr)=>{
 
   //sentence
   //verb
@@ -16,4 +16,4 @@ const outputCsv = (bunArr)=>{
 
 }
 
-export {outputCsv}
+export {outputBunArrCsv}

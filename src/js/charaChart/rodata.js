@@ -62,8 +62,8 @@ const rodata={
   knpCsvName:"171211dummyForCC",//bunArrをbunArrCsvに任せる場合でも、登場人物はknpCsvから取得
   //csvPath: this.knpCsvFolder+this.knpCsvName+".csv",
 
-  bunArrCsvFolder:"./csv/bunArr/",
-  bunArrCsvName:"201712211623_171114allKnp_withPeople_edited.csv",
+  bunArrCsvFolder:"./csv/bunArr/consideringCircle/",
+  bunArrCsvName:"2018220108_171211dummyForCC_withPeople_consideringCircle.csv",
   withPeople:true,
 
   charaChartAreaID : '#example',
