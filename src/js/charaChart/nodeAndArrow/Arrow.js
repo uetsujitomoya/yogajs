@@ -21,8 +21,8 @@ export default class Arrow {
     this.endPointX = 0
     this.endPointY = 0
 
-    this.redPoint=0
-    this.bluePoint=0
+    this.redPt=0
+    this.bluePt=0
 
     this.bunArr=[]
     this.verbBunHtmlArr=[]
@@ -35,13 +35,13 @@ export default class Arrow {
   updateColor(isBlueArrowColor){
     if(isBlueArrowColor==1){//==
       //this.isBlue=true
-      this.bluePoint++
+      this.bluePt++
     }else{
       //this.isBlue=false
-      this.redPoint++
+      this.redPt++
     }
 
-    if(this.bluePoint>this.redPoint){
+    if(this.bluePt>this.redPt){
       this.isBlue=true
     }else{
       this.isBlue=false

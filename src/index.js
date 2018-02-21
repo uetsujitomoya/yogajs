@@ -36,6 +36,14 @@ import { mainOfCharaChart } from './js/charaChart/main'
 
 //http://www.pori2.net/html5/File/020.html
 
+//inputモードとoutputモードを分けるときは，チェック入れた後にif文
+/*if(checked){
+  knpFormのみ
+}else{
+  bunArrFormも
+}*/
+
+
 const knpForm = document.getElementById("knp");
 
 //ダイアログでファイルが選択された時

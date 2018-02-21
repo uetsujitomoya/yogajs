@@ -17,6 +17,7 @@ const orbitOY=200*/
 const enshuBunkatsuNum = 3
 
 export default class Node {
+
   constructor (name,idx) {
     this.name=name
     this.subject = name
@@ -37,8 +38,14 @@ export default class Node {
     this.circleStrokeWidth = 1
     this.nodeIdx=nodeCnt
     this.viz=false
+
+    this.bluePt=0
+    this.redPt=0
+    //this.updateColor(verb.isBlueCircleColor)
+
     nodeCnt++
   }
+
   addStrokeWidth () {
     this.circleStrokeWidth = this.circleStrokeWidth + 0.5
     this.viz=true
@@ -51,6 +58,25 @@ export default class Node {
   }
   pushToBunArr(bun){
 
+  }
+  updatePropaties(isBlueCircleColor){
+    this.circleStrokeWidth++
+    this.updateColor(isBlueCircleColor)
+  }
+  updateColor(isBlueCircleColor){
+    console.log(isBlueCircleColor)
+    if(isBlueCircleColor==1){//==
+      //this.isBlue=true
+      this.bluePt++
+    }else{
+      //this.isBlue=false
+      this.redPt++
+    }
+    if(this.bluePt>this.redPt){
+      this.isBlue=true
+    }else{
+      this.isBlue=false
+    }
   }
 }
 
