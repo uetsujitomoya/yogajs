@@ -22,7 +22,7 @@ import { fromCsvTxt2Arr } from './csv/getCSVFile'
 let nodeArr = []
 let verbArr = []
 
-const mainOfCharaChart = (knpCsv,bunArrCsv) => {
+const mainOfCharaChart = (knpCsv,bunArrCsv,isToOutputBunArr) => {
   //const knpArr = csv2Arr(rodata.knpCsvFolder+rodata.knpCsvName+".csv")
   const knpArr = fromCsvTxt2Arr(knpCsv)
   //console.log(knpArr)
@@ -30,8 +30,12 @@ const mainOfCharaChart = (knpCsv,bunArrCsv) => {
   findChara(knpArr, nodeArr)
   fixNodePoint(nodeArr)
   const bunArr = createBunArr(knpArr, nodeArr)
-  //outputBunArrCsv(bunArr)
-  inputBunArrCsv(bunArr,bunArrCsv)
+  if(isToOutputBunArr){
+    outputBunArrCsv(bunArr)
+  }else{
+    inputBunArrCsv(bunArr,bunArrCsv)
+  }
+
   if(rodata.isSingleSlider&&rodata.checkBoxCommentOut){
     const selectedArea = {
       start: 0,

@@ -1,0 +1,5 @@
+const classifyInputMode=()=>{
+
+}
+
+export {classifyInputMode}
