@@ -1,5 +1,6 @@
 const getPixel=()=>{
 
+
 }
 
 export {getPixel}

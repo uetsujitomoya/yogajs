@@ -120,10 +120,10 @@ const viz = (stackdataArr, allQueHatsugenCArr, bun, hatsugen, svg, ansCateNumArr
 
   let m
 
-  var nagasa = []// 縦棒の位置
-  nagasa[0] = 1 * width / (bunsuu + 1)
-  for (m = 1; m < hatsugen.length; m = m + 2) {
-    nagasa[(m + 1) / 2] = nagasa[-1 + (m + 1) / 2] + hatsugen[m].length * width / bunsuu
+  var pipePosArr = []// 縦棒の位置
+  pipePosArr[0] = 1 * width / (bunsuu + 1)
+  for (let hatsugenNo = 1; hatsugenNo < hatsugen.length; hatsugenNo = hatsugenNo + 2) {
+    pipePosArr[(hatsugenNo + 1) / 2] = pipePosArr[-1 + (hatsugenNo + 1) / 2] + hatsugen[hatsugenNo].length * width / bunsuu
   }
 
   var margin2 = {top: 10, right: 10, bottom: 50, left: 40}
@@ -139,83 +139,83 @@ const viz = (stackdataArr, allQueHatsugenCArr, bun, hatsugen, svg, ansCateNumArr
     let graphShiftX = 58
     let axisShiftX = 68
 
-    var len2 = []// 区分
-    var mazekoze = []// カウンセラーを発言毎に、クライエントを文ごとに収録
+    var barLenArr = []// 区分
+    var barTxtArr = []// カウンセラーを発言毎に、クライエントを文ごとに収録
     var isFullConversationAnsArr = []// カウンセラーなら0
 
-    let barChartAllHatsugenColorArr = []
+    let barChartAllHatsugenCArr = []
     let barChartAllHatsugenCateArr=[]
 
     let rectHatsugenNoArr = []
-    let h = 0
-    let mazekozeRanshinArr = []
+    let barNo = 0
+    let barRanshinArr = []
     // 初手カウンセラー
-    len2[0] = hatsugen[0].length * width / bunsuu
-    mazekoze[0] = hatsugen[0]
+    barLenArr[0] = hatsugen[0].length * width / bunsuu
+    barTxtArr[0] = hatsugen[0]
     isFullConversationAnsArr[0] = 0
-    barChartAllHatsugenColorArr[0] = allQueHatsugenCArr[0]
+    barChartAllHatsugenCArr[0] = allQueHatsugenCArr[0]
     barChartAllHatsugenCateArr[0] =
       rectHatsugenNoArr[0] = 0
 
-    let c = 0
+    let ansRadioNo = 0
 
-    for (m = 1; m < hatsugen.length; m = m + 2) {
-      h++
+    for (let hatsugenNo = 1; hatsugenNo < hatsugen.length; hatsugenNo = hatsugenNo + 2) {
+      barNo++
       // クライエント
-      bun[m].forEach((d) => {
+      bun[hatsugenNo].forEach((d) => {
         if (d !== '') {
-          len2[h] = d.length * width / bunsuu
-          mazekoze[h] = d
-          isFullConversationAnsArr[h] = 1
-          barChartAllHatsugenColorArr[h] = answerTextureChoiceArr[ansRadioResult[c]]
-          rectHatsugenNoArr[h] = m
-          h++
-          c++
+          barLenArr[barNo] = d.length * width / bunsuu
+          barTxtArr[barNo] = d
+          isFullConversationAnsArr[barNo] = 1
+          barChartAllHatsugenCArr[barNo] = answerTextureChoiceArr[ansRadioResult[ansRadioNo]]
+          rectHatsugenNoArr[barNo] = hatsugenNo
+          barNo++
+          ansRadioNo++
         }
       })
-      if (m + 1 === hatsugen.length) {
+      if (hatsugenNo + 1 === hatsugen.length) {
         break
       }
       // カウンセラー
-      len2[h] = hatsugen[m + 1].length * width / bunsuu
-      mazekoze[h] = hatsugen[m + 1]
-      isFullConversationAnsArr[h] = 0
-      barChartAllHatsugenColorArr[h] = allQueHatsugenCArr[(m + 1) / 2]
-      rectHatsugenNoArr[h] = m + 1
+      barLenArr[barNo] = hatsugen[hatsugenNo + 1].length * width / bunsuu
+      barTxtArr[barNo] = hatsugen[hatsugenNo + 1]
+      isFullConversationAnsArr[barNo] = 0
+      barChartAllHatsugenCArr[barNo] = allQueHatsugenCArr[(hatsugenNo + 1) / 2]
+      rectHatsugenNoArr[barNo] = hatsugenNo + 1
     }
 
-    c = 0
+    let barNo = 0
     for (let m = 1; m < ranshin.length; m = m + 2) {
       for (let i = 0; i < ranshin[m].length; i++) {
-        mazekozeRanshinArr[c] = ''
+        barRanshinArr[barNo] = ''
         if (ranshin[m][i][0] === 1) {
-          mazekozeRanshinArr[c] = '病\n'
+          barRanshinArr[barNo] = '病\n'
         }
         if (ranshin[m][i][1] === 1) {
-          mazekozeRanshinArr[c] = '無気\n'
+          barRanshinArr[barNo] = '無気\n'
         }
         if (ranshin[m][i][2] === 1) {
-          mazekozeRanshinArr[c] = '疑\n'
+          barRanshinArr[barNo] = '疑\n'
         }
         if (ranshin[m][i][3] === 1) {
-          mazekozeRanshinArr[c] = '不注\n'
+          barRanshinArr[barNo] = '不注\n'
         }
         if (ranshin[m][i][4] === 1) {
-          mazekozeRanshinArr[c] = '怠\n'
+          barRanshinArr[barNo] = '怠\n'
         }
         if (ranshin[m][i][5] === 1) {
-          mazekozeRanshinArr[c] = '渇\n'
+          barRanshinArr[barNo] = '渇\n'
         }
         if (ranshin[m][i][6] === 1) {
-          mazekozeRanshinArr[c] = '妄想\n'
+          barRanshinArr[barNo] = '妄想\n'
         }
         if (ranshin[m][i][7] === 1) {
-          mazekozeRanshinArr[c] = '新境\n'
+          barRanshinArr[barNo] = '新境\n'
         }
         if (ranshin[m][i][8] === 1) {
-          mazekozeRanshinArr[c] = '落着'
+          barRanshinArr[barNo] = '落着'
         }
-        c++
+        barNo++
       }
 
       // ９種の乱心ストレージ保存
@@ -225,12 +225,12 @@ const viz = (stackdataArr, allQueHatsugenCArr, bun, hatsugen, svg, ansCateNumArr
     }
     // let width = width;
     var dataArr = [
-      len2,
-      len2
+      barLenArr,
+      barLenArr
     ]// カウンセラ発言長とクライエント各文長の配列
 
     var xScale = d3.scale.linear()
-      .domain([0, d3.sum(len2) / 10])
+      .domain([0, d3.sum(barLenArr) / 10])
       .range([axisShiftX, width - axisShiftX])
     // .nice();
 
@@ -239,16 +239,16 @@ const viz = (stackdataArr, allQueHatsugenCArr, bun, hatsugen, svg, ansCateNumArr
     let rectTxtArr = []
     let checkedNo = 0
 
-    for (rectTxtNo = 0; rectTxtNo < len2.length; rectTxtNo++) { // 色変えたからか。。
-      if (barChartAllHatsugenColorArr[rectTxtNo] === openC) {
+    for (rectTxtNo = 0; rectTxtNo < barLenArr.length; rectTxtNo++) { // 色変えたからか。。
+      if (barChartAllHatsugenCArr[rectTxtNo] === openC) {
         rectTxtArr[rectTxtNo] = rectTxtCate.openQuestion
-      } else if (barChartAllHatsugenColorArr[rectTxtNo] === aiduchiC) {
+      } else if (barChartAllHatsugenCArr[rectTxtNo] === aiduchiC) {
         rectTxtArr[rectTxtNo] = rectTxtCate.feedback
-      } else if (barChartAllHatsugenColorArr[rectTxtNo] === closeC) {
+      } else if (barChartAllHatsugenCArr[rectTxtNo] === closeC) {
         rectTxtArr[rectTxtNo] = rectTxtCate.closedQuestion
-      } else if (barChartAllHatsugenColorArr[rectTxtNo] === kaishakuC) {
+      } else if (barChartAllHatsugenCArr[rectTxtNo] === kaishakuC) {
         rectTxtArr[rectTxtNo] = rectTxtCate.interpretation
-      } else　if(barChartAllHatsugenColorArr[rectTxtNo] === sekenC) {
+      } else　if(barChartAllHatsugenCArr[rectTxtNo] === sekenC) {
         rectTxtArr[rectTxtNo] = rectTxtCate.smallTalk
       }else{
 
@@ -269,8 +269,8 @@ const viz = (stackdataArr, allQueHatsugenCArr, bun, hatsugen, svg, ansCateNumArr
       }
     }
 
-    for (rectTxtNo = 0; rectTxtNo < len2.length; rectTxtNo++) {
-      rectDataObjectArr[rectTxtNo] = {x: len2[rectTxtNo], y: 40, color: barChartAllHatsugenColorArr[rectTxtNo], text: rectTxtArr[rectTxtNo], which: isFullConversationAnsArr[rectTxtNo]}
+    for (rectTxtNo = 0; rectTxtNo < barLenArr.length; rectTxtNo++) {
+      rectDataObjectArr[rectTxtNo] = {x: barLenArr[rectTxtNo], y: 40, color: barChartAllHatsugenCArr[rectTxtNo], text: rectTxtArr[rectTxtNo], which: isFullConversationAnsArr[rectTxtNo]}
       // moji[jj]}//F_color2moji(color2[jj])}//, text:a}
     }
 
@@ -294,23 +294,23 @@ const viz = (stackdataArr, allQueHatsugenCArr, bun, hatsugen, svg, ansCateNumArr
       .enter()
       .append('rect')// 四角追加
       .attr('x', function (d, i) {
-        var arr = len2
+        var arr = barLenArr
         // var sum = d3.sum(arr);
         var subSum = d3.sum(i === 0 ? [] : arr.slice(0, i))
         return xScale(subSum) / 10 + 10 + graphShiftX
       })
       .attr('y', 10)
       .attr('width', function (d) {
-        // var sum = d3.sum(len2);
+        // var sum = d3.sum(barLenArr);
         return xScale(d) / 10
       })
       .attr('height', 20)
       .attr('fill', function (d, i) {
         if ((row === 0 && isFullConversationAnsArr[i] === 0) || (row === 1 && isFullConversationAnsArr[i] === 1)) {
-          if (i + 1 === mazekoze.length) {
+          if (i + 1 === barTxtArr.length) {
             row++
           }
-          //return barChartAllHatsugenColorArr[i] //質問の場合はtextureを使いたい
+          //return barChartAllHatsugenCArr[i] //質問の場合はtextureを使いたい
           //一個の関数にして振り分けたい（配列やreturnはまずそう）
 
           /*if(/*answer){
@@ -355,7 +355,7 @@ const viz = (stackdataArr, allQueHatsugenCArr, bun, hatsugen, svg, ansCateNumArr
               break;
           }
         } else {
-          if (i + 1 === mazekoze.length) {
+          if (i + 1 === barTxtArr.length) {
             row++
           }
           return barChartBGColor

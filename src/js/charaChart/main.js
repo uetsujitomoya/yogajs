@@ -4,7 +4,7 @@
 
 import {csv2Arr} from '../manageCsv/csv2Arr.js'
 import {getCSV} from '../manageCsv/getCSV.js'
-import {createBunArr} from './createBunArr/createBunArr.js'
+import {createBunArr} from './createBunArr/main.js'
 import {findChara} from './chara/findChara.js'
 import {createArrowArr} from './nodeAndArrow/createArrowArr.js'
 import {manageSlider} from './slider.js'

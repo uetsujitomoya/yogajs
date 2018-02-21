@@ -1,4 +1,4 @@
-import {r} from './defineNode'
+import {r} from './Node'
 
 const definePointArr = (arrow) => {
   //nodeとarrayを紐付ける

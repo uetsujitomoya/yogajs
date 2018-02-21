@@ -1,7 +1,7 @@
-import Bunsetsu from './defineBunsetsu.js'
-import BunKihonku from './defineKihonku.js'
+import Bunsetsu from './Bunsetsu.js'
+import BunKihonku from './Kihonku.js'
 import {rodata} from '../rodata'
-import BunVerb from './defineBunVerb'
+import BunVerb from './BunVerb'
 import {searchMaenoBunForShugo} from './SO/searchMaenoBunForS'
 
 const bun1stBunsetsuRId = 1
