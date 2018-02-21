@@ -35,7 +35,7 @@ const bunArr2CsvArr=(bunArr)=>{
     if(isNeededBunToSearch(bun)){
       for(const verb of bun.verbArr){
         if(isNeededVerbForCsv(verb)){
-          if(verb.object===null){
+          if(hasNoObject(verb)){
             csvArr.push([bun.surfaceForm,verb.surfaceForm,verb.subject.name,"（なし）",0])
           }else{
             csvArr.push([bun.surfaceForm,verb.surfaceForm,verb.subject.name,verb.object.name,0])
@@ -48,6 +48,14 @@ const bunArr2CsvArr=(bunArr)=>{
   }
 
   return csvArr
+}
+
+const hasNoObject=(verb)=>{
+  if(verb.object===null){
+    return true
+  }else{
+    return false
+  }
 }
 
 const isNeededBunToSearch=(bun)=>{
@@ -79,7 +87,7 @@ const isNeededVerbForCsv=(verb)=>{
   }*/
 }
 
-export {bunArr2CsvArr,isNeededBunToSearch,isNeededVerbForCsv}
+export {bunArr2CsvArr,isNeededBunToSearch,isNeededVerbForCsv,hasNoObject}
 
 class csvRow {
   constructor (){
