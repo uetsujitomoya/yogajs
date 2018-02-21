@@ -2,8 +2,8 @@
  * Created by uetsujitomoya on 2017/09/04.
  */
 
-//import Node from './defineNode.js'
-import Arrow from './defineArrow.js'
+//import Node from './Node.js'
+import Arrow from './Arrow.js'
 import {vizNodes} from './vizNode'
 import {initialValueOfSubjectAndObjectInVerb} from '../createBunArr/isVerb.js'
 import {definePointArr} from './connectNodeAndArrow'

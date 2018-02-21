@@ -3,7 +3,7 @@
  */
 
 import {hasJp} from "../../hasJapanese.js"
-import Node from '../nodeAndArrow/defineNode.js'
+import Node from '../nodeAndArrow/Node.js'
 import {rodata} from '../rodata'
 import {unifyNotaion} from './unifyNotation'
 import {passNotation} from './unifyNotation'
