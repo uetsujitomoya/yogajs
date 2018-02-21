@@ -88,16 +88,16 @@
 </style>
 
 <body>
-
-
+まず選択：
+<div id="b" style="cursor: pointer"><u></u></div><div id="r"><label><input type=radio name="r" value=0 checked>既に手動修正後CSVを持っている　</label><label><input type=radio name="r" value=1>まだ手動修正後CSVを持っていない</label></div><br>
 
 <form name="test">
-    まず，係り受け解析結果を読込<input type="file" id="knp" accept=".csv"><br>
+    上記選択後，係り受け解析結果を読込（後者選択時はまずこれのみ読込）<input type="file" id="knp" accept=".csv"><br>
     <!--    <textarea name="txt" rows="10" cols="50" readonly></textarea>-->
 </form>
 
 <form name="test">
-    次に，手動修正CSVを読込<input type="file" id="bunarr" accept=".csv"><br>
+    最後に，手動修正後CSVを読込<input type="file" id="bunarr" accept=".csv"><br>
     <!--    <textarea name="txt" rows="10" cols="50" readonly></textarea>-->
 </form>
 

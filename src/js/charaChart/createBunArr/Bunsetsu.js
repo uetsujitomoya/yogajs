@@ -1,5 +1,5 @@
 import {rodata} from '../rodata'
-import Word from './defineWord'
+import Word from './Word'
 import {isCharacter,searchNodeArrayForCharacterAndPoint} from '../chara/isChara'
 import {isVerb} from './isVerb'
 import {addSVO2Bunsetsu

@@ -53,8 +53,10 @@ knpForm.addEventListener("change",function(knpChangeEvt){
 
   //KNP出力結果のCSVを読込終了後の処理
   knpReader.onload = function(knpOnloadEv){
+    const radio = document.getElementById('r').children
+    console.log(radio)
 
-    if(isOutputMode()){
+    if(isOutputMode(radio)){
 
       //まだ手動修正後CSVを持っていない場合
       const firstResult = mainOfCharaChart(knpReader.result,null,true)
@@ -86,8 +88,13 @@ knpForm.addEventListener("change",function(knpChangeEvt){
   }
 },false);
 
-const isOutputMode=()=>{
-  if()
+const isOutputMode=(radio)=>{
+
+  if(radio[1].control.checked){
+    return true
+  }else{
+    return false
+  }
 }
 
 // 以下、今までの(170809)

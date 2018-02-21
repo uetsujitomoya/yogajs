@@ -1,7 +1,7 @@
-import Bunsetsu from './defineBunsetsu.js'
-import BunKihonku from './defineKihonku.js'
+import Bunsetsu from './Bunsetsu.js'
+import BunKihonku from './Kihonku.js'
 import {rodata} from '../rodata'
-import BunVerb from './defineBunVerb'
+import BunVerb from './BunVerb'
 import {searchMaenoBunForShugo} from './SO/searchMaenoBunForS'
 
 const bun1stBunsetsuRId = 1
@@ -138,6 +138,7 @@ export default class Bun {
       if (tmpClause.isSubject) {
         this.bunsetsuArray[ verbBunsetsuNo ].subject_of_verb = tmpClause.subject
         //モノホンのnodeもってこないといけない。
+        console.log(nodeArr)
         this.verbArr[tempVerbNum].rewriteSubjectAndAddBun2Node(nodeArr[tmpClause.subject.nodeIdx], this)
         break
       }else{

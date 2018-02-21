@@ -1,4 +1,4 @@
-import Word from './defineWord'
+import Word from './Word'
 
 export default class KihonkuInSentence {
   constructor (no, knpArr) {
