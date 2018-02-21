@@ -14,7 +14,7 @@ import {removeSVG} from './nodeAndArrow/vizNode.js'
 import { nowWatchingArrowOrNode } from './nowWatchingArrowOrNode'
 import { viewArrowTxt } from './viewText/viewArrowTxt'
 import { viewNodeTxt } from './viewText/viewNodeTxt'
-import { rodata } from './rodata'
+import { charaChartSetting } from './setting'
 
 const manageSlider = (allBunArr, charaArr) => {
 
@@ -26,7 +26,7 @@ const manageSlider = (allBunArr, charaArr) => {
   console.log($('#bunqty'))
   $('#bunqty')[0].innerHTML += ""+allBunArr.length+""
 
-  if(rodata.isSingleSlider){
+  if(charaChartSetting.isSingleSlider){
     createSingleSlider(allBunArr,charaArr)
   }else{
     manageDoubleSlider(allBunArr,charaArr)
@@ -37,7 +37,7 @@ const applySingleSliderVal=(allBunArr,charaArr)=>{
   $('#ex18a').on('slide', function (slideEvt) {
     const selectedArea = {
       start: slideEvt.value,
-      //end: slideEvt.value+rodata.singleSliderSelectLen
+      //end: slideEvt.value+charaChartSetting.singleSliderSelectLen
       end: slideEvt.value+ parseInt(document.forms.mainForm._text.value)
     }
     applySlider(selectedArea, allBunArr,charaArr)
@@ -65,13 +65,13 @@ const manageCheckBox=(allBunArr,charaArr)=>{
 
 const createSingleSlider=(allBunArr,charaArr)=>{
 
-  if(!rodata.checkBoxCommentOut){
+  if(!charaChartSetting.checkBoxCommentOut){
     manageCheckBox(allBunArr,charaArr)
   }
 
   $("#ex18a").slider({
     min: 0,
-    max: allBunArr.length-rodata.singleSliderSelectLen,
+    max: allBunArr.length-charaChartSetting.singleSliderSelectLen,
     value: 0,
     labelledby: 'ex18-label-1',
     formatter: function (value) {

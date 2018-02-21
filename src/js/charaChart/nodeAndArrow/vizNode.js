@@ -4,12 +4,12 @@
 
 import d3 from 'd3'
 import $ from 'jquery'
-import {rodata} from '../rodata'
+import {charaChartSetting} from '../setting'
 import {r} from './Node'
 import {viewNodeTxt} from '../viewText/viewNodeTxt'
 
-//import{rodata} from '../../rodata'
-//const r = rodata.nodeR
+//import{charaChartSetting} from '../../charaChartSetting'
+//const r = charaChartSetting.nodeR
 
 const clientColor = '#ff0000'
 const aroundClientPeopleColor = '#000000'
@@ -27,16 +27,16 @@ const vizNodes = (svg,nodeArr,sliderBunArr,r,allBunArr) => {
 
   nodes.append('circle').attr({
     /*      'r': function (d) { return r },
-          'stroke': function (d) { if (d.isClient) { return rodata.clientNodeColor } else { return rodata.aroundClientPeopleNodeColor } },
-          'fill': rodata.circleFill,
+          'stroke': function (d) { if (d.isClient) { return charaChartSetting.clientNodeColor } else { return charaChartSetting.aroundClientPeopleNodeColor } },
+          'fill': charaChartSetting.circleFill,
           'stroke-width': (d) => { return　d.circleStrokeWidth }*/
-    //'fill':  function (d) { if (d.isClient) { return rodata.clientNodeColor } else { return rodata.aroundClientPeopleNodeColor } },
+    //'fill':  function (d) { if (d.isClient) { return charaChartSetting.clientNodeColor } else { return charaChartSetting.aroundClientPeopleNodeColor } },
 
     'fill':  function (node) {
       console.log(node)
       if (node.isBlue) {
-        return rodata.aroundClientPeopleNodeColor
-      } else { return rodata.clientNodeColor } },
+        return charaChartSetting.aroundClientPeopleNodeColor
+      } else { return charaChartSetting.clientNodeColor } },
 
     'r':  (d) => { return　d.circleStrokeWidth }
   })
@@ -48,8 +48,8 @@ const vizNodes = (svg,nodeArr,sliderBunArr,r,allBunArr) => {
     .attr({
       'text-anchor': 'middle',
       'dy': '.100em',
-      'fill': rodata.charaNameColor,
-      "font-size":rodata.circleFontSize
+      'fill': charaChartSetting.charaNameColor,
+      "font-size":charaChartSetting.circleFontSize
     })
     .text(function (d) {
       //if(d.nodeCharacter==="Aさん"){alert("Aさん")}
@@ -61,7 +61,7 @@ const vizNodes = (svg,nodeArr,sliderBunArr,r,allBunArr) => {
 }
 
 let removeSVG = () => {
-  d3.select(rodata.charaChartAreaID).select('svg').remove()
+  d3.select(charaChartSetting.charaChartAreaID).select('svg').remove()
 }
 
 export {vizNodes, removeSVG}

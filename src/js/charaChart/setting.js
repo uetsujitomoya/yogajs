@@ -17,7 +17,7 @@ const color={
   }
 }
 
-const rodata={
+const charaChartSetting={
   bunsetsuSymbol:'*',
   kihonkuSymbol:'+',
   bunsetsu1stJpRowNo:2,
@@ -80,7 +80,9 @@ const rodata={
 
   checkBoxCommentOut:true,
 
-  isFizedArrowWigth:true
+  isFizedArrowWigth:true,
+
+  nodeCnt:0
 }
 
-export {rodata}
+export {charaChartSetting}

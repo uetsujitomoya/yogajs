@@ -4,13 +4,13 @@
 
 import {hasJp} from "../../hasJapanese.js"
 import Node from '../nodeAndArrow/Node.js'
-import {rodata} from '../rodata'
+import {charaChartSetting} from '../setting'
 import {unifyNotaion} from './unifyNotation'
 import {passNotation} from './unifyNotation'
 
-const r=rodata.nodeR
-const orbitR=rodata.orbitR
-const orbitOPoint = rodata.orbitOY
+const r=charaChartSetting.nodeR
+const orbitR=charaChartSetting.orbitR
+const orbitOPoint = charaChartSetting.orbitOY
 let nodeCnt=0
 let aSanCnt=0
 

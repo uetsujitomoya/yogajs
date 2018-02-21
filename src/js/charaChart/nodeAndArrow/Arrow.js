@@ -3,7 +3,7 @@
  */
 
 import {definePointArr} from './connectNodeAndArrow'
-import {rodata} from '../rodata'
+import {charaChartSetting} from '../setting'
 
 export default class Arrow {
 
@@ -70,6 +70,6 @@ export default class Arrow {
   }
   colorRed(){
     this.strokeColor="#ff0000"
-    localStorage.setItem(rodata.csvPath+"矢印"+this.arrowNo,"感謝貢献")
+    localStorage.setItem(charaChartSetting.csvPath+"矢印"+this.arrowNo,"感謝貢献")
   }
 }

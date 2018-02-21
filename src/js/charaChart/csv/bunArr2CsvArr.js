@@ -1,5 +1,5 @@
 import { EscapeSJIS, UnescapeSJIS } from '../../ecl'
-import { rodata } from '../rodata'
+import { charaChartSetting } from '../setting'
 
 const bunArr2CsvArr=(bunArr)=>{
 
@@ -73,7 +73,7 @@ const isNeededVerbForCsv=(verb)=>{
     return false
   }
 /*  if(verb.subject!==null && verb.object!==null){
-    if(rodata.withPeople){
+    if(charaChartSetting.withPeople){
       return true
     }else{
       if(verb.subject.name==="Aさん" && verb.object.name!=="Aさん"){

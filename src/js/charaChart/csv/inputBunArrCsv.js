@@ -1,6 +1,6 @@
 import { EscapeSJIS, UnescapeSJIS } from '../../ecl'
 import { csv2Arr } from '../../manageCsv/csv2Arr'
-import { rodata } from '../rodata'
+import { charaChartSetting } from '../setting'
 import { hasNoObject, isNeededBunToSearch, isNeededVerbForCsv } from './bunArr2CsvArr'
 import { fromCsvTxt2Arr } from './getCSVFile'
 
@@ -8,7 +8,7 @@ const inputBunArrCsv=(bunArr, bunArrCsv)=>{
   //bunArrの中身を書き換える
   //makeCsvの逆をやればいい
 
-  //const csvArr=csv2Arr(rodata.bunArrCsvFolder+rodata.bunArrCsvName)
+  //const csvArr=csv2Arr(charaChartSetting.bunArrCsvFolder+charaChartSetting.bunArrCsvName)
   const csvArr=fromCsvTxt2Arr(bunArrCsv)
 
 

@@ -7,7 +7,7 @@ import Arrow from './Arrow.js'
 import {vizNodes} from './vizNode'
 import {initialValueOfSubjectAndObjectInVerb} from '../createBunArr/isVerb.js'
 import {definePointArr} from './connectNodeAndArrow'
-import {rodata} from '../rodata'
+import {charaChartSetting} from '../setting'
 import * as d3 from 'd3'
 import {vizArrow} from './vizArrow'
 import {nowWatchingArrowOrNode} from '../nowWatchingArrowOrNode'
@@ -56,12 +56,12 @@ const createArrowArr = (sliderBunArr, nodeArr, allBunArr) => {
       }
     }
   }
-  let svg = d3.select(rodata.charaChartAreaID).append('svg')
+  let svg = d3.select(charaChartSetting.charaChartAreaID).append('svg')
     .attr({
-      width: rodata.svgWidth,
-      height: rodata.svgHeight
+      width: charaChartSetting.svgWidth,
+      height: charaChartSetting.svgHeight
     })
-  const r = (rodata.orbitR * rodata.circleRadiusCoefficient) / nodeArr.length
+  const r = (charaChartSetting.orbitR * charaChartSetting.circleRadiusCoefficient) / nodeArr.length
   vizNodes(svg,nodeArr,sliderBunArr,r,allBunArr)
 
   arrowArr.forEach((arrow,arrowId)=>{

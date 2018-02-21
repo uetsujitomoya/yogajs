@@ -1,4 +1,4 @@
-import {rodata} from '../rodata'
+import {charaChartSetting} from '../setting'
 import { createTxtViewArea } from './createTxtViewArea'
 import { nowWatchingArrowOrNode } from '../nowWatchingArrowOrNode'
 import { viewWhatIsClicked } from './viewWhatIsClicked'
@@ -8,7 +8,7 @@ let preBunNo = null
 const viewNodeTxt=(node, allBunArr)=>{
   nowWatchingArrowOrNode.node=node
   nowWatchingArrowOrNode.arrow=null
-  if(!rodata.isOnlyViz){
+  if(!charaChartSetting.isOnlyViz){
     let msg = document.getElementById('box')
     msg.innerHTML=''
 
