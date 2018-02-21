@@ -110,7 +110,7 @@ const kaishakuC = rodata.color.kaishaku
 const height0 = 200
 const height = 200
 
-const viz = (stackdataArr, allQueHatsugenCArr, bun, hatsugen, svg, ansCateNumArr, keitaisokaiseki, RGBmaxmax, startTime, graphTypeNum, ansRadioResult, ranshin, width, bunsuu) => {
+const viz = (stackdataArr, allQueHatsugenCArr, bun, hatsugen, svg, ansCateNumArr, keitaisokaiseki, RGBmaxmax, startTime, graphTypeNum, ansRadioResult, hatsugenBunRanshinArr, width, bunsuu) => {
 
   //console.log(ansRadioResult)
   const upperName = 'カウンセラー'
@@ -184,38 +184,37 @@ const viz = (stackdataArr, allQueHatsugenCArr, bun, hatsugen, svg, ansCateNumArr
       rectHatsugenNoArr[barNo] = hatsugenNo + 1
     }
 
-    let barNo = 0
-    for (let m = 1; m < ranshin.length; m = m + 2) {
-      for (let i = 0; i < ranshin[m].length; i++) {
+
+    for (let hatsugenNo = 1, barNo = 0; hatsugenNo < hatsugenBunRanshinArr.length; hatsugenNo = hatsugenNo + 2) {
+      for (let i = 0; i < hatsugenBunRanshinArr[hatsugenNo].length; i++,barNo++) {
         barRanshinArr[barNo] = ''
-        if (ranshin[m][i][0] === 1) {
+        if (hatsugenBunRanshinArr[hatsugenNo][i][0] === 1) {
           barRanshinArr[barNo] = '病\n'
         }
-        if (ranshin[m][i][1] === 1) {
+        if (hatsugenBunRanshinArr[hatsugenNo][i][1] === 1) {
           barRanshinArr[barNo] = '無気\n'
         }
-        if (ranshin[m][i][2] === 1) {
+        if (hatsugenBunRanshinArr[hatsugenNo][i][2] === 1) {
           barRanshinArr[barNo] = '疑\n'
         }
-        if (ranshin[m][i][3] === 1) {
+        if (hatsugenBunRanshinArr[hatsugenNo][i][3] === 1) {
           barRanshinArr[barNo] = '不注\n'
         }
-        if (ranshin[m][i][4] === 1) {
+        if (hatsugenBunRanshinArr[hatsugenNo][i][4] === 1) {
           barRanshinArr[barNo] = '怠\n'
         }
-        if (ranshin[m][i][5] === 1) {
+        if (hatsugenBunRanshinArr[hatsugenNo][i][5] === 1) {
           barRanshinArr[barNo] = '渇\n'
         }
-        if (ranshin[m][i][6] === 1) {
+        if (hatsugenBunRanshinArr[hatsugenNo][i][6] === 1) {
           barRanshinArr[barNo] = '妄想\n'
         }
-        if (ranshin[m][i][7] === 1) {
+        if (hatsugenBunRanshinArr[hatsugenNo][i][7] === 1) {
           barRanshinArr[barNo] = '新境\n'
         }
-        if (ranshin[m][i][8] === 1) {
+        if (hatsugenBunRanshinArr[hatsugenNo][i][8] === 1) {
           barRanshinArr[barNo] = '落着'
         }
-        barNo++
       }
 
       // ９種の乱心ストレージ保存
