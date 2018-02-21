@@ -107,6 +107,10 @@ const manageDoubleSlider=(allBunArr,charaArr)=>{
 
 const applySlider = (selectedArea, allBunArr,nodeArr) => {
   removeSVG()
+  nodeArr.forEach((node,idx)=>{
+    node.redPt=0
+    node.bluePt=0
+  })
   redrawCharaChart(allBunArr, selectedArea, nodeArr)
 }
 
