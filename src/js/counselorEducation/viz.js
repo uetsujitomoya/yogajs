@@ -8,6 +8,7 @@ import {barChartRodata} from './rodata'
 import { fromAnsRadioResultToAnsCateNum } from './setForViz/fromAnsRadioResultToAnsCateNum'
 import { readAnsRadio } from './setForViz/readAnsRadio'
 import { vizStackChart } from './viz/vizStackChart'
+//import tooltip from "jquery"
 
 // let love="#ffeeff";
 // let friend="#c0ffc0";
@@ -279,6 +280,7 @@ const viz = (stackdataArr, allQueHatsugenCArr, bun, hatsugen, svg, ansCateNumArr
     svg.call(selfTexture)
     svg.call(spiritualTexture)
 
+    let tooltip = d3.select("body").select("#tooltip")
     let row = 0// graph3の行番号
     // 階層構造をとるため，g要素を生成する部分とrect要素を生成している部分が連続している．
     svg.selectAll('g')
@@ -425,7 +427,7 @@ const viz = (stackdataArr, allQueHatsugenCArr, bun, hatsugen, svg, ansCateNumArr
           }
         }
       )
-      .on("click", function(d,rectNo){
+      .on("mouseover", function(d,rectNo){
         if (isFullConversationAnsArr[rectNo] === 0) {
 
           return tooltip.style("visibility", "visible").text(hatsugen[rectHatsugenNoArr[rectNo]]);
@@ -444,7 +446,10 @@ const viz = (stackdataArr, allQueHatsugenCArr, bun, hatsugen, svg, ansCateNumArr
 
         }
 
+
       })//吹き出し
+      .on("mousemove", function(d){return tooltip.style("top", (event.pageY-20)+"px").style("left",(event.pageX+10)+"px");})
+      .on("mouseout", function(d){return tooltip.style("visibility", "hidden");})
 
     var xAxis = d3.svg.axis()
       .scale(xScale)

@@ -77,6 +77,8 @@
 
 
     <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <style>
 
         body{
@@ -137,6 +139,19 @@
         }
         .B {
             display: inline;
+        }
+
+        span#tooltip{
+            position: absolute;
+            z-index: 10;
+            visibility: hidden;
+            padding: 0 5px;
+            border: 1px solid #000;
+            border-radius: 3px;
+            background-color: #333;
+            color: #fff;
+            font-size: 11px;
+            opacity: 0.8;
         }
     </style>
 
@@ -204,6 +219,7 @@
 <br>・クライエントの発言について<font color="#ff7777">「愛」</font><font color="#00cc00">「交友」</font><font color="#7777ff">「仕事」</font> -->
 
 <!-- <div id="timeKeeping"></div>-->
+<span id="tooltip"></span>
 <div id="svgdiv" style="height:300px; width:1200px; overflow-x:scroll"></div>
 
 
