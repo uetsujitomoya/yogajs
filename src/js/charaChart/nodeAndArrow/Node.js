@@ -6,7 +6,7 @@ import {rodata } from '../rodata'
 
 let r
 const orbitR=rodata.orbitR
-//onst orbitOPoint = rodata.orbitOY
+//onst orbitOPoint = barChartRodata.orbitOY
 
 let nodeCnt = 0
 /*

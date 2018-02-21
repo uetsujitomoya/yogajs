@@ -2,7 +2,7 @@ import d3 from 'd3'
 import { fromAnsRadioResultToAnsCateNum } from './setForViz/fromAnsRadioResultToAnsCateNum'
 import { readAnsRadio } from './setForViz/readAnsRadio'
 import { readQueRadio } from './setForViz/readQueRadio'
-import {rodata} from './rodata'
+import {barChartRodata} from './rodata'
 import {viz} from './viz'
 
 const setForViz = (name, storage, keitaisokaiseki, ansBunAnd1stCateArr, queBunAnd1stCateArr, RGBlist, hatsugen, hatsugenBunContentArr, ansRadioResult, queRadioResult, taiou, taiou2, ansChBoxLen, queChBoxLen, startTime, graph, ranshin, zoomVal) => {
@@ -50,15 +50,15 @@ const setForViz = (name, storage, keitaisokaiseki, ansBunAnd1stCateArr, queBunAn
   for (let queHatsugenNo = 0; queHatsugenNo < queRadioResult.length; queHatsugenNo++) {
     console.log(queRadioResult[queHatsugenNo])
     if (queRadioResult[queHatsugenNo] === 3) {
-      allQueHatsugenColorArr[queHatsugenNo] = rodata.color.open
+      allQueHatsugenColorArr[queHatsugenNo] = barChartRodata.color.open
     } else if (queRadioResult[queHatsugenNo] === 5) {
-      allQueHatsugenColorArr[queHatsugenNo] = rodata.color.aiduchi
+      allQueHatsugenColorArr[queHatsugenNo] = barChartRodata.color.aiduchi
     } else if (queRadioResult[queHatsugenNo] === 4) {
-      allQueHatsugenColorArr[queHatsugenNo] = rodata.color.close
+      allQueHatsugenColorArr[queHatsugenNo] = barChartRodata.color.close
     } else if (queRadioResult[queHatsugenNo] === 6) {
-      allQueHatsugenColorArr[queHatsugenNo] = rodata.color.kaishaku
+      allQueHatsugenColorArr[queHatsugenNo] = barChartRodata.color.kaishaku
     } else {
-      allQueHatsugenColorArr[queHatsugenNo] = rodata.color.seken
+      allQueHatsugenColorArr[queHatsugenNo] = barChartRodata.color.seken
     }
   }
 

@@ -1,9 +1,9 @@
 import {csv2Array} from './csv2Arr.js'
 import {TransposeMatrix} from './transposeMatrix.js'
-import {rodata} from '../rodata'
+import {barChartRodata} from '../rodata'
 
 let convertCSV2Storage = (jsonName, storage) => {
-  let storageArrayFromKamata = csv2Array(rodata.storageCsv)
+  let storageArrayFromKamata = csv2Array(barChartRodata.storageCsv)
     // objectの書いてあるところを確認
 
     // let storageTransposeArrayFromKamata=TransposeMatrix(storageArrayFromKamata);

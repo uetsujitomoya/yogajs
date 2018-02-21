@@ -4,7 +4,7 @@
 
 import d3 from 'd3'
 import textures from 'textures'
-import {rodata} from './rodata'
+import {barChartRodata} from './rodata'
 import { fromAnsRadioResultToAnsCateNum } from './setForViz/fromAnsRadioResultToAnsCateNum'
 import { readAnsRadio } from './setForViz/readAnsRadio'
 import { vizStackChart } from './viz/vizStackChart'
@@ -74,7 +74,7 @@ const rectTxtCate={
   smallTalk: '世間話'
 }
 
-const txtViewFontSize = rodata.textViewFontSize
+const txtViewFontSize = barChartRodata.textViewFontSize
 
 let vizPart = (talker, task, orijinalSentence) => {
   let box = (talker, task, orijinalSentence) => {
@@ -101,11 +101,11 @@ const addTextToSVG = (x, y, text) => {
     .text(text)
 }
 
-const openC = rodata.color.open
-const closeC = rodata.color.close
-const aiduchiC = rodata.color.aiduchi
-const sekenC = rodata.color.seken
-const kaishakuC = rodata.color.kaishaku
+const openC = barChartRodata.color.open
+const closeC = barChartRodata.color.close
+const aiduchiC = barChartRodata.color.aiduchi
+const sekenC = barChartRodata.color.seken
+const kaishakuC = barChartRodata.color.kaishaku
 
 const height0 = 200
 const height = 200
@@ -129,7 +129,7 @@ const viz = (stackdataArr, allQueHatsugenCArr, bun, hatsugen, svg, ansCateNumArr
   var margin2 = {top: 10, right: 10, bottom: 50, left: 40}
 
   //var colorBun = ['#c0c0c0', loveC, friendC, workC]
-  const answerTextureChoiceArr = [noCateAnsC, loveC, friendC, workC, rodata.color.self.t, rodata.color.spiritual.t]
+  const answerTextureChoiceArr = [noCateAnsC, loveC, friendC, workC, barChartRodata.color.self.t, barChartRodata.color.spiritual.t]
 
   const axisDescriptionY = 240
 
@@ -482,7 +482,7 @@ const viz = (stackdataArr, allQueHatsugenCArr, bun, hatsugen, svg, ansCateNumArr
   }
 }
 
-const ansRadioFullLen=rodata.ansRadioFullLen
+const ansRadioFullLen=barChartRodata.ansRadioFullLen
 
 const createCircleWithTexture = () => { // example
   var svg = d3.select('#example')

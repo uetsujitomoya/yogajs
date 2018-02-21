@@ -1,4 +1,4 @@
-import { rodata } from '../rodata'
+import { barChartRodata } from '../rodata'
 
 const fromAnsRadioResultToAnsCateNum = (ansCateNumArr, ansRadioResult, keitaisokaiseki, ansBunAnd1stCateArr, RGBlist, bun) => {
 
@@ -18,7 +18,7 @@ const fromAnsRadioResultToAnsCateNum = (ansCateNumArr, ansRadioResult, keitaisok
     ansCateNumArr[allHatsugenNo] = []// svgでの描画ではm→hatsugenBunNo
     console.log("--")
     //console.log(keitaisokaiseki[allHatsugenNo])
-    for (let hatsugenBunNo = 0; hatsugenBunNo < bun[allHatsugenNo].length - rodata.keitaisokaisekiHatugenBunQtyGap; hatsugenBunNo++) {
+    for (let hatsugenBunNo = 0; hatsugenBunNo < bun[allHatsugenNo].length - barChartRodata.keitaisokaisekiHatugenBunQtyGap; hatsugenBunNo++) {
       ansCateNumArr[allHatsugenNo][hatsugenBunNo] = 0
       //for (let ansRadioResultCnt = 1; ansRadioResultCnt < ansBunAnd1stCateArr.length; ansRadioResultCnt++) {
       //if (bun[allHatsugenNo][hatsugenBunNo] === ansBunAnd1stCateArr[ansRadioResultCnt][0]) {

@@ -1,4 +1,4 @@
-import { rodata } from '../rodata'
+import { barChartRodata } from '../rodata'
 
 const readAnsRadio = (jsonFileName, storage, ansBunAnd1stCateArr, answerRadioResult, taiou, ansChBoxLen, isUsingDictionaryWithWord2Vec) => {
   let graphNumber = 2
@@ -17,29 +17,30 @@ const readAnsRadio = (jsonFileName, storage, ansBunAnd1stCateArr, answerRadioRes
 
     //console.log(changedAnswerClassificationSaveTarget) //json縮小時の差分を見る
 
-    const answerRadio = document.getElementById('r' + chBoxNo).children
-    for (let buttonNo = answerRadio.length - rodata.ansRadioFullLen, l = answerRadio.length; buttonNo < l; buttonNo++) {
-      if (answerRadio[buttonNo].control.checked) {
-        //console.log("answerRadio[buttonNo].control.value")
-        //console.log(answerRadio[buttonNo].control.value)
-        if (answerRadio[buttonNo].control.value === '1') {
+    const ansRadio = document.getElementById('r' + chBoxNo).children
+    console.log(ansRadio)
+    for (let buttonNo = ansRadio.length - barChartRodata.ansRadioFullLen, l = ansRadio.length; buttonNo < l; buttonNo++) {
+      if (ansRadio[buttonNo].control.checked) {
+        //console.log("ansRadio[buttonNo].control.value")
+        //console.log(ansRadio[buttonNo].control.value)
+        if (ansRadio[buttonNo].control.value === '1') {
           answerRadioResult[taiou[chBoxNo - 1]] = 1
           storage.setItem(changedAnswerClassificationSaveTarget, 0)
           break
-        } else if (answerRadio[buttonNo].control.value === '2') {
+        } else if (ansRadio[buttonNo].control.value === '2') {
           answerRadioResult[taiou[chBoxNo - 1]] = 2
           storage.setItem(changedAnswerClassificationSaveTarget, 1)
           break
-        } else if (answerRadio[buttonNo].control.value === '3') {
+        } else if (ansRadio[buttonNo].control.value === '3') {
           answerRadioResult[taiou[chBoxNo - 1]] = 3
           storage.setItem(changedAnswerClassificationSaveTarget, 2)
           break
-        } else if (answerRadio[buttonNo].control.value === '4') {
+        } else if (ansRadio[buttonNo].control.value === '4') {
           answerRadioResult[taiou[chBoxNo - 1]] = 4
           storage.setItem(changedAnswerClassificationSaveTarget, 3)
           //console.log(ansBunAnd1stCateArr[taiou[chBoxNo]][0])
           break
-        } else if (answerRadio[buttonNo].control.value === '5') {
+        } else if (ansRadio[buttonNo].control.value === '5') {
           answerRadioResult[taiou[chBoxNo - 1]] = 5
           storage.setItem(changedAnswerClassificationSaveTarget, 4)
           break

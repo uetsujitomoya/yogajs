@@ -30,7 +30,7 @@ const vizArrow = (svg, arrow, r, arrowId,　allBunArr) => {
     .attr({
       'id': 'arrowhead'+arrowId,
       // 矢印の位置を一番後ろから手前に少しずらす
-      //'refX': rodata.yajirushi_refX,
+      //'refX': barChartRodata.yajirushi_refX,
       //'refX': 4.5*Math.sqrt(r),
       "refX":yajirushi_refX,
       'refY': refY,

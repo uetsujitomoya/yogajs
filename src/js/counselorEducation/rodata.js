@@ -1,4 +1,4 @@
-const rodata={
+const barChartRodata={
   storageCsv:'csv/storage20171115.csv',
 
   color:{
@@ -45,8 +45,9 @@ const rodata={
 
   ansRadioFullLen:5,
 
-  keitaisokaisekiHatugenBunQtyGap:0
+  keitaisokaisekiHatugenBunQtyGap:0,
 
+  ansCateQty:5
 }
 
-export{rodata}
+export{barChartRodata}

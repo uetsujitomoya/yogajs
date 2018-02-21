@@ -4,6 +4,7 @@ import {select} from './select.js'
 import {setForViz} from './setForViz'
 import {slider} from 'bootstrap-slider'
 import { isEOHatsugen } from './wordparse/isEOHatsugen'
+import { barChartRodata } from './rodata'
 
 let zoomVal = 3
 
@@ -70,7 +71,7 @@ const classifyWithFirstWordDictionary = (name, aBunWordArr, checkboxlist, chboxl
   var startTime = new Date()
   console.log(startTime)
 
-  var h, hatsugenBunCnt, aBunWordCnt, k, hatsugenCnt, afterMorphologicalAnalysisWordsCnt, c, x, y, z
+  var ansCateNo, hatsugenBunCnt, aBunWordCnt, k, hatsugenCnt, afterMorphologicalAnalysisWordsCnt, c, x, y, z
   var hinshi = []
   var ansBunCategory = []
   let ranshin = []
@@ -297,40 +298,40 @@ const classifyWithFirstWordDictionary = (name, aBunWordArr, checkboxlist, chboxl
       miserables.nodes[hatsugenBunCnt] = wordSet2[hatsugenBunCnt].t
     }
     var RGBk = []
-    for (h = 0; h <= 2; h++) {
-      RGBk[h] = []
+    for (ansCateNo = 0; ansCateNo < barChartRodata.ansCateQty; ansCateNo++) {
+      RGBk[ansCateNo] = []
       for (k = 0; k < miserables.nodes.length; k++) {
-        RGBk[h][k] = 0
+        RGBk[ansCateNo][k] = 0
         for (hatsugenCnt = 1; hatsugenCnt < aBunWordArr.length; hatsugenCnt = hatsugenCnt + 2) {
           for (hatsugenBunCnt = 0; hatsugenBunCnt < aBunWordArr[hatsugenCnt].length; hatsugenBunCnt++) {
-            if (ansBunCategory[hatsugenCnt][hatsugenBunCnt][h] === 1) {
+            if (ansBunCategory[hatsugenCnt][hatsugenBunCnt][ansCateNo] === 1) {
               for (aBunWordCnt = 0; aBunWordCnt < aBunWordArr[hatsugenCnt][hatsugenBunCnt].length; aBunWordCnt++) {
                 if (miserables.nodes[k] === aBunWordArr[hatsugenCnt][hatsugenBunCnt][aBunWordCnt]) {
-                  RGBk[h][k] = 1
+                  RGBk[ansCateNo][k] = 1
                   break
                 }
               }
             }
-            if (RGBk[h][k] === 1) {
+            if (RGBk[ansCateNo][k] === 1) {
               break
             }
           }
-          if (RGBk[h][k] === 1) {
+          if (RGBk[ansCateNo][k] === 1) {
             break
           }
         }
       }
     }
 
-    for (h = 0; h <= 2; h++) {
+    for (ansCateNo = 0; ansCateNo < barChartRodata.ansCateQty; ansCateNo++) {
       for (k = 0; k < miserables.nodes.length; k++) {
-        if (RGBk[h][k] === 1) {
+        if (RGBk[ansCateNo][k] === 1) {
           for (hatsugenCnt = 1; hatsugenCnt < aBunWordArr.length; hatsugenCnt = hatsugenCnt + 2) {
             for (hatsugenBunCnt = 0; hatsugenBunCnt < aBunWordArr[hatsugenCnt].length; hatsugenBunCnt++) {
-              if (ansBunCategory[hatsugenCnt][hatsugenBunCnt][h] === 0) {
+              if (ansBunCategory[hatsugenCnt][hatsugenBunCnt][ansCateNo] === 0) {
                 for (aBunWordCnt = 0; aBunWordCnt < aBunWordArr[hatsugenCnt][hatsugenBunCnt].length; aBunWordCnt++) {
                   if (miserables.nodes[k] === aBunWordArr[hatsugenCnt][hatsugenBunCnt][aBunWordCnt]) {
-                    ansBunCategory[hatsugenCnt][hatsugenBunCnt][h] = 1
+                    ansBunCategory[hatsugenCnt][hatsugenBunCnt][ansCateNo] = 1
                     break
                   }
                 }
@@ -348,24 +349,24 @@ const classifyWithFirstWordDictionary = (name, aBunWordArr, checkboxlist, chboxl
     console.log("bun")
     console.log(aBunContentArr)
 
-    var sResult = select(name, storage, checkboxlist, aBunWordArr, miserables, chboxlist, chboxlist2, ansBunCategory, RGBlist, hatsugenArr, aBunContentArr, ansRadioResult, checked2, taiou, taiou2, chboxlength, chboxlength2)
+    var selectResult = select(name, storage, checkboxlist, aBunWordArr, miserables, chboxlist, chboxlist2, ansBunCategory, RGBlist, hatsugenArr, aBunContentArr, ansRadioResult, checked2, taiou, taiou2, chboxlength, chboxlength2)
 
-    checkboxlist = sResult.checkboxlist
-    chboxlist = sResult.chboxlist
-    chboxlist2 = sResult.chboxlist2
-    ansBunCategory = sResult.RGB
-    RGBlist = sResult.RGBlist
-    ansRadioResult = sResult.checked
-    checked2 = sResult.checked2
-    taiou = sResult.taiou
-    taiou2 = sResult.taiou2
-    chboxlength = sResult.chboxlength
-    chboxlength2 = sResult.chboxlength2
+    checkboxlist = selectResult.checkboxlist
+    chboxlist = selectResult.chboxlist
+    chboxlist2 = selectResult.chboxlist2
+    ansBunCategory = selectResult.RGB
+    RGBlist = selectResult.RGBlist
+    ansRadioResult = selectResult.checked
+    checked2 = selectResult.checked2
+    taiou = selectResult.taiou
+    taiou2 = selectResult.taiou2
+    chboxlength = selectResult.chboxlength
+    chboxlength2 = selectResult.chboxlength2
     console.log(chboxlength2)
-    var answerNumbermax = sResult.answerNumbermax
-    var questionNumbermax = sResult.questionNumbermax
+    var answerNumbermax = selectResult.answerNumbermax
+    var questionNumbermax = selectResult.questionNumbermax
 
-    // graph = sResult.graph;
+    // graph = selectResult.graph;
     // console.log("chboxlength2=%d",chboxlength2)
 
     let setForVizInput = {

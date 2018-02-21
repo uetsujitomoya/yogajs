@@ -23,7 +23,7 @@ let nodeArr = []
 let verbArr = []
 
 const mainOfCharaChart = (knpCsv,bunArrCsv) => {
-  //const knpArr = csv2Arr(rodata.knpCsvFolder+rodata.knpCsvName+".csv")
+  //const knpArr = csv2Arr(barChartRodata.knpCsvFolder+barChartRodata.knpCsvName+".csv")
   const knpArr = fromCsvTxt2Arr(knpCsv)
   //console.log(knpArr)
   let nodeArr=[]

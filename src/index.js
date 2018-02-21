@@ -308,11 +308,12 @@ function TransposeMatrix (ary) {return ary.reduce(B, [])}
 
 
 
-/* storageSave-button
-document.getElementById('storageSave-button').addEventListener('click', function () {
-    localStorage.clear();
+
+document.getElementById('storageClear-button').addEventListener('click', function () {
+  console.log(localStorage.clear)
+  localStorage.clear();
 });
- */
+
 
 
 //export {csv2Arr, TransposeMatrix, downloadAsCSV}
@@ -321,24 +322,24 @@ document.getElementById('storageSave-button').addEventListener('click', function
 function downloadAsCSV (filename, csv_array) {
   let filenameWithExtension = filename + '.csv'
 
-    // 配列をTAB区切り文字列に変換
+  // 配列をTAB区切り文字列に変換
   var csv_string = ''
   for (let i = 0; i < csv_array.length; i++) {
     csv_string += csv_array[i].join(',')
     csv_string += '\n'
   }
 
-    // ファイル作成
+  // ファイル作成
   let blob = new Blob([csv_string], {
     type: 'text/csv'
   })
 
-    // ダウンロード実行...(2)
+  // ダウンロード実行...(2)
   if (window.navigator.msSaveOrOpenBlob) {
-        // IEの場合
+    // IEの場合
     navigator.msSaveBlob(blob, filenameWithExtension)
   } else {
-        // IE以外(Chrome, Firefox)
+    // IE以外(Chrome, Firefox)
     var downloadLink = $('<a></a>')
     downloadLink.attr('href', window.URL.createObjectURL(blob))
     downloadLink.attr('download', filenameWithExtension)
@@ -351,40 +352,40 @@ function downloadAsCSV (filename, csv_array) {
 }
 
 let storage2csv = () => {
-    // var storage = localStorage; //http://hakuhin.jp/js/storage.html#STORAGE_00
+  // var storage = localStorage; //http://hakuhin.jp/js/storage.html#STORAGE_00
 
-    // ウェブストレージに対応している http://hakuhin.jp/js/storage.html#STORAGE_GET_KEYS
-    // if(window.localStorage){
+  // ウェブストレージに対応している http://hakuhin.jp/js/storage.html#STORAGE_GET_KEYS
+  // if(window.localStorage){
 
-    // ------------------------------------------------------------
-    // キーの総数を取得する
-    // ------------------------------------------------------------
+  // ------------------------------------------------------------
+  // キーの総数を取得する
+  // ------------------------------------------------------------
   var num = window.localStorage.length
 
-    // ------------------------------------------------------------
-    // ストレージからすべてのキーを取得する
-    // ------------------------------------------------------------
+  // ------------------------------------------------------------
+  // ストレージからすべてのキーを取得する
+  // ------------------------------------------------------------
   var i
   let csv_array = []
   for (i = 0; i < num; i++) {
     csv_array[i] = []
 
-        // 位置を指定して、ストレージからキーを取得する
+    // 位置を指定して、ストレージからキーを取得する
     csv_array[i][0] = window.localStorage.key(i)
 
-        // ストレージからデータを取得する
+    // ストレージからデータを取得する
 
     csv_array[i][1] = window.localStorage.getItem(csv_array[i][0])
 
-        // 出力テスト
+    // 出力テスト
     console.log('name:' + csv_array[i][0] + ' value:' + csv_array[i][1])
   }
   console.log('csv_array')
   console.log(csv_array)
 
-    // }
+  // }
 
-    // CSVに記載するデータ配列
+  // CSVに記載するデータ配列
   return csv_array
 }
 
