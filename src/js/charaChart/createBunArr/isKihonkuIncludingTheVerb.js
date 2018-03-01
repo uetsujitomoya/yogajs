@@ -1,5 +1,5 @@
 import { isVerb } from './isVerb'
-import { charaChartSetting } from '../setting'
+import { charaChartRodata } from '../rodata'
 
 const isKihonkuIncludingTheVerb = (kihonku,verb) => {
 
@@ -8,8 +8,8 @@ const isKihonkuIncludingTheVerb = (kihonku,verb) => {
 
  // if(kihonku.)
 
- //console.log(kihonku.knpArr[charaChartSetting.kihonku1stJpRowNo][charaChartSetting.knpSurfaceFormColNo])
-/*  if(kihonku.knpArr[charaChartSetting.kihonku1stJpRowNo][charaChartSetting.knpSurfaceFormColNo]==="+"){
+ //console.log(kihonku.knpArr[charaChartRodata.kihonku1stJpRowNo][charaChartRodata.knpSurfaceFormColNo])
+/*  if(kihonku.knpArr[charaChartRodata.kihonku1stJpRowNo][charaChartRodata.knpSurfaceFormColNo]==="+"){
     console.log(kihonku.knpArr)
   }*/
   //console.log(verb.surfaceForm)

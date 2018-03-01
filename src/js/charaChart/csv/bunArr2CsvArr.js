@@ -1,5 +1,5 @@
 import { EscapeSJIS, UnescapeSJIS } from '../../ecl'
-import { charaChartSetting } from '../setting'
+import { charaChartRodata } from '../rodata'
 
 const bunArr2CsvArr=(bunArr)=>{
 

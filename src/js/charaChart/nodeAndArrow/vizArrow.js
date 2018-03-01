@@ -2,27 +2,27 @@
  * Created by uetsujitomoya on 2017/09/04.
  */
 
-import {charaChartSetting} from '../setting'
+import {charaChartRodata} from '../rodata'
 import {viewArrowTxt} from '../viewText/viewArrowTxt'
 import * as d3 from 'd3'
-const markerFillColor = charaChartSetting.markerFillColor
-const yajirushi_refX = charaChartSetting.yajirushi_refX
-const refY=charaChartSetting.refY
+const markerFillColor = charaChartRodata.markerFillColor
+const yajirushi_refX = charaChartRodata.yajirushi_refX
+const refY=charaChartRodata.refY
 const vizArrow = (svg, arrow, r, arrowId,　allBunArr) => {
   //let circle_data_array = [[nodeArray[0].x, nodeArray[0].y, r], [nodeArray[1].x, nodeArray[1].y, r]]
   //出発点の取得失敗？
   let color=null
   if (arrow.subject.isClient) {
     if(arrow.isBlue){
-      color= charaChartSetting.kawaisounaClientArrowColor
+      color= charaChartRodata.kawaisounaClientArrowColor
     }else{
-      color= charaChartSetting.clientArrowColor
+      color= charaChartRodata.clientArrowColor
     }
   } else {
     if(arrow.isBlue){
-      color= charaChartSetting.situationDependencyPeopleColor
+      color= charaChartRodata.situationDependencyPeopleColor
     }else{
-      color= charaChartSetting.aroundClientPeopleArrowColor
+      color= charaChartRodata.aroundClientPeopleArrowColor
     }
 
   }
@@ -30,18 +30,18 @@ const vizArrow = (svg, arrow, r, arrowId,　allBunArr) => {
     .attr({
       'id': 'arrowhead'+arrowId,
       // 矢印の位置を一番後ろから手前に少しずらす
-      //'refX': charaChartSetting.yajirushi_refX,
+      //'refX': charaChartRodata.yajirushi_refX,
       //'refX': 4.5*Math.sqrt(r),
       "refX":yajirushi_refX,
       'refY': refY,
-      'markerWidth': charaChartSetting.markerWitdh,
-      'markerHeight': charaChartSetting.markerHeight,
+      'markerWidth': charaChartRodata.markerWitdh,
+      'markerHeight': charaChartRodata.markerHeight,
       'orient': 'auto',
       "markerUnits":"userSpaceOnUse"
     })
   marker.append('path')
     .attr({
-      "d": charaChartSetting.markerPath,
+      "d": charaChartRodata.markerPath,
       "fill": color
     })
     .on('click', ()=>{
@@ -58,7 +58,7 @@ const vizArrow = (svg, arrow, r, arrowId,　allBunArr) => {
       'stroke-width': arrow.strokeWidth,
       'fill': 'none',
       'marker-end': ()=>{
-        if(charaChartSetting.viewMarkEnd){
+        if(charaChartRodata.viewMarkEnd){
           return 'url(#arrowhead'+arrowId+')'
         }else{
           return null

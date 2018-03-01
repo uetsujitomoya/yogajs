@@ -12,19 +12,20 @@ import {fixNodePoint} from './chara/fixNodePoint'
 import {searchMaenoBunForShugo} from './createBunArr/SO/searchMaenoBunForS'
 import {saveBunArrJson} from './saveBunArrJson'
 import { downloadJson } from './downloadJson'
-import {charaChartSetting} from './setting'
+import {charaChartRodata} from './rodata'
 import {downloadAsTask} from './downloadAsTask'
 import { outputBunArrCsv } from './csv/outputBunArrCsv'
 import { inputBunArrCsv } from './csv/inputBunArrCsv'
 import {applySlider} from './slider'
 import { fromCsvTxt2Arr } from './csv/getCSVFile'
+import { vizSliderBarChart } from './sliderBarChart/vizSliderBarChart'
 
 let nodeArr = []
 let verbArr = []
 
 const mainOfCharaChart = (knpCsv,bunArrCsv,isToOutputBunArr) => {
-  charaChartSetting.nodeCnt=0
-  //const knpArr = csv2Arr(charaChartSetting.knpCsvFolder+charaChartSetting.knpCsvName+".csv")
+  charaChartRodata.nodeCnt=0
+  //const knpArr = csv2Arr(charaChartRodata.knpCsvFolder+charaChartRodata.knpCsvName+".csv")
   const knpArr = fromCsvTxt2Arr(knpCsv)
   //console.log(knpArr)
   let nodeArr=[]
@@ -37,17 +38,17 @@ const mainOfCharaChart = (knpCsv,bunArrCsv,isToOutputBunArr) => {
     inputBunArrCsv(bunArr,bunArrCsv)
   }
 
-  if(charaChartSetting.isSingleSlider&&charaChartSetting.checkBoxCommentOut){
+  if(charaChartRodata.isSingleSlider&&charaChartRodata.checkBoxCommentOut){
     const selectedArea = {
       start: 0,
-      end: 0+charaChartSetting.singleSliderSelectLen
+      end: 0+charaChartRodata.singleSliderSelectLen
     }
     applySlider(selectedArea, bunArr,nodeArr)
   }else{
     createArrowArr(bunArr, nodeArr,bunArr)
   }
 
-
+  vizSliderBarChart()
   manageSlider(bunArr,nodeArr)
 }
 

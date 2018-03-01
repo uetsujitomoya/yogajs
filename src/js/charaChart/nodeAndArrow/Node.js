@@ -2,11 +2,11 @@
  * Created by uetsujitomoya on 2017/08/29.
  */
 
-import {charaChartSetting } from '../setting'
+import {charaChartRodata } from '../rodata'
 
 let r
-const orbitR=charaChartSetting.orbitR
-//onst orbitOPoint = charaChartSetting.orbitOY
+const orbitR=charaChartRodata.orbitR
+//onst orbitOPoint = charaChartRodata.orbitOY
 
 let nodeCnt = 0
 /*
@@ -36,14 +36,14 @@ export default class Node {
     }
     this.nodeCharacter = name
     this.circleStrokeWidth = 1
-    this.nodeIdx=charaChartSetting.nodeCnt
+    this.nodeIdx=charaChartRodata.nodeCnt
     this.viz=false
 
     this.bluePt=0
     this.redPt=0
     //this.updateColor(verb.isBlueCircleColor)
 
-    charaChartSetting.nodeCnt++
+    charaChartRodata.nodeCnt++
   }
 
   addStrokeWidth () {
@@ -52,8 +52,8 @@ export default class Node {
   }
   fixPoint(nodeArrLen){
     this.radian = (this.nodeIdx/nodeArrLen)*2*Math.PI
-    this.x = charaChartSetting.orbitOX + orbitR * Math.cos(this.radian)
-    this.y = charaChartSetting.orbitOY - orbitR * Math.sin(this.radian)
+    this.x = charaChartRodata.orbitOX + orbitR * Math.cos(this.radian)
+    this.y = charaChartRodata.orbitOY - orbitR * Math.sin(this.radian)
     r = orbitR / (nodeArrLen * 200)
   }
   pushToBunArr(bun){

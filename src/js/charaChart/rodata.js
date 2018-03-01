@@ -17,7 +17,7 @@ const color={
   }
 }
 
-const charaChartSetting={
+const charaChartRodata={
   bunsetsuSymbol:'*',
   kihonkuSymbol:'+',
   bunsetsu1stJpRowNo:2,
@@ -83,6 +83,8 @@ const charaChartSetting={
   isFizedArrowWigth:true,
 
   nodeCnt:0
+
+  
 }
 
-export {charaChartSetting}
+export {charaChartRodata}
