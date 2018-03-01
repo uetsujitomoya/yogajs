@@ -18,6 +18,7 @@ import { outputBunArrCsv } from './csv/outputBunArrCsv'
 import { inputBunArrCsv } from './csv/inputBunArrCsv'
 import {applySlider} from './slider'
 import { fromCsvTxt2Arr } from './csv/getCSVFile'
+import { vizSliderBarChart } from './sliderBarChart/vizSliderBarChart'
 
 let nodeArr = []
 let verbArr = []
@@ -42,7 +43,7 @@ const mainOfCharaChart = (knpCsv,bunArrCsv) => {
     createArrowArr(bunArr, nodeArr,bunArr)
   }
 
-
+  vizSliderBarChart()
   manageSlider(bunArr,nodeArr)
 }
 
