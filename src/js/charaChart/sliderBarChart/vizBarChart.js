@@ -4,19 +4,21 @@ import { charaChartRodata } from '../rodata'
 const vizBarChart=(strArr,svg,barLenArr,fullW,axisShiftX,chartShiftX)=>{
 
   //let axisShiftX = 68
+  console.log(barLenArr)
 
   var xScale = d3.scale.linear()
     .domain([0, d3.sum(barLenArr) / 10])
     .range([axisShiftX, fullW - axisShiftX])
 
   let tooltip = d3.select("body").select("#tooltip")
-  let row = 0// graph3の行番号
+ // let row = 0// graph3の行番号
   // 階層構造をとるため，g要素を生成する部分とrect要素を生成している部分が連続している．
   svg.selectAll('g')
     .data(strArr)
     .enter()
     .append('g')
     .attr('transform', function (d, i) {
+      console.log(i)
       return 'translate(0,' + (i * 50) + ')'
     })
     .selectAll('rect')

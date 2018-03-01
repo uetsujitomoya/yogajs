@@ -31,7 +31,6 @@ export default class BunVerb {
   }
   rewriteSubjectAndAddBun2Node (realNode, bun) {
     this.subject = realNode
-    console.log(realNode)
     realNode.bunArr.push(
       {
         bunNo: bun.bunNo,

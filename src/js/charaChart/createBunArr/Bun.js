@@ -138,7 +138,6 @@ export default class Bun {
       if (tmpClause.isSubject) {
         this.bunsetsuArray[ verbBunsetsuNo ].subject_of_verb = tmpClause.subject
         //モノホンのnodeもってこないといけない。
-        console.log(nodeArr)
         this.verbArr[tempVerbNum].rewriteSubjectAndAddBun2Node(nodeArr[tmpClause.subject.nodeIdx], this)
         break
       }else{
