@@ -4,9 +4,9 @@
 
 
 import {isCharacter} from '../chara/isChara'
-// import BunVerb from "../js/create_verbInSentence_class.js"
 import {createsvg} from '../nodeAndArrow/arrowNode.js'
 import Bun from './Bun'
+import { borderBunNoArr } from '../sliderBarChart/borderBunNoArr'
 
 //const firstJapaneseRowIdxInBunsetsu = 2
 
@@ -18,7 +18,11 @@ const createBunArr = (raw2dArr, nodeArr) =>
   let tmpRowNo = 0
   for(const row of raw2dArr){
     if (row[0] !== 'EOS') {
-      tmpBun2dArr.push(row)
+      if(row[0]==="///"){
+        borderBunNoArr.push(bunNo)
+      }else{
+        tmpBun2dArr.push(row)
+      }
     } else {
       //console.log(bunNo)
      bunArr.push(
