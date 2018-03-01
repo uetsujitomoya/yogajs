@@ -79,6 +79,15 @@ const vizSliderBarChart=()=>{
       }
 
     })
+    .on("mouseover", function(d,rectNo){
+
+      console.log(strArr[rectNo])
+
+        return tooltip.style("visibility", "visible").text(strArr[rectNo]);
+
+    })//吹き出し
+    .on("mousemove", function(d){return tooltip.style("top", (event.pageY-20)+"px").style("left",(event.pageX+10)+"px");})
+    .on("mouseout", function(d){return tooltip.style("visibility", "hidden");})
 
 }
 
