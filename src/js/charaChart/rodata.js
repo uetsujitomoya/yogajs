@@ -89,7 +89,7 @@ const charaChartRodata={
     h:50,
     id:"#sliderbarchart",
     axisShiftX:58,
-    chartShiftX:50
+    chartShiftX:85
   }
 }
 
