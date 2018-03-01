@@ -4,7 +4,7 @@
 
 import d3 from 'd3'
 import $ from 'jquery'
-import {rodata} from '../rodata'
+import {charaChartRodata} from '../rodata'
 import {r} from './Node'
 import {viewNodeTxt} from '../viewText/viewNodeTxt'
 
@@ -34,9 +34,9 @@ const vizNodes = (svg,nodeArr,sliderBunArr,r,allBunArr) => {
 
     'fill':  function (node) {
       if (node.isBlue) {
-        return rodata.aroundClientPeopleNodeColor
+        return charaChartRodata.aroundClientPeopleNodeColor
       } else {
-        return rodata.clientNodeColor
+        return charaChartRodata.clientNodeColor
       }
     },
 
@@ -50,8 +50,8 @@ const vizNodes = (svg,nodeArr,sliderBunArr,r,allBunArr) => {
     .attr({
       'text-anchor': 'middle',
       'dy': '.100em',
-      'fill': rodata.charaNameColor,
-      "font-size":rodata.circleFontSize
+      'fill': charaChartRodata.charaNameColor,
+      "font-size":charaChartRodata.circleFontSize
     })
     .text(function (d) {
       //if(d.nodeCharacter==="Aさん"){alert("Aさん")}
@@ -63,7 +63,7 @@ const vizNodes = (svg,nodeArr,sliderBunArr,r,allBunArr) => {
 }
 
 let removeSVG = () => {
-  d3.select(rodata.charaChartAreaID).select('svg').remove()
+  d3.select(charaChartRodata.charaChartAreaID).select('svg').remove()
 }
 
 export {vizNodes, removeSVG}

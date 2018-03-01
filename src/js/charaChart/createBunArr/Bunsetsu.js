@@ -1,4 +1,4 @@
-import {rodata} from '../rodata'
+import {charaChartRodata} from '../rodata'
 import Word from './Word'
 import {isCharacter,searchNodeArrayForCharacterAndPoint} from '../chara/isChara'
 import {isVerb} from './isVerb'
@@ -8,7 +8,7 @@ import {addSVO2Bunsetsu
 } from './SO/addSVO2bunsetsu'
 import { unifyNotaion } from '../chara/unifyNotation'
 
-const bunsetsu1stJpRIdx=rodata.bunsetsu1stJpRowNo
+const bunsetsu1stJpRIdx=charaChartRodata.bunsetsu1stJpRowNo
 
 export default class Bunsetsu {
   constructor (no, input2dArr, charaArr, bun) {
@@ -45,7 +45,7 @@ export default class Bunsetsu {
       const jp1stNo = 2
       for (let rowCnt = jp1stNo; rowCnt < bunsetsuRaw2dArray.length; rowCnt++) {
         let tmpRow = bunsetsuRaw2dArray[rowCnt]
-        if (tmpRow[0] === rodata.kihonkuSymbol) { // 文節内 2こ目以降の基本句
+        if (tmpRow[0] === charaChartRodata.kihonkuSymbol) { // 文節内 2こ目以降の基本句
           this.kihonkuArr[kihonkuIdxInBunsetsu] = new KihonkuInBunsetsu(tmp2dArrForKihonku)// 文の中の通し番号での基本句array
           tmp2dArrForKihonku = []
           kihonkuIdxInBunsetsu++

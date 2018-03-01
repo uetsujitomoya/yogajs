@@ -2,10 +2,10 @@
  * Created by uetsujitomoya on 2017/08/29.
  */
 
-import {rodata } from '../rodata'
+import {charaChartRodata } from '../rodata'
 
 let r
-const orbitR=rodata.orbitR
+const orbitR=charaChartRodata.orbitR
 //onst orbitOPoint = barChartRodata.orbitOY
 
 let nodeCnt = 0
@@ -52,8 +52,8 @@ export default class Node {
   }
   fixPoint(nodeArrLen){
     this.radian = (this.nodeIdx/nodeArrLen)*2*Math.PI
-    this.x = rodata.orbitOX + orbitR * Math.cos(this.radian)
-    this.y = rodata.orbitOY - orbitR * Math.sin(this.radian)
+    this.x = charaChartRodata.orbitOX + orbitR * Math.cos(this.radian)
+    this.y = charaChartRodata.orbitOY - orbitR * Math.sin(this.radian)
     r = orbitR / (nodeArrLen * 200)
   }
   pushToBunArr(bun){

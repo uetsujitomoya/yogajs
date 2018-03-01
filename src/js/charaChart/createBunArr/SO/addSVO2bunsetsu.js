@@ -1,9 +1,9 @@
 
 import {searchNodeArr} from './searchNodeArrForCharaAndPointForBunsetsuSO'
 
-import {rodata} from '../../rodata'
+import {charaChartRodata} from '../../rodata'
 
-const bunsetsu1stJpRowNo=rodata.bunsetsu1stJpRowNo
+const bunsetsu1stJpRowNo=charaChartRodata.bunsetsu1stJpRowNo
 
 const addSVO2Bunsetsu=(charaArr, tmpName, bunsetsu,bun)=> {
   //文中で登場人物を見つける。

@@ -1,6 +1,6 @@
 import 'kuromoji'
 import {select} from './select.js'
-import {setForViz} from './viz.js'
+import {setForViz} from './vizFlowBarChart.js'
 export const makeOnClick = (c) => {
   document.getElementById('b' + c).onclick = () => {
     const id = 'r' + c

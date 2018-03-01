@@ -1,6 +1,6 @@
 import Bunsetsu from './Bunsetsu.js'
 import BunKihonku from './Kihonku.js'
-import {rodata} from '../rodata'
+import {charaChartRodata} from '../rodata'
 import BunVerb from './BunVerb'
 import {searchMaenoBunForShugo} from './SO/searchMaenoBunForS'
 
@@ -8,11 +8,23 @@ const bun1stBunsetsuRId = 1
 const bun1stKihonkuRId = 2
 const bun1stJapaneseRId = 3
 
-const bunsetsuSymbol = rodata.bunsetsuSymbol
-const kihonkuSymbol = rodata.kihonkuSymbol
+const bunsetsuSymbol = charaChartRodata.bunsetsuSymbol
+const kihonkuSymbol = charaChartRodata.kihonkuSymbol
 
 export default class Bun {
   constructor (rawRId, bun2dArrFromKNP, nodeArr, bunNo, bunArr) {
+
+    this.conversationFlow={
+      isAns:null,
+      ans:{
+        group:null,
+      },
+      que:{
+        firstBunNo:null,
+        gropu:null,
+        endBunNo:null
+      }
+    }
 
     this.charaNameArr=[]
 

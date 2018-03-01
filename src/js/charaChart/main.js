@@ -12,7 +12,7 @@ import {fixNodePoint} from './chara/fixNodePoint'
 import {searchMaenoBunForShugo} from './createBunArr/SO/searchMaenoBunForS'
 import {saveBunArrJson} from './saveBunArrJson'
 import { downloadJson } from './downloadJson'
-import {rodata} from './rodata'
+import {charaChartRodata} from './rodata'
 import {downloadAsTask} from './downloadAsTask'
 import { outputBunArrCsv } from './csv/outputBunArrCsv'
 import { inputBunArrCsv } from './csv/inputBunArrCsv'
@@ -32,10 +32,10 @@ const mainOfCharaChart = (knpCsv,bunArrCsv) => {
   const bunArr = createBunArr(knpArr, nodeArr)
   //outputBunArrCsv(bunArr)
   inputBunArrCsv(bunArr,bunArrCsv)
-  if(rodata.isSingleSlider&&rodata.checkBoxCommentOut){
+  if(charaChartRodata.isSingleSlider&&charaChartRodata.checkBoxCommentOut){
     const selectedArea = {
       start: 0,
-      end: 0+rodata.singleSliderSelectLen
+      end: 0+charaChartRodata.singleSliderSelectLen
     }
     applySlider(selectedArea, bunArr,nodeArr)
   }else{

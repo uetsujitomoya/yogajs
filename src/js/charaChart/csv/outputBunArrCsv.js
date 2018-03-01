@@ -1,7 +1,7 @@
 import { bunArr2CsvArr } from './bunArr2CsvArr'
 import { downloadAsCSV } from '../../manageCsv/downloadAsCsv'
 import { now, today, year } from '../../getDate'
-import { rodata } from '../rodata'
+import { charaChartRodata } from '../rodata'
 
 const outputBunArrCsv = (bunArr)=>{
 
@@ -12,7 +12,7 @@ const outputBunArrCsv = (bunArr)=>{
   //kanshaKoken
 
   const csvArr = bunArr2CsvArr(bunArr)
-  downloadAsCSV( now+"_" + rodata.knpCsvName +"_withPeople" , csvArr )
+  downloadAsCSV( now+"_" + charaChartRodata.knpCsvName +"_withPeople" , csvArr )
 
 }
 

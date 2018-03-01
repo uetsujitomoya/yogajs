@@ -1,5 +1,5 @@
 import { isVerb } from './isVerb'
-import { rodata } from '../rodata'
+import { charaChartRodata } from '../rodata'
 
 const isKihonkuIncludingTheVerb = (kihonku,verb) => {
 

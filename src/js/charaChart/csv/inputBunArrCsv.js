@@ -1,6 +1,6 @@
 import { EscapeSJIS, UnescapeSJIS } from '../../ecl'
 import { csv2Arr } from '../../manageCsv/csv2Arr'
-import { rodata } from '../rodata'
+import { charaChartRodata } from '../rodata'
 import { hasNoObject, isNeededBunToSearch, isNeededVerbForCsv } from './bunArr2CsvArr'
 import { fromCsvTxt2Arr } from './getCSVFile'
 

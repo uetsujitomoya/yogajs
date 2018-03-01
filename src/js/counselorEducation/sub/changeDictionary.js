@@ -1,7 +1,7 @@
 
 import 'kuromoji'
 import {select} from '../select.js'
-import {setForViz} from '../viz.js'
+import {setForViz} from '../vizFlowBarChart.js'
 import {makeOnClickS, makeOnClick} from '../originWordparse.js'
 
 var ClassifyWithWordDictionary = (jsonFileName, event, keitaisokaiseki, chboxlist, chboxlist2, hatsugen, bun, checked, checked2, taiou, taiou2, chboxlength, chboxlength2, newLoveDictionary, newWorkDictionary, newFriendDictionary) => {

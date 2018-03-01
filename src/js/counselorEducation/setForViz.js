@@ -3,7 +3,7 @@ import { fromAnsRadioResultToAnsCateNum } from './setForViz/fromAnsRadioResultTo
 import { readAnsRadio } from './setForViz/readAnsRadio'
 import { readQueRadio } from './setForViz/readQueRadio'
 import {barChartRodata} from './rodata'
-import {viz} from './viz'
+import {viz} from './vizFlowBarChart'
 
 const setForViz = (name, storage, keitaisokaiseki, ansBunAnd1stCateArr, queBunAnd1stCateArr, RGBlist, hatsugen, hatsugenBunContentArr, ansRadioResult, queRadioResult, taiou, taiou2, ansChBoxLen, queChBoxLen, startTime, graph, ranshin, zoomVal) => {
   let isUsingDictionaryWithWord2Vec = 0

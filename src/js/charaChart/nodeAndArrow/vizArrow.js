@@ -2,27 +2,27 @@
  * Created by uetsujitomoya on 2017/09/04.
  */
 
-import {rodata} from '../rodata'
+import {charaChartRodata} from '../rodata'
 import {viewArrowTxt} from '../viewText/viewArrowTxt'
 import * as d3 from 'd3'
-const markerFillColor = rodata.markerFillColor
-const yajirushi_refX = rodata.yajirushi_refX
-const refY=rodata.refY
+const markerFillColor = charaChartRodata.markerFillColor
+const yajirushi_refX = charaChartRodata.yajirushi_refX
+const refY=charaChartRodata.refY
 const vizArrow = (svg, arrow, r, arrowId,　allBunArr) => {
   //let circle_data_array = [[nodeArray[0].x, nodeArray[0].y, r], [nodeArray[1].x, nodeArray[1].y, r]]
   //出発点の取得失敗？
   let color=null
   if (arrow.subject.isClient) {
     if(arrow.isBlue){
-      color= rodata.kawaisounaClientArrowColor
+      color= charaChartRodata.kawaisounaClientArrowColor
     }else{
-      color= rodata.clientArrowColor
+      color= charaChartRodata.clientArrowColor
     }
   } else {
     if(arrow.isBlue){
-      color= rodata.situationDependencyPeopleColor
+      color= charaChartRodata.situationDependencyPeopleColor
     }else{
-      color= rodata.aroundClientPeopleArrowColor
+      color= charaChartRodata.aroundClientPeopleArrowColor
     }
 
   }
@@ -34,14 +34,14 @@ const vizArrow = (svg, arrow, r, arrowId,　allBunArr) => {
       //'refX': 4.5*Math.sqrt(r),
       "refX":yajirushi_refX,
       'refY': refY,
-      'markerWidth': rodata.markerWitdh,
-      'markerHeight': rodata.markerHeight,
+      'markerWidth': charaChartRodata.markerWitdh,
+      'markerHeight': charaChartRodata.markerHeight,
       'orient': 'auto',
       "markerUnits":"userSpaceOnUse"
     })
   marker.append('path')
     .attr({
-      "d": rodata.markerPath,
+      "d": charaChartRodata.markerPath,
       "fill": color
     })
     .on('click', ()=>{
@@ -58,7 +58,7 @@ const vizArrow = (svg, arrow, r, arrowId,　allBunArr) => {
       'stroke-width': arrow.strokeWidth,
       'fill': 'none',
       'marker-end': ()=>{
-        if(rodata.viewMarkEnd){
+        if(charaChartRodata.viewMarkEnd){
           return 'url(#arrowhead'+arrowId+')'
         }else{
           return null

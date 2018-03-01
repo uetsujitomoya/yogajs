@@ -1,12 +1,12 @@
 import {createTxtViewArea} from './createTxtViewArea'
-import { rodata } from '../rodata'
+import { charaChartRodata } from '../rodata'
 import { nowWatchingArrowOrNode } from '../nowWatchingArrowOrNode'
 import { viewWhatIsClicked } from './viewWhatIsClicked'
 
 let preBunNo=null
 
 const viewArrowTxt = (arrow, allBunArr) => {
-  if(!rodata.isOnlyViz){
+  if(!charaChartRodata.isOnlyViz){
     nowWatchingArrowOrNode.arrow={
       subject:arrow.subject.name,
       object:arrow.object.name

@@ -17,7 +17,7 @@ const color={
   }
 }
 
-const rodata={
+const charaChartRodata={
   bunsetsuSymbol:'*',
   kihonkuSymbol:'+',
   bunsetsu1stJpRowNo:2,
@@ -80,7 +80,14 @@ const rodata={
 
   checkBoxCommentOut:true,
 
-  isFizedArrowWigth:true
+  isFizedArrowWigth:true,
+
+  sliderBarChart:{
+    fullW:600,
+    h:50,
+    id:"sliderbarchart",
+    axisShiftX:58
+  }
 }
 
-export {rodata}
+export {charaChartRodata}

@@ -1,6 +1,13 @@
 import d3 from 'd3'
+import { charaChartRodata } from '../rodata'
 
-const vizBarChart=(strArr)=>{
+const vizBarChart=(strArr,svg,barLenArr,fullW,axisShiftX,chartShiftX)=>{
+
+  //let axisShiftX = 68
+
+  var xScale = d3.scale.linear()
+    .domain([0, d3.sum(barLenArr) / 10])
+    .range([axisShiftX, fullW - axisShiftX])
 
   let tooltip = d3.select("body").select("#tooltip")
   let row = 0// graph3の行番号
@@ -20,7 +27,7 @@ const vizBarChart=(strArr)=>{
       var arr = barLenArr
       // var sum = d3.sum(arr);
       var subSum = d3.sum(i === 0 ? [] : arr.slice(0, i))
-      return xScale(subSum) / 10 + 10 + graphShiftX
+      return xScale(subSum) / 10 + 10 + chartShiftX
     })
     .attr('y', 10)
     .attr('width', function (d) {
@@ -42,40 +49,13 @@ const vizBarChart=(strArr)=>{
           //questionColor
         }*/
 
-        switch (rectTxtArr[i]){
-          case rectTxtCate.love:
-            return loveTexture.url()
-            break;
-          case rectTxtCate.work:
-            return workTexture.url()
-            break;
-          case rectTxtCate.friendship:
-            return friendTexture.url()
-            break;
-          case rectTxtCate.self:
-            return selfTexture.url()
-            break;
-          case rectTxtCate.spiritual:
-            return spiritualTexture.url()
-            break;
-          case rectTxtCate.openQuestion:
-            return openC
-            break;
-          case rectTxtCate.closedQuestion:
-            return closeC
-            break;
-          case rectTxtCate.feedback:
-            return aiduchiC
-            break;
-          case rectTxtCate.interpretation:
-            return kaishakuC
-            break;
-          case rectTxtCate.smallTalk:
-            return sekenC
-            break;
+        switch (i%2){
+          case 0:
+            return '#a0a0a0'
+            break
           default:
-            return '#c0c0c0'
-            break;
+            return '#f0f0f0'
+            break
         }
       } else {
         if (i + 1 === barTxtArr.length) {
