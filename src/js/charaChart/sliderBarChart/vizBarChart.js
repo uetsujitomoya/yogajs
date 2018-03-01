@@ -1,17 +1,19 @@
-import d3 from 'd3'
+import * as d3 from 'd3'
 import { charaChartRodata } from '../rodata'
 
 const vizBarChart=(strArr,svg,barLenArr,fullW,axisShiftX,chartShiftX)=>{
 
+
+
   //let axisShiftX = 68
-  console.log(barLenArr)
+/*  console.log(barLenArr)
 
   var xScale = d3.scale.linear()
     .domain([0, d3.sum(barLenArr) / 10])
     .range([axisShiftX, fullW - axisShiftX])
 
   let tooltip = d3.select("body").select("#tooltip")
- // let row = 0// graph3の行番号
+  // let row = 0// graph3の行番号
   // 階層構造をとるため，g要素を生成する部分とrect要素を生成している部分が連続している．
 
   var dataArr = [
@@ -28,10 +30,14 @@ const vizBarChart=(strArr,svg,barLenArr,fullW,axisShiftX,chartShiftX)=>{
       return 'translate(0,' + (i * 50) + ')'
     })
     .selectAll('rect')
-    .data(function (d) { return d })
+    .data(function (d) {
+      console.log(d)
+      return d
+    })
     .enter()
     .append('rect')// 四角追加
     .attr('x', function (d, i) {
+      console.log(i)
       var arr = barLenArr
       // var sum = d3.sum(arr);
       var subSum = d3.sum(i === 0 ? [] : arr.slice(0, i))
@@ -39,65 +45,68 @@ const vizBarChart=(strArr,svg,barLenArr,fullW,axisShiftX,chartShiftX)=>{
     })
     .attr('y', 10)
     .attr('width', function (d) {
+      console.log(i)
       // var sum = d3.sum(barLenArr);
       return xScale(d) / 10
     })
     .attr('height', 20)
     .attr('fill', function (d, i) {
+      console.log(i)
       return '#a0a0a0'
       //     if ((row === 0 && isFullConversationAnsArr[i] === 0) || (row === 1 && isFullConversationAnsArr[i] === 1)) {
-      /*        if (i + 1 === barTxtArr.length) {
+      /!*        if (i + 1 === barTxtArr.length) {
                 row++
-              }*/
+              }*!/
       //return barChartAllHatsugenCArr[i] //質問の場合はtextureを使いたい
       //一個の関数にして振り分けたい（配列やreturnはまずそう）
 
-      /*if(/*answer){
+      /!*if(/!*answer){
         //moyou
       }else{
         //questionColor
-      }*/
+      }*!/
 
-/*      switch (i%2) {
-        case 0:
-          return '#a0a0a0'
-          break
-        default:
-          return '#f0f0f0'
-          break
-      }*/
-      /*        }
+      /!*      switch (i%2) {
+              case 0:
+                return '#a0a0a0'
+                break
+              default:
+                return '#f0f0f0'
+                break
+            }*!/
+      /!*        }
             } else {
               if (i + 1 === barTxtArr.length) {
                 row++
               }
               return barChartBGColor
-            }*/
+            }*!/
     })
-/*    .on("mouseover", function(d,rectNo){
-      if (isFullConversationAnsArr[rectNo] === 0) {
+  /!*    .on("mouseover", function(d,rectNo){
+        if (isFullConversationAnsArr[rectNo] === 0) {
 
-        return tooltip.style("visibility", "visible").text(hatsugen[rectHatsugenNoArr[rectNo]]);
-      }else{
+          return tooltip.style("visibility", "visible").text(hatsugen[rectHatsugenNoArr[rectNo]]);
+        }else{
 
-        let msg=""
-        const txtViewHatsugenNo=0
+          let msg=""
+          const txtViewHatsugenNo=0
 
-        for (let hatsugenBunNo = 0; hatsugenBunNo < bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]].length; hatsugenBunNo++) {
-          if (bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][hatsugenBunNo] === '') { continue }
+          for (let hatsugenBunNo = 0; hatsugenBunNo < bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]].length; hatsugenBunNo++) {
+            if (bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][hatsugenBunNo] === '') { continue }
 
-          msg+= bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][hatsugenBunNo]
+            msg+= bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][hatsugenBunNo]
+          }
+
+          return tooltip.style("visibility", "visible").text( msg );
+
         }
 
-        return tooltip.style("visibility", "visible").text( msg );
 
-      }
+      })//吹き出し
+      .on("mousemove", function(d){return tooltip.style("top", (event.pageY-20)+"px").style("left",(event.pageX+10)+"px");})
+      .on("mouseout", function(d){return tooltip.style("visibility", "hidden");})*!/*/
 
-
-    })//吹き出し
-    .on("mousemove", function(d){return tooltip.style("top", (event.pageY-20)+"px").style("left",(event.pageX+10)+"px");})
-    .on("mouseout", function(d){return tooltip.style("visibility", "hidden");})*/
-
+  console.log("end of vizBarChart")
 }
 
 export {vizBarChart}
