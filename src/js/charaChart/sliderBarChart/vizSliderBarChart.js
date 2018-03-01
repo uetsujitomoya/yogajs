@@ -18,7 +18,7 @@ const vizSliderBarChart=()=>{
   console.log(svg)
   vizBarChart(["hoge","hoge","hoge","hoge","hoge"],svg,borderBunNoArr,fullW,0,0)
   const barLenArr=borderBunNoArr
-  const strArr=["hoge","hoge","hoge","hoge","hoge"]
+  const strArr=["8/1","10/2","10/30","1/8","3/18"]
   const axisShiftX=0
   const chartShiftX=charaChartRodata.sliderBarChart.chartShiftX
 
