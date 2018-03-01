@@ -13,8 +13,14 @@ const vizBarChart=(strArr,svg,barLenArr,fullW,axisShiftX,chartShiftX)=>{
   let tooltip = d3.select("body").select("#tooltip")
  // let row = 0// graph3の行番号
   // 階層構造をとるため，g要素を生成する部分とrect要素を生成している部分が連続している．
+
+  var dataArr = [
+    barLenArr,
+    barLenArr
+  ]
+
   svg.selectAll('g')
-    .data(strArr)
+    .data(dataArr)
     .enter()
     .append('g')
     .attr('transform', function (d, i) {
@@ -38,6 +44,7 @@ const vizBarChart=(strArr,svg,barLenArr,fullW,axisShiftX,chartShiftX)=>{
     })
     .attr('height', 20)
     .attr('fill', function (d, i) {
+      return '#a0a0a0'
       //     if ((row === 0 && isFullConversationAnsArr[i] === 0) || (row === 1 && isFullConversationAnsArr[i] === 1)) {
       /*        if (i + 1 === barTxtArr.length) {
                 row++
@@ -51,14 +58,14 @@ const vizBarChart=(strArr,svg,barLenArr,fullW,axisShiftX,chartShiftX)=>{
         //questionColor
       }*/
 
-      switch (i%2) {
+/*      switch (i%2) {
         case 0:
           return '#a0a0a0'
           break
         default:
           return '#f0f0f0'
           break
-      }
+      }*/
       /*        }
             } else {
               if (i + 1 === barTxtArr.length) {
