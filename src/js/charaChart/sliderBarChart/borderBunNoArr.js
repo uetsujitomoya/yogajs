@@ -1,0 +1,3 @@
+let borderBunNoArr=[]
+
+export {borderBunNoArr}
