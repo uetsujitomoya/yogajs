@@ -1,0 +1,5 @@
+const inputBorder=()=>{
+
+}
+
+export {inputBorder}
