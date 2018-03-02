@@ -11,7 +11,7 @@ import {charaChartRodata} from '../rodata'
 import * as d3 from 'd3'
 import {vizArrow} from './vizArrow'
 import {nowWatchingArrowOrNode} from '../nowWatchingArrowOrNode'
-import { viewArrowTxt } from '../viewText/viewArrowTxt'
+import { viewArrowTxt } from '../viewTxt/viewArrowTxt'
 import { borderBunNoArr } from '../sliderBarChart/borderBunNoArr'
 
 const createArrowArr = (sliderBunArr, nodeArr, allBunArr) => {

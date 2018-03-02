@@ -6,14 +6,14 @@ import d3 from 'd3'
 import 'jquery'
 import $ from 'jquery'
 import 'bootstrap-slider'
-import {applySliderForNodeText} from './viewText/applySliderForNodeTxt'
+import {applySliderForNodeText} from './viewTxt/applySliderForNodeTxt'
 
 import {createArrowArr} from './nodeAndArrow/createArrowArr.js'
 
 import {removeSVG} from './nodeAndArrow/vizNode.js'
 import { nowWatchingArrowOrNode } from './nowWatchingArrowOrNode'
-import { viewArrowTxt } from './viewText/viewArrowTxt'
-import { viewNodeTxt } from './viewText/viewNodeTxt'
+import { viewArrowTxt } from './viewTxt/viewArrowTxt'
+import { viewNodeTxt } from './viewTxt/viewNodeTxt'
 import { charaChartRodata } from './rodata'
 
 const manageSlider = (allBunArr, charaArr) => {

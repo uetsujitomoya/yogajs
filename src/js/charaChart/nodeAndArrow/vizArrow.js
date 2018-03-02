@@ -3,7 +3,7 @@
  */
 
 import {charaChartRodata} from '../rodata'
-import {viewArrowTxt} from '../viewText/viewArrowTxt'
+import {viewArrowTxt} from '../viewTxt/viewArrowTxt'
 import * as d3 from 'd3'
 const markerFillColor = charaChartRodata.markerFillColor
 const yajirushi_refX = charaChartRodata.yajirushi_refX

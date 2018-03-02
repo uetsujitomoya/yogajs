@@ -6,7 +6,7 @@ import d3 from 'd3'
 import $ from 'jquery'
 import {charaChartRodata} from '../rodata'
 import {r} from './Node'
-import {viewNodeTxt} from '../viewText/viewNodeTxt'
+import {viewNodeTxt} from '../viewTxt/viewNodeTxt'
 
 const clientColor = '#ff0000'
 const aroundClientPeopleColor = '#000000'
