@@ -6,14 +6,7 @@ import {charaChartRodata } from '../rodata'
 
 let r
 const orbitR=charaChartRodata.orbitR
-//onst orbitOPoint = barChartRodata.orbitOY
-
 let nodeCnt = 0
-/*
-let r = 40
-const orbitR =150
-const orbitOY=200*/
-
 const enshuBunkatsuNum = 3
 
 export default class Node {
@@ -36,14 +29,14 @@ export default class Node {
     }
     this.nodeCharacter = name
     this.circleStrokeWidth = 1
-    this.nodeIdx=nodeCnt
+    this.nodeIdx=charaChartRodata.nodeCnt
     this.viz=false
 
     this.bluePt=0
     this.redPt=0
     //this.updateColor(verb.isBlueCircleColor)
 
-    nodeCnt++
+    charaChartRodata.nodeCnt++
   }
 
   addStrokeWidth () {

@@ -73,7 +73,6 @@ const isNeededVerbForCsv=(verb)=>{
     return false
   }
 /*  if(verb.subject!==null && verb.object!==null){
-    if(barChartRodata.withPeople){
       return true
     }else{
       if(verb.subject.name==="Aさん" && verb.object.name!=="Aさん"){

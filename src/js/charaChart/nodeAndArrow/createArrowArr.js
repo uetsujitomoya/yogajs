@@ -12,6 +12,7 @@ import * as d3 from 'd3'
 import {vizArrow} from './vizArrow'
 import {nowWatchingArrowOrNode} from '../nowWatchingArrowOrNode'
 import { viewArrowTxt } from '../viewText/viewArrowTxt'
+import { borderBunNoArr } from '../sliderBarChart/borderBunNoArr'
 
 const createArrowArr = (sliderBunArr, nodeArr, allBunArr) => {
   let arrowArr = []
@@ -61,6 +62,7 @@ const createArrowArr = (sliderBunArr, nodeArr, allBunArr) => {
       width: charaChartRodata.svgWidth,
       height: charaChartRodata.svgHeight
     })
+
   const r = (charaChartRodata.orbitR * charaChartRodata.circleRadiusCoefficient) / nodeArr.length
   vizNodes(svg,nodeArr,sliderBunArr,r,allBunArr)
 
@@ -69,6 +71,63 @@ const createArrowArr = (sliderBunArr, nodeArr, allBunArr) => {
 
     vizArrow(svg, arrow, r,arrowId,allBunArr)
   })
+
+  const fullW=charaChartRodata.sliderBarChart.fullW
+  const barLenArr=borderBunNoArr
+  const strArr=["hoge","hoge","hoge","hoge","hoge"]
+  const axisShiftX=0
+  const chartShiftX=0
+
+  //let axisShiftX = 68
+  console.log(barLenArr)
+
+  var xScale = d3.scale.linear()
+    .domain([0, d3.sum(barLenArr) / 10])
+    .range([axisShiftX, fullW - axisShiftX])
+
+  let tooltip = d3.select("body").select("#tooltip")
+  // let row = 0// graph3の行番号
+  // 階層構造をとるため，g要素を生成する部分とrect要素を生成している部分が連続している．
+
+  var dataArr = [
+    barLenArr,
+    barLenArr
+  ]
+
+  svg.selectAll('g')
+    .data(dataArr)
+    .enter()
+    .append('g')
+    .attr('transform', function (d, i) {
+      console.log(i)
+      return 'translate(0,' + (i * 50) + ')'
+    })
+    .selectAll('rect')
+    .data(function (d) {
+      console.log(d)
+      return d
+    })
+    .enter()
+    .append('rect')// 四角追加
+    .attr('x', function (d, i) {
+      console.log(i)
+      var arr = barLenArr
+      // var sum = d3.sum(arr);
+      var subSum = d3.sum(i === 0 ? [] : arr.slice(0, i))
+      return xScale(subSum) / 10 + 10 + chartShiftX
+    })
+    .attr('y', 10)
+    .attr('width', function (d) {
+      console.log(i)
+      // var sum = d3.sum(barLenArr);
+      return xScale(d) / 10
+    })
+    .attr('height', 20)
+    .attr('fill', function (d, i) {
+      console.log(i)
+      return '#a0a0a0'
+
+    })
 }
 
 const isSameArrow = (arrow, verb) => {

@@ -8,9 +8,6 @@ import {charaChartRodata} from '../rodata'
 import {r} from './Node'
 import {viewNodeTxt} from '../viewText/viewNodeTxt'
 
-//import{barChartRodata} from '../../barChartRodata'
-//const r = barChartRodata.nodeR
-
 const clientColor = '#ff0000'
 const aroundClientPeopleColor = '#000000'
 const markerFillColor = '#ff0000'
@@ -26,20 +23,14 @@ const vizNodes = (svg,nodeArr,sliderBunArr,r,allBunArr) => {
     })
 
   nodes.append('circle').attr({
-    /*      'r': function (d) { return r },
-          'stroke': function (d) { if (d.isClient) { return barChartRodata.clientNodeColor } else { return barChartRodata.aroundClientPeopleNodeColor } },
-          'fill': barChartRodata.circleFill,
-          'stroke-width': (d) => { return　d.circleStrokeWidth }*/
-    //'fill':  function (d) { if (d.isClient) { return barChartRodata.clientNodeColor } else { return barChartRodata.aroundClientPeopleNodeColor } },
-
     'fill':  function (node) {
       if (node.isBlue) {
         return charaChartRodata.aroundClientPeopleNodeColor
+
       } else {
         return charaChartRodata.clientNodeColor
       }
     },
-
     'r':  (node) => { return　node.circleStrokeWidth }
   })
     .on('click', (d, i)=>{

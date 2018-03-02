@@ -37,7 +37,7 @@ const applySingleSliderVal=(allBunArr,charaArr)=>{
   $('#ex18a').on('slide', function (slideEvt) {
     const selectedArea = {
       start: slideEvt.value,
-      //end: slideEvt.value+barChartRodata.singleSliderSelectLen
+
       end: slideEvt.value+ parseInt(document.forms.mainForm._text.value)
     }
     applySlider(selectedArea, allBunArr,charaArr)

@@ -82,11 +82,16 @@ const charaChartRodata={
 
   isFizedArrowWigth:true,
 
+
+  nodeCnt:0,
+
   sliderBarChart:{
     fullW:600,
     h:50,
-    id:"sliderbarchart",
-    axisShiftX:58
+    id:"#sliderbarchart",
+    axisShiftX:58,
+    chartShiftX:85
+
   }
 }
 

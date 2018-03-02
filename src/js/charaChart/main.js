@@ -23,16 +23,26 @@ import { vizSliderBarChart } from './sliderBarChart/vizSliderBarChart'
 let nodeArr = []
 let verbArr = []
 
-const mainOfCharaChart = (knpCsv,bunArrCsv) => {
-  //const knpArr = csv2Arr(barChartRodata.knpCsvFolder+barChartRodata.knpCsvName+".csv")
+
+
+const mainOfCharaChart = (knpCsv,bunArrCsv,isToOutputBunArr) => {
+  charaChartRodata.nodeCnt=0
+  //const knpArr = csv2Arr(charaChartRodata.knpCsvFolder+charaChartRodata.knpCsvName+".csv")
+
   const knpArr = fromCsvTxt2Arr(knpCsv)
   //console.log(knpArr)
   let nodeArr=[]
   findChara(knpArr, nodeArr)
   fixNodePoint(nodeArr)
   const bunArr = createBunArr(knpArr, nodeArr)
-  //outputBunArrCsv(bunArr)
-  inputBunArrCsv(bunArr,bunArrCsv)
+
+  if(isToOutputBunArr){
+    outputBunArrCsv(bunArr)
+  }else{
+    inputBunArrCsv(bunArr,bunArrCsv)
+  }
+
+
   if(charaChartRodata.isSingleSlider&&charaChartRodata.checkBoxCommentOut){
     const selectedArea = {
       start: 0,
