@@ -46,48 +46,59 @@ import { mainOfCharaChart } from './js/charaChart/main'
   bunArrFormも
 }*/
 
-
 const knpForm = document.getElementById("knp");
 
-//ダイアログでファイルが選択された時
 knpForm.addEventListener("change",function(knpChangeEvt){
 
   var knpCsv = knpChangeEvt.target.files[0];
-
-  //FileReaderの作成
   var knpReader = new FileReader();
-  //テキスト形式で読み込む
   knpReader.readAsText(knpCsv);
 
-  //読込終了後の処理
+  //KNP出力結果のCSVを読込終了後の処理
   knpReader.onload = function(knpOnloadEv){
-    //テキストエリアに表示する
-    //document.test.txt.value = knpReader.result;
+    const radio = document.getElementById('r').children
+    console.log(radio)
 
-    //2個目のCSVを読む
-    var bunArrForm = document.getElementById("bunarr");
+    if(isOutputMode(radio)){
 
-//ダイアログでファイルが選択された時
-    bunArrForm.addEventListener("change",function(bunArrChangeEvt){
+      //まだ手動修正後CSVを持っていない場合
+      const firstResult = mainOfCharaChart(knpReader.result,null,true)
+      //2個目のCSVを読む
+      var bunArrForm = document.getElementById("bunarr");
+      bunArrForm.addEventListener("change",function(bunArrChangeEvt){
+        var bunArrCsv = bunArrChangeEvt.target.files[0];
+        var bunArrReader = new FileReader();
+        bunArrReader.readAsText(bunArrCsv);
+        bunArrReader.onload = function(bunArrOnloadEv){
+          const secondResult = mainOfCharaChart(knpReader.result,bunArrReader.result,false)
+        }
+      },false);
 
-      var bunArrCsv = bunArrChangeEvt.target.files[0];
+    }else{
 
-      //FileReaderの作成
-      var bunArrReader = new FileReader();
-      //テキスト形式で読み込む
-      bunArrReader.readAsText(bunArrCsv);
-
-      //読込終了後の処理
-      bunArrReader.onload = function(bunArrOnloadEv){
-        //テキストエリアに表示する
-        //document.test.txt.value = bunArrReader.result;
-        const charaChartResult = mainOfCharaChart(knpReader.result,bunArrReader.result)
-      }
-    },false);
+      //既に手動修正後CSVを持っている場合
+      //2個目のCSVを読む
+      var bunArrForm = document.getElementById("bunarr");
+      bunArrForm.addEventListener("change",function(bunArrChangeEvt){
+        var bunArrCsv = bunArrChangeEvt.target.files[0];
+        var bunArrReader = new FileReader();
+        bunArrReader.readAsText(bunArrCsv);
+        bunArrReader.onload = function(bunArrOnloadEv){
+          const charaChartResult = mainOfCharaChart(knpReader.result,bunArrReader.result,false)
+        }
+      },false);
+    }
   }
 },false);
 
+const isOutputMode=(radio)=>{
 
+  if(radio[1].control.checked){
+    return true
+  }else{
+    return false
+  }
+}
 
 // 以下、今までの(170809)
 
