@@ -8,7 +8,7 @@ import {createBunArr} from './createBunArr/main.js'
 import {findChara} from './chara/findChara.js'
 import {createArrowArr} from './nodeAndArrow/createArrowArr.js'
 import {manageSlider} from './slider.js'
-import {fixNodePoint} from './chara/fixNodePoint'
+import {fixNodePt} from './chara/fixNodePoint'
 import {searchMaenoBunForShugo} from './createBunArr/SO/searchMaenoBunForS'
 import {saveBunArrJson} from './saveBunArrJson'
 import { downloadJson } from './downloadJson'
@@ -33,7 +33,7 @@ const mainOfCharaChart = (knpCsv,bunArrCsv,isToOutputBunArr) => {
   //console.log(knpArr)
   let nodeArr=[]
   findChara(knpArr, nodeArr)
-  fixNodePoint(nodeArr)
+  fixNodePt(nodeArr)
   const bunArr = createBunArr(knpArr, nodeArr)
 
   if(isToOutputBunArr){

@@ -8,6 +8,7 @@ import {barChartRodata} from './rodata'
 import { fromAnsRadioResultToAnsCateNum } from './setForViz/fromAnsRadioResultToAnsCateNum'
 import { readAnsRadio } from './setForViz/readAnsRadio'
 import { vizStackChart } from './viz/vizStackChart'
+import { highlightTxt } from './viz/highlightTxt'
 //import tooltip from "jquery"
 
 // let love="#ffeeff";
@@ -130,7 +131,7 @@ const viz = (stackdataArr, allQueHatsugenCArr, bun, hatsugen, svg, ansCateNumArr
   var margin2 = {top: 10, right: 10, bottom: 50, left: 40}
 
   //var colorBun = ['#c0c0c0', loveC, friendC, workC]
-  const answerTextureChoiceArr = [noCateAnsC, loveC, friendC, workC, barChartRodata.color.self.t, barChartRodata.color.spiritual.t]
+  const ansTextureChoiceArr = [noCateAnsC, loveC, friendC, workC, barChartRodata.color.self.t, barChartRodata.color.spiritual.t]
 
   const axisDescriptionY = 240
 
@@ -168,7 +169,7 @@ const viz = (stackdataArr, allQueHatsugenCArr, bun, hatsugen, svg, ansCateNumArr
           barLenArr[barNo] = d.length * width / bunsuu
           barTxtArr[barNo] = d
           isFullConversationAnsArr[barNo] = 1
-          barChartAllHatsugenCArr[barNo] = answerTextureChoiceArr[ansRadioResult[ansRadioNo]]
+          barChartAllHatsugenCArr[barNo] = ansTextureChoiceArr[ansRadioResult[ansRadioNo]]
           rectHatsugenNoArr[barNo] = hatsugenNo
           barNo++
           ansRadioNo++
@@ -374,17 +375,18 @@ const viz = (stackdataArr, allQueHatsugenCArr, bun, hatsugen, svg, ansCateNumArr
                 continue
               }
               if (txtViewHatsugenNo === 0) {
-                console.log("allQueHatsugenCArr[rectHatsugenNoArr[rectNo] / 2] %s",allQueHatsugenCArr[rectHatsugenNoArr[rectNo] / 2])
-                console.log("rectHatsugenNoArr[rectNo] / 2 %d",rectHatsugenNoArr[rectNo] / 2)
+                //console.log("allQueHatsugenCArr[rectHatsugenNoArr[rectNo] / 2] %s",allQueHatsugenCArr[rectHatsugenNoArr[rectNo] / 2])
+                //console.log("rectHatsugenNoArr[rectNo] / 2 %d",rectHatsugenNoArr[rectNo] / 2)
                 msg.innerHTML += '<b><u><font size=' + txtViewFontSize + '>' + (1 + rectHatsugenNoArr[rectNo]) + '' + txtViewCounselor + ' <font color=' + allQueHatsugenCArr[rectHatsugenNoArr[rectNo] / 2] + '>【</font>' + hatsugen[rectHatsugenNoArr[rectNo]] + '<font color=' + allQueHatsugenCArr[rectHatsugenNoArr[rectNo] / 2] + '>】</font></u></b><font size=' + txtViewFontSize + '><br><br>'
 
               } else if (txtViewHatsugenNo % 2 === 0) {
                 msg.innerHTML += '<font size=' + txtViewFontSize + '>' + (1 + txtViewHatsugenNo + rectHatsugenNoArr[rectNo]) + '' + txtViewCounselor + ' <font color=' + allQueHatsugenCArr[txtViewHatsugenNo / 2 + rectHatsugenNoArr[rectNo] / 2] + '><b>【</b></font>' + hatsugen[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]] + '<font color=' + allQueHatsugenCArr[txtViewHatsugenNo / 2 + rectHatsugenNoArr[rectNo] / 2] + '><b>】</b></font><br><br>'
+                highlightTxt(msg,hatsugen[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]],allQueHatsugenCArr[txtViewHatsugenNo / 2 + rectHatsugenNoArr[rectNo] / 2])
               } else { // forループを回さないと各文ごとの表示ができない
                 msg.innerHTML += '<font size=' + txtViewFontSize + '>' + (1 + txtViewHatsugenNo + rectHatsugenNoArr[rectNo]) + '' + txtViewClient + ' '
                 for (l = 0; l < bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]].length; l++) {
                   if (bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][l] === '') { continue }
-                  msg.innerHTML += '<font size=' + txtViewFontSize + '><font color=' + answerTextureChoiceArr[ansCateNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][l]] + '><b>【</b></font>' + bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][l] + '<font color=' + answerTextureChoiceArr[ansCateNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][l]] + '><b>】</b></font>'
+                  msg.innerHTML += '<font size=' + txtViewFontSize + '><font color=' + ansTextureChoiceArr[ansCateNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][l]] + '><b>【</b></font>' + bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][l] + '<font color=' + ansTextureChoiceArr[ansCateNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][l]] + '><b>】</b></font>'
                 }
                 msg.innerHTML += '<font size=' + txtViewFontSize + '><br><br>'
               }
@@ -407,9 +409,9 @@ const viz = (stackdataArr, allQueHatsugenCArr, bun, hatsugen, svg, ansCateNumArr
 
                   //console.log("%d発言目",txtViewHatsugenNo + rectHatsugenNoArr[rectNo]) //txtViewHatsugenNoは0なので、発言Noになる
                   //console.log("ansCate %d",ansCateNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][hatsugenBunNo])
-                  //console.log(answerTextureChoiceArr[ansCateNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][hatsugenBunNo]])
+                  //console.log(ansTextureChoiceArr[ansCateNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][hatsugenBunNo]])
 
-                  msg.innerHTML += '<u><b><font size=' + txtViewFontSize + '><font color=' + answerTextureChoiceArr[ansCateNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][hatsugenBunNo]] + '>【</font>' + bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][hatsugenBunNo] + '<font color=' + answerTextureChoiceArr[ansCateNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][hatsugenBunNo]] + '>】</b></font></font></u>'
+                  msg.innerHTML += '<u><b><font size=' + txtViewFontSize + '><font color=' + ansTextureChoiceArr[ansCateNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][hatsugenBunNo]] + '>【</font>' + bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][hatsugenBunNo] + '<font color=' + ansTextureChoiceArr[ansCateNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][hatsugenBunNo]] + '>】</b></font></font></u>'
                 }
                 msg.innerHTML += '<font size=' + txtViewFontSize + '><br><br></font>'
 
@@ -417,7 +419,7 @@ const viz = (stackdataArr, allQueHatsugenCArr, bun, hatsugen, svg, ansCateNumArr
                 msg.innerHTML += '<font size=' + txtViewFontSize + '>' + (1 + txtViewHatsugenNo + rectHatsugenNoArr[rectNo]) + '' + txtViewClient + ' '
                 for (l = 0; l < bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]].length; l++) {
                   if (bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][l] === '') { continue }
-                  msg.innerHTML += '<font size=' + txtViewFontSize + '><font color=' + answerTextureChoiceArr[ansCateNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][l]] + '><b>【</b></font>' + bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][l] + '<font color=' + answerTextureChoiceArr[ansCateNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][l]] + '><b>】</b></font>'
+                  msg.innerHTML += '<font size=' + txtViewFontSize + '><font color=' + ansTextureChoiceArr[ansCateNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][l]] + '><b>【</b></font>' + bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][l] + '<font color=' + ansTextureChoiceArr[ansCateNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][l]] + '><b>】</b></font>'
                 }
                 msg.innerHTML += '<font size=' + txtViewFontSize + '><br><br>'
               } else { // forループを回さないと各文ごとの表示ができない

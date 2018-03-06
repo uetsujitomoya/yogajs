@@ -1,4 +1,4 @@
-const highlightTxt=(target,txt,group)=>{
-  target.innerHTML+="<mark class='"+group+"'>" +txt+"</mark>"
+const highlightTxt=(target,txt,className)=>{
+  target.innerHTML+="<mark class='"+className+"'>" +txt+"</mark>"
 }
 export {highlightTxt}
