@@ -380,7 +380,7 @@ const viz = (stackdataArr, allQueHatsugenCArr, bun, hatsugen, svg, ansCateNumArr
                 msg.innerHTML += '<b><u><font size=' + txtViewFontSize + '>' + (1 + rectHatsugenNoArr[rectNo]) + '' + txtViewCounselor + ' <font color=' + allQueHatsugenCArr[rectHatsugenNoArr[rectNo] / 2] + '>【</font>' + hatsugen[rectHatsugenNoArr[rectNo]] + '<font color=' + allQueHatsugenCArr[rectHatsugenNoArr[rectNo] / 2] + '>】</font></u></b><font size=' + txtViewFontSize + '><br><br>'
 
               } else if (txtViewHatsugenNo % 2 === 0) {
-                msg.innerHTML += '<font size=' + txtViewFontSize + '>' + (1 + txtViewHatsugenNo + rectHatsugenNoArr[rectNo]) + '' + txtViewCounselor + ' <font color=' + allQueHatsugenCArr[txtViewHatsugenNo / 2 + rectHatsugenNoArr[rectNo] / 2] + '><b>【</b></font>' + hatsugen[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]] + '<font color=' + allQueHatsugenCArr[txtViewHatsugenNo / 2 + rectHatsugenNoArr[rectNo] / 2] + '><b>】</b></font><br><br>'
+                //msg.innerHTML += '<font size=' + txtViewFontSize + '>' + (1 + txtViewHatsugenNo + rectHatsugenNoArr[rectNo]) + '' + txtViewCounselor + ' <font color=' + allQueHatsugenCArr[txtViewHatsugenNo / 2 + rectHatsugenNoArr[rectNo] / 2] + '><b>【</b></font>' + hatsugen[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]] + '<font color=' + allQueHatsugenCArr[txtViewHatsugenNo / 2 + rectHatsugenNoArr[rectNo] / 2] + '><b>】</b></font><br><br>'
                 highlightTxt(msg,hatsugen[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]],allQueHatsugenCArr[txtViewHatsugenNo / 2 + rectHatsugenNoArr[rectNo] / 2])
               } else { // forループを回さないと各文ごとの表示ができない
                 msg.innerHTML += '<font size=' + txtViewFontSize + '>' + (1 + txtViewHatsugenNo + rectHatsugenNoArr[rectNo]) + '' + txtViewClient + ' '
@@ -411,7 +411,7 @@ const viz = (stackdataArr, allQueHatsugenCArr, bun, hatsugen, svg, ansCateNumArr
                   //console.log("ansCate %d",ansCateNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][hatsugenBunNo])
                   //console.log(ansTextureChoiceArr[ansCateNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][hatsugenBunNo]])
 
-                  msg.innerHTML += '<u><b><font size=' + txtViewFontSize + '><font color=' + ansTextureChoiceArr[ansCateNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][hatsugenBunNo]] + '>【</font>' + bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][hatsugenBunNo] + '<font color=' + ansTextureChoiceArr[ansCateNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][hatsugenBunNo]] + '>】</b></font></font></u>'
+                  //msg.innerHTML += '<u><b><font size=' + txtViewFontSize + '><font color=' + ansTextureChoiceArr[ansCateNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][hatsugenBunNo]] + '>【</font>' + bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][hatsugenBunNo] + '<font color=' + ansTextureChoiceArr[ansCateNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][hatsugenBunNo]] + '>】</b></font></font></u>'
 
                   highlightTxt(msg,bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][hatsugenBunNo],ansTextureChoiceArr[ansCateNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][hatsugenBunNo]])
                 }
