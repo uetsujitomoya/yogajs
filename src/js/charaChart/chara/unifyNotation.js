@@ -1,3 +1,5 @@
+//登場人物の表記ゆれを修正する
+
 const unifyNotaion=(inputChara)=>{
   let outputChara=inputChara
 

@@ -1,3 +1,5 @@
+//左下の手動修正結果を反映
+
 import d3 from 'd3'
 import { fromAnsRadioResultToAnsCateNum } from './setForViz/fromAnsRadioResultToAnsCateNum'
 import { readAnsRadio } from './setForViz/readAnsRadio'

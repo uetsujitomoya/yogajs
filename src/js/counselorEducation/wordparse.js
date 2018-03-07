@@ -1,3 +1,5 @@
+//【会話の流れ】初期自動分類
+
 import 'kuromoji'
 import $ from 'jquery'
 import {select} from './select.js'

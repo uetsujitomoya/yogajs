@@ -2,6 +2,8 @@
  * Created by uetsujitomoya on 2017/08/29.
  */
 
+//矢印クラスの定義
+
 import {definePointArr} from './connectNodeAndArrow'
 import {charaChartRodata} from '../rodata'
 

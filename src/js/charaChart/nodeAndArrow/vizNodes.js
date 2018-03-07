@@ -2,6 +2,8 @@
  * Created by uetsujitomoya on 2017/09/04.
  */
 
+//ノード配列内にあるノードを全て描画する
+
 import d3 from 'd3'
 import $ from 'jquery'
 import {charaChartRodata} from '../rodata'

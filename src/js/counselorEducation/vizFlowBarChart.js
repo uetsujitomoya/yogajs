@@ -2,6 +2,8 @@
 // yogajsまで移動
 // npm run build でコンパイル
 
+//帯グラフを描画
+
 import d3 from 'd3'
 import textures from 'textures'
 import {barChartRodata} from './rodata'

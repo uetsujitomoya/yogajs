@@ -1,3 +1,5 @@
+//クラス"文節"の定義
+
 import {charaChartRodata} from '../rodata'
 import Word from './Word'
 import {isCharacter,searchNodeArrayForCharacterAndPoint} from '../chara/isChara'

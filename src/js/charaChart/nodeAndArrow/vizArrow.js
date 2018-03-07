@@ -2,6 +2,8 @@
  * Created by uetsujitomoya on 2017/09/04.
  */
 
+//矢印を1個1個描画する
+
 import {charaChartRodata} from '../rodata'
 import {viewArrowTxt} from '../viewTxt/viewArrowTxt'
 import * as d3 from 'd3'

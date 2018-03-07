@@ -2,6 +2,8 @@
  * Created by uetsujitomoya on 2017/08/21.
  */
 
+//登場人物をみつける
+
 import {hasJp} from "../../hasJapanese.js"
 import Node from '../nodeAndArrow/Node.js'
 import {charaChartRodata} from '../rodata'

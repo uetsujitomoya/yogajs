@@ -2,6 +2,8 @@
  * Created by uetsujitomoya on 2017/08/17.
  */
 
+//createBunArr
+//BunArrをつくる
 
 import {isCharacter} from '../chara/isChara'
 import {createsvg} from '../nodeAndArrow/arrowNode.js'

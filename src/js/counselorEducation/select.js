@@ -1,10 +1,4 @@
-// 入れ替える点の入力（トースト）
-
-/*
- let Button= {
- html:"",
- orijinalSentence:""
- }; */
+//左下の選択肢群を表示
 
 import { barChartRodata } from './rodata'
 

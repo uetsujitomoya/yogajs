@@ -1,3 +1,5 @@
+//単語クラスの定義
+
 export default class Word {
   constructor (row) {
 /*    this.raw_array = row

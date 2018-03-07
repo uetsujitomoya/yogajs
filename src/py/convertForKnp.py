@@ -3,27 +3,23 @@
 
 import codecs
 
-<<<<<<< HEAD:src/py/ConvertForKNP.py
-f = open('../../txt/xPlus1_0318.txt','r')
-=======
-f = open('../../txt/ningen_shikkaku_seiri.txt','r')
->>>>>>> counselorEducationForEvaluation:src/py/convertForKnp.py
+
+f = open('darshana/yoga-002_uetsujiEdited.txt','r')
+
 #f = codecs.open('../1030noRap.txt','r','utf-8')
 Allf = f.read()
 
-        
+
 textKaigyo = Allf.replace('。', '。\r\n')
 #text = Allf.replace(u'。',u'。\r\n')
 #print text,
 
-textDeleted1 = textKaigyo.replace('。', '。\r\n')
+textDeleted1 = textKaigyo.replace('？', '？\r\n')
+textDeleted2 = textDeleted1.replace('！', '！\r\n')
 
-<<<<<<< HEAD:src/py/ConvertForKNP.py
-txtForWrite = open('../../txt/xPlus1_0318c.txt','w')
-=======
-txtForWrite = open('../../txt/ningen_shikkakuC.txt','w')
->>>>>>> counselorEducationForEvaluation:src/py/convertForKnp.py
-txtForWrite.write(textKaigyo)
+txtForWrite = open('darshana/yoga-002_uetsujiEdited_lined.txt','w')
+
+txtForWrite.write(textDeleted2)
 
 #txtForWrite = codecs.open('../1030Rap.txt','w','shift_jis')
 
