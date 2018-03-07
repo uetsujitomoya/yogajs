@@ -1,3 +1,5 @@
+//クラス"Bun"の定義
+
 import Bunsetsu from './Bunsetsu.js'
 import BunKihonku from './Kihonku.js'
 import {charaChartRodata} from '../rodata'

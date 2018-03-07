@@ -1,6 +1,9 @@
 /**
  * Created by uetsujitomoya on 2017/08/28.
  */
+
+//動詞クラスの定義
+
 import {searchMaenoBunForShugo} from './SO/searchMaenoBunForS'
 import { isVerb } from './isVerb'
 import { isKihonkuIncludingTheVerb } from './isKihonkuIncludingTheVerb'

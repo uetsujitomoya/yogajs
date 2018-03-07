@@ -2,6 +2,8 @@
  * Created by uetsujitomoya on 2017/08/08.
  */
 
+//認知の修正に関するメインの関数
+
 import {csv2Arr} from '../manageCsv/csv2Arr.js'
 import {getCSV} from '../manageCsv/getCSV.js'
 import {createBunArr} from './createBunArr/createBunArr.js'

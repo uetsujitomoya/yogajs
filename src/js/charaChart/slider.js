@@ -2,6 +2,8 @@
  * Created by uetsujitomoya on 2017/09/11.
  */
 
+//スライダーに関する関数
+
 import d3 from 'd3'
 import 'jquery'
 import $ from 'jquery'
@@ -10,7 +12,7 @@ import {applySliderForNodeText} from './viewText/applySliderForNodeTxt'
 
 import {createArrowArr} from './nodeAndArrow/createArrowArr.js'
 
-import {removeSVG} from './nodeAndArrow/vizNode.js'
+import {removeSVG} from './nodeAndArrow/vizNodes.js'
 import { nowWatchingArrowOrNode } from './nowWatchingArrowOrNode'
 import { viewArrowTxt } from './viewText/viewArrowTxt'
 import { viewNodeTxt } from './viewText/viewNodeTxt'

@@ -1,3 +1,5 @@
+//手動修正用ファイルを出力する
+
 import { bunArr2CsvArr } from './bunArr2CsvArr'
 import { downloadAsCSV } from '../../manageCsv/downloadAsCsv'
 import { now, today, year } from '../../getDate'

@@ -1,8 +1,12 @@
+//手動修正後CSVを読み込む
+
 import { EscapeSJIS, UnescapeSJIS } from '../../ecl'
 import { csv2Arr } from '../../manageCsv/csv2Arr'
 import { charaChartRodata } from '../rodata'
 import { hasNoObject, isNeededBunToSearch, isNeededVerbForCsv } from './bunArr2CsvArr'
 import { fromCsvTxt2Arr } from './getCSVFile'
+
+
 
 const inputBunArrCsv=(bunArr, bunArrCsv)=>{
   //bunArrの中身を書き換える

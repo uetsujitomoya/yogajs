@@ -2,9 +2,11 @@
  * Created by uetsujitomoya on 2017/09/04.
  */
 
+//矢印配列をつくり，人間関係図を描画する
+
 //import Node from './Node.js'
 import Arrow from './Arrow.js'
-import {vizNodes} from './vizNode'
+import {vizNodes} from './vizNodes'
 import {initialValueOfSubjectAndObjectInVerb} from '../createBunArr/isVerb.js'
 import {definePointArr} from './connectNodeAndArrow'
 import {charaChartRodata} from '../rodata'
