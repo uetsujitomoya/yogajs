@@ -364,7 +364,7 @@ const viz = (stackdataArr, allQueHatsugenCArr, bun, hatsugen, svg, ansCateNumArr
         }
       })
 
-      .on('mouseover', function (d, rectNo) {
+      .on('click', function (d, rectNo) {
           console.log(allQueHatsugenCArr)
           var msg = document.getElementById('msg')
           let txtViewHatsugenNo, l
@@ -412,6 +412,8 @@ const viz = (stackdataArr, allQueHatsugenCArr, bun, hatsugen, svg, ansCateNumArr
                   //console.log(ansTextureChoiceArr[ansCateNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][hatsugenBunNo]])
 
                   msg.innerHTML += '<u><b><font size=' + txtViewFontSize + '><font color=' + ansTextureChoiceArr[ansCateNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][hatsugenBunNo]] + '>【</font>' + bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][hatsugenBunNo] + '<font color=' + ansTextureChoiceArr[ansCateNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][hatsugenBunNo]] + '>】</b></font></font></u>'
+
+                  highlightTxt(msg,bun[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][hatsugenBunNo],ansTextureChoiceArr[ansCateNumArr[txtViewHatsugenNo + rectHatsugenNoArr[rectNo]][hatsugenBunNo]])
                 }
                 msg.innerHTML += '<font size=' + txtViewFontSize + '><br><br></font>'
 
