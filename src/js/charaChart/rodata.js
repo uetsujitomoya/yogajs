@@ -76,7 +76,7 @@ const charaChartRodata={
 
   isOnlyViz:false,
   isSingleSlider:true,
-  singleSliderSelectLen:200,
+  singleSliderSelectLen:20,
 
   checkBoxCommentOut:true,
 
