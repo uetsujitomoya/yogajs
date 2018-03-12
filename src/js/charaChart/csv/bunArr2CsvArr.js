@@ -1,6 +1,8 @@
 import { EscapeSJIS, UnescapeSJIS } from '../../ecl'
 import { charaChartRodata } from '../rodata'
 
+//bunArrをCSV出力用配列に変換
+
 const bunArr2CsvArr=(bunArr)=>{
 
   //sentence

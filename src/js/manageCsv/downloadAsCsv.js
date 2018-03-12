@@ -8,7 +8,7 @@ const downloadAsCSV = (filename, csv_array) => {
   let csv_string = ''
   for (let i = 0; i < csv_array.length; i++) {
     csv_string += csv_array[i].join(',')
-    csv_string += '\n'
+    csv_string += '\r\n'
   }
 
   // ファイル作成
