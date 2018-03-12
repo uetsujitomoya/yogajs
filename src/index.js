@@ -1,66 +1,22 @@
 
 import {classifyWithFirstWordDictionary} from './js/counselorEducation/wordparse'
-// import {AcceptKnp} from "./processKnp.js";
-//import {ClassifyWithKNP} from './js/counselorEdu/processKnp.js' // processKNP
-//import {ClassifyWithWordDictionary} from './js/counselorEdu/changeDictionary.js' // AcceptDictionary
-//import $ from 'jquery'
-//import {wordparse2object} from './js/counselorEdu/wordparse2object.js'
+
 
 import { mainOfCharaChart } from './js/charaChart/main'
 
-// import {CreateSwitchClassificationMethod} from "./SwitchClassificationMethod.js"; //AcceptDictionary
-// var dictionaryFromWord2Vec = csv2Arr('HDFaceVertex.csv');
 
-/*document.getElementById('loadstartbutton').addEventListener('click', function () {
-  const knpCsv = document.getElementById('knp').files[0]
-  const bunArrCsv = document.getElementById('bunarr').files[0]
-  //console.log(file)
-  //const name = file.name
-  const knpReader = new FileReader()
-  knpReader.readAsText(file)
-  knpReader.onload = function (event) {
-    // let result = funcReaderOnload(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
-    const originalText = event.target.result
-
-    console.log('%center ClassifyWithFirstWordDictionary 85', 'color:red')
-    const resultWithNewDictionary = mainOfCharaChart()
-  }
-  const knpReader = new FileReader()
-  knpReader.readAsText(file)
-  knpReader.onload = function (event) {
-    // let result = funcReaderOnload(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
-    const originalText = event.target.result
-
-    console.log('%center ClassifyWithFirstWordDictionary 85', 'color:red')
-    const resultWithNewDictionary = mainOfCharaChart()
-  }
-
-})*/
-
-//http://www.pori2.net/html5/File/020.html
-
-//inputモードとoutputモードを分けるときは，チェック入れた後にif文
-/*if(checked){
-  knpFormのみ
-}else{
-  bunArrFormも
-}*/
 
 const knpForm = document.getElementById("knp");
 
-knpForm.addEventListener("change",function(knpChangeEvt){
-
+/*knpForm.addEventListener("change",function(knpChangeEvt){
   var knpCsv = knpChangeEvt.target.files[0];
   var knpReader = new FileReader();
   knpReader.readAsText(knpCsv);
-
   //KNP出力結果のCSVを読込終了後の処理
   knpReader.onload = function(knpOnloadEv){
     const radio = document.getElementById('r').children
     console.log(radio)
-
     if(isOutputMode(radio)){
-
       //まだ手動修正後CSVを持っていない場合
       const firstResult = mainOfCharaChart(knpReader.result,null,true)
       //2個目のCSVを読む
@@ -73,9 +29,7 @@ knpForm.addEventListener("change",function(knpChangeEvt){
           const secondResult = mainOfCharaChart(knpReader.result,bunArrReader.result,false)
         }
       },false);
-
     }else{
-
       //既に手動修正後CSVを持っている場合
       //2個目のCSVを読む
       var bunArrForm = document.getElementById("bunarr");
@@ -89,7 +43,7 @@ knpForm.addEventListener("change",function(knpChangeEvt){
       },false);
     }
   }
-},false);
+},false);*/
 
 const isOutputMode=(radio)=>{
 
@@ -100,32 +54,12 @@ const isOutputMode=(radio)=>{
   }
 }
 
-// 以下、今までの(170809)
 
-//let storageArrayFromKamata = csv2Arr('csv/storage170421fromKamata.csv')
-
-//var startTime = new Date()
-/*
-let newLoveDictionary = csv2Arr('../oldLoveDic.csv')
-newLoveDictionary = TransposeMatrix(newLoveDictionary)
-
-let newWorkDictionary = csv2Arr('workUtf8.csv')
-newWorkDictionary = TransposeMatrix(newWorkDictionary)
-
-let newFriendDictionary = csv2Arr('friendUtf8.csv')*/
 
 import {classifyWithFirstWordDictionary} from './js/counselorEducation/wordparse.js'
-// import {AcceptKnp} from "./processKnp.js";
-/*import {ClassifyWithKNP} from './js/counselorEducation/sub/processKnp.js' // processKNP
-import {ClassifyWithWordDictionary} from './js/counselorEducation/sub/changeDictionary.js' // AcceptDictionary*/
+
 import $ from 'jquery'
 import { clearStorage } from './js/counselorEducation/sub/clearStorage'
-
-// import {wordparse2object} from "./js/wordparse2object.js"
-// import {CreateSwitchClassificationMethod} from "./switchClassificationMethod.js"; //AcceptDictionary
-// var dictionaryFromWord2Vec = csv2Array('HDFaceVertex.csv')
-// wordparse2object()
-// 以下、今までの(170809)
 
 clearStorage()
 
@@ -164,62 +98,6 @@ let RGBlist = []
 
 let checkboxlist = []
 
-/*let switchClassificationMethod = () => {
-
-let checkboxlist = []
-
-const switchClassificationMethod = () => {
-
-  const SwitchClassificationMethodRadio = document.getElementById('SwitchClassificationMethod').children
-  if (SwitchClassificationMethodRadio[0].control.checked === true) {
-        // 単純な単語辞書を用いた分類
-        // ClassifyWithWordDictionary(name,event,keitaisokaiseki,chboxlist,chboxlist2,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,newLoveDictionary,newWorkDictionary,newFriendDictionary);
-    document.getElementById('load-button').addEventListener('click', function () {
-      var file = document.getElementById('file-input').files[0]
-      var name = file.name
-      var reader = new FileReader()
-      reader.onload = function (event) {
-                // var result = funcReaderOnload(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
-        console.log('%center ClassifyWithWordDictionary 48', 'color:red')
-                // let resultWithNewDictionary = ClassifyWithWordDictionary(name,event,keitaisokaiseki,chboxlist,chboxlist2,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,newLoveDictionary,newWorkDictionary,newFriendDictionary);
-
-        let result = ClassifyWithFirstWordDictionary(name, keitaisokaiseki, checkboxlist, chboxlist, chboxlist2, RGBlist, hatsugen, bun, checked, checked2, taiou, taiou2, chboxlength, chboxlength2)
-
-      }
-      reader.readAsText(file)
-    })
-  } else if (SwitchClassificationMethodRadio[1].control.checked === true) {
-        // 係り受け解析を用いた分類
-    console.log('%center ClassifyWithWordKNP 56', 'color:red')
-    ClassifyWithKNP(startTime, name, event, keitaisokaiseki, chboxlist, chboxlist2, questionClassification, hatsugen, bun, checked, checked2, taiou, taiou2, newLoveDictionary, newWorkDictionary, newFriendDictionary, RGB)
-  } else {
-        // SVMを用いた分類
-    console.log('%center ClassifyWithSVM 60', 'color:red')
-    ClassifyWithSVM()
-  }
-
-}*/
-
-
-
-
-/* 上部分
-
-CreateSwitchClassificationMethod();
-switchClassificationMethod();
-
-*/
-
-// console.log("Before processKNP");
-
-
-// let resultWithKNP = processKnp(startTime,name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,newLoveDictionary,newWorkDictionary,newFriendDictionary,RGB);
-
-// console.log("After resultWithKNP");
-
-
-// console.log("After resultWithKNP");
-
 document.getElementById('load-button').addEventListener('click', function () {
   var file = document.getElementById('file-input').files[0]
   var name = file.name
@@ -233,61 +111,6 @@ document.getElementById('load-button').addEventListener('click', function () {
   }
   reader.readAsText(file)
 })
-
-/* 170410knpLoadButton
-
-document.getElementById('knpLoadButton').addEventListener('click',function () {
-
-  var file = document.getElementById('knpLoadButton').files[0];//csv読み込めない
-  var name = file.name;
-  var reader = new FileReader();
-  reader.onload = function(event) {
-      //var result = funcReaderOnload(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2);
-      //let resultWithNewDictionary = AcceptDictionary(name,event,keitaisokaiseki,chboxlist,chboxlist2,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2,newLoveDictionary,newWorkDictionary,newFriendDictionary);
-      //let resultWithKNP = processKnp(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2)
-  };
-  reader.readAsText(file);
-
-});
-
-*/
-
-// document.getElementById('buttonToInputDictionary').addEventListener('click',AcceptDictionary(name,event,keitaisokaiseki,chboxlist,chboxlist2,questionClassification,hatsugen,bun,checked,checked2,taiou,taiou2,chboxlength,chboxlength2));
-
-// storage出力
-
-/* storageSave-button */
-/*
-document.getElementById('storageSave-button').addEventListener('click', () => {
-  let csv_array = storage2csv()
-    // KNPもCSVで読み込ませる
-  downloadAsCSV('storage', csv_array)
-})
-*/
-// let file_name="storage"+Date()+".csv";
-// let filenameWithExtension="storage.csv";
-
-// let csv_string=convertTocsv(ary);
-
-// http://qiita.com/kenchan0130/items/11c3abab109405379ffb
-
-/*function csv2Arr (filePath) { // csvﾌｧｲﾙﾉ相対ﾊﾟｽor絶対ﾊﾟｽ
-
-    console.log('%center classifyWithFirstWordDictionary 85', 'color:red')
-    let resultWithNewDictionary = classifyWithFirstWordDictionary(name, keitaisokaiseki, checkboxlist, chboxlist, chboxlist2, RGBlist, hatsugen, bun, checked, checked2, taiou, taiou2, chboxlength, chboxlength2, originalText)
-  }
-  reader.readAsText(file)
-})
-
-
-
-
-/*document.getElementById('storageSave-button').addEventListener('click', () => {
-  let csv_array = storage2csv()
-    // KNPもCSVで読み込ませる
-  downloadAsCSV('storage', csv_array)
-})*/
-
 
 function csv2Array (filePath) { // csvﾌｧｲﾙﾉ相対ﾊﾟｽor絶対ﾊﾟｽ
 
