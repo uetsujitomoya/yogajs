@@ -4,7 +4,10 @@ import {classifyWithFirstWordDictionary} from './js/counselorEducation/wordparse
 
 import { mainOfCharaChart } from './js/charaChart/main'
 
+//import {classifyWithFirstWordDictionary} from './js/counselorEducation/wordparse.js'
 
+import $ from 'jquery'
+import { clearStorage } from './js/counselorEducation/sub/clearStorage'
 
 const knpForm = document.getElementById("knp");
 
@@ -56,10 +59,7 @@ const isOutputMode=(radio)=>{
 
 
 
-import {classifyWithFirstWordDictionary} from './js/counselorEducation/wordparse.js'
 
-import $ from 'jquery'
-import { clearStorage } from './js/counselorEducation/sub/clearStorage'
 
 clearStorage()
 
