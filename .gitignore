@@ -14,3 +14,4 @@ json/
 knp/
 *.log
 *.numbers
+package-lock.json
