@@ -3,8 +3,8 @@
 import { barChartRodata } from './rodata'
 
 const kaishakuName = '解釈と助言'
-const selfTxtColor = "black"
-const spiritualTxtColor = "black"
+const selfTxtColor = barChartRodata.color.self.b
+const spiritualTxtColor = barChartRodata.color.spiritual.b
 
 import {convertCSV2Storage} from './sub/convertCsv2Storage.js'
 
@@ -123,23 +123,23 @@ const select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, ch
         console.log(ansCate3dArrforCreatingSelect[hatsugenIdx][bunIdx])
         if (ansCate3dArrforCreatingSelect[hatsugenIdx][bunIdx][0] == 0) {
 
-          createAnswerRadioButton(ansCnt, 1, selfTxtColor, '愛', false)
+          createAnswerRadioButton(ansCnt, 1, barChartRodata.color.love.b, '愛', false)
         } else {
           chboxlist[n][1] = 0
-          createAnswerRadioButton(ansCnt, 1, selfTxtColor, '愛', true)
+          createAnswerRadioButton(ansCnt, 1, barChartRodata.color.love.b, '愛', true)
         }
         if (ansCate3dArrforCreatingSelect[hatsugenIdx][bunIdx][1] == 0) {
-          createAnswerRadioButton(ansCnt, 2, selfTxtColor, '交友', false)
+          createAnswerRadioButton(ansCnt, 2, barChartRodata.color.friend.b, '交友', false)
         } else {
 
-          createAnswerRadioButton(ansCnt, 2, selfTxtColor, '交友', true)
+          createAnswerRadioButton(ansCnt, 2, barChartRodata.color.friend.b, '交友', true)
           chboxlist[n][1] = 1
         }
         if (ansCate3dArrforCreatingSelect[hatsugenIdx][bunIdx][2] == 0) {
 
-          createAnswerRadioButton(ansCnt, 3, selfTxtColor, '仕事', false)
+          createAnswerRadioButton(ansCnt, 3, barChartRodata.color.work.b, '仕事', false)
         } else {
-          createAnswerRadioButton(ansCnt, 3, selfTxtColor, '仕事', true)
+          createAnswerRadioButton(ansCnt, 3, barChartRodata.color.work.b, '仕事', true)
           chboxlist[n][1] = 2
         }
 
