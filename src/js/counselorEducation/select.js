@@ -1,3 +1,12 @@
+/*
+*
+*
+*
+*
+*
+* */
+
+
 //左下の選択肢群を表示
 
 import { barChartRodata } from './rodata'
