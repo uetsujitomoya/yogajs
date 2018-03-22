@@ -92,7 +92,9 @@ const charaChartRodata={
     id:"#sliderbarchart",
     axisShiftX:58,
     chartShiftX:85
-  }
+  },
+
+  counselingBorderMark:'///'
 }
 
 export {charaChartRodata}

@@ -10,6 +10,7 @@ import {isCharacter} from '../chara/isChara'
 import {createsvg} from '../nodeAndArrow/arrowNode.js'
 import Bun from './Bun'
 import { borderBunNoArr } from '../sliderBarChart/borderBunNoArr'
+import { charaChartRodata } from '../rodata'
 
 //const firstJapaneseRowIdxInBunsetsu = 2
 
@@ -21,7 +22,7 @@ const createBunArr = (raw2dArr, nodeArr) =>
   let tmpRowNo = 0
   for(const row of raw2dArr){
     if (row[0] !== 'EOS') {
-      if(row[0] === '///'){
+      if(row[0] === charaChartRodata.counselingBorderMark){
         borderBunNoArr.push(bunNo)
       }else{
         tmpBun2dArr.push(row)
