@@ -57,10 +57,6 @@ const isOutputMode=(radio)=>{
   }
 }
 
-
-
-
-
 clearStorage()
 
 let storageArrayFromKamata = csv2Array('csv/storage170421fromKamata.csv')
@@ -139,9 +135,6 @@ function B (a, b, c) {
 }
 
 function TransposeMatrix (ary) {return ary.reduce(B, [])}
-
-
-
 
 document.getElementById('storageClear-button').addEventListener('click', function () {
   console.log(localStorage.clear)
