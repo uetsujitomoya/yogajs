@@ -57,7 +57,7 @@ const isOutputMode=(radio)=>{
   }
 }
 
-clearStorage()
+//clearStorage()
 
 let storageArrayFromKamata = csv2Array('csv/storage170421fromKamata.csv')
 console.log('storageFromKamata')
