@@ -73,9 +73,9 @@ const classifyWithFirstWordDictionary = (name, aBunWordArr, checkboxlist, chboxl
   var startTime = new Date()
   console.log(startTime)
 
-  var ansCateNo, hatsugenBunCnt, aBunWordCnt, k, hatsugenCnt, afterMorphologicalAnalysisWordsCnt, c, x, y, z
+  var ansCateNo, hatsugenBunCnt, aBunWordCnt, wordNo, hatsugenCnt, afterMorphologicalAnalysisWordsCnt, c, x, y, z
   var hinshi = []
-  var ansBunCategory = []
+  var ansBunCategoryArr = []
   let ranshin = []
   var wordSet = new Set()
   var wordSet2 = []
@@ -109,7 +109,7 @@ const classifyWithFirstWordDictionary = (name, aBunWordArr, checkboxlist, chboxl
       aBunContentArr[hatsugenCnt] = []//安易に足していいのか？
       hatsugenArr[hatsugenCnt] = ''
       hinshi[hatsugenCnt] = []
-      ansBunCategory[hatsugenCnt] = []
+      ansBunCategoryArr[hatsugenCnt] = []
       ranshin[hatsugenCnt] = []
       if (hatsugenCnt % 2 === 0) {
         RGBlist[hatsugenCnt / 2] = [0, 0, 0, 0, 0, 0, 0, 0]
@@ -121,7 +121,7 @@ const classifyWithFirstWordDictionary = (name, aBunWordArr, checkboxlist, chboxl
         aBunContentArr[hatsugenCnt][hatsugenBunCnt] = ''//安易に足していいのか？
         hinshi[hatsugenCnt][hatsugenBunCnt] = []
         aBunWordArr[hatsugenCnt][hatsugenBunCnt].length = 0
-        ansBunCategory[hatsugenCnt][hatsugenBunCnt] = [0, 0, 0]
+        ansBunCategoryArr[hatsugenCnt][hatsugenBunCnt] = [0, 0, 0]
         ranshin[hatsugenCnt][hatsugenBunCnt] = [0, 0, 0, 0, 0, 0, 0, 0, 0]
         aBunWordCnt = 0
         while (afterMorphologicalAnalysisWordsCnt < morphologicalAnalysisWordsArr.length) {
@@ -135,19 +135,19 @@ const classifyWithFirstWordDictionary = (name, aBunWordArr, checkboxlist, chboxl
             kanjamoji = kanjamoji + morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].surface_form.length
             if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '母' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '主人' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '父さん' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'ご主人' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'お父さん' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '姉' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '姉さん' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '母親' ||
               morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'お姉さん' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '父' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '家族') {
-              ansBunCategory[hatsugenCnt][hatsugenBunCnt][0] = 1
+              ansBunCategoryArr[hatsugenCnt][hatsugenBunCnt][0] = 1
             }
             if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '兄' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '子' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '子ども' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '妹' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '弟') {
-              ansBunCategory[hatsugenCnt][hatsugenBunCnt][0] = 1
+              ansBunCategoryArr[hatsugenCnt][hatsugenBunCnt][0] = 1
             }
             if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '両親' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'お母様' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'お父様') {
-              ansBunCategory[hatsugenCnt][hatsugenBunCnt][0] = 1
+              ansBunCategoryArr[hatsugenCnt][hatsugenBunCnt][0] = 1
             }
             if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '仕事' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '休み' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'アルバイト' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '働く' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '同僚' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '職場' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '上司' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '部下') {
-              ansBunCategory[hatsugenCnt][hatsugenBunCnt][2] = 1
+              ansBunCategoryArr[hatsugenCnt][hatsugenBunCnt][2] = 1
             }
             if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '友人' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '親友' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '友達' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '友' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '交友' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '友好') {
-              ansBunCategory[hatsugenCnt][hatsugenBunCnt][1] = 1
+              ansBunCategoryArr[hatsugenCnt][hatsugenBunCnt][1] = 1
             }
 
             if (morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '病' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '病気' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === 'ストレス' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '不調' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '過食' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '嘔吐' || morphologicalAnalysisWordsArr[afterMorphologicalAnalysisWordsCnt].basic_form === '過食嘔吐') {
@@ -300,40 +300,40 @@ const classifyWithFirstWordDictionary = (name, aBunWordArr, checkboxlist, chboxl
       miserables.nodes[hatsugenBunCnt] = wordSet2[hatsugenBunCnt].t
     }
     var RGBk = []
-    for (ansCateNo = 0; ansCateNo < barChartRodata.ansCateQty; ansCateNo++) {
+    for (let ansCateNo = 0; ansCateNo < barChartRodata.ansCateQty; ansCateNo++) {
       RGBk[ansCateNo] = []
-      for (k = 0; k < miserables.nodes.length; k++) {
-        RGBk[ansCateNo][k] = 0
-        for (hatsugenCnt = 1; hatsugenCnt < aBunWordArr.length; hatsugenCnt = hatsugenCnt + 2) {
-          for (hatsugenBunCnt = 0; hatsugenBunCnt < aBunWordArr[hatsugenCnt].length; hatsugenBunCnt++) {
-            if (ansBunCategory[hatsugenCnt][hatsugenBunCnt][ansCateNo] === 1) {
-              for (aBunWordCnt = 0; aBunWordCnt < aBunWordArr[hatsugenCnt][hatsugenBunCnt].length; aBunWordCnt++) {
-                if (miserables.nodes[k] === aBunWordArr[hatsugenCnt][hatsugenBunCnt][aBunWordCnt]) {
-                  RGBk[ansCateNo][k] = 1
+      for (let wordNo = 0; wordNo < miserables.nodes.length; wordNo++) {
+        RGBk[ansCateNo][wordNo] = 0
+        for (let hatsugenCnt = 1; hatsugenCnt < aBunWordArr.length; hatsugenCnt = hatsugenCnt + 2) {
+          for (let hatsugenBunCnt = 0; hatsugenBunCnt < aBunWordArr[hatsugenCnt].length; hatsugenBunCnt++) {
+            if (ansBunCategoryArr[hatsugenCnt][hatsugenBunCnt][ansCateNo] === 1) {
+              for (let aBunWordCnt = 0; aBunWordCnt < aBunWordArr[hatsugenCnt][hatsugenBunCnt].length; aBunWordCnt++) {
+                if (miserables.nodes[wordNo] === aBunWordArr[hatsugenCnt][hatsugenBunCnt][aBunWordCnt]) {
+                  RGBk[ansCateNo][wordNo] = 1
                   break
                 }
               }
             }
-            if (RGBk[ansCateNo][k] === 1) {
+            if (RGBk[ansCateNo][wordNo] === 1) {
               break
             }
           }
-          if (RGBk[ansCateNo][k] === 1) {
+          if (RGBk[ansCateNo][wordNo] === 1) {
             break
           }
         }
       }
     }
 
-    for (ansCateNo = 0; ansCateNo < barChartRodata.ansCateQty; ansCateNo++) {
-      for (k = 0; k < miserables.nodes.length; k++) {
-        if (RGBk[ansCateNo][k] === 1) {
-          for (hatsugenCnt = 1; hatsugenCnt < aBunWordArr.length; hatsugenCnt = hatsugenCnt + 2) {
-            for (hatsugenBunCnt = 0; hatsugenBunCnt < aBunWordArr[hatsugenCnt].length; hatsugenBunCnt++) {
-              if (ansBunCategory[hatsugenCnt][hatsugenBunCnt][ansCateNo] === 0) {
-                for (aBunWordCnt = 0; aBunWordCnt < aBunWordArr[hatsugenCnt][hatsugenBunCnt].length; aBunWordCnt++) {
-                  if (miserables.nodes[k] === aBunWordArr[hatsugenCnt][hatsugenBunCnt][aBunWordCnt]) {
-                    ansBunCategory[hatsugenCnt][hatsugenBunCnt][ansCateNo] = 1
+    for (let ansCateNo = 0; ansCateNo < barChartRodata.ansCateQty; ansCateNo++) {
+      for (let wordNo = 0; wordNo < miserables.nodes.length; wordNo++) {
+        if (RGBk[ansCateNo][wordNo] === 1) {
+          for (let hatsugenCnt = 1; hatsugenCnt < aBunWordArr.length; hatsugenCnt = hatsugenCnt + 2) {
+            for (let hatsugenBunCnt = 0; hatsugenBunCnt < aBunWordArr[hatsugenCnt].length; hatsugenBunCnt++) {
+              if (ansBunCategoryArr[hatsugenCnt][hatsugenBunCnt][ansCateNo] === 0) {
+                for (let aBunWordCnt = 0; aBunWordCnt < aBunWordArr[hatsugenCnt][hatsugenBunCnt].length; aBunWordCnt++) {
+                  if (miserables.nodes[wordNo] === aBunWordArr[hatsugenCnt][hatsugenBunCnt][aBunWordCnt]) {
+                    ansBunCategoryArr[hatsugenCnt][hatsugenBunCnt][ansCateNo] = 1
                     break
                   }
                 }
@@ -351,12 +351,12 @@ const classifyWithFirstWordDictionary = (name, aBunWordArr, checkboxlist, chboxl
     console.log("bun")
     console.log(aBunContentArr)
 
-    var selectResult = select(name, storage, checkboxlist, aBunWordArr, miserables, chboxlist, chboxlist2, ansBunCategory, RGBlist, hatsugenArr, aBunContentArr, ansRadioResult, checked2, taiou, taiou2, chboxlength, chboxlength2)
+    var selectResult = select(name, storage, checkboxlist, aBunWordArr, miserables, chboxlist, chboxlist2, ansBunCategoryArr, RGBlist, hatsugenArr, aBunContentArr, ansRadioResult, checked2, taiou, taiou2, chboxlength, chboxlength2)
 
     checkboxlist = selectResult.checkboxlist
     chboxlist = selectResult.chboxlist
     chboxlist2 = selectResult.chboxlist2
-    ansBunCategory = selectResult.RGB
+    ansBunCategoryArr = selectResult.RGB
     RGBlist = selectResult.RGBlist
     ansRadioResult = selectResult.checked
     checked2 = selectResult.checked2

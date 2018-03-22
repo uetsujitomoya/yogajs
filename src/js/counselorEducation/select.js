@@ -92,17 +92,18 @@ const select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, ch
         //console.log(bun[hatsugenIdx][bunIdx])
         //console.log("ansCnt %d",ansCnt)
 
+        console.log(ansCate3dArrforCreatingSelect[hatsugenIdx][bunIdx])
 
-        let stockedAnsGroupNo = storage.getItem(jsonName + 'RGB' + ansCnt)//jsonの名前+"RGB"+そのjson内で何個目の回答か
+        let stockedAnsGrNo = storage.getItem(jsonName + 'RGB' + ansCnt)//jsonの名前+"RGB"+そのjson内で何個目の回答か
 
-        const categorizedAnswerCategoryQty=5
+        const categorizedAnsCateQty=5
 
-        if (stockedAnsGroupNo !== null) {
-          ansCate3dArrforCreatingSelect[hatsugenIdx][bunIdx][stockedAnsGroupNo] = 1
+        if (stockedAnsGrNo !== null) {
+          ansCate3dArrforCreatingSelect[hatsugenIdx][bunIdx][stockedAnsGrNo] = 1
 
-          for (let categoryIdx = 0; categoryIdx < barChartRodata.ansCateQty; categoryIdx++) {
-            if (categoryIdx != stockedAnsGroupNo) {
-              ansCate3dArrforCreatingSelect[hatsugenIdx][bunIdx][categoryIdx] = 0
+          for (let cateNo = 0; cateNo < barChartRodata.ansCateQty; cateNo++) {
+            if (cateNo != stockedAnsGrNo) {
+              ansCate3dArrforCreatingSelect[hatsugenIdx][bunIdx][cateNo] = 0
             }// 全てゼロなら濃いグレーが出力
           }
 
@@ -121,21 +122,21 @@ const select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, ch
         }
 
         console.log(ansCate3dArrforCreatingSelect[hatsugenIdx][bunIdx])
-        if (ansCate3dArrforCreatingSelect[hatsugenIdx][bunIdx][0] == 0) {
+        if (ansCate3dArrforCreatingSelect[hatsugenIdx][bunIdx][0] === 0) {
 
           createAnswerRadioButton(ansCnt, 1, barChartRodata.color.love.b, '愛', false)
         } else {
           chboxlist[n][1] = 0
           createAnswerRadioButton(ansCnt, 1, barChartRodata.color.love.b, '愛', true)
         }
-        if (ansCate3dArrforCreatingSelect[hatsugenIdx][bunIdx][1] == 0) {
+        if (ansCate3dArrforCreatingSelect[hatsugenIdx][bunIdx][1] === 0) {
           createAnswerRadioButton(ansCnt, 2, barChartRodata.color.friend.b, '交友', false)
         } else {
 
           createAnswerRadioButton(ansCnt, 2, barChartRodata.color.friend.b, '交友', true)
           chboxlist[n][1] = 1
         }
-        if (ansCate3dArrforCreatingSelect[hatsugenIdx][bunIdx][2] == 0) {
+        if (ansCate3dArrforCreatingSelect[hatsugenIdx][bunIdx][2] === 0) {
 
           createAnswerRadioButton(ansCnt, 3, barChartRodata.color.work.b, '仕事', false)
         } else {
@@ -143,21 +144,21 @@ const select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, ch
           chboxlist[n][1] = 2
         }
 
-        if (ansCate3dArrforCreatingSelect[hatsugenIdx][bunIdx][3] == 0) {
+        //if (ansCate3dArrforCreatingSelect[hatsugenIdx][bunIdx][3] === 0) {
           createAnswerRadioButton(ansCnt, 4, selfTxtColor, '自己', false)
-        } else {
+          /*} else {
 
-          createAnswerRadioButton(ansCnt, 4, selfTxtColor, '自己', true)
-          chboxlist[n][1] = 3
-        }
+            createAnswerRadioButton(ansCnt, 4, selfTxtColor, '自己', true)
+            chboxlist[n][1] = 3
+          }*/
 
-        if (ansCate3dArrforCreatingSelect[hatsugenIdx][bunIdx][4] == 0) {
+        //if (ansCate3dArrforCreatingSelect[hatsugenIdx][bunIdx][4] === 0) {
 
           createAnswerRadioButton(ansCnt, 5, spiritualTxtColor, 'スピリチュアル', false)
-        } else {
-          createAnswerRadioButton(ansCnt, 5, spiritualTxtColor, 'スピリチュアル', true)
-          chboxlist[n][1] = 4
-        }
+          /*} else {
+            createAnswerRadioButton(ansCnt, 5, spiritualTxtColor, 'スピリチュアル', true)
+            chboxlist[n][1] = 4
+          }*/
       }
     } else {
       questionCnt++
