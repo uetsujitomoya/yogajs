@@ -144,21 +144,21 @@ const select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, ch
           chboxlist[n][1] = 2
         }
 
-        //if (ansCate3dArrforCreatingSelect[hatsugenIdx][bunIdx][3] === 0) {
+        if (ansCate3dArrforCreatingSelect[hatsugenIdx][bunIdx][3] === 0) {
           createAnswerRadioButton(ansCnt, 4, selfTxtColor, '自己', false)
-          /*} else {
+        } else {
 
-            createAnswerRadioButton(ansCnt, 4, selfTxtColor, '自己', true)
-            chboxlist[n][1] = 3
-          }*/
+          createAnswerRadioButton(ansCnt, 4, selfTxtColor, '自己', true)
+          chboxlist[n][1] = 3
+        }
 
-        //if (ansCate3dArrforCreatingSelect[hatsugenIdx][bunIdx][4] === 0) {
+        if (ansCate3dArrforCreatingSelect[hatsugenIdx][bunIdx][4] === 0) {
 
           createAnswerRadioButton(ansCnt, 5, spiritualTxtColor, 'スピリチュアル', false)
-          /*} else {
-            createAnswerRadioButton(ansCnt, 5, spiritualTxtColor, 'スピリチュアル', true)
-            chboxlist[n][1] = 4
-          }*/
+        } else {
+          createAnswerRadioButton(ansCnt, 5, spiritualTxtColor, 'スピリチュアル', true)
+          chboxlist[n][1] = 4
+        }
       }
     } else {
       questionCnt++

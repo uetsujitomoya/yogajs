@@ -121,7 +121,10 @@ const classifyWithFirstWordDictionary = (name, aBunWordArr, checkboxlist, chboxl
         aBunContentArr[hatsugenCnt][hatsugenBunCnt] = ''//安易に足していいのか？
         hinshi[hatsugenCnt][hatsugenBunCnt] = []
         aBunWordArr[hatsugenCnt][hatsugenBunCnt].length = 0
-        ansBunCategoryArr[hatsugenCnt][hatsugenBunCnt] = [0, 0, 0]
+        ansBunCategoryArr[hatsugenCnt][hatsugenBunCnt] = []
+        for(let cateNo=0; cateNo<barChartRodata.ansCateQty; cateNo++){
+          ansBunCategoryArr[hatsugenCnt][hatsugenBunCnt].push(0)
+        }
         ranshin[hatsugenCnt][hatsugenBunCnt] = [0, 0, 0, 0, 0, 0, 0, 0, 0]
         aBunWordCnt = 0
         while (afterMorphologicalAnalysisWordsCnt < morphologicalAnalysisWordsArr.length) {
