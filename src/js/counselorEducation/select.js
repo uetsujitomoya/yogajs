@@ -93,7 +93,7 @@ const select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, ch
         //console.log("ansCnt %d",ansCnt)
 
 
-        let stockedAnsGroupNo = storage.getItem(jsonName + 'RGB' + ansCnt)
+        let stockedAnsGroupNo = storage.getItem(jsonName + 'RGB' + ansCnt)//jsonの名前+"RGB"+そのjson内で何個目の回答か
 
         const categorizedAnswerCategoryQty=5
 
@@ -167,7 +167,7 @@ const select = (jsonName, storage, checkboxlist, keitaisokaiseki, miserables, ch
       chboxlist2[questionCnt][1] = 4
       taiou2[questionCnt - 1] = questionCnt - 1
 
-      let stockedQuestionGroupNo = storage.getItem(jsonName + 'RGBlist' + questionCnt)
+      let stockedQuestionGroupNo = storage.getItem(jsonName + 'RGBlist' + questionCnt)//jsonの名前+"RGBlist"+そのjson内で何個目の質問か
 
       if (stockedQuestionGroupNo !== null) {
         for (categoryIdx = 3; categoryIdx <= 7; categoryIdx++) {
